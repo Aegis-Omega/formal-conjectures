@@ -95,7 +95,7 @@ theorem eval_phaseRow_zero (C S h : ℚ) (n : ℕ) (s : ℝ) :
       ((((s * h) ^ m / m.factorial : ℝ)) : ℂ) * (((C : ℂ) + (S : ℂ) * I) * I ^ m) by
     push_cast; ring]
   rw [Complex.re_ofReal_mul, re_mul_I_pow]
-  push_cast; ring
+  ring
 
 /-- Error of one column. -/
 def colErr (n : ℕ) (r h : ℚ) (A : CS) : ℚ := A.e + (1 + A.e) * taylorErr n (r * |h|)

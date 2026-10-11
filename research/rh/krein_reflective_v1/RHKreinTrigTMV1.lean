@@ -149,7 +149,7 @@ theorem eval_coefFrom_scaled (f : ℕ → ℚ) (h : ℚ) (s : ℝ) (n : ℕ) :
   rw [eval_coefFrom_zero, eval_coefFrom_zero]
   apply Finset.sum_congr rfl; intro m _; push_cast; ring
 
-theorem taylor_err_mono (n : ℕ) (r h : ℚ) (s : ℝ) (hr : 0 ≤ r) (hs : |s| ≤ r) :
+theorem taylor_err_mono (n : ℕ) (r h : ℚ) (s : ℝ) (_hr : 0 ≤ r) (hs : |s| ≤ r) :
     |(h : ℝ) * s| ^ n * (((n.succ : ℕ) : ℝ) * (n.factorial * n : ℝ)⁻¹) ≤
       ((taylorErr n (r * |h|) : ℚ) : ℝ) := by
   rw [taylorErr_cast]

@@ -99,9 +99,9 @@ jobs:
           mkdir -p evidence-m8-kernel/reflective
           for entry in \
             RHKreinTaylorModelV1:25596a69b7241f9a7a898f991927484e78f999ae \
-            RHKreinTrigTMV1:51227894eb7777f3e247bf89ffb0ca7d685c4b47 \
-            RHKreinRotTMV1:9f846d68bd464dc711d4437112f38b64e66c0186 \
-            RHKreinHatFastV1:6887435413a299ca5937c91988aab5d6dd36b407; do
+            RHKreinTrigTMV1:28320d2f759fa38ae832eaa6f59233301eaa2e75 \
+            RHKreinRotTMV1:1c4aa4bf8b36132bb09d7555a0a85ff7731f7e1c \
+            RHKreinHatFastV1:b352f7873be6233cbfe8fef3da5981937c460070; do
             m="${entry%%:*}"
             blob="${entry#*:}"
             src="$ROOT/$m.lean"
@@ -110,6 +110,10 @@ jobs:
             lake env lean -o ".lake/build/lib/lean/$m.olean" "$m.lean" \
               2>&1 | tee "evidence-m8-kernel/reflective/$m.log"
             test -s ".lake/build/lib/lean/$m.olean"
+            if grep -Eq '(^|:[0-9]+:[0-9]+: )warning:' "evidence-m8-kernel/reflective/$m.log"; then
+              echo "Unexpected Lean warning in $m" >&2
+              exit 1
+            fi
           done
           cat > evidence-m8-kernel/reflective/axiom-probes.lean <<'LEAN'
           import RHKreinHatFastV1
