@@ -19,8 +19,8 @@ import Mathlib
 /-!
 AEGIS Ω — the Krein pairing for the Fourier-side dual certificate, V13.
 
-The certificate in `RH_STATUS.md` adds `Ĥ(ξ)` to the weighted symbol, with `H` supported outside the
-window `|u| < L`. This module proves that such a term pairs to zero against `|Ĝ₁|²`, where `G₁` is supported
+The certificate in `RH_STATUS.md` adds `Ĥ(ξ)` to the weighted symbol, with `H` supported outside the
+window `|u| < L`. This module proves that such a term pairs to zero against `|Ĝ₁|²`, where `G₁` is supported
 in an interval of length `L`:
 
 * `self_adj`: `∫ 𝓕f·g = ∫ f·𝓕g` (Mathlib's `VectorFourier.integral_fourierIntegral_smul_eq_flip`).
@@ -115,7 +115,7 @@ theorem autoc_support (G : ℝ → ℂ) (a b : ℝ) (hsupp : ∀ y, G y ≠ 0 �
 
 /-- **Krein pairing.** If `G` is integrable and vanishes outside `(a, b)`, and `H` is continuous and
 integrable with integrable Fourier transform and vanishes on `|u| < b − a`, then
-`∫ |𝓕G(ξ)|²·𝓕H(ξ) dξ = 0`. So a dual-certificate term `Ĥ` supported outside the window costs nothing. -/
+`∫ |𝓕G(ξ)|²·𝓕H(ξ) dξ = 0`. So a dual-certificate term `Ĥ` supported outside the window costs nothing. -/
 theorem krein_pairing (G : ℝ → ℂ) (a b : ℝ) (hG : Integrable G)
     (hsupp : ∀ y, G y ≠ 0 → y ∈ Set.Ioo a b)
     (H : ℝ → ℂ) (hHc : Continuous H) (hH : Integrable H) (hFH : Integrable (𝓕 H))
