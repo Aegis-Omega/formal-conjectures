@@ -45,7 +45,7 @@ def snapshot(repo: Path, path: str = DEFAULT, channel: str = "CANDIDATE") -> dic
     content_hash = hashlib.sha256(raw).hexdigest()
     prefix = (
         f"LEAN SOURCE ONLY — PROOF NOT VERIFIED; path={path}; "
-        f"git_blob_sha256={content_hash}; excerpt:\n"
+        f"source_bytes_sha256={content_hash}; excerpt:\n"
     )
     allowance = 4000 - len(prefix.encode("utf-8"))
     excerpt = content.encode("utf-8")[:max(0, allowance)].decode("utf-8", "ignore")
