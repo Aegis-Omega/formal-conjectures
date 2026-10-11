@@ -643,6 +643,24 @@ jobs:
           git hash-object AEGISOverlay/RHFeshbachWeilClosureV2.lean > evidence-fusion/RHFESHBACH_WEIL_JOIN_BLOB.txt
           echo "EXACT_HEAD_FESHBACH_WEIL_JOIN=PASS"
 
+      - name: Compile exact official RH target without proof search
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp AEGISOverlay/RHOfficialTargetProbeV1.lean RHOfficialTargetProbeV1.lean
+          set +e
+          lake env lean -o .lake/build/lib/lean/RHOfficialTargetProbeV1.olean RHOfficialTargetProbeV1.lean 2>&1 | tee evidence-fusion/RHOfficialTargetProbeV1.log
+          rc=${PIPESTATUS[0]}
+          set -e
+          if [ "$rc" -ne 0 ]; then
+            printf 'EXACT_MATHLIB_RH_TARGET=NOT_CLOSED\nEXIT_CODE=%s\n' "$rc" | tee evidence-fusion/RH_TARGET_STATUS.txt
+            exit "$rc"
+          fi
+          python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHOfficialTargetProbeV1.lean evidence-fusion/RHOfficialTargetProbeV1.log
+          ! grep -F 'sorryAx' evidence-fusion/RHOfficialTargetProbeV1.log
+          ! grep -F 'error:' evidence-fusion/RHOfficialTargetProbeV1.log
+          echo 'EXACT_MATHLIB_RH_TARGET=PASS' | tee evidence-fusion/RH_TARGET_STATUS.txt
+
       - name: Upload proof-fusion receipts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
