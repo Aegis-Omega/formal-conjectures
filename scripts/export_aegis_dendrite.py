@@ -38,21 +38,34 @@ def snapshot(repo: Path, path: str = DEFAULT, channel: str = "CANDIDATE") -> dic
     sha = _git(root, "rev-parse", "--verify", "HEAD").decode().strip()
     if not SHA.fullmatch(sha):
         raise ValueError("INVALID_GIT_HEAD")
-    raw = _git(root, "show", "HEAD:" + path)
-    if not raw or len(raw) > MAX_FILE:
+    object_size = int(_git(root, "cat-file", "-s", "HEAD:" + path))
+    if not 0 < object_size <= MAX_FILE:
         raise ValueError("INVALID_LEAN_SOURCE_SIZE")
+    raw = _git(root, "show", "HEAD:" + path)
+    if len(raw) != object_size:
+        raise ValueError("LEAN_SOURCE_SIZE_MISMATCH")
     content = raw.decode("utf-8", "strict")
     content_hash = hashlib.sha256(raw).hexdigest()
     prefix = (
         f"LEAN SOURCE ONLY — PROOF NOT VERIFIED; path={path}; "
         f"source_bytes_sha256={content_hash}; excerpt:\n"
     )
+    if len(prefix.encode("utf-8")) >= 4000:
+        raise ValueError("SOURCE_PREFIX_TOO_LARGE")
     allowance = 4000 - len(prefix.encode("utf-8"))
     excerpt = content.encode("utf-8")[:max(0, allowance)].decode("utf-8", "ignore")
-    return {
+    packet = {
         "source": "formal", "source_head": sha, "source_record": content_hash,
         "sequence": 0, "text": prefix + excerpt, "channel": channel,
     }
+    # JSON escape expansion (e.g. Lean Unicode notation) can exceed the
+    # AEGIS ingress 8192-byte limit even when original UTF-8 text is small.
+    while len(json.dumps(packet, sort_keys=True, indent=2, ensure_ascii=True).encode("utf-8")) + 1 > 8192:
+        if not excerpt:
+            raise ValueError("ENCODED_RECORD_TOO_LARGE")
+        excerpt = excerpt[:len(excerpt) // 2]
+        packet["text"] = prefix + excerpt
+    return packet
 
 
 def main() -> None:
