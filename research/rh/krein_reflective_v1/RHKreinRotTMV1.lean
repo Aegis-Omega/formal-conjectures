@@ -43,7 +43,8 @@ theorem ZEncl.toCS {x : ℝ} {A : CS} (h : ZEncl x A) : CSEncl x A := by
   simp only [zOf, Complex.sub_re, Complex.sub_im, Complex.add_re, Complex.add_im,
     Complex.ofReal_re, Complex.ofReal_im, Complex.mul_re, Complex.mul_im, Complex.I_re,
     Complex.I_im, Complex.exp_ofReal_mul_I_re, Complex.exp_ofReal_mul_I_im] at hre him
-  simp only [mul_zero, sub_zero, mul_one, zero_add, add_zero] at hre him
+  simp only [mul_zero, sub_zero, mul_one, zero_add, add_zero, Complex.ratCast_re,
+    Complex.ratCast_im] at hre him
   exact ⟨hre.trans h, him.trans h⟩
 
 theorem norm_zOf_le {x : ℝ} {A : CS} (h : ZEncl x A) : ‖zOf A‖ ≤ 1 + A.e := by
