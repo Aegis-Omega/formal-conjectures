@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import RHExistingProofFusionV1
+import WeilAutocorrelationExplicitFormulaV10
 import Mathlib
 
 /-!
@@ -28,6 +29,7 @@ Schur families for all relevant Weil test packets. It is not a proof of RH.
 -/
 
 open Filter Topology
+open scoped BigOperators
 
 namespace AEGIS.RHFeshbachWeilClosureV2
 
@@ -106,9 +108,10 @@ structure PacketSchurFamily (g : WeilCompactSmoothGV1) where
   normSq : ℕ → ℝ
   normUpper : ℝ
   cofinal : Tendsto N atTop atTop
-  reproducesWeil : Tendsto
+  reproducesZeroQuadratic : Tendsto
     (fun j => a j + 2 * re_b j + q j) atTop
-    (𝓝 (-(WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re))
+    (𝓝 ((∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re))
   eventuallyBounded : ∀ᶠ j in atTop, normSq j ≤ normUpper
   shiftNonnegative : ∀ j, 0 ≤ μ j
   tailNonnegative : ∀ j, 0 ≤ nw j
@@ -121,16 +124,26 @@ structure PacketSchurFamily (g : WeilCompactSmoothGV1) where
       normSq j ≤
     a j - μ j * nv j ^ 2 - β j / (c j - μ j)
 
-theorem packet_weil_nonpositive (g : WeilCompactSmoothGV1)
+/-- An actual packet Schur family forces the nonnegative *canonical zero sum*
+from the repository's explicit-formula language, not an abstract surrogate. -/
+theorem packet_zero_quadratic_nonnegative (g : WeilCompactSmoothGV1)
     (h : PacketSchurFamily g) :
-    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 := by
-  have hQ : 0 ≤
-      -(WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re :=
-    cofinal_feshbach_unshifted_eventually_bounded_nonnegative
-      h.cofinal h.reproducesWeil h.eventuallyBounded h.shiftNonnegative
-      h.tailNonnegative h.tailCoercivity h.crossBound h.betaNonnegative
-      h.shiftBelowGap h.schurLower
-  exact neg_nonneg.mp hQ
+    0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re := by
+  exact cofinal_feshbach_unshifted_eventually_bounded_nonnegative
+    h.cofinal h.reproducesZeroQuadratic h.eventuallyBounded h.shiftNonnegative
+    h.tailNonnegative h.tailCoercivity h.crossBound h.betaNonnegative
+    h.shiftBelowGap h.schurLower
+
+/-- The pre-existing V10 concrete autocorrelation explicit formula converts
+the actual zero-side sign to the actual Weil arithmetic sign. -/
+theorem packet_weil_nonpositive (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (h : PacketSchurFamily g) :
+    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
+  (AEGIS.WeilAutocorrelationExplicitFormulaV10
+    .autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10 g hm).mpr
+      (packet_zero_quadratic_nonnegative g h)
 
 /-- Direct connection to the existing cofinal-window RH equivalence.
 This implication is conditional; no packet family is silently postulated. -/
@@ -144,11 +157,12 @@ theorem riemannHypothesis_of_window_schur_families
     RiemannHypothesis := by
   apply AEGIS.RHExistingProofFusionV1.rh_iff_pi_nat_windows.mpr
   intro n hn g hm hw
-  exact packet_weil_nonpositive g (h n hn g hm hw)
+  exact packet_weil_nonpositive g hm (h n hn g hm hw)
 
 end AEGIS.RHFeshbachWeilClosureV2
 
 #print axioms AEGIS.RHFeshbachWeilClosureV2.nonneg_of_vanishing_error_eventually_bounded
 #print axioms AEGIS.RHFeshbachWeilClosureV2.cofinal_feshbach_unshifted_eventually_bounded_nonnegative
+#print axioms AEGIS.RHFeshbachWeilClosureV2.packet_zero_quadratic_nonnegative
 #print axioms AEGIS.RHFeshbachWeilClosureV2.packet_weil_nonpositive
 #print axioms AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families
