@@ -46,7 +46,7 @@ theorem nonneg_of_vanishing_error_eventually_bounded
     tendsto_const_nhds
   have hzero : Tendsto (fun j => -(eps j) * C) atTop (𝓝 0) := by
     simpa using heps.neg.mul hconst
-  apply le_of_tendsto_of_tendsto' hzero hq
+  apply le_of_tendsto_of_tendsto hzero hq
   filter_upwards [hbound] with j hj
   have hmul : eps j * normSq j ≤ eps j * C :=
     mul_le_mul_of_nonneg_left hj (hepsNonneg j)
