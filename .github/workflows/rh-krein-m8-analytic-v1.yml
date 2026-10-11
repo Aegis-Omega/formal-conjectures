@@ -100,7 +100,7 @@ jobs:
           for entry in \
             RHKreinTaylorModelV1:25596a69b7241f9a7a898f991927484e78f999ae \
             RHKreinTrigTMV1:28320d2f759fa38ae832eaa6f59233301eaa2e75 \
-            RHKreinRotTMV1:1c4aa4bf8b36132bb09d7555a0a85ff7731f7e1c \
+            RHKreinRotTMV1:c539324a89ebe42378bbc7839c46052cb9d4c418 \
             RHKreinHatFastV1:b352f7873be6233cbfe8fef3da5981937c460070; do
             m="${entry%%:*}"
             blob="${entry#*:}"
