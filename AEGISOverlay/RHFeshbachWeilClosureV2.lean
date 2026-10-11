@@ -16,6 +16,7 @@ limitations under the License.
 
 import RHExistingProofFusionV1
 import WeilAutocorrelationExplicitFormulaV10
+import RHGramExpansionV13
 import Mathlib
 
 /-!
@@ -159,10 +160,77 @@ theorem riemannHypothesis_of_window_schur_families
   intro n hn g hm hw
   exact packet_weil_nonpositive g hm (h n hn g hm hw)
 
+
+/-!
+## Recovered arbitrary-finite-localization budget (existing V13 producer)
+
+This consumes the *existing* exact Gram expansion and row-sum estimate,
+without reconstructing their algebra or discarding mixed terms. It applies to
+any finite list of actual Weil packets for which the original Gram hypotheses
+have been established. The index-distance majorant and its numeric row budget
+remain explicit: no universal numerical budget is silently asserted.
+-/
+
+/-- The pre-existing Gershgorin row bound, with an admissible one-sided
+gap-budget, implies the sign of the *actual* mixed Weil form on an arbitrary
+finite packet sum. This is an adapter, not a new Gram/Schur proof. -/
+theorem actual_gram_arithmetic_nonpositive
+    {n : ℕ} (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (D E : ℝ) (hE : 0 ≤ E) (c : ℕ → ℝ)
+    (hc : ∀ k, 0 ≤ c k)
+    (hdiag : ∀ i, D * E ≤
+      -(AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)‖ ≤ c (Nat.dist i j) * E)
+    (hbudget : 2 * ∑ k ∈ Finset.Icc 1 n, c k ≤ D) :
+    (WeilExplicitRightSideV1 (WeilAutocorrelationV1
+      (AEGIS.RHGramExpansionV13.packetSum z gs))).re ≤ 0 := by
+  have hrow : ∀ i : Fin (n + 1),
+      AEGIS.RHGramExpansionV13.rowSum c i ≤ D := by
+    intro i
+    exact (AEGIS.RHGramExpansionV13.rowSum_le c hc i).trans hbudget
+  have hbound :=
+    AEGIS.RHGramExpansionV13.gram_re_le
+      z gs D E D hE c hc hdiag hcross hrow
+  have hsign :
+      (AEGIS.WeilMixedAlgebraV2.B
+        (AEGIS.RHGramExpansionV13.packetSum z gs)
+        (AEGIS.RHGramExpansionV13.packetSum z gs)).re ≤ 0 := by
+    simpa using hbound
+  change (AEGIS.WeilMixedAlgebraV2.B
+    (AEGIS.RHGramExpansionV13.packetSum z gs)
+    (AEGIS.RHGramExpansionV13.packetSum z gs)).re ≤ 0
+  exact hsign
+
+/-- Exact zero-side consequence of the already-proved arbitrary finite Gram
+estimate, using the *existing* V10 explicit formula and genuine moments. -/
+theorem actual_gram_zero_quadratic_nonnegative
+    {n : ℕ} (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (D E : ℝ) (hE : 0 ≤ E) (c : ℕ → ℝ)
+    (hc : ∀ k, 0 ≤ c k)
+    (hdiag : ∀ i, D * E ≤
+      -(AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)‖ ≤ c (Nat.dist i j) * E)
+    (hbudget : 2 * ∑ k ∈ Finset.Icc 1 n, c k ≤ D)
+    (hm : WeilMomentConditionsV1 (AEGIS.RHGramExpansionV13.packetSum z gs)) :
+    0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1
+        (WeilAutocorrelationV1 (AEGIS.RHGramExpansionV13.packetSum z gs))
+        rho).re := by
+  exact (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (AEGIS.RHGramExpansionV13.packetSum z gs) hm).mp
+    (actual_gram_arithmetic_nonpositive z gs D E hE c hc
+      hdiag hcross hbudget)
+
 end AEGIS.RHFeshbachWeilClosureV2
 
 #print axioms AEGIS.RHFeshbachWeilClosureV2.nonneg_of_vanishing_error_eventually_bounded
 #print axioms AEGIS.RHFeshbachWeilClosureV2.cofinal_feshbach_unshifted_eventually_bounded_nonnegative
 #print axioms AEGIS.RHFeshbachWeilClosureV2.packet_zero_quadratic_nonnegative
+#print axioms AEGIS.RHFeshbachWeilClosureV2.actual_gram_arithmetic_nonpositive
+#print axioms AEGIS.RHFeshbachWeilClosureV2.actual_gram_zero_quadratic_nonnegative
 #print axioms AEGIS.RHFeshbachWeilClosureV2.packet_weil_nonpositive
 #print axioms AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families
