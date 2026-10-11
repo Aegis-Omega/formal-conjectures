@@ -623,6 +623,17 @@ jobs:
           lean --version > evidence-fusion/LEAN_VERSION.txt
           echo "EXACT_SOURCE_PROOF_FUSION=PASS"
 
+      - name: Compile and audit eventual Feshbach Weil join
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          cp AEGISOverlay/RHFeshbachWeilClosureV2.lean RHFeshbachWeilClosureV2.lean
+          lake env lean -o .lake/build/lib/lean/RHFeshbachWeilClosureV2.olean RHFeshbachWeilClosureV2.lean 2>&1 | tee evidence-fusion/RHFeshbachWeilClosureV2.log
+          python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHFeshbachWeilClosureV2.lean evidence-fusion/RHFeshbachWeilClosureV2.log
+          git hash-object AEGISOverlay/RHFeshbachWeilClosureV2.lean > evidence-fusion/RHFESHBACH_WEIL_JOIN_BLOB.txt
+          echo "EXACT_HEAD_FESHBACH_WEIL_JOIN=PASS"
+
       - name: Upload proof-fusion receipts
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
