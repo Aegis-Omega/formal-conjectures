@@ -3,6 +3,7 @@ on:
   pull_request:
     paths:
       - 'research/rh/m8_kernel_v1/**'
+      - 'research/rh/finite_m8_v1/**'
       - '.github/workflows/rh-krein-m8-analytic-v1.yml'
   workflow_dispatch:
 permissions:
@@ -77,6 +78,18 @@ jobs:
         run: python3 research/rh/m8_kernel_v1/replay.py upstream
       - name: New M8 producer and strict endpoint axiom audit
         run: python3 research/rh/m8_kernel_v1/bind_pr52.py
+      - name: Compile recovered finite-M8 window theorem and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          FILE=research/rh/finite_m8_v1/RHKreinM8FiniteWindowV1.lean
+          OUT=.lake/build/lib/lean/research/rh/finite_m8_v1/RHKreinM8FiniteWindowV1.olean
+          test "$(git hash-object "$FILE")" = cdd3e7f9c92173a9e278044ab6f0efe451f532bd
+          mkdir -p "$(dirname "$OUT")"
+          lake env lean -o "$OUT" "$FILE" 2>&1 | tee evidence-m8-kernel/finite-m8-window300.log
+          test -s "$OUT"
+          python3 scripts/verify_rh_overlay_axioms.py "$FILE" evidence-m8-kernel/finite-m8-window300.log
+          git rev-parse HEAD > evidence-m8-kernel/finite-m8-window-head.txt
       - name: Upload complete source and proof evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
