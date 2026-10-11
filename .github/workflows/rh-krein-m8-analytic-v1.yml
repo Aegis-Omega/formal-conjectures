@@ -4,6 +4,7 @@ on:
     paths:
       - 'research/rh/m8_kernel_v1/**'
       - 'research/rh/finite_m8_v1/**'
+      - 'research/rh/krein_reflective_v1/**'
       - '.github/workflows/rh-krein-m8-analytic-v1.yml'
   workflow_dispatch:
 permissions:
@@ -90,6 +91,39 @@ jobs:
           test -s "$OUT"
           python3 scripts/verify_rh_overlay_axioms.py "$FILE" evidence-m8-kernel/finite-m8-window300.log
           git rev-parse HEAD > evidence-m8-kernel/finite-m8-window-head.txt
+      - name: Compile exact reflective cell primitives and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=research/rh/krein_reflective_v1
+          mkdir -p evidence-m8-kernel/reflective
+          for entry in \
+            RHKreinTaylorModelV1:25596a69b7241f9a7a898f991927484e78f999ae \
+            RHKreinTrigTMV1:51227894eb7777f3e247bf89ffb0ca7d685c4b47 \
+            RHKreinRotTMV1:9f846d68bd464dc711d4437112f38b64e66c0186 \
+            RHKreinHatFastV1:6887435413a299ca5937c91988aab5d6dd36b407; do
+            m="${entry%%:*}"
+            blob="${entry#*:}"
+            src="$ROOT/$m.lean"
+            test "$(git hash-object "$src")" = "$blob"
+            cp "$src" "$m.lean"
+            lake env lean -o ".lake/build/lib/lean/$m.olean" "$m.lean" \
+              2>&1 | tee "evidence-m8-kernel/reflective/$m.log"
+            test -s ".lake/build/lib/lean/$m.olean"
+          done
+          cat > evidence-m8-kernel/reflective/axiom-probes.lean <<'LEAN'
+          import RHKreinHatFastV1
+          #print axioms AEGIS.RHKreinTaylorModelV1.Encl.trim
+          #print axioms AEGIS.RHKreinTrigTMV1.encl_sincAff
+          #print axioms AEGIS.RHKreinRotTMV1.phaseZ_encl
+          #print axioms AEGIS.RHKreinHatFastV1.col_encl
+          LEAN
+          lake env lean evidence-m8-kernel/reflective/axiom-probes.lean \
+            2>&1 | tee evidence-m8-kernel/reflective/axiom-probes.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            evidence-m8-kernel/reflective/axiom-probes.lean \
+            evidence-m8-kernel/reflective/axiom-probes.log
+          git rev-parse HEAD > evidence-m8-kernel/reflective/head.txt
       - name: Upload complete source and proof evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
