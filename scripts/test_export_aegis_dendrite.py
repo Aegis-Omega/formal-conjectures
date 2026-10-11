@@ -57,6 +57,17 @@ class ExportTests(unittest.TestCase):
         with self.assertRaises(subprocess.CalledProcessError):
             snapshot(self.repo, "AegisRH/missing.lean")
 
+    def test_unicode_lean_fits_receiver_json_limit(self):
+        target = self.repo / self.path
+        target.write_text("theorem unicode : True := by\n  -- " + "∀∃∑αβ" * 900 + "\n  trivial\n", encoding="utf-8")
+        git(self.repo, "add", ".")
+        git(self.repo, "-c", "user.name=Tester", "-c", "user.email=test@example.com",
+            "commit", "-qm", "unicode fixture")
+        import json
+        obj = snapshot(self.repo)
+        self.assertLessEqual(len(json.dumps(obj, sort_keys=True, indent=2).encode("utf-8")) + 1, 8192)
+        self.assertLessEqual(len(obj["text"].encode("utf-8")), 4096)
+
     def test_deterministic_snapshot(self):
         self.assertEqual(snapshot(self.repo), snapshot(self.repo))
 
