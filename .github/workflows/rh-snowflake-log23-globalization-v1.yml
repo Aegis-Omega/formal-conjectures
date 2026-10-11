@@ -628,6 +628,15 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          # Reuse the existing arbitrary finite Gram/Gershgorin kernel theorem
+          # exactly as recorded in AEGIS pin; no duplicate proof and no changing its source.
+          ROOT=.aegis/sovereign-omega-v2/formal/bridges/lean
+          test "$(git -C .aegis hash-object sovereign-omega-v2/formal/bridges/lean/RHGramExpansionV13.lean)" = "684a7e8bf72a76f36b81a2d66c45413bfdbe89e9"
+          cp "$ROOT/RHGramExpansionV13.lean" RHGramExpansionV13.lean
+          lake env lean -o .lake/build/lib/lean/RHGramExpansionV13.olean RHGramExpansionV13.lean 2>&1 | tee evidence-fusion/RHGramExpansionV13.log
+          ! grep -F 'sorryAx' evidence-fusion/RHGramExpansionV13.log
+          ! grep -F 'error:' evidence-fusion/RHGramExpansionV13.log
+          echo "PINNED_GERSHGORIN_GRAM=PASS" | tee evidence-fusion/GRAM_SOURCE_BINDING.txt
           cp AEGISOverlay/RHFeshbachWeilClosureV2.lean RHFeshbachWeilClosureV2.lean
           lake env lean -o .lake/build/lib/lean/RHFeshbachWeilClosureV2.olean RHFeshbachWeilClosureV2.lean 2>&1 | tee evidence-fusion/RHFeshbachWeilClosureV2.log
           python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHFeshbachWeilClosureV2.lean evidence-fusion/RHFeshbachWeilClosureV2.log
