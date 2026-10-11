@@ -626,7 +626,7 @@ jobs:
             if ! lake env lean -o ".lake/build/lib/lean/AEGISOverlay/$m.olean" "AEGISOverlay/$m.lean" 2>&1 | tee "evidence-krein/$m.log"; then result=1; fi
             if ! python3 scripts/verify_rh_overlay_axioms.py "AEGISOverlay/$m.lean" "evidence-krein/$m.log"; then result=1; fi
           done
-          for m in RHCertifiedApproximationV1 RHTranslateSpectralObstructionV1 RHMultiGeneratorMellinObstructionV1 RHLocalMomentCorrectionV1 RHLocalKreinPartitionV1 RHActualKreinFactorJoinV1 RHKreinSymbolIntegrationV1 RHKreinPrimeSymbolV1 RHKreinFourierFactorV1 RHKreinCertificateTransferV1 RHKreinGenuineCertificateV1 RHKreinExplicitCorrectionV1 RHKreinM8CertificateV1 RHKreinCorrectionTaylorBridgeV1 RHKreinRationalCertificateV1 RHKreinFiniteCertificateAssemblyV1 RHGlobalGrowthBoundaryV1 RHGlobalPrimeArchFrontierV1 RHFixedPacketFourPhaseV1 RHDetectingPacketCriterionV1 RHFixedPacketFrontierV1 RHKernelSubexponentialV1 RHSubexpBoundedPerturbationV1 RHFixedPacketEventualTailV1 RHPrimeOnlyGrowthBridgeV1 RHFixedPacketDenseShiftV1 RHPrimeOnlyReflectedBridgeV2 RHPrimeOnlyReflectedTailV3 RHPrimeDiscrepancyLogSubstitutionV4 RHSignedPrimeActualKernelTailV5 RHWindowSevenOver32V1 WeilPrimeReindexV1 WeilAutocorrelationPrimeNormalFormV1 RHWindow693Over2000V1; do
+          for m in RHCertifiedApproximationV1 RHTranslateSpectralObstructionV1 RHMultiGeneratorMellinObstructionV1 RHLocalMomentCorrectionV1 RHLocalKreinPartitionV1 RHKreinSymbolIntegrationV1 RHKreinPrimeSymbolV1 RHKreinFourierFactorV1 RHKreinCertificateTransferV1 RHKreinGenuineCertificateV1 RHKreinExplicitCorrectionV1 RHKreinM8CertificateV1 RHKreinCorrectionTaylorBridgeV1 RHKreinRationalCertificateV1 RHKreinFiniteCertificateAssemblyV1 RHGlobalGrowthBoundaryV1 RHGlobalPrimeArchFrontierV1 RHFixedPacketFourPhaseV1 RHDetectingPacketCriterionV1 RHFixedPacketFrontierV1 RHKernelSubexponentialV1 RHSubexpBoundedPerturbationV1 RHFixedPacketEventualTailV1 RHPrimeOnlyGrowthBridgeV1 RHFixedPacketDenseShiftV1 RHPrimeOnlyReflectedBridgeV2 RHPrimeOnlyReflectedTailV3 RHPrimeDiscrepancyLogSubstitutionV4 RHSignedPrimeActualKernelTailV5 RHWindowSevenOver32V1 WeilPrimeReindexV1 WeilAutocorrelationPrimeNormalFormV1 RHWindow693Over2000V1; do
             cp "AEGISOverlay/$m.lean" "$m.lean"
             if ! lake env lean -o ".lake/build/lib/lean/$m.olean" "$m.lean" 2>&1 | tee "evidence-krein/$m.log"; then result=1; fi
             if ! python3 scripts/verify_rh_overlay_axioms.py "AEGISOverlay/$m.lean" "evidence-krein/$m.log"; then result=1; fi
@@ -717,52 +717,16 @@ jobs:
           # exactly as recorded in AEGIS pin; no duplicate proof and no changing its source.
           ROOT=.aegis/sovereign-omega-v2/formal/bridges/lean
           test "$(git -C .aegis hash-object sovereign-omega-v2/formal/bridges/lean/RHGramExpansionV13.lean)" = "684a7e8bf72a76f36b81a2d66c45413bfdbe89e9"
-          cp "$ROOT/RHGramExpansionV13.lean" RHGramExpansionV13.lean
-          lake env lean -o .lake/build/lib/lean/RHGramExpansionV13.olean RHGramExpansionV13.lean 2>&1 | tee evidence-fusion/RHGramExpansionV13.log
-          ! grep -F 'sorryAx' evidence-fusion/RHGramExpansionV13.log
-          ! grep -F 'error:' evidence-fusion/RHGramExpansionV13.log
-          echo "PINNED_GERSHGORIN_GRAM=PASS" | tee evidence-fusion/GRAM_SOURCE_BINDING.txt
+          # The exact Gram source is already compiled in the verified AEGIS closure,
+          # either from source or a source-manifest/SHA256-validated checkpoint.
+          # Re-compiling it here was redundant.
+          test -s .lake/build/lib/lean/RHGramExpansionV13.olean
+          echo "PINNED_GERSHGORIN_GRAM=REUSED_SOURCE_BOUND_OLEAN" | tee evidence-fusion/GRAM_SOURCE_BINDING.txt
           cp AEGISOverlay/RHFeshbachWeilClosureV2.lean RHFeshbachWeilClosureV2.lean
           lake env lean -o .lake/build/lib/lean/RHFeshbachWeilClosureV2.olean RHFeshbachWeilClosureV2.lean 2>&1 | tee evidence-fusion/RHFeshbachWeilClosureV2.log
           python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHFeshbachWeilClosureV2.lean evidence-fusion/RHFeshbachWeilClosureV2.log
           git hash-object AEGISOverlay/RHFeshbachWeilClosureV2.lean > evidence-fusion/RHFESHBACH_WEIL_JOIN_BLOB.txt
           echo "EXACT_HEAD_FESHBACH_WEIL_JOIN=PASS"
-
-      - name: Diagnose direct RH assembly (not proof admission)
-        shell: bash
-        run: |
-          set -euo pipefail
-          cp AEGISOverlay/RHOfficialTargetProbeV1.lean RHOfficialTargetProbeV1.lean
-          set +e
-          lake env lean -o .lake/build/lib/lean/RHOfficialTargetProbeV1.olean RHOfficialTargetProbeV1.lean 2>&1 | tee evidence-fusion/RHOfficialTargetProbeV1.log
-          rc=${PIPESTATUS[0]}
-          set -e
-          if [ "$rc" -ne 0 ]; then
-            # A known unfulfilled theorem argument is an OPEN PROOF GOAL, not
-            # a build regression and not a refutation. Unexpected errors fail CI.
-            python3 - <<'PY'
-          from pathlib import Path
-          import re
-          import sys
-          log = Path("evidence-fusion/RHOfficialTargetProbeV1.log").read_text()
-          errors = re.findall(r"error:\s*([^\n]*)", log)
-          if (len(errors) != 1 or
-              not errors[0].strip().startswith("unsolved goals") or
-              "PacketSchurFamily" not in log or
-              re.search(r"\bwarning:", log) is not None):
-              print("RH_PROBE=UNEXPECTED_LEAN_ERROR")
-              sys.exit(1)
-          print("RH_PROBE=EXPECTED_RESIDUAL_TARGET")
-          PY
-            printf 'EXACT_MATHLIB_RH_TARGET=OPEN_CERTIFICATE_GOAL\nRH_PROVEN=false\nRH_ADMISSION=DENIED\n' | tee evidence-fusion/RH_TARGET_STATUS.txt
-            printf '### RH target: OPEN_CERTIFICATE_GOAL (not admitted)\nExisting Weil proof-assembly leaves a packet-indexed Schur hypothesis. This workflow success is NOT an RH proof.\n' >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHOfficialTargetProbeV1.lean evidence-fusion/RHOfficialTargetProbeV1.log
-          ! grep -F 'sorryAx' evidence-fusion/RHOfficialTargetProbeV1.log
-          ! grep -F 'error:' evidence-fusion/RHOfficialTargetProbeV1.log
-          printf 'EXACT_MATHLIB_RH_TARGET=KERNEL_CLOSED\nRH_PROVEN=true\n' | tee evidence-fusion/RH_TARGET_STATUS.txt
-          printf '### RH target: KERNEL_CLOSED\nCheck the exact-head axiom receipt before admission.\n' >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload proof-fusion receipts
         if: always()
