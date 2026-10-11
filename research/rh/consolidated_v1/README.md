@@ -65,7 +65,11 @@ lake env python3 research/rh/consolidated_v1/build.py OUT_DIR consolidated.log 3
 `build.py` checks every SHA-256, compiles the modules in import order (independent ones in
 parallel), fails on any error or `sorry`, and checks that every `#print axioms` report is within
 the standard three and that the four headline theorems are reported.
-`.github/workflows/rh-consolidated-v1.yml` runs exactly this. The batch modules dominate the cost
-(about 9 CPU-hours).
+
+The batch modules dominate the cost (about 9 CPU-hours), and each one peaks at about 9 GiB while
+the kernel checks it, so `build.py` compiles at most one of them at a time (`RHC_HEAVY_JOBS`).
+`.github/workflows/rh-consolidated-v1.yml` runs the same build in stages, passing the `.olean`
+files on as artifacts: `base` (every module that does not import a batch), `shard:K/12` on twelve
+runners (the batches), and `final` (the three modules that import them, then the headline audit).
 
 AUTHORITY_EFFECT = NONE.
