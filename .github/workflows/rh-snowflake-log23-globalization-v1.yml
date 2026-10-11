@@ -664,7 +664,7 @@ jobs:
           if (len(errors) != 1 or
               not errors[0].strip().startswith("unsolved goals") or
               "PacketSchurFamily" not in log or
-              "RiemannHypothesis" not in log):
+              re.search(r"\bwarning:", log) is not None):
               print("RH_PROBE=UNEXPECTED_LEAN_ERROR")
               sys.exit(1)
           print("RH_PROBE=EXPECTED_RESIDUAL_TARGET")
