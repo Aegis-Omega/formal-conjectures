@@ -141,8 +141,8 @@ theorem packet_weil_nonpositive (g : WeilCompactSmoothGV1)
     (hm : WeilMomentConditionsV1 g)
     (h : PacketSchurFamily g) :
     (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
-  (AEGIS.WeilAutocorrelationExplicitFormulaV10
-    .autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10 g hm).mpr
+  (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+    g hm).mpr
       (packet_zero_quadratic_nonnegative g h)
 
 /-- Direct connection to the existing cofinal-window RH equivalence.
