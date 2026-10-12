@@ -7,6 +7,7 @@ on:
     paths:
       - 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
       - 'research/rh/m8_kernel_v1/**'
+      - 'research/rh/finite_m8_v1/**'
       - '.github/workflows/rh-trigram-exact-head-v1.yml'
   workflow_dispatch:
 
@@ -23,6 +24,19 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
+      - name: Reproduce existing PR55 fifteenth-cell correction from exact generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-trigram
+          gen=research/rh/m8_kernel_v1/cell15_direct/gen.py
+          model=research/rh/m8_kernel_v1/cell15_direct/model.py
+          out=research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectCorrectionV1.lean
+          test "$(git hash-object "$gen")" = 8fc5e3898b30a5047398663334baf083794e673d
+          test "$(git hash-object "$model")" = 834ba9df2213e01c9ec8668038aa7752552c8de2
+          python3 "$gen" "$out" 2>&1 | tee evidence-trigram/direct-correction-generation.log
+          test -s "$out"
+          sha256sum "$out" | tee evidence-trigram/direct-correction-sha256.txt
       - name: Bind source to SHA and verify finite-cell certificate
         shell: bash
         run: |
