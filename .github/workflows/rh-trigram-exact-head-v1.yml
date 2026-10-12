@@ -14,6 +14,14 @@ on:
 permissions:
   contents: read
 
+# Same pins as rh-krein-m8-analytic-v1.yml; the provider is built by its existing recipe.
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+
 jobs:
   trigram-kernel:
     runs-on: ubuntu-24.04
@@ -93,6 +101,29 @@ jobs:
           lake exe cache get
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = '0df444a360eaa60ab8c11dca51a86af692955474'
           lean --version | tee evidence-trigram/lean-version.txt
+      # ZeroCountingBoundV1 and three Weil/Hadamard modules import Lc.* and Hadamard.*.
+      # Reuse the PR53 provider build: replay.py runs the pinned recipe from
+      # .baseline (workflow blob c29025bd) and copies the oleans into .lake/build.
+      - name: Checkout immutable PR51 source for the pinned provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+      - name: Checkout exact external provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+      - name: Restore pinned provider build
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .li-provider/.lake/build
+          key: rh-li-provider-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.LI_CRITERION_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
+        run: python3 research/rh/m8_kernel_v1/replay.py provider
       - name: Compile source-bound imports before trigram and audit axioms
         shell: bash
         run: |
