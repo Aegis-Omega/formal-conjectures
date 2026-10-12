@@ -1,0 +1,99 @@
+# Copyright 2026 The Formal Conjectures Authors.
+# Source-bound, fail-closed candidate replay; never marks the official RH target proved.
+name: RH adaptive trigram exact-head kernel replay
+
+on:
+  pull_request:
+    paths:
+      - 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
+      - 'research/rh/m8_kernel_v1/**'
+      - '.github/workflows/rh-trigram-exact-head-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  trigram-kernel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - name: Checkout exact candidate SHA
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Bind source to SHA and verify finite-cell certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-trigram
+          git rev-parse HEAD | tee evidence-trigram/head.txt
+          python3 - <<'PY' | tee evidence-trigram/source-closure.log
+          import json, pathlib, re, subprocess, sys
+          root = pathlib.Path('.')
+          f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
+          source = f.read_text()
+          ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
+          cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
+          required = [
+              'RHKreinCellBatchV1', 'RHKreinFifteenthCellDirectV1',
+              'RHKreinFifteenthCellReductionV1',
+              'RHKreinFifteenthCellDirectCorrectionV1',
+              'RHKreinFirstCellV1', 'RHKreinSecondCellReductionV1',
+              'RHKreinCellAnalyticBridgeV1'
+          ]
+          found = {}
+          for name in required:
+              paths = sorted(str(p) for p in root.rglob(name+'.lean')
+                             if '.lake' not in p.parts)
+              found[name] = paths
+          outcome = dict(
+              head_sha=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              file_blob=subprocess.check_output(['git','hash-object',str(f)],text=True).strip(),
+              n_cells=len(ns), c_checks=len(cs),
+              contiguous_cells=ns==list(range(375)),
+              expected_checks=cs==list(range(2,375)),
+              source_modules=found,
+              missing_modules=[n for n,p in found.items() if not p],
+              status='SOURCE_CLOSURE_PENDING')
+          if (outcome['contiguous_cells'] and outcome['expected_checks']
+                and not outcome['missing_modules']):
+              outcome['status']='SOURCE_CLOSURE_READY_FOR_LEAN'
+          pathlib.Path('evidence-trigram/source-closure.json').write_text(
+              json.dumps(outcome,indent=2,sort_keys=True)+'\n')
+          print(json.dumps(outcome,sort_keys=True))
+          if outcome['status']!='SOURCE_CLOSURE_READY_FOR_LEAN':
+              sys.exit(1)
+          PY
+      - name: Install exact pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = 'leanprover/lean4:v4.33.1'
+          grep -Fq '0df444a360eaa60ab8c11dca51a86af692955474' lake-manifest.json
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = '0df444a360eaa60ab8c11dca51a86af692955474'
+          lean --version | tee evidence-trigram/lean-version.txt
+      - name: Compile trigram on the exact source head and print axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          src=research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/RHKreinTrigramAdaptiveV1.olean "$src" 2>&1 | tee evidence-trigram/kernel.log
+          test -s .lake/build/lib/lean/RHKreinTrigramAdaptiveV1.olean
+          ! grep -E '(^|:[0-9]+:[0-9]+: )error:|sorryAx' evidence-trigram/kernel.log
+          grep -F 'AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1' evidence-trigram/kernel.log
+      - name: Archive immutable source and kernel evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-trigram-exact-head-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: evidence-trigram/
+          if-no-files-found: warn
+          retention-days: 30
