@@ -122,6 +122,17 @@ jobs:
               if not name.startswith(('RHKrein','RHEulerGamma','AEGISOverlay.','research.rh.')):
                   return None
               matches=by_stem.get(name.split('.')[-1],[])
+              if not matches:
+                  # Existing source archive tracked in this same exact HEAD.
+                  # Fall back only when no ordinary Lean module owns the name.
+                  # PR53's AEGIS source pin includes RHKreinFactorV13 here.
+                  archived = pathlib.Path('research/rh/aegis_source_4d7578e/lean') / (
+                      name.split('.')[-1] + '.lean.src')
+                  if archived.is_file():
+                      if subprocess.check_output(
+                          ['git', 'ls-files', '--', str(archived)], text=True).strip() != str(archived):
+                          raise ValueError(f'UNTRACKED_ARCHIVE_SOURCE {name}')
+                      return archived
               if len(matches)!=1: raise ValueError(f'IMPORT_NOT_UNIQUE {name}: {matches}')
               return matches[0]
           def visit(name):
