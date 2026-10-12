@@ -722,6 +722,10 @@ jobs:
           # Re-compiling it here was redundant.
           test -s .lake/build/lib/lean/RHGramExpansionV13.olean
           echo "PINNED_GERSHGORIN_GRAM=REUSED_SOURCE_BOUND_OLEAN" | tee evidence-fusion/GRAM_SOURCE_BINDING.txt
+          # Actual small-window producer, exact repo blob; separate from the Gram route.
+          test "$(git hash-object AEGISOverlay/RHWindow693Over2000V1.lean)" = "f3e7ad538f991c5cf7e7cee4683257fb8414b0bb"
+          cp AEGISOverlay/RHWindow693Over2000V1.lean RHWindow693Over2000V1.lean
+          lake env lean -o .lake/build/lib/lean/RHWindow693Over2000V1.olean RHWindow693Over2000V1.lean 2>&1 | tee evidence-fusion/RHWindow693Over2000V1.log
           cp AEGISOverlay/RHFeshbachWeilClosureV2.lean RHFeshbachWeilClosureV2.lean
           lake env lean -o .lake/build/lib/lean/RHFeshbachWeilClosureV2.olean RHFeshbachWeilClosureV2.lean 2>&1 | tee evidence-fusion/RHFeshbachWeilClosureV2.log
           python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHFeshbachWeilClosureV2.lean evidence-fusion/RHFeshbachWeilClosureV2.log
