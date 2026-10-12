@@ -119,8 +119,13 @@ jobs:
                   return p
               candidate=name.replace('.','/')+'.lean'
               if candidate in sources: return sources[candidate]
-              if not name.startswith(('RHKrein','RHEulerGamma','AEGISOverlay.','research.rh.',
-                                      'Weil','RH','Meromorphic','Mellin')):
+              # Known Lake and Lean package imports are resolved by Lake.
+              # Every other import is searched in tracked local source first;
+              # avoid brittle name prefixes that skip ZeroShell/other proofs.
+              if name.split('.')[0] in {
+                  'Mathlib','Batteries','Aesop','Qq','Plausible','Lean','Init',
+                  'Std','ImportGraph','ProofWidgets','LeanSearchClient','Lc',
+                  'Hadamard','FunctionsOfOneComplexVariable'}:
                   return None
               matches=by_stem.get(name.split('.')[-1],[])
               if len(matches)>1:
