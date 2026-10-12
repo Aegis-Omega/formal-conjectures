@@ -93,16 +93,72 @@ jobs:
           lake exe cache get
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = '0df444a360eaa60ab8c11dca51a86af692955474'
           lean --version | tee evidence-trigram/lean-version.txt
-      - name: Compile trigram on the exact source head and print axioms
+      - name: Compile source-bound imports before trigram and audit axioms
         shell: bash
         run: |
           set -euo pipefail
-          src=research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean
-          mkdir -p .lake/build/lib/lean
-          lake env lean -o .lake/build/lib/lean/RHKreinTrigramAdaptiveV1.olean "$src" 2>&1 | tee evidence-trigram/kernel.log
-          test -s .lake/build/lib/lean/RHKreinTrigramAdaptiveV1.olean
-          ! grep -E '(^|:[0-9]+:[0-9]+: )error:|sorryAx' evidence-trigram/kernel.log
-          grep -F 'AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1' evidence-trigram/kernel.log
+          python3 - <<'PY'
+          import json, pathlib, re, subprocess, sys
+          root=pathlib.Path('.')
+          tracked=subprocess.check_output(['git','ls-files','--','*.lean'],text=True).splitlines()
+          generated='research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectCorrectionV1.lean'
+          if pathlib.Path(generated).is_file(): tracked.append(generated)
+          sources={p:pathlib.Path(p) for p in tracked if pathlib.Path(p).is_file()}
+          by_stem={}
+          for p in sources.values(): by_stem.setdefault(p.stem,[]).append(p)
+          order=[]; visiting=set(); visited=set()
+          def resolve(name):
+              candidate=name.replace('.','/')+'.lean'
+              if candidate in sources: return sources[candidate]
+              if not name.startswith(('RHKrein','RHEulerGamma','AEGISOverlay.','research.rh.')):
+                  return None
+              matches=by_stem.get(name.split('.')[-1],[])
+              if len(matches)!=1: raise ValueError(f'IMPORT_NOT_UNIQUE {name}: {matches}')
+              return matches[0]
+          def visit(name):
+              if name in visited:return
+              if name in visiting:raise ValueError(f'IMPORT_CYCLE {name}')
+              path=resolve(name)
+              if path is None:return
+              visiting.add(name)
+              for dep in re.findall(r'^import\s+([\w.]+)',path.read_text(),re.M):visit(dep)
+              visiting.remove(name);visited.add(name);order.append((name,path))
+          visit('RHKreinTrigramAdaptiveV1')
+          pathlib.Path('evidence-trigram/ordered-modules.tsv').write_text(
+              ''.join(f'{name}\t{path}\n' for name,path in order))
+          pathlib.Path('evidence-trigram/import-closure.json').write_text(
+              json.dumps({'sha':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'modules':[{'name':name,'path':str(path)} for name,path in order]},indent=2)+'\n')
+          print(f'ROOT_SOURCE_CLOSURE_COUNT={len(order)}')
+          PY
+          idx=0
+          while IFS=$'\t' read -r mod src; do
+            out=".lake/build/lib/lean/\${mod//.//}.olean"
+            mkdir -p "$(dirname "$out")"
+            if [ "$mod" = RHKreinTrigramAdaptiveV1 ]; then
+              log=evidence-trigram/kernel.log
+            else
+              log="evidence-trigram/module-\${idx}.log"
+            fi
+            blob="$(git hash-object "$src")"
+            if git ls-files --error-unmatch "$src" >/dev/null 2>&1; then
+              test "$blob" = "$(git rev-parse "HEAD:$src")"
+            fi
+            printf '%s\t%s\t%s\n' "$mod" "$src" "$blob" >> evidence-trigram/compiled-modules.tsv
+            if ! lake env lean -o "$out" "$src" > "$log" 2>&1; then
+              echo "FIRST_LEAN_FAILURE module=$mod source=$src blob=$blob"
+              tail -n 55 "$log"
+              exit 1
+            fi
+            test -s "$out" || { echo "OLEAN_MISSING $mod"; exit 1; }
+            if grep -Fq sorryAx "$log"; then
+              echo "SORRY_AXIOM $mod"; exit 1
+            fi
+            idx=$((idx+1))
+          done < evidence-trigram/ordered-modules.tsv
+          for declaration in finiteIntervalCertificate_trigram_v1 pointwiseCertificate_trigram_v1 zero_quadratic_margin_trigram_v1; do
+            grep -F "AEGIS.RHKreinTrigramAdaptiveV1.$declaration" evidence-trigram/kernel.log
+          done
       - name: Archive immutable source and kernel evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
