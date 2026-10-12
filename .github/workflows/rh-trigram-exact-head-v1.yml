@@ -133,12 +133,12 @@ jobs:
           PY
           idx=0
           while IFS=$'\t' read -r mod src; do
-            out=".lake/build/lib/lean/\${mod//.//}.olean"
+            out=".lake/build/lib/lean/${mod//.//}.olean"
             mkdir -p "$(dirname "$out")"
             if [ "$mod" = RHKreinTrigramAdaptiveV1 ]; then
               log=evidence-trigram/kernel.log
             else
-              log="evidence-trigram/module-\${idx}.log"
+              log="evidence-trigram/module-${idx}.log"
             fi
             blob="$(git hash-object "$src")"
             if git ls-files --error-unmatch "$src" >/dev/null 2>&1; then
