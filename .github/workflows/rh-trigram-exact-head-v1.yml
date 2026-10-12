@@ -108,6 +108,15 @@ jobs:
           for p in sources.values(): by_stem.setdefault(p.stem,[]).append(p)
           order=[]; visiting=set(); visited=set()
           def resolve(name):
+              # Exact PR53/PR52 import adapter. Existing bind_pr52.py already
+              # binds this name to the unchanged declaration-free source.
+              if name == 'AEGISOverlay.RHKreinCorrectionSymbolV1':
+                  p = pathlib.Path('research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean')
+                  expected = 'cb70597230e1cd1863bef40e0901c9e317dedf20'
+                  if not p.is_file() or subprocess.check_output(
+                      ['git', 'hash-object', str(p)], text=True).strip() != expected:
+                      raise ValueError('PR53_CORRECTION_ADAPTER_DRIFT')
+                  return p
               candidate=name.replace('.','/')+'.lean'
               if candidate in sources: return sources[candidate]
               if not name.startswith(('RHKrein','RHEulerGamma','AEGISOverlay.','research.rh.')):
