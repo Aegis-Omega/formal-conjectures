@@ -138,6 +138,72 @@ theorem actual_two_block_zero_quadratic_coefficients
   rw [← actual_two_block_gram_coefficients u v]
   linarith
 
+/-- Source-bound two-block Feshbach inequality: the diagonal, mixed,
+and tail Schur entries are the actual arithmetic Weil Gram values.
+The equality with the genuine zeta-zero quadratic comes from the
+repository's explicit formula; no surrogate bilinear form is introduced. -/
+theorem actual_two_block_feshbach_lower
+    (u v : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v))
+    (nv nw β c μ : ℝ)
+    (hnw : 0 ≤ nw)
+    (hq : c * nw ^ 2 ≤ -(AEGIS.WeilMixedAlgebraV2.B v v).re)
+    (hb : (-(AEGIS.WeilMixedAlgebraV2.B u v).re) ^ 2 ≤ β * nw ^ 2)
+    (hβ : 0 ≤ β)
+    (hμ : μ < c) :
+    -(AEGIS.WeilMixedAlgebraV2.B u u).re -
+        μ * nv ^ 2 - β / (c - μ) ≤
+      (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1
+          (WeilAutocorrelationV1
+            (AEGIS.WeilMixedAlgebraV2.addPacket u v)) rho).re -
+        μ * (nv ^ 2 + nw ^ 2) := by
+  rw [actual_two_block_zero_quadratic_coefficients u v hm]
+  exact AEGIS.RHFeshbachCoreV1.feshbach_lower
+    (-(AEGIS.WeilMixedAlgebraV2.B u u).re)
+    (-(AEGIS.WeilMixedAlgebraV2.B u v).re)
+    (-(AEGIS.WeilMixedAlgebraV2.B v v).re)
+    nv nw β c μ hnw hq hb hβ hμ
+
+/-- A genuine two-block Schur certificate bounds the actual zero sum.
+The error and its squared norm remain explicit; this is the finite
+source-bound inequality consumed by the cofinal limit argument. -/
+theorem actual_two_block_zero_quadratic_schur_bound
+    (u v : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v))
+    (nv nw β c μ eps normSq : ℝ)
+    (hnw : 0 ≤ nw)
+    (hq : c * nw ^ 2 ≤ -(AEGIS.WeilMixedAlgebraV2.B v v).re)
+    (hb : (-(AEGIS.WeilMixedAlgebraV2.B u v).re) ^ 2 ≤ β * nw ^ 2)
+    (hβ : 0 ≤ β)
+    (hμ : μ < c)
+    (hμ0 : 0 ≤ μ)
+    (hSchur :
+      -(eps) * normSq ≤
+        -(AEGIS.WeilMixedAlgebraV2.B u u).re -
+          μ * nv ^ 2 - β / (c - μ)) :
+    -(eps) * normSq ≤
+      (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1
+          (WeilAutocorrelationV1
+            (AEGIS.WeilMixedAlgebraV2.addPacket u v)) rho).re := by
+  have hshift : 0 ≤ μ * (nv ^ 2 + nw ^ 2) :=
+    mul_nonneg hμ0 (add_nonneg (sq_nonneg _) (sq_nonneg _))
+  calc
+    -(eps) * normSq ≤
+        -(AEGIS.WeilMixedAlgebraV2.B u u).re -
+          μ * nv ^ 2 - β / (c - μ) := hSchur
+    _ ≤
+        (∑' rho : RiemannNontrivialZeroIndexV2,
+          WeilZeroIndexSummandV1
+            (WeilAutocorrelationV1
+              (AEGIS.WeilMixedAlgebraV2.addPacket u v)) rho).re -
+          μ * (nv ^ 2 + nw ^ 2) :=
+      actual_two_block_feshbach_lower u v hm nv nw β c μ hnw hq hb hβ hμ
+    _ ≤ _ := sub_le_self _ hshift
+
 /-- The exact canonical zeta-zero quadratic of an actual finite packet
 sum is the negative real part of its *full* mixed Weil Gram matrix.
 This is the literal explicit formula, not a surrogate PSD model. -/
@@ -212,5 +278,7 @@ end AEGIS.RHCofinalSchurAdapterV1
 #print axioms AEGIS.RHCofinalSchurAdapterV1.riemannHypothesis_of_schur_norm_families
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_zero_quadratic_coefficients
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_feshbach_lower
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_zero_quadratic_schur_bound
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_eq_neg_finite_gram
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds
