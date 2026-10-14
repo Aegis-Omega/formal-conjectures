@@ -1229,6 +1229,113 @@ theorem distinct_fine_far_actual_B_q16_prime_plus_120
     p q a b hp hq hm hgap primeCost 120 hprime hdecay
 
 
+/-! ## Exact exponential-to-geometric bridge for moment-zero ARCH
+
+For centers separated by at least 65/32 per index increment,
+the rank-one-cancelled Arch contribution decays geometrically with
+index distance. No prime-sum inequality is assumed or concluded.
+-/
+
+/-- A rational geometric majorant for the moment-zero Arch remainder
+at every positive integer gap, without floating-point evaluation. -/
+theorem moment_zero_arch_decay_geometric
+    (δ : ℝ) (k : ℕ) (hk : 1 ≤ k)
+    (hδ : 2 * (k : ℝ) ≤ δ) :
+    (1 / 32 : ℝ) *
+      (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) ≤
+        (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ k) := by
+  have hkreal : (1 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hk
+  have htwo : (2 : ℝ) ≤ δ := by nlinarith
+  have he5 : (37 / 2 : ℝ) ≤ Real.exp 5 := by
+    have h := Real.quadratic_le_exp_of_nonneg
+      (by norm_num : (0 : ℝ) ≤ 5)
+    norm_num at h
+    exact h
+  have he4 : (13 : ℝ) ≤ Real.exp 4 := by
+    have h := Real.quadratic_le_exp_of_nonneg
+      (by norm_num : (0 : ℝ) ≤ 4)
+    norm_num at h
+    exact h
+  have hprod5 : Real.exp 5 * Real.exp (-5) = 1 := by
+    rw [← Real.exp_add]
+    norm_num
+  have hprod4 : Real.exp 4 * Real.exp (-4) = 1 := by
+    rw [← Real.exp_add]
+    norm_num
+  have hneg5 : Real.exp (-5) ≤ (2 / 37 : ℝ) := by
+    have hm := mul_le_mul_of_nonneg_right he5 (Real.exp_nonneg (-5))
+    rw [hprod5] at hm
+    nlinarith
+  have hneg4 : Real.exp (-4) ≤ (1 / 13 : ℝ) := by
+    have hm := mul_le_mul_of_nonneg_right he4 (Real.exp_nonneg (-4))
+    rw [hprod4] at hm
+    nlinarith
+  have hdenbound : Real.exp (-2 * δ) ≤ (1 / 13 : ℝ) := by
+    exact (Real.exp_le_exp.mpr (by linarith : -2 * δ ≤ -4)).trans hneg4
+  have hden : (12 / 13 : ℝ) ≤ 1 - Real.exp (-2 * δ) := by
+    linarith
+  have hdenpos : 0 < 1 - Real.exp (-2 * δ) := by linarith
+  have hpow :
+      Real.exp (-(5 * (k : ℝ))) = (Real.exp (-5)) ^ k := by
+    calc
+      Real.exp (-(5 * (k : ℝ))) =
+          Real.exp ((k : ℝ) * (-5)) := by congr 1; ring
+      _ = (Real.exp (-5)) ^ k := Real.exp_nat_mul (-5) k
+  have hnum :
+      Real.exp (-5 * δ / 2) ≤ (2 / 37 : ℝ) ^ k := by
+    calc
+      Real.exp (-5 * δ / 2) ≤
+          Real.exp (-(5 * (k : ℝ))) :=
+        Real.exp_le_exp.mpr (by linarith)
+      _ = (Real.exp (-5)) ^ k := hpow
+      _ ≤ (2 / 37 : ℝ) ^ k :=
+        pow_le_pow_left₀ (Real.exp_nonneg _) hneg5 k
+  have hratio :
+      Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ)) ≤
+        ((2 / 37 : ℝ) ^ k) / (12 / 13) := by
+    apply (div_le_div_iff₀ hdenpos (by norm_num : (0 : ℝ) < 12 / 13)).mpr
+    calc
+      Real.exp (-5 * δ / 2) * (12 / 13) ≤
+          ((2 / 37 : ℝ) ^ k) * (12 / 13) :=
+        mul_le_mul_of_nonneg_right hnum (by norm_num)
+      _ ≤ ((2 / 37 : ℝ) ^ k) *
+          (1 - Real.exp (-2 * δ)) :=
+        mul_le_mul_of_nonneg_left hden
+          (pow_nonneg (by norm_num : (0 : ℝ) ≤ 2 / 37) k)
+  calc
+    (1 / 32 : ℝ) *
+      (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) ≤
+        (1 / 32 : ℝ) * (((2 / 37 : ℝ) ^ k) / (12 / 13)) :=
+      mul_le_mul_of_nonneg_left hratio (by norm_num)
+    _ = (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ k) := by ring
+
+/-- Direct actual Weil-Arch cross bound, indexed by the integer
+separation of two fine moment-zero packets. This is the analytic
+pair-to-geometric interface used by a dimension-free row certificate. -/
+theorem distinct_fine_far_actual_arch_geometric
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (k : ℕ) (hk : 1 ≤ k)
+    (hsep : (65 / 32 : ℝ) * (k : ℝ) ≤ b - a) :
+    ‖WeilArchimedeanIntegralV1 (mixed p q)‖ ≤
+      ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ k)) *
+        (energy p.1 + energy q.1) := by
+  have hkreal : (1 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hk
+  have hlog : Real.log 2 ≤ b - a := by
+    linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
+  have hδ : 2 * (k : ℝ) ≤ (b - a) - 1 / 32 := by
+    nlinarith
+  have harch := distinct_fine_far_arch_moment_decay
+    p q a b hp hq hm hlog
+  have hcost := moment_zero_arch_decay_geometric
+    ((b - a) - 1 / 32) k hk hδ
+  have henergy : 0 ≤ energy p.1 + energy q.1 :=
+    add_nonneg (energy_nonnegative p.1) (energy_nonnegative q.1)
+  exact harch.trans (mul_le_mul_of_nonneg_right hcost henergy)
+
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1269,3 +1376,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_separate_rational_budgets
 #print axioms AEGIS.RHActualMixedDefectV1.moment_zero_arch_rational_exp_bound
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
+
+#print axioms AEGIS.RHActualMixedDefectV1.moment_zero_arch_decay_geometric
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_arch_geometric
