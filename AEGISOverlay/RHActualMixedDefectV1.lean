@@ -1712,6 +1712,119 @@ theorem fine_cluster_nine_mixed_defect_opposite
   exact fine_width_into_common_nine (gs i) (centers i)
     center (hw i) (hnear i)
 
+
+/-! ## Exact prime-side localization in the missing intermediate log gap
+
+The genuine WeilPrimeTermV1 has BOTH samples m and m⁻¹.
+The support-difference window for two distinct fine packets is
+(a-b)-1/128 ≤ u ≤ (a-b)+1/128. When b-a > 1/128, the positive
+sample m vanishes automatically. The reciprocal sample only survives
+when log m lies within 1/128 of b-a. This theorem retains that exact
+discrete obstruction rather than postulating a prime-energy bound. -/
+
+/-- If a fine packet pair has a strictly positive support gap and
+the integer logarithm misses its correlation window, both actual
+multiplicative Weil samples vanish. No special mother packet. -/
+theorem distinct_fine_prime_samples_vanish_of_integer_log_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hsep : (1 / 128 : ℝ) < b - a)
+    (m : ℕ) (hm : 0 < m)
+    (havoid : (1 / 128 : ℝ) <
+      |Real.log (m : ℝ) - (b - a)|) :
+    mixed p q (m : ℝ) = 0 ∧
+      mixed p q ((m : ℝ)⁻¹) = 0 := by
+  have hmR : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  have hmone : (1 : ℝ) ≤ (m : ℝ) := by
+    exact_mod_cast (show 1 ≤ m by omega)
+  have hlog0 : 0 ≤ Real.log (m : ℝ) := Real.log_nonneg hmone
+  have hpI : LogSupportIn p (a - 1 / 256) (a + 1 / 256) := hp
+  have hqI : LogSupportIn q (b - 1 / 256) (b + 1 / 256) := hq
+  have hpos : logCrossV28 p q (Real.log (m : ℝ)) = 0 := by
+    apply logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (b - 1 / 256) (b + 1 / 256) (Real.log (m : ℝ)) hpI hqI
+    right
+    linarith
+  have hrealpos : mixed p q (m : ℝ) = 0 := by
+    rw [logCross_eq_mixed_v28, Real.exp_log hmR] at hpos
+    exact (mul_eq_zero.mp hpos).resolve_left (by simp)
+  have hsplit :
+      Real.log (m : ℝ) - (b - a) < -(1 / 128 : ℝ) ∨
+        (1 / 128 : ℝ) < Real.log (m : ℝ) - (b - a) := by
+    by_cases hlow :
+        Real.log (m : ℝ) - (b - a) < -(1 / 128 : ℝ)
+    · exact Or.inl hlow
+    · right
+      by_contra hhigh
+      have hlo : -(1 / 128 : ℝ) ≤
+          Real.log (m : ℝ) - (b - a) := le_of_not_gt hlow
+      have hhi : Real.log (m : ℝ) - (b - a) ≤
+          (1 / 128 : ℝ) := le_of_not_gt hhigh
+      have habs : |Real.log (m : ℝ) - (b - a)| ≤
+          (1 / 128 : ℝ) := abs_le.mpr ⟨hlo, hhi⟩
+      linarith
+  have hinv : logCrossV28 p q (-Real.log (m : ℝ)) = 0 := by
+    apply logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (b - 1 / 256) (b + 1 / 256) (-Real.log (m : ℝ)) hpI hqI
+    rcases hsplit with hlow | hhigh
+    · right; linarith
+    · left; linarith
+  have hrealinv : mixed p q ((m : ℝ)⁻¹) = 0 := by
+    rw [logCross_eq_mixed_v28,
+      Real.exp_neg, Real.exp_log hmR] at hinv
+    exact (mul_eq_zero.mp hinv).resolve_left (by simp)
+  exact ⟨hrealpos, hrealinv⟩
+
+/-- The FULL genuine von Mangoldt series vanishes if the finite
+correlation window meets no integer logarithm. In particular this
+does not discard any prime-power term: every summand is exactly zero.
+The condition explicitly remains an obligation on b-a. -/
+theorem distinct_fine_actual_prime_zero_of_integer_log_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hsep : (1 / 128 : ℝ) < b - a)
+    (havoid : ∀ m : ℕ, 0 < m →
+      (1 / 128 : ℝ) < |Real.log (m : ℝ) - (b - a)|) :
+    WeilPrimeSumV1 (mixed p q) = 0 := by
+  have hterm : ∀ n : ℕ, WeilPrimeTermV1 (mixed p q) n = 0 := by
+    intro n
+    have hm : 0 < n + 1 := by omega
+    obtain ⟨hpos, hinv⟩ :=
+      distinct_fine_prime_samples_vanish_of_integer_log_gap
+        p q a b hp hq hsep (n + 1) hm (havoid (n + 1) hm)
+    simp only [WeilPrimeTermV1, hpos, hinv,
+      mul_zero, add_zero]
+  unfold WeilPrimeSumV1
+  simp only [hterm, tsum_zero]
+
+/-- On every integer-log-free fine separation, the real actual Weil
+interaction is purely Archimedean and has the proven moment-zero
+decay. This is an unconditional equality of genuine B coefficients
+given explicit geometric/log-gap hypotheses, not an RH certificate. -/
+theorem distinct_fine_actual_B_of_integer_log_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hsep : (1 / 128 : ℝ) < b - a)
+    (havoid : ∀ m : ℕ, 0 < m →
+      (1 / 128 : ℝ) < |Real.log (m : ℝ) - (b - a)|) :
+    ‖B p q‖ ≤
+      (1 / 128 : ℝ) *
+        (Real.exp (-5 * ((b - a) - 1 / 128) / 2) /
+          (1 - Real.exp (-2 * ((b - a) - 1 / 128)))) *
+          (energy p.1 + energy q.1) := by
+  have hzero := distinct_fine_actual_prime_zero_of_integer_log_gap
+    p q a b hp hq hsep havoid
+  have hbound := distinct_fine_actual_B_any_positive_gap
+    p q a b hp hq hm hsep
+  rw [hzero] at hbound
+  simpa using hbound
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1766,3 +1879,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.fine_width_into_common_nine
 #print axioms AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart
 #print axioms AEGIS.RHActualMixedDefectV1.fine_cluster_nine_mixed_defect_opposite
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_samples_vanish_of_integer_log_gap
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_prime_zero_of_integer_log_gap
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_of_integer_log_gap
