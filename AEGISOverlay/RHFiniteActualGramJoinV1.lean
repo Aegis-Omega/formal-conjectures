@@ -35,7 +35,7 @@ AUTHORITY_EFFECT = NONE; RH_PROVEN = FALSE.
 -/
 
 open Set Finset Complex
-open scoped BigOperators
+open scoped ContDiff BigOperators
 set_option autoImplicit false
 noncomputable section
 
