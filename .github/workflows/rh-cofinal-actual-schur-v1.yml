@@ -124,6 +124,36 @@ jobs:
           cp -R .li-provider/.lake/build/lib/lean/Hadamard/. .lake/build/lib/lean/Hadamard/
           cp -R .li-provider/.lake/build/lib/lean/FunctionsOfOneComplexVariable/. .lake/build/lib/lean/FunctionsOfOneComplexVariable/
 
+      - name: Restore existing source-locked signed-prime and Abel imports
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-cofinal
+          cat > evidence-cofinal/archived-source-lock.txt <<'PINS'
+          RHNarrowFourBlockV2 36d07b81dbb67a765b4f3a37c50b16ee87ad1982
+          RHNarrowArchV1 705f5524d644bdbbf8fa777dbf2e8810edd4e883
+          WeilSignedPrimeKernelV1 4ef031bb4ff987de2687964b92649988acbfbc12
+          WeilSignedKernelReductionV1 5c62344e0c659624e30e3843bbda4b4dc5f5a462
+          WeilGeneralSignedKernelBoundV1 3cd1cfd5ea2659452aea4b963824e8b08aff6b88
+          WeilSignedPrimeEventualBridgeV1 e342ba5a694f58dd59e88818f07637f9a1ec53cd
+          RHBoundedKernelLaplaceV14 c1307d86bab3d6a2febcec613a4b00e6a5e03087
+          RHBoundedKernelCriterionV14 476eba8d560fba42bef9bce93efd857a82e7bad8
+          PINS
+          while read -r module blob; do
+            curl -fsSL --retry 3 --retry-delay 2 \
+              -H "Accept: application/vnd.github+json" \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              "https://api.github.com/repos/tarikskalic33/formal-conjectures/git/blobs/$blob" |
+              python3 -c 'import sys,json,base64; x=json.load(sys.stdin); assert x["encoding"]=="base64"; sys.stdout.buffer.write(base64.b64decode(x["content"]))' > "$module.lean"
+            test "$(git hash-object "$module.lean")" = "$blob"
+          done < evidence-cofinal/archived-source-lock.txt
+          archive=research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz
+          printf '%s  %s\n' dafcf849489f9b5f5ed7275ca74c53e4d0e6740d14bddbe51b62332d79a40801 "$archive" | sha256sum -c -
+          test "$(tar -tzf "$archive" | wc -l)" -eq 4
+          tar -xzf "$archive" -C .
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -140,6 +170,8 @@ jobs:
                   p=pathlib.Path(m.replace(".","/")+".lean")
                   return p if p.is_file() else None
               p=pathlib.Path(m.replace(".","/")+".lean")
+              if m == "RHNarrowMomentPacketV1":
+                  return pathlib.Path("AegisRH/Overlay/RHNarrowMomentPacketV1.lean")
               if m == "RHFeshbachCoreV1":
                   return pathlib.Path("research/rh/krein_ring_v1/RHFeshbachCoreV1.lean")
               if m in ("RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1",
