@@ -188,7 +188,7 @@ jobs:
           base = pathlib.Path("research/rh/aegis_pr721_fb983fd")
           manifest = json.loads((base / "source_manifest.json").read_text())
           entries = manifest if isinstance(manifest, list) else (
-              manifest.get("sources") or manifest.get("modules") or manifest.get("entries"))
+              manifest.get("files") or manifest.get("sources") or manifest.get("modules") or manifest.get("entries"))
           if not isinstance(entries, list):
               raise RuntimeError("UNKNOWN_PR721_MANIFEST_SCHEMA")
           expected = {
