@@ -16,6 +16,7 @@ limitations under the License.
 
 import AEGISOverlay.RHActualLocalGramCoercivityV1
 import RHWindowNineOver64GlobalizationV14
+import WeilFinalSignTranslationBoundV10
 
 /-!
 AEGIS Ω — genuine full-Weil mixed-term defect, without dropped off-diagonals.
@@ -558,6 +559,186 @@ theorem fine_local_exact_mixed_defect_opposite
   unfold actualMixedDefect
   linarith
 
+
+/-! ## Nearby but distinct fine windows: an unconditional actual-B bridge
+
+If two fine atoms have individual log half-width 1/256 and their
+centers have distance at most 35/128, their union fits exactly inside
+one 9/64 half-width interval centered at their midpoint.  The pinned
+9/64 analytic coercivity then bounds the genuine mixed Weil
+coefficient of the two DIFFERENT atoms.
+
+This is a finite-range bridge, NOT a claim for arbitrarily distant
+windows or a universal Q16.16 producer. -/
+
+open AEGIS.WeilFinalSignTranslationBoundV10
+
+/-- Geometric recentering of a genuinely fine source packet: all
+constants are exact rationals (1/256 + (35/128)/2 = 9/64). -/
+theorem fine_width_into_nine_midpoint
+    (u : WeilCompactSmoothGV1) (a b : ℝ)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hab : |a - b| ≤ (35 / 128 : ℝ)) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      u (9 / 64) ((a + b) / 2) := by
+  change tsupport (lift u.1) ⊆
+    Icc ((a + b) / 2 - 9 / 64) ((a + b) / 2 + 9 / 64)
+  change tsupport (lift u.1) ⊆
+    Icc (a - 1 / 256) (a + 1 / 256) at hu
+  intro t ht
+  obtain ⟨hlo, hhi⟩ := hu ht
+  obtain ⟨hablo, habhi⟩ := abs_le.mp hab
+  constructor <;> dsimp only [Set.mem_Icc] <;> linarith
+
+/-- Multiplication by any complex scalar preserves the common 9/64
+logarithmic support; the proof is about the genuine source packet. -/
+theorem nine_width_scale
+    (u : WeilCompactSmoothGV1) (z : ℂ) (center : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (9 / 64) center) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (scalePacket z u) (9 / 64) center := by
+  change tsupport (lift (scalePacket z u).1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64)
+  change tsupport (lift u.1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64) at hu
+  have hlift : lift (scalePacket z u).1 =
+      (fun x => z * lift u.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, scalePacket]
+    ring
+  rw [hlift]
+  have hs : tsupport (fun x => z * lift u.1 x) ⊆
+      tsupport (lift u.1) := by
+    apply closure_minimal ?_ (isClosed_tsupport _)
+    intro x hx
+    by_contra hn
+    have hz : lift u.1 x = 0 := image_eq_zero_of_notMem_tsupport hn
+    exact hx (by simp [hz])
+  exact hs.trans hu
+
+/-- Adding packets with different shapes preserves their shared
+9/64 local support without assuming their mixed Weil sign. -/
+theorem nine_width_add
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (9 / 64) center)
+    (hv : AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (9 / 64) center) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (addPacket u v) (9 / 64) center := by
+  change tsupport (lift (addPacket u v).1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64)
+  change tsupport (lift u.1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64) at hu
+  change tsupport (lift v.1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64) at hv
+  have hlift : lift (addPacket u v).1 =
+      (fun x => lift u.1 x + lift v.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, addPacket, mul_add]
+  rw [hlift]
+  have hs :
+      tsupport (fun x => lift u.1 x + lift v.1 x) ⊆
+        tsupport (lift u.1) ∪ tsupport (lift v.1) := by
+    apply closure_minimal ?_
+      ((isClosed_tsupport _).union (isClosed_tsupport _))
+    intro x hx
+    by_contra hn
+    have hu0 : lift u.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxU
+        exact hn (Or.inl hxU))
+    have hv0 : lift v.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxV
+        exact hn (Or.inr hxV))
+    exact hx (by simp [hu0, hv0])
+  intro x hx
+  rcases hs hx with hxU | hxV
+  · exact hu hxU
+  · exact hv hxV
+
+/-- Nearby distinct local packets have a common 9/64 window:
+there is no assumption that they are translates of a fixed seed. -/
+theorem nearby_fine_pair_shared_nine_window
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hv : WidthOneOneTwentyEightAt v b)
+    (hab : |a - b| ≤ (35 / 128 : ℝ)) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (9 / 64) ((a + b) / 2) ∧
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (9 / 64) ((a + b) / 2) := by
+  constructor
+  · exact fine_width_into_nine_midpoint u a b hu hab
+  · have hba : |b - a| ≤ (35 / 128 : ℝ) := by
+      simpa only [abs_sub_comm] using hab
+    simpa only [add_comm] using
+      (fine_width_into_nine_midpoint v b a hv hba)
+
+/-- GENUINE signed mixed-term estimate for two DISTINCT fine-window
+Weil packets, from pinned unconditional radius-9/64 coercivity.
+Both moment annihilations are propagated through addition. -/
+theorem nearby_fine_pair_actual_mixed_signed
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hv : WidthOneOneTwentyEightAt v b)
+    (hab : |a - b| ≤ (35 / 128 : ℝ)) :
+    2 * (B u v).re + (1 / 10 : ℝ) * energy (addPacket u v).1 ≤
+      -(B u u).re - (B v v).re := by
+  obtain ⟨hwu, hwv⟩ := nearby_fine_pair_shared_nine_window
+    u v a b hu hv hab
+  exact actual_nine_over_64_mixed_re_upper u v ((a + b) / 2)
+    (momentConditions_addPacket_v10 u v hmu hmv)
+    (nine_width_add u v ((a + b) / 2) hwu hwv)
+
+/-- The same signed actual-Weil estimate, conservatively rounded
+down to Q16.16. No float computation or postulated inequality. -/
+theorem nearby_fine_pair_actual_mixed_q16
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hv : WidthOneOneTwentyEightAt v b)
+    (hab : |a - b| ≤ (35 / 128 : ℝ)) :
+    2 * (B u v).re +
+      (6553 / 65536 : ℝ) * energy (addPacket u v).1 ≤
+      -(B u u).re - (B v v).re := by
+  have he : 0 ≤ energy (addPacket u v).1 := energy_nonnegative _
+  have hround : (6553 / 65536 : ℝ) ≤ 1 / 10 := by norm_num
+  have hprod := mul_le_mul_of_nonneg_right hround he
+  have hexact := nearby_fine_pair_actual_mixed_signed u v a b
+    hmu hmv hu hv hab
+  linarith
+
+/-- Complex mixed norm for nearby DIFFERENT fine windows, with all
+four exact polarization tests supplied by the same geometric support
+and preserved moment conditions.  No cross estimate is an input. -/
+theorem nearby_fine_pair_actual_mixed_norm
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hv : WidthOneOneTwentyEightAt v b)
+    (hab : |a - b| ≤ (35 / 128 : ℝ)) :
+    ‖B u v‖ ≤ -(B u u).re - (B v v).re := by
+  obtain ⟨hwu, hwv⟩ := nearby_fine_pair_shared_nine_window
+    u v a b hu hv hab
+  let c : ℝ := (a + b) / 2
+  have hpolarM (z : ℂ) :
+      WeilMomentConditionsV1 (addPacket u (scalePacket z v)) :=
+    momentConditions_addPacket_v10 u (scalePacket z v) hmu
+      (momentConditions_scalePacket_v10 z v hmv)
+  have hpolarW (z : ℂ) :
+      AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (addPacket u (scalePacket z v)) (9 / 64) c :=
+    nine_width_add u (scalePacket z v) c hwu
+      (nine_width_scale v z c hwv)
+  exact actual_nine_over_64_mixed_norm_le u v c
+    (momentConditions_addPacket_v10 u v hmu hmv)
+    (nine_width_add u v c hwu hwv)
+    (hpolarM (-1)) (hpolarW (-1))
+    (hpolarM Complex.I) (hpolarW Complex.I)
+    (hpolarM (-Complex.I)) (hpolarW (-Complex.I))
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -578,3 +759,9 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.fine_local_exact_counterpart
 #print axioms AEGIS.RHActualMixedDefectV1.fine_local_q16_counterpart
 #print axioms AEGIS.RHActualMixedDefectV1.fine_local_exact_mixed_defect_opposite
+
+#print axioms AEGIS.RHActualMixedDefectV1.fine_width_into_nine_midpoint
+#print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_shared_nine_window
+#print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_signed
+#print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_q16
+#print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_norm
