@@ -15,6 +15,7 @@ limitations under the License.
 
 import AEGISOverlay.RHTargetPacketMellinGeneralV2
 import AEGISOverlay.RHCompactMellinEntireV1
+import AEGISOverlay.RHDetectingPacketV1
 import AEGISOverlay.RHGenericSpectralShiftV1
 import RestrictedWeilCriterionResidueCoefficientV11
 import WeilZeroTwoPointV11
