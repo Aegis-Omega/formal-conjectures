@@ -325,7 +325,8 @@ theorem actual_B_re_le_signed_prime_plus_arch145
     ring
   rw [heq, Complex.add_re]
   exact add_le_add_left
-    ((Complex.re_le_norm _).trans harch) _
+    (((le_abs_self (WeilArchimedeanIntegralV1 (mixed p q)).re).trans
+      (Complex.abs_re_le_norm (WeilArchimedeanIntegralV1 (mixed p q)))).trans harch) _
 
 /-- Full genuine Weil sign with the sharper Arch-29 estimate using a
 SIGNED real von Mangoldt row certificate. Unlike a norm-prime bound,
