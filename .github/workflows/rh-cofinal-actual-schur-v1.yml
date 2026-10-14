@@ -391,6 +391,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          mkdir -p evidence-cofinal
           git rev-parse HEAD > evidence-cofinal/formal-conjectures-sha.txt
           git -C .lake/packages/mathlib rev-parse HEAD > evidence-cofinal/mathlib-sha.txt || true
           lean --version > evidence-cofinal/lean-version.txt || true
