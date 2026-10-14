@@ -228,7 +228,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -251,7 +251,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -559,7 +559,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -582,7 +582,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -890,7 +890,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -913,7 +913,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1221,7 +1221,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1244,7 +1244,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1552,7 +1552,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1575,7 +1575,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1884,7 +1884,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1907,7 +1907,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -2216,7 +2216,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -2239,7 +2239,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -2548,7 +2548,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=144
+          TOTAL=145
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -2571,7 +2571,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x5+3x3-v3',source_order=entries)
+                    stage_plan='27x5+3x3+1-v4',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
