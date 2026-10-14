@@ -115,9 +115,99 @@ theorem q16_two_scale_units
   norm_num at hh ⊢
   linarith
 
+
+/-! ## Coarse scale: exact local 9/64 control pays for every near interaction
+
+Each macro packet may itself be the sum of arbitrarily many moment-zero
+fine atoms. Its genuine diagonal is controlled by the existing local
+nine-over-64 analytic theorem, not by an entrywise near-pair bound.
+Only the cross-MACRO signed row remains a hypothesis. -/
+
+/-- Coarse Weil packets each occupy their own 9/64 logarithmic window.
+The actual local signed Gram is paid exactly. A signed cross-macro row
+budget 2 * R + gap <= 1/10 then yields a quantitative global sign.
+No cross-macro analytic estimate or universal producer is assumed. -/
+theorem actual_nine_macro_coercive_of_signed_cross_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (R gap : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) (center i))
+    (hsym : ∀ i j, c i j = c j i)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      c i j) ≤ R)
+    (hbudget : 2 * R + gap ≤ (1 / 10 : ℝ)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -gap * (∑ i, energy (gs i).1) := by
+  have hd (i : Fin (n + 1)) :
+      (1 / 10 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re := by
+    have h := AEGIS.RHWindowNineOver64GlobalizationV14.nine_over_64_coercive
+      (gs i) (center i) (hwin i) (hm i)
+    change (B (gs i) (gs i)).re ≤
+      -(1 / 10 : ℝ) * energy (gs i).1 at h
+    linarith
+  have hs :
+      (∑ i, (1 / 10 : ℝ) * energy (gs i).1) ≤
+      ∑ i, -(B (gs i) (gs i)).re :=
+    Finset.sum_le_sum (fun i _ => hd i)
+  have hdiag :
+      (1 / 10 : ℝ) * (∑ i, energy (gs i).1) ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+    rw [Finset.mul_sum]
+    simpa only [Finset.sum_neg_distrib] using hs
+  have hmixed := actual_mixed_defect_le_of_signed_symmetric_row
+    gs c R hsym hcross hrow
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [← hgram] at hmixed
+  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect at hmixed
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hbudgetE :
+      (2 * R + gap) * (∑ i, energy (gs i).1) ≤
+      (1 / 10 : ℝ) * (∑ i, energy (gs i).1) :=
+    mul_le_mul_of_nonneg_right hbudget hE
+  nlinarith
+
+/-- Non-strict full global sign under the concrete macro row threshold 1/20. -/
+theorem actual_nine_macro_nonpositive_of_signed_cross_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) (center i))
+    (hsym : ∀ i j, c i j = c j i)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      c i j) ≤ (1 / 20 : ℝ)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+  have h := actual_nine_macro_coercive_of_signed_cross_rows
+    gs center c (1 / 20 : ℝ) 0 hm hwin hsym hcross hrow (by norm_num)
+  simpa using h
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_le_of_near_far
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_coercive_of_two_scale_signed_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.q16_two_scale_units
+
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_nonpositive_of_signed_cross_rows
