@@ -179,7 +179,7 @@ jobs:
           python3 -m py_compile research/rh/assembly/export_evidence.py
           bash -n research/rh/assembly/RH_EXACT_HEAD_REPLAY.sh
 
-      - name: Stage exact V14 window sources from PR721 manifest
+      - name: Stage exact V14 and fine-localization sources from PR721 manifest
         shell: bash
         run: |
           set -euo pipefail
@@ -194,6 +194,9 @@ jobs:
           expected = {
               "RHMomentNumericsV14": "98db31d2bb9305bdf4ab4062ed982304e1a8005e",
               "RHWindowNineOver64GlobalizationV14": "a9be154062cf131dd0c07cf6405babffc6b2290c",
+              "RHFineMomentPacketV3": "709bd274400ec98c85756c33d002ae88bf0323f7",
+              "RHRationalNinePacketPrimeWindowV1": "7175f243640df980d9c2effc610cbb6748ffc29b",
+              "RHFineDiagonalUpgradeV3": "576d1f3a17851b20d6a5008d79f45e7c067f3e11",
           }
           for name, sha in expected.items():
               matches = [row for row in entries if row.get("module") == name]
@@ -357,6 +360,13 @@ jobs:
             grep -F "AEGIS.RHActualMixedDefectV1.$theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
           done
+          for original in RHFineMomentPacketV3 RHRationalNinePacketPrimeWindowV1 RHFineDiagonalUpgradeV3; do
+            python3 scripts/verify_rh_overlay_axioms.py \
+              "research/rh/aegis_pr721_fb983fd/lean/$original.lean.src" \
+              "evidence-cofinal/compile-$original.log"
+          done
+          grep -F "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram" \
+            evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
           grep -F "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_narrow_coercive_gram" \
             evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
