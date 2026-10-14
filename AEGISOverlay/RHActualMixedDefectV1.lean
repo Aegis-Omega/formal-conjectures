@@ -17,6 +17,7 @@ limitations under the License.
 import AEGISOverlay.RHActualLocalGramCoercivityV1
 import RHWindowNineOver64GlobalizationV14
 import WeilFinalSignTranslationBoundV10
+import WeilSeparatedArchBridgeV31
 
 /-!
 AEGIS Ω — genuine full-Weil mixed-term defect, without dropped off-diagonals.
@@ -739,6 +740,103 @@ theorem nearby_fine_pair_actual_mixed_norm
     (hpolarM Complex.I) (hpolarW Complex.I)
     (hpolarM (-Complex.I)) (hpolarW (-Complex.I))
 
+
+/-! ## Actual distant-window ARCH control for unequal packet shapes
+
+The existing separated support theorem bounds the real arithmetic
+Archimedean integral if supplied a logCross envelope.  Here we prove
+that envelope for two arbitrary, distinct packets from the exact L²
+isometry, and discharge all geometric hypotheses by padding the
+individual fine windows to radius 1/64.
+
+This is a REAL ANALYTIC PRODUCER for the distant Arch term, not a
+complete bound on B: the von Mangoldt prime contribution remains.
+-/
+
+open AEGIS.WeilSeparatedArchBridgeV31
+open AEGIS.WeilThreeBlockCrossPrimeV28
+open AEGIS.WeilWidthArchCorrelationV25
+open AEGIS.WeilLogCoordinateIsometryV21
+
+/-- General distinct-packet mixed correlation, with no shared seed:
+the energy bound is the arithmetic mean, avoiding sqrt/CS obligations. -/
+theorem distinct_logCross_norm_le_mean_energy
+    (p q : WeilCompactSmoothGV1) (u : ℝ) :
+    ‖logCrossV28 p q u‖ ≤
+      (energy p.1 + energy q.1) / 2 := by
+  let F : ℝ → ℂ := fun v =>
+    logLift p.1 (v + u) * conj (logLift q.1 v)
+  let M : ℝ → ℝ := fun v =>
+    (1 / 2 : ℝ) *
+      (‖logLift p.1 (v + u)‖ ^ 2 + ‖logLift q.1 v‖ ^ 2)
+  have hM : Integrable M := by
+    unfold M
+    exact ((shifted_logLift_sq_integrable_v25 p u).add
+      (logLift_sq_integrable_v25 q)).const_mul (1 / 2 : ℝ)
+  have hmeas : AEStronglyMeasurable F := by
+    exact (((logLift_continuous p).comp (by fun_prop)).aestronglyMeasurable.mul
+      ((continuous_conj.comp (logLift_continuous q)).aestronglyMeasurable))
+  have hpoint : ∀ v : ℝ, ‖F v‖ ≤ M v := by
+    intro v
+    have hab :
+        ‖logLift p.1 (v + u)‖ * ‖logLift q.1 v‖ ≤
+        (1 / 2 : ℝ) *
+          (‖logLift p.1 (v + u)‖ ^ 2 + ‖logLift q.1 v‖ ^ 2) := by
+      nlinarith [sq_nonneg (‖logLift p.1 (v + u)‖ - ‖logLift q.1 v‖)]
+    simpa [F, M, norm_mul, norm_conj] using hab
+  have hF : Integrable F :=
+    hM.mono' hmeas (Filter.Eventually.of_forall hpoint)
+  calc
+    ‖logCrossV28 p q u‖ = ‖∫ v : ℝ, F v‖ := rfl
+    _ ≤ ∫ v : ℝ, ‖F v‖ := norm_integral_le_integral_norm _
+    _ ≤ ∫ v : ℝ, M v := integral_mono hF.norm hM hpoint
+    _ = (1 / 2 : ℝ) *
+        ((∫ v : ℝ, ‖logLift p.1 (v + u)‖ ^ 2) +
+           ∫ v : ℝ, ‖logLift q.1 v‖ ^ 2) := by
+          unfold M
+          rw [integral_const_mul, integral_add
+            (shifted_logLift_sq_integrable_v25 p u)
+            (logLift_sq_integrable_v25 q)]
+    _ = (energy p.1 + energy q.1) / 2 := by
+          rw [shifted_logLift_sq_integral_v25,
+            logLift_energy_eq_packet_energy]
+          ring
+
+/-- The actual separated ARCH term for arbitrary distinct fine local
+Weil atoms, with an exact gap threshold log 2 and no postulated cross
+correlation bound. The sum of energies is explicit. -/
+theorem distinct_fine_far_arch_norm_le
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a) :
+    ‖WeilArchimedeanIntegralV1 (mixed p q)‖ ≤
+      (1 / 200 : ℝ) * (energy p.1 + energy q.1) := by
+  let E : ℝ := (energy p.1 + energy q.1) / 2
+  have hEp : 0 ≤ energy p.1 := energy_nonnegative p.1
+  have hEq : 0 ≤ energy q.1 := energy_nonnegative q.1
+  have hE : 0 ≤ E := by dsimp [E]; positivity
+  have hlogp :
+      LogSupportIn p (a - 1 / 64) (a + 1 / 64) := by
+    intro t ht
+    obtain ⟨hlo, hhi⟩ := hp ht
+    exact ⟨by linarith, by linarith⟩
+  have hlogq :
+      LogSupportIn q (b - 1 / 64) (b + 1 / 64) := by
+    intro t ht
+    obtain ⟨hlo, hhi⟩ := hq ht
+    exact ⟨by linarith, by linarith⟩
+  have harch := separated_arch_norm_bound
+    p q (a - 1 / 64) (a + 1 / 64)
+    (b - 1 / 64) (b + 1 / 64) E
+    hlogp hlogq (by linarith) (by
+      norm_num [CorrelationSupportDifferenceWidthV31]
+      ring) hm hE
+    (fun u => distinct_logCross_norm_le_mean_energy p q u)
+  dsimp [E] at harch
+  convert harch using 1 <;> ring
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -765,3 +863,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_signed
 #print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_q16
 #print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_norm
+
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_logCross_norm_le_mean_energy
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_norm_le
