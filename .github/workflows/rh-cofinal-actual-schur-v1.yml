@@ -12,6 +12,7 @@ on:
       - 'AEGISOverlay/RHFeshbachWeilClosureV2.lean'
       - 'AEGISOverlay/RHLocalKreinPartitionV1.lean'
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
+      - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -165,7 +166,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -276,6 +277,10 @@ jobs:
             every_packet_actual_two_block_zero_quadratic; do
             grep -F "AEGIS.RHKreinMultiplicativeTransportV1.$thm" \
               evidence-cofinal/compile-AEGISOverlay_RHKreinMultiplicativeTransportV1.log
+          done
+          for thm in packetSum_one_apply every_packet_actual_finite_gram; do
+            grep -F "AEGIS.RHFiniteActualGramJoinV1.$thm" \
+              evidence-cofinal/compile-AEGISOverlay_RHFiniteActualGramJoinV1.log
           done
           grep -F "AEGIS.RHFeshbachScaledErrorV1.nonneg_of_invFourth_scaled_error" \
             evidence-cofinal/compile-RHFeshbachScaledErrorV1.log
