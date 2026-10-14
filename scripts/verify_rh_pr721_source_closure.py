@@ -12,6 +12,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import tempfile
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -70,36 +71,47 @@ def validate(out: Path) -> dict:
 def compile_smoke(out: Path, receipt: dict) -> None:
     olean_dir = out / "olean"
     olean_dir.mkdir()
-    for mod in SMOKE_TARGETS:
-        source = out / "source" / (mod + ".lean")
-        output = olean_dir / (mod + ".olean")
-        log = out / (mod + ".compile.log")
-        with log.open("w", encoding="utf-8") as fh:
-            p = subprocess.run(["lake", "env", "lean", "-o", str(output), str(source)],
-                               cwd=ROOT, text=True, stdout=fh, stderr=subprocess.STDOUT)
-        if p.returncode != 0 or not output.is_file():
-            receipt["kernel"] = "FAILED"
-            receipt["failed_module"] = mod
-            fail("LEAN_COMPILE_FAILED " + mod)
-        text = log.read_text(encoding="utf-8")
-        if "sorryAx" in text or "error:" in text or "unsolved goals" in text:
-            receipt["kernel"] = "FAILED"
-            receipt["failed_module"] = mod
-            fail("LEAN_AX_OR_ERROR " + mod)
-        # Each smoke module prints 4 explicit axiom reports.
-        declarations = re.findall(r"'[^']+' depends on axioms:\s*\[([^\]]*)\]", text)
-        if len(declarations) != 4:
-            receipt["kernel"] = "FAILED"
-            receipt["failed_module"] = mod
-            fail("INCOMPLETE_AXIOM_AUDIT " + mod)
-        for axioms in declarations:
-            found = {a.strip() for a in axioms.split(",") if a.strip()}
-            if not found.issubset(STANDARD_AXIOMS):
+    # Lean 4.33 rejects compiling input sources located outside Lake's project
+    # root. Materialize exact, SHA-verified bytes into a temporary directory
+    # WITHIN the checkout; always remove these copies on exit.
+    with tempfile.TemporaryDirectory(prefix=".rh-pr721-smoke-", dir=ROOT) as work:
+        local = Path(work)
+        for mod in SMOKE_TARGETS:
+            payload = (out / "source" / (mod + ".lean")).read_bytes()
+            source = local / (mod + ".lean")
+            source.write_bytes(payload)
+            output = olean_dir / (mod + ".olean")
+            log = out / (mod + ".compile.log")
+            with log.open("w", encoding="utf-8") as fh:
+                p = subprocess.run(
+                    ["lake", "env", "lean", "-o", str(output), str(source.relative_to(ROOT))],
+                    cwd=ROOT, text=True, stdout=fh, stderr=subprocess.STDOUT)
+            if p.returncode != 0 or not output.is_file():
                 receipt["kernel"] = "FAILED"
                 receipt["failed_module"] = mod
-                fail("NONSTANDARD_AXIOMS " + mod + ": " + repr(found))
-        receipt["compiled"].append({"module": mod, "printed_axioms": len(declarations),
-                                    "olean_sha256": hashlib.sha256(output.read_bytes()).hexdigest()})
+                fail("LEAN_COMPILE_FAILED " + mod)
+            text = log.read_text(encoding="utf-8")
+            if "sorryAx" in text or "error:" in text or "unsolved goals" in text:
+                receipt["kernel"] = "FAILED"
+                receipt["failed_module"] = mod
+                fail("LEAN_AX_OR_ERROR " + mod)
+            # Count both supported #print axioms outputs, including a theorem
+            # whose axiom list is empty.
+            reports = re.findall(
+                r"'[^']+' (?:depends on axioms:\s*\[([^\]]*)\]|does not depend on any axioms)",
+                text)
+            if len(reports) != 4:
+                receipt["kernel"] = "FAILED"
+                receipt["failed_module"] = mod
+                fail("INCOMPLETE_AXIOM_AUDIT " + mod)
+            for axioms in reports:
+                found = {a.strip() for a in axioms.split(",") if a.strip()}
+                if not found.issubset(STANDARD_AXIOMS):
+                    receipt["kernel"] = "FAILED"
+                    receipt["failed_module"] = mod
+                    fail("NONSTANDARD_AXIOMS " + mod + ": " + repr(found))
+            receipt["compiled"].append({"module": mod, "printed_axioms": len(reports),
+                                        "olean_sha256": hashlib.sha256(output.read_bytes()).hexdigest()})
     receipt["kernel"] = "THREE_SOS_MODULES_PASS"
 
 def main() -> int:
