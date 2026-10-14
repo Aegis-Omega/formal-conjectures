@@ -76,8 +76,7 @@ def narrow_window_schur_family
     shiftBelowGap := ?_
     schurLower := ?_
   }
-  · simpa [hrepr] using
-      (tendsto_const_nhds : Tendsto (fun _ : ℕ => A) atTop (𝓝 A))
+  · simp [hrepr]
   · intro j
     norm_num
   · intro j
