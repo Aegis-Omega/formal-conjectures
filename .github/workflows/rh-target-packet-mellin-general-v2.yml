@@ -220,6 +220,7 @@ jobs:
               "narrowDetectingPacket_arithmetic_nonpositive",
               "narrowDetectingPacket_local_twoPoint_window",
               "narrowDetectingPacket_local_twoPoint_sign",
+              "narrowDetectingPacket_local_kernel_norm_bound",
               "riemannHypothesis_of_narrow_kernel_bound",
               "riemannHypothesis_of_narrow_four_phase_sign",
           )

@@ -326,6 +326,25 @@ theorem narrowDetectingPacket_local_twoPoint_sign
     (WeilTwoPointTranslateV11 narrowDetectingPacket d c).1
   linarith
 
+/-- Exact uniform bound on the genuine zero translation kernel for all
+    shifts in the certified local interval. The constant is the same scalar
+    diagonal used by the global fixed-four-phase criterion. -/
+theorem narrowDetectingPacket_local_kernel_norm_bound (d : ℝ)
+    (hd : |d| ≤ (3 / 16 : ℝ)) :
+    ‖WeilZeroTranslationKernelV11 narrowDetectingPacket d‖ ≤
+      2 * (WeilAutocorrelationZeroQuadraticV11 narrowDetectingPacket).re := by
+  apply weil_four_phase_nonnegative_norm_bound_v1
+  intro c _hc
+  rw [← AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
+    narrowDetectingPacket narrowDetectingPacket_moments d c]
+  have hm :=
+    AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      narrowDetectingPacket d c narrowDetectingPacket_moments
+  exact
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 narrowDetectingPacket d c) hm).mp
+        (narrowDetectingPacket_local_twoPoint_sign d hd c)
+
 /-- The existing pole criterion applies to the SAME narrow packet.
     The kernel-bound hypothesis refers to narrowDetectingPacket itself. -/
 theorem riemannHypothesis_of_narrow_kernel_bound
@@ -355,5 +374,6 @@ end AEGIS.RHNarrowFixedDetectorV1
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_arithmetic_nonpositive
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_window
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_sign
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_kernel_norm_bound
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_kernel_bound
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign
