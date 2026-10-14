@@ -13,6 +13,7 @@ on:
       - 'AEGISOverlay/RHLocalKreinPartitionV1.lean'
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
+      - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -166,7 +167,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -273,6 +274,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHKreinMultiplicativeTransportV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHKreinMultiplicativeTransportV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/AEGIS_RH_Unconditional.lean \
+            evidence-cofinal/compile-AEGISOverlay_AEGIS_RH_Unconditional.log
           for thm in every_moment_zero_packet_two_actual_weil_packets \
             every_packet_actual_two_block_zero_quadratic; do
             grep -F "AEGIS.RHKreinMultiplicativeTransportV1.$thm" \
