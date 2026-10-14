@@ -20,6 +20,8 @@ import AEGISOverlay.RHDetectingPacketV1
 import AEGISOverlay.RHGenericSpectralShiftV1
 import RestrictedWeilCriterionResidueCoefficientV11
 import WeilZeroTwoPointV11
+import AEGISOverlay.RHDetectingPacketCriterionV1
+import AEGISOverlay.RHFixedPacketFourPhaseV1
 
 /-!
 # One fixed *narrow* detecting packet
@@ -202,6 +204,24 @@ theorem narrowDetectingPacket_detects (rho : RiemannNontrivialZeroIndexV2) :
     WeilZeroCoefficientV11 narrowDetectingPacket rho ≠ 0 :=
   (Classical.choose_spec exists_narrow_fixed_detecting_packet).2.2 rho
 
+
+/-- The existing pole criterion applies to the SAME narrow packet.
+    The kernel-bound hypothesis refers to narrowDetectingPacket itself. -/
+theorem riemannHypothesis_of_narrow_kernel_bound
+    (h : AEGIS.RHDetectingPacketCriterionV1.PacketKernelBoundV1
+      narrowDetectingPacket) : RiemannHypothesis :=
+  AEGIS.RHDetectingPacketCriterionV1.riemannHypothesis_of_detecting_bounded_kernel
+    narrowDetectingPacket narrowDetectingPacket_detects h
+
+/-- Four-phase arithmetic signs for the narrow packet imply the exact Mathlib RH.
+    Support and detecting properties are unconditional source theorems. -/
+theorem riemannHypothesis_of_narrow_four_phase_sign
+    (h : AEGIS.RHFixedPacketFourPhaseV1.FixedPacketFourPhaseSignV1
+      narrowDetectingPacket) : RiemannHypothesis :=
+  riemannHypothesis_of_narrow_kernel_bound
+    (AEGIS.RHFixedPacketFourPhaseV1.fixed_packet_four_phase_implies_bounded_zero_kernel
+      narrowDetectingPacket narrowDetectingPacket_moments h)
+
 end AEGIS.RHNarrowFixedDetectorV1
 
 #print axioms AEGIS.RHNarrowFixedDetectorV1.exists_narrow_complementary_pair
@@ -210,3 +230,5 @@ end AEGIS.RHNarrowFixedDetectorV1
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_support
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_detects
+#print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_kernel_bound
+#print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign

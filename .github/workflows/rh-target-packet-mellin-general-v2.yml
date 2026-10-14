@@ -138,7 +138,10 @@ jobs:
           root=pathlib.Path(sys.argv[1]); out=pathlib.Path(sys.argv[2])
           targets=["RestrictedWeilCriterionResidueCoefficientV11",
                    "WeilMomentAnnihilatorV1",
-                   "WeilMellinInversionV1"]
+                   "WeilMellinInversionV1",
+                   "RHRestrictedWeilBridgeV13",
+                   "WeilZeroKernelHermitianV11",
+                   "WeilTwoPointPositivityV1"]
           mods={p.stem:p for p in root.glob("*.lean")}
           for target in targets:
               if target not in mods:
@@ -187,7 +190,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/AEGISOverlay evidence-target-mellin
-          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHNarrowFixedDetectorV1; do
+          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHDetectingPacketCriterionV1 RHFixedPacketFourPhaseV1 RHNarrowFixedDetectorV1; do
             echo "COMPILE AEGISOverlay/$m"
             lake env lean -o ".lake/build/lib/lean/AEGISOverlay/$m.olean" "AEGISOverlay/$m.lean" 2>&1 | tee "evidence-target-mellin/compile-$m.log"
             ! grep -F 'sorryAx' "evidence-target-mellin/compile-$m.log"
@@ -211,6 +214,8 @@ jobs:
               "narrowDetectingPacket_moments",
               "narrowDetectingPacket_support",
               "narrowDetectingPacket_detects",
+              "riemannHypothesis_of_narrow_kernel_bound",
+              "riemannHypothesis_of_narrow_four_phase_sign",
           )
           for theorem in theorems:
               label = "'AEGIS.RHNarrowFixedDetectorV1." + theorem + "' depends on axioms:"
