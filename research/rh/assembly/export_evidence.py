@@ -18,6 +18,8 @@ def write(name, value):
 manifest = json.loads((ROOT / "evidence-cofinal/source-manifest.json").read_text())
 head = git_sha()
 modules = {}
+originals = json.loads((ROOT / "research/rh/aegis_pr721_fb983fd/source_manifest.json").read_text())
+originals_by_name = {r["module"]: r for r in originals["files"]}
 for record in manifest:
     module = record["module"]
     source = pathlib.Path(record["source"])
@@ -39,6 +41,16 @@ for record in manifest:
         provenance = {"repo": "tarikskalic33/formal-conjectures",
                       "replay_sha": head, "historical_containing_commit": None,
                       "note": "Archived/blob-staged input; see archived-source-lock and archive digest"}
+    original = originals_by_name.get(module)
+    if original and source.read_bytes() == (ROOT / original["archive"]).read_bytes():
+        provenance = {"repo": "Aegis-Omega/AEGIS-OMEGA",
+                      "sha": originals["source_head"],
+                      "source_file": originals["source_subtree"] + "/" + module + ".lean"
+                         if "/" in originals["source_subtree"] else
+                         "sovereign-omega-v2/formal/bridges/lean/" + module + ".lean",
+                      "git_blob": original["sha"],
+                      "archive_in_replay": original["archive"],
+                      "replay_sha": head}
     probes = re.findall(r"^#print axioms (\S+)$", src, re.M)
     modules[module] = dict(record, imports=imports, provenance=provenance,
                           kernel_status="compiled_on_exact_head", printed_axiom_probes=probes)

@@ -15,6 +15,9 @@ limitations under the License.
 -/
 import AEGISOverlay.AEGIS_RH_Unconditional
 import AEGISOverlay.RHFiniteActualGramJoinV1
+import AEGISOverlay.RHActualLocalGramCoercivityV1
+import AEGISOverlay.RHActualMixedDefectV1
+import AEGISOverlay.RHActualElevenLatticeV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -26,6 +29,10 @@ set_option maxHeartbeats 0
 elab "#export_rh_proof_graph" : command => do
   let env ← getEnv
   let roots : List Name := [
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
+    "AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds",
+    "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram",
+    "AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_norm_le",
     "AEGIS.RHAssemblyV1.narrow_window_schur_family",
     "AEGIS.RHAssemblyV1.narrow_window_schur_norm_family",
     "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",

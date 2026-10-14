@@ -85,3 +85,23 @@ synthetic PR merge SHA; the checkout receipt is authoritative.
 RH_EXACT_HEAD_REPLAY.sh replays the pinned workflow shell steps on a fresh
 normal Lean host. No sorry, admit, new custom axiom, existing theorem statement
 change, protected-main mutation, merge or RH status promotion is made.
+
+
+## Actual eleven-translate analytic assembly
+
+`AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds` derives all
+110 directed off-diagonal bounds (55 Hermitian pairs) for eleven translates
+of one moment-zero packet of total log width 1/128. Gaps 1–8 cost 1/100
+of the common energy, gap 9 costs 57/100, and gap 10 costs 837/3700.
+Every diagonal has gain 5671/3200. The existing actual Gram theorem then
+gives `actual_eleven_lattice_arithmetic_nonpositive` for arbitrary complex
+coefficients. This proof supplies analytic coefficients rather than
+assuming the eleven SOS inputs. Its replay is pending until observed CI.
+
+The finite lattice class is not an exhaustive support-local partition:
+its atoms are translates of one mother packet at spacing log(33/16).
+The local partition construction permits different atoms at unrelated
+centers and nonuniform energies. Applying the lattice estimates to that
+construction requires a proved connecting representation or a new mixed
+estimate. The radius-9/64 result requires a common support window for its
+four polarized sums, which separated lattice pairs do not satisfy.

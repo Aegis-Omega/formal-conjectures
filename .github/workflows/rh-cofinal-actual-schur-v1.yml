@@ -16,6 +16,7 @@ on:
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
+      - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
@@ -197,6 +198,8 @@ jobs:
               "RHFineMomentPacketV3": "709bd274400ec98c85756c33d002ae88bf0323f7",
               "RHRationalNinePacketPrimeWindowV1": "7175f243640df980d9c2effc610cbb6748ffc29b",
               "RHFineDiagonalUpgradeV3": "576d1f3a17851b20d6a5008d79f45e7c067f3e11",
+              "RHRationalGapNinePrimeBoundV1": "6f0ce19532bb422649d764a0bea930e3756a8c59",
+              "RHRationalGapTenPrimeBoundV1": "c1771ca493a3292d962b77332437c2de3a693ac2",
           }
           for name, sha in expected.items():
               matches = [row for row in entries if row.get("module") == name]
@@ -225,7 +228,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -241,11 +244,12 @@ jobs:
                        "RHExistingProofFusionV1"):
                   return overlay/(m+".lean")
               # PR721 exact SHA-staged source takes precedence over older
-              # AEGIS checkout ONLY for these five manifest-pinned modules.
+              # AEGIS checkout ONLY for these manifest-pinned modules.
               # Stage above already verifies each source Git blob.
               if m in ("RHMomentNumericsV14", "RHWindowNineOver64GlobalizationV14",
                        "RHFineMomentPacketV3", "RHRationalNinePacketPrimeWindowV1",
-                       "RHFineDiagonalUpgradeV3") and p.is_file():
+                       "RHFineDiagonalUpgradeV3", "RHRationalGapNinePrimeBoundV1",
+                       "RHRationalGapTenPrimeBoundV1") and p.is_file():
                   return p
               if (root/(m+".lean")).is_file():
                   return root/(m+".lean")
@@ -367,7 +371,10 @@ jobs:
             grep -F "AEGIS.RHActualMixedDefectV1.$theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
           done
-          for original in RHFineMomentPacketV3 RHRationalNinePacketPrimeWindowV1 RHFineDiagonalUpgradeV3; do
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualElevenLatticeV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
+          for original in RHFineMomentPacketV3 RHRationalNinePacketPrimeWindowV1 RHFineDiagonalUpgradeV3 RHRationalGapNinePrimeBoundV1 RHRationalGapTenPrimeBoundV1; do
             python3 scripts/verify_rh_overlay_axioms.py \
               "research/rh/aegis_pr721_fb983fd/lean/$original.lean.src" \
               "evidence-cofinal/compile-$original.log"
