@@ -148,6 +148,7 @@ theorem actual_zero_quadratic_nonnegative_of_gram_bounds
           rho).re := by
   have hbound := AEGIS.RHGramExpansionV13.gram_re_le
     z gs D E S hE c hc hdiag hcross hrow
+  rw [AEGIS.RHGramExpansionV13.B_packetSum] at hbound
   have hcoeff : 0 ≤ (∑ i, ‖z i‖ ^ 2) := by
     apply Finset.sum_nonneg
     intro i hi
