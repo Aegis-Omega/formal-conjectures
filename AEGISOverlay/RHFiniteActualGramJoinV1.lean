@@ -16,6 +16,7 @@ limitations under the License.
 
 import RHKreinMultiplicativeTransportV1
 import RHGramExpansionV13
+import RHNarrowDiagonalUpgradeV2
 import Mathlib
 
 /-!
@@ -44,6 +45,7 @@ open AEGIS.RHLocalKreinPartitionV1
 open AEGIS.RHKreinMultiplicativeTransportV1
 open AEGIS.RHGramExpansionV13
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilDisjointEnergyV2
 
 /-- The existing recursively-defined `packetSum` is exactly the pointwise
 sum of its genuine packets when all coefficients are 1. -/
@@ -147,8 +149,34 @@ theorem localized_actual_weil_krein_atom
   · change lift (unlift (kreinAtom ψ)) = kreinAtom ψ
     exact lift_unlift (kreinAtom ψ)
 
+/-- Unconditional coercive *diagonal* estimate for every actual localized
+Krein atom whose smooth cutoff has logarithmic half-width at most 1/128.
+This binds the universal localization producer to the pre-existing
+narrow-support arithmetic B certificate, at any center, with no sign
+hypothesis and no discarded mixed terms. -/
+theorem localized_actual_weil_diagonal_32_over_25
+    (φ χ : ℝ → ℂ)
+    (hφ : ContDiff ℝ ∞ φ) (hχ : ContDiff ℝ ∞ χ)
+    (a b center : ℝ)
+    (hsφ : tsupport φ ⊆ Icc a b)
+    (hcut : tsupport χ ⊆ Icc (center - 1 / 128) (center + 1 / 128)) :
+    ∃ p : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧
+      lift p.1 = kreinAtom (fun x => χ x * φ x) ∧
+      (32 / 25 : ℝ) * energy p.1 ≤ -(B p p).re := by
+  obtain ⟨p, hm, hsupport, hfactor⟩ :=
+    localized_actual_weil_krein_atom φ χ hφ hχ a b hsφ
+  refine ⟨p, hm, hfactor, ?_⟩
+  have hw : AEGIS.RHNarrowDiagonalUpgradeV2.WidthOneSixtyFourAt p center := by
+    change tsupport (lift p.1) ⊆
+      Icc (center - 1 / 128) (center + 1 / 128)
+    exact hsupport.trans hcut
+  exact AEGIS.RHNarrowDiagonalUpgradeV2.narrow_diagonal_32_over_25_v2
+    p center hw
+
 end AEGIS.RHFiniteActualGramJoinV1
 
 #print axioms AEGIS.RHFiniteActualGramJoinV1.packetSum_one_apply
 #print axioms AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram
 #print axioms AEGIS.RHFiniteActualGramJoinV1.localized_actual_weil_krein_atom
+#print axioms AEGIS.RHFiniteActualGramJoinV1.localized_actual_weil_diagonal_32_over_25
