@@ -16,6 +16,7 @@ limitations under the License.
 
 import RHMomentDecayCofinalJoinV1
 import RHFeshbachWeilClosureV2
+import RHRestrictedWeilBridgeV13
 
 /-!
 AEGIS Ω — cofinal actual-zero terminal, using the October 14 moment-decay join.
