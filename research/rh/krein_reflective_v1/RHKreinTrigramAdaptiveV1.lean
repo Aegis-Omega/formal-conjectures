@@ -58,8 +58,29 @@ theorem zero_quadratic_margin_trigram_v1
   exact AEGIS.RHKreinExplicitCorrectionV1.actual_zero_quadratic_margin
     pointwiseCertificate_trigram_v1 g r a hr0 hr hw hm
 
+/-- Unconditional arithmetic Weil sign for every two-moment test packet
+    whose logarithmic support is contained in a radius-2/5 window.
+    The positive 1/16 spectral-energy margin is inherited from the genuine
+    analytic Trigram certificate, not assumed as a hypothesis. -/
+theorem arithmetic_sign_window_two_fifths_trigram_v1
+    (g : WeilCompactSmoothGV1)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt g (2 / 5 : ℝ) 0)
+    (hm : WeilMomentConditionsV1 g) :
+    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 := by
+  have hmargin :=
+    zero_quadratic_margin_trigram_v1 g (2 / 5 : ℝ) 0
+      (by norm_num) (by norm_num) hw hm
+  have henergy :
+      0 ≤ (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1 :=
+    mul_nonneg (by norm_num)
+      (AEGIS.WeilDisjointEnergyV2.energy_nonnegative g.1)
+  exact
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      g hm).mpr (henergy.trans hmargin)
+
 end AEGIS.RHKreinTrigramAdaptiveV1
 
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.finiteIntervalCertificate_trigram_v1
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.pointwiseCertificate_trigram_v1
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
+#print axioms AEGIS.RHKreinTrigramAdaptiveV1.arithmetic_sign_window_two_fifths_trigram_v1
