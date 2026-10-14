@@ -266,6 +266,11 @@ jobs:
               # mellin sum grouping, norm of cpow, and multiplier at zero.
               if m == "WeilFiniteDilationFilterV10":
                   return pathlib.Path("AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean")
+              # The original AEGIS seed module fails pinned Lean on
+              # complex-exp smoothness and Mellin integral normalization.
+              # Restore the existing PR606 repaired source, pin its exact blob.
+              if m == "WeilOffLineSeedV10":
+                  return pathlib.Path("AegisRH/PR606/Source/WeilOffLineSeedV10.lean")
               if m in ("RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1",
                        "RHCofinalSchurAdapterV1","RHFeshbachWeilClosureV2",
                        "RHExistingProofFusionV1"):
@@ -315,6 +320,8 @@ jobs:
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
               "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean":"3fac46ae976087f75248662af12966dd04ea6770",
+              "AegisRH/PR606/Source/WeilOffLineSeedV10.lean":"36a9554f02786b7dd6de41ac9a649f9aad5d36ee",
+              "research/rh/aegis_source_4d7578e/lean/WeilOffLineSeedV10.lean.src":"255cfa30537da17af7ee3f7fe64b6845808af246",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/WeilFiniteDilationFilterV10.lean":"6970c598b8af0e25cc051567359f46cff63244bc",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
           }
