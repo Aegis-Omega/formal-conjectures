@@ -242,7 +242,7 @@ theorem narrowDetectingPacket_arithmetic_nonpositive :
       narrowDetectingPacket (0 - (7 / 32 : ℝ)) (0 + (7 / 32 : ℝ))
     intro t ht
     have hn := narrowDetectingPacket_logWindow ht
-    exact ⟨by dsimp; linarith [hn.1], by dsimp; linarith [hn.2]⟩
+    exact ⟨by linarith [hn.1], by linarith [hn.2]⟩
   have hc := AEGIS.RHThreeCellClassV13.cell_coercive
     narrowDetectingPacket 0 hw narrowDetectingPacket_moments
   have he := AEGIS.WeilDisjointEnergyV2.energy_nonnegative
