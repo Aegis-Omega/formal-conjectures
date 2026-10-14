@@ -61,7 +61,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -228,7 +228,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -251,7 +251,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -261,8 +261,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -392,7 +392,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -559,7 +559,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -582,7 +582,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -592,8 +592,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -723,7 +723,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -890,7 +890,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -913,7 +913,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -923,8 +923,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -1054,7 +1054,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -1221,7 +1221,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1244,7 +1244,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1254,8 +1254,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -1385,7 +1385,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -1552,7 +1552,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1575,7 +1575,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1585,8 +1585,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -1717,7 +1717,7 @@ jobs:
           import json, pathlib, re, subprocess, sys
           root = pathlib.Path('.')
           f = root / 'research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean'
-          source = f.read_text()
+          source = '\n'.join(p.read_text() for p in sorted(f.parent.glob('RHKreinTrigramAdaptive*.lean')))
           ns = sorted(int(s) for s in re.findall(r'^theorem n([0-9]{4})\s*:', source, re.M))
           cs = sorted(int(s) for s in re.findall(r'^theorem c([0-9]{4})\s*:', source, re.M))
           required = [
@@ -1884,7 +1884,7 @@ jobs:
           import hashlib, json, os, pathlib, re, shutil, subprocess, sys
           STAGE=int(os.environ['TRIGRAM_STAGE'])
           STEP=27
-          TOTAL=135
+          TOTAL=144
           source_order=pathlib.Path('evidence-trigram/ordered-modules.tsv').read_text().splitlines()
           if len(source_order)!=TOTAL: raise SystemExit(f'IMPORT_CLOSURE_DRIFT {len(source_order)} != {TOTAL}')
           entries=[]
@@ -1907,7 +1907,7 @@ jobs:
           pins=dict(head=head,toolchain=pathlib.Path('lean-toolchain').read_text().strip(),
                     mathlib=os.environ['MATHLIB_SHA'],li_provider=os.environ['LI_CRITERION_SHA'],
                     factorization=os.environ['FACTORIZATION_SOURCE_BLOB'],
-                    stage_plan='27x4+26+1-v1',source_order=entries)
+                    stage_plan='27x5+9-v2',source_order=entries)
           if pins['toolchain']!=os.environ['LEAN_TOOLCHAIN']: raise SystemExit('LEAN_TOOLCHAIN_DRIFT')
           if subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip()!=pins['mathlib']:
               raise SystemExit('MATHLIB_PIN_DRIFT')
@@ -1917,8 +1917,8 @@ jobs:
           oleans=checkpoint/'oleans'
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
-          start=134 if STAGE==5 else STAGE*STEP
-          stop=134 if STAGE==4 else min(start+STEP,TOTAL)
+          start=STAGE*STEP
+          stop=min(start+STEP,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
