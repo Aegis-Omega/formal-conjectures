@@ -14,7 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
-import RHExistingProofFusionV1
+import RHFeshbachCoreV1
+import FormalConjecturesUtil.FixedWindowLimitBridge
+import WeilRHImpliesFinalSignV13
+import RHFinalClosureV1
+import WeilWindowExhaustionV1
 import WeilAutocorrelationExplicitFormulaV10
 import RHGramExpansionV13
 import RHWindow693Over2000V1
@@ -157,7 +161,18 @@ theorem riemannHypothesis_of_window_schur_families
           ((n : ℝ) * Real.pi) →
         PacketSchurFamily g) :
     RiemannHypothesis := by
-  apply AEGIS.RHExistingProofFusionV1.rh_iff_pi_nat_windows.mpr
+  have hAll :
+      RiemannHypothesis ↔
+        ∀ L : ℝ, 0 < L →
+          AEGIS.WeilWindowExhaustionV1.WindowArithmeticNonpositiveV1 L :=
+    AEGIS.WeilRHImpliesFinalSignV13.rh_iff_final_sign_v13.trans
+      (AEGIS.RHFinalClosureV1.final_sign_residual_iff_weil_negativity_v1.trans
+        AEGIS.WeilWindowExhaustionV1.weil_compact_smooth_negativity_iff_all_windows_v1)
+  apply (hAll.trans
+    (FormalConjecturesUtil.FixedWindowLimitBridge.all_positive_windows_iff_pi_nat_windows
+      AEGIS.WeilWindowExhaustionV1.WindowArithmeticNonpositiveV1
+      (fun {R₁ R₂} hR hWin =>
+        AEGIS.WeilWindowExhaustionV1.windowArithmeticNonpositive_mono_v1 hR hWin))).mpr
   intro n hn g hm hw
   exact packet_weil_nonpositive g hm (h n hn g hm hw)
 
