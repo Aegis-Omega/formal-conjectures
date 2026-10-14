@@ -1366,6 +1366,113 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
   rw [heq]
   exact (norm_add_le _ _).trans (add_le_add_left harch _)
 
+
+
+/-! ## Finite signed actual-Weil counterpart at common half-width 9/64
+
+No entrywise mixed norm budget, no special mother packet, and no bound
+on the number of atoms. Unlike a diagonal-only result, this retains
+the entire signed Weil Gram contraction and the existing moment-zero
+hypotheses. The atoms must share one common 9/64 window. -/
+
+/-- An arbitrary complex linear combination of actual Weil atoms in
+one common radius-9/64 window remains in that radius-9/64 window. -/
+theorem nine_window_packetSum :
+    ∀ (n : ℕ) (z : Fin (n + 1) → ℂ)
+      (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ),
+      (∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (gs i) (9 / 64) center) →
+      AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (packetSum z gs) (9 / 64) center := by
+  intro n
+  induction n with
+  | zero =>
+      intro z gs center hwin
+      change AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (scalePacket (z 0) (gs 0)) (9 / 64) center
+      exact nine_width_scale (gs 0) (z 0) center (hwin 0)
+  | succ n ih =>
+      intro z gs center hwin
+      change AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (addPacket
+          (packetSum (fun i : Fin (n + 1) => z i.castSucc)
+            (fun i : Fin (n + 1) => gs i.castSucc))
+          (scalePacket (z (Fin.last (n + 1)))
+            (gs (Fin.last (n + 1))))) (9 / 64) center
+      exact nine_width_add _ _ center
+        (ih (fun i => z i.castSucc) (fun i => gs i.castSucc)
+          center (fun i => hwin i.castSucc))
+        (nine_width_scale _ _ center (hwin (Fin.last (n + 1))))
+
+/-- Moment-zero conditions are closed under any finite complex
+packetSum; all constituent packets are genuine Weil test packets. -/
+theorem nine_moment_packetSum :
+    ∀ (n : ℕ) (z : Fin (n + 1) → ℂ)
+      (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      (∀ i, WeilMomentConditionsV1 (gs i)) →
+      WeilMomentConditionsV1 (packetSum z gs) := by
+  intro n
+  induction n with
+  | zero =>
+      intro z gs hm
+      change WeilMomentConditionsV1 (scalePacket (z 0) (gs 0))
+      exact momentConditions_scalePacket_v10 (z 0) (gs 0) (hm 0)
+  | succ n ih =>
+      intro z gs hm
+      change WeilMomentConditionsV1
+        (addPacket
+          (packetSum (fun i : Fin (n + 1) => z i.castSucc)
+            (fun i : Fin (n + 1) => gs i.castSucc))
+          (scalePacket (z (Fin.last (n + 1)))
+            (gs (Fin.last (n + 1)))))
+      exact momentConditions_addPacket_v10 _ _
+        (ih (fun i => z i.castSucc) (fun i => gs i.castSucc)
+          (fun i => hm i.castSucc))
+        (momentConditions_scalePacket_v10 _ _ (hm (Fin.last (n + 1))))
+
+/-- Genuine full signed Weil Gram coercivity for ANY finite complex
+linear combination of DIFFERENT moment-zero atoms sharing one 9/64
+logarithmic window. No pairwise mixed-term bounds are hypotheses. -/
+theorem nine_local_exact_counterpart
+    (n : ℕ) (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) center) :
+    (1 / 10 : ℝ) * energy (packetSum z gs).1 ≤
+      -(B (packetSum z gs) (packetSum z gs)).re := by
+  have hmSum := nine_moment_packetSum n z gs hm
+  have hwSum := nine_window_packetSum n z gs center hwin
+  have h := AEGIS.RHWindowNineOver64GlobalizationV14.nine_over_64_coercive
+    (packetSum z gs) center hwSum hmSum
+  change (B (packetSum z gs) (packetSum z gs)).re ≤
+    -(1 / 10 : ℝ) * energy (packetSum z gs).1 at h
+  linarith
+
+/-- Exact opposite-side signed mixed-defect bound for arbitrarily many
+atoms on a common 9/64 window; no Gershgorin norm majorant is needed. -/
+theorem nine_local_exact_mixed_defect_opposite
+    (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) center) :
+    actualMixedDefect n gs ≤
+      -((1 / 10 : ℝ) *
+        energy (packetSum (fun _ => (1 : ℂ)) gs).1) -
+      ∑ i, (B (gs i) (gs i)).re := by
+  have hcoercive :=
+    nine_local_exact_counterpart n (fun _ => (1 : ℂ)) gs center hm hwin
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+        (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [hgram] at hcoercive
+  unfold actualMixedDefect
+  linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1410,3 +1517,7 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.moment_zero_arch_decay_geometric
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_arch_geometric
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
+#print axioms AEGIS.RHActualMixedDefectV1.nine_window_packetSum
+#print axioms AEGIS.RHActualMixedDefectV1.nine_moment_packetSum
+#print axioms AEGIS.RHActualMixedDefectV1.nine_local_exact_counterpart
+#print axioms AEGIS.RHActualMixedDefectV1.nine_local_exact_mixed_defect_opposite
