@@ -312,30 +312,29 @@ theorem actual_fine_gram_q16_coercive_of_pair_certificate
   linarith
 
 /-- The full conditional Q16.16 route to the canonical RH theorem.  The
-certificate producer is explicitly still required for each arbitrary
-moment-zero packet and its exact fine decomposition. -/
+certificate producer must select at least one admissible finite
+reconstruction for each moment-zero packet; arbitrary decompositions
+are not assumed to satisfy the same strict Q16.16 row budget. -/
 theorem riemannHypothesis_of_universal_actual_q16_pair_certificates
     (hcert : ∀ (g : WeilCompactSmoothGV1),
       WeilMomentConditionsV1 g →
-      ∀ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
-      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
-        -(B (gs i) (gs i)).re) →
-      g = packetSum (fun _ => (1 : ℂ)) gs →
-      ∃ cost : Fin (n + 1) → Fin (n + 1) → ℕ,
-        (∀ i j, cost i j = cost j i) ∧
-        (∀ i j, i ≠ j →
-          ‖B (gs i) (gs j)‖ ≤
-            actualQ16PairCost cost i j *
-              (energy (gs i).1 + energy (gs j).1)) ∧
-        (∀ i, (∑ j ∈
-          (Finset.univ : Finset (Fin (n + 1))).erase i,
-          cost i j) ≤ 57430)) :
+      ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+        g = packetSum (fun _ => (1 : ℂ)) gs ∧
+        (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+          -(B (gs i) (gs i)).re) ∧
+        ∃ cost : Fin (n + 1) → Fin (n + 1) → ℕ,
+          (∀ i j, cost i j = cost j i) ∧
+          (∀ i j, i ≠ j →
+            ‖B (gs i) (gs j)‖ ≤
+              actualQ16PairCost cost i j *
+                (energy (gs i).1 + energy (gs j).1)) ∧
+          (∀ i, (∑ j ∈
+            (Finset.univ : Finset (Fin (n + 1))).erase i,
+            cost i j) ≤ 57430)) :
     RiemannHypothesis := by
   apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
   intro g hm
-  obtain ⟨n, gs, _hmom, hd, hg, _hgram⟩ :=
-    every_moment_zero_packet_actual_fine_gram g hm
-  obtain ⟨cost, hsym, hcross, hrow⟩ := hcert g hm n gs hd hg
+  obtain ⟨n, gs, hg, hd, cost, hsym, hcross, hrow⟩ := hcert g hm
   have hbound := actual_fine_gram_q16_coercive_of_pair_certificate
     gs cost hsym hd hcross hrow
   have hE : 0 ≤ (∑ i, energy (gs i).1) :=
