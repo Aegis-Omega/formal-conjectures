@@ -213,8 +213,8 @@ theorem c0189 : checkPiece pa19 (2625/512) 0 (2625/512) (675/128) = true := by d
 theorem n0189 : NonnegOnQ (2625/512) (675/128) :=
   nonnegOn_of_checkPiece_zero (2625/512) (675/128) (by norm_num) c0189
 
-/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 set_option maxRecDepth 4096 in
+/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 theorem foldTo0189 : NonnegOnQ 0 (675/128) := by
   have h142 := foldTo0142
   have h143 : NonnegOnQ 0 (4125/2048) := nonnegOn_union 0 (2025/1024) (4125/2048) h142 n0143
