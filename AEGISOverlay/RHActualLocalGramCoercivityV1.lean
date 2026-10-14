@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 import AEGISOverlay.RHFiniteActualGramJoinV1
+import RHWindow693Over2000V1
 
 /-!
 AEGIS Ω — universal *actual Weil* finite-localization / Gram join.
@@ -141,6 +142,45 @@ theorem every_packet_actual_narrow_coercive_gram
   rw [B_packetSum]
   simp
 
+
+/-- For a packet in the *already certified* 693/2000 log-window, any
+finite smooth partition summing to one only on its support produces
+genuine localized moment-zero Weil packets with coercive diagonals and
+a nonpositive FULL mixed Gram contraction. No mixed term is discarded.
+
+The narrow-window hypothesis applies to the original packet; the theorem
+does not assert that arbitrary linear combinations of the localized atoms
+have this window, nor that their full Gram matrix is negative semidefinite. -/
+theorem every_narrow_packet_actual_localized_full_gram_nonpositive
+    (n : ℕ)
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g (693 / 2000))
+    (L : ℝ) (hL : 0 ≤ L)
+    (hs : tsupport (lift g.1) ⊆ Icc (-L) L)
+    (χ : Fin (n + 1) → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x ∈ Icc (-L) L, ∑ i : Fin (n + 1), χ i x = 1)
+    (center : Fin (n + 1) → ℝ)
+    (hcut : ∀ i, tsupport (χ i) ⊆
+      Icc (center i - 1 / 128) (center i + 1 / 128)) :
+    ∃ gs : Fin (n + 1) → WeilCompactSmoothGV1,
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (32 / 25 : ℝ) * energy (gs i).1 ≤ -(B (gs i) (gs i)).re) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∑ i, ∑ j, B (gs i) (gs j)).re ≤ 0 := by
+  obtain ⟨gs, hmom, hdiag, hpacket, hfull⟩ :=
+    every_packet_actual_narrow_coercive_gram
+      n g hm L hL hs χ hχ hpart center hcut
+  refine ⟨gs, hmom, hdiag, hpacket, ?_⟩
+  calc
+    (∑ i, ∑ j, B (gs i) (gs j)).re =
+        (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re := hfull.symm
+    _ ≤ 0 :=
+      AEGIS.RHWindow693Over2000V1.window_693_over_2000_arithmetic_nonpositive_v1
+        g hm hw
+
 end AEGIS.RHActualLocalGramCoercivityV1
 
 #print axioms AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_narrow_coercive_gram
+#print axioms AEGIS.RHActualLocalGramCoercivityV1.every_narrow_packet_actual_localized_full_gram_nonpositive
