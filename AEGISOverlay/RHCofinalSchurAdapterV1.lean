@@ -92,6 +92,52 @@ theorem riemannHypothesis_of_schur_norm_families
   riemannHypothesis_of_cofinal_lower_certificates
     (every_packet_certificate_of_schur_norm_families h)
 
+/-- The exact negative Weil Gram form of two actual packets has
+    the three Schur block coefficients with the genuine mixed term.
+    All values come from the original arithmetic B, not free real parameters. -/
+theorem actual_two_block_gram_coefficients
+    (u v : WeilCompactSmoothGV1) :
+    -(AEGIS.WeilMixedAlgebraV2.B
+        (AEGIS.WeilMixedAlgebraV2.addPacket u v)
+        (AEGIS.WeilMixedAlgebraV2.addPacket u v)).re =
+      -(AEGIS.WeilMixedAlgebraV2.B u u).re +
+      2 * (-(AEGIS.WeilMixedAlgebraV2.B u v).re) +
+      -(AEGIS.WeilMixedAlgebraV2.B v v).re := by
+  rw [AEGIS.WeilMixedAlgebraV2.B_add_left,
+      AEGIS.WeilMixedAlgebraV2.B_add_right,
+      AEGIS.WeilMixedAlgebraV2.B_add_right,
+      AEGIS.WeilMixedAlgebraV2.B_hermitian u v]
+  simp only [Complex.add_re, Complex.neg_re, Complex.conj_re]
+  ring
+
+/-- The same actual two-block decomposition is an identity for the
+    canonical nontrivial-zeta-zero quadratic, not only the arithmetic side. -/
+theorem actual_two_block_zero_quadratic_coefficients
+    (u v : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v)) :
+    (∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1
+        (WeilAutocorrelationV1
+          (AEGIS.WeilMixedAlgebraV2.addPacket u v)) rho).re =
+      -(AEGIS.WeilMixedAlgebraV2.B u u).re +
+      2 * (-(AEGIS.WeilMixedAlgebraV2.B u v).re) +
+      -(AEGIS.WeilMixedAlgebraV2.B v v).re := by
+  have hEF :=
+    AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_explicit_formula_v10
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v) hm
+  change AEGIS.WeilMixedAlgebraV2.B
+    (AEGIS.WeilMixedAlgebraV2.addPacket u v)
+    (AEGIS.WeilMixedAlgebraV2.addPacket u v) =
+      -(∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1
+          (WeilAutocorrelationV1
+            (AEGIS.WeilMixedAlgebraV2.addPacket u v)) rho) at hEF
+  have hre := congrArg Complex.re hEF
+  simp only [Complex.neg_re] at hre
+  rw [← actual_two_block_gram_coefficients u v]
+  linarith
+
 /-- The exact canonical zeta-zero quadratic of an actual finite packet
 sum is the negative real part of its *full* mixed Weil Gram matrix.
 This is the literal explicit formula, not a surrogate PSD model. -/
@@ -164,5 +210,7 @@ end AEGIS.RHCofinalSchurAdapterV1
 #print axioms AEGIS.RHCofinalSchurAdapterV1.cofinal_certificate_of_packet_schur
 #print axioms AEGIS.RHCofinalSchurAdapterV1.every_packet_certificate_of_schur_norm_families
 #print axioms AEGIS.RHCofinalSchurAdapterV1.riemannHypothesis_of_schur_norm_families
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_two_block_zero_quadratic_coefficients
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_eq_neg_finite_gram
 #print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds
