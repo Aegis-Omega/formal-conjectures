@@ -1043,6 +1043,72 @@ theorem distinct_fine_far_arch_moment_decay
   dsimp [E, δ] at harch ⊢
   convert harch using 1 <;> ring
 
+
+/-- The entire genuine distant Weil coefficient inherits the moment-zero
+exponential Archimedean decay, *retaining* the von Mangoldt prime term.
+This sharpens the constant 1/200 bound for sufficiently distant centers;
+no bound for the remaining prime term is assumed or asserted. -/
+theorem distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a) :
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+      (1 / 32 : ℝ) *
+        (Real.exp (-5 * ((b-a)-1/32) / 2) /
+          (1 - Real.exp (-2 * ((b-a)-1/32)))) *
+            (energy p.1 + energy q.1) := by
+  have hzero := distinct_fine_far_mixed_one_zero p q a b hp hq hgap
+  have harch := distinct_fine_far_arch_moment_decay p q a b hp hq hm hgap
+  have heq : B p q =
+      WeilPrimeSumV1 (mixed p q) +
+        WeilArchimedeanIntegralV1 (mixed p q) := by
+    unfold B WeilExplicitRightSideV1
+    rw [hzero]
+    ring
+  rw [heq]
+  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+
+/-- Convert an analytic estimate on the *prime part alone* into an
+outward Q16.16 bound on the actual distant mixed Weil coefficient.
+The source-pinned moment-zero Archimedean remainder is budgeted exactly,
+not silently dropped. The prime estimate remains an explicit obligation. -/
+theorem distinct_fine_far_actual_B_q16_of_prime_decay_budget
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a) (k : ℕ)
+    (hprime :
+      ‖WeilPrimeSumV1 (mixed p q)‖ ≤
+        ((k : ℝ) / 65536 -
+          (1 / 32 : ℝ) *
+            (Real.exp (-5 * ((b-a)-1/32) / 2) /
+              (1 - Real.exp (-2 * ((b-a)-1/32))))) *
+          (energy p.1 + energy q.1)) :
+    ‖B p q‖ ≤ ((k : ℝ) / 65536) *
+      (energy p.1 + energy q.1) := by
+  have h := distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
+    p q a b hp hq hm hgap
+  calc
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+        (1 / 32 : ℝ) *
+          (Real.exp (-5 * ((b-a)-1/32) / 2) /
+            (1 - Real.exp (-2 * ((b-a)-1/32)))) *
+              (energy p.1 + energy q.1) := h
+    _ ≤ (((k : ℝ) / 65536 -
+          (1 / 32 : ℝ) *
+            (Real.exp (-5 * ((b-a)-1/32) / 2) /
+              (1 - Real.exp (-2 * ((b-a)-1/32))))) *
+          (energy p.1 + energy q.1)) +
+        (1 / 32 : ℝ) *
+          (Real.exp (-5 * ((b-a)-1/32) / 2) /
+            (1 - Real.exp (-2 * ((b-a)-1/32)))) *
+              (energy p.1 + energy q.1) :=
+                add_le_add_right hprime _
+    _ = ((k : ℝ) / 65536) * (energy p.1 + energy q.1) := by ring
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1078,3 +1144,5 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.separated_arch_decay_bound
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_moment_decay
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_prime_decay_budget
