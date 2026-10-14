@@ -106,7 +106,49 @@ theorem every_packet_actual_finite_gram
     rw [B_packetSum]
     simp
 
+/-- Localizing a smooth Krein factor with a smooth cutoff produces an
+actual compact-smooth Weil packet with both moments zero. Crucially, the
+resulting log-support stays inside the *cutoff* support, not merely the
+original potentially wide factor support. Thus genuine finite Gram
+decompositions can be paired with existing narrow-window producers.
+No cross-term positivity is asserted. -/
+theorem localized_actual_weil_krein_atom
+    (φ χ : ℝ → ℂ)
+    (hφ : ContDiff ℝ ∞ φ) (hχ : ContDiff ℝ ∞ χ)
+    (a b : ℝ)
+    (hsφ : tsupport φ ⊆ Icc a b) :
+    ∃ p : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧
+      tsupport (lift p.1) ⊆ tsupport χ ∧
+      lift p.1 = kreinAtom (fun x => χ x * φ x) := by
+  let ψ : ℝ → ℂ := fun x => χ x * φ x
+  have hψ : ContDiff ℝ ∞ ψ := hχ.mul hφ
+  have hsψ : tsupport (kreinAtom ψ) ⊆ Icc a b :=
+    (kreinAtom_support ψ).trans
+      ((tsupport_factor_mul χ φ).trans hsφ)
+  have hcφ : HasCompactSupport φ :=
+    isCompact_Icc.of_isClosed_subset (isClosed_tsupport _) hsφ
+  let p : WeilCompactSmoothGV1 :=
+    unliftWeilPacket (kreinAtom ψ) (kreinAtom_contDiff ψ hψ) a b hsψ
+  refine ⟨p, ?_, ?_, ?_⟩
+  · exact unliftWeilPacket_kreinAtom_moments
+      ψ hψ a b hsψ hcφ.mul_left
+  · change tsupport (lift (unlift (kreinAtom ψ))) ⊆ tsupport χ
+    rw [lift_unlift]
+    have hswap : ψ = (fun x => φ x * χ x) := by
+      funext x
+      exact mul_comm (χ x) (φ x)
+    calc
+      tsupport (kreinAtom ψ) ⊆ tsupport ψ :=
+        kreinAtom_support ψ
+      _ = tsupport (fun x => φ x * χ x) :=
+        congrArg tsupport hswap
+      _ ⊆ tsupport χ := tsupport_factor_mul φ χ
+  · change lift (unlift (kreinAtom ψ)) = kreinAtom ψ
+    exact lift_unlift (kreinAtom ψ)
+
 end AEGIS.RHFiniteActualGramJoinV1
 
 #print axioms AEGIS.RHFiniteActualGramJoinV1.packetSum_one_apply
 #print axioms AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram
+#print axioms AEGIS.RHFiniteActualGramJoinV1.localized_actual_weil_krein_atom
