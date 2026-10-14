@@ -31,7 +31,7 @@ This does NOT yet provide a Schur lower bound.
 -/
 
 open Set MeasureTheory
-open scoped ContDiff BigOperators
+open scoped ContDiff BigOperators Topology
 set_option autoImplicit false
 noncomputable section
 
@@ -144,13 +144,16 @@ theorem unlift_contDiff (F : ℝ → ℂ) (hF : ContDiff ℝ ∞ F)
       he.mul (hF.contDiffAt.comp x hlog)
     have hEq : unlift F =ᶠ[𝓝 x]
         (fun y : ℝ => (Real.exp (-Real.log y / 2) : ℂ) * F (Real.log y)) :=
-      eventuallyEq_of_mem (Ioi_mem_nhds hx) (fun y hy => by simp [unlift, hy])
+      by
+        filter_upwards [Ioi_mem_nhds hx] with y hy
+        simp [unlift, hy]
     exact ContDiffAt.congr_of_eventuallyEq hloc hEq
   · have hmem : Iio (Real.exp (a - 1)) ∈ 𝓝 x :=
       Iio_mem_nhds (lt_of_le_of_lt hx (Real.exp_pos _))
     have hEq : unlift F =ᶠ[𝓝 x] (fun _ => (0 : ℂ)) :=
-      eventuallyEq_of_mem hmem
-        (fun y hy => unlift_zero_below F a b hs (le_of_lt hy))
+      by
+        filter_upwards [hmem] with y hy
+        exact unlift_zero_below F a b hs (le_of_lt hy)
     exact ContDiffAt.congr_of_eventuallyEq contDiffAt_const hEq
 
 def unliftWeilPacket (F : ℝ → ℂ) (hF : ContDiff ℝ ∞ F)
