@@ -146,7 +146,8 @@ theorem narrow_width_scale
   have hlift : lift (scalePacket z u).1 =
       (fun x => z * lift u.1 x) := by
     funext x
-    simp [lift, scalePacket, mul_left_comm, mul_assoc]
+    simp only [AEGIS.RHKreinFactorV13.lift, scalePacket]
+    ring
   rw [hlift]
   have hsupport : tsupport (fun x => z * lift u.1 x) ⊆
       tsupport (lift u.1) := by
@@ -173,7 +174,7 @@ theorem narrow_width_add
   have hlift : lift (addPacket u v).1 =
       (fun x => lift u.1 x + lift v.1 x) := by
     funext x
-    simp [lift, addPacket, mul_add]
+    simp only [AEGIS.RHKreinFactorV13.lift, addPacket, mul_add]
   rw [hlift]
   have hsupport :
       tsupport (fun x => lift u.1 x + lift v.1 x) ⊆
@@ -275,7 +276,7 @@ theorem actual_mixed_norm_le_of_common_narrow_window
       (B (scalePacket Complex.I v) (scalePacket Complex.I v)).re =
         (B v v).re := by
     rw [B_scale_left, B_scale_right]
-    simp [mul_assoc]
+    simp
   rw [hrot, hdiag] at himag
   have htri := Complex.norm_le_abs_re_add_abs_im (B u v)
   linarith
@@ -292,7 +293,7 @@ open AEGIS.WeilThreeBlockTranslatedPacketsV22
 theorem actual_nine_over_64_mixed_re_upper
     (u v : WeilCompactSmoothGV1) (center : ℝ)
     (hm : WeilMomentConditionsV1 (addPacket u v))
-    (hw : HalfWidthAt (addPacket u v) (9 / 64) center) :
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt (addPacket u v) (9 / 64) center) :
     2 * (B u v).re +
       (1 / 10 : ℝ) * energy (addPacket u v).1 ≤
       -(B u u).re - (B v v).re := by
@@ -308,10 +309,10 @@ theorem actual_nine_over_64_mixed_re_upper
 theorem actual_nine_over_64_mixed_re_abs
     (u v : WeilCompactSmoothGV1) (center : ℝ)
     (hmp : WeilMomentConditionsV1 (addPacket u v))
-    (hwp : HalfWidthAt (addPacket u v) (9 / 64) center)
+    (hwp : AEGIS.RHDyadicDiagonalV13.HalfWidthAt (addPacket u v) (9 / 64) center)
     (hmm : WeilMomentConditionsV1
       (addPacket u (scalePacket (-1 : ℂ) v)))
-    (hwm : HalfWidthAt
+    (hwm : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
       (addPacket u (scalePacket (-1 : ℂ) v)) (9 / 64) center) :
     |(B u v).re| ≤ (-(B u u).re - (B v v).re) / 2 := by
   have hplus := actual_nine_over_64_mixed_re_upper u v center hmp hwp
@@ -342,18 +343,18 @@ B itself; no universal cofinal row bound is inferred from this theorem. -/
 theorem actual_nine_over_64_mixed_norm_le
     (u v : WeilCompactSmoothGV1) (center : ℝ)
     (hmp : WeilMomentConditionsV1 (addPacket u v))
-    (hwp : HalfWidthAt (addPacket u v) (9 / 64) center)
+    (hwp : AEGIS.RHDyadicDiagonalV13.HalfWidthAt (addPacket u v) (9 / 64) center)
     (hmm : WeilMomentConditionsV1
       (addPacket u (scalePacket (-1 : ℂ) v)))
-    (hwm : HalfWidthAt
+    (hwm : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
       (addPacket u (scalePacket (-1 : ℂ) v)) (9 / 64) center)
     (hmi : WeilMomentConditionsV1
       (addPacket u (scalePacket Complex.I v)))
-    (hwi : HalfWidthAt
+    (hwi : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
       (addPacket u (scalePacket Complex.I v)) (9 / 64) center)
     (hmni : WeilMomentConditionsV1
       (addPacket u (scalePacket (-Complex.I) v)))
-    (hwni : HalfWidthAt
+    (hwni : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
       (addPacket u (scalePacket (-Complex.I) v)) (9 / 64) center) :
     ‖B u v‖ ≤ -(B u u).re - (B v v).re := by
   have hreal :=
@@ -376,12 +377,12 @@ theorem actual_nine_over_64_mixed_norm_le
       (B (scalePacket Complex.I v) (scalePacket Complex.I v)).re =
         (B v v).re := by
     rw [B_scale_left, B_scale_right]
-    simp [mul_assoc]
+    simp
   have hdiagn :
       (B (scalePacket (-Complex.I) v)
         (scalePacket (-Complex.I) v)).re = (B v v).re := by
     rw [B_scale_left, B_scale_right]
-    simp [mul_assoc]
+    simp
   rw [hcrossi, hdiagi] at hiplus
   rw [hcrossni, hdiagn] at himinus
   have hei : 0 ≤ energy (addPacket u (scalePacket Complex.I v)).1 :=
