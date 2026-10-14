@@ -105,3 +105,24 @@ centers and nonuniform energies. Applying the lattice estimates to that
 construction requires a proved connecting representation or a new mixed
 estimate. The radius-9/64 result requires a common support window for its
 four polarized sums, which separated lattice pairs do not satisfy.
+
+
+## Constructed finite partitions and arbitrary-packet fine Gram
+
+`RHFiniteFinePartitionV1.exists_finite_smooth_local_partition` uses a
+finite subcover of a compact interval by arbitrarily small open intervals
+and the pinned Mathlib smooth partition of unity. It returns actual smooth
+complex cutoffs whose sum is one on that interval and whose closed supports
+lie in the prescribed small intervals. The caller supplies no partition.
+
+`RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram`
+combines that construction at radius 1/256 with the existing finite log
+window and actual Krein localization. For every admissible moment-zero
+packet it returns moment-zero components, gain 5671/3200 for every
+diagonal, exact packet reconstruction, and the full actual mixed Gram.
+Its quantitative mixed-defect theorem retains every off-diagonal term.
+These new declarations require their own observed exact-head kernel replay.
+
+The remaining sign step is an upper bound on the actual mixed defect for
+a suitable such decomposition, or an actual cofinal Schur construction.
+The diagonal estimate and exact reconstruction do not assume that bound.

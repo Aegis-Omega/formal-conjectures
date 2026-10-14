@@ -80,7 +80,7 @@ theorem uniform_lower_bound_collapses
     ∀ f, 0 ≤ Q f := by
   intro f
   by_contra hneg
-  push_neg at hneg
+  push Not at hneg
   set c : ℝ := (|ε| + 1) / (-Q f) with hc
   have hpos : 0 < -Q f := by linarith
   have hc0 : 0 ≤ c := div_nonneg (by positivity) hpos.le

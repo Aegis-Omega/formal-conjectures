@@ -18,6 +18,7 @@ import AEGISOverlay.RHFiniteActualGramJoinV1
 import AEGISOverlay.RHActualLocalGramCoercivityV1
 import AEGISOverlay.RHActualMixedDefectV1
 import AEGISOverlay.RHActualElevenLatticeV1
+import AEGISOverlay.RHActualUniversalFineGramV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -29,6 +30,9 @@ set_option maxHeartbeats 0
 elab "#export_rh_proof_graph" : command => do
   let env ← getEnv
   let roots : List Name := [
+    "AEGIS.RHFiniteFinePartitionV1.exists_finite_smooth_local_partition",
+    "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
+    "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
     "AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds",
     "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram",

@@ -17,6 +17,8 @@ on:
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
       - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
+      - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
+      - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
@@ -60,6 +62,18 @@ jobs:
           lake exe cache get
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
           lean --version
+
+      - name: Construct and audit finite smooth local partitions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-cofinal .lake/build/lib/lean/AEGISOverlay
+          lake env lean -o .lake/build/lib/lean/AEGISOverlay/RHFiniteFinePartitionV1.olean \
+            AEGISOverlay/RHFiniteFinePartitionV1.lean \
+            2>&1 | tee evidence-cofinal/compile-AEGISOverlay_RHFiniteFinePartitionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFiniteFinePartitionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHFiniteFinePartitionV1.log
 
       - name: Checkout exact AEGIS source
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -161,12 +175,13 @@ jobs:
           RHBoundedKernelCriterionV14 476eba8d560fba42bef9bce93efd857a82e7bad8
           PINS
           while read -r module blob; do
-            curl -fsSL --retry 3 --retry-delay 2 \
-              -H "Accept: application/vnd.github+json" \
-              -H "Authorization: Bearer $GH_TOKEN" \
-              "https://api.github.com/repos/tarikskalic33/formal-conjectures/git/blobs/$blob" |
-              python3 -c 'import sys,json,base64; x=json.load(sys.stdin); assert x["encoding"]=="base64"; sys.stdout.buffer.write(base64.b64decode(x["content"]))' > "$module.lean"
-            test "$(git hash-object "$module.lean")" = "$blob"
+            source="research/rh/assembly/exact-source-inputs/$module.lean.txt"
+            test -f "$source"
+            test "$(git hash-object "$source")" = "$blob"
+            if test -e "$module.lean"; then
+              test "$(git hash-object "$module.lean")" = "$blob"
+            fi
+            cp "$source" "$module.lean"
           done < evidence-cofinal/archived-source-lock.txt
           archive=research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz
           printf '%s  %s\n' dafcf849489f9b5f5ed7275ca74c53e4d0e6740d14bddbe51b62332d79a40801 "$archive" | sha256sum -c -
@@ -228,7 +243,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -371,6 +386,12 @@ jobs:
             grep -F "AEGIS.RHActualMixedDefectV1.$theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
           done
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFiniteFinePartitionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHFiniteFinePartitionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualUniversalFineGramV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualUniversalFineGramV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenLatticeV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log

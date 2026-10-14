@@ -68,7 +68,13 @@
   ],
   "receipt_location": "Successful exact-head CI generates evidence-cofinal/assembly/RH_EVIDENCE_PASSPORT.json with actual checkout SHA, source hashes, axiom outputs and probe result.",
   "limitations": [
-    "Eight historical source blobs have exact blob/source hashes but no identified containing historical commit.",
+    "Eight historical source blobs are embedded verbatim in this branch under exact-source-inputs; their original historical containing commits remain unidentified.",
     "Complete all-history proof census and elaborated declaration dependency closure are not completed."
-  ]
+  ],
+  "active_integration_target": {
+    "repository": "tarikskalic33/formal-conjectures",
+    "pull_request": 88,
+    "branch": "research/rh-actual-proof-assembly-20261014",
+    "exact_sha": "generated from actual git HEAD by CI receipt"
+  }
 }

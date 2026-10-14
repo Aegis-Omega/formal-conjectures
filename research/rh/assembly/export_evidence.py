@@ -18,6 +18,10 @@ def write(name, value):
 manifest = json.loads((ROOT / "evidence-cofinal/source-manifest.json").read_text())
 head = git_sha()
 modules = {}
+source_snapshots = {line.split()[0]: line.split()[1]
+                    for line in (ROOT / "evidence-cofinal/archived-source-lock.txt").read_text().splitlines()}
+abel_members = {"WeilSignedPrimeFiniteSupportV1", "WeilPrimeAbelReductionV1",
+                "WeilPrimeDiscrepancyV1", "WeilPrimeDiscrepancyEstimateV1"}
 originals = json.loads((ROOT / "research/rh/aegis_pr721_fb983fd/source_manifest.json").read_text())
 originals_by_name = {r["module"]: r for r in originals["files"]}
 for record in manifest:
@@ -41,6 +45,16 @@ for record in manifest:
         provenance = {"repo": "tarikskalic33/formal-conjectures",
                       "replay_sha": head, "historical_containing_commit": None,
                       "note": "Archived/blob-staged input; see archived-source-lock and archive digest"}
+    if module in source_snapshots:
+        snapshot = "research/rh/assembly/exact-source-inputs/" + module + ".lean.txt"
+        assert source.read_bytes() == (ROOT / snapshot).read_bytes(), module
+        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+                      "source_file": snapshot, "git_blob": source_snapshots[module],
+                      "original_historical_commit": None}
+    elif module in abel_members:
+        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+                      "source_archive": "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz",
+                      "archive_member": module + ".lean"}
     original = originals_by_name.get(module)
     if original and source.read_bytes() == (ROOT / original["archive"]).read_bytes():
         provenance = {"repo": "Aegis-Omega/AEGIS-OMEGA",
@@ -138,13 +152,21 @@ blocker = json.loads((META / "RH_BLOCKER.json").read_text())
 blocker["status"] = "CONSTRUCTOR_KERNEL_PASS; UNIVERSAL_CLOSURE_NOT_ACHIEVED"
 blocker["attempts"][0]["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
 blocker["attempts"][1]["status"] = "ACTUAL_COMPILER_TYPE_MISMATCH"
+for attempt in blocker["attempts"]:
+    if attempt.get("source") == "AEGISOverlay/RHActualUniversalFineGramV1.lean":
+        assert "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram" in root_axioms
+        attempt["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
+        attempt["exact_head"] = head
 blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_PROBE.lean",
                                   "exit_code": probe.returncode, "log": probe.stdout}
 write("RH_BLOCKER.json", blocker)
 
 passport = json.loads((META / "RH_EVIDENCE_PASSPORT.json").read_text())
-passport.update(verification_status="SELECTED_CONSTRUCTOR_KERNEL_AND_AXIOM_PASS; UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED",
+passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
+                active_repository="tarikskalic33/formal-conjectures",
+                active_pull_request=88,
+                active_branch=os.environ.get("GITHUB_HEAD_REF", "research/rh-actual-proof-assembly-20261014"),
                 proof_graph_status=graph["status"],
                 workflow_run_id=os.environ.get("GITHUB_RUN_ID"),
                 workflow_job=os.environ.get("GITHUB_JOB"),
@@ -157,7 +179,27 @@ passport.update(verification_status="SELECTED_CONSTRUCTOR_KERNEL_AND_AXIOM_PASS;
                 certificate_hashes={"abel_archive": digest(ROOT / "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz")})
 write("RH_EVIDENCE_PASSPORT.json", passport)
 shutil.copyfile(ROOT / "AEGISOverlay/AEGIS_RH_Unconditional.lean", OUT / "AEGIS_RH_Unconditional.lean")
-shutil.copyfile(META / "RH_PROOFBOOK.md", OUT / "RH_PROOFBOOK.md")
+book = (META / "RH_PROOFBOOK.md").read_text()
+book += "\n\n## Observed exact-head kernel receipt\n\n"
+book += "Exact replay head: `" + head + "`. The following selected roots compiled "
+book += "and have only permitted foundational axioms. Earlier candidate labels describe "
+book += "the committed source snapshot; this observed receipt records the replay result.\n\n"
+for root, axioms in root_axioms.items():
+    module = rows[root]["module"]
+    record = modules.get(module)
+    if record:
+        prov = record["provenance"]
+        sha = prov.get("sha", head)
+        repo = prov.get("repo", "tarikskalic33/formal-conjectures")
+        path = prov.get("source_file", record["source"])
+        if path.startswith(".aegis/"): path = path[len(".aegis/"):]
+        url = "https://github.com/" + repo + "/blob/" + sha + "/" + path
+        book += "- [`" + root + "`](" + url + "): `" + ", ".join(axioms) + "`.\n"
+    else:
+        book += "- `" + root + "`: `" + ", ".join(axioms) + "`.\n"
+book += "\nRH_PROVEN_UNCONDITIONALLY=false. The mixed-defect/universal-family obligation "
+book += "is recorded with its complete formal type in RH_BLOCKER.json.\n"
+(OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
 print("ASSEMBLY_KERNEL_ROOTS", len(terms["roots"]))

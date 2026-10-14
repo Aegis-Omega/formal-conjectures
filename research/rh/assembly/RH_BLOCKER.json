@@ -1,6 +1,6 @@
 {
   "status": "CLOSURE_NOT_ACHIEVED; CONSTRUCTOR_AND_PROBE_EXECUTION_PENDING",
-  "obligation_type": "∀ n : ℕ, 0 < n → ∀ g : WeilCompactSmoothGV1,\n  WeilMomentConditionsV1 g →\n  AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g ((n : ℝ) * Real.pi) →\n  AEGIS.RHFeshbachWeilClosureV2.PacketSchurFamily g",
+  "obligation_type": "\u2200 n : \u2115, 0 < n \u2192 \u2200 g : WeilCompactSmoothGV1,\n  WeilMomentConditionsV1 g \u2192\n  AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g ((n : \u211d) * Real.pi) \u2192\n  AEGIS.RHFeshbachWeilClosureV2.PacketSchurFamily g",
   "consumer": "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",
   "attempts": [
     {
@@ -23,7 +23,20 @@
         "hrow",
         "hmargin"
       ]
+    },
+    {
+      "source": "AEGISOverlay/RHActualElevenLatticeV1.lean",
+      "operation": "derive all 55 actual analytic mixed pair bounds for eleven translates of one fine packet",
+      "status": "KERNEL_AND_STANDARD_AXIOM_PASS_AT_c21bd818d8c21e6ad7eb411bf1248dbeb151deee; whole job failed on separate globalization linter",
+      "run_id": 38618888217,
+      "job_id": 116040956843
+    },
+    {
+      "source": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+      "operation": "eliminate supplied partition using compact finite subcover and smooth partition of unity; retain exact mixed defect",
+      "status": "CANDIDATE_KERNEL_PENDING"
     }
   ],
-  "not_an_impossibility_claim": true
+  "not_an_impossibility_claim": true,
+  "mixed_defect_obligation_type": "\u2200 g : WeilCompactSmoothGV1, WeilMomentConditionsV1 g \u2192\n  \u2203 (n : \u2115) (gs : Fin (n + 1) \u2192 WeilCompactSmoothGV1),\n    (\u2200 i, WeilMomentConditionsV1 (gs i)) \u2227\n    (\u2200 i, (5671 / 3200 : \u211d) * AEGIS.WeilDisjointEnergyV2.energy (gs i).1 \u2264\n      -(AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) \u2227\n    g = AEGIS.RHGramExpansionV13.packetSum (fun _ => (1 : \u2102)) gs \u2227\n    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =\n      (\u2211 i, \u2211 j, AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)).re \u2227\n    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs \u2264\n      (5671 / 3200 : \u211d) * (\u2211 i, AEGIS.WeilDisjointEnergyV2.energy (gs i).1)"
 }
