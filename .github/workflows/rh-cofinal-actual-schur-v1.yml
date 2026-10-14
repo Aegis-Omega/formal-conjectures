@@ -240,6 +240,13 @@ jobs:
                        "RHCofinalSchurAdapterV1","RHFeshbachWeilClosureV2",
                        "RHExistingProofFusionV1"):
                   return overlay/(m+".lean")
+              # PR721 exact SHA-staged source takes precedence over older
+              # AEGIS checkout ONLY for these five manifest-pinned modules.
+              # Stage above already verifies each source Git blob.
+              if m in ("RHMomentNumericsV14", "RHWindowNineOver64GlobalizationV14",
+                       "RHFineMomentPacketV3", "RHRationalNinePacketPrimeWindowV1",
+                       "RHFineDiagonalUpgradeV3") and p.is_file():
+                  return p
               if (root/(m+".lean")).is_file():
                   return root/(m+".lean")
               if (overlay/(m+".lean")).is_file():
