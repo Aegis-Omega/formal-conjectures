@@ -7,6 +7,7 @@ on:
       - 'AEGISOverlay/RHNarrowFixedDetectorV1.lean'
       - 'AEGISOverlay/RHNarrowCenteredKernelV1.lean'
       - 'AEGISOverlay/RHNarrowEventualTailV1.lean'
+      - 'AEGISOverlay/RHNarrowNineFacesBridgeV1.lean'
       - '.github/workflows/rh-target-packet-mellin-general-v2.yml'
   workflow_dispatch:
 
@@ -152,7 +153,8 @@ jobs:
                    "WeilZeroKernelHermitianV11",
                    "WeilTwoPointPositivityV1",
                    "WeilWindowExhaustionV1",
-                   "RHThreeCellClassV13"]
+                   "RHThreeCellClassV13",
+                   "RHNineFacesV13"]
           mods={p.stem:p for p in root.glob("*.lean")}
           for target in targets:
               if target not in mods:
@@ -215,7 +217,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/AEGISOverlay evidence-target-mellin
-          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHDetectingPacketCriterionV1 RHFixedPacketFourPhaseV1 RHNarrowFixedDetectorV1 RHNarrowCenteredKernelV1 RHNarrowEventualTailV1; do
+          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHDetectingPacketCriterionV1 RHFixedPacketFourPhaseV1 RHNarrowFixedDetectorV1 RHNarrowCenteredKernelV1 RHNarrowEventualTailV1 RHNarrowNineFacesBridgeV1; do
             echo "COMPILE AEGISOverlay/$m"
             lake env lean -o ".lake/build/lib/lean/AEGISOverlay/$m.olean" "AEGISOverlay/$m.lean" 2>&1 | tee "evidence-target-mellin/compile-$m.log"
             ! grep -F 'sorryAx' "evidence-target-mellin/compile-$m.log"
@@ -311,6 +313,33 @@ jobs:
               if got != expected: raise SystemExit("AXIOM_DRIFT: " + thm + ": " + repr(sorted(got)))
           if "sorryAx" in log or "error:" in log: raise SystemExit("LEAN_LOG_ERROR")
           print("NARROW_EVENTUAL_TAIL_AXIOMS_STANDARD_ONLY=PASS")
+          PY
+
+      - name: Audit exact narrow-to-nine-faces bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          log = Path("evidence-target-mellin/compile-RHNarrowNineFacesBridgeV1.log").read_text()
+          expected = {"propext", "Classical.choice", "Quot.sound"}
+          for thm in (
+              "narrow_four_phase_sign_of_rh",
+              "narrow_kernel_bound_of_rh",
+              "rh_iff_narrow_kernel_bound",
+              "rh_iff_narrow_eventual_tail",
+              "narrow_eventual_tail_iff_all_windows",
+              "narrow_eventual_tail_iff_millennium_certificate",
+          ):
+              label = "'AEGIS.RHNarrowNineFacesBridgeV1." + thm + "' depends on axioms:"
+              m = re.search(re.escape(label) + r"\s*\[([^\]]*)\]", log, re.DOTALL)
+              if m is None: raise SystemExit("AXIOMS_MISSING: " + thm)
+              got = {s.strip() for s in m.group(1).split(",") if s.strip()}
+              if got != expected:
+                  raise SystemExit("AXIOM_DRIFT: " + thm + ": " + repr(sorted(got)))
+          if "sorryAx" in log or "error:" in log: raise SystemExit("LEAN_ERROR_OR_SORRYAX")
+          print("NARROW_NINE_FACES_STANDARD_AXIOMS_ONLY=PASS")
           PY
 
       - name: Record exact-head receipt
