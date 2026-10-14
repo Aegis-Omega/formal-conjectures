@@ -5,6 +5,8 @@ on:
     paths:
       - 'AEGISOverlay/RHTargetPacketMellinGeneralV2.lean'
       - 'AEGISOverlay/RHNarrowFixedDetectorV1.lean'
+      - 'AEGISOverlay/RHNarrowCenteredKernelV1.lean'
+      - 'AEGISOverlay/RHNarrowEventualTailV1.lean'
       - '.github/workflows/rh-target-packet-mellin-general-v2.yml'
   workflow_dispatch:
 
@@ -192,7 +194,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .lake/build/lib/lean/AEGISOverlay evidence-target-mellin
-          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHDetectingPacketCriterionV1 RHFixedPacketFourPhaseV1 RHNarrowFixedDetectorV1 RHNarrowCenteredKernelV1; do
+          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHDetectingPacketCriterionV1 RHFixedPacketFourPhaseV1 RHNarrowFixedDetectorV1 RHNarrowCenteredKernelV1 RHNarrowEventualTailV1; do
             echo "COMPILE AEGISOverlay/$m"
             lake env lean -o ".lake/build/lib/lean/AEGISOverlay/$m.olean" "AEGISOverlay/$m.lean" 2>&1 | tee "evidence-target-mellin/compile-$m.log"
             ! grep -F 'sorryAx' "evidence-target-mellin/compile-$m.log"
@@ -266,6 +268,28 @@ jobs:
           if "sorryAx" in log or "error:" in log:
               raise SystemExit("LEAN_ERROR_OR_SORRYAX")
           print("CENTERED_3_8_STANDARD_AXIOMS_ONLY=PASS")
+          PY
+
+      - name: Audit exact narrow eventual-tail bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          log = Path("evidence-target-mellin/compile-RHNarrowEventualTailV1.log").read_text()
+          expected = {"propext", "Classical.choice", "Quot.sound"}
+          for thm in (
+              "packetKernelBound_of_eventuallyBounded",
+              "riemannHypothesis_of_narrow_eventual_bound",
+          ):
+              label = "'AEGIS.RHNarrowEventualTailV1." + thm + "' depends on axioms:"
+              m = re.search(re.escape(label) + r"\s*\[([^\]]*)\]", log, re.DOTALL)
+              if m is None: raise SystemExit("MISSING_AX_PRINT: " + thm)
+              got = {x.strip() for x in m.group(1).split(",") if x.strip()}
+              if got != expected: raise SystemExit("AXIOM_DRIFT: " + thm + ": " + repr(sorted(got)))
+          if "sorryAx" in log or "error:" in log: raise SystemExit("LEAN_LOG_ERROR")
+          print("NARROW_EVENTUAL_TAIL_AXIOMS_STANDARD_ONLY=PASS")
           PY
 
       - name: Record exact-head receipt
