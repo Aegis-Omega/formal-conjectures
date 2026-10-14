@@ -278,7 +278,7 @@ jobs:
             grep -F "AEGIS.RHKreinMultiplicativeTransportV1.$thm" \
               evidence-cofinal/compile-AEGISOverlay_RHKreinMultiplicativeTransportV1.log
           done
-          for thm in packetSum_one_apply every_packet_actual_finite_gram localized_actual_weil_krein_atom; do
+          for thm in packetSum_one_apply every_packet_actual_finite_gram localized_actual_weil_krein_atom localized_actual_weil_diagonal_32_over_25; do
             grep -F "AEGIS.RHFiniteActualGramJoinV1.$thm" \
               evidence-cofinal/compile-AEGISOverlay_RHFiniteActualGramJoinV1.log
           done
