@@ -671,6 +671,108 @@ theorem actual_fine_gram_coercive_of_summable_arch_prime_row
   linarith
 
 
+/-- A closed finite-dimensional REAL Schur consumer of the already
+formalized moment-zero geometric Arch estimate. Every genuine Weil
+off-diagonal term is retained. Prime-side row majorants and ordered
+logarithmic separation are the only remaining analytic/geometric inputs.
+The pairwise Arch bound is derived, not postulated. -/
+theorem actual_far_fine_gram_coercive_of_geometric_arch_prime_row
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+      (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (primeCost : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (hsym : ∀ i j, primeCost i j = primeCost j i)
+    (hprime : ∀ i j : Fin (n + 1), i < j →
+      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
+        primeCost i j * (energy (gs i).1 + energy (gs j).1))
+    (hprimeRow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      primeCost i j) ≤ (57176 / 65536 : ℝ)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+        -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ := fun i j =>
+    primeCost i j + (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)
+  have hc : ∀ i j, c i j = c j i := by
+    intro i j
+    dsimp [c]
+    rw [hsym i j, Nat.dist_comm i j]
+  have hforward (i j : Fin (n + 1)) (hij : i < j) :
+      ‖B (gs i) (gs j)‖ ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    obtain ⟨hk, hgap⟩ := hsep i j hij
+    have hb :=
+      AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
+        (gs i) (gs j) (center i) (center j)
+        (hw i) (hw j) (hm i)
+        (Nat.dist i j) hk hgap
+    dsimp [c]
+    calc
+      ‖B (gs i) (gs j)‖ ≤
+          ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ +
+          ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
+            (energy (gs i).1 + energy (gs j).1) := hb
+      _ ≤ primeCost i j * (energy (gs i).1 + energy (gs j).1) +
+          ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
+            (energy (gs i).1 + energy (gs j).1) :=
+              add_le_add_right (hprime i j hij) _
+      _ = (primeCost i j +
+            (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
+          (energy (gs i).1 + energy (gs j).1) := by ring
+  have hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    rcases lt_or_gt_of_ne hij with hijlt | hjilt
+    · exact hforward i j hijlt
+    · have hb := hforward j i hjilt
+      rw [B_hermitian, norm_conj]
+      simpa only [hc j i,
+        add_comm (energy (gs j).1) (energy (gs i).1)] using hb
+  have hrowc : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) ≤
+        (57430 / 65536 : ℝ) := by
+    intro i
+    calc
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          c i j) =
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          primeCost i j) +
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) := by
+            simp only [c, Finset.sum_add_distrib]
+      _ ≤ (57176 / 65536 : ℝ) + (254 / 65536 : ℝ) :=
+        add_le_add (hprimeRow i) (geometric_arch_row_q16 i)
+      _ = (57430 / 65536 : ℝ) := by norm_num
+  have hmixed := actual_mixed_defect_le_of_real_symmetric_row
+    gs c (57430 / 65536 : ℝ) hc hcross hrowc
+  have hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re := by
+    intro i
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hw i)
+  have hlocal := fine_mixed_defect_lower_bound n gs hdiag
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [AEGIS.RHGramExpansionV13.B_packetSum]
+    simp
+  rw [← hgram] at hlocal
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hround :
+      (116142 / 65536 : ℝ) * (∑ i, energy (gs i).1) ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) :=
+    mul_le_mul_of_nonneg_right (by norm_num) hE
+  linarith
+
+
 end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
@@ -689,3 +791,5 @@ end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_mixed_defect_le_of_real_symmetric_row
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_summable_arch_prime_row
+
+#print axioms AEGIS.RHActualUniversalFineGramV1.actual_far_fine_gram_coercive_of_geometric_arch_prime_row
