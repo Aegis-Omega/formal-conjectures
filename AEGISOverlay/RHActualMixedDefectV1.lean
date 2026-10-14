@@ -249,6 +249,36 @@ theorem actual_mixed_re_abs_of_common_narrow_window
   apply abs_le.mpr
   constructor <;> linarith
 
+
+/-- A bound on the entire complex genuine Weil mixed entry. Apply the
+same real-polarization lemma to u and i v to control its imaginary part;
+then use the pinned Mathlib complex norm inequality. This controls B,
+not a surrogate or its real projection only, for pairs sharing a
+certified width-1/64 log window. -/
+theorem actual_mixed_norm_le_of_common_narrow_window
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hu : AEGIS.RHNarrowDiagonalUpgradeV2.WidthOneSixtyFourAt u center)
+    (hv : AEGIS.RHNarrowDiagonalUpgradeV2.WidthOneSixtyFourAt v center) :
+    ‖B u v‖ ≤ -(B u u).re - (B v v).re := by
+  have hreal :=
+    actual_mixed_re_abs_of_common_narrow_window u v center hu hv
+  have himag :=
+    actual_mixed_re_abs_of_common_narrow_window
+      u (scalePacket Complex.I v) center hu
+      (narrow_width_scale v Complex.I center hv)
+  have hrot :
+      (B u (scalePacket Complex.I v)).re = (B u v).im := by
+    rw [B_scale_right]
+    simp [Complex.mul_re]
+  have hdiag :
+      (B (scalePacket Complex.I v) (scalePacket Complex.I v)).re =
+        (B v v).re := by
+    rw [B_scale_left, B_scale_right]
+    simp [mul_assoc]
+  rw [hrot, hdiag] at himag
+  have htri := Complex.norm_le_abs_re_add_abs_im (B u v)
+  linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -258,3 +288,4 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.narrow_width_add
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_re_upper_of_narrow_sum
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_re_abs_of_common_narrow_window
+#print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_norm_le_of_common_narrow_window
