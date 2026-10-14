@@ -146,7 +146,8 @@ theorem unlift_contDiff (F : ℝ → ℂ) (hF : ContDiff ℝ ∞ F)
         (fun y : ℝ => (Real.exp (-Real.log y / 2) : ℂ) * F (Real.log y)) :=
       by
         filter_upwards [Ioi_mem_nhds hx] with y hy
-        simp [unlift, hy]
+        have hypos : (0 : ℝ) < y := hy
+        simp [unlift, hypos]
     exact ContDiffAt.congr_of_eventuallyEq hloc hEq
   · have hmem : Iio (Real.exp (a - 1)) ∈ 𝓝 x :=
       Iio_mem_nhds (lt_of_le_of_lt hx (Real.exp_pos _))
