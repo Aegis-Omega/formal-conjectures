@@ -13,6 +13,7 @@ on:
       - 'AEGISOverlay/RHLocalKreinPartitionV1.lean'
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
+      - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
@@ -174,7 +175,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -293,6 +294,11 @@ jobs:
             grep -F "AEGIS.RHFiniteActualGramJoinV1.$thm" \
               evidence-cofinal/compile-AEGISOverlay_RHFiniteActualGramJoinV1.log
           done
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualNarrowGramSignV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
+          grep -F "AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive" \
+            evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
           grep -F "AEGIS.RHFeshbachScaledErrorV1.nonneg_of_invFourth_scaled_error" \
             evidence-cofinal/compile-RHFeshbachScaledErrorV1.log
           for thm in packet_zero_quadratic_nonnegative packet_weil_nonpositive riemannHypothesis_of_window_scaled_schur_families; do
