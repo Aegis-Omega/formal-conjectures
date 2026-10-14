@@ -207,8 +207,6 @@ theorem narrowDetectingPacket_detects (rho : RiemannNontrivialZeroIndexV2) :
   (Classical.choose_spec exists_narrow_fixed_detecting_packet).2.2 rho
 
 
-/-- The existing pole criterion applies to the SAME narrow packet.
-    The kernel-bound hypothesis refers to narrowDetectingPacket itself. -/
 /-- Transport the narrow multiplicative support to the *actual* repository
     logarithmic window predicate, for the same fixed detecting packet. -/
 theorem narrowDetectingPacket_logWindow :
@@ -251,6 +249,85 @@ theorem narrowDetectingPacket_arithmetic_nonpositive :
     narrowDetectingPacket.1
   linarith
 
+/-- For every coefficient c and every shift |d| ≤ 3/16, the actual
+    two-point packet fits the already-certified 7/32 logarithmic window. -/
+theorem narrowDetectingPacket_local_twoPoint_window
+    (d : ℝ) (hd : |d| ≤ (3 / 16 : ℝ)) (c : ℂ) :
+    AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1
+      (WeilTwoPointTranslateV11 narrowDetectingPacket d c) (7 / 32 : ℝ) := by
+  let g := narrowDetectingPacket
+  have hdlo := (abs_le.mp hd).1
+  have hdhi := (abs_le.mp hd).2
+  have hg : AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      g (-(1 / 32 : ℝ)) (1 / 32 : ℝ) :=
+    narrowDetectingPacket_logWindow
+  have hleft : AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      g (-(7 / 32 : ℝ)) (7 / 32 : ℝ) := by
+    intro t ht
+    have h := hg ht
+    exact ⟨by linarith [h.1], by linarith [h.2]⟩
+  have htrans := AEGIS.WeilThreeBlockTranslatedPacketsV22.translate_logSupportIn
+    g d (-(1 / 32 : ℝ)) (1 / 32 : ℝ) hg
+  have hright : AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d)
+      (-(7 / 32 : ℝ)) (7 / 32 : ℝ) := by
+    intro t ht
+    have h := htrans ht
+    exact ⟨by linarith [h.1, hdlo], by linarith [h.2, hdhi]⟩
+  change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+    (WeilTwoPointTranslateV11 g d c) (-(7 / 32 : ℝ)) (7 / 32 : ℝ)
+  unfold AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+  apply closure_minimal ?_ isClosed_Icc
+  intro t ht
+  by_contra houtside
+  have hfirst : AEGIS.WeilLogCoordinateIsometryV21.logLift g.1 t = 0 :=
+    image_eq_zero_of_notMem_tsupport (fun hs => houtside (hleft hs))
+  have hsecond :
+      AEGIS.WeilLogCoordinateIsometryV21.logLift
+        (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d).1 t = 0 :=
+    image_eq_zero_of_notMem_tsupport (fun hs => houtside (hright hs))
+  have heq :
+      AEGIS.WeilLogCoordinateIsometryV21.logLift
+        (WeilTwoPointTranslateV11 g d c).1 t =
+        AEGIS.WeilLogCoordinateIsometryV21.logLift g.1 t +
+        c * AEGIS.WeilLogCoordinateIsometryV21.logLift
+          (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d).1 t := by
+    change ((Real.exp (t / 2) : ℂ) *
+        (g.1 (Real.exp t) +
+          c * (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d).1
+            (Real.exp t))) =
+      ((Real.exp (t / 2) : ℂ) * g.1 (Real.exp t)) +
+        c * ((Real.exp (t / 2) : ℂ) *
+          (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d).1
+            (Real.exp t))
+    ring
+  apply ht
+  rw [heq, hfirst, hsecond]
+  ring
+
+/-- Certified arithmetic sign for every complex two-point coefficient in the
+    complete real translation interval [-3/16, 3/16]. -/
+theorem narrowDetectingPacket_local_twoPoint_sign
+    (d : ℝ) (hd : |d| ≤ (3 / 16 : ℝ)) (c : ℂ) :
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1
+        (WeilTwoPointTranslateV11 narrowDetectingPacket d c))).re ≤ 0 := by
+  have hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (WeilTwoPointTranslateV11 narrowDetectingPacket d c) (7 / 32 : ℝ) 0 := by
+    simpa only [AEGIS.RHDyadicDiagonalV13.HalfWidthAt,
+      AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn,
+      AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1,
+      zero_sub, zero_add] using narrowDetectingPacket_local_twoPoint_window d hd c
+  have hm := AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+    narrowDetectingPacket d c narrowDetectingPacket_moments
+  have hc := AEGIS.RHThreeCellClassV13.cell_coercive
+    (WeilTwoPointTranslateV11 narrowDetectingPacket d c) 0 hw hm
+  have he := AEGIS.WeilDisjointEnergyV2.energy_nonnegative
+    (WeilTwoPointTranslateV11 narrowDetectingPacket d c).1
+  linarith
+
+/-- The existing pole criterion applies to the SAME narrow packet.
+    The kernel-bound hypothesis refers to narrowDetectingPacket itself. -/
 theorem riemannHypothesis_of_narrow_kernel_bound
     (h : AEGIS.RHDetectingPacketCriterionV1.PacketKernelBoundV1
       narrowDetectingPacket) : RiemannHypothesis :=
@@ -276,5 +353,7 @@ end AEGIS.RHNarrowFixedDetectorV1
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_detects
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_logWindow
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_arithmetic_nonpositive
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_window
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_sign
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_kernel_bound
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign
