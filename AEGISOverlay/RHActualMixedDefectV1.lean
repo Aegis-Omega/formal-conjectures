@@ -1109,6 +1109,50 @@ theorem distinct_fine_far_actual_B_q16_of_prime_decay_budget
                 add_le_add_right hprime _
     _ = ((k : ℝ) / 65536) * (energy p.1 + energy q.1) := by ring
 
+
+/-- Pure rational Q16.16 combination rule for separated actual Weil atoms.
+The moment-zero Arch remainder is charged by an outward certified rational
+bound, and the genuine von Mangoldt prime term has its own independent cost.
+No floating-point evaluation and no assumed sign of the prime term. -/
+theorem distinct_fine_far_actual_B_q16_of_separate_rational_budgets
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a)
+    (primeCost archCost : ℕ)
+    (hprime :
+      ‖WeilPrimeSumV1 (mixed p q)‖ ≤
+        ((primeCost : ℝ) / 65536) *
+          (energy p.1 + energy q.1))
+    (hdecay :
+      (1 / 32 : ℝ) *
+        (Real.exp (-5 * ((b-a)-1/32) / 2) /
+          (1 - Real.exp (-2 * ((b-a)-1/32)))) ≤
+        (archCost : ℝ) / 65536) :
+    ‖B p q‖ ≤ (((primeCost + archCost : ℕ) : ℝ) / 65536) *
+      (energy p.1 + energy q.1) := by
+  have hE : 0 ≤ energy p.1 + energy q.1 :=
+    add_nonneg (energy_nonnegative p.1) (energy_nonnegative q.1)
+  have harch := mul_le_mul_of_nonneg_right hdecay hE
+  have hactual := distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
+    p q a b hp hq hm hgap
+  calc
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+      (1 / 32 : ℝ) *
+        (Real.exp (-5 * ((b-a)-1/32) / 2) /
+          (1 - Real.exp (-2 * ((b-a)-1/32)))) *
+            (energy p.1 + energy q.1) := hactual
+    _ ≤ ((primeCost : ℝ) / 65536) *
+          (energy p.1 + energy q.1) +
+        ((archCost : ℝ) / 65536) *
+          (energy p.1 + energy q.1) := add_le_add hprime harch
+    _ = (((primeCost + archCost : ℕ) : ℝ) / 65536) *
+          (energy p.1 + energy q.1) := by
+            push_cast
+            ring
+
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1146,3 +1190,4 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_moment_decay
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_prime_decay_budget
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_separate_rational_budgets
