@@ -396,6 +396,168 @@ theorem actual_nine_over_64_mixed_norm_le
   have htri := Complex.norm_le_abs_re_add_abs_im (B u v)
   linarith
 
+
+/-! ## Exact counterpart on an arbitrary finite *common local* window
+
+Unlike an entrywise Q16.16 majorant, this proof retains the signed
+off-diagonal contributions and applies the existing *actual* strong
+fine-window diagonal inequality to the whole packet sum.  The
+summands may have distinct shapes and energies, but all share a
+single center and a half-width 1/256 in log coordinates.
+
+The exact counterpart concerns the full contracted Gram and its
+off-diagonal defect; it does not assert a pairwise norm bound for
+remote support windows or a global RH theorem. -/
+
+open AEGIS.RHRationalNinePacketPrimeWindowV1
+open AEGIS.RHGramExpansionV13
+
+/-- A complex scalar does not enlarge a fine log-support window. -/
+theorem fine_width_scale
+    (u : WeilCompactSmoothGV1) (z : ℂ) (center : ℝ)
+    (hu : WidthOneOneTwentyEightAt u center) :
+    WidthOneOneTwentyEightAt (scalePacket z u) center := by
+  change tsupport (lift (scalePacket z u).1) ⊆
+    Icc (center - 1 / 256) (center + 1 / 256)
+  change tsupport (lift u.1) ⊆
+    Icc (center - 1 / 256) (center + 1 / 256) at hu
+  have hlift : lift (scalePacket z u).1 =
+      (fun x => z * lift u.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, scalePacket]
+    ring
+  rw [hlift]
+  have hs : tsupport (fun x => z * lift u.1 x) ⊆
+      tsupport (lift u.1) := by
+    apply closure_minimal ?_ (isClosed_tsupport _)
+    intro x hx
+    by_contra hn
+    have hzero : lift u.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport hn
+    exact hx (by simp [hzero])
+  exact hs.trans hu
+
+/-- Two fine packets centered on the same finite window remain fine
+after exact addition, independently of their relative energies. -/
+theorem fine_width_add
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hu : WidthOneOneTwentyEightAt u center)
+    (hv : WidthOneOneTwentyEightAt v center) :
+    WidthOneOneTwentyEightAt (addPacket u v) center := by
+  change tsupport (lift (addPacket u v).1) ⊆
+    Icc (center - 1 / 256) (center + 1 / 256)
+  change tsupport (lift u.1) ⊆
+    Icc (center - 1 / 256) (center + 1 / 256) at hu
+  change tsupport (lift v.1) ⊆
+    Icc (center - 1 / 256) (center + 1 / 256) at hv
+  have hlift : lift (addPacket u v).1 =
+      (fun x => lift u.1 x + lift v.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, addPacket, mul_add]
+  rw [hlift]
+  have hs :
+      tsupport (fun x => lift u.1 x + lift v.1 x) ⊆
+        tsupport (lift u.1) ∪ tsupport (lift v.1) := by
+    apply closure_minimal ?_
+      ((isClosed_tsupport _).union (isClosed_tsupport _))
+    intro x hx
+    by_contra hn
+    have hu0 : lift u.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxU
+        exact hn (Or.inl hxU))
+    have hv0 : lift v.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxV
+        exact hn (Or.inr hxV))
+    exact hx (by simp [hu0, hv0])
+  intro x hx
+  rcases hs hx with hxU | hxV
+  · exact hu hxU
+  · exact hv hxV
+
+/-- Any finite complex linear combination of arbitrary *different*
+fine packets stays on their common window. This is not a theorem
+about translates with different centers. -/
+theorem fine_width_packetSum :
+    ∀ (n : ℕ)
+      (z : Fin (n + 1) → ℂ)
+      (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : ℝ),
+      (∀ i, WidthOneOneTwentyEightAt (gs i) center) →
+      WidthOneOneTwentyEightAt (packetSum z gs) center := by
+  intro n
+  induction n with
+  | zero =>
+      intro z gs center hwin
+      change WidthOneOneTwentyEightAt
+        (scalePacket (z 0) (gs 0)) center
+      exact fine_width_scale (gs 0) (z 0) center (hwin 0)
+  | succ n ih =>
+      intro z gs center hwin
+      change WidthOneOneTwentyEightAt
+        (addPacket
+          (packetSum (fun i : Fin (n + 1) => z i.castSucc)
+            (fun i : Fin (n + 1) => gs i.castSucc))
+          (scalePacket (z (Fin.last (n + 1)))
+            (gs (Fin.last (n + 1))))) center
+      exact fine_width_add _ _ center
+        (ih (fun i => z i.castSucc) (fun i => gs i.castSucc)
+          center (fun i => hwin i.castSucc))
+        (fine_width_scale _ _ center (hwin (Fin.last (n + 1))))
+
+/-- The actual full signed Weil Gram on any common fine finite window
+has the *exact* rational coercivity, for arbitrary coefficients. The
+off-diagonal cancellations are not replaced by norm majorants. -/
+theorem fine_local_exact_counterpart
+    (n : ℕ) (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ)
+    (hwin : ∀ i, WidthOneOneTwentyEightAt (gs i) center) :
+    (5671 / 3200 : ℝ) * energy (packetSum z gs).1 ≤
+      -(B (packetSum z gs) (packetSum z gs)).re := by
+  exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+    (packetSum z gs) center
+    (fine_width_packetSum n z gs center hwin)
+
+/-- The outward-rounded *opposite-sign* Q16.16 companion to the exact
+local finite-window proof. Rounding the positive diagonal gain down
+cannot change the direction of this inequality. -/
+theorem fine_local_q16_counterpart
+    (n : ℕ) (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ)
+    (hwin : ∀ i, WidthOneOneTwentyEightAt (gs i) center) :
+    (116142 / 65536 : ℝ) * energy (packetSum z gs).1 ≤
+      -(B (packetSum z gs) (packetSum z gs)).re := by
+  have hE : 0 ≤ energy (packetSum z gs).1 :=
+    energy_nonnegative _
+  have hround : (116142 / 65536 : ℝ) ≤ 5671 / 3200 := by
+    norm_num
+  exact (mul_le_mul_of_nonneg_right hround hE).trans
+    (fine_local_exact_counterpart n z gs center hwin)
+
+/-- Signed (not absolute) upper bound for the exact actual mixed defect
+of an arbitrary finite family on one common fine window.  This is the
+opposite-side counterpart of the global Q16.16 pairwise budget. -/
+theorem fine_local_exact_mixed_defect_opposite
+    (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : ℝ)
+    (hwin : ∀ i, WidthOneOneTwentyEightAt (gs i) center) :
+    actualMixedDefect n gs ≤
+      -((5671 / 3200 : ℝ) *
+        energy (packetSum (fun _ => (1 : ℂ)) gs).1) -
+      ∑ i, (B (gs i) (gs i)).re := by
+  have hcoercive := fine_local_exact_counterpart n
+    (fun _ => (1 : ℂ)) gs center hwin
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+        (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [hgram] at hcoercive
+  unfold actualMixedDefect
+  linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -409,3 +571,10 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_upper
 #print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_abs
 #print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_norm_le
+
+#print axioms AEGIS.RHActualMixedDefectV1.fine_width_scale
+#print axioms AEGIS.RHActualMixedDefectV1.fine_width_add
+#print axioms AEGIS.RHActualMixedDefectV1.fine_width_packetSum
+#print axioms AEGIS.RHActualMixedDefectV1.fine_local_exact_counterpart
+#print axioms AEGIS.RHActualMixedDefectV1.fine_local_q16_counterpart
+#print axioms AEGIS.RHActualMixedDefectV1.fine_local_exact_mixed_defect_opposite
