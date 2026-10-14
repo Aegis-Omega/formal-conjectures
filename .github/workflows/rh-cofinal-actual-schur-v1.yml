@@ -14,6 +14,7 @@ on:
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
+      - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
@@ -176,7 +177,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -298,6 +299,11 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualNarrowGramSignV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
+          grep -F "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_narrow_coercive_gram" \
+            evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualLocalGramCoercivityV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
           grep -F "AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive" \
             evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
