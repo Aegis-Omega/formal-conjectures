@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'AEGISOverlay/RHTargetPacketMellinGeneralV2.lean'
+      - 'AEGISOverlay/RHNarrowFixedDetectorV1.lean'
       - '.github/workflows/rh-target-packet-mellin-general-v2.yml'
   workflow_dispatch:
 
@@ -21,7 +22,7 @@ env:
 jobs:
   target-packet-mellin-general:
     runs-on: ubuntu-24.04
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - name: Checkout exact candidate head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
@@ -126,10 +127,13 @@ jobs:
           python3 - "$ROOT" evidence-target-mellin/aegis-modules.txt <<'PY'
           import pathlib,sys
           root=pathlib.Path(sys.argv[1]); out=pathlib.Path(sys.argv[2])
-          target="RestrictedWeilCriterionResidueWitnessV11"
+          targets=["RestrictedWeilCriterionResidueCoefficientV11",
+                   "WeilMomentAnnihilatorV1",
+                   "WeilMellinInversionV1"]
           mods={p.stem:p for p in root.glob("*.lean")}
-          if target not in mods:
-              raise SystemExit(f"missing target: {target}")
+          for target in targets:
+              if target not in mods:
+                  raise SystemExit(f"missing target: {target}")
           deps={}
           for m,p in mods.items():
               ds=[]
@@ -149,9 +153,9 @@ jobs:
               active.add(m)
               for d in deps[m]: visit(d)
               active.remove(m); seen.add(m); order.append(m)
-          visit(target)
+          for target in targets: visit(target)
           out.write_text("\n".join(order)+"\n")
-          print("TARGET_PACKET_AEGIS_CLOSURE_COUNT",len(order))
+          print("NARROW_DETECTOR_AEGIS_CLOSURE_COUNT",len(order))
           print("\n".join(order))
           PY
           while IFS= read -r m; do
@@ -168,6 +172,19 @@ jobs:
           ! grep -F 'sorryAx' evidence-target-mellin/compile.log
           ! grep -F 'error:' evidence-target-mellin/compile.log
           grep -F 'AEGIS.RHTargetPacketMellinGeneralV2.targetPacket_mellin_general_v2'             evidence-target-mellin/compile.log
+
+      - name: Compile verified overlay dependencies and narrow detector
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean/AEGISOverlay evidence-target-mellin
+          for m in RHGenericSpectralShiftV1 RHCompactMellinEntireV1 RHWeilTiltComplementarityV1 RHDetectingPacketV1 RHNarrowFixedDetectorV1; do
+            echo "COMPILE AEGISOverlay/$m"
+            lake env lean -o ".lake/build/lib/lean/AEGISOverlay/$m.olean" "AEGISOverlay/$m.lean" 2>&1 | tee "evidence-target-mellin/compile-$m.log"
+            ! grep -F 'sorryAx' "evidence-target-mellin/compile-$m.log"
+            ! grep -F 'error:' "evidence-target-mellin/compile-$m.log"
+          done
+          grep -F 'AEGIS.RHNarrowFixedDetectorV1.exists_narrow_fixed_detecting_packet' evidence-target-mellin/compile-RHNarrowFixedDetectorV1.log
 
       - name: Record exact-head receipt
         if: always()
