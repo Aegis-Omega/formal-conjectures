@@ -39,6 +39,7 @@ namespace AEGIS.RHCrossRepositoryFiveSpineV1
 
 open AEGIS.RHNarrowFixedDetectorV1
 open AEGIS.RHCofinalActualTerminalV1
+open AEGIS.WeilZeroTwoPointV11
 
 /-- The same narrow compact-smooth packet carries the moment constraints and
 detects each nontrivial zeta zero, with no new construction. -/
