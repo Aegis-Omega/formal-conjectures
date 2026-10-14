@@ -2649,7 +2649,7 @@ jobs:
           if len(records)!=stop: raise SystemExit('COMPLETED_PREFIX_INCORRECT')
           if stop==TOTAL:
               kernel=(pathlib.Path('evidence-trigram')/f'module-{TOTAL-1:03d}.log').read_text(errors='replace')
-              for theorem in ['finiteIntervalCertificate_trigram_v1','pointwiseCertificate_trigram_v1','zero_quadratic_margin_trigram_v1','arithmetic_sign_window_two_fifths_trigram_v1']:
+              for theorem in ['finiteIntervalCertificate_trigram_v1','pointwiseCertificate_trigram_v1','zero_quadratic_margin_trigram_v1','arithmetic_sign_window_two_fifths_trigram_v1','window_two_fifths_trigram_v1','window_le_two_fifths_trigram_v1']:
                   m=re.search(r"'AEGIS\.RHKreinTrigramAdaptiveV1\."+theorem+r"'\s+depends on axioms:\s*\[([^\]]*)\]",kernel)
                   if not m: raise SystemExit(f'AXIOM_AUDIT_MISSING {theorem}')
                   axioms={x.strip() for x in m.group(1).split(',') if x.strip()}

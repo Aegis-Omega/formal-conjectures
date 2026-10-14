@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 import RHKreinTrigramAdaptiveCells08V1
+import WeilWindowExhaustionV1
 
 /-!
 AEGIS Ω adaptive trigram, memory-sharded kernel replay.
@@ -78,9 +79,31 @@ theorem arithmetic_sign_window_two_fifths_trigram_v1
     (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
       g hm).mpr (henergy.trans hmargin)
 
+/-- A genuine unconditional radius-2/5 Weil window certificate,
+    in precisely the original AEGIS WindowArithmeticNonpositiveV1 type. -/
+theorem window_two_fifths_trigram_v1 :
+    AEGIS.WeilWindowExhaustionV1.WindowArithmeticNonpositiveV1
+      (2 / 5 : ℝ) := by
+  intro g hm hw
+  apply arithmetic_sign_window_two_fifths_trigram_v1 g ?_ hm
+  change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+    g (0 - (2 / 5 : ℝ)) (0 + (2 / 5 : ℝ))
+  simpa only [AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1,
+    zero_sub, zero_add] using hw
+
+/-- Monotone transfer of the genuine 2/5 certificate to every smaller
+    positive log window, without any unproved global hypothesis. -/
+theorem window_le_two_fifths_trigram_v1
+    {L : ℝ} (hL : L ≤ (2 / 5 : ℝ)) :
+    AEGIS.WeilWindowExhaustionV1.WindowArithmeticNonpositiveV1 L :=
+  AEGIS.WeilWindowExhaustionV1.windowArithmeticNonpositive_mono_v1
+    hL window_two_fifths_trigram_v1
+
 end AEGIS.RHKreinTrigramAdaptiveV1
 
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.finiteIntervalCertificate_trigram_v1
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.pointwiseCertificate_trigram_v1
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
 #print axioms AEGIS.RHKreinTrigramAdaptiveV1.arithmetic_sign_window_two_fifths_trigram_v1
+#print axioms AEGIS.RHKreinTrigramAdaptiveV1.window_two_fifths_trigram_v1
+#print axioms AEGIS.RHKreinTrigramAdaptiveV1.window_le_two_fifths_trigram_v1
