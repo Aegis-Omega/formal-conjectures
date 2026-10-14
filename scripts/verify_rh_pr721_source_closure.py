@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "research/rh/aegis_pr721_fb983fd/source_manifest.json"
 SOURCE_HEAD = "fb983fdc84a6bbeec6960c0e0c54b9695beba837"
 SMOKE_TARGETS = ("RHNineBlockComparisonV1", "RHTenBlockComparisonV1", "RHElevenBlockComparisonV1")
+ACTUAL_BRIDGE_TARGETS = ("RHTenBlockActualBridgeV1", "RHElevenBlockActualBridgeV1")
 STANDARD_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 
 def git_blob_hash(payload: bytes) -> str:
@@ -69,18 +70,26 @@ def validate(out: Path) -> dict:
             "files": items}
 
 def compile_smoke(out: Path, receipt: dict) -> None:
-    olean_dir = out / "olean"
-    olean_dir.mkdir()
-    # Lean 4.33 rejects compiling input sources located outside Lake's project
-    # root. Materialize exact, SHA-verified bytes into a temporary directory
-    # WITHIN the checkout; always remove these copies on exit.
+    """Kernel-check exact SOS sources, then their strongest actual-Weil consumers.
+
+    Stage imported comparison .olean files in the standard Lake library path;
+    keeping outputs only in /tmp does NOT make Lean imports discoverable.
+    Every generated .olean is hashed into the outside-worktree receipt.
+    """
+    olean_dir = ROOT / ".lake" / "build" / "lib" / "lean"
+    olean_dir.mkdir(parents=True, exist_ok=True)
+    receipt["actual_bridge"] = "NOT_RUN"
+    # Lean 4.33 refuses sources outside the Lake project root. The temporary
+    # source copies use the original SHA-verified bytes, never edited copies.
     with tempfile.TemporaryDirectory(prefix=".rh-pr721-smoke-", dir=ROOT) as work:
         local = Path(work)
-        for mod in SMOKE_TARGETS:
+        for mod in SMOKE_TARGETS + ACTUAL_BRIDGE_TARGETS:
             payload = (out / "source" / (mod + ".lean")).read_bytes()
             source = local / (mod + ".lean")
             source.write_bytes(payload)
             output = olean_dir / (mod + ".olean")
+            # Delete cached output to make stale-module acceptance impossible.
+            output.unlink(missing_ok=True)
             log = out / (mod + ".compile.log")
             with log.open("w", encoding="utf-8") as fh:
                 p = subprocess.run(
@@ -95,12 +104,11 @@ def compile_smoke(out: Path, receipt: dict) -> None:
                 receipt["kernel"] = "FAILED"
                 receipt["failed_module"] = mod
                 fail("LEAN_AX_OR_ERROR " + mod)
-            # Count both supported #print axioms outputs, including a theorem
-            # whose axiom list is empty.
             reports = re.findall(
                 r"'[^']+' (?:depends on axioms:\s*\[([^\]]*)\]|does not depend on any axioms)",
                 text)
-            if len(reports) != 4:
+            expected = 4 if mod in SMOKE_TARGETS else 2
+            if len(reports) != expected:
                 receipt["kernel"] = "FAILED"
                 receipt["failed_module"] = mod
                 fail("INCOMPLETE_AXIOM_AUDIT " + mod)
@@ -112,6 +120,7 @@ def compile_smoke(out: Path, receipt: dict) -> None:
                     fail("NONSTANDARD_AXIOMS " + mod + ": " + repr(found))
             receipt["compiled"].append({"module": mod, "printed_axioms": len(reports),
                                         "olean_sha256": hashlib.sha256(output.read_bytes()).hexdigest()})
+    receipt["actual_bridge"] = "TEN_ELEVEN_ACTUAL_KERNEL_PASS"
     receipt["kernel"] = "THREE_SOS_MODULES_PASS"
 
 def main() -> int:
