@@ -6,6 +6,9 @@ on:
       - 'AEGISOverlay/RHMomentDecayCofinalJoinV1.lean'
       - 'AEGISOverlay/RHCofinalActualTerminalV1.lean'
       - 'AEGISOverlay/RHCofinalSchurAdapterV1.lean'
+      - 'AEGISOverlay/RHTargetPacketMellinGeneralV2.lean'
+      - 'AEGISOverlay/RHNarrowFixedDetectorV1.lean'
+      - 'AEGISOverlay/RHCrossRepositoryFiveSpineV1.lean'
       - 'AEGISOverlay/RHFeshbachWeilClosureV2.lean'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
@@ -125,10 +128,10 @@ jobs:
           set -euo pipefail
           mkdir -p evidence-cofinal .lake/build/lib/lean
           python3 - <<'PY'
-          import hashlib, json, pathlib, shutil
+          import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1"]
+          targets=["RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","AEGISOverlay.RHCrossRepositoryFiveSpineV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -171,6 +174,18 @@ jobs:
           if hdr_end<0: raise RuntimeError("missing source wrapper")
           archived=original[hdr_end+4:]
           assert hashlib.sha256(archived).hexdigest()=="b5c8c8ee464027694d711a9882135fa76b0e8261e5dcfda8259dae98915196f1", "archived Lean text changed"
+          def git_blob(path):
+              return subprocess.check_output(["git","hash-object",str(path)],text=True).strip()
+          pinned={
+              "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
+              "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
+              ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
+          }
+          for path, sha in pinned.items():
+              actual=git_blob(path)
+              if actual!=sha:
+                  raise RuntimeError(f"SOURCE_BLOB_DRIFT {path}: {actual} != {sha}")
+          print("CROSS_REPOSITORY_SOURCE_BLOBS=PASS")
           records=[]
           for m in order:
               src=pathlib.Path(paths[m])
@@ -211,7 +226,12 @@ jobs:
             riemannHypothesis_of_schur_norm_families; do
             grep -F "AEGIS.RHCofinalSchurAdapterV1.$thm" evidence-cofinal/compile-RHCofinalSchurAdapterV1.log
           done
-          echo "COFINAL_ACTUAL_JOIN=KERNEL_PASS; RH_UNCONDITIONAL=NOT_CLAIMED"
+          for thm in narrow_packet_moments_and_detection narrow_packet_local_actual_arithmetic_sign \
+            narrow_packet_actual_zero_of_cofinal three_nine_faces_of_cofinal; do
+            grep -F "AEGIS.RHCrossRepositoryFiveSpineV1.$thm" \
+              evidence-cofinal/compile-AEGISOverlay_RHCrossRepositoryFiveSpineV1.log
+          done
+          echo "COFINAL_ACTUAL_JOIN=KERNEL_PASS; CROSS_REPOSITORY_FIVE_SPINE=KERNEL_PASS; RH_UNCONDITIONAL=NOT_CLAIMED"
 
       - name: Record exact-head receipt
         if: always()
