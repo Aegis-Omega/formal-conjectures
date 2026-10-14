@@ -30,6 +30,15 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
 
+      - name: Verify exact checked-out head
+        shell: bash
+        env:
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          echo "EXACT_HEAD_BINDING=$EXPECTED_HEAD"
+
       - name: Install pinned Lean and Mathlib cache
         shell: bash
         run: |
@@ -186,6 +195,37 @@ jobs:
           done
           grep -F 'AEGIS.RHNarrowFixedDetectorV1.exists_narrow_fixed_detecting_packet' evidence-target-mellin/compile-RHNarrowFixedDetectorV1.log
 
+      - name: Audit exact narrow detector axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          log = Path("evidence-target-mellin/compile-RHNarrowFixedDetectorV1.log").read_text()
+          expected = {"propext", "Classical.choice", "Quot.sound"}
+          theorems = (
+              "exists_narrow_complementary_pair",
+              "exists_narrow_mellin_detecting_packet",
+              "exists_narrow_fixed_detecting_packet",
+              "narrowDetectingPacket_moments",
+              "narrowDetectingPacket_support",
+              "narrowDetectingPacket_detects",
+          )
+          for theorem in theorems:
+              label = "'AEGIS.RHNarrowFixedDetectorV1." + theorem + "' depends on axioms:"
+              pattern = re.escape(label) + r"\s*\[([^\]]*)\]"
+              match = re.search(pattern, log, re.DOTALL)
+              if match is None:
+                  raise SystemExit("AXIOM_ENTRY_MISSING: " + theorem)
+              observed = {a.strip() for a in match.group(1).split(",") if a.strip()}
+              if observed != expected:
+                  raise SystemExit(f"NONSTANDARD_AXIOMS: {theorem}: {sorted(observed)}")
+          if "sorryAx" in log or "error:" in log:
+              raise SystemExit("LEAN_LOG_ERROR_OR_SORRYAX")
+          print("NARROW_DETECTOR_AXIOMS_STANDARD_ONLY=PASS")
+          PY
+
       - name: Record exact-head receipt
         if: always()
         shell: bash
@@ -199,7 +239,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: rh-target-packet-mellin-general-${{ github.sha }}-${{ github.run_id }}
+          name: rh-target-packet-mellin-general-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: evidence-target-mellin/
           if-no-files-found: warn
           retention-days: 30

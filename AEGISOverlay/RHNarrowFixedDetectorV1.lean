@@ -182,8 +182,31 @@ theorem exists_narrow_fixed_detecting_packet :
   exact mul_ne_zero hmult
     (mul_ne_zero (hmel rho).1 ((map_ne_zero conj).mpr (hmel rho).2))
 
+
+/-- A fixed choice of the kernel-verified narrow detector for downstream RH
+    estimates. All following facts refer to this exact same packet. -/
+def narrowDetectingPacket : WeilCompactSmoothGV1 :=
+  Classical.choose exists_narrow_fixed_detecting_packet
+
+theorem narrowDetectingPacket_moments :
+    WeilMomentConditionsV1 narrowDetectingPacket :=
+  (Classical.choose_spec exists_narrow_fixed_detecting_packet).1
+
+/-- Public support interface, with no inaccessible private window name. -/
+theorem narrowDetectingPacket_support :
+    tsupport narrowDetectingPacket.1 ⊆
+      Icc (Real.exp (-(1 / 32 : ℝ))) (Real.exp (1 / 32 : ℝ)) :=
+  (Classical.choose_spec exists_narrow_fixed_detecting_packet).2.1
+
+theorem narrowDetectingPacket_detects (rho : RiemannNontrivialZeroIndexV2) :
+    WeilZeroCoefficientV11 narrowDetectingPacket rho ≠ 0 :=
+  (Classical.choose_spec exists_narrow_fixed_detecting_packet).2.2 rho
+
 end AEGIS.RHNarrowFixedDetectorV1
 
 #print axioms AEGIS.RHNarrowFixedDetectorV1.exists_narrow_complementary_pair
 #print axioms AEGIS.RHNarrowFixedDetectorV1.exists_narrow_mellin_detecting_packet
 #print axioms AEGIS.RHNarrowFixedDetectorV1.exists_narrow_fixed_detecting_packet
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_support
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_detects
