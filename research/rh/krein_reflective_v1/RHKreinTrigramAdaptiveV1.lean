@@ -13,12 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
+import RHKreinTrigramAdaptiveCells08V1
+
 /-!
 AEGIS Ω adaptive trigram, memory-sharded kernel replay.
 All 373 original rational `decide +kernel` checks remain in imported exact source modules.
 No axioms, no sorry, no change to RH target.
 -/
-import RHKreinTrigramAdaptiveCells08V1
 
 set_option autoImplicit false
 noncomputable section
