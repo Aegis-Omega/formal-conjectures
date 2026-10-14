@@ -213,8 +213,8 @@ theorem c0330 : checkPiece pa19 (3225/32) 0 (3225/32) (825/8) = true := by decid
 theorem n0330 : NonnegOnQ (3225/32) (825/8) :=
   nonnegOn_of_checkPiece_zero (3225/32) (825/8) (by norm_num) c0330
 
+/- Original contiguous interval fold, staged to bound Lean memory use. -/
 set_option maxRecDepth 4096 in
-/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 theorem foldTo0330 : NonnegOnQ 0 (825/8) := by
   have h283 := foldTo0283
   have h284 : NonnegOnQ 0 (525/16) := nonnegOn_union 0 (975/32) (525/16) h283 n0284
