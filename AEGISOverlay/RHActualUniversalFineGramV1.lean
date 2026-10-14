@@ -57,7 +57,10 @@ theorem fine_mixed_defect_lower_bound
     (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) -
       AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
         -(∑ i, ∑ j, B (gs i) (gs j)).re := by
-  have hs := Finset.sum_le_sum (fun i _ => hd i)
+  have hs :
+      (∑ i, (5671 / 3200 : ℝ) * energy (gs i).1) ≤
+        ∑ i, -(B (gs i) (gs i)).re :=
+    Finset.sum_le_sum (fun i _ => hd i)
   have hdiag :
       (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) ≤
         -(∑ i, (B (gs i) (gs i)).re) := by

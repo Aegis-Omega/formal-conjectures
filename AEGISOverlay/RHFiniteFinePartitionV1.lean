@@ -73,7 +73,7 @@ theorem exists_finite_smooth_local_partition
       (contMDiff_iff_contDiff.mp (ρ i).contMDiff)
   · intro x hx
     have hs : (∑ i : Fin (n + 1), ρ i x) = 1 := by
-      simpa only [finsum_eq_sum] using ρ.sum_eq_one hx
+      simpa only [finsum_eq_sum_of_fintype] using ρ.sum_eq_one hx
     change (∑ i : Fin (n + 1), (ρ i x : ℂ)) = 1
     exact_mod_cast hs
   · intro i x hx

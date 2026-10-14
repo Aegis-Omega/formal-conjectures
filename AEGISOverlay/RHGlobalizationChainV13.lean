@@ -124,13 +124,8 @@ theorem rh_of_vanishing_error_on_exhaustion
 
 end AEGIS.RHGlobalizationChainV13
 
-open AEGIS.RHGlobalizationChainV13 in
-#print axioms globalization_limit_nonneg
-open AEGIS.RHGlobalizationChainV13 in
-#print axioms vanishing_error_is_indispensable
-open AEGIS.RHGlobalizationChainV13 in
-#print axioms uniform_lower_bound_collapses
-open AEGIS.RHGlobalizationChainV13 in
-#print axioms rh_of_sign_on_exhaustion
-open AEGIS.RHGlobalizationChainV13 in
-#print axioms rh_of_vanishing_error_on_exhaustion
+#print axioms AEGIS.RHGlobalizationChainV13.globalization_limit_nonneg
+#print axioms AEGIS.RHGlobalizationChainV13.vanishing_error_is_indispensable
+#print axioms AEGIS.RHGlobalizationChainV13.uniform_lower_bound_collapses
+#print axioms AEGIS.RHGlobalizationChainV13.rh_of_sign_on_exhaustion
+#print axioms AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion
