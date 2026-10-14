@@ -115,13 +115,23 @@ jobs:
               text=text.replace(old,new)
           fp.write_text(text)
           PY
-          rm -f .li-provider/lake-manifest.json
+          # The pinned fork setup already verified Mathlib and fetched ALL
+          # transitive dependencies. LiCriterion depends only on Mathlib:
+          # reuse the exact same package store rather than cloning it twice.
+          # This prevents intermittent GitHub DNS failures in provider setup.
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          cp lake-manifest.json .li-provider/lake-manifest.json
           printf '%s\n' "$LEAN_TOOLCHAIN" > .li-provider/lean-toolchain
+          mkdir -p .li-provider/.lake
+          if test -e .li-provider/.lake/packages; then
+            test "$(readlink -f .li-provider/.lake/packages)" = "$GITHUB_WORKSPACE/.lake/packages"
+          else
+            ln -s "$GITHUB_WORKSPACE/.lake/packages" .li-provider/.lake/packages
+          fi
+          test "$(git -C .li-provider/.lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
           (
             cd .li-provider
             export PATH="$HOME/.elan/bin:$PATH"
-            lake update mathlib
-            lake exe cache get
             lake build Hadamard.OrderOne.LogDerivMultiplicity Lc.LiCriterion.XiGrowth Lc.LiCriterion.HadamardSummabilityBridge Lc.LiCriterion.HadamardBridge
           )
           cp -R .li-provider/Lc .
