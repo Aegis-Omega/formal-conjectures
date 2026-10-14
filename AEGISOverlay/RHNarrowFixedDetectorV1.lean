@@ -22,6 +22,8 @@ import RestrictedWeilCriterionResidueCoefficientV11
 import WeilZeroTwoPointV11
 import AEGISOverlay.RHDetectingPacketCriterionV1
 import AEGISOverlay.RHFixedPacketFourPhaseV1
+import WeilWindowExhaustionV1
+import RHThreeCellClassV13
 
 /-!
 # One fixed *narrow* detecting packet
@@ -207,6 +209,48 @@ theorem narrowDetectingPacket_detects (rho : RiemannNontrivialZeroIndexV2) :
 
 /-- The existing pole criterion applies to the SAME narrow packet.
     The kernel-bound hypothesis refers to narrowDetectingPacket itself. -/
+/-- Transport the narrow multiplicative support to the *actual* repository
+    logarithmic window predicate, for the same fixed detecting packet. -/
+theorem narrowDetectingPacket_logWindow :
+    AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1
+      narrowDetectingPacket (1 / 32 : ℝ) := by
+  intro t ht
+  obtain ⟨x, hx, hxt⟩ :=
+    AEGIS.WeilWindowExhaustionV1.logLift_tsupport_subset_envelope_v1
+      narrowDetectingPacket ht
+  have hwindow := narrowDetectingPacket_support hx
+  have hxpos : 0 < x := narrowDetectingPacket.2.2.2 hx
+  have hlow : -(1 / 32 : ℝ) ≤ Real.log x := by
+    have h :=
+      (Real.log_le_log_iff (Real.exp_pos (-(1 / 32 : ℝ))) hxpos).2
+        hwindow.1
+    simpa using h
+  have hhigh : Real.log x ≤ (1 / 32 : ℝ) := by
+    have h :=
+      (Real.log_le_log_iff hxpos (Real.exp_pos (1 / 32 : ℝ))).2
+        hwindow.2
+    simpa using h
+  rw [← hxt]
+  exact ⟨hlow, hhigh⟩
+
+/-- An unconditional *actual arithmetic* sign for the fixed narrow detector,
+    reusing the existing certified 7/32 three-cell coercivity theorem. -/
+theorem narrowDetectingPacket_arithmetic_nonpositive :
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1 narrowDetectingPacket)).re ≤ 0 := by
+  have hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      narrowDetectingPacket (7 / 32 : ℝ) 0 := by
+    change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      narrowDetectingPacket (0 - (7 / 32 : ℝ)) (0 + (7 / 32 : ℝ))
+    intro t ht
+    have hn := narrowDetectingPacket_logWindow ht
+    exact ⟨by dsimp; linarith [hn.1], by dsimp; linarith [hn.2]⟩
+  have hc := AEGIS.RHThreeCellClassV13.cell_coercive
+    narrowDetectingPacket 0 hw narrowDetectingPacket_moments
+  have he := AEGIS.WeilDisjointEnergyV2.energy_nonnegative
+    narrowDetectingPacket.1
+  linarith
+
 theorem riemannHypothesis_of_narrow_kernel_bound
     (h : AEGIS.RHDetectingPacketCriterionV1.PacketKernelBoundV1
       narrowDetectingPacket) : RiemannHypothesis :=
@@ -230,5 +274,7 @@ end AEGIS.RHNarrowFixedDetectorV1
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_support
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_detects
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_logWindow
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_arithmetic_nonpositive
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_kernel_bound
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign

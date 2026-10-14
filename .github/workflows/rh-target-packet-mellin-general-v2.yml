@@ -141,7 +141,9 @@ jobs:
                    "WeilMellinInversionV1",
                    "RHRestrictedWeilBridgeV13",
                    "WeilZeroKernelHermitianV11",
-                   "WeilTwoPointPositivityV1"]
+                   "WeilTwoPointPositivityV1",
+                   "WeilWindowExhaustionV1",
+                   "RHThreeCellClassV13"]
           mods={p.stem:p for p in root.glob("*.lean")}
           for target in targets:
               if target not in mods:
@@ -214,6 +216,8 @@ jobs:
               "narrowDetectingPacket_moments",
               "narrowDetectingPacket_support",
               "narrowDetectingPacket_detects",
+              "narrowDetectingPacket_logWindow",
+              "narrowDetectingPacket_arithmetic_nonpositive",
               "riemannHypothesis_of_narrow_kernel_bound",
               "riemannHypothesis_of_narrow_four_phase_sign",
           )
