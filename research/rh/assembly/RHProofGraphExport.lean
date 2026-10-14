@@ -34,6 +34,8 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
     "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_coercive",
     "AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds",
     "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram",
     "AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_norm_le",

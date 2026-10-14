@@ -126,3 +126,11 @@ These new declarations require their own observed exact-head kernel replay.
 The remaining sign step is an upper bound on the actual mixed defect for
 a suitable such decomposition, or an actual cofinal Schur construction.
 The diagonal estimate and exact reconstruction do not assume that bound.
+
+## Q16.16 outward-rounded actual eleven-packet certificate
+
+`RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive` derives the actual Weil bound with margin `7339/8192` for every complex coefficient vector on eleven lattice translates of one fine moment-zero seed. The analytic costs are rounded upward to `656/65536` (gaps 1–8), `37356/65536` (gap 9), and `14826/65536` (gap 10). The diagonal is rounded downward to `116142/65536`; evaluating all eleven rows gives the sharper row budget `57430/65536`. The doubled one-sided budget `114860/65536` also retains margin `641/32768`, but is not used for the strongest theorem. All 55 mixed pairs remain included. The integer certificate uses trusted `decide`, not `native_decide`.
+
+The local integer certificate has been checked separately using the official pinned Lean frontend. The complete actual-form theorem is a candidate until exact-head CI compiles and audits it. These bounds apply to the stated eleven-translate domain; they do not assert the universal mixed-defect budget.
+
+The exact rational counterpart `actual_eleven_lattice_coercive` gives the source SOS margin `106083/118400` on the same genuine analytic family. It reuses all derived analytic diagonals and mixed terms, and evaluates the actual row maximum `1621/1850` through the existing `gram_re_le` theorem. This new stronger actual-form declaration also awaits exact-head replay.
