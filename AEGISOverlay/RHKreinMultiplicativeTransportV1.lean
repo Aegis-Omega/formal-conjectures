@@ -298,6 +298,57 @@ theorem every_moment_zero_packet_multiplicative_two_atom
   · exact unlift_kreinAtom_moments _ (hχ.mul hφ) hc1
   · exact unlift_kreinAtom_moments _ ((contDiff_const.sub hχ).mul hφ) hc2
 
+
+/-- The existing *arbitrary finite* Krein partition is transported to an actual
+finite family of smooth, positive-support Weil test packets, with BOTH moments
+zero and exact reconstruction. No positivity or mixed-term estimate is assumed.
+
+This is the source-level bridge from the universal log-coordinate partition
+to the finite actual-Weil Gram carrier. -/
+theorem every_moment_zero_packet_finite_actual_weil_partition
+    {ι : Type*} (s : Finset ι)
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (χ : ι → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x : ℝ, ∑ i ∈ s, χ i x = 1) :
+    ∃ gs : ι → WeilCompactSmoothGV1,
+      (∀ i ∈ s, WeilMomentConditionsV1 (gs i)) ∧
+      g.1 = (fun x => ∑ i ∈ s, (gs i).1 x) := by
+  classical
+  obtain ⟨L, hL, hwindow⟩ :=
+    AEGIS.WeilWindowExhaustionV1.logLift_has_finite_window_v1 g
+  have hs : tsupport (lift g.1) ⊆ Icc (-L) L := hwindow
+  obtain ⟨φ, hφ, hsφ, hsplit, _hlocal⟩ :=
+    actual_packet_finite_krein_decomposition s g hm (-L) L
+      (by linarith) hs χ hχ (by
+        intro x _
+        exact hpart x)
+  let ψ (i : ι) : ℝ → ℂ := fun y => χ i y * φ y
+  have hψ (i : ι) : ContDiff ℝ ∞ (ψ i) := (hχ i).mul hφ
+  have hψsupp (i : ι) :
+      tsupport (kreinAtom (ψ i)) ⊆ Icc (-L) L :=
+    (kreinAtom_support (ψ i)).trans
+      ((tsupport_factor_mul (χ i) φ).trans hsφ)
+  have hcφ : HasCompactSupport φ :=
+    isCompact_Icc.of_isClosed_subset (isClosed_tsupport _) hsφ
+  have hcψ (i : ι) : HasCompactSupport (ψ i) := hcφ.mul_left
+  let gs (i : ι) : WeilCompactSmoothGV1 :=
+    unliftWeilPacket (kreinAtom (ψ i))
+      (kreinAtom_contDiff (ψ i) (hψ i)) (-L) L (hψsupp i)
+  refine ⟨gs, ?_, ?_⟩
+  · intro i _
+    exact unliftWeilPacket_kreinAtom_moments
+      (ψ i) (hψ i) (-L) L (hψsupp i) (hcψ i)
+  · have hsplit' :
+        lift g.1 = (fun x => ∑ i ∈ s, kreinAtom (ψ i) x) := hsplit
+    calc
+      g.1 = unlift (lift g.1) := (unlift_lift g).symm
+      _ = unlift (fun x => ∑ i ∈ s, kreinAtom (ψ i) x) :=
+        congrArg unlift hsplit'
+      _ = (fun x => ∑ i ∈ s, unlift (kreinAtom (ψ i)) x) :=
+        unlift_finset_sum s (fun i => kreinAtom (ψ i))
+      _ = (fun x => ∑ i ∈ s, (gs i).1 x) := rfl
+
 end AEGIS.RHKreinMultiplicativeTransportV1
 
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.lift_unlift
@@ -308,3 +359,5 @@ end AEGIS.RHKreinMultiplicativeTransportV1
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.unlift_finset_sum
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.unlift_kreinAtom_moments
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_multiplicative_two_atom
+
+#print axioms AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition
