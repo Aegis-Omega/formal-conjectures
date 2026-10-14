@@ -1153,6 +1153,82 @@ theorem distinct_fine_far_actual_B_q16_of_separate_rational_budgets
             ring
 
 
+
+/-- A fully rational, floating-point-free upper certificate for the
+moment-zero Archimedean kernel when the exponential arguments are ≥5
+and ≥4 respectively. The proof uses the quadratic Taylor *lower*
+bound on the positive exponential, not numerical evaluation. -/
+theorem moment_zero_arch_rational_exp_bound
+    (x y : ℝ) (hx : 5 ≤ x) (hy : 4 ≤ y) :
+    (1 / 32 : ℝ) * (Real.exp (-x) / (1 - Real.exp (-y))) ≤
+      (120 / 65536 : ℝ) := by
+  have hx0 : 0 ≤ x := by linarith
+  have hy0 : 0 ≤ y := by linarith
+  have hxexp : (37 / 2 : ℝ) ≤ Real.exp x := by
+    have hq := Real.quadratic_le_exp_of_nonneg hx0
+    have hp : (37 / 2 : ℝ) ≤ 1 + x + x ^ 2 / 2 := by
+      nlinarith [sq_nonneg (x - 5)]
+    exact hp.trans hq
+  have hyexp : (13 : ℝ) ≤ Real.exp y := by
+    have hq := Real.quadratic_le_exp_of_nonneg hy0
+    have hp : (13 : ℝ) ≤ 1 + y + y ^ 2 / 2 := by
+      nlinarith [sq_nonneg (y - 4)]
+    exact hp.trans hq
+  have hxpair : Real.exp x * Real.exp (-x) = 1 := by
+    rw [← Real.exp_add]
+    simp
+  have hypair : Real.exp y * Real.exp (-y) = 1 := by
+    rw [← Real.exp_add]
+    simp
+  have hxupper : Real.exp (-x) ≤ (2 / 37 : ℝ) := by
+    have hmul := mul_le_mul_of_nonneg_right hxexp (Real.exp_nonneg (-x))
+    rw [hxpair] at hmul
+    nlinarith
+  have hyupper : Real.exp (-y) ≤ (1 / 13 : ℝ) := by
+    have hmul := mul_le_mul_of_nonneg_right hyexp (Real.exp_nonneg (-y))
+    rw [hypair] at hmul
+    nlinarith
+  have hden : 0 < 1 - Real.exp (-y) := by linarith
+  have hratio :
+      Real.exp (-x) / (1 - Real.exp (-y)) ≤ (13 / 222 : ℝ) := by
+    apply (div_le_iff₀ hden).mpr
+    linarith
+  have hmul := mul_le_mul_of_nonneg_left hratio
+    (by norm_num : (0 : ℝ) ≤ 1 / 32)
+  nlinarith
+
+/-- The full true distant mixed Weil form, with Archimedean contribution
+admitted at exactly 120/65536 for log-center gap at least 65/32.
+Any outstanding von Mangoldt estimate stays explicit. -/
+theorem distinct_fine_far_actual_B_q16_prime_plus_120
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a)
+    (hfar : (65 / 32 : ℝ) ≤ b - a)
+    (primeCost : ℕ)
+    (hprime : ‖WeilPrimeSumV1 (mixed p q)‖ ≤
+      ((primeCost : ℝ) / 65536) *
+        (energy p.1 + energy q.1)) :
+    ‖B p q‖ ≤ (((primeCost + 120 : ℕ) : ℝ) / 65536) *
+      (energy p.1 + energy q.1) := by
+  have hx : (5 : ℝ) ≤ 5 * ((b-a)-1/32) / 2 := by
+    linarith
+  have hy : (4 : ℝ) ≤ 2 * ((b-a)-1/32) := by
+    linarith
+  have hr := moment_zero_arch_rational_exp_bound
+    (5 * ((b-a)-1/32) / 2) (2 * ((b-a)-1/32)) hx hy
+  have hdecay :
+      (1 / 32 : ℝ) *
+        (Real.exp (-5 * ((b-a)-1/32) / 2) /
+          (1 - Real.exp (-2 * ((b-a)-1/32)))) ≤
+            (120 / 65536 : ℝ) := by
+    convert hr using 1 <;> congr 2 <;> ring
+  exact distinct_fine_far_actual_B_q16_of_separate_rational_budgets
+    p q a b hp hq hm hgap primeCost 120 hprime hdecay
+
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1191,3 +1267,5 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_prime_decay_budget
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_separate_rational_budgets
+#print axioms AEGIS.RHActualMixedDefectV1.moment_zero_arch_rational_exp_bound
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
