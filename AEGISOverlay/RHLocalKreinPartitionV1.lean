@@ -16,6 +16,7 @@ limitations under the License.
 
 import RHKreinFactorV13
 import WeilCriterionCompactSmoothV1
+import WeilWindowExhaustionV1
 
 /-!
 # Exact local decomposition through the Krein factor
@@ -229,6 +230,21 @@ theorem actual_packet_has_compact_krein_factor (g : WeilCompactSmoothGV1)
     actual_packet_has_supported_krein_factor g hm a b hab hs
   exact ⟨φ, hφ, isCompact_Icc.of_isClosed_subset (isClosed_tsupport _) hsφ, heq⟩
 
+/-- Every admissible moment-zero packet has an actual compact Krein
+factor, without requiring the caller to supply a support interval.
+The interval is obtained from the existing log-window exhaustion theorem. -/
+theorem every_moment_zero_packet_has_compact_krein_factor
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g) :
+    ∃ φ : ℝ → ℂ,
+      ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
+        lift g.1 = kreinAtom φ := by
+  obtain ⟨L, hL, hwindow⟩ :=
+    AEGIS.WeilWindowExhaustionV1.logLift_has_finite_window_v1 g
+  change tsupport (lift g.1) ⊆ Icc (-L) L at hwindow
+  exact actual_packet_has_compact_krein_factor
+    g hm (-L) L (by linarith) hwindow
+
 /-- Construct a genuine *finite* family of compact Krein atoms from an
     arbitrary moment-zero Weil packet and a smooth interval partition.
     All component moments vanish, and the original log-lift is recovered
@@ -281,6 +297,7 @@ theorem actual_packet_finite_krein_decomposition {ι : Type*}
 #print axioms AEGIS.RHLocalKreinPartitionV1.kreinAtom_finite_partition
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_has_compact_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_has_supported_krein_factor
+#print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_has_compact_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_finite_krein_decomposition
 
 end AEGIS.RHLocalKreinPartitionV1
