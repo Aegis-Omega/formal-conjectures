@@ -179,6 +179,40 @@ jobs:
           python3 -m py_compile research/rh/assembly/export_evidence.py
           bash -n research/rh/assembly/RH_EXACT_HEAD_REPLAY.sh
 
+      - name: Stage exact V14 window sources from PR721 manifest
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          base = pathlib.Path("research/rh/aegis_pr721_fb983fd")
+          manifest = json.loads((base / "source_manifest.json").read_text())
+          entries = manifest if isinstance(manifest, list) else (
+              manifest.get("sources") or manifest.get("modules") or manifest.get("entries"))
+          if not isinstance(entries, list):
+              raise RuntimeError("UNKNOWN_PR721_MANIFEST_SCHEMA")
+          expected = {
+              "RHMomentNumericsV14": "98db31d2bb9305bdf4ab4062ed982304e1a8005e",
+              "RHWindowNineOver64GlobalizationV14": "a9be154062cf131dd0c07cf6405babffc6b2290c",
+          }
+          for name, sha in expected.items():
+              matches = [row for row in entries if row.get("module") == name]
+              if len(matches) != 1 or matches[0].get("sha") != sha:
+                  raise RuntimeError("ORIGINAL_SOURCE_MANIFEST_MISMATCH " + name)
+              src = pathlib.Path(matches[0]["archive"])
+              if not src.is_file():
+                  raise RuntimeError("MISSING_ARCHIVED_SOURCE " + name)
+              actual = subprocess.check_output(["git", "hash-object", str(src)],
+                  text=True).strip()
+              if actual != sha:
+                  raise RuntimeError("SOURCE_BLOB_DRIFT " + name)
+              dst = pathlib.Path(name + ".lean")
+              if dst.exists() and dst.read_bytes() != src.read_bytes():
+                  raise RuntimeError("MODULE_IDENTITY_COLLISION " + name)
+              dst.write_bytes(src.read_bytes())
+              print("EXACT_ORIGINAL_V14_SOURCE", name, sha)
+          PY
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -313,6 +347,12 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualMixedDefectV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            research/rh/aegis_pr721_fb983fd/lean/RHMomentNumericsV14.lean.src \
+            evidence-cofinal/compile-RHMomentNumericsV14.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            research/rh/aegis_pr721_fb983fd/lean/RHWindowNineOver64GlobalizationV14.lean.src \
+            evidence-cofinal/compile-RHWindowNineOver64GlobalizationV14.log
           for theorem in quantitative_lower_of_diagonal every_packet_actual_mixed_defect_bound actual_zero_sign_of_paid_mixed_defect; do
             grep -F "AEGIS.RHActualMixedDefectV1.$theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
