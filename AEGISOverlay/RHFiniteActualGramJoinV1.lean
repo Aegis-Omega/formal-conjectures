@@ -41,6 +41,7 @@ noncomputable section
 
 namespace AEGIS.RHFiniteActualGramJoinV1
 
+open AEGIS.RHKreinFactorV13
 open AEGIS.RHLocalKreinPartitionV1
 open AEGIS.RHKreinMultiplicativeTransportV1
 open AEGIS.RHGramExpansionV13
