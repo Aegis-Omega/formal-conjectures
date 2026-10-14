@@ -334,6 +334,67 @@ theorem actual_nine_over_64_mixed_re_abs
   apply abs_le.mpr
   constructor <;> linarith
 
+
+/-- Actual COMPLEX mixed coefficient at half-width 9/64.
+The caller supplies moment/centered-window witnesses for the four actual
+polarized sums u+v, u-v, u+i v and u-i v. None is an assumption about
+B itself; no universal cofinal row bound is inferred from this theorem. -/
+theorem actual_nine_over_64_mixed_norm_le
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hmp : WeilMomentConditionsV1 (addPacket u v))
+    (hwp : HalfWidthAt (addPacket u v) (9 / 64) center)
+    (hmm : WeilMomentConditionsV1
+      (addPacket u (scalePacket (-1 : ℂ) v)))
+    (hwm : HalfWidthAt
+      (addPacket u (scalePacket (-1 : ℂ) v)) (9 / 64) center)
+    (hmi : WeilMomentConditionsV1
+      (addPacket u (scalePacket Complex.I v)))
+    (hwi : HalfWidthAt
+      (addPacket u (scalePacket Complex.I v)) (9 / 64) center)
+    (hmni : WeilMomentConditionsV1
+      (addPacket u (scalePacket (-Complex.I) v)))
+    (hwni : HalfWidthAt
+      (addPacket u (scalePacket (-Complex.I) v)) (9 / 64) center) :
+    ‖B u v‖ ≤ -(B u u).re - (B v v).re := by
+  have hreal :=
+    actual_nine_over_64_mixed_re_abs u v center hmp hwp hmm hwm
+  have hiplus :=
+    actual_nine_over_64_mixed_re_upper
+      u (scalePacket Complex.I v) center hmi hwi
+  have himinus :=
+    actual_nine_over_64_mixed_re_upper
+      u (scalePacket (-Complex.I) v) center hmni hwni
+  have hcrossi :
+      (B u (scalePacket Complex.I v)).re = (B u v).im := by
+    rw [B_scale_right]
+    simp [Complex.mul_re]
+  have hcrossni :
+      (B u (scalePacket (-Complex.I) v)).re = -(B u v).im := by
+    rw [B_scale_right]
+    simp [Complex.mul_re]
+  have hdiagi :
+      (B (scalePacket Complex.I v) (scalePacket Complex.I v)).re =
+        (B v v).re := by
+    rw [B_scale_left, B_scale_right]
+    simp [mul_assoc]
+  have hdiagn :
+      (B (scalePacket (-Complex.I) v)
+        (scalePacket (-Complex.I) v)).re = (B v v).re := by
+    rw [B_scale_left, B_scale_right]
+    simp [mul_assoc]
+  rw [hcrossi, hdiagi] at hiplus
+  rw [hcrossni, hdiagn] at himinus
+  have hei : 0 ≤ energy (addPacket u (scalePacket Complex.I v)).1 :=
+    energy_nonnegative _
+  have heni : 0 ≤ energy (addPacket u (scalePacket (-Complex.I) v)).1 :=
+    energy_nonnegative _
+  have himag :
+      |(B u v).im| ≤ (-(B u u).re - (B v v).re) / 2 := by
+    apply abs_le.mpr
+    constructor <;> linarith
+  have htri := Complex.norm_le_abs_re_add_abs_im (B u v)
+  linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -346,3 +407,4 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_norm_le_of_common_narrow_window
 #print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_upper
 #print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_abs
+#print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_norm_le
