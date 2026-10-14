@@ -998,6 +998,191 @@ theorem separated_arch_decay_bound
       simp [Measure.real, Real.volume_Icc, hw, R]
       <;> ring
 
+
+/-! ## Any strictly positive separation: exact fine-width Arch cancellation
+
+The original distant estimate required log 2 only to establish a
+positive support gap. Rank-one moment cancellation itself needs merely
+a strictly positive gap. Keeping exact 1/256 packet half-widths gives
+correlation width 1/64, rather than padded width 1/16.
+The von Mangoldt contribution is NOT discarded. -/
+
+/-- Same rank-one-cancelled Arch integral proof without a log 2 threshold,
+with correlation-support width 1/64. -/
+theorem separated_arch_decay_any_positive_gap
+    (p q : WeilCompactSmoothGV1) (plo phi qlo qhi E : ℝ)
+    (hp : LogSupportIn p plo phi) (hq : LogSupportIn q qlo qhi)
+    (δ : ℝ) (hδ : 0 < δ) (hδgap : δ ≤ qlo - phi)
+    (hwidth : (qhi - plo) - (qlo - phi) = (1 / 64 : ℝ))
+    (hm : WeilMomentConditionsV1 p) (hE : 0 ≤ E)
+    (hR : ∀ u : ℝ, ‖logCrossV28 p q u‖ ≤ E) :
+    ‖WeilArchimedeanIntegralV1 (mixed p q)‖ ≤
+      (1 / 64 : ℝ) *
+        (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
+  let R : ℝ := Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))
+  have hRnonneg : 0 ≤ R := by
+    dsimp [R]
+    exact (div_pos (Real.exp_pos _) (sub_pos.mpr
+      (Real.exp_lt_one_iff.mpr (by linarith)))).le
+  let lo := qlo - phi
+  let hi := qhi - plo
+  let K : ℝ → ℝ := fun u => Real.exp (-u / 2) / (1 - Real.exp (-2 * u))
+  let F : ℝ → ℂ := fun u => (K u : ℂ) * logCrossV28 p q (-u)
+  let M : ℝ → ℂ := fun u => (Real.exp (-u / 2) : ℂ) * logCrossV28 p q (-u)
+  have hlo : 0 < lo := by
+    dsimp [lo]
+    exact lt_of_lt_of_le hδ hδgap
+  have hzero (u : ℝ) (hu : u ∉ Icc lo hi) : logCrossV28 p q (-u) = 0 := by
+    apply logCross_zero_outside p q plo phi qlo qhi (-u) hp hq
+    by_cases hlow : u < lo
+    · right
+      dsimp [lo] at hlow
+      linarith
+    · have hhigh : hi < u := lt_of_not_ge (fun h => hu ⟨le_of_not_gt hlow, h⟩)
+      left
+      dsimp [hi] at hhigh
+      linarith
+  have hFfull : (∫ u in Icc lo hi, F u) = ∫ u, F u :=
+    setIntegral_eq_integral_of_forall_compl_eq_zero (fun u hu => by simp [F, hzero u hu])
+  have hFpos : (∫ u in Ioi (0 : ℝ), F u) = ∫ u, F u := by
+    apply setIntegral_eq_integral_of_forall_compl_eq_zero
+    intro u hu
+    have hnot : u ∉ Icc lo hi := by
+      intro h
+      exact hu (lt_of_lt_of_le hlo h.1)
+    simp [F, hzero u hnot]
+  have harch : WeilArchimedeanIntegralV1 (mixed p q) = ∫ u in Icc lo hi, F u := by
+    rw [separated_arch_eq_log_kernel p q plo phi qlo qhi hp hq (by dsimp [lo] at hlo; linarith)]
+    exact hFpos.trans hFfull.symm
+  have hMfull : (∫ u, M u) = 0 := by
+    have ht := integral_neg_eq_self
+      (fun u : ℝ => (Real.exp (u / 2) : ℂ) * logCrossV28 p q u) volume
+    exact ht.trans (logCross_plus_moment_zero p q plo phi qlo qhi hp hq hm)
+  have hMzero : (∫ u in Icc lo hi, M u) = 0 := by
+    rw [setIntegral_eq_integral_of_forall_compl_eq_zero (f := M) (s := Icc lo hi)
+      (fun u hu => by simp [M, hzero u hu])]
+    exact hMfull
+  have hMc : Continuous M := by
+    dsimp [M]
+    exact (by fun_prop : Continuous (fun u : ℝ => (Real.exp (-u / 2) : ℂ))).mul
+      ((logCross_continuous p q).comp continuous_neg)
+  have hKc : ContinuousOn K (Icc lo hi) := by
+    apply ContinuousOn.div (by fun_prop) (by fun_prop)
+    intro u hu
+    have hup : 0 < u := lt_of_lt_of_le hlo hu.1
+    exact ne_of_gt (sub_pos.mpr (Real.exp_lt_one_iff.mpr (by linarith)))
+  have hFc : ContinuousOn F (Icc lo hi) :=
+    (Complex.continuous_ofReal.comp_continuousOn hKc).mul
+      (((logCross_continuous p q).comp continuous_neg).continuousOn)
+  have hcancel : (∫ u in Icc lo hi, F u) =
+      ∫ u in Icc lo hi, F u - M u := by
+    rw [integral_sub hFc.integrableOn_Icc hMc.integrableOn_Icc,
+      hMzero, sub_zero]
+  have hpoint (u : ℝ) (hu : u ∈ Icc lo hi) :
+      ‖F u - M u‖ ≤ R * E := by
+    have huPos : 0 < u := lt_of_lt_of_le hlo hu.1
+    have hden : 0 < 1 - Real.exp (-2 * u) := by
+      apply sub_pos.mpr
+      exact Real.exp_lt_one_iff.mpr (by linarith)
+    have hku : |K u - Real.exp (-u / 2)| ≤ R := by
+      change |Real.exp (-u / 2) / (1 - Real.exp (-2 * u)) -
+        Real.exp (-u / 2)| ≤ R
+      rw [AEGIS.WeilThreeBlockCrossAssemblyV30.arch_kernel_sub_rank_one u huPos]
+      rw [abs_of_nonneg (div_nonneg (Real.exp_pos _).le hden.le)]
+      exact AEGIS.WeilThreeBlockCrossAssemblyV30.arch_remainder_le_at_gap
+        δ u hδ (hδgap.trans hu.1)
+    have heq : F u - M u =
+        (((K u - Real.exp (-u / 2)) : ℝ) : ℂ) * logCrossV28 p q (-u) := by
+      dsimp [F, M]
+      push_cast
+      ring
+    rw [heq, norm_mul, Complex.norm_real, Real.norm_eq_abs]
+    exact mul_le_mul hku (hR (-u)) (norm_nonneg _) hRnonneg
+  rw [harch, hcancel]
+  calc
+    ‖∫ u in Icc lo hi, F u - M u‖ ≤
+        R * E * (volume.restrict (Icc lo hi)).real univ := by
+      apply norm_integral_le_of_norm_le_const
+      filter_upwards [self_mem_ae_restrict measurableSet_Icc] with u hu
+      exact hpoint u hu
+    _ = (1 / 64 : ℝ) *
+      (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
+      have hw : hi - lo = (1 / 64 : ℝ) := by
+        simpa [lo, hi] using hwidth
+      simp [Measure.real, Real.volume_Icc, hw, R]
+      <;> ring
+
+
+/-- For any two distinct moment-zero fine packets with disjoint ordered
+log supports, the actual Arch integral has a quantitative residual
+that decays with their *exact* positive support gap. -/
+theorem distinct_fine_arch_decay_any_positive_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hsep : (1 / 128 : ℝ) < b - a) :
+    ‖WeilArchimedeanIntegralV1 (mixed p q)‖ ≤
+      (1 / 128 : ℝ) *
+        (Real.exp (-5 * ((b - a) - 1 / 128) / 2) /
+          (1 - Real.exp (-2 * ((b - a) - 1 / 128)))) *
+            (energy p.1 + energy q.1) := by
+  let δ : ℝ := (b - a) - 1 / 128
+  let E : ℝ := (energy p.1 + energy q.1) / 2
+  have hδ : 0 < δ := by dsimp [δ]; linarith
+  have hE : 0 ≤ E := by
+    dsimp [E]
+    have hp0 := energy_nonnegative p.1
+    have hq0 := energy_nonnegative q.1
+    positivity
+  have hlogp : LogSupportIn p (a - 1 / 256) (a + 1 / 256) := hp
+  have hlogq : LogSupportIn q (b - 1 / 256) (b + 1 / 256) := hq
+  have harch := separated_arch_decay_any_positive_gap
+    p q (a - 1 / 256) (a + 1 / 256)
+      (b - 1 / 256) (b + 1 / 256) E
+      hlogp hlogq δ hδ
+      (by dsimp [δ]; ring)
+      (by ring)
+      hm hE
+      (fun u => distinct_logCross_norm_le_mean_energy p q u)
+  dsimp [δ, E] at harch ⊢
+  convert harch using 1 <;> ring
+
+/-- True separated mixed Weil coefficient at every positive support gap.
+The prime sum remains explicit, while the moment-zero Arch term carries
+its exact fine-window width and exponential decay. -/
+theorem distinct_fine_actual_B_any_positive_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hsep : (1 / 128 : ℝ) < b - a) :
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+      (1 / 128 : ℝ) *
+        (Real.exp (-5 * ((b - a) - 1 / 128) / 2) /
+          (1 - Real.exp (-2 * ((b - a) - 1 / 128)))) *
+            (energy p.1 + energy q.1) := by
+  have hlog : logCrossV28 p q 0 = 0 := by
+    apply logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (b - 1 / 256) (b + 1 / 256) 0 hp hq
+    right
+    linarith
+  have hcenter : mixed p q 1 = 0 := by
+    have h := logCross_eq_mixed_v28 p q 0
+    simp only [zero_div, Real.exp_zero, Complex.ofReal_one, one_mul] at h
+    exact h.symm.trans hlog
+  have harch :=
+    distinct_fine_arch_decay_any_positive_gap p q a b hp hq hm hsep
+  have heq : B p q =
+      WeilPrimeSumV1 (mixed p q) +
+        WeilArchimedeanIntegralV1 (mixed p q) := by
+    unfold B WeilExplicitRightSideV1
+    rw [hcenter]
+    ring
+  rw [heq]
+  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+
 /-- Actual distant ARCH bound after using the zero Mellin moment,
 for different fine packets supported near centers a and b. The
 right-hand side decreases exponentially with b-a. -/
@@ -1562,6 +1747,9 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.separated_arch_decay_bound
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_moment_decay
+#print axioms AEGIS.RHActualMixedDefectV1.separated_arch_decay_any_positive_gap
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_arch_decay_any_positive_gap
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_any_positive_gap
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_prime_decay_budget
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_of_separate_rational_budgets
