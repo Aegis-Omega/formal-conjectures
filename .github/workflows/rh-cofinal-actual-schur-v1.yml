@@ -158,6 +158,13 @@ jobs:
           test "$(tar -tzf "$archive" | wc -l)" -eq 4
           tar -xzf "$archive" -C .
 
+      - name: Validate assembly evidence scripts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile research/rh/assembly/export_evidence.py
+          bash -n research/rh/assembly/RH_EXACT_HEAD_REPLAY.sh
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -292,6 +299,16 @@ jobs:
             grep -F "AEGIS.RHFeshbachScaledWeilV1.$thm" evidence-cofinal/compile-RHFeshbachScaledWeilV1.log
           done
           echo "SCALED_WEIL_JOIN=KERNEL_PASS; RH_UNCONDITIONAL=NOT_CLAIMED"
+
+      - name: Export actual proof dependencies and observed closure test
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-cofinal/assembly
+          lake env lean research/rh/assembly/RHProofGraphExport.lean \
+            2>&1 | tee evidence-cofinal/assembly/graph-export.log
+          ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
+          python3 research/rh/assembly/export_evidence.py
 
       - name: Record exact-head receipt
         if: always()
