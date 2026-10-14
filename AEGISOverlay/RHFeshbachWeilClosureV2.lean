@@ -17,7 +17,7 @@ limitations under the License.
 import RHFeshbachCoreV1
 import FormalConjecturesUtil.FixedWindowLimitBridge
 import WeilRHImpliesFinalSignV13
-import RHFinalClosureV1
+import RHFinalClosureSpineV1
 import WeilWindowExhaustionV1
 import WeilAutocorrelationExplicitFormulaV10
 import RHGramExpansionV13
