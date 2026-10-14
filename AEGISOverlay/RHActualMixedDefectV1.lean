@@ -1825,6 +1825,74 @@ theorem distinct_fine_actual_B_of_integer_log_gap
   rw [hzero] at hbound
   simpa using hbound
 
+
+/-- The first explicit integer-log-free middle interval, between the
+two neighboring prime logarithms log 2 and log 3. No universally
+quantified exclusion certificate is required from the caller. -/
+theorem distinct_fine_prime_zero_between_log_two_three
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hlow : Real.log 2 + (1 / 128 : ℝ) < b - a)
+    (hhigh : b - a < Real.log 3 - (1 / 128 : ℝ)) :
+    WeilPrimeSumV1 (mixed p q) = 0 := by
+  have hlog2 : 0 < Real.log (2 : ℝ) :=
+    Real.log_pos (by norm_num : (1 : ℝ) < 2)
+  apply distinct_fine_actual_prime_zero_of_integer_log_gap
+    p q a b hp hq (by linarith)
+  intro m hm
+  by_cases hm1 : m = 1
+  · subst m
+    simp only [Nat.cast_one, Real.log_one, zero_sub, abs_neg]
+    linarith
+  by_cases hm2 : m = 2
+  · subst m
+    have hneg : Real.log (2 : ℝ) - (b - a) < 0 := by linarith
+    rw [abs_of_neg hneg]
+    linarith
+  · have hm3 : 3 ≤ m := by omega
+    have hreal : (3 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm3
+    have hlog3 : Real.log (3 : ℝ) ≤ Real.log (m : ℝ) :=
+      Real.log_le_log (by norm_num : (0 : ℝ) < 3) hreal
+    have hpos : 0 ≤ Real.log (m : ℝ) - (b - a) := by linarith
+    rw [abs_of_nonneg hpos]
+    linarith
+
+/-- Genuine full Weil mixed B, with exact moment-zero Arch decay and
+exactly zero von Mangoldt sum, for every fine pair whose centers lie
+strictly between the log-2 and log-3 sampling windows. -/
+theorem distinct_fine_actual_B_between_log_two_three
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hlow : Real.log 2 + (1 / 128 : ℝ) < b - a)
+    (hhigh : b - a < Real.log 3 - (1 / 128 : ℝ)) :
+    ‖B p q‖ ≤
+      (1 / 128 : ℝ) *
+        (Real.exp (-5 * ((b - a) - 1 / 128) / 2) /
+          (1 - Real.exp (-2 * ((b - a) - 1 / 128)))) *
+          (energy p.1 + energy q.1) := by
+  apply distinct_fine_actual_B_of_integer_log_gap p q a b hp hq hm
+  · linarith [Real.log_pos (by norm_num : (1 : ℝ) < 2)]
+  · intro m hm
+    by_cases hm1 : m = 1
+    · subst m
+      simp only [Nat.cast_one, Real.log_one, zero_sub, abs_neg]
+      linarith [Real.log_pos (by norm_num : (1 : ℝ) < 2)]
+    by_cases hm2 : m = 2
+    · subst m
+      have hneg : Real.log (2 : ℝ) - (b - a) < 0 := by linarith
+      rw [abs_of_neg hneg]
+      linarith
+    · have hm3 : 3 ≤ m := by omega
+      have hreal : (3 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm3
+      have hlog3 : Real.log (3 : ℝ) ≤ Real.log (m : ℝ) :=
+        Real.log_le_log (by norm_num : (0 : ℝ) < 3) hreal
+      have hpos : 0 ≤ Real.log (m : ℝ) - (b - a) := by linarith
+      rw [abs_of_nonneg hpos]
+      linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1882,3 +1950,5 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_samples_vanish_of_integer_log_gap
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_prime_zero_of_integer_log_gap
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_of_integer_log_gap
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_between_log_two_three
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_between_log_two_three
