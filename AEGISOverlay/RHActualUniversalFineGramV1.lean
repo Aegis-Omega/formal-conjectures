@@ -420,6 +420,53 @@ theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
   exact actual_fine_gram_q16_coercive_of_pair_certificate
     gs cost hcostsym hd hcross hcostrow
 
+/-! ## Dimension-free Q16.16 bound on the summed moment-zero Arch envelope
+
+Do not round the Arch component separately for each off-diagonal entry.
+The actual remainder-to-geometric majorization has to be established
+independently, and the true prime term is not controlled here.
+-/
+
+/-- The symmetric geometric envelope from a moment-zero separated Arch
+kernel has a rational row bound uniform in the number of packets.
+This discharges the arithmetic FINITE ROW part of the Arch tail budget,
+without assuming a finite bound on n. -/
+theorem geometric_arch_row_q16 {n : ℕ} (i : Fin (n + 1)) :
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) ≤
+      (254 / 65536 : ℝ) := by
+  have hgeom : (∑ k ∈ Finset.Icc 1 n, ((2 / 37 : ℝ) ^ k)) ≤
+      (2 / 35 : ℝ) := by
+    have hIcc :
+        (Finset.Icc 1 n : Finset ℕ) = Finset.Ico 1 (n + 1) := by
+      ext k
+      simp only [Finset.mem_Icc, Finset.mem_Ico]
+      omega
+    rw [hIcc]
+    have h := geom_sum_Ico_le_of_lt_one
+      (m := 1) (n := n + 1) (x := (2 / 37 : ℝ))
+      (by norm_num) (by norm_num)
+    norm_num at h ⊢
+    exact h
+  have hcost : (∑ k ∈ Finset.Icc 1 n,
+        (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ k)) ≤
+        (13 / 384 : ℝ) * (2 / 35 : ℝ) := by
+    have h := mul_le_mul_of_nonneg_left hgeom
+      (by norm_num : (0 : ℝ) ≤ 13 / 384)
+    simpa only [Finset.mul_sum] using h
+  have hrow := AEGIS.RHGramExpansionV13.rowSum_le
+    (n := n) (c := fun k => (13 / 384 : ℝ) *
+      ((2 / 37 : ℝ) ^ k))
+    (by intro k; positivity) i
+  have hbound :
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) ≤
+          2 * ((13 / 384 : ℝ) * (2 / 35 : ℝ)) := by
+    exact hrow.trans (mul_le_mul_of_nonneg_left hcost
+      (by norm_num : (0 : ℝ) ≤ 2))
+  nlinarith
+
+
 end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
@@ -433,3 +480,5 @@ end AEGIS.RHActualUniversalFineGramV1
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_q16_coercive_of_pair_certificate
 #print axioms AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_universal_actual_q16_pair_certificates
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_far_fine_gram_coercive_of_rational_prime_row_budget
+
+#print axioms AEGIS.RHActualUniversalFineGramV1.geometric_arch_row_q16
