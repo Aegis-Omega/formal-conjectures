@@ -274,6 +274,44 @@ theorem every_moment_zero_packet_two_atom_partition
     exact (kreinAtom_partition_two φ χ hφ hχ).symm
   · exact kreinAtom_partition_moments φ χ hφ hχ hc
 
+/-- No externally supplied log window is needed for a finite smooth
+partition of an arbitrary moment-zero packet. Every localized Krein atom
+retains both moments and compact support; all cutoff commutators cancel
+in the exact finite reconstruction. This theorem asserts no Gram sign. -/
+theorem every_moment_zero_packet_finite_krein_partition
+    {ι : Type*} (s : Finset ι)
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (χ : ι → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x : ℝ, ∑ i ∈ s, χ i x = 1) :
+    ∃ φ : ℝ → ℂ,
+      ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
+      lift g.1 = (fun x => ∑ i ∈ s,
+        kreinAtom (fun y => χ i y * φ y) x) ∧
+      (∀ i ∈ s,
+        HasCompactSupport (fun y => χ i y * φ y) ∧
+        tsupport (kreinAtom (fun y => χ i y * φ y)) ⊆
+          tsupport (fun y => χ i y * φ y) ∧
+        (∫ x : ℝ, (Real.exp (-x / 2) : ℂ) *
+          kreinAtom (fun y => χ i y * φ y) x) = 0 ∧
+        (∫ x : ℝ, (Real.exp (x / 2) : ℂ) *
+          kreinAtom (fun y => χ i y * φ y) x) = 0) := by
+  classical
+  obtain ⟨φ, hφ, hcφ, heq⟩ :=
+    every_moment_zero_packet_has_compact_krein_factor g hm
+  have hpartφ : ∀ x, φ x ≠ 0 → ∑ i ∈ s, χ i x = 1 := by
+    intro x _
+    exact hpart x
+  refine ⟨φ, hφ, hcφ, ?_, ?_⟩
+  · rw [heq]
+    exact kreinAtom_finite_partition s φ χ hφ hχ hpartφ
+  · intro i _
+    have hci : HasCompactSupport (fun y => χ i y * φ y) :=
+      hcφ.mul_left
+    obtain ⟨hminus, hplus⟩ :=
+      kreinAtom_moments _ ((hχ i).mul hφ) hci
+    exact ⟨hci, kreinAtom_support _, hminus, hplus⟩
+
 /-- Construct a genuine *finite* family of compact Krein atoms from an
     arbitrary moment-zero Weil packet and a smooth interval partition.
     All component moments vanish, and the original log-lift is recovered
@@ -328,6 +366,7 @@ theorem actual_packet_finite_krein_decomposition {ι : Type*}
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_has_supported_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_has_compact_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_two_atom_partition
+#print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_finite_krein_partition
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_finite_krein_decomposition
 
 end AEGIS.RHLocalKreinPartitionV1
