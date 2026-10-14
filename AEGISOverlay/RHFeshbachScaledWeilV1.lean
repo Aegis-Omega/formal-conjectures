@@ -29,7 +29,15 @@ namespace AEGIS.RHFeshbachScaledWeilV1
 
 structure PacketScaledSchurFamily (g : WeilCompactSmoothGV1) where
   N : ℕ → ℕ
-  a re_b q nv nw β c μ normSq : ℕ → ℝ
+  a : ℕ → ℝ
+  re_b : ℕ → ℝ
+  q : ℕ → ℝ
+  nv : ℕ → ℝ
+  nw : ℕ → ℝ
+  β : ℕ → ℝ
+  c : ℕ → ℝ
+  μ : ℕ → ℝ
+  normSq : ℕ → ℝ
   cofinal : Tendsto N atTop atTop
   reproducesZeroQuadratic : Tendsto
     (fun j => a j + 2 * re_b j + q j) atTop
