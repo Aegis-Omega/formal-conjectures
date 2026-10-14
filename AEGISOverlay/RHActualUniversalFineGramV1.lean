@@ -344,6 +344,84 @@ theorem riemannHypothesis_of_universal_actual_q16_pair_certificates
     (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
   linarith
 
+
+/-- All actual distant off-diagonal entries of an arbitrary finite fine
+moment-zero packet family can be certified by prime-side integer Q16.16
+costs plus a fixed rational Archimedean allowance of 120 units per pair.
+
+The ordered centers are separated by 65/32 in log coordinates.
+The *only* analytic mixed estimate required from the caller is on the
+genuine von Mangoldt prime sum. In particular, no actual-Weil \`hcross\`
+is assumed and all off-diagonal entries are retained.
+
+This is a finite separated-family theorem. It does not assert that every
+Weil packet has a reconstruction satisfying its separation or prime-budget
+hypotheses. -/
+theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      (65 / 32 : ℝ) ≤ center j - center i)
+    (primeCost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (hsym : ∀ i j, primeCost i j = primeCost j i)
+    (hprime : ∀ i j : Fin (n + 1), i < j →
+      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
+        ((primeCost i j : ℝ) / 65536) *
+          (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+        primeCost i j + 120) ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+        -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let cost : Fin (n + 1) → Fin (n + 1) → ℕ :=
+    fun i j => primeCost i j + 120
+  have hcostsym : ∀ i j, cost i j = cost j i := by
+    intro i j
+    dsimp [cost]
+    rw [hsym i j]
+  have hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re := by
+    intro i
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hw i)
+  have hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤
+        actualQ16PairCost cost i j *
+          (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    rcases lt_or_gt_of_ne hij with hijlt | hjilt
+    · have hgap : Real.log 2 ≤ center j - center i := by
+        have hs := hsep i j hijlt
+        linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
+      have h := AEGIS.RHActualMixedDefectV1.
+        distinct_fine_far_actual_B_q16_prime_plus_120
+        (gs i) (gs j) (center i) (center j)
+        (hw i) (hw j) (hm i) hgap
+        (hsep i j hijlt) (primeCost i j) (hprime i j hijlt)
+      simpa only [actualQ16PairCost, cost] using h
+    · have hgap : Real.log 2 ≤ center i - center j := by
+        have hs := hsep j i hjilt
+        linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
+      have h := AEGIS.RHActualMixedDefectV1.
+        distinct_fine_far_actual_B_q16_prime_plus_120
+        (gs j) (gs i) (center j) (center i)
+        (hw j) (hw i) (hm j) hgap
+        (hsep j i hjilt) (primeCost j i) (hprime j i hjilt)
+      rw [B_hermitian, norm_conj]
+      simpa only [actualQ16PairCost, cost, hsym j i,
+        add_comm (energy (gs j).1) (energy (gs i).1)] using h
+  have hcostrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      cost i j) ≤ 57430 := by
+    intro i
+    exact hrow i
+  exact actual_fine_gram_q16_coercive_of_pair_certificate
+    gs cost hcostsym hd hcross hcostrow
+
 end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
@@ -356,3 +434,4 @@ end AEGIS.RHActualUniversalFineGramV1
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_mixed_defect_le_of_q16_matrix
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_q16_coercive_of_pair_certificate
 #print axioms AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_universal_actual_q16_pair_certificates
+#print axioms AEGIS.RHActualUniversalFineGramV1.actual_far_fine_gram_coercive_of_rational_prime_row_budget
