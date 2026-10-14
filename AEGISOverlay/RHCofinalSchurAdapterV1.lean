@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import RHCofinalActualTerminalV1
+import RHGramExpansionV13
 
 /-!
 # Existing Feshbach/Schur families -> archived cofinal moment-decay terminal
@@ -91,8 +92,76 @@ theorem riemannHypothesis_of_schur_norm_families
   riemannHypothesis_of_cofinal_lower_certificates
     (every_packet_certificate_of_schur_norm_families h)
 
+/-- The exact canonical zeta-zero quadratic of an actual finite packet
+sum is the negative real part of its *full* mixed Weil Gram matrix.
+This is the literal explicit formula, not a surrogate PSD model. -/
+theorem actual_zero_quadratic_eq_neg_finite_gram
+    {n : ℕ}
+    (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 (AEGIS.RHGramExpansionV13.packetSum z gs)) :
+    (∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1
+        (WeilAutocorrelationV1 (AEGIS.RHGramExpansionV13.packetSum z gs))
+        rho).re =
+      -(∑ i, ∑ j,
+        z i * star (z j) * AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)).re := by
+  have hEF :=
+    AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_explicit_formula_v10
+      (AEGIS.RHGramExpansionV13.packetSum z gs) hm
+  change
+    AEGIS.WeilMixedAlgebraV2.B
+      (AEGIS.RHGramExpansionV13.packetSum z gs)
+      (AEGIS.RHGramExpansionV13.packetSum z gs) =
+      -(∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1
+          (WeilAutocorrelationV1 (AEGIS.RHGramExpansionV13.packetSum z gs))
+          rho) at hEF
+  rw [AEGIS.RHGramExpansionV13.B_packetSum] at hEF
+  have hre := congrArg Complex.re hEF
+  simp only [Complex.neg_re] at hre
+  linarith
+
+/-- Verified finite-dimensional Gram/Gershgorin data control the *actual*
+zeta-zero expression, including all off-diagonal arithmetic interactions. -/
+theorem actual_zero_quadratic_nonnegative_of_gram_bounds
+    {n : ℕ}
+    (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 (AEGIS.RHGramExpansionV13.packetSum z gs))
+    (D E S : ℝ)
+    (hE : 0 ≤ E)
+    (c : ℕ → ℝ)
+    (hc : ∀ k, 0 ≤ c k)
+    (hdiag : ∀ i,
+      D * E ≤ -(AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)‖ ≤
+        c (Nat.dist i j) * E)
+    (hrow : ∀ i : Fin (n + 1),
+      AEGIS.RHGramExpansionV13.rowSum c i ≤ S)
+    (hmargin : S ≤ D) :
+    0 ≤
+      (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1
+          (WeilAutocorrelationV1 (AEGIS.RHGramExpansionV13.packetSum z gs))
+          rho).re := by
+  have hbound := AEGIS.RHGramExpansionV13.gram_re_le
+    z gs D E S hE c hc hdiag hcross hrow
+  have hcoeff : 0 ≤ (∑ i, ‖z i‖ ^ 2) := by
+    apply Finset.sum_nonneg
+    intro i hi
+    positivity
+  have hnonneg : 0 ≤ (D - S) * E * (∑ i, ‖z i‖ ^ 2) :=
+    mul_nonneg
+      (mul_nonneg (sub_nonneg.mpr hmargin) hE) hcoeff
+  rw [actual_zero_quadratic_eq_neg_finite_gram z gs hm]
+  linarith
+
 end AEGIS.RHCofinalSchurAdapterV1
 
 #print axioms AEGIS.RHCofinalSchurAdapterV1.cofinal_certificate_of_packet_schur
 #print axioms AEGIS.RHCofinalSchurAdapterV1.every_packet_certificate_of_schur_norm_families
 #print axioms AEGIS.RHCofinalSchurAdapterV1.riemannHypothesis_of_schur_norm_families
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_eq_neg_finite_gram
+#print axioms AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds
