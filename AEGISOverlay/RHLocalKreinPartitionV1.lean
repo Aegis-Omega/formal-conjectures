@@ -245,6 +245,35 @@ theorem every_moment_zero_packet_has_compact_krein_factor
   exact actual_packet_has_compact_krein_factor
     g hm (-L) L (by linarith) hwindow
 
+/-- A smooth cutoff gives an exact two-atom splitting for *every*
+moment-zero Weil packet, with independently vanishing exponential moments.
+Neither an externally supplied support interval nor a positivity hypothesis
+is needed. In particular, cutoff derivative terms cancel exactly. -/
+theorem every_moment_zero_packet_two_atom_partition
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (χ : ℝ → ℂ) (hχ : ContDiff ℝ ∞ χ) :
+    ∃ φ : ℝ → ℂ,
+      ContDiff ℝ ∞ φ ∧ HasCompactSupport φ ∧
+      lift g.1 = (fun x =>
+        kreinAtom (fun y => χ y * φ y) x +
+        kreinAtom (fun y => (1 - χ y) * φ y) x) ∧
+      HasCompactSupport (fun y => χ y * φ y) ∧
+      HasCompactSupport (fun y => (1 - χ y) * φ y) ∧
+      ((∫ x : ℝ, (Real.exp (-x / 2) : ℂ) *
+          kreinAtom (fun y => χ y * φ y) x) = 0 ∧
+        (∫ x : ℝ, (Real.exp (x / 2) : ℂ) *
+          kreinAtom (fun y => χ y * φ y) x) = 0) ∧
+      ((∫ x : ℝ, (Real.exp (-x / 2) : ℂ) *
+          kreinAtom (fun y => (1 - χ y) * φ y) x) = 0 ∧
+        (∫ x : ℝ, (Real.exp (x / 2) : ℂ) *
+          kreinAtom (fun y => (1 - χ y) * φ y) x) = 0) := by
+  obtain ⟨φ, hφ, hc, hfactor⟩ :=
+    every_moment_zero_packet_has_compact_krein_factor g hm
+  refine ⟨φ, hφ, hc, ?_, hc.mul_left, hc.mul_left, ?_⟩
+  · rw [hfactor]
+    exact (kreinAtom_partition_two φ χ hφ hχ).symm
+  · exact kreinAtom_partition_moments φ χ hφ hχ hc
+
 /-- Construct a genuine *finite* family of compact Krein atoms from an
     arbitrary moment-zero Weil packet and a smooth interval partition.
     All component moments vanish, and the original log-lift is recovered
@@ -298,6 +327,7 @@ theorem actual_packet_finite_krein_decomposition {ι : Type*}
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_has_compact_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_has_supported_krein_factor
 #print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_has_compact_krein_factor
+#print axioms AEGIS.RHLocalKreinPartitionV1.every_moment_zero_packet_two_atom_partition
 #print axioms AEGIS.RHLocalKreinPartitionV1.actual_packet_finite_krein_decomposition
 
 end AEGIS.RHLocalKreinPartitionV1
