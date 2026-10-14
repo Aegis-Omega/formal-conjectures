@@ -19,6 +19,7 @@ on:
       - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
+      - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
@@ -243,7 +244,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               if m.startswith("AEGISOverlay."):
@@ -405,6 +406,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualUniversalFineGramV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualUniversalFineGramV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHScaleRowCompositionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenLatticeV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
