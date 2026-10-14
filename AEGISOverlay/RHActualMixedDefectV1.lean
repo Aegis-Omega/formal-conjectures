@@ -837,6 +837,48 @@ theorem distinct_fine_far_arch_norm_le
   dsimp [E] at harch
   convert harch using 1 <;> ring
 
+
+/-- The exact off-diagonal B form of two distant, different fine atoms:
+the term at 1 is actually zero by disjoint logarithmic supports. -/
+theorem distinct_fine_far_mixed_one_zero
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hgap : Real.log 2 ≤ b - a) :
+    mixed p q 1 = 0 := by
+  have hlog : logCrossV28 p q 0 = 0 := by
+    apply logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (b - 1 / 256) (b + 1 / 256) 0 hp hq
+    right
+    linarith [log_two_gt_one_thirty_two]
+  have h := logCross_eq_mixed_v28 p q 0
+  simp only [zero_div, Real.exp_zero, Complex.ofReal_one, one_mul] at h
+  exact h.symm.trans hlog
+
+/-- Exact decomposition of the FULL distant Weil B interaction.  This
+is the established ARCH bound plus the genuine remaining von Mangoldt
+prime contribution, not an assumed mixed-Weil estimate and not a
+claim that remote prime contributions vanish. -/
+theorem distinct_fine_far_actual_B_norm_le_prime_plus_arch
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hgap : Real.log 2 ≤ b - a) :
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+      (1 / 200 : ℝ) * (energy p.1 + energy q.1) := by
+  have hzero := distinct_fine_far_mixed_one_zero p q a b hp hq hgap
+  have harch := distinct_fine_far_arch_norm_le p q a b hp hq hm hgap
+  have heq : B p q =
+      WeilPrimeSumV1 (mixed p q) +
+      WeilArchimedeanIntegralV1 (mixed p q) := by
+    unfold B WeilExplicitRightSideV1
+    rw [hzero]
+    ring
+  rw [heq]
+  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -866,3 +908,6 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_logCross_norm_le_mean_energy
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_norm_le
+
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_mixed_one_zero
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_arch
