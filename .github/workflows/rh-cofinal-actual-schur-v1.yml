@@ -6,6 +6,7 @@ on:
       - 'AEGISOverlay/RHMomentDecayCofinalJoinV1.lean'
       - 'AEGISOverlay/RHCofinalActualTerminalV1.lean'
       - 'AEGISOverlay/RHCofinalSchurAdapterV1.lean'
+      - 'AEGISOverlay/RHFeshbachWeilClosureV2.lean'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
 
