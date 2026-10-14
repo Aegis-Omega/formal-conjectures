@@ -15,6 +15,7 @@ limitations under the License.
 -/
 import AEGISOverlay.RHFiniteFinePartitionV1
 import AEGISOverlay.RHActualMixedDefectV1
+import RHRestrictedWeilBridgeV13
 
 /-! All compact-support moment-zero Weil packets have an actual finite
 fine coercive Gram decomposition. The finite smooth partition is
@@ -90,9 +91,47 @@ theorem every_packet_actual_fine_mixed_defect_lower_bound
     _ = -(WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re := by
       rw [hgram]
 
+
+/-! ## Final exact-head consumer of the universal actual mixed budget
+
+The localization and the full arithmetic Weil Gram are constructed
+unconditionally above.  Only \`hbudget\` remains as a mathematical input.
+The conclusion is the canonical Mathlib RH proposition, with no renamed
+theorem or weakened endpoint.  This implication does not establish
+\`hbudget\` and MUST NOT be marked as an unconditional RH proof. -/
+
+/-- Genuine mixed-defect control on the actual fine decompositions
+constructed above suffices for the canonical Riemann hypothesis.  No
+unproved term is suppressed, and the only remaining hypothesis is
+spelled out on the original Weil pairing. -/
+theorem riemannHypothesis_of_uniform_actual_fine_mixed_budget
+    (hbudget :
+      ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+        ∀ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+          (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+            -(B (gs i) (gs i)).re) →
+          g = packetSum (fun _ => (1 : ℂ)) gs →
+          AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+            (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)) :
+    RiemannHypothesis := by
+  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
+  intro g hm
+  obtain ⟨n, gs, _hmom, hdiag, hpacket, hgram⟩ :=
+    every_moment_zero_packet_actual_fine_gram g hm
+  have hpaid := hbudget g hm n gs hdiag hpacket
+  have hlower := fine_mixed_defect_lower_bound n gs hdiag
+  rw [← hgram] at hlower
+  have hnonneg :
+      0 ≤ (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) -
+        AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs :=
+    sub_nonneg.mpr hpaid
+  linarith
+
 end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.fine_mixed_defect_lower_bound
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound
+
+#print axioms AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_uniform_actual_fine_mixed_budget
