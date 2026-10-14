@@ -201,8 +201,8 @@ theorem c0374 : checkPiece pa19 (1125/4) 0 (1125/4) (300) = true := by decide +k
 theorem n0374 : NonnegOnQ (1125/4) (300) :=
   nonnegOn_of_checkPiece_zero (1125/4) (300) (by norm_num) c0374
 
+/- Original contiguous interval fold, staged to bound Lean memory use. -/
 set_option maxRecDepth 4096 in
-/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 theorem foldTo0374 : NonnegOnQ 0 (300) := by
   have h330 := foldTo0330
   have h331 : NonnegOnQ 0 (3375/32) := nonnegOn_union 0 (825/8) (3375/32) h330 n0331
