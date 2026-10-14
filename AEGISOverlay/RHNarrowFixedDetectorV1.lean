@@ -326,6 +326,34 @@ theorem narrowDetectingPacket_local_twoPoint_sign
     (WeilTwoPointTranslateV11 narrowDetectingPacket d c).1
   linarith
 
+/-- The real, canonical zero quadratic is nonnegative for every
+    two-point packet within the certified shift interval, with arbitrary c. -/
+theorem narrowDetectingPacket_local_zero_quadratic_nonnegative
+    (d : ℝ) (hd : |d| ≤ (3 / 16 : ℝ)) (c : ℂ) :
+    0 ≤ (WeilAutocorrelationZeroQuadraticV11
+      (WeilTwoPointTranslateV11 narrowDetectingPacket d c)).re := by
+  have hm :=
+    AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      narrowDetectingPacket d c narrowDetectingPacket_moments
+  exact
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 narrowDetectingPacket d c) hm).mp
+        (narrowDetectingPacket_local_twoPoint_sign d hd c)
+
+/-- Separate sharp component-wise bounds for the actual zero kernel, with
+    the same real diagonal in all four Hermitian phase tests. -/
+theorem narrowDetectingPacket_local_kernel_components
+    (d : ℝ) (hd : |d| ≤ (3 / 16 : ℝ)) :
+    |(WeilZeroTranslationKernelV11 narrowDetectingPacket d).re| ≤
+      (WeilAutocorrelationZeroQuadraticV11 narrowDetectingPacket).re ∧
+    |(WeilZeroTranslationKernelV11 narrowDetectingPacket d).im| ≤
+      (WeilAutocorrelationZeroQuadraticV11 narrowDetectingPacket).re := by
+  apply weil_four_phase_nonnegative_components_v1
+  intro c _hc
+  rw [← AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
+    narrowDetectingPacket narrowDetectingPacket_moments d c]
+  exact narrowDetectingPacket_local_zero_quadratic_nonnegative d hd c
+
 /-- Exact uniform bound on the genuine zero translation kernel for all
     shifts in the certified local interval. The constant is the same scalar
     diagonal used by the global fixed-four-phase criterion. -/
@@ -375,5 +403,7 @@ end AEGIS.RHNarrowFixedDetectorV1
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_window
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_twoPoint_sign
 #print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_kernel_norm_bound
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_zero_quadratic_nonnegative
+#print axioms AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_local_kernel_components
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_kernel_bound
 #print axioms AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign

@@ -221,6 +221,8 @@ jobs:
               "narrowDetectingPacket_local_twoPoint_window",
               "narrowDetectingPacket_local_twoPoint_sign",
               "narrowDetectingPacket_local_kernel_norm_bound",
+              "narrowDetectingPacket_local_zero_quadratic_nonnegative",
+              "narrowDetectingPacket_local_kernel_components",
               "riemannHypothesis_of_narrow_kernel_bound",
               "riemannHypothesis_of_narrow_four_phase_sign",
           )
