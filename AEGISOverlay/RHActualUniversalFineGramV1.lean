@@ -244,7 +244,7 @@ theorem actual_mixed_defect_le_of_q16_matrix
       _ = 2 * (∑ i, E i * (∑ j ∈
            (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
             rw [hswap]
-            rw [hfactor]
+            simp only [hfactor]
             ring
   have hrowtotal :
       (∑ i, E i * (∑ j ∈
