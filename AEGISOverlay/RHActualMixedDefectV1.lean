@@ -1473,6 +1473,60 @@ theorem nine_local_exact_mixed_defect_opposite
   unfold actualMixedDefect
   linarith
 
+
+
+/-- A fine Weil atom can move to an explicitly different common
+9/64 window whenever its local center is at most 35/256 away.
+The radius arithmetic is exact: 1/256 + 35/256 = 9/64. -/
+theorem fine_width_into_common_nine
+    (u : WeilCompactSmoothGV1) (a center : ℝ)
+    (hu : WidthOneOneTwentyEightAt u a)
+    (hcenter : |a - center| ≤ (35 / 256 : ℝ)) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (9 / 64) center := by
+  change tsupport (lift u.1) ⊆
+    Icc (center - 9 / 64) (center + 9 / 64)
+  change tsupport (lift u.1) ⊆
+    Icc (a - 1 / 256) (a + 1 / 256) at hu
+  intro t ht
+  obtain ⟨hlo, hhi⟩ := hu ht
+  obtain ⟨haclo, hachi⟩ := abs_le.mp hcenter
+  constructor <;> dsimp only [Set.mem_Icc] <;> linarith
+
+/-- Arbitrarily many different fine moment-zero atoms with centers
+in one 35/256 neighborhood have the exact signed radius-9/64 Weil
+coercivity, for arbitrary complex coefficients. No common mother
+packet, equal energy, pairwise cross-majorant or fixed n is assumed. -/
+theorem fine_cluster_nine_exact_counterpart
+    (n : ℕ) (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (centers : Fin (n + 1) → ℝ) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, WidthOneOneTwentyEightAt (gs i) (centers i))
+    (hnear : ∀ i, |centers i - center| ≤ (35 / 256 : ℝ)) :
+    (1 / 10 : ℝ) * energy (packetSum z gs).1 ≤
+      -(B (packetSum z gs) (packetSum z gs)).re := by
+  apply nine_local_exact_counterpart n z gs center hm
+  intro i
+  exact fine_width_into_common_nine (gs i) (centers i)
+    center (hw i) (hnear i)
+
+/-- Signed opposite-side mixed-defect counterpart for a finite
+fine cluster with distinct source centers. -/
+theorem fine_cluster_nine_mixed_defect_opposite
+    (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (centers : Fin (n + 1) → ℝ) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, WidthOneOneTwentyEightAt (gs i) (centers i))
+    (hnear : ∀ i, |centers i - center| ≤ (35 / 256 : ℝ)) :
+    actualMixedDefect n gs ≤
+      -((1 / 10 : ℝ) *
+        energy (packetSum (fun _ => (1 : ℂ)) gs).1) -
+      ∑ i, (B (gs i) (gs i)).re := by
+  apply nine_local_exact_mixed_defect_opposite n gs center hm
+  intro i
+  exact fine_width_into_common_nine (gs i) (centers i)
+    center (hw i) (hnear i)
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1521,3 +1575,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.nine_moment_packetSum
 #print axioms AEGIS.RHActualMixedDefectV1.nine_local_exact_counterpart
 #print axioms AEGIS.RHActualMixedDefectV1.nine_local_exact_mixed_defect_opposite
+#print axioms AEGIS.RHActualMixedDefectV1.fine_width_into_common_nine
+#print axioms AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart
+#print axioms AEGIS.RHActualMixedDefectV1.fine_cluster_nine_mixed_defect_opposite
