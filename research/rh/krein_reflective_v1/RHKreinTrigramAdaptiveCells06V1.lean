@@ -213,8 +213,8 @@ theorem c0283 : checkPiece pa19 (1875/64) 0 (1875/64) (975/32) = true := by deci
 theorem n0283 : NonnegOnQ (1875/64) (975/32) :=
   nonnegOn_of_checkPiece_zero (1875/64) (975/32) (by norm_num) c0283
 
-/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 set_option maxRecDepth 4096 in
+/-- Original contiguous interval fold, staged to bound Lean memory use. -/
 theorem foldTo0283 : NonnegOnQ 0 (975/32) := by
   have h236 := foldTo0236
   have h237 : NonnegOnQ 0 (3675/256) := nonnegOn_union 0 (225/16) (3675/256) h236 n0237
