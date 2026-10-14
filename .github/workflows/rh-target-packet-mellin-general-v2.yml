@@ -128,6 +128,13 @@ jobs:
           cp -R .li-provider/.lake/build/lib/lean/Hadamard/. .lake/build/lib/lean/Hadamard/
           cp -R .li-provider/.lake/build/lib/lean/FunctionsOfOneComplexVariable/. .lake/build/lib/lean/FunctionsOfOneComplexVariable/
 
+      - name: Restore pinned AEGIS Lean closure checkpoint
+        id: aegis-closure-checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .lake/build/lib/lean/*.olean
+          key: rh-aegis-narrow-closure-v1-${{ runner.os }}-lean4331-${{ env.AEGIS_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+
       - name: Compile exact AEGIS residue-witness dependency closure
         shell: bash
         run: |
@@ -176,8 +183,22 @@ jobs:
           PY
           while IFS= read -r m; do
             cp "$ROOT/$m.lean" "$m.lean"
-            lake env lean -o ".lake/build/lib/lean/$m.olean" "$m.lean"               2>&1 | tee "evidence-target-mellin/source-$m.log"
+            if test -s ".lake/build/lib/lean/$m.olean"; then
+              echo "PINNED_AEGIS_OLEAN_RESTORED=$m $AEGIS_SHA" | tee "evidence-target-mellin/source-$m.log"
+            else
+              lake env lean -o ".lake/build/lib/lean/$m.olean" "$m.lean" 2>&1 | tee "evidence-target-mellin/source-$m.log"
+            fi
           done < evidence-target-mellin/aegis-modules.txt
+          while IFS= read -r m; do
+            test -s ".lake/build/lib/lean/$m.olean" || { echo "AEGIS_OLEAN_MISSING=$m"; exit 1; }
+          done < evidence-target-mellin/aegis-modules.txt
+
+      - name: Save pinned AEGIS Lean closure checkpoint
+        if: steps.aegis-closure-checkpoint.outputs.cache-hit != 'true'
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .lake/build/lib/lean/*.olean
+          key: rh-aegis-narrow-closure-v1-${{ runner.os }}-lean4331-${{ env.AEGIS_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
 
       - name: Compile general target packet Mellin theorem
         shell: bash
