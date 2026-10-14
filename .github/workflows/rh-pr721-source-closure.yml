@@ -65,6 +65,51 @@ jobs:
           python3 scripts/verify_rh_pr721_source_closure.py --out /tmp/pr721-kernel --compile-smoke
           grep -F '"kernel": "THREE_SOS_MODULES_PASS"' /tmp/pr721-kernel/receipt.json
           echo "PR721_SOURCE=SHA_VERIFIED; THREE_SOS=KERNEL_VERIFIED; RH_UNCONDITIONAL=NOT_CLAIMED"
+      - name: Compile original eleven-block complex comparison bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/pr721-eleven-bridge .lake/build/lib/lean
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          manifest=json.loads(pathlib.Path(
+              'research/rh/aegis_pr721_fb983fd/source_manifest.json').read_text())
+          for mod in ('RHElevenBlockComparisonV1', 'RHElevenBlockActualBridgeV1'):
+              matches=[x for x in manifest['files'] if x['module']==mod]
+              assert len(matches)==1, 'MISSING_OR_AMBIGUOUS_MODULE '+mod
+              item=matches[0]
+              src=pathlib.Path(item['archive'])
+              assert src.is_file(), 'MISSING_ARCHIVED_SOURCE '+mod
+              actual=subprocess.check_output(
+                  ['git','hash-object',str(src)],text=True).strip()
+              assert actual==item['sha'], 'SOURCE_BLOB_DRIFT '+mod
+              dst=pathlib.Path(mod+'.lean')
+              assert not dst.exists(), 'MODULE_IDENTITY_COLLISION '+mod
+              dst.write_bytes(src.read_bytes())
+              print('EXACT_SOURCE',mod,item['sha'],flush=True)
+              out=pathlib.Path('.lake/build/lib/lean')/(mod+'.olean')
+              log=pathlib.Path('/tmp/pr721-eleven-bridge')/(mod+'.compile.log')
+              with log.open('w') as fh:
+                  p=subprocess.run(['lake','env','lean','-o',str(out),str(dst)],
+                    stdout=fh,stderr=subprocess.STDOUT,text=True)
+              print(log.read_text(),flush=True)
+              if p.returncode!=0 or not out.is_file():
+                  raise RuntimeError('ELEVEN_BRIDGE_LEAN_FAILURE '+mod)
+          PY
+          for mod in RHElevenBlockComparisonV1 RHElevenBlockActualBridgeV1; do
+            python3 scripts/verify_rh_overlay_axioms.py \
+              "research/rh/aegis_pr721_fb983fd/lean/$mod.lean.src" \
+              "/tmp/pr721-eleven-bridge/$mod.compile.log"
+          done
+          echo 'PR721_ELEVEN_COMPARISON_BRIDGE=KERNEL_PASS; RH_UNCONDITIONAL=NOT_CLAIMED'
+      - name: Preserve eleven-block complex bridge replay
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-pr721-eleven-complex-bridge-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: /tmp/pr721-eleven-bridge/
+          if-no-files-found: warn
+          retention-days: 30
       - name: Preserve exact-head evidence and compiler logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
