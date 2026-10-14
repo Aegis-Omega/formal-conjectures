@@ -1336,6 +1336,36 @@ theorem distinct_fine_far_actual_arch_geometric
   exact harch.trans (mul_le_mul_of_nonneg_right hcost henergy)
 
 
+
+/-- Full exact distant Weil-pair bound using the rational geometric
+moment-zero Arch envelope. The genuine von Mangoldt prime contribution
+remains explicit: this lemma does NOT assert a bound on that prime term. -/
+theorem distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (k : ℕ) (hk : 1 ≤ k)
+    (hsep : (65 / 32 : ℝ) * (k : ℝ) ≤ b - a) :
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+      ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ k)) *
+        (energy p.1 + energy q.1) := by
+  have hkreal : (1 : ℝ) ≤ (k : ℝ) := by exact_mod_cast hk
+  have hgap : Real.log 2 ≤ b - a := by
+    linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
+  have hzero :=
+    distinct_fine_far_mixed_one_zero p q a b hp hq hgap
+  have harch :=
+    distinct_fine_far_actual_arch_geometric p q a b hp hq hm k hk hsep
+  have heq :
+      B p q = WeilPrimeSumV1 (mixed p q) +
+        WeilArchimedeanIntegralV1 (mixed p q) := by
+    unfold B WeilExplicitRightSideV1
+    rw [hzero]
+    ring
+  rw [heq]
+  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -1379,3 +1409,4 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.moment_zero_arch_decay_geometric
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_arch_geometric
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
