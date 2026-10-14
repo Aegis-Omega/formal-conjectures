@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHActualLocalGramCoercivityV1
+import RHWindowNineOver64GlobalizationV14
 
 /-!
 AEGIS Ω — genuine full-Weil mixed-term defect, without dropped off-diagonals.
@@ -279,6 +280,60 @@ theorem actual_mixed_norm_le_of_common_narrow_window
   have htri := Complex.norm_le_abs_re_add_abs_im (B u v)
   linarith
 
+
+/-! ## Source-locked radius 9/64 coercive mixed-term bridge
+
+This uses the original V14 rational moment gain, not a proxy positivity
+hypothesis. The mixed B identity is exact. The sum's moment and 9/64
+window membership are explicit, not silently assumed. -/
+
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
+
+theorem actual_nine_over_64_mixed_re_upper
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hm : WeilMomentConditionsV1 (addPacket u v))
+    (hw : HalfWidthAt (addPacket u v) (9 / 64) center) :
+    2 * (B u v).re +
+      (1 / 10 : ℝ) * energy (addPacket u v).1 ≤
+      -(B u u).re - (B v v).re := by
+  have hcoercive :=
+    AEGIS.RHWindowNineOver64GlobalizationV14.nine_over_64_coercive
+      (addPacket u v) center hw hm
+  change (B (addPacket u v) (addPacket u v)).re ≤
+    -(1 / 10 : ℝ) * energy (addPacket u v).1 at hcoercive
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients u v
+  linarith
+
+theorem actual_nine_over_64_mixed_re_abs
+    (u v : WeilCompactSmoothGV1) (center : ℝ)
+    (hmp : WeilMomentConditionsV1 (addPacket u v))
+    (hwp : HalfWidthAt (addPacket u v) (9 / 64) center)
+    (hmm : WeilMomentConditionsV1
+      (addPacket u (scalePacket (-1 : ℂ) v)))
+    (hwm : HalfWidthAt
+      (addPacket u (scalePacket (-1 : ℂ) v)) (9 / 64) center) :
+    |(B u v).re| ≤ (-(B u u).re - (B v v).re) / 2 := by
+  have hplus := actual_nine_over_64_mixed_re_upper u v center hmp hwp
+  have hminus := actual_nine_over_64_mixed_re_upper
+    u (scalePacket (-1 : ℂ) v) center hmm hwm
+  have hcross :
+      (B u (scalePacket (-1 : ℂ) v)).re = -(B u v).re := by
+    rw [B_scale_right]
+    simp
+  have hdiag :
+      (B (scalePacket (-1 : ℂ) v) (scalePacket (-1 : ℂ) v)).re =
+        (B v v).re := by
+    rw [B_scale_left, B_scale_right]
+    simp
+  rw [hcross, hdiag] at hminus
+  have heplus : 0 ≤ energy (addPacket u v).1 := energy_nonnegative _
+  have heminus :
+      0 ≤ energy (addPacket u (scalePacket (-1 : ℂ) v)).1 :=
+    energy_nonnegative _
+  apply abs_le.mpr
+  constructor <;> linarith
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -289,3 +344,5 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_re_upper_of_narrow_sum
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_re_abs_of_common_narrow_window
 #print axioms AEGIS.RHActualMixedDefectV1.actual_mixed_norm_le_of_common_narrow_window
+#print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_upper
+#print axioms AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_re_abs
