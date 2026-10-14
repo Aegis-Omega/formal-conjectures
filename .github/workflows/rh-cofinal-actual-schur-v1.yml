@@ -254,6 +254,10 @@ jobs:
                   return pathlib.Path("AegisRH/Overlay/RHNarrowMomentPacketV1.lean")
               if m == "RHFeshbachCoreV1":
                   return pathlib.Path("research/rh/krein_ring_v1/RHFeshbachCoreV1.lean")
+              # Reuse existing kernel-correct PR606 proof of translatePacket g 0 = g.
+              # The earlier AEGIS exact source ends in sorryAx on diagonal equality.
+              if m == "WeilTranslationGapInvariantV10":
+                  return pathlib.Path("AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean")
               if m in ("RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1",
                        "RHCofinalSchurAdapterV1","RHFeshbachWeilClosureV2",
                        "RHExistingProofFusionV1"):
@@ -301,6 +305,7 @@ jobs:
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
+              "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
           }
           for path, sha in pinned.items():
