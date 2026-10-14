@@ -287,7 +287,8 @@ theorem actual_far_fine_gram_coercive_of_arch29_prime_row
   apply AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_signed_real_row_certificate
     gs c hc hd
   · intro i j hij
-    exact (Complex.re_le_norm _).trans (hcross i j hij)
+    exact ((le_abs_self (B (gs i) (gs j)).re).trans
+      (Complex.abs_re_le_norm (B (gs i) (gs j)))).trans (hcross i j hij)
   · exact hrow
 
 end AEGIS.RHArchRow29V1
