@@ -542,6 +542,155 @@ theorem actual_mixed_defect_le_of_real_symmetric_row
         dsimp [E]
         ring
 
+theorem actual_mixed_defect_le_of_signed_symmetric_row
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ) (R : ℝ)
+    (hsym : ∀ i j, c i j = c j i)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) ≤ R) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      (2 * R) * (∑ i, energy (gs i).1) := by
+  let E : Fin (n + 1) → ℝ := fun i => energy (gs i).1
+  have hsplit (i : Fin (n + 1)) :
+      (∑ j, (B (gs i) (gs j)).re) =
+        (B (gs i) (gs i)).re +
+          ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            (B (gs i) (gs j)).re := by
+    rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
+  have hdef :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs =
+        ∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (B (gs i) (gs j)).re := by
+    unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect
+    rw [Complex.re_sum]
+    simp_rw [Complex.re_sum]
+    simp_rw [hsplit]
+    rw [Finset.sum_add_distrib]
+    ring
+  have hrows (i : Fin (n + 1)) :
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) ≤ R :=
+    hrow i
+  have hoff :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (B (gs i) (gs j)).re) ≤
+      ∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * (E i + E j) := by
+    apply Finset.sum_le_sum
+    intro i _
+    apply Finset.sum_le_sum
+    intro j hj
+    have hij : i ≠ j := by
+      intro h
+      exact (Finset.mem_erase.mp hj).1 h.symm
+    exact hcross i j hij
+  have hswap :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E j) =
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i) := by
+    rw [AEGIS.RHGramExpansionV13.sum_erase_comm
+      (fun i j => c i j * E j)]
+    apply Finset.sum_congr rfl
+    intro i _
+    apply Finset.sum_congr rfl
+    intro j _
+    rw [hsym j i]
+  have hfactor :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i) =
+      ∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) := by
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+  have htwo :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * (E i + E j)) =
+      2 * (∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
+    calc
+      _ = (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+             c i j * E i) +
+          (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+             c i j * E j) := by
+            simp only [mul_add, Finset.sum_add_distrib]
+      _ = 2 * (∑ i, E i * (∑ j ∈
+           (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
+            rw [hswap]
+            simp only [hfactor]
+            ring
+  have hrowtotal :
+      (∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) ≤
+      R * (∑ i, E i) := by
+    calc
+      _ ≤ ∑ i, E i * R := by
+        apply Finset.sum_le_sum
+        intro i _
+        exact mul_le_mul_of_nonneg_left (hrows i)
+          (energy_nonnegative (gs i).1)
+      _ = R * (∑ i, E i) := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro i _
+        ring
+  calc
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs =
+        (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (B (gs i) (gs j)).re) := hdef
+    _ ≤ (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          c i j * (E i + E j)) := hoff
+    _ = 2 * (∑ i, E i * (∑ j ∈
+          (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := htwo
+    _ ≤ 2 * (R * (∑ i, E i)) :=
+        mul_le_mul_of_nonneg_left hrowtotal (by norm_num)
+    _ = (2 * R) * (∑ i, energy (gs i).1) := by
+        dsimp [E]
+        ring
+
+
+/-- True signed Weil-Gram coercivity from a symmetric REAL row bound.
+This strengthens the norm-based Q16 consumer without demanding that
+off-diagonal prime contributions have a prescribed sign. -/
+theorem actual_fine_gram_coercive_of_signed_real_row_certificate
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (hsym : ∀ i j, c i j = c j i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      c i j) ≤ (57430 / 65536 : ℝ)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+        -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  have hmixed := actual_mixed_defect_le_of_signed_symmetric_row
+    gs c (57430 / 65536 : ℝ) hsym hcross hrow
+  have hlocal := fine_mixed_defect_lower_bound n gs hdiag
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [AEGIS.RHGramExpansionV13.B_packetSum]
+    simp
+  rw [← hgram] at hlocal
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hround :
+      (116142 / 65536 : ℝ) * (∑ i, energy (gs i).1) ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) :=
+    mul_le_mul_of_nonneg_right (by norm_num) hE
+  linarith
+
 /-! ## Dimension-free Q16.16 bound on the summed moment-zero Arch envelope
 
 Do not round the Arch component separately for each off-diagonal entry.
@@ -793,3 +942,6 @@ end AEGIS.RHActualUniversalFineGramV1
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_summable_arch_prime_row
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_far_fine_gram_coercive_of_geometric_arch_prime_row
+
+#print axioms AEGIS.RHActualUniversalFineGramV1.actual_mixed_defect_le_of_signed_symmetric_row
+#print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_signed_real_row_certificate
