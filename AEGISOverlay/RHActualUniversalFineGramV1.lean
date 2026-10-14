@@ -397,8 +397,7 @@ theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
     · have hgap : Real.log 2 ≤ center j - center i := by
         have hs := hsep i j hijlt
         linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
-      have h := AEGIS.RHActualMixedDefectV1.
-        distinct_fine_far_actual_B_q16_prime_plus_120
+      have h := AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
         (gs i) (gs j) (center i) (center j)
         (hw i) (hw j) (hm i) hgap
         (hsep i j hijlt) (primeCost i j) (hprime i j hijlt)
@@ -406,8 +405,7 @@ theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
     · have hgap : Real.log 2 ≤ center i - center j := by
         have hs := hsep j i hjilt
         linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
-      have h := AEGIS.RHActualMixedDefectV1.
-        distinct_fine_far_actual_B_q16_prime_plus_120
+      have h := AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
         (gs j) (gs i) (center j) (center i)
         (hw j) (hw i) (hm j) hgap
         (hsep j i hjilt) (primeCost j i) (hprime j i hjilt)
