@@ -13,6 +13,7 @@ on:
       - 'AEGISOverlay/RHLocalKreinPartitionV1.lean'
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
+      - 'AEGISOverlay/RHBaguaWalshV1.lean'
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
@@ -264,7 +265,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
