@@ -281,6 +281,45 @@ theorem bagua_complementary_phase_coupling_margin
     (momentConditions_addPacket_v10 _ _ hmu hphaseMom)
     (trigram_width_add _ _ center hwu hphaseWin)
 
+
+/-! ## Exact opposition in the Walsh character basis
+
+Bagua opposite-index involution i ↦ 7-i acts on the ORIGINAL binary
+packet labels. This is distinct from applying the same involution to
+Walsh MODE labels. The Walsh matrix diagonalizes original-index
+complementation, with precisely four positive and four negative
+eigencharacters. No invariance of the ACTUAL Weil pairing under this
+index permutation is postulated. -/
+
+/-- Parity of the three binary line labels, as an exact ±1 integer. -/
+def baguaCharacterParity (a : Fin 8) : ℤ :=
+  if (a.val % 2 + (a.val / 2) % 2 +
+      (a.val / 4) % 2) % 2 = 0 then 1 else -1
+
+/-- Opposing all three bits multiplies a Walsh character by its
+integer parity eigenvalue. This holds for ALL 64 character entries. -/
+theorem bagua_walsh_opposite_character (a i : Fin 8) :
+    walsh8 a (baguaOpp i) =
+      baguaCharacterParity a * walsh8 a i := by
+  fin_cases a <;> fin_cases i <;> decide
+
+/-- EXACT Q=2, p=2 count: four complement-even and four
+complement-odd Walsh characters, verified on the complete carrier. -/
+theorem bagua_walsh_opposite_four_plus_four :
+    (Finset.univ.filter
+      (fun a : Fin 8 => baguaCharacterParity a = 1)).card = 4 ∧
+    (Finset.univ.filter
+      (fun a : Fin 8 => baguaCharacterParity a = -1)).card = 4 := by
+  decide
+
+/-- H C H = 8 diag(1,-1,-1,1,-1,1,1,-1), where C sends
+i to 7-i. The entire original 8×8 complementary coupling
+is preserved, rather than postulated to have vanishing cross terms. -/
+theorem bagua_walsh_complement_cross (a b : Fin 8) :
+    (∑ i : Fin 8, walsh8 a i * walsh8 (baguaOpp i) b) =
+      if a = b then (8 : ℤ) * baguaCharacterParity b else 0 := by
+  fin_cases a <;> fin_cases b <;> decide
+
 end AEGIS.RHBaguaActualWeilV1
 
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_gram_exact
@@ -295,3 +334,6 @@ end AEGIS.RHBaguaActualWeilV1
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_both_complementary_moments
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_both_complementary_windows
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_complementary_phase_coupling_margin
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_walsh_opposite_character
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_walsh_opposite_four_plus_four
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_walsh_complement_cross
