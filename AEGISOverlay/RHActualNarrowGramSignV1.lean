@@ -16,6 +16,7 @@ limitations under the License.
 
 import RHFiniteActualGramJoinV1
 import RHWindow693Over2000V1
+import RHKreinTrigramAdaptiveV1
 
 /-!
 # Actual (not surrogate) finite Weil Gram sign on the certified window
@@ -66,6 +67,36 @@ theorem every_narrow_packet_actual_full_gram_nonpositive
       AEGIS.RHWindow693Over2000V1.window_693_over_2000_arithmetic_nonpositive_v1
         g hm hw
 
+
+/-- The exact genuine Weil Gram contraction of ANY finite smooth partition
+of a two-moment packet on the larger Trigram 2/5 logarithmic window is
+nonpositive.  All cross terms B(gs i, gs j) remain in the conclusion:
+nothing is dropped, averaged, or bounded by a surrogate coefficient.
+
+This reuses the fully constructive moment-zero Krein partition and the
+original actual arithmetic Trigram sign, with no added analytic premise.
+It does NOT claim the same sign for packets of arbitrary support. -/
+theorem every_two_fifths_packet_actual_full_gram_nonpositive
+    (n : ℕ) (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g (2 / 5))
+    (χ : Fin (n + 1) → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x : ℝ, ∑ i : Fin (n + 1), χ i x = 1) :
+    ∃ gs : Fin (n + 1) → WeilCompactSmoothGV1,
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∑ i, ∑ j, B (gs i) (gs j)).re ≤ 0 := by
+  obtain ⟨gs, hgs, hfull⟩ :=
+    AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram
+      n g hm χ hχ hpart
+  refine ⟨gs, hgs, ?_⟩
+  calc
+    (∑ i, ∑ j, B (gs i) (gs j)).re =
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re := hfull.symm
+    _ ≤ 0 :=
+      AEGIS.RHKreinTrigramAdaptiveV1.window_two_fifths_trigram_v1 g hm hw
+
 end AEGIS.RHActualNarrowGramSignV1
 
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive
+#print axioms AEGIS.RHActualNarrowGramSignV1.every_two_fifths_packet_actual_full_gram_nonpositive
