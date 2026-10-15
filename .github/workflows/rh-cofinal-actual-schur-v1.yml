@@ -242,6 +242,19 @@ jobs:
               print("EXACT_ORIGINAL_V14_SOURCE", name, sha)
           PY
 
+      - name: Reproduce pinned trigram fifteenth-cell correction
+        shell: bash
+        run: |
+          set -euo pipefail
+          gen=research/rh/m8_kernel_v1/cell15_direct/gen.py
+          model=research/rh/m8_kernel_v1/cell15_direct/model.py
+          out=research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectCorrectionV1.lean
+          test "$(git hash-object "$gen")" = "8fc5e3898b30a5047398663334baf083794e673d"
+          test "$(git hash-object "$model")" = "834ba9df2213e01c9ec8668038aa7752552c8de2"
+          python3 "$gen" "$out"
+          test -s "$out"
+          sha256sum "$out" | tee evidence-cofinal/trigram-generated-source-sha256.txt
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -289,11 +302,26 @@ jobs:
                        "RHFineDiagonalUpgradeV3", "RHRationalGapNinePrimeBoundV1",
                        "RHRationalGapTenPrimeBoundV1") and p.is_file():
                   return p
+              # The source-sharded PR85 trigram certificate, already on this
+              # branch, is outside the repository root and AEGIS checkout.
+              # Prefer its exact tracked shards over older module lookalikes.
+              if m.startswith("RHKreinTrigramAdaptive"):
+                  trigram=pathlib.Path("research/rh/krein_reflective_v1")/(m+".lean")
+                  if trigram.is_file(): return trigram
               if (root/(m+".lean")).is_file():
                   return root/(m+".lean")
               if (overlay/(m+".lean")).is_file():
                   return overlay/(m+".lean")
               if p.is_file(): return p
+              # All remaining Krein dependencies are existing research files.
+              # The generated correction is reproducible from SHA-pinned sources.
+              for directory in ("research/rh/krein_reflective_v1",
+                                "research/rh/m8_kernel_v1",
+                                "research/rh/finite_m8_v1",
+                                "research/rh/krein_L105_v1",
+                                "research/rh/krein_ring_v1"):
+                  candidate=pathlib.Path(directory)/(m+".lean")
+                  if candidate.is_file(): return candidate
               return None
           def visit(m):
               if m in seen: return
@@ -330,6 +358,9 @@ jobs:
               "research/rh/aegis_source_4d7578e/lean/WeilOffLineSeedV10.lean.src":"255cfa30537da17af7ee3f7fe64b6845808af246",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/WeilFiniteDilationFilterV10.lean":"6970c598b8af0e25cc051567359f46cff63244bc",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
+              "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean":"2ceda75eb8eedb7225a6fed4b8a78c089020e1f9",
+              "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveCells08V1.lean":"bfe62cdf2072fb7e2f65cd069bb9a0273d5f12d9",
+              "research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectV1.lean":"ce12b737359922aa880e9a438b78d49c7bbfda35",
           }
           for path, sha in pinned.items():
               actual=git_blob(path)
