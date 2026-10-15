@@ -270,6 +270,14 @@ jobs:
           path: .rh-krein-full
           key: rh-krein-full-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
 
+      - name: Restore source-bound partial cofinal checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -436,7 +444,12 @@ jobs:
           print("SOURCE_DAG_MODULE_COUNT",len(order))
           for m in order: print("MODULE",m,paths[m])
           PY
-          python3 scripts/rh_restore_source_bound_oleans.py
+          if test -d .rh-cofinal-checkpoint; then
+            python3 scripts/rh_restore_source_bound_oleans.py --cache .rh-cofinal-checkpoint
+          else
+            python3 scripts/rh_restore_source_bound_oleans.py
+          fi
+          : > evidence-cofinal/completed-modules.txt
           while IFS= read -r m; do
             # Guard the exact module-name OLEAN, not a bare-name alias.
             # This catches the archived PR88 missing object at the first
@@ -456,6 +469,7 @@ jobs:
             if grep -Fxq "$m" evidence-cofinal/reused-modules.txt; then
               echo "REUSE_VERIFIED_SOURCE_OLEAN $m"
               printf 'REUSED_VERIFIED_SOURCE_BOUND_OLEAN\\n' > "evidence-cofinal/compile-${m//./_}.log"
+              printf '%s\n' "$m" >> evidence-cofinal/completed-modules.txt
               continue
             fi
             echo "COMPILE $m"
@@ -463,6 +477,7 @@ jobs:
               2>&1 | tee "evidence-cofinal/compile-${m//./_}.log"
             ! grep -F 'sorryAx' "evidence-cofinal/compile-${m//./_}.log"
             ! grep -F 'error:' "evidence-cofinal/compile-${m//./_}.log"
+            printf '%s\n' "$m" >> evidence-cofinal/completed-modules.txt
           done < evidence-cofinal/module-order.txt
 
           # Positive regression: the REAL narrow producer is well typed.
@@ -644,6 +659,66 @@ jobs:
             2>&1 | tee evidence-cofinal/assembly/graph-export.log
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
+
+      - name: Preserve completed source-bound cofinal modules
+        id: cofinal-checkpoint
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, pathlib, shutil, subprocess
+          root=pathlib.Path("evidence-cofinal")
+          manifest=root/"source-manifest.json"
+          done=root/"completed-modules.txt"
+          if not manifest.is_file() or not done.is_file():
+              print("NO_COMPLETED_COFINAL_CHECKPOINT")
+              raise SystemExit(0)
+          rows=json.loads(manifest.read_text())
+          completed=set(done.read_text().splitlines())
+          available={row["module"] for row in rows}
+          cache=pathlib.Path(".rh-cofinal-checkpoint")
+          if cache.exists():
+              shutil.rmtree(cache)
+          (cache/"oleans").mkdir(parents=True)
+          blobs=[]; hashes=[]; accepted=set()
+          for row in rows:
+              module=row["module"]
+              if module not in completed:
+                  continue
+              src=pathlib.Path(row["source"])
+              if hashlib.sha256(src.read_bytes()).hexdigest()!=row["sha256"]:
+                  raise RuntimeError("CHECKPOINT_SOURCE_DRIFT "+module)
+              deps=set()
+              for line in src.read_text().splitlines():
+                  if line.strip().startswith("import "):
+                      deps.update(line.strip()[7:].split())
+              if not (deps & available)<=accepted:
+                  continue
+              olean=pathlib.Path(".lake/build/lib/lean")/(module.replace(".","/")+".olean")
+              if not olean.is_file():
+                  raise RuntimeError("CHECKPOINT_OLEAN_MISSING "+module)
+              blob=subprocess.check_output(["git","hash-object",str(src)],text=True).strip()
+              rel="oleans/"+module+".olean"
+              shutil.copyfile(olean,cache/rel)
+              digest=hashlib.sha256((cache/rel).read_bytes()).hexdigest()
+              blobs.append(module+" "+blob+"\n")
+              hashes.append(digest+"  "+rel+"\n")
+              accepted.add(module)
+          (cache/"source-blobs.txt").write_text("".join(blobs))
+          (cache/"oleans.sha256").write_text("".join(hashes))
+          (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
+          with open(__import__("os").environ["GITHUB_OUTPUT"],"a") as out:
+              out.write("count="+str(len(accepted))+"\n")
+          print("SAVED_SOURCE_BOUND_PARTIAL_MODULES",len(accepted))
+          PY
+
+      - name: Save partial cofinal checkpoint
+        if: always() && steps.cofinal-checkpoint.outputs.count != '' && steps.cofinal-checkpoint.outputs.count != '0'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Record exact-head receipt
         if: always()
