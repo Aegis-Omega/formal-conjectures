@@ -403,6 +403,102 @@ theorem trigram_full_weighted_gram_margin
   rw [AEGIS.RHGramExpansionV13.B_packetSum] at hmargin
   linarith
 
+
+/-! ## Bagua: Q = 2, p = 2, four complementary pairs
+
+The binary model has 2 * 2^2 = 8 states. The involution
+i ↦ 7 - i pairs (0,7), (1,6), (2,5), (3,4).
+These are exactly complementary three-bit words.
+
+The + and - projectors are reconstructed with exact complex halves;
+neither parity sector discards any source coefficient. The *actual*
+Trigram margin is then applied independently to BOTH projections,
+under its stated common radius-2/5 support hypothesis. No global
+complement symmetry of B or arbitrary-support RH sign is assumed. -/
+
+theorem bagua_q2_p2_count : 2 * 2 ^ 2 = 8 := by norm_num
+
+/-- Complement of all three binary digits on the eight-element carrier. -/
+def baguaOpp (i : Fin 8) : Fin 8 :=
+  ⟨7 - i.val, by omega⟩
+
+theorem baguaOpp_involutive (i : Fin 8) :
+    baguaOpp (baguaOpp i) = i := by
+  apply Fin.ext
+  dsimp [baguaOpp]
+  omega
+
+theorem baguaOpp_has_no_fixed_points (i : Fin 8) :
+    baguaOpp i ≠ i := by
+  intro h
+  have hv : 7 - i.val = i.val := congrArg Fin.val h
+  have hi := i.isLt
+  omega
+
+/-- Complement-even component: the paired contributions reinforce
+in the + channel, independently of the ordering of the four pairs. -/
+def baguaPlus (z : Fin 8 → ℂ) (i : Fin 8) : ℂ :=
+  (z i + z (baguaOpp i)) / 2
+
+/-- Complement-odd component: the paired contributions reinforce
+in the - channel after reversing one sign. -/
+def baguaMinus (z : Fin 8 → ℂ) (i : Fin 8) : ℂ :=
+  (z i - z (baguaOpp i)) / 2
+
+theorem baguaPlus_even (z : Fin 8 → ℂ) (i : Fin 8) :
+    baguaPlus z (baguaOpp i) = baguaPlus z i := by
+  simp only [baguaPlus, baguaOpp_involutive]
+  ring
+
+theorem baguaMinus_odd (z : Fin 8 → ℂ) (i : Fin 8) :
+    baguaMinus z (baguaOpp i) = -baguaMinus z i := by
+  simp only [baguaMinus, baguaOpp_involutive]
+  ring
+
+/-- Exact direct-sum reconstruction; neither complementary mode is lost. -/
+theorem bagua_reconstruct (z : Fin 8 → ℂ) (i : Fin 8) :
+    baguaPlus z i + baguaMinus z i = z i := by
+  unfold baguaPlus baguaMinus
+  ring
+
+/-- The two projections are genuine idempotents, not just labels. -/
+theorem baguaPlus_idempotent (z : Fin 8 → ℂ) (i : Fin 8) :
+    baguaPlus (baguaPlus z) i = baguaPlus z i := by
+  simp only [baguaPlus, baguaOpp_involutive]
+  ring
+
+theorem baguaMinus_idempotent (z : Fin 8 → ℂ) (i : Fin 8) :
+    baguaMinus (baguaMinus z) i = baguaMinus z i := by
+  simp only [baguaMinus, baguaOpp_involutive]
+  ring
+
+/-- BOTH exact complementary sectors inherit the existing 1/16
+genuine Weil Gram margin on one Trigram 2/5 window. All 64 entries
+of the original eight-packet Hermitian matrix are retained by the
+underlying full-Gram theorem; these are not eight scalar tests. -/
+theorem bagua_complementary_sector_margins
+    (gs : Fin 8 → WeilCompactSmoothGV1) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center)
+    (z : Fin 8 → ℂ) :
+    ((1 / 16 : ℝ) *
+      AEGIS.WeilDisjointEnergyV2.energy
+        (packetSum (baguaPlus z) gs).1 ≤
+        -(∑ i, ∑ j, baguaPlus z i * star (baguaPlus z j) *
+          B (gs i) (gs j)).re) ∧
+    ((1 / 16 : ℝ) *
+      AEGIS.WeilDisjointEnergyV2.energy
+        (packetSum (baguaMinus z) gs).1 ≤
+        -(∑ i, ∑ j, baguaMinus z i * star (baguaMinus z j) *
+          B (gs i) (gs j)).re) := by
+  constructor
+  · exact trigram_full_weighted_gram_margin 7 (baguaPlus z)
+      gs center hm hw
+  · exact trigram_full_weighted_gram_margin 7 (baguaMinus z)
+      gs center hm hw
+
+
 end AEGIS.RHActualNarrowGramSignV1
 
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive
@@ -417,3 +513,13 @@ end AEGIS.RHActualNarrowGramSignV1
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_window_packetSum
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_moment_packetSum
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_full_weighted_gram_margin
+
+#print axioms AEGIS.RHActualNarrowGramSignV1.bagua_q2_p2_count
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaOpp_involutive
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaOpp_has_no_fixed_points
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaPlus_even
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaMinus_odd
+#print axioms AEGIS.RHActualNarrowGramSignV1.bagua_reconstruct
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaPlus_idempotent
+#print axioms AEGIS.RHActualNarrowGramSignV1.baguaMinus_idempotent
+#print axioms AEGIS.RHActualNarrowGramSignV1.bagua_complementary_sector_margins
