@@ -75,17 +75,16 @@ theorem actual_packet_sum_nonpositive_of_optimized_rows
     mul_nonpos_of_nonpos_of_nonneg (by norm_num) henergy
   exact hopt.trans hnonpos
 
-/-- Source-true RH terminal that consumes the universal fine constructor
-and the strongest existing optimized actual Weil–Schur estimate.
+/-- Universal sign consumer using a *selected* finite reconstruction, not
+an arbitrary partition. The starting geometry and actual Weil Gram are
+constructed by the existing source theorem. The explicit hselect obligation
+may replace that partition with one certified weighted-Schur reconstruction.
 
-The producer hrows is an *explicit hypothesis*. It must supply real
-symmetric nonnegative costs and positive weights for the actual atoms at
-all their constructed centers, including every genuine prime-power mixed
-term. A verified proof of hrows (or a suitable weakened producer for the
-chosen reconstruction) would close the universal arithmetic-sign step.
-Nothing about CI success proves hrows. -/
+This choice of quantifiers is essential: arbitrary fine decompositions may
+contain repeated or nearly identical atoms and need not satisfy a strict
+off-diagonal row budget. No universal analytic producer is assumed proved. -/
 theorem riemannHypothesis_of_optimized_actual_row_producer
-    (hrows :
+    (hselect :
       ∀ (g : WeilCompactSmoothGV1)
         (hm : WeilMomentConditionsV1 g)
         (n : ℕ)
@@ -96,31 +95,36 @@ theorem riemannHypothesis_of_optimized_actual_row_producer
         (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
           -(B (gs i) (gs i)).re) →
         g = packetSum (fun _ => (1 : ℂ)) gs →
-        ∃ (c : Fin (n + 1) → Fin (n + 1) → ℝ)
-          (w : Fin (n + 1) → ℝ),
-          (∀ i j, 0 ≤ c i j) ∧
-          (∀ i, c i i = 0) ∧
-          (∀ i j, c i j = c j i) ∧
-          (∀ i, 0 < w i) ∧
-          (∀ i j, i ≠ j →
-            ‖B (gs i) (gs j)‖ ≤ c i j *
-              (Real.sqrt (energy (gs i).1) *
-                Real.sqrt (energy (gs j).1))) ∧
-          (∀ i, ∑ j, c i j * (w j / w i) ≤
-            (46688 / 65536 : ℝ))) :
+        ∃ (m : ℕ) (selected : Fin (m + 1) → WeilCompactSmoothGV1),
+          g = packetSum (fun _ => (1 : ℂ)) selected ∧
+          (∀ i, (5671 / 3200 : ℝ) * energy (selected i).1 ≤
+            -(B (selected i) (selected i)).re) ∧
+          ∃ (c : Fin (m + 1) → Fin (m + 1) → ℝ)
+            (w : Fin (m + 1) → ℝ),
+            (∀ i j, 0 ≤ c i j) ∧
+            (∀ i, c i i = 0) ∧
+            (∀ i j, c i j = c j i) ∧
+            (∀ i, 0 < w i) ∧
+            (∀ i j, i ≠ j →
+              ‖B (selected i) (selected j)‖ ≤ c i j *
+                (Real.sqrt (energy (selected i).1) *
+                  Real.sqrt (energy (selected j).1))) ∧
+            (∀ i, ∑ j, c i j * (w j / w i) ≤
+              (46688 / 65536 : ℝ))) :
     RiemannHypothesis := by
   apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
   intro g hm
   obtain ⟨n, gs, center, _hmom, hd, hwidth, hpacket, _hgram⟩ :=
     AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support g hm
-  obtain ⟨c, w, hc, hzero, hsym, hw, hcross, hrow⟩ :=
-    hrows g hm n gs center hwidth hd hpacket
+  obtain ⟨m, selected, hselected, hdiag, c, w, hc, hzero, hsym, hw,
+    hcross, hrow⟩ :=
+    hselect g hm n gs center hwidth hd hpacket
   have hsign :=
     actual_packet_sum_nonpositive_of_optimized_rows
-      gs c w hc hzero hsym hw hd hcross hrow
-  rw [hpacket]
-  change (B (packetSum (fun _ => (1 : ℂ)) gs)
-    (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
+      selected c w hc hzero hsym hw hdiag hcross hrow
+  rw [hselected]
+  change (B (packetSum (fun _ => (1 : ℂ)) selected)
+    (packetSum (fun _ => (1 : ℂ)) selected)).re ≤ 0
   exact hsign
 
 end AEGIS.RHOptimizedSchurGlobalJoinV1
