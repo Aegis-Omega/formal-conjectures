@@ -40,6 +40,11 @@ noncomputable section
 namespace AEGIS.RHNarrowDetectingTrigramDenseV1
 
 open AEGIS.RHNarrowFixedDetectorV1
+open AEGIS.RestrictedWeilCriterionResidueWitnessV11
+open AEGIS.RestrictedWeilCriterionResidueCoefficientV11
+open AEGIS.RHTargetPacketMellinGeneralV2
+open AEGIS.WeilMixedAlgebraV2
+open AEGIS.RestrictedWeilCriterionKernelBridgeV10
 open AEGIS.WeilZeroTwoPointV11
 open AEGIS.WeilZeroTranslationV11
 
