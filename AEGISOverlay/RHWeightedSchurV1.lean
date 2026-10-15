@@ -120,6 +120,90 @@ theorem weighted_gram {ι : Type*} [Fintype ι] [DecidableEq ι]
       add_le_add le_rfl (mul_le_mul_of_nonneg_left hs hE)
     _ = _ := by ring
 
+
+/-- Full complex weighted-Schur Gram with *unequal* individual energies.
+The previous eleven-translate consumer has one common energy. This
+version retains every atom's own energy and arbitrary complex
+coefficients, so it can be applied to non-translate finite families.
+
+The cross estimate with square-root energies is an EXPLICIT input:
+the theorem does not assume or manufacture Weil prime estimates. -/
+theorem weighted_gram_variable_energy
+    {ι : Type*} [Fintype ι] [DecidableEq ι]
+    (H : ι → ι → ℂ) (z : ι → ℂ) (E : ι → ℝ)
+    (c : ι → ι → ℝ) (w : ι → ℝ) (D S : ℝ)
+    (hE : ∀ i, 0 ≤ E i)
+    (hc : ∀ i j, 0 ≤ c i j)
+    (hzero : ∀ i, c i i = 0)
+    (hsym : ∀ i j, c i j = c j i)
+    (hw : ∀ i, 0 < w i)
+    (hdiag : ∀ i, D * E i ≤ -(H i i).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖H i j‖ ≤ c i j * (Real.sqrt (E i) * Real.sqrt (E j)))
+    (hrow : ∀ i, ∑ j, c i j * (w j / w i) ≤ S) :
+    (∑ i, ∑ j, z i * star (z j) * H i j).re ≤
+      -(D - S) * ∑ i, E i * ‖z i‖ ^ 2 := by
+  let a : ι → ℝ := fun i => Real.sqrt (E i) * ‖z i‖
+  have hpoint (i j : ι) :
+      (z i * star (z j) * H i j).re ≤
+      (if j = i then -(D * E i) * ‖z i‖ ^ 2 else 0) +
+        c i j * (a i * a j) := by
+    by_cases hij : j = i
+    · subst j
+      simp only [ite_true, hzero, zero_mul, zero_add, add_zero]
+      rw [Complex.star_def, Complex.mul_conj,
+        Complex.normSq_eq_norm_sq, Complex.re_ofReal_mul]
+      have hd : (H i i).re ≤ -(D * E i) := by linarith [hdiag i]
+      nlinarith [mul_le_mul_of_nonneg_left hd (sq_nonneg ‖z i‖)]
+    · simp only [if_neg hij, zero_add]
+      calc
+        (z i * star (z j) * H i j).re ≤
+            ‖z i * star (z j) * H i j‖ := Complex.re_le_norm _
+        _ = ‖z i‖ * ‖z j‖ * ‖H i j‖ := by
+          simp only [norm_mul, norm_star]
+        _ ≤ ‖z i‖ * ‖z j‖ *
+            (c i j * (Real.sqrt (E i) * Real.sqrt (E j))) :=
+          mul_le_mul_of_nonneg_left (hcross i j (Ne.symm hij))
+            (mul_nonneg (norm_nonneg _) (norm_nonneg _))
+        _ = c i j * (a i * a j) := by
+          dsimp [a]
+          ring
+  have hall :
+      (∑ i, ∑ j, (z i * star (z j) * H i j).re) ≤
+      ∑ i, ∑ j,
+        ((if j = i then -(D * E i) * ‖z i‖ ^ 2 else 0) +
+          c i j * (a i * a j)) := by
+    exact sum_le_sum fun i _ => sum_le_sum fun j _ => hpoint i j
+  have hs := weighted_schur c w a S hc hsym hw hrow
+  have hsquares :
+      (∑ i, a i ^ 2) = ∑ i, E i * ‖z i‖ ^ 2 := by
+    apply sum_congr rfl
+    intro i _
+    dsimp [a]
+    rw [mul_pow, Real.sq_sqrt (hE i)]
+  rw [hsquares] at hs
+  simp only [sum_add_distrib, sum_ite_eq', mem_univ, if_true] at hall
+  rw [Complex.re_sum]
+  simp_rw [Complex.re_sum]
+  calc
+    _ ≤ (∑ i, -(D * E i) * ‖z i‖ ^ 2) +
+        (∑ i, ∑ j, c i j * (a i * a j)) := hall
+    _ ≤ (∑ i, -(D * E i) * ‖z i‖ ^ 2) +
+        S * (∑ i, E i * ‖z i‖ ^ 2) :=
+          add_le_add_left hs _
+    _ = -(D - S) * (∑ i, E i * ‖z i‖ ^ 2) := by
+      have hdiagSum :
+          (∑ i, -(D * E i) * ‖z i‖ ^ 2) =
+            -D * (∑ i, E i * ‖z i‖ ^ 2) := by
+        rw [Finset.mul_sum]
+        apply sum_congr rfl
+        intro i _
+        ring
+      rw [hdiagSum]
+      ring
+
+
 #print axioms AEGIS.WeightedSchur.weighted_schur
 #print axioms AEGIS.WeightedSchur.weighted_gram
+#print axioms AEGIS.WeightedSchur.weighted_gram_variable_energy
 end AEGIS.WeightedSchur
