@@ -15,6 +15,8 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHBaguaActualWeilV1
+import AEGISOverlay.RHFixedPacketDenseShiftV1
+import AEGISOverlay.RHNarrowFixedDetectorV1
 
 /-!
 # AEGIS Ω — exact femtosecond time slices as arithmetic Weil translations
@@ -374,6 +376,130 @@ theorem timeSliceFamily_full_weighted_margin {n : ℕ}
     (timeSliceFamily_moments g p ticks hm)
     (timeSliceFamily_common_window g p origin center ticks hw hspan)
 
+
+/-! ## Two exact femtosecond channels form a dense spectral sampling group
+
+A single fixed femtosecond step at p = 2 samples log 2 / 10^15.
+At p = 3 it samples log 3 / 10^15. Their ratio is irrational,
+hence the additive group that both generate is dense in real log-time.
+This is a theorem about LOGARITHMIC SPECTRAL coordinates, not an
+assertion that physical clocks have infinite resolution.
+
+The sign criterion below uses the actual source Weil two-point test
+of a fixed moment-zero packet. Density plus proven continuity turns
+positivity at these exact discrete coordinates into positivity at
+ALL real shifts. The global four-phase sign on the discrete group
+remains an explicit, mathematically substantial hypothesis. -/
+
+def fsTwoThreeShiftGroup : AddSubgroup ℝ :=
+  AddSubgroup.closure {fsLogSlice 2 1, fsLogSlice 3 1}
+
+/-- Rational rescaling by one femtosecond does not change the
+irrational ratio of the two prime-logarithmic sampling steps. -/
+theorem fsTwoThree_slice_ratio :
+    fsLogSlice 2 1 / fsLogSlice 3 1 =
+      Real.log 2 / Real.log 3 := by
+  have h3 : Real.log (3 : ℝ) ≠ 0 :=
+    ne_of_gt (Real.log_pos (by norm_num : (1 : ℝ) < 3))
+  unfold fsLogSlice
+  norm_num only [Int.cast_one]
+  field_simp [h3]
+  ring
+
+/-- The two exact integer-femtosecond sampling channels generate
+a dense additive subgroup of the real spectral translation axis. -/
+theorem fsTwoThreeShiftGroup_dense :
+    Dense (fsTwoThreeShiftGroup : Set ℝ) := by
+  unfold fsTwoThreeShiftGroup
+  apply (dense_addSubgroupClosure_pair_iff).mpr
+  rw [fsTwoThree_slice_ratio]
+  exact RHSnowflakeLog23.irrational_log_two_div_log_three
+
+/-- Actual four-phase Weil arithmetic sign of the fixed detecting
+packet restricted to the dense femtosecond/log2/log3 subgroup. -/
+def FsTwoThreeDetectorSign : Prop :=
+  ∀ d : ℝ, d ∈ fsTwoThreeShiftGroup →
+    ∀ c : ℂ, AEGIS.RHFixedPacketFourPhaseV1.WeilFourPhaseV1 c →
+      (WeilExplicitRightSideV1
+        (WeilAutocorrelationV1
+          (WeilTwoPointTranslateV11
+            AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket d c))).re ≤ 0
+
+/-- Dense spectral sampling preserves the complete four-phase
+test under the ACTUAL Weil kernel continuity. This does not
+assert that the sampled values are sign-correct. -/
+theorem fsTwoThree_detector_sign_implies_all_shifts
+    (h : FsTwoThreeDetectorSign) :
+    AEGIS.RHFixedPacketFourPhaseV1.FixedPacketFourPhaseSignV1
+      AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket := by
+  let g := AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket
+  have hm : WeilMomentConditionsV1 g :=
+    AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
+  intro d c hc
+  let Q : ℝ → ℝ := fun x =>
+    AEGIS.WeilZeroKernelHermitianV11.WeilTwoPointValueV1
+      (WeilAutocorrelationZeroQuadraticV11 g).re
+      (WeilZeroTranslationKernelV11 g x) c
+  have hcontinuous : Continuous Q :=
+    AEGIS.RHFixedPacketDenseShiftV1.translated_four_phase_value_continuous g c
+  have hset : IsClosed {x : ℝ | 0 ≤ Q x} :=
+    isClosed_Ici.preimage hcontinuous
+  have hsubset : (fsTwoThreeShiftGroup : Set ℝ) ⊆ {x : ℝ | 0 ≤ Q x} := by
+    intro x hx
+    have hmx := AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      g x c hm
+    have hzero : 0 ≤
+        (WeilAutocorrelationZeroQuadraticV11
+          (WeilTwoPointTranslateV11 g x c)).re :=
+      (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+        (WeilTwoPointTranslateV11 g x c) hmx).mp (h x hx c hc)
+    change 0 ≤ Q x
+    rw [AEGIS.WeilZeroKernelHermitianV11.twoPoint_zero_quadratic_re_eq_four_phase_value
+      g hm x c] at hzero
+    exact hzero
+  have hclosed : closure (fsTwoThreeShiftGroup : Set ℝ) ⊆
+      {x : ℝ | 0 ≤ Q x} := closure_minimal hsubset hset
+  have hQ : 0 ≤ Q d := by
+    apply hclosed
+    rw [fsTwoThreeShiftGroup_dense.closure_eq]
+    trivial
+  apply (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+    (WeilTwoPointTranslateV11 g d c)
+    (AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      g d c hm)).mpr
+  change 0 ≤ (WeilAutocorrelationZeroQuadraticV11
+    (WeilTwoPointTranslateV11 g d c)).re
+  rw [AEGIS.WeilZeroKernelHermitianV11.twoPoint_zero_quadratic_re_eq_four_phase_value
+    g hm d c]
+  exact hQ
+
+/-- Exact RH consumer of the dense two-prime femtosecond sampling
+criterion, with the global sign premise plainly visible. -/
+theorem riemannHypothesis_of_fsTwoThreeDetectorSign
+    (h : FsTwoThreeDetectorSign) : RiemannHypothesis :=
+  AEGIS.RHNarrowFixedDetectorV1.riemannHypothesis_of_narrow_four_phase_sign
+    (fsTwoThree_detector_sign_implies_all_shifts h)
+
+/-- Conversely, RH implies the actual signed tests on every
+femtosecond sampled shift. Neither direction is a claim of
+an unconditional RH theorem. -/
+theorem fsTwoThreeDetectorSign_of_riemannHypothesis
+    (h : RiemannHypothesis) : FsTwoThreeDetectorSign := by
+  intro d _hd c _hc
+  let g := AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket
+  have hm :=
+    AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      g d c AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
+  exact (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+    (WeilTwoPointTranslateV11 g d c) hm).mpr
+    (AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13
+      h (WeilTwoPointTranslateV11 g d c) hm)
+
+theorem fsTwoThreeDetectorSign_iff_riemannHypothesis :
+    FsTwoThreeDetectorSign ↔ RiemannHypothesis :=
+  ⟨riemannHypothesis_of_fsTwoThreeDetectorSign,
+    fsTwoThreeDetectorSign_of_riemannHypothesis⟩
+
 end AEGIS.RHTimeSliceWeilV1
 
 #print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_add
@@ -395,3 +521,9 @@ end AEGIS.RHTimeSliceWeilV1
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_common_window
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_gram
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin
+#print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThree_slice_ratio
+#print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThreeShiftGroup_dense
+#print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThree_detector_sign_implies_all_shifts
+#print axioms AEGIS.RHTimeSliceWeilV1.riemannHypothesis_of_fsTwoThreeDetectorSign
+#print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_of_riemannHypothesis
+#print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_iff_riemannHypothesis
