@@ -17,6 +17,7 @@ limitations under the License.
 import AEGISOverlay.RHBaguaActualWeilV1
 import AEGISOverlay.RHFixedPacketDenseShiftV1
 import AEGISOverlay.RHNarrowFixedDetectorV1
+import AEGISOverlay.RHArchRow29V1
 
 /-!
 # AEGIS Ω — exact femtosecond time slices as arithmetic Weil translations
@@ -596,6 +597,78 @@ theorem fsTwoThreeDetectorSign_iff_riemannHypothesis :
   ⟨riemannHypothesis_of_fsTwoThreeDetectorSign,
     fsTwoThreeDetectorSign_of_riemannHypothesis⟩
 
+
+/-! ## Genuine von Mangoldt signed-prime/Arch-29 bridge for time layers
+
+The exact time-slice family inherits the source fine support and two
+vanishing moments. For ORDERED, separated time layers the existing
+moment-zero Arch theorem bounds the full infinite geometric row by
+29 / 65536, uniformly in n. We therefore preserve the signed REAL
+prime-row allowance 57401 / 65536, without taking absolute values
+of favorable negative prime interference.
+
+This is an actual Weil coercivity theorem for every finite n WITH
+the genuine prime cost and its row budget supplied as explicit
+hypotheses. It does not fabricate a global signed-prime producer,
+a far-separated exact reconstruction of all compact packets, or RH. -/
+
+/-- Full source Weil coercivity on an arbitrary-size family of
+exact signed-femtosecond spectral slices, with a SIGNED prime row
+rather than a norm-based prime row. The only additional analytic
+input is the explicit actual von Mangoldt estimate. -/
+theorem timeSliceFamily_signed_prime_arch29 {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p origin : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      g origin)
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+      (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤
+        fsLogSlice p (ticks j) - fsLogSlice p (ticks i))
+    (primeCost : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (hsym : ∀ i j, primeCost i j = primeCost j i)
+    (hprime : ∀ i j : Fin (n + 1), i < j →
+      (WeilPrimeSumV1
+        (mixed (timeSliceFamily g p ticks i)
+          (timeSliceFamily g p ticks j))).re ≤
+        primeCost i j *
+          (energy (timeSliceFamily g p ticks i).1 +
+            energy (timeSliceFamily g p ticks j).1))
+    (hprimeRow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      primeCost i j) ≤ (57401 / 65536 : ℝ)) :
+    (B (packetSum (fun _ => (1 : ℂ)) (timeSliceFamily g p ticks))
+       (packetSum (fun _ => (1 : ℂ)) (timeSliceFamily g p ticks))).re ≤
+      -(641 / 32768 : ℝ) *
+        (∑ i, energy (timeSliceFamily g p ticks i).1) := by
+  let centers : Fin (n + 1) → ℝ :=
+    fun i => origin + fsLogSlice p (ticks i)
+  have hwFamily : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (timeSliceFamily g p ticks i) (centers i) := by
+    intro i
+    have htranslated := translate_logSupportIn g
+      (fsLogSlice p (ticks i))
+      (origin - 1 / 256) (origin + 1 / 256) hw
+    change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      (translatePacket g (fsLogSlice p (ticks i)))
+      (origin + fsLogSlice p (ticks i) - 1 / 256)
+      (origin + fsLogSlice p (ticks i) + 1 / 256)
+    convert htranslated using 1 <;> ring
+  have hsepFamily : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+      (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ centers j - centers i := by
+    intro i j hij
+    obtain ⟨hpositive, hgap⟩ := hsep i j hij
+    refine ⟨hpositive, ?_⟩
+    dsimp [centers]
+    linarith
+  exact AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row
+    (timeSliceFamily g p ticks) centers hwFamily
+    (timeSliceFamily_moments g p ticks hm)
+    hsepFamily primeCost hsym hprime hprimeRow
+
 end AEGIS.RHTimeSliceWeilV1
 
 #print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_add
@@ -629,3 +702,4 @@ end AEGIS.RHTimeSliceWeilV1
 #print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_im
 #print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_polar
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSlice_mellin_at_zero_polar
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_signed_prime_arch29
