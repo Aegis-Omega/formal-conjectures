@@ -33,11 +33,13 @@ on:
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
 
-# Only the newest exact-head replay for a given PR is load-bearing.
-# Isolated by PR number; unrelated PRs and other workflows are unaffected.
+# Preserve an already-running, SHA-pinned kernel replay when new commits arrive.
+# GitHub keeps at most one pending replay in this PR concurrency group, so
+# the latest candidate waits rather than cancelling every expensive proof DAG.
+# Every job still checks out and records its own immutable exact source SHA.
 concurrency:
   group: rh-cofinal-exact-head-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
