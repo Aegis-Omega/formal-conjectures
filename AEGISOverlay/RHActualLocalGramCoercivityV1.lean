@@ -154,7 +154,7 @@ This supplies the exact stronger diagonal input required by the historical
 eleven-block comparison. It does not assert its 55 cross-coefficient bounds
 or the universal sign. -/
 
-theorem every_packet_actual_fine_coercive_gram
+theorem every_packet_actual_fine_coercive_gram_with_support
     (n : ℕ)
     (g : WeilCompactSmoothGV1)
     (hm : WeilMomentConditionsV1 g)
@@ -169,6 +169,8 @@ theorem every_packet_actual_fine_coercive_gram
     ∃ gs : Fin (n + 1) → WeilCompactSmoothGV1,
       (∀ i, WeilMomentConditionsV1 (gs i)) ∧
       (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤ -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
       g = packetSum (fun _ => (1 : ℂ)) gs ∧
       (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =
         (∑ i, ∑ j, B (gs i) (gs j)).re := by
@@ -209,6 +211,12 @@ theorem every_packet_actual_fine_coercive_gram
       _ = tsupport (fun y => φ y * χ i y) :=
         congrArg tsupport hswap
       _ ⊆ tsupport (χ i) := tsupport_factor_mul φ (χ i)
+  have hwidth (i : Fin (n + 1)) :
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i) := by
+    change tsupport (lift (gs i).1) ⊆
+      Icc (center i - 1 / 256) (center i + 1 / 256)
+    exact (hsLocal i).trans (hcut i)
   have hdiag (i : Fin (n + 1)) :
       (5671 / 3200 : ℝ) * energy (gs i).1 ≤ -(B (gs i) (gs i)).re := by
     have hw : AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
@@ -239,7 +247,7 @@ theorem every_packet_actual_fine_coercive_gram
       g.1 = (fun x => ∑ i : Fin (n + 1), (gs i).1 x) := hsum
       _ = (packetSum (fun _ => (1 : ℂ)) gs).1 :=
         (AEGIS.RHFiniteActualGramJoinV1.packetSum_one_apply n gs).symm
-  refine ⟨gs, hmom, hdiag, hpacket, ?_⟩
+  refine ⟨gs, hmom, hdiag, hwidth, hpacket, ?_⟩
   rw [hpacket]
   change
     (B (packetSum (fun _ => (1 : ℂ)) gs)
@@ -247,6 +255,31 @@ theorem every_packet_actual_fine_coercive_gram
       (∑ i, ∑ j, B (gs i) (gs j)).re
   rw [B_packetSum]
   simp
+
+
+/-- Preserve the original interface while the stronger producer retains support witnesses. -/
+theorem every_packet_actual_fine_coercive_gram
+    (n : ℕ)
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : 0 ≤ L)
+    (hs : tsupport (lift g.1) ⊆ Icc (-L) L)
+    (χ : Fin (n + 1) → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x ∈ Icc (-L) L, ∑ i : Fin (n + 1), χ i x = 1)
+    (center : Fin (n + 1) → ℝ)
+    (hcut : ∀ i, tsupport (χ i) ⊆
+      Icc (center i - 1 / 256) (center i + 1 / 256)) :
+    ∃ gs : Fin (n + 1) → WeilCompactSmoothGV1,
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤ -(B (gs i) (gs i)).re) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+  obtain ⟨gs, hmom, hd, _, hpacket, hgram⟩ :=
+    every_packet_actual_fine_coercive_gram_with_support
+      n g hm L hL hs χ hχ hpart center hcut
+  exact ⟨gs, hmom, hd, hpacket, hgram⟩
 
 
 /-- For a packet in the *already certified* 693/2000 log-window, any
@@ -291,3 +324,5 @@ end AEGIS.RHActualLocalGramCoercivityV1
 #print axioms AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_narrow_coercive_gram
 #print axioms AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram
 #print axioms AEGIS.RHActualLocalGramCoercivityV1.every_narrow_packet_actual_localized_full_gram_nonpositive
+
+#print axioms AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram_with_support

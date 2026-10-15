@@ -31,14 +31,15 @@ The remaining universal-sign obligation is precisely control of this
 genuine mixed defect. No unconditional RH statement is introduced.
 -/
 
-open Set Finset Complex
-open scoped ContDiff BigOperators
+open Set Finset Complex MeasureTheory
+open scoped ContDiff BigOperators ComplexConjugate
 set_option autoImplicit false
 noncomputable section
 
 namespace AEGIS.RHActualMixedDefectV1
 
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilMixedClosureV2
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHGramExpansionV13
 
@@ -589,7 +590,7 @@ theorem fine_width_into_nine_midpoint
   intro t ht
   obtain ⟨hlo, hhi⟩ := hu ht
   obtain ⟨hablo, habhi⟩ := abs_le.mp hab
-  constructor <;> dsimp only [Set.mem_Icc] <;> linarith
+  constructor <;> linarith
 
 /-- Multiplication by any complex scalar preserves the common 9/64
 logarithmic support; the proof is about the genuine source packet. -/
@@ -1141,7 +1142,7 @@ theorem distinct_fine_arch_decay_any_positive_gap
     p q (a - 1 / 256) (a + 1 / 256)
       (b - 1 / 256) (b + 1 / 256) E
       hlogp hlogq δ hδ
-      (by dsimp [δ]; ring)
+      (by dsimp [δ]; linarith)
       (by ring)
       hm hE
       (fun u => distinct_logCross_norm_le_mean_energy p q u)
@@ -1221,7 +1222,7 @@ theorem distinct_fine_far_arch_moment_decay
     p q (a - 1 / 64) (a + 1 / 64)
       (b - 1 / 64) (b + 1 / 64) E
       hlogp hlogq (by linarith)
-      δ hδ (by dsimp [δ]; ring)
+      δ hδ (by dsimp [δ]; linarith)
       (by norm_num [CorrelationSupportDifferenceWidthV31]; ring)
       hm hE
       (fun u => distinct_logCross_norm_le_mean_energy p q u)
@@ -1675,7 +1676,7 @@ theorem fine_width_into_common_nine
   intro t ht
   obtain ⟨hlo, hhi⟩ := hu ht
   obtain ⟨haclo, hachi⟩ := abs_le.mp hcenter
-  constructor <;> dsimp only [Set.mem_Icc] <;> linarith
+  constructor <;> linarith
 
 /-- Arbitrarily many different fine moment-zero atoms with centers
 in one 35/256 neighborhood have the exact signed radius-9/64 Weil
@@ -1826,6 +1827,54 @@ theorem distinct_fine_actual_B_of_integer_log_gap
   simpa using hbound
 
 
+/-- Below the first nontrivial integer logarithm, every integer sample
+misses a separated fine correlation window. -/
+theorem integer_log_avoids_below_log_two
+    (d : ℝ) (hlow : (1 / 128 : ℝ) < d)
+    (hhigh : d < Real.log 2 - (1 / 128 : ℝ)) :
+    ∀ m : ℕ, 0 < m → (1 / 128 : ℝ) < |Real.log (m : ℝ) - d| := by
+  intro m hm
+  by_cases hm1 : m = 1
+  · subst m
+    simp only [Nat.cast_one, Real.log_one, zero_sub, abs_neg]
+    rw [abs_of_pos (by linarith : 0 < d)]
+    exact hlow
+  · have hm2 : 2 ≤ m := by omega
+    have hreal : (2 : ℝ) ≤ (m : ℝ) := by exact_mod_cast hm2
+    have hlog : Real.log (2 : ℝ) ≤ Real.log (m : ℝ) :=
+      Real.log_le_log (by norm_num : (0 : ℝ) < 2) hreal
+    rw [abs_of_nonneg (by linarith : 0 ≤ Real.log (m : ℝ) - d)]
+    linarith
+
+/-- The entire genuine prime-power contribution vanishes on separated
+fine windows below log 2; no integer-log exclusion is assumed. -/
+theorem distinct_fine_prime_zero_below_log_two
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hlow : (1 / 128 : ℝ) < b - a)
+    (hhigh : b - a < Real.log 2 - (1 / 128 : ℝ)) :
+    WeilPrimeSumV1 (mixed p q) = 0 := by
+  exact distinct_fine_actual_prime_zero_of_integer_log_gap p q a b hp hq hlow
+    (integer_log_avoids_below_log_two (b - a) hlow hhigh)
+
+/-- Actual mixed Weil interaction on the sub-log-2 interval: all prime
+samples are zero, leaving the source-bound moment-zero Arch decay. -/
+theorem distinct_fine_actual_B_below_log_two
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hlow : (1 / 128 : ℝ) < b - a)
+    (hhigh : b - a < Real.log 2 - (1 / 128 : ℝ)) :
+    ‖B p q‖ ≤
+      (1 / 128 : ℝ) *
+        (Real.exp (-5 * ((b - a) - 1 / 128) / 2) /
+          (1 - Real.exp (-2 * ((b - a) - 1 / 128)))) *
+          (energy p.1 + energy q.1) := by
+  exact distinct_fine_actual_B_of_integer_log_gap p q a b hp hq hm hlow
+    (integer_log_avoids_below_log_two (b - a) hlow hhigh)
+
 /-- The first explicit integer-log-free middle interval, between the
 two neighboring prime logarithms log 2 and log 3. No universally
 quantified exclusion certificate is required from the caller. -/
@@ -1844,9 +1893,11 @@ theorem distinct_fine_prime_zero_between_log_two_three
   by_cases hm1 : m = 1
   · subst m
     simp only [Nat.cast_one, Real.log_one, zero_sub, abs_neg]
+    rw [abs_of_pos (by linarith : 0 < b - a)]
     linarith
   by_cases hm2 : m = 2
   · subst m
+    norm_num only [Nat.cast_ofNat]
     have hneg : Real.log (2 : ℝ) - (b - a) < 0 := by linarith
     rw [abs_of_neg hneg]
     linarith
@@ -1879,9 +1930,11 @@ theorem distinct_fine_actual_B_between_log_two_three
     by_cases hm1 : m = 1
     · subst m
       simp only [Nat.cast_one, Real.log_one, zero_sub, abs_neg]
+      rw [abs_of_pos (by linarith [Real.log_pos (by norm_num : (1 : ℝ) < 2)] : 0 < b - a)]
       linarith [Real.log_pos (by norm_num : (1 : ℝ) < 2)]
     by_cases hm2 : m = 2
     · subst m
+      norm_num only [Nat.cast_ofNat]
       have hneg : Real.log (2 : ℝ) - (b - a) < 0 := by linarith
       rw [abs_of_neg hneg]
       linarith
@@ -1952,3 +2005,7 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_of_integer_log_gap
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_between_log_two_three
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_between_log_two_three
+
+#print axioms AEGIS.RHActualMixedDefectV1.integer_log_avoids_below_log_two
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_below_log_two
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_below_log_two

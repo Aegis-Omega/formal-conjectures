@@ -19,6 +19,8 @@ import AEGISOverlay.RHActualLocalGramCoercivityV1
 import AEGISOverlay.RHActualMixedDefectV1
 import AEGISOverlay.RHActualElevenLatticeV1
 import AEGISOverlay.RHActualUniversalFineGramV1
+import AEGISOverlay.RHArchRow29V1
+import AEGISOverlay.RHScaleRowCompositionV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -32,6 +34,13 @@ elab "#export_rh_proof_graph" : command => do
   let roots : List Name := [
     "AEGIS.RHFiniteFinePartitionV1.exists_finite_smooth_local_partition",
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
+    "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_below_log_two",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_below_log_two",
+    "AEGIS.RHArchRow29V1.geometric_arch_row_29",
+    "AEGIS.RHArchRow29V1.actual_B_re_le_signed_prime_plus_arch145",
+    "AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row",
+    "AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows",
     "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive",

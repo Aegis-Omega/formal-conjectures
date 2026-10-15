@@ -96,7 +96,9 @@ of the common energy, gap 9 costs 57/100, and gap 10 costs 837/3700.
 Every diagonal has gain 5671/3200. The existing actual Gram theorem then
 gives `actual_eleven_lattice_arithmetic_nonpositive` for arbitrary complex
 coefficients. This proof supplies analytic coefficients rather than
-assuming the eleven SOS inputs. Its replay is pending until observed CI.
+assuming the eleven SOS inputs. These declarations passed at exact head
+`edac34b902d8deba6810a61a0e1816506369d9cc`, run `38627745660`,
+job `116071121734`. This historical PASS is not the verdict for a newer head.
 
 The finite lattice class is not an exhaustive support-local partition:
 its atoms are translates of one mother packet at spacing log(33/16).
@@ -131,6 +133,32 @@ The diagonal estimate and exact reconstruction do not assume that bound.
 
 `RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive` derives the actual Weil bound with margin `7339/8192` for every complex coefficient vector on eleven lattice translates of one fine moment-zero seed. The analytic costs are rounded upward to `656/65536` (gaps 1–8), `37356/65536` (gap 9), and `14826/65536` (gap 10). The diagonal is rounded downward to `116142/65536`; evaluating all eleven rows gives the sharper row budget `57430/65536`. The doubled one-sided budget `114860/65536` also retains margin `641/32768`, but is not used for the strongest theorem. All 55 mixed pairs remain included. The integer certificate uses trusted `decide`, not `native_decide`.
 
-The local integer certificate has been checked separately using the official pinned Lean frontend. The complete actual-form theorem is a candidate until exact-head CI compiles and audits it. These bounds apply to the stated eleven-translate domain; they do not assert the universal mixed-defect budget.
+The local integer certificate has been checked separately using the official pinned Lean frontend. The complete actual-form theorem passed at exact head `edac34b902d8deba6810a61a0e1816506369d9cc` in run `38627745660`, job `116071121734`; later source changes need their own replay. These bounds apply to the stated eleven-translate domain; they do not assert the universal mixed-defect budget.
 
-The exact rational counterpart `actual_eleven_lattice_coercive` gives the source SOS margin `106083/118400` on the same genuine analytic family. It reuses all derived analytic diagonals and mixed terms, and evaluates the actual row maximum `1621/1850` through the existing `gram_re_le` theorem. This new stronger actual-form declaration also awaits exact-head replay.
+The exact rational counterpart `actual_eleven_lattice_coercive` gives the source SOS margin `106083/118400` on the same genuine analytic family. It reuses all derived analytic diagonals and mixed terms, and evaluates the actual row maximum `1621/1850` through the existing `gram_re_le` theorem. This exact rational declaration passed in that same exact-head replay.
+
+
+## Retained geometry and sub-log-2 prime exclusion
+
+`RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support`
+returns the constructed centers and each atom's actual support containment at
+radius 1/256, along with the existing moments, diagonal estimates, reconstruction
+and full mixed Gram identity. The original public theorem is recovered by
+projection. No partition or support certificate is supplied by its caller.
+
+`RHActualMixedDefectV1.integer_log_avoids_below_log_two` proves that every
+positive integer logarithm misses the fine correlation window when
+`1/128 < b-a < log(2)-1/128`: for m=1 the logarithm is zero; for m>=2,
+log(m)>=log(2). Thus `distinct_fine_prime_zero_below_log_two` proves the
+entire actual von Mangoldt series zero. `distinct_fine_actual_B_below_log_two`
+then retains the exact moment-zero Archimedean bound on the actual Weil B.
+These are source candidates until their new exact-head replay is observed.
+
+The graph exporter includes these constructions and the signed prime/Arch
+row consumers. The constructed general partition does not assert that all
+center gaps lie in a prime-free interval or in the far-spaced row domain.
+The explicit next analytic obligation is to bound the full actual mixed
+contribution for a suitable constructed family, including pairs whose
+correlation windows meet genuine prime logarithms and near/overlapping pairs.
+The narrow and nine-window sign theorems and the far Arch row theorem retain
+their proven domains; no global sign is inferred from these interval results.
