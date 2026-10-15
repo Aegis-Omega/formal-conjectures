@@ -50,6 +50,7 @@ open AEGIS.WeilZeroTranslationV11
 open AEGIS.WeilZeroTwoPointV11
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilMixedClosureV2
 open AEGIS.RHGramExpansionV13
 open AEGIS.RHBaguaActualWeilV1
 
@@ -201,7 +202,7 @@ theorem zeroSliceFactor_re
       ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).im =
         rho.1.im * fsLogSlice p ticks := by
     simp only [Complex.mul_im, Complex.sub_im, Complex.ofReal_re,
-      Complex.ofReal_im, mul_zero, sub_zero, zero_add, add_zero]
+      Complex.ofReal_im, mul_zero, zero_add]
     norm_num
   unfold zeroSliceFactor WeilZeroTranslationFactorV11
   rw [Complex.exp_re, hre, him]
@@ -223,7 +224,7 @@ theorem zeroSliceFactor_im
       ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).im =
         rho.1.im * fsLogSlice p ticks := by
     simp only [Complex.mul_im, Complex.sub_im, Complex.ofReal_re,
-      Complex.ofReal_im, mul_zero, sub_zero, zero_add, add_zero]
+      Complex.ofReal_im, mul_zero, zero_add]
     norm_num
   unfold zeroSliceFactor WeilZeroTranslationFactorV11
   rw [Complex.exp_im, hre, him]
@@ -238,9 +239,13 @@ theorem zeroSliceFactor_polar
           (Real.sin (zeroSliceAngle rho p ticks) : ℂ) * Complex.I) := by
   apply Complex.ext
   · rw [zeroSliceFactor_re]
-    simp [Complex.mul_re, Complex.add_re, Complex.mul_im]
+    simp only [Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
   · rw [zeroSliceFactor_im]
-    simp [Complex.mul_im, Complex.add_im, Complex.mul_re]
+    simp only [Complex.mul_re, Complex.mul_im, Complex.add_re, Complex.add_im,
+      Complex.ofReal_re, Complex.ofReal_im, Complex.I_re, Complex.I_im]
+    ring
 
 /-- Mellin transport at any actual zero retains BOTH radius and phase. -/
 theorem timeSlice_mellin_at_zero_polar
@@ -348,7 +353,8 @@ theorem bagua_time_three_exact_q16_product (a b c : ℤ) :
     ((a : ℚ) / 65536) * ((b : ℚ) / 65536) *
       ((c : ℚ) / 65536) =
       (((a * b * c : ℤ) : ℚ) / ((64 : ℕ) ^ (2 ^ 3) : ℕ)) := by
-  norm_num [Int.cast_mul] <;> ring
+  norm_num [Int.cast_mul]
+  ring
 
 /-- Exact temporal composition for an ARBITRARY finite list of signed
 femtosecond intervals. No maximum slice count is assumed. -/
@@ -357,7 +363,7 @@ theorem fsLogSlice_list_sum (p : ℝ) (ticks : List ℤ) :
   induction ticks with
   | nil => simp [fsLogSlice_zero]
   | cons t ts ih =>
-    simpa [fsLogSlice_add, ih]
+    simp [fsLogSlice_add, ih]
 
 /-- Exact zero-spectrum multiplicative cocycle for an ARBITRARY finite
 number of ordered slices, without combining or rounding phase factors.
@@ -370,7 +376,7 @@ theorem zeroSliceFactor_list_product
   induction ticks with
   | nil => simp [zeroSliceFactor_zero]
   | cons t ts ih =>
-    simpa [zeroSliceFactor_add, ih]
+    simp [zeroSliceFactor_add, ih]
 
 
 /-! ## Arbitrarily many actual time slices in a common certified window
@@ -502,7 +508,6 @@ theorem fsTwoThree_slice_ratio :
   unfold fsLogSlice
   norm_num only [Int.cast_one]
   field_simp [h3]
-  ring
 
 /-- The two exact integer-femtosecond sampling channels generate
 a dense additive subgroup of the real spectral translation axis. -/

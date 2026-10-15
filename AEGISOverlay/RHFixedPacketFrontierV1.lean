@@ -16,8 +16,8 @@ limitations under the License.
 
 
 import AEGISOverlay.RHDetectingPacketV1
-import RHDetectingPacketCriterionV1
-import RHFixedPacketFourPhaseV1
+import AEGISOverlay.RHDetectingPacketCriterionV1
+import AEGISOverlay.RHFixedPacketFourPhaseV1
 import WeilRHImpliesFinalSignV13
 
 /-!

@@ -35,6 +35,7 @@ using only exp(log 3) = 3 and the universal inequality 1 + x <= exp x.
 open Complex
 open AEGIS.RHPrimeThreeWindowV1
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilMixedClosureV2
 open AEGIS.WeilThreeBlockTranslatedPacketsV22
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHDyadicDiagonalV13
