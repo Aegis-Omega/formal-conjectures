@@ -218,6 +218,60 @@ theorem timeSliceEight_bagua_four_sector
   exact bagua_actual_weil_four_sector_identity
     (timeSliceEight g p ticks) z
 
+
+/-! ## Eight Bagua layers, 64-way branching, and exact Q16.16 arithmetic
+
+Exponentiation is right-associative: 64^(2^3) = 64^8 = 2^48.
+The same cardinality equals (2^16)^3 = 65536^3, the denominator
+of a product of THREE unrounded Q16.16 rational factors. This is a
+finite combinatorial/denominator identity; it is not a proof that
+every state carries an admissible actual Weil sign certificate.
+
+The spectral cocycle below applies to ANY FINITE number of slices,
+not merely the 64^8-indexed collection. This algebraic universality
+must not be confused with universal arithmetic Gram coercivity. -/
+
+/-- 8 layers, each with 64 choices: exactly 2^48 states. -/
+theorem bagua_time_64_pow_2_pow_3 :
+    (64 : ℕ) ^ (2 ^ 3) = 281474976710656 := by
+  norm_num
+
+/-- The 2^48 cardinality is exactly three unrounded Q16.16
+denominators, with no floating point or tick truncation. -/
+theorem bagua_time_64_pow_2_pow_3_q16 :
+    (64 : ℕ) ^ (2 ^ 3) = (65536 : ℕ) ^ 3 := by
+  norm_num
+
+/-- Three stages of fixed-point rational factors compose over the
+EXACT rational denominator 64^(2^3), not over a rounded Q16.16 result. -/
+theorem bagua_time_three_exact_q16_product (a b c : ℤ) :
+    ((a : ℚ) / 65536) * ((b : ℚ) / 65536) *
+      ((c : ℚ) / 65536) =
+      (((a * b * c : ℤ) : ℚ) / ((64 : ℕ) ^ (2 ^ 3) : ℕ)) := by
+  norm_num [Int.cast_mul] <;> ring
+
+/-- Exact temporal composition for an ARBITRARY finite list of signed
+femtosecond intervals. No maximum slice count is assumed. -/
+theorem fsLogSlice_list_sum (p : ℝ) (ticks : List ℤ) :
+    fsLogSlice p ticks.sum = (ticks.map (fsLogSlice p)).sum := by
+  induction ticks with
+  | nil => simp [fsLogSlice_zero]
+  | cons t ts ih =>
+    simpa [fsLogSlice_add, ih]
+
+/-- Exact zero-spectrum multiplicative cocycle for an ARBITRARY finite
+number of ordered slices, without combining or rounding phase factors.
+This has no assumption of RH and implies no global Weil sign. -/
+theorem zeroSliceFactor_list_product
+    (rho : RiemannNontrivialZeroIndexV2)
+    (p : ℝ) (ticks : List ℤ) :
+    zeroSliceFactor rho p ticks.sum =
+      (ticks.map (zeroSliceFactor rho p)).prod := by
+  induction ticks with
+  | nil => simp [zeroSliceFactor_zero]
+  | cons t ts ih =>
+    simpa [zeroSliceFactor_add, ih]
+
 end AEGIS.RHTimeSliceWeilV1
 
 #print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_add
@@ -230,3 +284,8 @@ end AEGIS.RHTimeSliceWeilV1
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSlice_energy
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSliceEight_actual_full_gram
 #print axioms AEGIS.RHTimeSliceWeilV1.timeSliceEight_bagua_four_sector
+#print axioms AEGIS.RHTimeSliceWeilV1.bagua_time_64_pow_2_pow_3
+#print axioms AEGIS.RHTimeSliceWeilV1.bagua_time_64_pow_2_pow_3_q16
+#print axioms AEGIS.RHTimeSliceWeilV1.bagua_time_three_exact_q16_product
+#print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_list_sum
+#print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_list_product
