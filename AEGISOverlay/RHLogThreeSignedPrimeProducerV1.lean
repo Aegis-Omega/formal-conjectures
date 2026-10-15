@@ -15,6 +15,8 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHPrimeThreeWindowV1
+import RHFineDiagonalUpgradeV3
+import AEGISOverlay.RHCofinalSchurAdapterV1
 
 /-!
 # Actual prime-row producer: the exact 2 log 3 gap
@@ -93,8 +95,82 @@ theorem actual_signed_prime_gap_two_log_three
          energy (translatePacket g (2 * Real.log 3)).1) := by
       rw [translate_energy, translate_energy]
 
+
+/-- Genuine two-packet Weil Gram coercivity at the NONLOCAL logarithmic
+gap 2 log 3. Unlike the radius-2/5 Trigram test, the two supports here
+are separated; the prime row is supplied by the exact von Mangoldt
+formula, and each diagonal is the proved fine 5671/3200 estimate.
+There are NO free mixed-term or prime-row hypotheses. -/
+theorem actual_two_log_three_gram_coercive
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : HalfWidthAt g (1 / 256 : ℝ) a) :
+    (AEGIS.WeilMixedAlgebraV2.B
+      (AEGIS.WeilMixedAlgebraV2.addPacket
+        (translatePacket g 0) (translatePacket g (2 * Real.log 3)))
+      (AEGIS.WeilMixedAlgebraV2.addPacket
+        (translatePacket g 0) (translatePacket g (2 * Real.log 3)))).re ≤
+      -(10517 / 4800 : ℝ) * energy g.1 := by
+  let u := translatePacket g 0
+  let v := translatePacket g (2 * Real.log 3)
+  have hu : AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      u a := by
+    change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn u
+      (a - 1 / 256) (a + 1 / 256)
+    simpa [u] using
+      (translate_logSupportIn g 0 (a - 1 / 256) (a + 1 / 256) hw)
+  have hv : AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      v (a + 2 * Real.log 3) := by
+    change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn v
+      ((a + 2 * Real.log 3) - 1 / 256)
+      ((a + 2 * Real.log 3) + 1 / 256)
+    have ht := translate_logSupportIn g (2 * Real.log 3)
+      (a - 1 / 256) (a + 1 / 256) hw
+    convert ht using 1 <;> ring
+  have hdiagU :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3 u a hu
+  have hdiagV :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      v (a + 2 * Real.log 3) hv
+  have hEu : energy u.1 = energy g.1 := translate_energy g 0
+  have hEv : energy v.1 = energy g.1 :=
+    translate_energy g (2 * Real.log 3)
+  rw [hEu] at hdiagU
+  rw [hEv] at hdiagV
+  have hcrossNorm :=
+    gap_B_norm_bound_three g (1 / 256 : ℝ) a 2
+      (by omega) (by norm_num) (by norm_num) (by norm_num) hw hm
+  have hcross :
+      (AEGIS.WeilMixedAlgebraV2.B u v).re ≤
+        (Real.log 3 * triadicHalf 2 + 1 / 100) * energy g.1 :=
+    (le_abs_self _).trans
+      ((Complex.abs_re_le_norm _).trans (by simpa [u, v] using hcrossNorm))
+  have hE : 0 ≤ energy g.1 := energy_nonnegative g.1
+  have hLogBound :
+      Real.log 3 * energy g.1 ≤ 2 * energy g.1 :=
+    mul_le_mul_of_nonneg_right log_three_le_two hE
+  rw [triadicHalf_two_exact] at hcross
+  have hcrossSmall :
+      (AEGIS.WeilMixedAlgebraV2.B u v).re ≤
+        (203 / 300 : ℝ) * energy g.1 := by
+    nlinarith [hcross, hLogBound]
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients u v
+  change -(AEGIS.WeilMixedAlgebraV2.B
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v)
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v)).re =
+      -(AEGIS.WeilMixedAlgebraV2.B u u).re +
+        2 * (-(AEGIS.WeilMixedAlgebraV2.B u v).re) +
+      -(AEGIS.WeilMixedAlgebraV2.B v v).re at hgram
+  change (AEGIS.WeilMixedAlgebraV2.B
+    (AEGIS.WeilMixedAlgebraV2.addPacket u v)
+    (AEGIS.WeilMixedAlgebraV2.addPacket u v)).re ≤
+      -(10517 / 4800 : ℝ) * energy g.1
+  linarith
+
 end AEGIS.RHLogThreeSignedPrimeProducerV1
 
 #print axioms AEGIS.RHLogThreeSignedPrimeProducerV1.triadicHalf_two_exact
 #print axioms AEGIS.RHLogThreeSignedPrimeProducerV1.log_three_le_two
 #print axioms AEGIS.RHLogThreeSignedPrimeProducerV1.actual_signed_prime_gap_two_log_three
+#print axioms AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive
