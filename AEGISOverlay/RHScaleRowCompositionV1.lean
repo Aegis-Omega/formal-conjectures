@@ -275,6 +275,68 @@ theorem actual_fine_gram_q16_coercive_of_two_scale_integer_row
     _ ≤ nearUnits + farUnits := add_le_add (hnear i) (hfar i)
     _ ≤ 57430 := hbudget
 
+
+/-- Signed-real Q16.16 near/far consumer with *integer-only* ledger
+accumulation. Unlike the norm version, only upper bounds on the
+actual signed real Weil mixed entries are needed. Exact row sums are
+checked as Naturals before the single 65536 denominator is applied.
+
+No sign is assigned to any prime term and no unconditional analytic
+prime estimate is assumed by this theorem. -/
+theorem actual_fine_gram_q16_signed_of_two_scale_integer_row
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (block : Fin (n + 1) → ℕ)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (nearUnits farUnits : ℕ)
+    (hsym : ∀ i j, cost i j = cost j i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        actualQ16PairCost cost i j *
+          (energy (gs i).1 + energy (gs j).1))
+    (hnear : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j else 0) ≤ nearUnits)
+    (hfar : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j else 0) ≤ farUnits)
+    (hbudget : nearUnits + farUnits ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  have hc : ∀ i j,
+      actualQ16PairCost cost i j = actualQ16PairCost cost j i := by
+    intro i j
+    dsimp [actualQ16PairCost]
+    rw [hsym i j]
+  apply actual_fine_gram_coercive_of_signed_real_row_certificate
+    gs (actualQ16PairCost cost) hc hdiag hcross
+  intro i
+  have hrowNat :
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        cost i j) ≤ 57430 := by
+    calc
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        cost i j) =
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          if block i = block j then cost i j else 0) +
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          if block i ≠ block j then cost i j else 0) :=
+            q16_nat_row_eq_near_add_far block cost i
+      _ ≤ nearUnits + farUnits := add_le_add (hnear i) (hfar i)
+      _ ≤ 57430 := hbudget
+  change (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+    (cost i j : ℝ) / 65536) ≤ (57430 / 65536 : ℝ)
+  calc
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      (cost i j : ℝ) / 65536) =
+      (((∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        cost i j : ℕ) : ℝ) / 65536) := by
+          simp only [Finset.sum_div, Nat.cast_sum]
+    _ ≤ (57430 / 65536 : ℝ) :=
+      div_le_div_of_nonneg_right (by exact_mod_cast hrowNat) (by norm_num)
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
@@ -286,3 +348,4 @@ end AEGIS.RHScaleRowCompositionV1
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_nonpositive_of_signed_cross_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.q16_nat_row_eq_near_add_far
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_coercive_of_two_scale_integer_row
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_signed_of_two_scale_integer_row
