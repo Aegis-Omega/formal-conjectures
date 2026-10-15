@@ -161,6 +161,101 @@ theorem timeSlice_mellin
         (fsLogSlice p ticks : ℂ)) * mellin g.1 s := by
   exact mellin_translatePacket_v11 g (fsLogSlice p ticks) s
 
+
+/-! ## Exact angular coordinate of the actual zeta-zero time slice
+
+The spectral angle is Im(rho) times the *declared* real logarithmic shift.
+The radius is exp((Re(rho)-1/2)*shift). Both are SOURCE-EXACT and do not
+assert that physical time is logarithmic. The phase-angle law alone does
+not imply any universal arithmetic sign.
+-/
+
+/-- Unwrapped phase, in radians, of an actual zero's spectral time slice. -/
+def zeroSliceAngle
+    (rho : RiemannNontrivialZeroIndexV2) (p : ℝ) (ticks : ℤ) : ℝ :=
+  rho.1.im * fsLogSlice p ticks
+
+/-- Exact phase addition for any two signed integer time intervals. -/
+theorem zeroSliceAngle_add
+    (rho : RiemannNontrivialZeroIndexV2) (p : ℝ) (a b : ℤ) :
+    zeroSliceAngle rho p (a + b) =
+      zeroSliceAngle rho p a + zeroSliceAngle rho p b := by
+  simp only [zeroSliceAngle, fsLogSlice_add]
+  ring
+
+/-- The real component is the precise spiral radius times cos(angle). -/
+theorem zeroSliceFactor_re
+    (rho : RiemannNontrivialZeroIndexV2) (p : ℝ) (ticks : ℤ) :
+    (zeroSliceFactor rho p ticks).re =
+      Real.exp ((rho.1.re - 1 / 2) * fsLogSlice p ticks) *
+        Real.cos (zeroSliceAngle rho p ticks) := by
+  have hre :
+      ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).re =
+        (rho.1.re - 1 / 2) * fsLogSlice p ticks := by
+    simp only [Complex.mul_re, Complex.sub_re, Complex.ofReal_re,
+      Complex.ofReal_im, mul_zero, sub_zero]
+    norm_num
+  have him :
+      ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).im =
+        rho.1.im * fsLogSlice p ticks := by
+    simp only [Complex.mul_im, Complex.sub_im, Complex.ofReal_re,
+      Complex.ofReal_im, mul_zero, sub_zero, zero_add, add_zero]
+    norm_num
+  unfold zeroSliceFactor WeilZeroTranslationFactorV11
+  rw [Complex.exp_re, hre, him]
+  rfl
+
+/-- The imaginary component is the precise spiral radius times sin(angle). -/
+theorem zeroSliceFactor_im
+    (rho : RiemannNontrivialZeroIndexV2) (p : ℝ) (ticks : ℤ) :
+    (zeroSliceFactor rho p ticks).im =
+      Real.exp ((rho.1.re - 1 / 2) * fsLogSlice p ticks) *
+        Real.sin (zeroSliceAngle rho p ticks) := by
+  have hre :
+      ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).re =
+        (rho.1.re - 1 / 2) * fsLogSlice p ticks := by
+    simp only [Complex.mul_re, Complex.sub_re, Complex.ofReal_re,
+      Complex.ofReal_im, mul_zero, sub_zero]
+    norm_num
+  have him :
+      ((rho.1 - (1 / 2 : ℂ)) * (fsLogSlice p ticks : ℂ)).im =
+        rho.1.im * fsLogSlice p ticks := by
+    simp only [Complex.mul_im, Complex.sub_im, Complex.ofReal_re,
+      Complex.ofReal_im, mul_zero, sub_zero, zero_add, add_zero]
+    norm_num
+  unfold zeroSliceFactor WeilZeroTranslationFactorV11
+  rw [Complex.exp_im, hre, him]
+  rfl
+
+/-- Full polar reconstruction of the source-defined complex time slice. -/
+theorem zeroSliceFactor_polar
+    (rho : RiemannNontrivialZeroIndexV2) (p : ℝ) (ticks : ℤ) :
+    zeroSliceFactor rho p ticks =
+      (Real.exp ((rho.1.re - 1 / 2) * fsLogSlice p ticks) : ℂ) *
+        ((Real.cos (zeroSliceAngle rho p ticks) : ℂ) +
+          (Real.sin (zeroSliceAngle rho p ticks) : ℂ) * Complex.I) := by
+  apply Complex.ext
+  · rw [zeroSliceFactor_re]
+    simp [Complex.mul_re, Complex.add_re, Complex.mul_im]
+  · rw [zeroSliceFactor_im]
+    simp [Complex.mul_im, Complex.add_im, Complex.mul_re]
+
+/-- Mellin transport at any actual zero retains BOTH radius and phase. -/
+theorem timeSlice_mellin_at_zero_polar
+    (g : WeilCompactSmoothGV1) (rho : RiemannNontrivialZeroIndexV2)
+    (p : ℝ) (ticks : ℤ) :
+    mellin (timeSlicePacket g p ticks).1 rho.1 =
+      (Real.exp ((rho.1.re - 1 / 2) * fsLogSlice p ticks) : ℂ) *
+        ((Real.cos (zeroSliceAngle rho p ticks) : ℂ) +
+          (Real.sin (zeroSliceAngle rho p ticks) : ℂ) * Complex.I) *
+        mellin g.1 rho.1 := by
+  calc
+    mellin (timeSlicePacket g p ticks).1 rho.1 =
+        zeroSliceFactor rho p ticks * mellin g.1 rho.1 := by
+          simpa [zeroSliceFactor, WeilZeroTranslationFactorV11] using
+            (timeSlice_mellin g rho.1 p ticks)
+    _ = _ := by rw [zeroSliceFactor_polar]
+
 /-- Both repository moment annihilations survive each actual slice. -/
 theorem timeSlice_moments
     (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
@@ -528,3 +623,9 @@ end AEGIS.RHTimeSliceWeilV1
 #print axioms AEGIS.RHTimeSliceWeilV1.riemannHypothesis_of_fsTwoThreeDetectorSign
 #print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_of_riemannHypothesis
 #print axioms AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_iff_riemannHypothesis
+
+#print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceAngle_add
+#print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_re
+#print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_im
+#print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_polar
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSlice_mellin_at_zero_polar
