@@ -350,8 +350,13 @@ jobs:
               if m in active: raise RuntimeError("import cycle: "+m)
               p=locate(m)
               if p is None:
-                  if m in targets or m.startswith("AEGISOverlay."):
-                      raise RuntimeError("UNRESOLVED_OVERLAY_IMPORT "+m)
+                  # Source-defined versioned RH/Weil modules are never external libraries.
+                  # Fail BEFORE the long Lean replay if a historical alias is unmapped.
+                  local_versioned=m.rsplit(".",1)[-1]
+                  local_versioned=(local_versioned.startswith(("RH","Weil","Zero","Mellin",
+                      "Riemann","Krein","Restricted")) and "V" in local_versioned)
+                  if m in targets or m.startswith("AEGISOverlay.") or local_versioned:
+                      raise RuntimeError("UNRESOLVED_RH_SOURCE_IMPORT "+m)
                   return
               if not p.is_file(): raise RuntimeError("missing pinned source: "+str(p))
               active.add(m); paths[m]=str(p)
