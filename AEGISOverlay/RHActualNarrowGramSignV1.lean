@@ -42,7 +42,7 @@ noncomputable section
 namespace AEGIS.RHActualNarrowGramSignV1
 
 open AEGIS.WeilMixedAlgebraV2
-open AEGIS.WeilMixedClosureV2 AEGIS.RHKreinFactorV13
+open AEGIS.WeilMixedClosureV2 AEGIS.RHKreinFactorV13 AEGIS.RHGramExpansionV13
 open Set
 
 /-- Exact full-matrix sign with every mixed coefficient retained, for any
@@ -325,6 +325,84 @@ theorem nearby_fine_pair_actual_mixed_margin_trigram
     (momentConditions_addPacket_v10 u v hmu hmv)
     (trigram_width_add u v ((a + b) / 2) hwu hwv)
 
+
+/-- Trigram's common radius-2/5 log support is preserved under every
+finite complex linear combination of actual Weil packets. -/
+theorem trigram_window_packetSum :
+    ∀ (n : ℕ) (z : Fin (n + 1) → ℂ)
+      (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ),
+      (∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (gs i) (2 / 5) center) →
+      AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (packetSum z gs) (2 / 5) center := by
+  intro n
+  induction n with
+  | zero =>
+      intro z gs center hwin
+      change AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (scalePacket (z 0) (gs 0)) (2 / 5) center
+      exact trigram_width_scale (gs 0) (z 0) center (hwin 0)
+  | succ n ih =>
+      intro z gs center hwin
+      change AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (addPacket
+          (packetSum (fun i : Fin (n + 1) => z i.castSucc)
+            (fun i : Fin (n + 1) => gs i.castSucc))
+          (scalePacket (z (Fin.last (n + 1)))
+            (gs (Fin.last (n + 1))))) (2 / 5) center
+      exact trigram_width_add _ _ center
+        (ih (fun i => z i.castSucc) (fun i => gs i.castSucc)
+          center (fun i => hwin i.castSucc))
+        (trigram_width_scale _ _ center (hwin (Fin.last (n + 1))))
+
+/-- The two annihilated Weil moments are preserved under an arbitrary
+finite complex-weighted sum of genuine moment-zero packets. -/
+theorem trigram_moment_packetSum :
+    ∀ (n : ℕ) (z : Fin (n + 1) → ℂ)
+      (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      (∀ i, WeilMomentConditionsV1 (gs i)) →
+      WeilMomentConditionsV1 (packetSum z gs) := by
+  intro n
+  induction n with
+  | zero =>
+      intro z gs hm
+      change WeilMomentConditionsV1 (scalePacket (z 0) (gs 0))
+      exact momentConditions_scalePacket_v10 (z 0) (gs 0) (hm 0)
+  | succ n ih =>
+      intro z gs hm
+      change WeilMomentConditionsV1
+        (addPacket
+          (packetSum (fun i : Fin (n + 1) => z i.castSucc)
+            (fun i : Fin (n + 1) => gs i.castSucc))
+          (scalePacket (z (Fin.last (n + 1)))
+            (gs (Fin.last (n + 1)))))
+      exact momentConditions_addPacket_v10 _ _
+        (ih (fun i => z i.castSucc) (fun i => gs i.castSucc)
+          (fun i => hm i.castSucc))
+        (momentConditions_scalePacket_v10 _ _ (hm (Fin.last (n + 1))))
+
+/-- Actual 1/16 coercivity for the full complex Hermitian Gram with
+ARBITRARY coefficients and differently shaped moment-zero packets, all
+in one common Trigram 2/5 window. Every off-diagonal Weil term is kept;
+the result does not assume any pairwise Schur or Gershgorin majorant. -/
+theorem trigram_full_weighted_gram_margin
+    (n : ℕ) (z : Fin (n + 1) → ℂ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center) :
+    (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy (packetSum z gs).1 ≤
+      -(∑ i, ∑ j, z i * star (z j) * B (gs i) (gs j)).re := by
+  have hmSum := trigram_moment_packetSum n z gs hm
+  have hwSum := trigram_window_packetSum n z gs center hwin
+  have hmargin :=
+    trigram_actual_arithmetic_margin_at (packetSum z gs) center hmSum hwSum
+  change (B (packetSum z gs) (packetSum z gs)).re ≤
+    -(1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy (packetSum z gs).1
+      at hmargin
+  rw [AEGIS.RHGramExpansionV13.B_packetSum] at hmargin
+  linarith
+
 end AEGIS.RHActualNarrowGramSignV1
 
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive
@@ -336,3 +414,6 @@ end AEGIS.RHActualNarrowGramSignV1
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_trigram_packet_actual_full_gram_margin_at
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_mixed_margin_from_sum
 #print axioms AEGIS.RHActualNarrowGramSignV1.nearby_fine_pair_actual_mixed_margin_trigram
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_window_packetSum
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_moment_packetSum
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_full_weighted_gram_margin
