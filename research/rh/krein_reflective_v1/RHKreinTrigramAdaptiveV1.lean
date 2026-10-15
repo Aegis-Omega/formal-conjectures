@@ -37,7 +37,7 @@ theorem finite_interval_nonneg : NonnegOnQ 0 300 := foldTo0374
 
 theorem finiteIntervalCertificate_trigram_v1 : FiniteIntervalCertificateV1 := by
   intro t ht0 ht300
-  exact finite_interval_nonneg t ht0 ht300
+  exact finite_interval_nonneg t (by simpa using ht0) (by simpa using ht300)
 
 /-- The finite trigram certificate plus proved evenness and |t| >= 300 tail
 supply the actual pointwise certificate at all real frequencies. -/
@@ -89,6 +89,7 @@ theorem window_two_fifths_trigram_v1 :
   change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
     g (0 - (2 / 5 : ℝ)) (0 + (2 / 5 : ℝ))
   simpa only [AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1,
+    AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn,
     zero_sub, zero_add] using hw
 
 /-- Monotone transfer of the genuine 2/5 certificate to every smaller

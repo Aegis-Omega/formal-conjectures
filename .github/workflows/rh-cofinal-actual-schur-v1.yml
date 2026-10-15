@@ -418,7 +418,7 @@ jobs:
               "research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean":"cb70597230e1cd1863bef40e0901c9e317dedf20",
               "research/rh/m8_kernel_v1/RHKreinM8AnalyticV1.lean":"27c3d8c4c1ebf3d08887af75fd60ecfd39d4db63",
               "research/rh/m8_kernel_v1/RHKreinCorrectionM8BoundV1.lean":"50d60b68282b9f17d25a4f9cacaa50e09ba892dc",
-              "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean":"2ceda75eb8eedb7225a6fed4b8a78c089020e1f9",
+              "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean":"1c5af3c295aa3a358c15e24686b5756a856af270",
               "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveCells08V1.lean":"bfe62cdf2072fb7e2f65cd069bb9a0273d5f12d9",
               "research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectV1.lean":"ce12b737359922aa880e9a438b78d49c7bbfda35",
           }
