@@ -244,6 +244,87 @@ theorem nearby_fine_pair_actual_mixed_signed_trigram
     (momentConditions_addPacket_v10 u v hmu hmv)
     (trigram_width_add u v ((a + b) / 2) hwu hwv)
 
+
+/-- The positive Trigram zero-series margin transfers EXACTLY, with
+its 1/16 rational factor, to the genuine arithmetic side by the
+original Weil autocorrelation explicit-formula identity. No sign-only
+weakening or new analytic hypothesis is needed. -/
+theorem trigram_actual_arithmetic_margin_at
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt g (2 / 5) a) :
+    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤
+      -(1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1 := by
+  have hmargin :=
+    AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
+      g (2 / 5 : ℝ) a (by norm_num) (by norm_num) hw hm
+  have hEF :=
+    AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_explicit_formula_v10 g hm
+  rw [hEF]
+  simp only [Complex.neg_re]
+  linarith
+
+/-- The EXACT full contracted Hermitian Weil Gram of every smooth
+finite moment-zero Krein partition retains the 1/16 Trigram margin.
+The original packet may be partitioned into arbitrarily many distinct
+atoms; all off-diagonal entries remain in the double sum. -/
+theorem every_trigram_packet_actual_full_gram_margin_at
+    (n : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt g (2 / 5) a)
+    (χ : Fin (n + 1) → ℝ → ℂ)
+    (hχ : ∀ i, ContDiff ℝ ∞ (χ i))
+    (hpart : ∀ x : ℝ, ∑ i : Fin (n + 1), χ i x = 1) :
+    ∃ gs : Fin (n + 1) → WeilCompactSmoothGV1,
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1 ≤
+        -(∑ i, ∑ j, B (gs i) (gs j)).re := by
+  obtain ⟨gs, hgs, hfull⟩ :=
+    AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram
+      n g hm χ hχ hpart
+  refine ⟨gs, hgs, ?_⟩
+  have hmargin := trigram_actual_arithmetic_margin_at g a hm hw
+  rw [hfull] at hmargin
+  linarith
+
+/-- A *quantitative signed* bound for the true Weil mixed entry on
+one common Trigram window, retaining the spectral-energy margin of
+the sum itself rather than discarding it after proving its sign. -/
+theorem trigram_actual_mixed_margin_from_sum
+    (u v : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 (addPacket u v))
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (addPacket u v) (2 / 5) a) :
+    2 * (B u v).re +
+      (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy (addPacket u v).1 ≤
+      -(B u u).re - (B v v).re := by
+  have hmargin :=
+    trigram_actual_arithmetic_margin_at (addPacket u v) a hm hw
+  change (B (addPacket u v) (addPacket u v)).re ≤
+    -(1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy (addPacket u v).1
+      at hmargin
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients u v
+  linarith
+
+/-- The 507/640 center-distance theorem now has the full exact-rational
+1/16 energy budget for two DIFFERENT moment-zero fine packets. -/
+theorem nearby_fine_pair_actual_mixed_margin_trigram
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (1 / 256) a)
+    (hv : AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (1 / 256) b)
+    (hab : |a - b| ≤ (507 / 640 : ℝ)) :
+    2 * (B u v).re +
+      (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy (addPacket u v).1 ≤
+      -(B u u).re - (B v v).re := by
+  obtain ⟨hwu, hwv⟩ :=
+    nearby_fine_pair_shared_trigram_window u v a b hu hv hab
+  exact trigram_actual_mixed_margin_from_sum u v ((a + b) / 2)
+    (momentConditions_addPacket_v10 u v hmu hmv)
+    (trigram_width_add u v ((a + b) / 2) hwu hwv)
+
 end AEGIS.RHActualNarrowGramSignV1
 
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive
@@ -251,3 +332,7 @@ end AEGIS.RHActualNarrowGramSignV1
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_arithmetic_nonpositive_at
 #print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_mixed_signed_from_sum
 #print axioms AEGIS.RHActualNarrowGramSignV1.nearby_fine_pair_actual_mixed_signed_trigram
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_arithmetic_margin_at
+#print axioms AEGIS.RHActualNarrowGramSignV1.every_trigram_packet_actual_full_gram_margin_at
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_mixed_margin_from_sum
+#print axioms AEGIS.RHActualNarrowGramSignV1.nearby_fine_pair_actual_mixed_margin_trigram
