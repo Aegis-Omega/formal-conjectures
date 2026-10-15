@@ -267,6 +267,13 @@ jobs:
           targets=["AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
+              # Trigram uses an existing declaration-free adapter for two
+              # import aliases of the SAME correction definitions. Compiling
+              # full correction source under the bare alias would duplicate
+              # declarations and break the Lean import closure.
+              if m in ("RHKreinExplicitCorrectionV1",
+                       "AEGISOverlay.RHKreinCorrectionSymbolV1"):
+                  return pathlib.Path("research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean")
               if m.startswith("AEGISOverlay."):
                   p=pathlib.Path(m.replace(".","/")+".lean")
                   return p if p.is_file() else None
@@ -358,6 +365,7 @@ jobs:
               "research/rh/aegis_source_4d7578e/lean/WeilOffLineSeedV10.lean.src":"255cfa30537da17af7ee3f7fe64b6845808af246",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/WeilFiniteDilationFilterV10.lean":"6970c598b8af0e25cc051567359f46cff63244bc",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
+              "research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean":"cb70597230e1cd1863bef40e0901c9e317dedf20",
               "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveV1.lean":"2ceda75eb8eedb7225a6fed4b8a78c089020e1f9",
               "research/rh/krein_reflective_v1/RHKreinTrigramAdaptiveCells08V1.lean":"bfe62cdf2072fb7e2f65cd069bb9a0273d5f12d9",
               "research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectV1.lean":"ce12b737359922aa880e9a438b78d49c7bbfda35",
