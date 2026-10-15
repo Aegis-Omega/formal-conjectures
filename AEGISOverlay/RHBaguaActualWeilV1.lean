@@ -31,7 +31,7 @@ spectral energy margin to every complex combination of the eight modes.
 The restriction to a common certified window remains explicit.
 -/
 
-open scoped BigOperators
+open scoped BigOperators ComplexConjugate
 set_option autoImplicit false
 noncomputable section
 
