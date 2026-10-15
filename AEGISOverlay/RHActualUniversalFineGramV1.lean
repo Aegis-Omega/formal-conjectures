@@ -940,6 +940,92 @@ theorem actual_far_fine_gram_coercive_of_geometric_arch_prime_row
   linarith
 
 
+
+/-! ## Exact final consumer: one genuine signed certificate per packet
+
+This is a genuine assembly into the existing canonical RH statement.
+Every source packet uses its own finite decomposition: no uniform number
+of pieces and no far-separated reconstruction are presumed.
+
+The existential mixed-defect budget is strictly less demanding than the
+earlier statement quantifying over ALL decompositions. Its production
+remains an explicit universal arithmetic obligation. The signed-row
+version preserves favorable negative REAL Weil mixed interference.
+Neither theorem asserts its hypothesis without proof.
+-/
+
+/-- ONE source-exact finite moment-zero Gram with a sufficiently controlled
+actual mixed defect has the genuine arithmetic Weil sign. -/
+theorem actual_sign_of_one_fine_mixed_budget
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hbudget : AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+  have hlo := fine_mixed_defect_lower_bound n gs hd
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+        (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [AEGIS.RHGramExpansionV13.B_packetSum]
+    simp
+  rw [← hgram] at hlo
+  linarith
+
+/-- Kernel-facing terminal: an independently witnessed actual mixed budget
+for each arbitrary source moment-zero packet implies the canonical RH. -/
+theorem riemannHypothesis_of_one_actual_mixed_budget_per_packet
+    (hcert : ∀ (g : WeilCompactSmoothGV1),
+      WeilMomentConditionsV1 g →
+      ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+        g = packetSum (fun _ => (1 : ℂ)) gs ∧
+        (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+          -(B (gs i) (gs i)).re) ∧
+        AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+          (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)) :
+    RiemannHypothesis := by
+  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
+  intro g hm
+  obtain ⟨n, gs, hg, hd, hbudget⟩ := hcert g hm
+  have hsign := actual_sign_of_one_fine_mixed_budget gs hd hbudget
+  rw [hg]
+  change (B (packetSum (fun _ => (1 : ℂ)) gs)
+    (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
+  exact hsign
+
+/-- Signed-real row producer, allowing negative cross interference.
+Unlike norm-only pair certificates, it bounds actual real Weil B. The
+finite family and its source identity may depend on each g. -/
+theorem riemannHypothesis_of_universal_actual_signed_row_certificates
+    (hcert : ∀ (g : WeilCompactSmoothGV1),
+      WeilMomentConditionsV1 g →
+      ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+        g = packetSum (fun _ => (1 : ℂ)) gs ∧
+        (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+          -(B (gs i) (gs i)).re) ∧
+        ∃ c : Fin (n + 1) → Fin (n + 1) → ℝ,
+          (∀ i j, c i j = c j i) ∧
+          (∀ i j, i ≠ j →
+            (B (gs i) (gs j)).re ≤
+              c i j * (energy (gs i).1 + energy (gs j).1)) ∧
+          (∀ i, (∑ j ∈
+            (Finset.univ : Finset (Fin (n + 1))).erase i,
+            c i j) ≤ (57430 / 65536 : ℝ))) :
+    RiemannHypothesis := by
+  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
+  intro g hm
+  obtain ⟨n, gs, hg, hd, c, hsym, hcross, hrow⟩ := hcert g hm
+  have hbound := actual_fine_gram_coercive_of_signed_real_row_certificate
+    gs c hsym hd hcross hrow
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  rw [hg]
+  change (B (packetSum (fun _ => (1 : ℂ)) gs)
+    (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
+  linarith
+
 end AEGIS.RHActualUniversalFineGramV1
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
@@ -965,3 +1051,7 @@ end AEGIS.RHActualUniversalFineGramV1
 #print axioms AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_signed_real_row_certificate
 
 #print axioms AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support
+
+#print axioms AEGIS.RHActualUniversalFineGramV1.actual_sign_of_one_fine_mixed_budget
+#print axioms AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_one_actual_mixed_budget_per_packet
+#print axioms AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_universal_actual_signed_row_certificates
