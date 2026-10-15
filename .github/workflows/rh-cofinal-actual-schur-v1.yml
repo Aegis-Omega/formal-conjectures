@@ -263,6 +263,12 @@ jobs:
           test -s "$out"
           sha256sum "$out" | tee evidence-cofinal/trigram-generated-source-sha256.txt
 
+      - name: Restore SHA-pinned Krein proof dependency checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-krein-full
+          key: rh-krein-full-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+
       - name: Compile exact source import DAG and all three joined theorems
         shell: bash
         run: |
@@ -416,12 +422,18 @@ jobs:
           print("SOURCE_DAG_MODULE_COUNT",len(order))
           for m in order: print("MODULE",m,paths[m])
           PY
+          python3 scripts/rh_restore_source_bound_oleans.py
           while IFS= read -r m; do
             case "$m" in
               *.*) path="${m//.//}" ;;
               *) path="$m" ;;
             esac
             mkdir -p ".lake/build/lib/lean/$(dirname "$path")"
+            if grep -Fxq "$m" evidence-cofinal/reused-modules.txt; then
+              echo "REUSE_VERIFIED_SOURCE_OLEAN $m"
+              printf 'REUSED_VERIFIED_SOURCE_BOUND_OLEAN\\n' > "evidence-cofinal/compile-${m//./_}.log"
+              continue
+            fi
             echo "COMPILE $m"
             lake env lean -o ".lake/build/lib/lean/$path.olean" "$path.lean" \
               2>&1 | tee "evidence-cofinal/compile-${m//./_}.log"
