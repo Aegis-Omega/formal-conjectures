@@ -15,6 +15,12 @@ limitations under the License.
 -/
 import AEGISOverlay.AEGIS_RH_Unconditional
 import AEGISOverlay.RHFiniteActualGramJoinV1
+import AEGISOverlay.RHActualLocalGramCoercivityV1
+import AEGISOverlay.RHActualMixedDefectV1
+import AEGISOverlay.RHActualElevenLatticeV1
+import AEGISOverlay.RHActualUniversalFineGramV1
+import AEGISOverlay.RHArchRow29V1
+import AEGISOverlay.RHScaleRowCompositionV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -26,6 +32,27 @@ set_option maxHeartbeats 0
 elab "#export_rh_proof_graph" : command => do
   let env ← getEnv
   let roots : List Name := [
+    "AEGIS.RHFiniteFinePartitionV1.exists_finite_smooth_local_partition",
+    "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
+    "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
+    "AEGIS.RHActualUniversalFineGramV1.actual_sign_of_one_fine_mixed_budget",
+    "AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_one_actual_mixed_budget_per_packet",
+    "AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_universal_actual_signed_row_certificates",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_below_log_two",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_below_log_two",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_q16_middle_gap",
+    "AEGIS.RHArchRow29V1.geometric_arch_row_29",
+    "AEGIS.RHArchRow29V1.actual_B_re_le_signed_prime_plus_arch145",
+    "AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row",
+    "AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows",
+    "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_coercive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_weighted_q16_coercive",
+    "AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds",
+    "AEGIS.RHActualLocalGramCoercivityV1.every_packet_actual_fine_coercive_gram",
+    "AEGIS.RHActualMixedDefectV1.actual_nine_over_64_mixed_norm_le",
     "AEGIS.RHAssemblyV1.narrow_window_schur_family",
     "AEGIS.RHAssemblyV1.narrow_window_schur_norm_family",
     "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",

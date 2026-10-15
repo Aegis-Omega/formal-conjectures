@@ -15,7 +15,15 @@ limitations under the License.
 -/
 import AEGISOverlay.AEGIS_RH_Unconditional
 
+/-! This executable probe checks ONLY the established 693/2000 window.
+The separate NEGATIVE_PI_PROBE is an expected failing test: a pi-sized
+support does not imply this smaller support. Neither proves RH. -/
+
+noncomputable section
+
 example (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
-    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g Real.pi) :
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g (693 / 2000)) :
     AEGIS.RHFeshbachWeilClosureV2.PacketSchurFamily g := by
   exact AEGIS.RHAssemblyV1.narrow_window_schur_family g hm hw
+
+#print axioms AEGIS.RHAssemblyV1.narrow_window_schur_family

@@ -11,6 +11,12 @@ on:
       - '.github/workflows/rh-trigram-exact-head-v1.yml'
   workflow_dispatch:
 
+# Keep the active 8-stage exact-source proof checkpoint alive across PR pushes.
+# Stages still use immutable checkout SHA and audited artifact hashes.
+concurrency:
+  group: rh-trigram-resume-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
@@ -135,6 +141,13 @@ jobs:
         with:
           path: .rh-krein-full
           key: rh-krein-full-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 1/6
         shell: bash
         run: |
@@ -289,16 +302,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -307,7 +316,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -466,6 +475,13 @@ jobs:
         with:
           name: rh-trigram-stage-0-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 2/6
         shell: bash
         run: |
@@ -620,16 +636,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -638,7 +650,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -797,6 +809,13 @@ jobs:
         with:
           name: rh-trigram-stage-1-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 3/6
         shell: bash
         run: |
@@ -951,16 +970,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -969,7 +984,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -1128,6 +1143,13 @@ jobs:
         with:
           name: rh-trigram-stage-2-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 4/6
         shell: bash
         run: |
@@ -1282,16 +1304,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -1300,7 +1318,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -1459,6 +1477,13 @@ jobs:
         with:
           name: rh-trigram-stage-3-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 5/6
         shell: bash
         run: |
@@ -1613,16 +1638,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -1631,7 +1652,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -1791,6 +1812,13 @@ jobs:
         with:
           name: rh-trigram-stage-4-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 6/8
         shell: bash
         run: |
@@ -1945,16 +1973,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -1963,7 +1987,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -2123,6 +2147,13 @@ jobs:
         with:
           name: rh-trigram-stage-5-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 7/8
         shell: bash
         run: |
@@ -2277,16 +2308,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -2295,7 +2322,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)
@@ -2455,6 +2482,13 @@ jobs:
         with:
           name: rh-trigram-stage-6-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
           path: trigram-checkpoint
+      - name: Restore source-bound cofinal import checkpoint
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: |
+            rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-2c3d041b633147ec97c7ef753aa9d157a47bb9f5-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-
       - name: Compile and audit pinned Trigram source stage 8/8
         shell: bash
         run: |
@@ -2582,7 +2616,7 @@ jobs:
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
           start=STAGE*STEP if STAGE<5 else 135+(STAGE-5)*3
-          stop=min(start+STEP,135) if STAGE<5 else min(start+3,TOTAL)
+          stop=min(start+STEP,135) if STAGE<5 else min(start+4,TOTAL)
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
@@ -2609,16 +2643,12 @@ jobs:
           else:
               if checkpoint.exists(): raise SystemExit('STAGE_ZERO_CHECKPOINT_UNEXPECTED')
               oleans.mkdir(parents=True)
-          existing={}
-          bound=pathlib.Path('.rh-krein-full')
-          if STAGE==0 and (bound/'source-blobs.txt').is_file():
-              if not (bound/'oleans.sha256').is_file(): raise SystemExit('KREIN_CHECKPOINT_HASH_MANIFEST_MISSING')
-              if subprocess.run(['sha256sum','--status','-c','oleans.sha256'],cwd=bound).returncode:
-                  raise SystemExit('KREIN_CHECKPOINT_CORRUPT')
-              pairs=[s.split() for s in (bound/'source-blobs.txt').read_text().splitlines()]
-              if any(len(x)!=2 for x in pairs): raise SystemExit('KREIN_CHECKPOINT_SOURCE_MANIFEST_INVALID')
-              existing=dict(pairs)
-              print(f'KREIN_CHECKPOINT_AVAILABLE={len(existing)}',flush=True)
+          from scripts.rh_trigram_cached_imports import reusable_imports
+          bound=pathlib.Path('.rh-cofinal-checkpoint')
+          if not bound.exists():
+              bound=pathlib.Path('.rh-krein-full')
+          reusable=reusable_imports(entries,bound)
+          print(f'SOURCE_BOUND_CACHED_IMPORTS={len(reusable)}',flush=True)
           for i in range(start,stop):
               entry=entries[i]
               name=entry['name']
@@ -2627,7 +2657,7 @@ jobs:
               out.parent.mkdir(parents=True,exist_ok=True)
               log=pathlib.Path('evidence-trigram')/f'module-{i:03d}.log'
               precompiled=bound/'oleans'/(name+'.olean')
-              reuse=STAGE==0 and existing.get(name)==entry['blob'] and precompiled.is_file()
+              reuse=name in reusable
               print(f'TRIGRAM_{"REUSE" if reuse else "COMPILE"} {i+1}/{TOTAL} {name}',flush=True)
               if reuse:
                   shutil.copyfile(precompiled,out)

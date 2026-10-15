@@ -107,7 +107,7 @@ theorem actual_two_block_gram_coefficients
       AEGIS.WeilMixedAlgebraV2.B_add_right,
       AEGIS.WeilMixedAlgebraV2.B_add_right,
       AEGIS.WeilMixedAlgebraV2.B_hermitian u v]
-  simp only [Complex.add_re, Complex.neg_re, Complex.conj_re]
+  simp only [Complex.add_re, Complex.conj_re]
   ring
 
 /-- The same actual two-block decomposition is an identity for the

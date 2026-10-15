@@ -15,9 +15,44 @@ def git_sha(p=ROOT):
 def write(name, value):
     (OUT / name).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
 
+def run_closure_probes(root, meta, out):
+    """Require the narrow constructor to pass and the pi-window misuse to fail."""
+    results = {}
+    for stem in ("RH_CLOSURE_PROBE", "RH_CLOSURE_NEGATIVE_PI_PROBE"):
+        source = root / (stem + ".lean")
+        source.write_text((meta / (stem + ".txt")).read_text())
+        probe = subprocess.run(["lake", "env", "lean", str(source)],
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        (out / (stem + ".log")).write_text(probe.stdout)
+        results[stem] = probe
+    positive = results["RH_CLOSURE_PROBE"]
+    if positive.returncode != 0 or "sorryAx" in positive.stdout or "error:" in positive.stdout:
+        raise RuntimeError("NARROW_CONSTRUCTOR_PROBE_FAILED\n" + positive.stdout)
+    name = "AEGIS.RHAssemblyV1.narrow_window_schur_family"
+    audit = re.search(r"'" + re.escape(name) +
+                      r"'\s+depends on axioms:\s*\[([^\]]*)\]", positive.stdout)
+    if audit is None:
+        raise RuntimeError("NARROW_CONSTRUCTOR_AXIOM_AUDIT_MISSING")
+    axioms = {item.strip() for item in audit.group(1).split(",") if item.strip()}
+    if not axioms <= {"propext", "Classical.choice", "Quot.sound"}:
+        raise RuntimeError("NARROW_CONSTRUCTOR_UNEXPECTED_AXIOMS " + repr(axioms))
+    negative = results["RH_CLOSURE_NEGATIVE_PI_PROBE"]
+    if negative.returncode == 0:
+        raise RuntimeError("PI_WINDOW_NEGATIVE_PROBE_UNEXPECTEDLY_COMPILED")
+    if ("type mismatch" not in negative.stdout.lower()
+            or "LogWindowContainsV1" not in negative.stdout):
+        raise RuntimeError("PI_WINDOW_PROBE_FAILED_FOR_UNEXPECTED_REASON\n" + negative.stdout)
+    return positive, negative
+
 manifest = json.loads((ROOT / "evidence-cofinal/source-manifest.json").read_text())
 head = git_sha()
 modules = {}
+source_snapshots = {line.split()[0]: line.split()[1]
+                    for line in (ROOT / "evidence-cofinal/archived-source-lock.txt").read_text().splitlines()}
+abel_members = {"WeilSignedPrimeFiniteSupportV1", "WeilPrimeAbelReductionV1",
+                "WeilPrimeDiscrepancyV1", "WeilPrimeDiscrepancyEstimateV1"}
+originals = json.loads((ROOT / "research/rh/aegis_pr721_fb983fd/source_manifest.json").read_text())
+originals_by_name = {r["module"]: r for r in originals["files"]}
 for record in manifest:
     module = record["module"]
     source = pathlib.Path(record["source"])
@@ -39,6 +74,26 @@ for record in manifest:
         provenance = {"repo": "tarikskalic33/formal-conjectures",
                       "replay_sha": head, "historical_containing_commit": None,
                       "note": "Archived/blob-staged input; see archived-source-lock and archive digest"}
+    if module in source_snapshots:
+        snapshot = "research/rh/assembly/exact-source-inputs/" + module + ".lean.txt"
+        assert source.read_bytes() == (ROOT / snapshot).read_bytes(), module
+        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+                      "source_file": snapshot, "git_blob": source_snapshots[module],
+                      "original_historical_commit": None}
+    elif module in abel_members:
+        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+                      "source_archive": "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz",
+                      "archive_member": module + ".lean"}
+    original = originals_by_name.get(module)
+    if original and source.read_bytes() == (ROOT / original["archive"]).read_bytes():
+        provenance = {"repo": "Aegis-Omega/AEGIS-OMEGA",
+                      "sha": originals["source_head"],
+                      "source_file": originals["source_subtree"] + "/" + module + ".lean"
+                         if "/" in originals["source_subtree"] else
+                         "sovereign-omega-v2/formal/bridges/lean/" + module + ".lean",
+                      "git_blob": original["sha"],
+                      "archive_in_replay": original["archive"],
+                      "replay_sha": head}
     probes = re.findall(r"^#print axioms (\S+)$", src, re.M)
     modules[module] = dict(record, imports=imports, provenance=provenance,
                           kernel_status="compiled_on_exact_head", printed_axiom_probes=probes)
@@ -112,27 +167,33 @@ graph = {"status": "selected_root_elaborated_type_and_available_proof_dependency
          "unresolved_producer": json.loads((META / "RH_BLOCKER.json").read_text())["obligation_type"]}
 write("RH_PROOF_GRAPH.json", graph)
 
+probe, negative_probe = run_closure_probes(ROOT, META, OUT)
 probe_file = ROOT / "RH_CLOSURE_PROBE.lean"
-probe_file.write_text((META / "RH_CLOSURE_PROBE.txt").read_text())
-probe = subprocess.run(["lake", "env", "lean", str(probe_file)],
-                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-(OUT / "RH_CLOSURE_PROBE.log").write_text(probe.stdout)
-if probe.returncode == 0:
-    raise RuntimeError("Broader-window probe unexpectedly compiled; inspect its actual type")
-assert "type mismatch" in probe.stdout.lower(), probe.stdout
-assert "LogWindowContainsV1" in probe.stdout, probe.stdout
+negative_probe_file = ROOT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean"
 
 blocker = json.loads((META / "RH_BLOCKER.json").read_text())
 blocker["status"] = "CONSTRUCTOR_KERNEL_PASS; UNIVERSAL_CLOSURE_NOT_ACHIEVED"
 blocker["attempts"][0]["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
-blocker["attempts"][1]["status"] = "ACTUAL_COMPILER_TYPE_MISMATCH"
-blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_PROBE.lean",
-                                  "exit_code": probe.returncode, "log": probe.stdout}
+blocker["attempts"][1].update(
+    operation="Compile established narrow-window constructor; separately reject pi-window misuse",
+    status="NARROW_KERNEL_AND_AXIOM_PASS; PI_WINDOW_NEGATIVE_TYPE_MISMATCH")
+for attempt in blocker["attempts"]:
+    if attempt.get("source") == "AEGISOverlay/RHActualUniversalFineGramV1.lean":
+        assert "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram" in root_axioms
+        attempt["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
+        attempt["exact_head"] = head
+blocker["observed_positive_test"] = {"command": "lake env lean RH_CLOSURE_PROBE.lean",
+                                   "exit_code": probe.returncode, "log": probe.stdout}
+blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_NEGATIVE_PI_PROBE.lean",
+                                  "exit_code": negative_probe.returncode, "log": negative_probe.stdout}
 write("RH_BLOCKER.json", blocker)
 
 passport = json.loads((META / "RH_EVIDENCE_PASSPORT.json").read_text())
-passport.update(verification_status="SELECTED_CONSTRUCTOR_KERNEL_AND_AXIOM_PASS; UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED",
+passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
+                active_repository="tarikskalic33/formal-conjectures",
+                active_pull_request=88,
+                active_branch=os.environ.get("GITHUB_HEAD_REF", "research/rh-actual-proof-assembly-20261014"),
                 proof_graph_status=graph["status"],
                 workflow_run_id=os.environ.get("GITHUB_RUN_ID"),
                 workflow_job=os.environ.get("GITHUB_JOB"),
@@ -142,13 +203,37 @@ passport.update(verification_status="SELECTED_CONSTRUCTOR_KERNEL_AND_AXIOM_PASS;
                 source_hashes={m: r["sha256"] for m, r in modules.items()},
                 proof_term_graph_sha256=digest(OUT / "proof-terms.json"),
                 compiler_probe={"exit_code": probe.returncode, "log_sha256": digest(OUT / "RH_CLOSURE_PROBE.log")},
+                negative_compiler_probe={"exit_code": negative_probe.returncode,
+                                         "log_sha256": digest(OUT / "RH_CLOSURE_NEGATIVE_PI_PROBE.log")},
                 certificate_hashes={"abel_archive": digest(ROOT / "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz")})
 write("RH_EVIDENCE_PASSPORT.json", passport)
 shutil.copyfile(ROOT / "AEGISOverlay/AEGIS_RH_Unconditional.lean", OUT / "AEGIS_RH_Unconditional.lean")
-shutil.copyfile(META / "RH_PROOFBOOK.md", OUT / "RH_PROOFBOOK.md")
+book = (META / "RH_PROOFBOOK.md").read_text()
+book += "\n\n## Observed exact-head kernel receipt\n\n"
+book += "Exact replay head: `" + head + "`. The following selected roots compiled "
+book += "and have only permitted foundational axioms. Earlier candidate labels describe "
+book += "the committed source snapshot; this observed receipt records the replay result.\n\n"
+for root, axioms in root_axioms.items():
+    module = rows[root]["module"]
+    record = modules.get(module)
+    if record:
+        prov = record["provenance"]
+        sha = prov.get("sha", head)
+        repo = prov.get("repo", "tarikskalic33/formal-conjectures")
+        path = prov.get("source_file", record["source"])
+        if path.startswith(".aegis/"): path = path[len(".aegis/"):]
+        url = "https://github.com/" + repo + "/blob/" + sha + "/" + path
+        book += "- [`" + root + "`](" + url + "): `" + ", ".join(axioms) + "`.\n"
+    else:
+        book += "- `" + root + "`: `" + ", ".join(axioms) + "`.\n"
+book += "\nRH_PROVEN_UNCONDITIONALLY=false. The mixed-defect/universal-family obligation "
+book += "is recorded with its complete formal type in RH_BLOCKER.json.\n"
+(OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
+shutil.copyfile(negative_probe_file, OUT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean")
 print("ASSEMBLY_KERNEL_ROOTS", len(terms["roots"]))
 print("ASSEMBLY_PROOF_GRAPH_DECLARATIONS", len(rows))
-print("ASSEMBLY_PROBE_ACTUAL_TYPE_MISMATCH", probe.returncode)
+print("ASSEMBLY_NARROW_PROBE_PASS", probe.returncode)
+print("ASSEMBLY_PI_NEGATIVE_PROBE_ACTUAL_TYPE_MISMATCH", negative_probe.returncode)
 print("UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED")

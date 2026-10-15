@@ -85,3 +85,119 @@ synthetic PR merge SHA; the checkout receipt is authoritative.
 RH_EXACT_HEAD_REPLAY.sh replays the pinned workflow shell steps on a fresh
 normal Lean host. No sorry, admit, new custom axiom, existing theorem statement
 change, protected-main mutation, merge or RH status promotion is made.
+
+
+## Actual eleven-translate analytic assembly
+
+`AEGIS.RHActualElevenLatticeV1.all_actual_eleven_mixed_bounds` derives all
+110 directed off-diagonal bounds (55 Hermitian pairs) for eleven translates
+of one moment-zero packet of total log width 1/128. Gaps 1–8 cost 1/100
+of the common energy, gap 9 costs 57/100, and gap 10 costs 837/3700.
+Every diagonal has gain 5671/3200. The existing actual Gram theorem then
+gives `actual_eleven_lattice_arithmetic_nonpositive` for arbitrary complex
+coefficients. This proof supplies analytic coefficients rather than
+assuming the eleven SOS inputs. These declarations passed at exact head
+`edac34b902d8deba6810a61a0e1816506369d9cc`, run `38627745660`,
+job `116071121734`. This historical PASS is not the verdict for a newer head.
+
+The finite lattice class is not an exhaustive support-local partition:
+its atoms are translates of one mother packet at spacing log(33/16).
+The local partition construction permits different atoms at unrelated
+centers and nonuniform energies. Applying the lattice estimates to that
+construction requires a proved connecting representation or a new mixed
+estimate. The radius-9/64 result requires a common support window for its
+four polarized sums, which separated lattice pairs do not satisfy.
+
+
+## Constructed finite partitions and arbitrary-packet fine Gram
+
+`RHFiniteFinePartitionV1.exists_finite_smooth_local_partition` uses a
+finite subcover of a compact interval by arbitrarily small open intervals
+and the pinned Mathlib smooth partition of unity. It returns actual smooth
+complex cutoffs whose sum is one on that interval and whose closed supports
+lie in the prescribed small intervals. The caller supplies no partition.
+
+`RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram`
+combines that construction at radius 1/256 with the existing finite log
+window and actual Krein localization. For every admissible moment-zero
+packet it returns moment-zero components, gain 5671/3200 for every
+diagonal, exact packet reconstruction, and the full actual mixed Gram.
+Its quantitative mixed-defect theorem retains every off-diagonal term.
+These new declarations require their own observed exact-head kernel replay.
+
+The remaining sign step is an upper bound on the actual mixed defect for
+a suitable such decomposition, or an actual cofinal Schur construction.
+The diagonal estimate and exact reconstruction do not assume that bound.
+
+## Q16.16 outward-rounded actual eleven-packet certificate
+
+`RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive` derives the actual Weil bound with margin `7339/8192` for every complex coefficient vector on eleven lattice translates of one fine moment-zero seed. The analytic costs are rounded upward to `656/65536` (gaps 1–8), `37356/65536` (gap 9), and `14826/65536` (gap 10). The diagonal is rounded downward to `116142/65536`; evaluating all eleven rows gives the sharper row budget `57430/65536`. The doubled one-sided budget `114860/65536` also retains margin `641/32768`, but is not used for the strongest theorem. All 55 mixed pairs remain included. The integer certificate uses trusted `decide`, not `native_decide`.
+
+The local integer certificate has been checked separately using the official pinned Lean frontend. The complete actual-form theorem passed at exact head `edac34b902d8deba6810a61a0e1816506369d9cc` in run `38627745660`, job `116071121734`; later source changes need their own replay. These bounds apply to the stated eleven-translate domain; they do not assert the universal mixed-defect budget.
+
+The exact rational counterpart `actual_eleven_lattice_coercive` gives the source SOS margin `106083/118400` on the same genuine analytic family. It reuses all derived analytic diagonals and mixed terms, and evaluates the actual row maximum `1621/1850` through the existing `gram_re_le` theorem. This exact rational declaration passed in that same exact-head replay.
+
+
+## Retained geometry and sub-log-2 prime exclusion
+
+`RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support`
+returns the constructed centers and each atom's actual support containment at
+radius 1/256, along with the existing moments, diagonal estimates, reconstruction
+and full mixed Gram identity. The original public theorem is recovered by
+projection. No partition or support certificate is supplied by its caller.
+
+`RHActualMixedDefectV1.integer_log_avoids_below_log_two` proves that every
+positive integer logarithm misses the fine correlation window when
+`1/128 < b-a < log(2)-1/128`: for m=1 the logarithm is zero; for m>=2,
+log(m)>=log(2). Thus `distinct_fine_prime_zero_below_log_two` proves the
+entire actual von Mangoldt series zero. `distinct_fine_actual_B_below_log_two`
+then retains the exact moment-zero Archimedean bound on the actual Weil B.
+These are source candidates until their new exact-head replay is observed.
+
+The graph exporter includes these constructions and the signed prime/Arch
+row consumers. The constructed general partition does not assert that all
+center gaps lie in a prime-free interval or in the far-spaced row domain.
+The explicit next analytic obligation is to bound the full actual mixed
+contribution for a suitable constructed family, including pairs whose
+correlation windows meet genuine prime logarithms and near/overlapping pairs.
+The narrow and nine-window sign theorems and the far Arch row theorem retain
+their proven domains; no global sign is inferred from these interval results.
+
+The source candidate `distinct_fine_actual_B_q16_middle_gap` combines that
+prime exclusion with the outward Q16.16 Arch cost `676/65536` whenever
+`35/128 <= b-a < log(2)-1/128`. The quadratic exponential lower bounds
+are exact rationals: `61753/32768` at `85/128` and `3425/2048` at `17/32`.
+The scalar kernel bound has passed a separate pinned-Mathlib frontend
+check with warnings as errors and only the three foundational axioms;
+the actual Weil specialization requires its own exact-head replay.
+
+## Weighted eleven-block Schur improvement
+
+`RHWeightedSchurV1.weighted_schur` and `weighted_gram` prove the weighted
+Schur test for an arbitrary finite symmetric nonnegative cost matrix and the
+complete complex Gram form. The proof uses exact weighted Young inequalities,
+exchanges the two finite indices, and retains every mixed term. Both generic
+lemmas passed the pinned local Lean frontend with warnings as errors and only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+The candidate `RHActualElevenLatticeV1.actual_eleven_lattice_weighted_q16_coercive`
+uses positive weights `(89,74,5,5,5,5,5,5,5,74,89)` against the SAME actual
+analytic gap-1 through gap-10 bounds. Its row ceiling is `46708/65536`, independently kernel-checked using a
+finite natural-number `decide` certificate and an exact cast to real rationals,
+and its exact resulting diagonal-minus-row margin is `34717/32768`.
+The target retains arbitrary complex coefficients, all 55 Hermitian mixed
+pairs, the genuine prime-power costs, and the original fine moment-zero seed
+domain. It adds no analytic hypothesis. This actual-form integration remains
+a source candidate until its own exact-head kernel replay is recorded.
+The weights are rational proof data; no golden-ratio identity or numerical
+spectral computation is admitted as a proof dependency.
+
+PR #722 reconciliation: the 22 Lean source blobs changed by
+`Aegis-Omega/AEGIS-OMEGA` #722 at `2b9da4e3a4029c7eca3cc3f0db88831c01743eca`
+all match, byte-for-byte by Git blob SHA, the existing PR721 manifest at
+`fb983fdc84a6bbeec6960c0e0c54b9695beba837`. In particular, the eleven-block
+actual/comparison sources and the gap-9/gap-10 producers are the same inputs
+already used here; they are not an additional independent positivity theorem.
+PR #87 head `2a1fc23de40298051fa3a61db694ae4a393846af` separately replays these
+five actual/comparison modules. This reconciliation is limited to those exact
+22 changed Lean blobs, not an assertion about every historical research branch.

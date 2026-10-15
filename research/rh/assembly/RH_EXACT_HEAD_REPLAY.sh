@@ -21,6 +21,7 @@ top=text.split('\nenv:\n',1)[1].split('\njobs:',1)[0]
 for key,value in re.findall(r'^  (\w+): (.+)$',top,re.M):env[key]=value
 env['PATH']=str(pathlib.Path.home()/'.elan/bin')+':'+env['PATH']
 env['GITHUB_PATH']=str(pathlib.Path('.replay-github-path').resolve())
+env['GITHUB_OUTPUT']=str(pathlib.Path('.replay-github-output').resolve())
 env.setdefault('GITHUB_RUN_ID','local-replay')
 env.setdefault('GITHUB_JOB','local-replay')
 blocks=[];name='';collect=False;code=[]
