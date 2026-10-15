@@ -9,7 +9,7 @@ This document is **not** a claim that RH has been proved.
 - Upstream official theorem file: `FormalConjectures/Millennium/RiemannHypothesis.lean`; blob `5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542`.
 - The fork has the **same** official theorem blob on main, including its catalog placeholder `by sorry`; the catalog file is not changed in this PR.
 - Preexisting AEGIS proof assembly: `tarikskalic33/formal-conjectures` PR #88 exact source `aacdd511877e3e725dbee05b1167ee38b681ab31`.
-- New external source anchor: `https://github.com/tarikskalic33/formal-conjectures/blob/f371f4fa5a9d19065846f3b4566978fdceaec9af/AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean`.
+- New external source anchor: `https://github.com/tarikskalic33/formal-conjectures/blob/4242d9a58254132178a19c0d35e9c572739282fe/AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean`.
 - Lean pin: 4.33.1. Mathlib pin: `0df444a360eaa60ab8c11dca51a86af692955474`.
 
 ## New theorem and why it matters
@@ -23,14 +23,14 @@ The new module `AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean` composes:
 The joined declaration is
 `AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer`.
 
-Its conclusion is **exactly** `RiemannHypothesis`. Its `hrows` hypothesis is visible in the Lean type, and is *not* assumed to be discharged: for the constructed finite family it must produce the actual nonnegative symmetric costs `c`, positive weights `w`, analytic mixed bound involving `B`, and weighted row ceiling `46688/65536`. The true prime-power and Archimedean contributions must both be included.
+Its conclusion is **exactly** `RiemannHypothesis`. Its **`hselect` hypothesis** is visible in the Lean type and is *not* discharged. It selects one possibly different finite reconstruction per source packet, with actual nonnegative symmetric costs `c`, positive weights `w`, analytic mixed bound involving the genuine `B` pairing, and weighted row ceiling `46688/65536`. This avoids the invalid demand that *every* admissible decomposition (including repeated atoms) satisfy that ceiling. Prime-power and Archimedean interactions remain essential.
 
 ## Verification boundary
 
 - Baseline PR #88 cofinal replay `38799949777` (311 modules) succeeded for the **preexisting** source; its strict axiom audit recorded standard foundational axioms. It is not proof of this **new** module.
 - The newly committed join has `#print axioms` for its two theorems. This PR does **not** report a verified kernel result for that newly introduced source until an exact-head replay runs.
 - The old scalar/narrow-window constructor covers `693/2000` logarithmic width only; it cannot be applied by type conversion to an arbitrary `n * pi` window.
-- The new theorem does not derive `hrows`. An all-green workflow, a formal criterion equivalence, and the absence of `sorryAx` from a **conditional** theorem do not prove the premise.
+- The new theorem does not derive `hselect`. An all-green workflow, a formal criterion equivalence, and the absence of `sorryAx` from a **conditional** theorem do not prove the premise.
 
 ### Kernel acceptance commands in a provisioned exact-source environment
 
@@ -62,4 +62,4 @@ The exact external declaration must compile with no added mathematical parameter
 
 ## Preservation and review
 
-This is stacked onto the existing PR #88 exact head, never merged or rebased into the protected main by automation. No old proof files, saved receipts, mathematical theorem statements, or PR #88 workflow checks are changed by this handoff. To propose an upstream change, start from the current DeepMind main and carry **only** the final verified link — not the complete AEGIS research tree or this conditional handoff.
+This is stacked onto the existing PR #88 exact head, never merged or rebased into the protected main by automation. No old proof files, saved receipts, or existing mathematical theorem statements have been changed. This PR extends its own inherited cofinal workflow to compile and audit the new module, and extends the exported proof graph; the separately pinned PR #88 exact-head source and green receipts remain intact. To propose an upstream change, start from the current DeepMind main and carry **only** the final verified link — not the complete AEGIS research tree or this conditional handoff.
