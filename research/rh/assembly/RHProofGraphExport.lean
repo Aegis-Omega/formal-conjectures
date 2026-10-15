@@ -21,6 +21,7 @@ import AEGISOverlay.RHActualElevenLatticeV1
 import AEGISOverlay.RHActualUniversalFineGramV1
 import AEGISOverlay.RHArchRow29V1
 import AEGISOverlay.RHScaleRowCompositionV1
+import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -45,6 +46,8 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHArchRow29V1.actual_B_re_le_signed_prime_plus_arch145",
     "AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row",
     "AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.actual_packet_sum_nonpositive_of_optimized_rows",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer",
     "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive",
