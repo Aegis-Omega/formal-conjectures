@@ -2582,7 +2582,8 @@ jobs:
           manifest=checkpoint/'manifest.json'
           sha256=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
           start=STAGE*STEP if STAGE<5 else 135+(STAGE-5)*3
-          stop=min(start+STEP,135) if STAGE<5 else min(start+3,TOTAL)
+          stop=min(start+STEP,135) if STAGE<5 else min(start+(4 if STAGE==7 else 3),TOTAL)
+          if STAGE==7 and stop!=TOTAL: raise SystemExit('TRIGRAM_FINAL_MODULE_MISSING')
           records=[]
           if STAGE:
               if not manifest.is_file(): raise SystemExit('CHECKPOINT_MANIFEST_MISSING')
