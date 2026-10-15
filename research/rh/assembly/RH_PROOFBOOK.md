@@ -170,3 +170,34 @@ are exact rationals: `61753/32768` at `85/128` and `3425/2048` at `17/32`.
 The scalar kernel bound has passed a separate pinned-Mathlib frontend
 check with warnings as errors and only the three foundational axioms;
 the actual Weil specialization requires its own exact-head replay.
+
+## Weighted eleven-block Schur improvement
+
+`RHWeightedSchurV1.weighted_schur` and `weighted_gram` prove the weighted
+Schur test for an arbitrary finite symmetric nonnegative cost matrix and the
+complete complex Gram form. The proof uses exact weighted Young inequalities,
+exchanges the two finite indices, and retains every mixed term. Both generic
+lemmas passed the pinned local Lean frontend with warnings as errors and only
+`propext`, `Classical.choice`, and `Quot.sound`.
+
+The candidate `RHActualElevenLatticeV1.actual_eleven_lattice_weighted_q16_coercive`
+uses positive weights `(89,74,5,5,5,5,5,5,5,74,89)` against the SAME actual
+analytic gap-1 through gap-10 bounds. Its row ceiling is `46708/65536`, independently kernel-checked using a
+finite natural-number `decide` certificate and an exact cast to real rationals,
+and its exact resulting diagonal-minus-row margin is `34717/32768`.
+The target retains arbitrary complex coefficients, all 55 Hermitian mixed
+pairs, the genuine prime-power costs, and the original fine moment-zero seed
+domain. It adds no analytic hypothesis. This actual-form integration remains
+a source candidate until its own exact-head kernel replay is recorded.
+The weights are rational proof data; no golden-ratio identity or numerical
+spectral computation is admitted as a proof dependency.
+
+PR #722 reconciliation: the 22 Lean source blobs changed by
+`Aegis-Omega/AEGIS-OMEGA` #722 at `2b9da4e3a4029c7eca3cc3f0db88831c01743eca`
+all match, byte-for-byte by Git blob SHA, the existing PR721 manifest at
+`fb983fdc84a6bbeec6960c0e0c54b9695beba837`. In particular, the eleven-block
+actual/comparison sources and the gap-9/gap-10 producers are the same inputs
+already used here; they are not an additional independent positivity theorem.
+PR #87 head `2a1fc23de40298051fa3a61db694ae4a393846af` separately replays these
+five actual/comparison modules. This reconciliation is limited to those exact
+22 changed Lean blobs, not an assertion about every historical research branch.
