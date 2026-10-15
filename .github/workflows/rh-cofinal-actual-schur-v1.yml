@@ -348,7 +348,8 @@ jobs:
               if m in active: raise RuntimeError("import cycle: "+m)
               p=locate(m)
               if p is None:
-                  if m in targets: raise RuntimeError("missing target: "+m)
+                  if m in targets or m.startswith("AEGISOverlay."):
+                      raise RuntimeError("UNRESOLVED_OVERLAY_IMPORT "+m)
                   return
               if not p.is_file(): raise RuntimeError("missing pinned source: "+str(p))
               active.add(m); paths[m]=str(p)
@@ -484,6 +485,17 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHBaguaActualWeilV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHBaguaActualWeilV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHTimeSliceWeilV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHTimeSliceWeilV1.log
+          for slice_theorem in zeroSliceFactor_two_one_fs_iff_critical \
+            timeSlice_mellin timeSlice_moments timeSlice_energy \
+            timeSliceEight_actual_full_gram timeSliceEight_bagua_four_sector \
+            bagua_time_64_pow_2_pow_3_q16 bagua_time_three_exact_q16_product \
+            fsLogSlice_list_sum zeroSliceFactor_list_product; do
+            grep -F "AEGIS.RHTimeSliceWeilV1.$slice_theorem" \
+              evidence-cofinal/compile-AEGISOverlay_RHTimeSliceWeilV1.log
+          done
           for bagua_theorem in bagua_actual_gram_exact bagua_actual_gram_hermitian \
             bagua_mode_moments bagua_mode_window bagua_actual_weighted_gram_exact \
             bagua_actual_full_weighted_margin bagua_sector_four_block_exact \
