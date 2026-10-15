@@ -204,6 +204,77 @@ theorem actual_nine_macro_nonpositive_of_signed_cross_rows
     gs center c (1 / 20 : ℝ) 0 hm hwin hsym hcross hrow (by norm_num)
   simpa using h
 
+
+/-! ## Lossless Q16.16 accumulation, exactly as integer time-tick arithmetic
+
+Integer-valued actual pair-cost certificates are accumulated as Nat
+first. The near/far partition is an exact disjoint split of EVERY
+off-diagonal entry. Only the final total is divided by 65536.
+This is a proof about actual Weil Gram certificates, not a physical
+temporal-resolution claim or an assumed universal prime bound. -/
+
+/-- The integer pair costs of every actual off-diagonal entry are
+partitioned without rounding, deletion, or double counting. -/
+theorem q16_nat_row_eq_near_add_far
+    {n : ℕ} (block : Fin (n + 1) → ℕ)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (i : Fin (n + 1)) :
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      cost i j) =
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      if block i = block j then cost i j else 0) +
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      if block i ≠ block j then cost i j else 0) := by
+  classical
+  rw [← Finset.sum_add_distrib]
+  apply Finset.sum_congr rfl
+  intro j _
+  by_cases h : block i = block j
+  · simp [h]
+  · simp [h]
+
+/-- Exact finite, dimension-independent Q16.16 row-budget admission
+from separate integer near and far ledgers. All pairwise estimates
+remain about genuine complex Weil B, not a proxy matrix.
+
+The analytic bound on each B entry is explicitly required; the
+integer-row theorem itself only eliminates intermediate rounding. -/
+theorem actual_fine_gram_q16_coercive_of_two_scale_integer_row
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (block : Fin (n + 1) → ℕ)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (nearUnits farUnits : ℕ)
+    (hsym : ∀ i j, cost i j = cost j i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤
+        actualQ16PairCost cost i j *
+          (energy (gs i).1 + energy (gs j).1))
+    (hnear : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j else 0) ≤ nearUnits)
+    (hfar : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j else 0) ≤ farUnits)
+    (hbudget : nearUnits + farUnits ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  apply actual_fine_gram_q16_coercive_of_pair_certificate
+    gs cost hsym hdiag hcross
+  intro i
+  calc
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      cost i j) =
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j else 0) +
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j else 0) :=
+          q16_nat_row_eq_near_add_far block cost i
+    _ ≤ nearUnits + farUnits := add_le_add (hnear i) (hfar i)
+    _ ≤ 57430 := hbudget
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
@@ -213,3 +284,5 @@ end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_nonpositive_of_signed_cross_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.q16_nat_row_eq_near_add_far
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_coercive_of_two_scale_integer_row
