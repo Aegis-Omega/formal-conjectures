@@ -6,6 +6,12 @@ on:
       - 'scripts/verify_rh_pr721_source_closure.py'
       - '.github/workflows/rh-pr721-source-closure.yml'
   workflow_dispatch:
+# Do not throw away a pinned SOS replay when a different source file changes.
+# This serializes overlapping runs without accepting stale source identities.
+concurrency:
+  group: rh-pr721-source-resume-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 env:

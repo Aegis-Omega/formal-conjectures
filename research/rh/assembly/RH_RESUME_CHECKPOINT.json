@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "intent": "Resume verified RH integration; never claim unconditional RH from a local certificate.",
+  "repository": "tarikskalic33/formal-conjectures",
+  "pr": 88,
+  "active_branch": "research/rh-actual-proof-assembly-20261014",
+  "historical_pass": {
+    "exact_head": "edac34b902d8deba6810a61a0e1816506369d9cc",
+    "status": "FIVE_EXACT_HEAD_WORKFLOWS_PASS",
+    "workflow_runs": {
+      "Build Lean project and deploy docs": 38627745937,
+      "RH PR721 exact-source closure and Lean SOS replay": 38627745740,
+      "RH Snowflake log2-log3 globalization v1": 38627745733,
+      "Check Copyright Header": 38627745750,
+      "RH cofinal actual Schur kernel join": 38627745660
+    },
+    "interpretation": "Historical source+kernel checkpoint, not a proof of RH and not an exact-head PASS for later commits."
+  },
+  "source_bound_reuse_rules": {
+    "proof_reuse": "Use certificate only if all relevant declaration source blobs, transitive dependencies, Lean/Mathlib and external providers remain identical; else replay changed import closure.",
+    "never": "Never promote cancelled, queued, unrun, or older-head CI to exact-head PASS.",
+    "reads": [
+      "git rev-parse HEAD",
+      "git hash-object PATH",
+      "lean-toolchain",
+      "lake-manifest.json"
+    ],
+    "current_head": "Resolve live PR head at execution; do not infer from this ledger."
+  },
+  "verified_unchanged_lemma_blobs_at_747aff1be89b2774a2d26dbf165aa3dcfe77aa70": [
+    {
+      "path": "AEGISOverlay/RHKreinMultiplicativeTransportV1.lean",
+      "blob": "d882947b11b1981bb7ed9daedcfc702f972627e2"
+    },
+    {
+      "path": "AEGISOverlay/RHFixedPacketFourPhaseV1.lean",
+      "blob": "995e8866eaddee12e8d38faf414d39734d7495bb"
+    }
+  ],
+  "subsequent_source_only_candidates": [
+    "AEGISOverlay/RHTimeSliceWeilV1.lean: exact angle, polar factor, Mellin transport; require latest-head kernel replay",
+    "AEGISOverlay/RHArchRow29V1.lean: moment-zero Arch row bound for separated finite families",
+    "AEGISOverlay/RHPrimeRowFirstTwoV1.lean: prime-zero in two explicit log intervals, not universal",
+    "AEGISOverlay/RHLogThreeSignedPrimeProducerV1.lean: inspect current source and replay before treating as verified"
+  ],
+  "remaining_mathematical_obligations": [
+    "Derive source-bound signed real prime-row producer for needed actual separated families, not merely a supplied hprime/hprimeRow.",
+    "Preserve all mixed Weil terms and show a valid fine decomposition or cofinal approximation for every admissible moment-zero packet; far-separated translates are not an exact universal reconstruction.",
+    "Discharge the actual global four-phase arithmetic sign on dense log2/log3 samples without assuming RH."
+  ],
+  "admission": {
+    "RH_PROVEN_UNCONDITIONALLY": false,
+    "required_final_target": "theorem unconditional_riemannHypothesis : RiemannHypothesis := by ...",
+    "fail_closed": true,
+    "axioms_no_sorryAx": true,
+    "no_main_merge_by_this_change": true
+  },
+  "continuous_execution": "Work from this checkpoint; inspect only changed source/import closure, logs, then test smallest remaining analytical obligation. Do not reopen branches or run identical historical proof searches."
+}

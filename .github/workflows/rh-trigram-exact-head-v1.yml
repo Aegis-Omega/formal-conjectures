@@ -11,6 +11,12 @@ on:
       - '.github/workflows/rh-trigram-exact-head-v1.yml'
   workflow_dispatch:
 
+# Keep the active 8-stage exact-source proof checkpoint alive across PR pushes.
+# Stages still use immutable checkout SHA and audited artifact hashes.
+concurrency:
+  group: rh-trigram-resume-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 

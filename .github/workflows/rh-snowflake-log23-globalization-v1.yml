@@ -1,8 +1,10 @@
 name: RH Snowflake log2-log3 globalization v1
 
+# The long-running SHA-locked proof replay must not be killed by a new PR commit.
+# GitHub retains the active run and at most the latest pending run per group.
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: false
 
 on:
   pull_request:
