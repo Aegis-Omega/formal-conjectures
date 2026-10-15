@@ -131,6 +131,68 @@ theorem bagua_actual_full_weighted_margin
     (trigram_full_weighted_gram_margin 7 z
       (baguaMode gs) center hmModes hwModes)
 
+
+/-- The complete sesquilinear pairing in Bagua/Walsh coordinates.
+No assumption that even-odd cross blocks vanish is made. -/
+def baguaGramBilinear
+    (gs : Fin 8 → WeilCompactSmoothGV1)
+    (u v : Fin 8 → ℂ) : ℂ :=
+  ∑ a : Fin 8, ∑ b : Fin 8,
+    u a * star (v b) * baguaActualGram gs a b
+
+/-- Exact Q=2, p=2 complementary-sector decomposition of ALL 64
+true Weil Gram coefficients. Four contributions occur: plus/plus,
+minus/minus, plus/minus, and minus/plus. In particular the latter
+two actual mixed blocks are NOT silently assumed to be zero. -/
+theorem bagua_sector_four_block_exact
+    (gs : Fin 8 → WeilCompactSmoothGV1) (z : Fin 8 → ℂ) :
+    baguaGramBilinear gs z z =
+      baguaGramBilinear gs (baguaPlus z) (baguaPlus z) +
+      baguaGramBilinear gs (baguaMinus z) (baguaMinus z) +
+      baguaGramBilinear gs (baguaPlus z) (baguaMinus z) +
+      baguaGramBilinear gs (baguaMinus z) (baguaPlus z) := by
+  unfold baguaGramBilinear
+  calc
+    (∑ a : Fin 8, ∑ b : Fin 8,
+      z a * star (z b) * baguaActualGram gs a b) =
+      ∑ a : Fin 8, ∑ b : Fin 8,
+        (baguaPlus z a + baguaMinus z a) *
+          star (baguaPlus z b + baguaMinus z b) *
+            baguaActualGram gs a b := by
+      apply Finset.sum_congr rfl
+      intro a _
+      apply Finset.sum_congr rfl
+      intro b _
+      rw [bagua_reconstruct z a, bagua_reconstruct z b]
+    _ = (∑ a : Fin 8, ∑ b : Fin 8,
+          baguaPlus z a * star (baguaPlus z b) * baguaActualGram gs a b) +
+        (∑ a : Fin 8, ∑ b : Fin 8,
+          baguaMinus z a * star (baguaMinus z b) * baguaActualGram gs a b) +
+        (∑ a : Fin 8, ∑ b : Fin 8,
+          baguaPlus z a * star (baguaMinus z b) * baguaActualGram gs a b) +
+        (∑ a : Fin 8, ∑ b : Fin 8,
+          baguaMinus z a * star (baguaPlus z b) * baguaActualGram gs a b) := by
+      simp only [star_add, add_mul, mul_add, Finset.sum_add_distrib]
+      ring
+
+/-- The four-sector identity is about the exact original B operator
+applied to actual Walsh packets, not merely an abstract matrix proxy. -/
+theorem bagua_actual_weil_four_sector_identity
+    (gs : Fin 8 → WeilCompactSmoothGV1) (z : Fin 8 → ℂ) :
+    B (packetSum z (baguaMode gs))
+      (packetSum z (baguaMode gs)) =
+      baguaGramBilinear gs (baguaPlus z) (baguaPlus z) +
+      baguaGramBilinear gs (baguaMinus z) (baguaMinus z) +
+      baguaGramBilinear gs (baguaPlus z) (baguaMinus z) +
+      baguaGramBilinear gs (baguaMinus z) (baguaPlus z) := by
+  calc
+    B (packetSum z (baguaMode gs))
+        (packetSum z (baguaMode gs)) =
+      baguaGramBilinear gs z z := by
+        simpa only [baguaGramBilinear] using
+          bagua_actual_weighted_gram_exact gs z
+    _ = _ := bagua_sector_four_block_exact gs z
+
 end AEGIS.RHBaguaActualWeilV1
 
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_gram_exact
@@ -139,3 +201,5 @@ end AEGIS.RHBaguaActualWeilV1
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_mode_window
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_weighted_gram_exact
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_full_weighted_margin
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_sector_four_block_exact
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_weil_four_sector_identity
