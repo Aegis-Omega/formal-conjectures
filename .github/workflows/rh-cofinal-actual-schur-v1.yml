@@ -15,6 +15,7 @@ on:
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
       - 'AEGISOverlay/RHBaguaWalshV1.lean'
       - 'AEGISOverlay/RHBaguaActualWeilV1.lean'
+      - 'AEGISOverlay/RHNarrowDetectingTrigramDenseV1.lean'
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
@@ -267,7 +268,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -486,6 +487,18 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenSpectralV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenSpectralV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHNarrowDetectingTrigramDenseV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHNarrowDetectingTrigramDenseV1.log
+          for detecting_theorem in exact_trigram_shift_radius \
+            narrow_detector_trigram_two_point_window \
+            narrow_detector_trigram_two_point_sign \
+            riemannHypothesis_of_dense_narrow_detector \
+            dense_narrow_detector_of_riemannHypothesis \
+            dense_narrow_detector_iff_riemannHypothesis; do
+            grep -F "AEGIS.RHNarrowDetectingTrigramDenseV1.$detecting_theorem" \
+              evidence-cofinal/compile-AEGISOverlay_RHNarrowDetectingTrigramDenseV1.log
+          done
           for spectral_theorem in cost_reflect even_zero_action even_one_action \
             even_middle_action odd_zero_action odd_one_action \
             middle_difference_eigen witness_norm_exact witness_cost_quadratic_exact \
