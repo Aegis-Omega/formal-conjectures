@@ -718,6 +718,53 @@ theorem actual_weighted_schur_unequal_energy_from_fine_diagonals
   rw [B_packetSum]
   exact h
 
+
+/-- The exact optimized 46688/65536 cost budget applies to *any* finite
+family of actual Weil atoms with potentially unequal energies, provided
+the genuine mixed B entries obey the explicit square-root energy cost
+and the indicated weighted row inequalities. Unlike the eleven-translate
+producer, this adapter assumes neither a common seed nor a common energy.
+It does NOT construct those rows for arbitrary moment-zero packets. -/
+theorem actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (z : Fin (n + 1) → ℂ)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (w : Fin (n + 1) → ℝ)
+    (hc : ∀ i j, 0 ≤ c i j)
+    (hzero : ∀ i, c i i = 0)
+    (hsym : ∀ i j, c i j = c j i)
+    (hw : ∀ i, 0 < w i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤ c i j *
+        (Real.sqrt (energy (gs i).1) *
+          Real.sqrt (energy (gs j).1)))
+    (hrow : ∀ i, ∑ j, c i j * (w j / w i) ≤
+      (46688 / 65536 : ℝ)) :
+    (B (packetSum z gs) (packetSum z gs)).re ≤
+      -(34727 / 32768 : ℝ) *
+        (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
+  have hdiagonal :
+      ∀ i, (116142 / 65536 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re := by
+    intro i
+    exact (mul_le_mul_of_nonneg_right
+      (by norm_num : (116142 / 65536 : ℝ) ≤ 5671 / 3200)
+      (energy_nonnegative (gs i).1)).trans (hdiag i)
+  have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
+    (fun i j => B (gs i) (gs j)) z
+    (fun i => energy (gs i).1) c w
+    (116142 / 65536 : ℝ) (46688 / 65536 : ℝ)
+    (fun i => energy_nonnegative (gs i).1)
+    hc hzero hsym hw hdiagonal hcross hrow
+  have hmargin :
+      (116142 / 65536 : ℝ) - 46688 / 65536 =
+        34727 / 32768 := by norm_num
+  rw [hmargin] at h
+  rw [B_packetSum]
+  exact h
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
@@ -737,3 +784,5 @@ end AEGIS.RHScaleRowCompositionV1
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_abjad_four_phase_reconstruction
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_weighted_q16_of_abjad_phase_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weighted_schur_unequal_energy_from_fine_diagonals
+
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals
