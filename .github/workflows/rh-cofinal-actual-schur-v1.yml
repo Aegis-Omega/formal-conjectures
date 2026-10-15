@@ -472,6 +472,18 @@ jobs:
             AEGISOverlay/RHActualElevenLatticeV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHBaguaActualWeilV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHBaguaActualWeilV1.log
+          for bagua_theorem in bagua_actual_gram_exact bagua_actual_gram_hermitian \
+            bagua_mode_moments bagua_mode_window bagua_actual_weighted_gram_exact \
+            bagua_actual_full_weighted_margin bagua_sector_four_block_exact \
+            bagua_actual_weil_four_sector_identity; do
+            grep -F "AEGIS.RHBaguaActualWeilV1.$bagua_theorem" \
+              evidence-cofinal/compile-AEGISOverlay_RHBaguaActualWeilV1.log
+          done
+          grep -F "AEGIS.RHScaleRowCompositionV1.actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals" \
+            evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenSpectralV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenSpectralV1.log
           for spectral_theorem in cost_reflect even_zero_action even_one_action \
