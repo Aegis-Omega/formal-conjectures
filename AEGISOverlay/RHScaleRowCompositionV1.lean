@@ -337,6 +337,245 @@ theorem actual_fine_gram_q16_signed_of_two_scale_integer_row
     _ ≤ (57430 / 65536 : ℝ) :=
       div_le_div_of_nonneg_right (by exact_mod_cast hrowNat) (by norm_num)
 
+
+/-! ## Directed weighted Schur rows, with exact Q16.16 integer admission
+
+A weighted Schur row is not obtained by merely multiplying an
+unweighted sum-energy majorant by an arbitrary weight. Instead the
+ACTUAL signed Weil coefficient has the explicit *directed* bound
+
+  Re B(i,j) ≤ c(i,j) E(i) + c(j,i) E(j).
+
+No symmetry or positivity of the directed c matrix is necessary.
+This permits unequal energies and distinct weights. The row estimate
+is exact, and no negative real mixed coefficient is discarded.
+
+For positive integer weights w and natural Q16.16 cost tickets k,
+c(i,j) = k(i,j)*w(j)/(65536*w(i)). Requiring a natural-number
+weighted row bound closes the finite arithmetic Schur step.
+
+It does NOT construct k or prove the analytic cross-packet bound:
+those remain explicit hypotheses for the universal producer. -/
+
+/-- Actual mixed Weil defect obeys a *directed* Schur upper row budget.
+No symmetric-cost assumption is needed, because the second directed
+term is transposed over the entire off-diagonal index set. -/
+theorem actual_mixed_defect_le_of_directed_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (c : Fin (n + 1) → Fin (n + 1) → ℝ) (R : ℝ)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * energy (gs i).1 + c j i * energy (gs j).1)
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) ≤ R) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      (2 * R) * (∑ i, energy (gs i).1) := by
+  let E : Fin (n + 1) → ℝ := fun i => energy (gs i).1
+  have hsplit (i : Fin (n + 1)) :
+      (∑ j, (B (gs i) (gs j)).re) =
+        (B (gs i) (gs i)).re +
+          ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            (B (gs i) (gs j)).re := by
+    rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
+  have hdef :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs =
+        ∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (B (gs i) (gs j)).re := by
+    unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect
+    rw [Complex.re_sum]
+    simp_rw [Complex.re_sum]
+    simp_rw [hsplit]
+    rw [Finset.sum_add_distrib]
+    ring
+  have hoff :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (B (gs i) (gs j)).re) ≤
+      ∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i + c j i * E j := by
+    apply Finset.sum_le_sum
+    intro i _
+    apply Finset.sum_le_sum
+    intro j hj
+    have hij : i ≠ j := by
+      intro h
+      exact (Finset.mem_erase.mp hj).1 h.symm
+    exact hcross i j hij
+  have htranspose :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c j i * E j) =
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i) := by
+    simpa using (AEGIS.RHGramExpansionV13.sum_erase_comm
+      (fun i j : Fin (n + 1) => c j i * E j))
+  have hfactor :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i) =
+      ∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) := by
+    apply Finset.sum_congr rfl
+    intro i _
+    rw [Finset.mul_sum]
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+  have hdouble :
+      (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j * E i + c j i * E j) =
+      2 * (∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
+    calc
+      _ = (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+             c i j * E i) +
+          (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+             c j i * E j) := by
+           simp only [Finset.sum_add_distrib]
+      _ = 2 * (∑ i, E i * (∑ j ∈
+          (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
+           rw [htranspose]
+           simp only [hfactor]
+           ring
+  have htotal :
+      (∑ i, E i * (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) ≤
+      R * (∑ i, E i) := by
+    calc
+      _ ≤ ∑ i, E i * R := by
+        apply Finset.sum_le_sum
+        intro i _
+        exact mul_le_mul_of_nonneg_left (hrow i)
+          (energy_nonnegative (gs i).1)
+      _ = R * (∑ i, E i) := by
+        rw [Finset.mul_sum]
+        apply Finset.sum_congr rfl
+        intro i _
+        ring
+  calc
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs =
+        (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (B (gs i) (gs j)).re) := hdef
+    _ ≤ (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          c i j * E i + c j i * E j) := hoff
+    _ = 2 * (∑ i, E i * (∑ j ∈
+          (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := hdouble
+    _ ≤ 2 * (R * (∑ i, E i)) :=
+      mul_le_mul_of_nonneg_left htotal (by norm_num)
+    _ = (2 * R) * (∑ i, energy (gs i).1) := by
+      dsimp [E]
+      ring
+
+/-- The original arithmetic Weil Gram is coercive from directed weighted
+integer row certificates. All Q16.16 divisions happen AFTER multiplying
+and summing exact integer costs and integer weights.
+
+The pairwise *analytic* directed inequality is an explicit premise, not
+derived from numerical rounding or the preceding eleven-block sources. -/
+theorem actual_weighted_q16_coercive_of_integer_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (weight : Fin (n + 1) → ℕ)
+    (hw : ∀ i, 0 < weight i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        ((cost i j : ℝ) * (weight j : ℝ) /
+          ((weight i : ℝ) * 65536)) * energy (gs i).1 +
+        ((cost j i : ℝ) * (weight i : ℝ) /
+          ((weight j : ℝ) * 65536)) * energy (gs j).1)
+    (hrow : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        cost i j * weight j) ≤ 57430 * weight i) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ := fun i j =>
+    (cost i j : ℝ) * (weight j : ℝ) / ((weight i : ℝ) * 65536)
+  have hc (i : Fin (n + 1)) :
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j) ≤ (57430 / 65536 : ℝ) := by
+    have hwi : (0 : ℝ) < (weight i : ℝ) := by
+      exact_mod_cast hw i
+    have hden : (0 : ℝ) < (weight i : ℝ) * 65536 :=
+      mul_pos hwi (by norm_num)
+    have hrowReal :
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          (cost i j : ℝ) * (weight j : ℝ)) ≤
+          (57430 : ℝ) * (weight i : ℝ) := by
+      exact_mod_cast hrow i
+    change (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      (cost i j : ℝ) * (weight j : ℝ) /
+        ((weight i : ℝ) * 65536)) ≤ (57430 / 65536 : ℝ)
+    rw [Finset.sum_div]
+    apply (div_le_iff₀ hden).mpr
+    calc
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (cost i j : ℝ) * (weight j : ℝ)) ≤
+          (57430 : ℝ) * (weight i : ℝ) := hrowReal
+      _ = (57430 / 65536 : ℝ) * ((weight i : ℝ) * 65536) := by ring
+  have hdefect := actual_mixed_defect_le_of_directed_rows
+    gs c (57430 / 65536 : ℝ) hcross hc
+  have hlocal := fine_mixed_defect_lower_bound n gs hdiag
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+        (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [← hgram] at hlocal
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hround :
+      (116142 / 65536 : ℝ) * (∑ i, energy (gs i).1) ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) :=
+    mul_le_mul_of_nonneg_right (by norm_num) hE
+  linarith
+
+/-- Optional multiscale ledger. Near/far weighted costs are added in
+Nat, and only the final exact weighted Schur budget is converted to
+a real upper bound. No cost is silently rounded away. -/
+theorem actual_weighted_q16_coercive_of_two_scale_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (block : Fin (n + 1) → ℕ)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (weight : Fin (n + 1) → ℕ)
+    (nearUnits farUnits : ℕ)
+    (hw : ∀ i, 0 < weight i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        ((cost i j : ℝ) * (weight j : ℝ) /
+          ((weight i : ℝ) * 65536)) * energy (gs i).1 +
+        ((cost j i : ℝ) * (weight i : ℝ) /
+          ((weight j : ℝ) * 65536)) * energy (gs j).1)
+    (hnear : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j * weight j else 0) ≤
+          nearUnits * weight i)
+    (hfar : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j * weight j else 0) ≤
+          farUnits * weight i)
+    (hbudget : nearUnits + farUnits ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  apply actual_weighted_q16_coercive_of_integer_rows gs cost weight
+    hw hdiag hcross
+  intro i
+  calc
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      cost i j * weight j) =
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j * weight j else 0) +
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j * weight j else 0) :=
+          q16_nat_row_eq_near_add_far block (fun i j => cost i j * weight j) i
+    _ ≤ nearUnits * weight i + farUnits * weight i :=
+          add_le_add (hnear i) (hfar i)
+    _ = (nearUnits + farUnits) * weight i := by ring
+    _ ≤ 57430 * weight i := Nat.mul_le_mul_right (weight i) hbudget
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
@@ -349,3 +588,6 @@ end AEGIS.RHScaleRowCompositionV1
 #print axioms AEGIS.RHScaleRowCompositionV1.q16_nat_row_eq_near_add_far
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_coercive_of_two_scale_integer_row
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_signed_of_two_scale_integer_row
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_mixed_defect_le_of_directed_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_weighted_q16_coercive_of_integer_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_weighted_q16_coercive_of_two_scale_rows
