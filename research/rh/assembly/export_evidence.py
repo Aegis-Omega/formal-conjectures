@@ -15,6 +15,35 @@ def git_sha(p=ROOT):
 def write(name, value):
     (OUT / name).write_text(json.dumps(value, indent=2, ensure_ascii=False) + "\n")
 
+def run_closure_probes(root, meta, out):
+    """Require the narrow constructor to pass and the pi-window misuse to fail."""
+    results = {}
+    for stem in ("RH_CLOSURE_PROBE", "RH_CLOSURE_NEGATIVE_PI_PROBE"):
+        source = root / (stem + ".lean")
+        source.write_text((meta / (stem + ".txt")).read_text())
+        probe = subprocess.run(["lake", "env", "lean", str(source)],
+                               stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+        (out / (stem + ".log")).write_text(probe.stdout)
+        results[stem] = probe
+    positive = results["RH_CLOSURE_PROBE"]
+    if positive.returncode != 0 or "sorryAx" in positive.stdout or "error:" in positive.stdout:
+        raise RuntimeError("NARROW_CONSTRUCTOR_PROBE_FAILED\n" + positive.stdout)
+    name = "AEGIS.RHAssemblyV1.narrow_window_schur_family"
+    audit = re.search(r"'" + re.escape(name) +
+                      r"'\s+depends on axioms:\s*\[([^\]]*)\]", positive.stdout)
+    if audit is None:
+        raise RuntimeError("NARROW_CONSTRUCTOR_AXIOM_AUDIT_MISSING")
+    axioms = {item.strip() for item in audit.group(1).split(",") if item.strip()}
+    if not axioms <= {"propext", "Classical.choice", "Quot.sound"}:
+        raise RuntimeError("NARROW_CONSTRUCTOR_UNEXPECTED_AXIOMS " + repr(axioms))
+    negative = results["RH_CLOSURE_NEGATIVE_PI_PROBE"]
+    if negative.returncode == 0:
+        raise RuntimeError("PI_WINDOW_NEGATIVE_PROBE_UNEXPECTEDLY_COMPILED")
+    if ("type mismatch" not in negative.stdout.lower()
+            or "LogWindowContainsV1" not in negative.stdout):
+        raise RuntimeError("PI_WINDOW_PROBE_FAILED_FOR_UNEXPECTED_REASON\n" + negative.stdout)
+    return positive, negative
+
 manifest = json.loads((ROOT / "evidence-cofinal/source-manifest.json").read_text())
 head = git_sha()
 modules = {}
@@ -138,27 +167,25 @@ graph = {"status": "selected_root_elaborated_type_and_available_proof_dependency
          "unresolved_producer": json.loads((META / "RH_BLOCKER.json").read_text())["obligation_type"]}
 write("RH_PROOF_GRAPH.json", graph)
 
+probe, negative_probe = run_closure_probes(ROOT, META, OUT)
 probe_file = ROOT / "RH_CLOSURE_PROBE.lean"
-probe_file.write_text((META / "RH_CLOSURE_PROBE.txt").read_text())
-probe = subprocess.run(["lake", "env", "lean", str(probe_file)],
-                       stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-(OUT / "RH_CLOSURE_PROBE.log").write_text(probe.stdout)
-if probe.returncode == 0:
-    raise RuntimeError("Broader-window probe unexpectedly compiled; inspect its actual type")
-assert "type mismatch" in probe.stdout.lower(), probe.stdout
-assert "LogWindowContainsV1" in probe.stdout, probe.stdout
+negative_probe_file = ROOT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean"
 
 blocker = json.loads((META / "RH_BLOCKER.json").read_text())
 blocker["status"] = "CONSTRUCTOR_KERNEL_PASS; UNIVERSAL_CLOSURE_NOT_ACHIEVED"
 blocker["attempts"][0]["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
-blocker["attempts"][1]["status"] = "ACTUAL_COMPILER_TYPE_MISMATCH"
+blocker["attempts"][1].update(
+    operation="Compile established narrow-window constructor; separately reject pi-window misuse",
+    status="NARROW_KERNEL_AND_AXIOM_PASS; PI_WINDOW_NEGATIVE_TYPE_MISMATCH")
 for attempt in blocker["attempts"]:
     if attempt.get("source") == "AEGISOverlay/RHActualUniversalFineGramV1.lean":
         assert "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram" in root_axioms
         attempt["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
         attempt["exact_head"] = head
-blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_PROBE.lean",
-                                  "exit_code": probe.returncode, "log": probe.stdout}
+blocker["observed_positive_test"] = {"command": "lake env lean RH_CLOSURE_PROBE.lean",
+                                   "exit_code": probe.returncode, "log": probe.stdout}
+blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_NEGATIVE_PI_PROBE.lean",
+                                  "exit_code": negative_probe.returncode, "log": negative_probe.stdout}
 write("RH_BLOCKER.json", blocker)
 
 passport = json.loads((META / "RH_EVIDENCE_PASSPORT.json").read_text())
@@ -176,6 +203,8 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; UNCON
                 source_hashes={m: r["sha256"] for m, r in modules.items()},
                 proof_term_graph_sha256=digest(OUT / "proof-terms.json"),
                 compiler_probe={"exit_code": probe.returncode, "log_sha256": digest(OUT / "RH_CLOSURE_PROBE.log")},
+                negative_compiler_probe={"exit_code": negative_probe.returncode,
+                                         "log_sha256": digest(OUT / "RH_CLOSURE_NEGATIVE_PI_PROBE.log")},
                 certificate_hashes={"abel_archive": digest(ROOT / "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz")})
 write("RH_EVIDENCE_PASSPORT.json", passport)
 shutil.copyfile(ROOT / "AEGISOverlay/AEGIS_RH_Unconditional.lean", OUT / "AEGIS_RH_Unconditional.lean")
@@ -202,7 +231,9 @@ book += "is recorded with its complete formal type in RH_BLOCKER.json.\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
+shutil.copyfile(negative_probe_file, OUT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean")
 print("ASSEMBLY_KERNEL_ROOTS", len(terms["roots"]))
 print("ASSEMBLY_PROOF_GRAPH_DECLARATIONS", len(rows))
-print("ASSEMBLY_PROBE_ACTUAL_TYPE_MISMATCH", probe.returncode)
+print("ASSEMBLY_NARROW_PROBE_PASS", probe.returncode)
+print("ASSEMBLY_PI_NEGATIVE_PROBE_ACTUAL_TYPE_MISMATCH", negative_probe.returncode)
 print("UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED")
