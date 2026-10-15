@@ -193,6 +193,94 @@ theorem bagua_actual_weil_four_sector_identity
           bagua_actual_weighted_gram_exact gs z
     _ = _ := bagua_sector_four_block_exact gs z
 
+
+/-! ## Genuine complementary coupling, not an assumed zero cross block
+
+The Walsh/Bagua four-sector identity above keeps the +/− interactions.
+Here the existing quantitative Trigram theorem controls their TRUE Weil
+coefficient for arbitrary complex relative phase. This applies to the
+entire eight-mode packet family, including every original mixed entry,
+provided all source packets lie in the SAME certified 2/5 log window.
+No commutation or block-diagonality of the arithmetic Weil B is assumed. -/
+
+/-- Opposite-pair even packet in the existing genuine Walsh mode basis. -/
+def baguaEvenPacket (gs : Fin 8 → WeilCompactSmoothGV1)
+    (z : Fin 8 → ℂ) : WeilCompactSmoothGV1 :=
+  packetSum (baguaPlus z) (baguaMode gs)
+
+/-- Opposite-pair odd packet in the existing genuine Walsh mode basis. -/
+def baguaOddPacket (gs : Fin 8 → WeilCompactSmoothGV1)
+    (z : Fin 8 → ℂ) : WeilCompactSmoothGV1 :=
+  packetSum (baguaMinus z) (baguaMode gs)
+
+/-- The two exact complement modes inherit the TWO moment annihilations. -/
+theorem bagua_both_complementary_moments
+    (gs : Fin 8 → WeilCompactSmoothGV1) (z : Fin 8 → ℂ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i)) :
+    WeilMomentConditionsV1 (baguaEvenPacket gs z) ∧
+    WeilMomentConditionsV1 (baguaOddPacket gs z) := by
+  constructor
+  · unfold baguaEvenPacket
+    exact trigram_moment_packetSum 7 (baguaPlus z) (baguaMode gs)
+      (fun a => bagua_mode_moments gs hm a)
+  · unfold baguaOddPacket
+    exact trigram_moment_packetSum 7 (baguaMinus z) (baguaMode gs)
+      (fun a => bagua_mode_moments gs hm a)
+
+/-- The same 2/5 window survives both complementation projections. -/
+theorem bagua_both_complementary_windows
+    (gs : Fin 8 → WeilCompactSmoothGV1) (z : Fin 8 → ℂ)
+    (center : ℝ)
+    (hw : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (baguaEvenPacket gs z) (2 / 5) center ∧
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (baguaOddPacket gs z) (2 / 5) center := by
+  constructor
+  · unfold baguaEvenPacket
+    exact trigram_window_packetSum 7 (baguaPlus z) (baguaMode gs)
+      center (fun a => bagua_mode_window gs center hw a)
+  · unfold baguaOddPacket
+    exact trigram_window_packetSum 7 (baguaMinus z) (baguaMode gs)
+      center (fun a => bagua_mode_window gs center hw a)
+
+/-- Quantitative TRUE Weil +/− coupling. For every complex phase c,
+the complete real mixed entry has an exact Trigram energy budget.
+Thus the four Abjad phases 1, -1, I, -I are all covered without
+silently discarding either cross block or introducing a new premise.
+This is a signed margin, stronger than mere reconstruction. -/
+theorem bagua_complementary_phase_coupling_margin
+    (gs : Fin 8 → WeilCompactSmoothGV1) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center)
+    (z : Fin 8 → ℂ) (phase : ℂ) :
+    2 * (B (baguaEvenPacket gs z)
+          (scalePacket phase (baguaOddPacket gs z))).re +
+      (1 / 16 : ℝ) *
+        AEGIS.WeilDisjointEnergyV2.energy
+          (addPacket (baguaEvenPacket gs z)
+            (scalePacket phase (baguaOddPacket gs z))).1 ≤
+      -(B (baguaEvenPacket gs z) (baguaEvenPacket gs z)).re -
+        (B (scalePacket phase (baguaOddPacket gs z))
+          (scalePacket phase (baguaOddPacket gs z))).re := by
+  obtain ⟨hmu, hmv⟩ := bagua_both_complementary_moments gs z hm
+  obtain ⟨hwu, hwv⟩ := bagua_both_complementary_windows gs z center hw
+  have hphaseMom :
+      WeilMomentConditionsV1
+        (scalePacket phase (baguaOddPacket gs z)) :=
+    momentConditions_scalePacket_v10 phase (baguaOddPacket gs z) hmv
+  have hphaseWin :
+      AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (scalePacket phase (baguaOddPacket gs z)) (2 / 5) center :=
+    trigram_width_scale (baguaOddPacket gs z) phase center hwv
+  exact trigram_actual_mixed_margin_from_sum
+    (baguaEvenPacket gs z)
+    (scalePacket phase (baguaOddPacket gs z)) center
+    (momentConditions_addPacket_v10 _ _ hmu hphaseMom)
+    (trigram_width_add _ _ center hwu hphaseWin)
+
 end AEGIS.RHBaguaActualWeilV1
 
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_gram_exact
@@ -203,3 +291,7 @@ end AEGIS.RHBaguaActualWeilV1
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_full_weighted_margin
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_sector_four_block_exact
 #print axioms AEGIS.RHBaguaActualWeilV1.bagua_actual_weil_four_sector_identity
+
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_both_complementary_moments
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_both_complementary_windows
+#print axioms AEGIS.RHBaguaActualWeilV1.bagua_complementary_phase_coupling_margin
