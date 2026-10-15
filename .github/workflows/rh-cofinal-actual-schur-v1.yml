@@ -500,6 +500,8 @@ jobs:
             evidence-cofinal/compile-AEGISOverlay_RHLogThreeSignedPrimeProducerV1.log
           grep -F "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_signed_prime_gap_two_log_three" \
             evidence-cofinal/compile-AEGISOverlay_RHLogThreeSignedPrimeProducerV1.log
+          grep -F "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive" \
+            evidence-cofinal/compile-AEGISOverlay_RHLogThreeSignedPrimeProducerV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHTimeSliceWeilV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHTimeSliceWeilV1.log
