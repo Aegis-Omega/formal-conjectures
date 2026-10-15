@@ -162,3 +162,11 @@ contribution for a suitable constructed family, including pairs whose
 correlation windows meet genuine prime logarithms and near/overlapping pairs.
 The narrow and nine-window sign theorems and the far Arch row theorem retain
 their proven domains; no global sign is inferred from these interval results.
+
+The source candidate `distinct_fine_actual_B_q16_middle_gap` combines that
+prime exclusion with the outward Q16.16 Arch cost `676/65536` whenever
+`35/128 <= b-a < log(2)-1/128`. The quadratic exponential lower bounds
+are exact rationals: `61753/32768` at `85/128` and `3425/2048` at `17/32`.
+The scalar kernel bound has passed a separate pinned-Mathlib frontend
+check with warnings as errors and only the three foundational axioms;
+the actual Weil specialization requires its own exact-head replay.

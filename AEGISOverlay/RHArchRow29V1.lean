@@ -14,13 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
+
+import AEGISOverlay.RHActualUniversalFineGramV1
+import Mathlib
+
 /-!
 AEGIS Ω — rational improvement of the separated moment-zero Arch tail.
 This file adds mathematical source candidates, NOT an unconditional RH claim.
 All genuine von Mangoldt terms remain outside the Arch bound.
 -/
-import AEGISOverlay.RHActualUniversalFineGramV1
-import Mathlib
 
 open Finset
 open scoped BigOperators
@@ -83,7 +85,9 @@ theorem arch_kernel_geometric_145 (δ : ℝ) (k : ℕ)
   have hden : (53 / 54 : ℝ) ≤ 1 - Real.exp (-2 * δ) := by linarith
   have hdpos : 0 < 1 - Real.exp (-2 * δ) := by linarith
   have hpow : Real.exp (-(5 * (k : ℝ))) = (Real.exp (-5)) ^ k := by
-    convert Real.exp_nat_mul (-5) k using 1 <;> ring
+    rw [← Real.exp_nat_mul]
+    congr 1
+    ring
   have hnum : Real.exp (-5 * δ / 2) ≤ (1 / 145 : ℝ) ^ k := by
     calc
       _ ≤ Real.exp (-(5 * (k : ℝ))) :=
@@ -198,7 +202,7 @@ theorem actual_B_norm_le_prime_plus_arch145
     rw [hzero]
     ring
   rw [heq]
-  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+  exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 /-- Dimension-free real-Weil coercivity with the sharper Arch envelope.
 At each row the genuine prime cost may consume 57401/65536, while
@@ -249,7 +253,7 @@ theorem actual_far_fine_gram_coercive_of_arch29_prime_row
           (((1 / 32 : ℝ) * (54 / 53)) *
             ((1 / 145 : ℝ) ^ Nat.dist i j)) *
               (energy (gs i).1 + energy (gs j).1) :=
-        add_le_add_right (hprime i j hij) _
+        add_le_add (hprime i j hij) le_rfl
       _ = (primeCost i j +
             ((1 / 32 : ℝ) * (54 / 53)) *
               ((1 / 145 : ℝ) ^ Nat.dist i j)) *
@@ -324,9 +328,9 @@ theorem actual_B_re_le_signed_prime_plus_arch145
     rw [hzero]
     ring
   rw [heq, Complex.add_re]
-  exact add_le_add_left
+  exact add_le_add le_rfl
     (((le_abs_self (WeilArchimedeanIntegralV1 (mixed p q)).re).trans
-      (Complex.abs_re_le_norm (WeilArchimedeanIntegralV1 (mixed p q)))).trans harch) _
+      (Complex.abs_re_le_norm (WeilArchimedeanIntegralV1 (mixed p q)))).trans harch)
 
 /-- Full genuine Weil sign with the sharper Arch-29 estimate using a
 SIGNED real von Mangoldt row certificate. Unlike a norm-prime bound,
@@ -376,7 +380,7 @@ theorem actual_far_fine_gram_coercive_of_signed_prime_arch29_row
           (((1 / 32 : ℝ) * (54 / 53)) *
             ((1 / 145 : ℝ) ^ Nat.dist i j)) *
               (energy (gs i).1 + energy (gs j).1) :=
-        add_le_add_right (hprime i j hij) _
+        add_le_add (hprime i j hij) le_rfl
       _ = (primeCost i j +
             ((1 / 32 : ℝ) * (54 / 53)) *
               ((1 / 145 : ℝ) ^ Nat.dist i j)) *

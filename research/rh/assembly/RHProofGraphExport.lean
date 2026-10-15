@@ -37,6 +37,7 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
     "AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_below_log_two",
     "AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_below_log_two",
+    "AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_q16_middle_gap",
     "AEGIS.RHArchRow29V1.geometric_arch_row_29",
     "AEGIS.RHArchRow29V1.actual_B_re_le_signed_prime_plus_arch145",
     "AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row",

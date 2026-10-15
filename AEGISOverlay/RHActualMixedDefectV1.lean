@@ -836,7 +836,7 @@ theorem distinct_fine_far_arch_norm_le
       ring) hm hE
     (fun u => distinct_logCross_norm_le_mean_energy p q u)
   dsimp [E] at harch
-  convert harch using 1 <;> ring
+  convert harch using 1; ring
 
 
 /-- The exact off-diagonal B form of two distant, different fine atoms:
@@ -852,7 +852,7 @@ theorem distinct_fine_far_mixed_one_zero
       (a - 1 / 256) (a + 1 / 256)
       (b - 1 / 256) (b + 1 / 256) 0 hp hq
     right
-    linarith [log_two_gt_one_thirty_two]
+    linarith [hgap, log_two_gt_one_thirty_two]
   have h := logCross_eq_mixed_v28 p q 0
   simp only [zero_div, Real.exp_zero, Complex.ofReal_one, one_mul] at h
   exact h.symm.trans hlog
@@ -878,7 +878,7 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_arch
     rw [hzero]
     ring
   rw [heq]
-  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+  exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 
 /-! ## Moment-zero removal of the distant rank-one Arch kernel
@@ -907,10 +907,6 @@ theorem separated_arch_decay_bound
       (1 / 16 : ℝ) *
         (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
   let R : ℝ := Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))
-  have hRnonneg : 0 ≤ R := by
-    dsimp [R]
-    exact (div_pos (Real.exp_pos _) (sub_pos.mpr
-      (Real.exp_lt_one_iff.mpr (by linarith)))).le
   let lo := qlo - phi
   let hi := qhi - plo
   let K : ℝ → ℝ := fun u => Real.exp (-u / 2) / (1 - Real.exp (-2 * u))
@@ -918,7 +914,7 @@ theorem separated_arch_decay_bound
   let M : ℝ → ℂ := fun u => (Real.exp (-u / 2) : ℂ) * logCrossV28 p q (-u)
   have hlo : 0 < lo := by
     dsimp [lo]
-    linarith [log_two_gt_one_thirty_two]
+    linarith [hgap, log_two_gt_one_thirty_two]
   have hzero (u : ℝ) (hu : u ∉ Icc lo hi) : logCrossV28 p q (-u) = 0 := by
     apply logCross_zero_outside p q plo phi qlo qhi (-u) hp hq
     by_cases hlow : u < lo
@@ -984,7 +980,8 @@ theorem separated_arch_decay_bound
       push_cast
       ring
     rw [heq, norm_mul, Complex.norm_real, Real.norm_eq_abs]
-    exact mul_le_mul hku (hR (-u)) (norm_nonneg _) hRnonneg
+    exact (mul_le_mul_of_nonneg_left (hR (-u)) (abs_nonneg _)).trans
+      (mul_le_mul_of_nonneg_right hku hE)
   rw [harch, hcancel]
   calc
     ‖∫ u in Icc lo hi, F u - M u‖ ≤
@@ -996,8 +993,7 @@ theorem separated_arch_decay_bound
       (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
       have hw : hi - lo = (1 / 16 : ℝ) := by
         simpa [CorrelationSupportDifferenceWidthV31] using hwidth
-      simp [Measure.real, Real.volume_Icc, hw, R]
-      <;> ring
+      simp [Measure.real, Real.volume_Icc, hw, R]; ring
 
 
 /-! ## Any strictly positive separation: exact fine-width Arch cancellation
@@ -1021,10 +1017,6 @@ theorem separated_arch_decay_any_positive_gap
       (1 / 64 : ℝ) *
         (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
   let R : ℝ := Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))
-  have hRnonneg : 0 ≤ R := by
-    dsimp [R]
-    exact (div_pos (Real.exp_pos _) (sub_pos.mpr
-      (Real.exp_lt_one_iff.mpr (by linarith)))).le
   let lo := qlo - phi
   let hi := qhi - plo
   let K : ℝ → ℝ := fun u => Real.exp (-u / 2) / (1 - Real.exp (-2 * u))
@@ -1098,7 +1090,8 @@ theorem separated_arch_decay_any_positive_gap
       push_cast
       ring
     rw [heq, norm_mul, Complex.norm_real, Real.norm_eq_abs]
-    exact mul_le_mul hku (hR (-u)) (norm_nonneg _) hRnonneg
+    exact (mul_le_mul_of_nonneg_left (hR (-u)) (abs_nonneg _)).trans
+      (mul_le_mul_of_nonneg_right hku hE)
   rw [harch, hcancel]
   calc
     ‖∫ u in Icc lo hi, F u - M u‖ ≤
@@ -1110,8 +1103,7 @@ theorem separated_arch_decay_any_positive_gap
       (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) * E := by
       have hw : hi - lo = (1 / 64 : ℝ) := by
         simpa [lo, hi] using hwidth
-      simp [Measure.real, Real.volume_Icc, hw, R]
-      <;> ring
+      simp [Measure.real, Real.volume_Icc, hw, R]; ring
 
 
 /-- For any two distinct moment-zero fine packets with disjoint ordered
@@ -1147,7 +1139,7 @@ theorem distinct_fine_arch_decay_any_positive_gap
       hm hE
       (fun u => distinct_logCross_norm_le_mean_energy p q u)
   dsimp [δ, E] at harch ⊢
-  convert harch using 1 <;> ring
+  convert harch using 1; ring
 
 /-- True separated mixed Weil coefficient at every positive support gap.
 The prime sum remains explicit, while the moment-zero Arch term carries
@@ -1182,7 +1174,7 @@ theorem distinct_fine_actual_B_any_positive_gap
     rw [hcenter]
     ring
   rw [heq]
-  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+  exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 /-- Actual distant ARCH bound after using the zero Mellin moment,
 for different fine packets supported near centers a and b. The
@@ -1202,7 +1194,7 @@ theorem distinct_fine_far_arch_moment_decay
   let E : ℝ := (energy p.1 + energy q.1)/2
   have hδ : 0 < δ := by
     dsimp [δ]
-    linarith [log_two_gt_one_thirty_two]
+    linarith [hgap, log_two_gt_one_thirty_two]
   have hE : 0 ≤ E := by
     dsimp [E]
     have hp0 := energy_nonnegative p.1
@@ -1227,7 +1219,7 @@ theorem distinct_fine_far_arch_moment_decay
       hm hE
       (fun u => distinct_logCross_norm_le_mean_energy p q u)
   dsimp [E, δ] at harch ⊢
-  convert harch using 1 <;> ring
+  convert harch using 1; ring
 
 
 /-- The entire genuine distant Weil coefficient inherits the moment-zero
@@ -1254,7 +1246,7 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_moment_decay
     rw [hzero]
     ring
   rw [heq]
-  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+  exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 /-- Convert an analytic estimate on the *prime part alone* into an
 outward Q16.16 bound on the actual distant mixed Weil coefficient.
@@ -1292,7 +1284,7 @@ theorem distinct_fine_far_actual_B_q16_of_prime_decay_budget
           (Real.exp (-5 * ((b-a)-1/32) / 2) /
             (1 - Real.exp (-2 * ((b-a)-1/32)))) *
               (energy p.1 + energy q.1) :=
-                add_le_add_right hprime _
+                add_le_add hprime le_rfl
     _ = ((k : ℝ) / 65536) * (energy p.1 + energy q.1) := by ring
 
 
@@ -1410,7 +1402,7 @@ theorem distinct_fine_far_actual_B_q16_prime_plus_120
         (Real.exp (-5 * ((b-a)-1/32) / 2) /
           (1 - Real.exp (-2 * ((b-a)-1/32)))) ≤
             (120 / 65536 : ℝ) := by
-    convert hr using 1 <;> congr 2 <;> ring
+    convert hr using 1; congr 2 <;> ring
   exact distinct_fine_far_actual_B_q16_of_separate_rational_budgets
     p q a b hp hq hm hgap primeCost 120 hprime hdecay
 
@@ -1550,7 +1542,7 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_geometric_arch
     rw [hzero]
     ring
   rw [heq]
-  exact (norm_add_le _ _).trans (add_le_add_left harch _)
+  exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 
 
@@ -1875,6 +1867,68 @@ theorem distinct_fine_actual_B_below_log_two
   exact distinct_fine_actual_B_of_integer_log_gap p q a b hp hq hm hlow
     (integer_log_avoids_below_log_two (b - a) hlow hhigh)
 
+/-- A floating-point-free Q16.16 Arch certificate for the intermediate
+fine gap. Quadratic Taylor lower bounds give the outward cost 676. -/
+theorem moment_zero_fine_middle_arch_q16 (δ : ℝ) (hδ : (17 / 64 : ℝ) ≤ δ) :
+    (1 / 128 : ℝ) *
+      (Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ))) ≤
+      (676 / 65536 : ℝ) := by
+  have hx : (85 / 128 : ℝ) ≤ 5 * δ / 2 := by linarith
+  have hy : (17 / 32 : ℝ) ≤ 2 * δ := by linarith
+  have hxexp : (61753 / 32768 : ℝ) ≤ Real.exp (5 * δ / 2) := by
+    have hq := Real.quadratic_le_exp_of_nonneg (by linarith : 0 ≤ 5 * δ / 2)
+    have hp : (61753 / 32768 : ℝ) ≤ 1 + 5 * δ / 2 + (5 * δ / 2) ^ 2 / 2 := by
+      nlinarith [sq_nonneg (5 * δ / 2 - 85 / 128)]
+    exact hp.trans hq
+  have hyexp : (3425 / 2048 : ℝ) ≤ Real.exp (2 * δ) := by
+    have hq := Real.quadratic_le_exp_of_nonneg (by linarith : 0 ≤ 2 * δ)
+    have hp : (3425 / 2048 : ℝ) ≤ 1 + 2 * δ + (2 * δ) ^ 2 / 2 := by
+      nlinarith [sq_nonneg (2 * δ - 17 / 32)]
+    exact hp.trans hq
+  have hxpair : Real.exp (5 * δ / 2) * Real.exp (-5 * δ / 2) = 1 := by
+    rw [← Real.exp_add]
+    convert Real.exp_zero using 1
+    congr 1
+    ring
+  have hypair : Real.exp (2 * δ) * Real.exp (-2 * δ) = 1 := by
+    rw [← Real.exp_add]
+    convert Real.exp_zero using 1
+    congr 1
+    ring
+  have hxupper : Real.exp (-5 * δ / 2) ≤ (32768 / 61753 : ℝ) := by
+    have hmul := mul_le_mul_of_nonneg_right hxexp (Real.exp_nonneg (-5 * δ / 2))
+    rw [hxpair] at hmul
+    nlinarith
+  have hyupper : Real.exp (-2 * δ) ≤ (2048 / 3425 : ℝ) := by
+    have hmul := mul_le_mul_of_nonneg_right hyexp (Real.exp_nonneg (-2 * δ))
+    rw [hypair] at hmul
+    nlinarith
+  have hden : 0 < 1 - Real.exp (-2 * δ) := by linarith
+  have hratio : Real.exp (-5 * δ / 2) / (1 - Real.exp (-2 * δ)) ≤
+      (169 / 128 : ℝ) := by
+    apply (div_le_iff₀ hden).mpr
+    linarith
+  have hmul := mul_le_mul_of_nonneg_left hratio (by norm_num : (0 : ℝ) ≤ 1 / 128)
+  nlinarith
+
+/-- Actual mixed Weil Q16.16 certificate for different fine atoms of
+arbitrary energies in the intermediate interval below log 2. Every prime
+sample is proved zero; the Arch remainder is charged, not discarded. -/
+theorem distinct_fine_actual_B_q16_middle_gap
+    (p q : WeilCompactSmoothGV1) (a b : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q b)
+    (hm : WeilMomentConditionsV1 p)
+    (hlow : (35 / 128 : ℝ) ≤ b - a)
+    (hhigh : b - a < Real.log 2 - (1 / 128 : ℝ)) :
+    ‖B p q‖ ≤ (676 / 65536 : ℝ) * (energy p.1 + energy q.1) := by
+  have hactual := distinct_fine_actual_B_below_log_two
+    p q a b hp hq hm (by linarith) hhigh
+  have hkernel := moment_zero_fine_middle_arch_q16
+    ((b - a) - 1 / 128) (by linarith)
+  exact hactual.trans (mul_le_mul_of_nonneg_right hkernel
+    (add_nonneg (energy_nonnegative p.1) (energy_nonnegative q.1)))
+
 /-- The first explicit integer-log-free middle interval, between the
 two neighboring prime logarithms log 2 and log 3. No universally
 quantified exclusion certificate is required from the caller. -/
@@ -2009,3 +2063,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.integer_log_avoids_below_log_two
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_prime_zero_below_log_two
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_below_log_two
+
+#print axioms AEGIS.RHActualMixedDefectV1.moment_zero_fine_middle_arch_q16
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_q16_middle_gap

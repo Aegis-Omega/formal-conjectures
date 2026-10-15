@@ -14,13 +14,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
+
+import AEGISOverlay.RHActualUniversalFineGramV1
+
 /-!
 AEGIS Omega: source-only two-scale actual Weil row-budget bridge.
 This imports the existing genuine-Weil signed-row consumer on PR #88.
 The near/far inequalities are EXPLICIT hypotheses: no analytic bound
 on the prime part or unconditional RH is claimed.
 -/
-import AEGISOverlay.RHActualUniversalFineGramV1
 
 open Finset
 open scoped BigOperators

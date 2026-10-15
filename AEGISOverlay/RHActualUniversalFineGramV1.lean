@@ -800,7 +800,7 @@ theorem actual_fine_gram_coercive_of_summable_arch_prime_row
       _ ≤ primeCost i j * (energy (gs i).1 + energy (gs j).1) +
           ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
           (energy (gs i).1 + energy (gs j).1) :=
-            add_le_add_right (hprime i j hij) _
+            add_le_add (hprime i j hij) le_rfl
       _ = (primeCost i j +
             (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
           (energy (gs i).1 + energy (gs j).1) := by ring
@@ -887,7 +887,7 @@ theorem actual_far_fine_gram_coercive_of_geometric_arch_prime_row
       _ ≤ primeCost i j * (energy (gs i).1 + energy (gs j).1) +
           ((13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
             (energy (gs i).1 + energy (gs j).1) :=
-              add_le_add_right (hprime i j hij) _
+              add_le_add (hprime i j hij) le_rfl
       _ = (primeCost i j +
             (13 / 384 : ℝ) * ((2 / 37 : ℝ) ^ Nat.dist i j)) *
           (energy (gs i).1 + energy (gs j).1) := by ring
