@@ -37,6 +37,7 @@ nonzero slice. Slices compose exactly, and their actual Weil packet
 Gram keeps every cross term. No universal Weil sign is assumed.
 -/
 
+open Set
 open scoped BigOperators
 set_option autoImplicit false
 noncomputable section
@@ -419,7 +420,7 @@ theorem fsTwoThreeShiftGroup_dense :
 packet restricted to the dense femtosecond/log2/log3 subgroup. -/
 def FsTwoThreeDetectorSign : Prop :=
   ∀ d : ℝ, d ∈ fsTwoThreeShiftGroup →
-    ∀ c : ℂ, AEGIS.RHFixedPacketFourPhaseV1.WeilFourPhaseV1 c →
+    ∀ c : ℂ, WeilFourPhaseV1 c →
       (WeilExplicitRightSideV1
         (WeilAutocorrelationV1
           (WeilTwoPointTranslateV11
@@ -437,7 +438,7 @@ theorem fsTwoThree_detector_sign_implies_all_shifts
     AEGIS.RHNarrowFixedDetectorV1.narrowDetectingPacket_moments
   intro d c hc
   let Q : ℝ → ℝ := fun x =>
-    AEGIS.WeilZeroKernelHermitianV11.WeilTwoPointValueV1
+    WeilTwoPointValueV1
       (WeilAutocorrelationZeroQuadraticV11 g).re
       (WeilZeroTranslationKernelV11 g x) c
   have hcontinuous : Continuous Q :=
@@ -454,7 +455,7 @@ theorem fsTwoThree_detector_sign_implies_all_shifts
       (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
         (WeilTwoPointTranslateV11 g x c) hmx).mp (h x hx c hc)
     change 0 ≤ Q x
-    rw [AEGIS.WeilZeroKernelHermitianV11.twoPoint_zero_quadratic_re_eq_four_phase_value
+    rw [AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
       g hm x c] at hzero
     exact hzero
   have hclosed : closure (fsTwoThreeShiftGroup : Set ℝ) ⊆
@@ -469,7 +470,7 @@ theorem fsTwoThree_detector_sign_implies_all_shifts
       g d c hm)).mpr
   change 0 ≤ (WeilAutocorrelationZeroQuadraticV11
     (WeilTwoPointTranslateV11 g d c)).re
-  rw [AEGIS.WeilZeroKernelHermitianV11.twoPoint_zero_quadratic_re_eq_four_phase_value
+  rw [AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
     g hm d c]
   exact hQ
 
