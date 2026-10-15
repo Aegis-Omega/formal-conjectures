@@ -49,6 +49,7 @@ open AEGIS.WeilThreeBlockTranslatedPacketsV22
 open AEGIS.WeilZeroTranslationV11
 open AEGIS.WeilZeroTwoPointV11
 open AEGIS.WeilDisjointEnergyV2
+open AEGIS.WeilMixedAlgebraV2
 open AEGIS.RHGramExpansionV13
 open AEGIS.RHBaguaActualWeilV1
 
