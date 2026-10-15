@@ -69,8 +69,11 @@ theorem actual_packet_sum_nonpositive_of_optimized_rows
       0 ≤ ∑ i : Fin (n + 1), energy (gs i).1 * ‖(1 : ℂ)‖ ^ 2 :=
     Finset.sum_nonneg (fun i _ =>
       mul_nonneg (energy_nonnegative (gs i).1) (sq_nonneg _))
-  exact hopt.trans (neg_nonpos.mpr
-    (mul_nonneg (by norm_num : (0 : ℝ) ≤ 34727 / 32768) henergy))
+  have hnonpos :
+      -(34727 / 32768 : ℝ) *
+        (∑ i : Fin (n + 1), energy (gs i).1 * ‖(1 : ℂ)‖ ^ 2) ≤ 0 :=
+    mul_nonpos_of_nonpos_of_nonneg (by norm_num) henergy
+  exact hopt.trans hnonpos
 
 /-- Source-true RH terminal that consumes the universal fine constructor
 and the strongest existing optimized actual Weil–Schur estimate.
