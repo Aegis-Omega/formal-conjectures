@@ -16,6 +16,7 @@ limitations under the License.
 
 
 import AEGISOverlay.RHActualUniversalFineGramV1
+import WeilAbjadFourPhaseBridgeV1
 
 /-!
 AEGIS Omega: source-only two-scale actual Weil row-budget bridge.
@@ -576,6 +577,90 @@ theorem actual_weighted_q16_coercive_of_two_scale_rows
     _ = (nearUnits + farUnits) * weight i := by ring
     _ ≤ 57430 * weight i := Nat.mul_le_mul_right (weight i) hbudget
 
+
+/-! ## Abjad's exact four-phase tests as a Weil/Schur interface
+
+The EXISTING source-pinned AEGIS module WeilAbjadFourPhaseBridgeV1
+proves that the four triadic nodes 0,3,6,9 encode 1,I,-1,-I.
+Here the actual Weil cross coefficient B(p,q), not a stand-in
+complex variable, is passed to that exact four-phase theorem.
+
+Nonnegativity of all four phase tests is still a specific ANALYTIC
+obligation. We neither infer it from modular Abjad arithmetic nor
+silently assume a global Weil sign. -/
+
+/-- Actual Weil cross real-part bound from the full Abjad quarter-turn
+phase tests. The bound is obtained by an existing formal equivalence
+with the exact component-box condition on B, not a fresh assertion
+of nonnegative zeta/Weil forms. -/
+theorem actual_weil_re_le_of_abjad_four_phases
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hphase : ∀ r : ℕ, AbjadTriadicNodeV1 r →
+      0 ≤ WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 r)) :
+    (B p q).re ≤ a := by
+  have hcomponent :=
+    (weil_abjad_triadic_nonnegative_iff_components_v1
+      a (B p q)).mp hphase
+  exact (le_abs_self (B p q).re).trans hcomponent.1
+
+/-- Direct reconstruction of the true Weil cross coefficient using
+opposite pairs of triadic Abjad phase nodes. All four identities come
+from the original pinned WeilAbjadFourPhaseBridgeV1 source. -/
+theorem actual_weil_abjad_four_phase_reconstruction
+    (p q : WeilCompactSmoothGV1) (a : ℝ) :
+    WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 0) +
+        WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 6) = 4 * a ∧
+    WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 3) +
+        WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 9) = 4 * a ∧
+    WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 0) -
+        WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 6) =
+          4 * (B p q).re ∧
+    WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 9) -
+        WeilTwoPointValueV1 a (B p q) (AbjadPhaseV1 3) =
+          4 * (B p q).im := by
+  exact weil_abjad_phase_reconstruction_v1 a (B p q)
+
+/-- Abjad-to-weighted-Schur adapter with the actual Weil B and exact
+directed Q16.16 integer ledgers. This theorem does NOT prove the
+four phase positivity hypotheses; it only discharges their correct
+algebraic transport to the true signed Gram. -/
+theorem actual_weil_weighted_q16_of_abjad_phase_rows
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (block : Fin (n + 1) → ℕ)
+    (cost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (weight : Fin (n + 1) → ℕ)
+    (nearUnits farUnits : ℕ)
+    (hw : ∀ i, 0 < weight i)
+    (hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hphase : ∀ i j, i ≠ j → ∀ r : ℕ,
+      AbjadTriadicNodeV1 r →
+      0 ≤ WeilTwoPointValueV1
+        (((cost i j : ℝ) * (weight j : ℝ) /
+          ((weight i : ℝ) * 65536)) * energy (gs i).1 +
+         ((cost j i : ℝ) * (weight i : ℝ) /
+          ((weight j : ℝ) * 65536)) * energy (gs j).1)
+        (B (gs i) (gs j)) (AbjadPhaseV1 r))
+    (hnear : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i = block j then cost i j * weight j else 0) ≤
+          nearUnits * weight i)
+    (hfar : ∀ i : Fin (n + 1),
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        if block i ≠ block j then cost i j * weight j else 0) ≤
+          farUnits * weight i)
+    (hbudget : nearUnits + farUnits ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  apply actual_weighted_q16_coercive_of_two_scale_rows
+    gs block cost weight nearUnits farUnits hw hdiag
+    (by
+      intro i j hij
+      exact actual_weil_re_le_of_abjad_four_phases (gs i) (gs j)
+        _ (hphase i j hij))
+    hnear hfar hbudget
+
 end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_row_eq_near_add_far
@@ -591,3 +676,6 @@ end AEGIS.RHScaleRowCompositionV1
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_mixed_defect_le_of_directed_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weighted_q16_coercive_of_integer_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_weighted_q16_coercive_of_two_scale_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_re_le_of_abjad_four_phases
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_abjad_four_phase_reconstruction
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_weil_weighted_q16_of_abjad_phase_rows
