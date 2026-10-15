@@ -327,6 +327,123 @@ theorem actual_eleven_lattice_weighted_q16_coercive
   rw [B_packetSum]
   exact h
 
+
+/-!
+Q16.16 exact weighted-Schur refinement (2026-10-15).
+All eleven mixed-entry costs remain source-derived and outward-rounded.
+This proves a STRICTLY STRONGER finite eleven-translate result, without
+claiming coverage of arbitrary moment-zero Weil packets.
+-/
+
+/-- Rational Perron-style weights, encoded by small positive integers.
+Symmetry under i ↦ 10 - i retains all seven middle rows. -/
+def elevenOptimizedWeightUnits (i : Fin 11) : ℕ :=
+  if (i : ℕ) = 0 ∨ (i : ℕ) = 10 then 427 else
+  if (i : ℕ) = 1 ∨ (i : ℕ) = 9 then 355 else 24
+
+def elevenOptimizedWeight (i : Fin 11) : ℝ :=
+  (elevenOptimizedWeightUnits i : ℝ)
+
+theorem elevenOptimizedWeight_positive (i : Fin 11) :
+    0 < elevenOptimizedWeight i := by
+  unfold elevenOptimizedWeight elevenOptimizedWeightUnits
+  split_ifs <;> norm_num
+
+/-- Kernel-decidable integer inequalities for all eleven rows.
+No floating-point test is used; the same source-derived Q16.16 costs
+appear in the existing elevenCostUnits definition. -/
+theorem eleven_optimized_integer_certificate : ∀ i : Fin 11,
+    (∑ j, elevenCostUnits i j * elevenOptimizedWeightUnits j) ≤
+      46688 * elevenOptimizedWeightUnits i := by decide
+
+theorem eleven_optimized_row_bound (i : Fin 11) :
+    (∑ j, elevenSchurCost i j *
+      (elevenOptimizedWeight j / elevenOptimizedWeight i)) ≤
+        (46688 / 65536 : ℝ) := by
+  have hcost (j : Fin 11) :
+      elevenSchurCost i j = (elevenCostUnits i j : ℝ) / 65536 := by
+    unfold elevenSchurCost elevenCostUnits q16Cost
+    split_ifs <;> norm_num
+  have hw : (0 : ℝ) < (elevenOptimizedWeightUnits i : ℝ) := by
+    exact elevenOptimizedWeight_positive i
+  have hreal :
+      (∑ j, (elevenCostUnits i j : ℝ) *
+        (elevenOptimizedWeightUnits j : ℝ)) ≤
+          46688 * (elevenOptimizedWeightUnits i : ℝ) := by
+    exact_mod_cast eleven_optimized_integer_certificate i
+  simp_rw [hcost, elevenOptimizedWeight]
+  have heq :
+      (∑ j, (elevenCostUnits i j : ℝ) / 65536 *
+        ((elevenOptimizedWeightUnits j : ℝ) /
+          (elevenOptimizedWeightUnits i : ℝ))) =
+      (∑ j, (elevenCostUnits i j : ℝ) *
+        (elevenOptimizedWeightUnits j : ℝ)) /
+          (65536 * (elevenOptimizedWeightUnits i : ℝ)) := by
+    rw [sum_div]
+    apply sum_congr rfl
+    intro j _
+    field_simp
+  rw [heq]
+  apply (div_le_iff₀
+    (mul_pos (by norm_num : (0 : ℝ) < 65536) hw)).2
+  nlinarith
+
+/-- Strict improvement: 34727/32768 > 34717/32768. -/
+theorem eleven_optimized_margin :
+    (116142 / 65536 : ℝ) - 46688 / 65536 =
+      34727 / 32768 := by norm_num
+
+/-- Stronger exact Q16.16 Weil coercivity on the original eleven-translate
+moment-zero domain; the analytic diagonal and all Hermitian mixed
+estimates are imported unchanged. -/
+theorem actual_eleven_lattice_optimized_q16_coercive
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : WidthOneOneTwentyEightAt g a)
+    (hm : WeilMomentConditionsV1 g) (z : Fin 11 → ℂ) :
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1 (packetSum z (elevenAtoms g)))).re ≤
+        -(34727 / 32768 : ℝ) * energy g.1 *
+          ∑ i, ‖z i‖ ^ 2 := by
+  have he := energy_nonnegative g.1
+  have hd : ∀ i : Fin 11,
+      (116142 / 65536 : ℝ) * energy g.1 ≤
+        -(B (elevenAtoms g i) (elevenAtoms g i)).re := by
+    intro i
+    exact (mul_le_mul_of_nonneg_right
+      (by norm_num : (116142 / 65536 : ℝ) ≤ 5671 / 3200) he).trans
+        (all_actual_eleven_diagonal_bounds g a hw i)
+  have hc : ∀ i j, 0 ≤ elevenSchurCost i j := by
+    intro i j
+    unfold elevenSchurCost
+    split_ifs
+    · exact le_rfl
+    · exact q16Cost_nonnegative _
+  have hx : ∀ i j : Fin 11, i ≠ j →
+      ‖B (elevenAtoms g i) (elevenAtoms g j)‖ ≤
+        elevenSchurCost i j * energy g.1 := by
+    intro i j hij
+    have hdist : Nat.dist (i : ℕ) (j : ℕ) ≠ 0 := by
+      intro h
+      exact hij (Fin.ext (Nat.eq_of_dist_eq_zero h))
+    rw [elevenSchurCost, if_neg hdist]
+    exact (all_actual_eleven_mixed_bounds g a hw hm i j hij).trans
+      (mul_le_mul_of_nonneg_right (elevenCost_le_q16Cost _) he)
+  have hs : ∀ i j,
+      elevenSchurCost i j = elevenSchurCost j i := by
+    intro i j
+    simp only [elevenSchurCost, Nat.dist_comm]
+  have h := AEGIS.WeightedSchur.weighted_gram
+    (fun i j => B (elevenAtoms g i) (elevenAtoms g j)) z
+    elevenSchurCost elevenOptimizedWeight
+    (116142 / 65536) (energy g.1) (46688 / 65536)
+    he hc (fun i => by simp [elevenSchurCost]) hs
+    elevenOptimizedWeight_positive hd hx eleven_optimized_row_bound
+  rw [eleven_optimized_margin] at h
+  change (B (packetSum z (elevenAtoms g))
+    (packetSum z (elevenAtoms g))).re ≤ _
+  rw [B_packetSum]
+  exact h
+
 end AEGIS.RHActualElevenLatticeV1
 
 #print axioms AEGIS.RHActualElevenLatticeV1.lattice_gap_bound
@@ -348,3 +465,7 @@ end AEGIS.RHActualElevenLatticeV1
 #print axioms AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_weighted_q16_coercive
 
 #print axioms AEGIS.RHActualElevenLatticeV1.eleven_weighted_integer_certificate
+
+#print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_integer_certificate
+#print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_row_bound
+#print axioms AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_optimized_q16_coercive
