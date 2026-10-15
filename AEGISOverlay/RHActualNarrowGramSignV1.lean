@@ -42,6 +42,8 @@ noncomputable section
 namespace AEGIS.RHActualNarrowGramSignV1
 
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilMixedClosureV2 AEGIS.RHKreinFactorV13
+open Set
 
 /-- Exact full-matrix sign with every mixed coefficient retained, for any
 smooth finite partition of an admissible packet in the certified 693/2000
@@ -96,7 +98,156 @@ theorem every_two_fifths_packet_actual_full_gram_nonpositive
     _ ≤ 0 :=
       AEGIS.RHKreinTrigramAdaptiveV1.window_two_fifths_trigram_v1 g hm hw
 
+
+/-- The Trigram zero-series margin holds with arbitrary logarithmic center,
+so the original actual arithmetic Weil sign does not require recentering
+the test packet to the origin. -/
+theorem trigram_actual_arithmetic_nonpositive_at
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt g (2 / 5) a) :
+    (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 := by
+  have hmargin :=
+    AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
+      g (2 / 5 : ℝ) a (by norm_num) (by norm_num) hw hm
+  have henergy :
+      0 ≤ (1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1 :=
+    mul_nonneg (by norm_num)
+      (AEGIS.WeilDisjointEnergyV2.energy_nonnegative g.1)
+  exact
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      g hm).mpr (henergy.trans hmargin)
+
+/-- The exact two-block identity converts Trigram's actual arithmetic
+sign to a signed bound on the GENUINE Weil mixed entry, not a surrogate. -/
+theorem trigram_actual_mixed_signed_from_sum
+    (u v : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 (addPacket u v))
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (addPacket u v) (2 / 5) a) :
+    2 * (B u v).re ≤ -(B u u).re - (B v v).re := by
+  have hsign :=
+    trigram_actual_arithmetic_nonpositive_at (addPacket u v) a hm hw
+  change (B (addPacket u v) (addPacket u v)).re ≤ 0 at hsign
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients u v
+  linarith
+
+/-- The exact support geometry: 1/256 + (507/640)/2 = 2/5.
+This increases the previously used 35/128 near-pair separation without
+changing the supplied Weil packet or its moments. -/
+theorem fine_width_into_trigram_midpoint
+    (u : WeilCompactSmoothGV1) (a b : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (1 / 256) a)
+    (hab : |a - b| ≤ (507 / 640 : ℝ)) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      u (2 / 5) ((a + b) / 2) := by
+  change tsupport (lift u.1) ⊆
+    Icc ((a + b) / 2 - 2 / 5) ((a + b) / 2 + 2 / 5)
+  change tsupport (lift u.1) ⊆
+    Icc (a - 1 / 256) (a + 1 / 256) at hu
+  intro t ht
+  obtain ⟨hlo, hhi⟩ := hu ht
+  obtain ⟨hablo, habhi⟩ := abs_le.mp hab
+  constructor <;> linarith
+
+/-- Exact preservation of the Trigram logarithmic support under
+arbitrary complex multiplication. -/
+theorem trigram_width_scale
+    (u : WeilCompactSmoothGV1) (z : ℂ) (a : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (2 / 5) a) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (scalePacket z u) (2 / 5) a := by
+  change tsupport (lift (scalePacket z u).1) ⊆ Icc (a - 2 / 5) (a + 2 / 5)
+  change tsupport (lift u.1) ⊆ Icc (a - 2 / 5) (a + 2 / 5) at hu
+  have hlift : lift (scalePacket z u).1 =
+      (fun x => z * lift u.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, scalePacket]
+    ring
+  rw [hlift]
+  have hs : tsupport (fun x => z * lift u.1 x) ⊆ tsupport (lift u.1) := by
+    apply closure_minimal ?_ (isClosed_tsupport _)
+    intro x hx
+    by_contra hn
+    have hz : lift u.1 x = 0 := image_eq_zero_of_notMem_tsupport hn
+    exact hx (by simp [hz])
+  exact hs.trans hu
+
+/-- Exact preservation of the Trigram window under packet addition. -/
+theorem trigram_width_add
+    (u v : WeilCompactSmoothGV1) (a : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (2 / 5) a)
+    (hv : AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (2 / 5) a) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (addPacket u v) (2 / 5) a := by
+  change tsupport (lift (addPacket u v).1) ⊆ Icc (a - 2 / 5) (a + 2 / 5)
+  change tsupport (lift u.1) ⊆ Icc (a - 2 / 5) (a + 2 / 5) at hu
+  change tsupport (lift v.1) ⊆ Icc (a - 2 / 5) (a + 2 / 5) at hv
+  have hlift : lift (addPacket u v).1 =
+      (fun x => lift u.1 x + lift v.1 x) := by
+    funext x
+    simp only [AEGIS.RHKreinFactorV13.lift, addPacket, mul_add]
+  rw [hlift]
+  have hs :
+      tsupport (fun x => lift u.1 x + lift v.1 x) ⊆
+        tsupport (lift u.1) ∪ tsupport (lift v.1) := by
+    apply closure_minimal ?_
+      ((isClosed_tsupport _).union (isClosed_tsupport _))
+    intro x hx
+    by_contra hn
+    have hu0 : lift u.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxU
+        exact hn (Or.inl hxU))
+    have hv0 : lift v.1 x = 0 :=
+      image_eq_zero_of_notMem_tsupport (by
+        intro hxV
+        exact hn (Or.inr hxV))
+    exact hx (by simp [hu0, hv0])
+  intro x hx
+  rcases hs hx with hxU | hxV
+  · exact hu hxU
+  · exact hv hxV
+
+/-- Any two fine atoms separated by at most 507/640 share the actual
+Trigram 2/5 log window, even when their shapes are unrelated. -/
+theorem nearby_fine_pair_shared_trigram_window
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (1 / 256) a)
+    (hv : AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (1 / 256) b)
+    (hab : |a - b| ≤ (507 / 640 : ℝ)) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      u (2 / 5) ((a + b) / 2) ∧
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      v (2 / 5) ((a + b) / 2) := by
+  constructor
+  · exact fine_width_into_trigram_midpoint u a b hu hab
+  · have hba : |b - a| ≤ (507 / 640 : ℝ) := by
+      simpa only [abs_sub_comm] using hab
+    simpa only [add_comm] using
+      (fine_width_into_trigram_midpoint v b a hv hba)
+
+/-- True signed Weil B interaction of two distinct moment-zero fine
+atoms at center separation at most 507/640. No near-pair cost premise. -/
+theorem nearby_fine_pair_actual_mixed_signed_trigram
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : AEGIS.RHDyadicDiagonalV13.HalfWidthAt u (1 / 256) a)
+    (hv : AEGIS.RHDyadicDiagonalV13.HalfWidthAt v (1 / 256) b)
+    (hab : |a - b| ≤ (507 / 640 : ℝ)) :
+    2 * (B u v).re ≤ -(B u u).re - (B v v).re := by
+  obtain ⟨hwu, hwv⟩ :=
+    nearby_fine_pair_shared_trigram_window u v a b hu hv hab
+  exact trigram_actual_mixed_signed_from_sum u v ((a + b) / 2)
+    (momentConditions_addPacket_v10 u v hmu hmv)
+    (trigram_width_add u v ((a + b) / 2) hwu hwv)
+
 end AEGIS.RHActualNarrowGramSignV1
 
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive
 #print axioms AEGIS.RHActualNarrowGramSignV1.every_two_fifths_packet_actual_full_gram_nonpositive
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_arithmetic_nonpositive_at
+#print axioms AEGIS.RHActualNarrowGramSignV1.trigram_actual_mixed_signed_from_sum
+#print axioms AEGIS.RHActualNarrowGramSignV1.nearby_fine_pair_actual_mixed_signed_trigram
