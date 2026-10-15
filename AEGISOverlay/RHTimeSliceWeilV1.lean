@@ -272,6 +272,107 @@ theorem zeroSliceFactor_list_product
   | cons t ts ih =>
     simpa [zeroSliceFactor_add, ih]
 
+
+/-! ## Arbitrarily many actual time slices in a common certified window
+
+This lifts the previously source-proved full-weighted genuine Weil Gram
+margin to n+1 time-sliced translates of ONE arbitrary moment-zero seed.
+Unlike the eight-dimensional Bagua showcase, n is unrestricted.
+
+The width hypothesis is DERIVED from the source seed support and explicit
+bounds on the slice centers. In particular, the inter-slice B entries are
+not assumed small or discarded: all (n+1)^2 genuine mixed coefficients
+are retained exactly by the imported Trigram theorem.
+
+The center-span condition remains load-bearing: it does not assert
+global arithmetic positivity outside the common 2/5 log window. -/
+
+/-- Actual source packets along an arbitrary finite sequence of signed
+integer femtosecond offsets. -/
+def timeSliceFamily {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p : ℝ)
+    (ticks : Fin (n + 1) → ℤ) :
+    Fin (n + 1) → WeilCompactSmoothGV1 :=
+  fun i => timeSlicePacket g p (ticks i)
+
+/-- Moment-zero annihilations are valid for every sliced component. -/
+theorem timeSliceFamily_moments {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (hm : WeilMomentConditionsV1 g) :
+    ∀ i, WeilMomentConditionsV1 (timeSliceFamily g p ticks i) := by
+  intro i
+  exact timeSlice_moments g hm p (ticks i)
+
+/-- Each component inherits an actual common Trigram support bound
+if its exact log-time shift lies within the certified center span.
+The per-slice base radius is 1/256, leaving 507/1280 of center slack. -/
+theorem timeSliceFamily_common_window {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p origin center : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256) origin)
+    (hspan : ∀ i, |origin + fsLogSlice p (ticks i) - center| ≤
+      (507 / 1280 : ℝ)) :
+    ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (timeSliceFamily g p ticks i) (2 / 5) center := by
+  intro i
+  let d : ℝ := fsLogSlice p (ticks i)
+  have htranslated :
+      AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+        (timeSliceFamily g p ticks i)
+        ((origin - 1 / 256) + d) ((origin + 1 / 256) + d) := by
+    change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+      (translatePacket g d)
+      ((origin - 1 / 256) + d) ((origin + 1 / 256) + d)
+    exact translate_logSupportIn g d (origin - 1 / 256)
+      (origin + 1 / 256) hw
+  change AEGIS.WeilThreeBlockTranslatedPacketsV22.LogSupportIn
+    (timeSliceFamily g p ticks i)
+    (center - 2 / 5) (center + 2 / 5)
+  intro x hx
+  have h := htranslated hx
+  obtain ⟨hlo, hhi⟩ := abs_le.mp (hspan i)
+  change |origin + d - center| ≤ (507 / 1280 : ℝ) at hlo hhi
+  constructor <;> linarith [h.1, h.2]
+
+/-- ACTUAL full Weil Gram, valid for arbitrarily many time slices,
+including every complex-weighted off-diagonal entry. -/
+theorem timeSliceFamily_full_gram {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (z : Fin (n + 1) → ℂ) :
+    B (packetSum z (timeSliceFamily g p ticks))
+      (packetSum z (timeSliceFamily g p ticks)) =
+    ∑ i : Fin (n + 1), ∑ j : Fin (n + 1),
+      z i * star (z j) *
+        B (timeSliceFamily g p ticks i)
+          (timeSliceFamily g p ticks j) := by
+  exact B_packetSum z (timeSliceFamily g p ticks)
+
+/-- Proven Trigram 1/16 energy margin for ALL (n+1)^2 genuine
+mixed coefficients, now carried by arbitrary exact femtosecond
+time slices within the common certified log support. -/
+theorem timeSliceFamily_full_weighted_margin {n : ℕ}
+    (g : WeilCompactSmoothGV1) (p origin center : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (z : Fin (n + 1) → ℂ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256) origin)
+    (hspan : ∀ i, |origin + fsLogSlice p (ticks i) - center| ≤
+      (507 / 1280 : ℝ)) :
+    (1 / 16 : ℝ) *
+      energy (packetSum z (timeSliceFamily g p ticks)).1 ≤
+      -(∑ i : Fin (n + 1), ∑ j : Fin (n + 1),
+          z i * star (z j) *
+            B (timeSliceFamily g p ticks i)
+              (timeSliceFamily g p ticks j)).re := by
+  exact AEGIS.RHActualNarrowGramSignV1.trigram_full_weighted_gram_margin
+    n z (timeSliceFamily g p ticks) center
+    (timeSliceFamily_moments g p ticks hm)
+    (timeSliceFamily_common_window g p origin center ticks hw hspan)
+
 end AEGIS.RHTimeSliceWeilV1
 
 #print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_add
@@ -289,3 +390,7 @@ end AEGIS.RHTimeSliceWeilV1
 #print axioms AEGIS.RHTimeSliceWeilV1.bagua_time_three_exact_q16_product
 #print axioms AEGIS.RHTimeSliceWeilV1.fsLogSlice_list_sum
 #print axioms AEGIS.RHTimeSliceWeilV1.zeroSliceFactor_list_product
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_moments
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_common_window
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_gram
+#print axioms AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin
