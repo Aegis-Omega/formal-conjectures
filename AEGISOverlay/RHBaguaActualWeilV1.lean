@@ -38,6 +38,7 @@ noncomputable section
 namespace AEGIS.RHBaguaActualWeilV1
 
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilFinalSignTranslationBoundV10
 open AEGIS.RHGramExpansionV13
 open AEGIS.RHBaguaWalshV1
 open AEGIS.RHActualNarrowGramSignV1

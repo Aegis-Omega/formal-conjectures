@@ -17,6 +17,7 @@ limitations under the License.
 import RHFiniteActualGramJoinV1
 import RHWindow693Over2000V1
 import RHKreinTrigramAdaptiveV1
+import WeilFinalSignTranslationBoundV10
 
 /-!
 # Actual (not surrogate) finite Weil Gram sign on the certified window
@@ -42,6 +43,7 @@ noncomputable section
 namespace AEGIS.RHActualNarrowGramSignV1
 
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilFinalSignTranslationBoundV10
 open AEGIS.WeilMixedClosureV2 AEGIS.RHKreinFactorV13 AEGIS.RHGramExpansionV13
 open Set
 
