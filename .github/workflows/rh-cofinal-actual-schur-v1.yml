@@ -376,6 +376,19 @@ jobs:
               for d in ids: visit(d)
               active.remove(m); seen.add(m); order.append(m)
           for m in targets: visit(m)
+          # The historical PR88 replay tried to compile the cell consumer
+          # without the actual AEGISOverlay.RHKreinM8AnalyticV1 dependency.
+          # Check this path BEFORE any large Lean compilation; never treat
+          # a stale / missing .olean as an analytic theorem failure.
+          m8="AEGISOverlay.RHKreinM8AnalyticV1"
+          consumers=("RHKreinCellAnalyticBridgeV1",
+                     "AEGISOverlay.RHKreinCellAnalyticBridgeV1")
+          for consumer in consumers:
+              if consumer in order:
+                  if (m8 not in order or order.index(m8)>=order.index(consumer)
+                      or m8 not in deps[consumer]):
+                      raise RuntimeError("M8_ANALYTIC_IMPORT_ORDER_INVALID "+consumer)
+                  print("M8_ANALYTIC_IMPORT_ORDER=PASS",m8,consumer)
           if len(order)>480: raise RuntimeError("source closure exceeds bounded replay")
           original=pathlib.Path("AEGISOverlay/RHMomentDecayCofinalJoinV1.lean").read_bytes()
           hdr_end=original.find(b"-/\n\n")
@@ -424,6 +437,16 @@ jobs:
           PY
           python3 scripts/rh_restore_source_bound_oleans.py
           while IFS= read -r m; do
+            # Guard the exact module-name OLEAN, not a bare-name alias.
+            # This catches the archived PR88 missing object at the first
+            # bridge consumer, instead of misreporting a new Lean result.
+            if [[ "$m" == "RHKreinCellAnalyticBridgeV1" ||
+                  "$m" == "AEGISOverlay.RHKreinCellAnalyticBridgeV1" ]]; then
+              test -s ".lake/build/lib/lean/AEGISOverlay/RHKreinM8AnalyticV1.olean" || {
+                echo "M8_ANALYTIC_OLEAN_MISSING_BEFORE_CELL_BRIDGE" >&2
+                exit 1
+              }
+            fi
             case "$m" in
               *.*) path="${m//.//}" ;;
               *) path="$m" ;;
@@ -440,6 +463,18 @@ jobs:
             ! grep -F 'sorryAx' "evidence-cofinal/compile-${m//./_}.log"
             ! grep -F 'error:' "evidence-cofinal/compile-${m//./_}.log"
           done < evidence-cofinal/module-order.txt
+
+          # Positive regression: the REAL narrow producer is well typed.
+          # The separate pi-sized probe is intentionally not compiled:
+          # that implication is false and must never be silently admitted.
+          cp research/rh/assembly/RH_CLOSURE_PROBE.txt evidence-cofinal/RH_CLOSURE_PROBE.lean
+          lake env lean evidence-cofinal/RH_CLOSURE_PROBE.lean \
+            2>&1 | tee evidence-cofinal/compile-RH_CLOSURE_PROBE.log
+          ! grep -F 'sorryAx' evidence-cofinal/compile-RH_CLOSURE_PROBE.log
+          ! grep -F 'error:' evidence-cofinal/compile-RH_CLOSURE_PROBE.log
+          grep -F 'AEGIS.RHAssemblyV1.narrow_window_schur_family' \
+            evidence-cofinal/compile-RH_CLOSURE_PROBE.log
+
           for thm in corrected_packet_moments_and_decay corrected_autocorrelation_zero_summable \
             scaled_error_of_cofinal_norm_convergence actual_zero_quadratic_nonnegative_of_cofinal_lower_bound; do
             grep -F "AEGIS.RHMomentDecayCofinalJoinV1.$thm" evidence-cofinal/compile-RHMomentDecayCofinalJoinV1.log
