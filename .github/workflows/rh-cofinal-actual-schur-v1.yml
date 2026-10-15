@@ -281,7 +281,15 @@ jobs:
                   return pathlib.Path("research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean")
               if m.startswith("AEGISOverlay."):
                   p=pathlib.Path(m.replace(".","/")+".lean")
-                  return p if p.is_file() else None
+                  if p.is_file(): return p
+                  # Preserve exact PR52 sources imported under the AEGISOverlay namespace.
+                  if m in ("AEGISOverlay.RHKreinM8AnalyticV1",
+                           "AEGISOverlay.RHKreinCorrectionM8BoundV1"):
+                      candidate=pathlib.Path("research/rh/m8_kernel_v1")/(m.rsplit(".",1)[1]+".lean")
+                      if not candidate.is_file():
+                          raise RuntimeError("missing M8 overlay source: "+str(candidate))
+                      return candidate
+                  return None
               p=pathlib.Path(m.replace(".","/")+".lean")
               if m == "RHNarrowMomentPacketV1":
                   return pathlib.Path("AegisRH/Overlay/RHNarrowMomentPacketV1.lean")
@@ -353,7 +361,7 @@ jobs:
               for d in ids: visit(d)
               active.remove(m); seen.add(m); order.append(m)
           for m in targets: visit(m)
-          if len(order)>380: raise RuntimeError("source closure exceeds bounded replay")
+          if len(order)>480: raise RuntimeError("source closure exceeds bounded replay")
           original=pathlib.Path("AEGISOverlay/RHMomentDecayCofinalJoinV1.lean").read_bytes()
           hdr_end=original.find(b"-/\n\n")
           if hdr_end<0: raise RuntimeError("missing source wrapper")
