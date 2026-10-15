@@ -53,6 +53,7 @@ open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilMixedClosureV2
 open AEGIS.RHGramExpansionV13
 open AEGIS.RHBaguaActualWeilV1
+open AEGIS.RHActualNarrowGramSignV1
 
 /-- Exact (signed) femtosecond ticks mapped into a dimensionless
 logarithmic spectral shift by an explicitly declared scale p. -/
