@@ -175,8 +175,8 @@ theorem actual_nine_macro_coercive_of_signed_cross_rows
         (∑ i, ∑ j, B (gs i) (gs j)).re := by
     rw [B_packetSum]
     simp
-  rw [← hgram] at hmixed
   unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect at hmixed
+  rw [← hgram] at hmixed
   have hE : 0 ≤ (∑ i, energy (gs i).1) :=
     Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
   have hbudgetE :
@@ -393,7 +393,7 @@ theorem actual_mixed_defect_le_of_directed_rows
       (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
         (B (gs i) (gs j)).re) ≤
       ∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
-        c i j * E i + c j i * E j := by
+        (c i j * E i + c j i * E j) := by
     apply Finset.sum_le_sum
     intro i _
     apply Finset.sum_le_sum
@@ -422,7 +422,7 @@ theorem actual_mixed_defect_le_of_directed_rows
     ring
   have hdouble :
       (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
-        c i j * E i + c j i * E j) =
+        (c i j * E i + c j i * E j)) =
       2 * (∑ i, E i * (∑ j ∈
         (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := by
     calc
@@ -456,7 +456,7 @@ theorem actual_mixed_defect_le_of_directed_rows
         (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
           (B (gs i) (gs j)).re) := hdef
     _ ≤ (∑ i, ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
-          c i j * E i + c j i * E j) := hoff
+          (c i j * E i + c j i * E j)) := hoff
     _ = 2 * (∑ i, E i * (∑ j ∈
           (Finset.univ : Finset (Fin (n + 1))).erase i, c i j)) := hdouble
     _ ≤ 2 * (R * (∑ i, E i)) :=
@@ -507,7 +507,7 @@ theorem actual_weighted_q16_coercive_of_integer_rows
     change (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
       (cost i j : ℝ) * (weight j : ℝ) /
         ((weight i : ℝ) * 65536)) ≤ (57430 / 65536 : ℝ)
-    rw [Finset.sum_div]
+    rw [← Finset.sum_div]
     apply (div_le_iff₀ hden).mpr
     calc
       (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,

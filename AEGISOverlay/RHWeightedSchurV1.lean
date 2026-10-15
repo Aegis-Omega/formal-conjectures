@@ -150,7 +150,7 @@ theorem weighted_gram_variable_energy
         c i j * (a i * a j) := by
     by_cases hij : j = i
     · subst j
-      simp only [ite_true, hzero, zero_mul, zero_add, add_zero]
+      simp only [ite_true, hzero, zero_mul, add_zero]
       rw [Complex.star_def, Complex.mul_conj,
         Complex.normSq_eq_norm_sq, Complex.re_ofReal_mul]
       have hd : (H i i).re ≤ -(D * E i) := by linarith [hdiag i]
@@ -190,7 +190,7 @@ theorem weighted_gram_variable_energy
         (∑ i, ∑ j, c i j * (a i * a j)) := hall
     _ ≤ (∑ i, -(D * E i) * ‖z i‖ ^ 2) +
         S * (∑ i, E i * ‖z i‖ ^ 2) :=
-          add_le_add_left hs _
+          add_le_add le_rfl hs
     _ = -(D - S) * (∑ i, E i * ‖z i‖ ^ 2) := by
       have hdiagSum :
           (∑ i, -(D * E i) * ‖z i‖ ^ 2) =

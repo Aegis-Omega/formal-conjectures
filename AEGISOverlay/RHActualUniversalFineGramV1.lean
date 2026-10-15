@@ -16,6 +16,7 @@ limitations under the License.
 import AEGISOverlay.RHFiniteFinePartitionV1
 import AEGISOverlay.RHActualMixedDefectV1
 import RHRestrictedWeilBridgeV13
+import AEGISOverlay.RHArchGeometric145V1
 
 /-! All compact-support moment-zero Weil packets have an actual finite
 fine coercive Gram decomposition. The finite smooth partition is
@@ -29,6 +30,7 @@ noncomputable section
 namespace AEGIS.RHActualUniversalFineGramV1
 
 open AEGIS.WeilMixedAlgebraV2 AEGIS.WeilDisjointEnergyV2
+open AEGIS.WeilMixedClosureV2
 open AEGIS.RHGramExpansionV13
 
 /-- Construct the actual finite geometry as well as the Gram identities for every packet. -/
@@ -361,82 +363,6 @@ theorem riemannHypothesis_of_universal_actual_q16_pair_certificates
   change (B (packetSum (fun _ => (1 : ℂ)) gs)
     (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
   linarith
-
-
-/-- All actual distant off-diagonal entries of an arbitrary finite fine
-moment-zero packet family can be certified by prime-side integer Q16.16
-costs plus a fixed rational Archimedean allowance of 120 units per pair.
-
-The ordered centers are separated by 65/32 in log coordinates.
-The *only* analytic mixed estimate required from the caller is on the
-genuine von Mangoldt prime sum. In particular, no actual-Weil \`hcross\`
-is assumed and all off-diagonal entries are retained.
-
-This is a finite separated-family theorem. It does not assert that every
-Weil packet has a reconstruction satisfying its separation or prime-budget
-hypotheses. -/
-theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
-    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
-    (center : Fin (n + 1) → ℝ)
-    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-      (gs i) (center i))
-    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
-    (hsep : ∀ i j : Fin (n + 1), i < j →
-      (65 / 32 : ℝ) ≤ center j - center i)
-    (primeCost : Fin (n + 1) → Fin (n + 1) → ℕ)
-    (hsym : ∀ i j, primeCost i j = primeCost j i)
-    (hprime : ∀ i j : Fin (n + 1), i < j →
-      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
-        ((primeCost i j : ℝ) / 65536) *
-          (energy (gs i).1 + energy (gs j).1))
-    (hrow : ∀ i, (∑ j ∈
-      (Finset.univ : Finset (Fin (n + 1))).erase i,
-        primeCost i j + 120) ≤ 57430) :
-    (B (packetSum (fun _ => (1 : ℂ)) gs)
-      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
-        -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
-  let cost : Fin (n + 1) → Fin (n + 1) → ℕ :=
-    fun i j => primeCost i j + 120
-  have hcostsym : ∀ i j, cost i j = cost j i := by
-    intro i j
-    dsimp [cost]
-    rw [hsym i j]
-  have hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
-      -(B (gs i) (gs i)).re := by
-    intro i
-    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
-      (gs i) (center i) (hw i)
-  have hcross : ∀ i j, i ≠ j →
-      ‖B (gs i) (gs j)‖ ≤
-        actualQ16PairCost cost i j *
-          (energy (gs i).1 + energy (gs j).1) := by
-    intro i j hij
-    rcases lt_or_gt_of_ne hij with hijlt | hjilt
-    · have hgap : Real.log 2 ≤ center j - center i := by
-        have hs := hsep i j hijlt
-        linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
-      have h := AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
-        (gs i) (gs j) (center i) (center j)
-        (hw i) (hw j) (hm i) hgap
-        (hsep i j hijlt) (primeCost i j) (hprime i j hijlt)
-      simpa only [actualQ16PairCost, cost] using h
-    · have hgap : Real.log 2 ≤ center i - center j := by
-        have hs := hsep j i hjilt
-        linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper]
-      have h := AEGIS.RHActualMixedDefectV1.distinct_fine_far_actual_B_q16_prime_plus_120
-        (gs j) (gs i) (center j) (center i)
-        (hw j) (hw i) (hm j) hgap
-        (hsep j i hjilt) (primeCost j i) (hprime j i hjilt)
-      rw [B_hermitian, norm_conj]
-      simpa only [actualQ16PairCost, cost, hsym j i,
-        add_comm (energy (gs j).1) (energy (gs i).1)] using h
-  have hcostrow : ∀ i, (∑ j ∈
-      (Finset.univ : Finset (Fin (n + 1))).erase i,
-      cost i j) ≤ 57430 := by
-    intro i
-    exact hrow i
-  exact actual_fine_gram_q16_coercive_of_pair_certificate
-    gs cost hcostsym hd hcross hcostrow
 
 
 /-! ## Exact real-weight Schur summation without integer ceiling per pair -/
@@ -1025,6 +951,163 @@ theorem riemannHypothesis_of_universal_actual_signed_row_certificates
   change (B (packetSum (fun _ => (1 : ℂ)) gs)
     (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
   linarith
+
+private theorem separated_centers_dist {n : ℕ} (center : Fin (n + 1) → ℝ)
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      (65 / 32 : ℝ) ≤ center j - center i) :
+    ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+      (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i := by
+  have hscaled (i j : Fin (n + 1)) (hij : i ≤ j) :
+      (65 / 32 : ℝ) * ((j.val : ℝ) - (i.val : ℝ)) ≤ center j - center i := by
+    induction j using Fin.induction with
+    | zero =>
+      have hi : i = 0 := by
+        apply Fin.ext
+        have hz : i.val ≤ 0 := hij
+        simpa using Nat.eq_zero_of_le_zero hz
+      subst i
+      simp
+    | succ j ih =>
+      by_cases heq : i = j.succ
+      · subst i
+        simp
+      · have hiprev : i ≤ j.castSucc := by
+          simp only [Fin.le_iff_val_le_val, Fin.val_succ, Fin.val_castSucc] at hij ⊢
+          have hne : i.val ≠ j.val + 1 := by
+            intro he
+            apply heq
+            exact Fin.ext he
+          omega
+        have hp := ih hiprev
+        have hs := hsep j.castSucc j.succ (Fin.castSucc_lt_succ)
+        simp only [Fin.val_succ, Fin.val_castSucc, Nat.cast_add, Nat.cast_one] at hp ⊢
+        linarith
+  intro i j hij
+  have hijval : i.val < j.val := hij
+  have hi : i.val ≤ j.val := Nat.le_of_lt hijval
+  have hd : Nat.dist i.val j.val = j.val - i.val := Nat.dist_eq_sub_of_le hi
+  refine ⟨?_, ?_⟩
+  · rw [hd]
+    omega
+  rw [hd, Nat.cast_sub hi]
+  exact hscaled i j (le_of_lt hij)
+
+
+/-- All actual distant off-diagonal entries of an arbitrary finite fine
+moment-zero packet family can be certified by prime-side integer Q16.16
+costs plus a whole-row rational Archimedean allowance of 120 units.
+The proof uses the sharper geometric Arch-29 bound for the complete row.
+
+The ordered centers are separated by 65/32 in log coordinates.
+The *only* analytic mixed estimate required from the caller is on the
+genuine von Mangoldt prime sum. In particular, no actual-Weil \`hcross\`
+is assumed and all off-diagonal entries are retained.
+
+This is a finite separated-family theorem. It does not assert that every
+Weil packet has a reconstruction satisfying its separation or prime-budget
+hypotheses. -/
+theorem actual_far_fine_gram_coercive_of_rational_prime_row_budget
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      (65 / 32 : ℝ) ≤ center j - center i)
+    (primeCost : Fin (n + 1) → Fin (n + 1) → ℕ)
+    (hsym : ∀ i j, primeCost i j = primeCost j i)
+    (hprime : ∀ i j : Fin (n + 1), i < j →
+      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
+        ((primeCost i j : ℝ) / 65536) *
+          (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+        primeCost i j + 120) ≤ 57430) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+        -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ := fun i j =>
+    ((primeCost i j : ℝ) / 65536) +
+      ((1 / 32 : ℝ) * (54 / 53)) * ((1 / 145 : ℝ) ^ Nat.dist i j)
+  have hc : ∀ i j, c i j = c j i := by
+    intro i j
+    dsimp [c]
+    rw [hsym i j, Nat.dist_comm i j]
+  have hforward (i j : Fin (n + 1)) (hij : i < j) :
+      ‖B (gs i) (gs j)‖ ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    obtain ⟨hk, hgap⟩ := separated_centers_dist center hsep i j hij
+    have ha := AEGIS.RHArchRow29V1.actual_B_norm_le_prime_plus_arch145
+      (gs i) (gs j) (center i) (center j)
+      (hw i) (hw j) (hm i) (Nat.dist i j) hk hgap
+    dsimp [c]
+    calc
+      ‖B (gs i) (gs j)‖ ≤
+          ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ +
+          (((1 / 32 : ℝ) * (54 / 53)) *
+            ((1 / 145 : ℝ) ^ Nat.dist i j)) *
+              (energy (gs i).1 + energy (gs j).1) := ha
+      _ ≤ ((primeCost i j : ℝ) / 65536) * (energy (gs i).1 + energy (gs j).1) +
+          (((1 / 32 : ℝ) * (54 / 53)) *
+            ((1 / 145 : ℝ) ^ Nat.dist i j)) *
+              (energy (gs i).1 + energy (gs j).1) :=
+        add_le_add (hprime i j hij) le_rfl
+      _ = (((primeCost i j : ℝ) / 65536) +
+            ((1 / 32 : ℝ) * (54 / 53)) *
+              ((1 / 145 : ℝ) ^ Nat.dist i j)) *
+            (energy (gs i).1 + energy (gs j).1) := by ring
+  have hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    rcases lt_or_gt_of_ne hij with hijlt | hjilt
+    · exact hforward i j hijlt
+    · have hb := hforward j i hjilt
+      rw [B_hermitian, norm_conj]
+      simpa only [hc j i,
+        add_comm (energy (gs j).1) (energy (gs i).1)] using hb
+
+  have hprimeRow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      ((primeCost i j : ℝ) / 65536)) ≤ (57310 / 65536 : ℝ) := by
+    intro i
+    have hnat : (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        primeCost i j) ≤ 57310 := by
+      have hi := hrow i
+      omega
+    have hreal : (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (primeCost i j : ℝ)) ≤ (57310 : ℝ) := by
+      exact_mod_cast hnat
+    simpa only [Finset.sum_div] using (div_le_div_of_nonneg_right hreal (by norm_num : (0 : ℝ) ≤ 65536))
+  have hcostrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+      c i j) ≤ (57430 / 65536 : ℝ) := by
+    intro i
+    calc
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) =
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          ((primeCost i j : ℝ) / 65536)) +
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+          ((1 / 32 : ℝ) * (54 / 53)) *
+            ((1 / 145 : ℝ) ^ Nat.dist i j)) := by
+          simp only [c, Finset.sum_add_distrib]
+      _ ≤ (57310 / 65536 : ℝ) + (29 / 65536 : ℝ) :=
+        add_le_add (hprimeRow i) (AEGIS.RHArchRow29V1.geometric_arch_row_29 i)
+      _ ≤ (57430 / 65536 : ℝ) := by norm_num
+  have hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re := by
+    intro i
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hw i)
+  apply AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_signed_real_row_certificate
+    gs c hc hd
+  · intro i j hij
+    exact ((le_abs_self (B (gs i) (gs j)).re).trans
+      (Complex.abs_re_le_norm (B (gs i) (gs j)))).trans (hcross i j hij)
+  · exact hcostrow
+
+
 
 end AEGIS.RHActualUniversalFineGramV1
 
