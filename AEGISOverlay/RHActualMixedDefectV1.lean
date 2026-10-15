@@ -914,7 +914,7 @@ theorem separated_arch_decay_bound
   let M : ℝ → ℂ := fun u => (Real.exp (-u / 2) : ℂ) * logCrossV28 p q (-u)
   have hlo : 0 < lo := by
     dsimp [lo]
-    linarith [hgap, log_two_gt_one_thirty_two]
+    linarith only [hgap, log_two_gt_one_thirty_two]
   have hzero (u : ℝ) (hu : u ∉ Icc lo hi) : logCrossV28 p q (-u) = 0 := by
     apply logCross_zero_outside p q plo phi qlo qhi (-u) hp hq
     by_cases hlow : u < lo
