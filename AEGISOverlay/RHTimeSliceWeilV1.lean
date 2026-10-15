@@ -333,7 +333,8 @@ theorem timeSliceFamily_common_window {n : ℕ}
   intro x hx
   have h := htranslated hx
   obtain ⟨hlo, hhi⟩ := abs_le.mp (hspan i)
-  change |origin + d - center| ≤ (507 / 1280 : ℝ) at hlo hhi
+  change -(507 / 1280 : ℝ) ≤ origin + d - center at hlo
+  change origin + d - center ≤ (507 / 1280 : ℝ) at hhi
   constructor <;> linarith [h.1, h.2]
 
 /-- ACTUAL full Weil Gram, valid for arbitrarily many time slices,
