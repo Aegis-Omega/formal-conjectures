@@ -316,6 +316,129 @@ theorem riemannHypothesis_of_four_log_three_global_reconstruction
     (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
   nlinarith [hbound, henergy]
 
+
+/-! ## Genuine complex von Mangoldt and norm-prime row for every sparse size
+
+This improves the earlier signed-real row to the norm row needed for
+phase-stable Gram estimates. It does not assert a global decomposition. -/
+
+/-- Exact COMPLEX prime sum for arbitrary translated centers. -/
+theorem actual_prime_four_log_three_complex_at_centers
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (u v : ℝ)
+    (hgap : v - u = ((4 * d : ℕ) : ℝ) * Real.log 3) :
+    WeilPrimeSumV1 (mixed (translatePacket g u) (translatePacket g v)) =
+      ((Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 : ℝ) : ℂ) := by
+  have hgap' :
+      v - u = (((4 * d : ℕ) : ℝ) * Real.log 3) - 0 := by
+    simpa using hgap
+  have htranslate :=
+    AEGIS.WeilTranslationGapInvariantV10.mixed_translate_eq_of_gap_v10
+      g u v 0 (((4 * d : ℕ) : ℝ) * Real.log 3) hgap'
+  rw [htranslate]
+  simpa only [triadicHalf_four_mul] using
+    (AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
+      K (4 * d) (by omega) hdK g a hw)
+
+/-- Norm-cost is obtained from the EXACT complex prime identity,
+not by replacing the full Weil B with its signed real part. -/
+theorem actual_prime_four_log_three_norm_cost_at_centers
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (u v : ℝ)
+    (hgap : v - u = ((4 * d : ℕ) : ℝ) * Real.log 3) :
+    ‖WeilPrimeSumV1 (mixed (translatePacket g u)
+      (translatePacket g v))‖ ≤
+      (1 / 9 : ℝ) ^ d *
+        (energy (translatePacket g u).1 +
+          energy (translatePacket g v).1) := by
+  have hlog : 0 ≤ Real.log (3 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  have hpow : 0 ≤ (1 / 9 : ℝ) ^ d := by positivity
+  have hE : 0 ≤ energy g.1 := energy_nonnegative g.1
+  have hpos : 0 ≤ Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 :=
+    mul_nonneg (mul_nonneg hlog hpow) hE
+  have heq := actual_prime_four_log_three_complex_at_centers
+    K d hd hdK g a hw u v hgap
+  have hnorm :
+      ‖WeilPrimeSumV1 (mixed (translatePacket g u)
+        (translatePacket g v))‖ =
+        Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 := by
+    rw [heq]
+    simp only [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hpos]
+  have hcoeff :
+      Real.log 3 * ((1 / 9 : ℝ) ^ d * energy g.1) ≤
+        2 * ((1 / 9 : ℝ) ^ d * energy g.1) :=
+    mul_le_mul_of_nonneg_right
+      AEGIS.RHLogThreeSignedPrimeProducerV1.log_three_le_two
+      (mul_nonneg hpow hE)
+  calc
+    ‖WeilPrimeSumV1 (mixed (translatePacket g u)
+      (translatePacket g v))‖ =
+        Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 := hnorm
+    _ = Real.log 3 * ((1 / 9 : ℝ) ^ d * energy g.1) := by ring
+    _ ≤ 2 * ((1 / 9 : ℝ) ^ d * energy g.1) := hcoeff
+    _ = (1 / 9 : ℝ) ^ d *
+        (energy (translatePacket g u).1 +
+          energy (translatePacket g v).1) := by
+      rw [translate_energy, translate_energy]
+      ring
+
+/-- Same genuine Weil coercivity with every OFF-DIAGONAL PRIME NORM
+certified. Unlike the signed-only result, this remains sound when the
+prime contributions have arbitrary phases. For an arbitrary source,
+the sparse same-mother reconstruction is still an explicit requirement. -/
+theorem actual_four_log_three_prime_norm_family_sign
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
+  have hsym : ∀ i j, primeCost i j = primeCost j i := by
+    intro i j
+    dsimp [primeCost]
+    rw [Nat.dist_comm]
+  have hprime : ∀ i j : Fin (n + 1), i < j →
+      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
+        primeCost i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    obtain ⟨hd, _⟩ := hsep i j hij
+    obtain ⟨hdK, hgapij⟩ := hgap i j hij
+    have hp := actual_prime_four_log_three_norm_cost_at_centers
+      K (Nat.dist i j) hd hdK g a hw
+        (center i) (center j) hgapij
+    simpa only [primeCost, hfamily i, hfamily j] using hp
+  have hrow : ∀ i,
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        primeCost i j) ≤ (57401 / 65536 : ℝ) := by
+    intro i
+    simpa only [primeCost] using full_four_log_three_prime_row_arch29 i
+  exact
+    AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_arch29_prime_row
+      gs center hwidth hm hsep primeCost hsym hprime hrow
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -327,4 +450,7 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_same_mother_family_sign
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_complex_at_centers
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.riemannHypothesis_of_four_log_three_global_reconstruction
