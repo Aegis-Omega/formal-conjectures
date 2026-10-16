@@ -144,8 +144,27 @@ for start in reversed(order):
 dag = sorted({(component[n], component[d]) for n, deps in adj.items() for d in deps
               if component[n] != component[d]})
 root_axioms = {root: rows[root]["axioms"] for root in terms["roots"]}
+allowed_axioms = {"propext", "Classical.choice", "Quot.sound"}
 for root, axioms in root_axioms.items():
-    assert set(axioms) <= {"propext", "Classical.choice", "Quot.sound"}, (root, axioms)
+    assert set(axioms) <= allowed_axioms, (root, axioms)
+
+# Assess only what the kernel-compiled *selected roots* actually establish.
+# A theorem with conclusion RH but a premise (e.g. hselect/hcert) is not a
+# closed proof. Absence of a closed root in this limited graph does not imply
+# that none exists in other branches, repos, or source DAGs.
+closed_rh_roots = [
+    root for root in terms["roots"]
+    if rows[root]["type_expr"].strip() in ("RiemannHypothesis", "_root_.RiemannHypothesis")
+    and rows[root]["has_body"]
+    and not rows[root]["is_axiom"]
+    and set(rows[root]["axioms"]) <= allowed_axioms
+]
+rh_assessment = (
+    "CLOSED_CANONICAL_RH_ROOT_KERNEL_AND_AXIOM_PASS"
+    if closed_rh_roots else
+    "CANONICAL_RH_CLOSURE_NOT_ASSESSED_OUTSIDE_SELECTED_ROOTS"
+)
+rh_proven_in_selected_roots = True if closed_rh_roots else None
 
 for row in rows.values():
     module = row["module"]
@@ -172,7 +191,7 @@ probe_file = ROOT / "RH_CLOSURE_PROBE.lean"
 negative_probe_file = ROOT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean"
 
 blocker = json.loads((META / "RH_BLOCKER.json").read_text())
-blocker["status"] = "CONSTRUCTOR_KERNEL_PASS; UNIVERSAL_CLOSURE_NOT_ACHIEVED"
+blocker["status"] = "CONSTRUCTOR_KERNEL_PASS; " + rh_assessment
 blocker["attempts"][0]["status"] = "KERNEL_AND_STANDARD_AXIOM_AUDIT_PASS"
 blocker["attempts"][1].update(
     operation="Compile established narrow-window constructor; separately reject pi-window misuse",
@@ -189,11 +208,17 @@ blocker["observed_failing_test"] = {"command": "lake env lean RH_CLOSURE_NEGATIV
 write("RH_BLOCKER.json", blocker)
 
 passport = json.loads((META / "RH_EVIDENCE_PASSPORT.json").read_text())
-passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED",
+event = json.loads(pathlib.Path(os.environ["GITHUB_EVENT_PATH"]).read_text()) if os.environ.get("GITHUB_EVENT_PATH") else {}
+passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + rh_assessment,
+                RH_PROVEN_UNCONDITIONALLY=rh_proven_in_selected_roots,
+                final_theorem_signature="RiemannHypothesis" if closed_rh_roots else None,
+                final_theorem_axioms={root: root_axioms[root] for root in closed_rh_roots} if closed_rh_roots else None,
+                closed_rh_roots_in_selected_graph=closed_rh_roots,
+                unconditional_proof_scope="Selected kernel-compiled Lean roots only; null means not determined",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
                 active_repository="tarikskalic33/formal-conjectures",
-                active_pull_request=88,
-                active_branch=os.environ.get("GITHUB_HEAD_REF", "research/rh-actual-proof-assembly-20261014"),
+                active_pull_request=(event.get("pull_request") or {}).get("number"),
+                active_branch=os.environ.get("GITHUB_HEAD_REF") or None,
                 proof_graph_status=graph["status"],
                 workflow_run_id=os.environ.get("GITHUB_RUN_ID"),
                 workflow_job=os.environ.get("GITHUB_JOB"),
@@ -226,8 +251,14 @@ for root, axioms in root_axioms.items():
         book += "- [`" + root + "`](" + url + "): `" + ", ".join(axioms) + "`.\n"
     else:
         book += "- `" + root + "`: `" + ", ".join(axioms) + "`.\n"
-book += "\nRH_PROVEN_UNCONDITIONALLY=false. The mixed-defect/universal-family obligation "
-book += "is recorded with its complete formal type in RH_BLOCKER.json.\n"
+book += "\n## Canonical RH proof admission (observed, not pre-set)\n"
+book += "Selected-root status: `" + rh_assessment + "`.\n"
+book += "Closed canonical RH roots in this compiled graph: `" + repr(closed_rh_roots) + "`.\n"
+book += "The RH_PROVEN_UNCONDITIONALLY field is true only for a kernel-compiled "
+book += "axiom-clean root with EXACT type RiemannHypothesis. Otherwise it is null "
+book += "(unknown outside this selected DAG), not a hard-coded false assertion.\n"
+book += "The previously described producer obligation is retained in RH_BLOCKER.json "
+book += "as a candidate route, NOT as a global impossibility or closure verdict.\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
@@ -236,4 +267,4 @@ print("ASSEMBLY_KERNEL_ROOTS", len(terms["roots"]))
 print("ASSEMBLY_PROOF_GRAPH_DECLARATIONS", len(rows))
 print("ASSEMBLY_NARROW_PROBE_PASS", probe.returncode)
 print("ASSEMBLY_PI_NEGATIVE_PROBE_ACTUAL_TYPE_MISMATCH", negative_probe.returncode)
-print("UNCONDITIONAL_RH_CLOSURE_NOT_ACHIEVED")
+print("CANONICAL_RH_SELECTED_ROOT_ASSESSMENT", rh_assessment)
