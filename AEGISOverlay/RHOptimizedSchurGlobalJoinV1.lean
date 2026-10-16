@@ -40,6 +40,51 @@ open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHGramExpansionV13
 
+/-! ## Sharp scalar signed-defect route (no Schur or absolute-row assumption)
+
+The actual mixed defect has an exact scalar criterion, irrespective of
+the energies and relative locations of the atoms. This is strictly weaker
+than the conservative 5671/3200 energy budget as a sufficient condition.
+It is an identity, not a universal arithmetic estimate. The cluster
+producer below supplies the exact budget on its proved domain.
+-/
+
+/-- Necessary and sufficient exact signed mixed budget for the genuine
+finite Weil Gram, with no diagonal coercivity or matrix norm assumptions. -/
+theorem actual_signed_defect_iff_packet_nonpositive
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      -(∑ i, (B (gs i) (gs i)).re) ↔
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+        (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [hgram]
+  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect
+  constructor <;> intro h <;> linarith
+
+/-- Source-proved 9/64 cluster coercivity pays the exact signed budget.
+No absolute values, weights or pairwise row bounds occur in the statement.
+The common-center geometric hypothesis is preserved without weakening. -/
+theorem actual_fine_cluster_sharp_signed_budget
+    (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (centers : Fin (n + 1) → ℝ) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (centers i))
+    (hnear : ∀ i, |centers i - center| ≤ (35 / 256 : ℝ)) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      -(∑ i, (B (gs i) (gs i)).re) := by
+  have h := AEGIS.RHActualMixedDefectV1.fine_cluster_nine_mixed_defect_opposite
+    n gs centers center hm hw hnear
+  have hE : 0 ≤ energy (packetSum (fun _ => (1 : ℂ)) gs).1 :=
+    energy_nonnegative _
+  linarith
+
 /-- The existing optimized bound makes one actual reconstructed packet
 nonpositive once the genuine mixed-entry and weighted-row estimates are
 available. Unequal atom energies and arbitrary finite dimension are allowed. -/
@@ -129,5 +174,7 @@ theorem riemannHypothesis_of_optimized_actual_row_producer
 
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_fine_cluster_sharp_signed_budget
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_packet_sum_nonpositive_of_optimized_rows
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer
