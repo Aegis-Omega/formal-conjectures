@@ -263,66 +263,8 @@ theorem actual_four_log_three_same_mother_family_sign
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
 
-/-! ## Direct bridge to Mathlib's canonical RiemannHypothesis
-
-The exact missing statement is a source-preserving GLOBAL reconstruction,
-not an additional norm inequality for an already separated sparse family.
-Keeping it a transparent Prop prevents a finite-window result from being
-silently promoted to RH. No new axiom or sorry is used. -/
-
-/-- Every moment-zero test packet can be reconstructed from actual
-same-mother, four-log-three-separated Weil atoms, retaining all analytic
-support, gap, moment and source-identity requirements. This is a
-mathematical obligation, NOT a proved global constructor. -/
-def HasActualFourLogThreeReconstruction (source : WeilCompactSmoothGV1) : Prop :=
-  ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
-    (center : Fin (n + 1) → ℝ)
-    (K : ℕ) (mother : WeilCompactSmoothGV1) (a : ℝ),
-    source = packetSum (fun _ => (1 : ℂ)) gs ∧
-    (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-      (gs i) (center i)) ∧
-    (∀ i, WeilMomentConditionsV1 (gs i)) ∧
-    (∀ i j : Fin (n + 1), i < j →
-      1 ≤ Nat.dist i j ∧
-        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i) ∧
-    HalfWidthAt mother
-      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a ∧
-    (∀ i, gs i = translatePacket mother (center i)) ∧
-    (∀ i j : Fin (n + 1), i < j →
-      4 * Nat.dist i j ≤ K ∧
-        center j - center i =
-          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
-
-/-- Direct, type-correct proof of the CANONICAL Mathlib RH proposition
-from an explicit global source-preserving sparse-family constructor.
-The prime-row and Arch-29 bounds have been discharged in the preceding
-theorem; the global reconstruction remains the stated premise. -/
-theorem riemannHypothesis_of_four_log_three_global_reconstruction
-    (hglobal : ∀ source : WeilCompactSmoothGV1,
-      WeilMomentConditionsV1 source →
-        HasActualFourLogThreeReconstruction source) :
-    RiemannHypothesis := by
-  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
-  intro source hm
-  obtain ⟨n, gs, center, K, mother, a, hsource, hwidth,
-      hatoms, hsep, hmother, hfamily, hgap⟩ := hglobal source hm
-  have hbound :=
-    actual_four_log_three_same_mother_family_sign
-      gs center hwidth hatoms hsep K mother a hmother hfamily hgap
-  have henergy : 0 ≤ (∑ i, energy (gs i).1) :=
-    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
-  rw [hsource]
-  change (B (packetSum (fun _ => (1 : ℂ)) gs)
-    (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
-  nlinarith [hbound, henergy]
 
 
-/-! ## Genuine complex von Mangoldt and norm-prime row for every sparse size
-
-This improves the earlier signed-real row to the norm row needed for
-phase-stable Gram estimates. It does not assert a global decomposition. -/
-
-/-- Exact COMPLEX prime sum for arbitrary translated centers. -/
 theorem actual_prime_four_log_three_complex_at_centers
     (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
     (g : WeilCompactSmoothGV1) (a : ℝ)
@@ -343,8 +285,6 @@ theorem actual_prime_four_log_three_complex_at_centers
     (AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
       K (4 * d) (by omega) hdK g a hw)
 
-/-- Norm-cost is obtained from the EXACT complex prime identity,
-not by replacing the full Weil B with its signed real part. -/
 theorem actual_prime_four_log_three_norm_cost_at_centers
     (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
     (g : WeilCompactSmoothGV1) (a : ℝ)
@@ -389,10 +329,6 @@ theorem actual_prime_four_log_three_norm_cost_at_centers
       rw [translate_energy, translate_energy]
       ring
 
-/-- Same genuine Weil coercivity with every OFF-DIAGONAL PRIME NORM
-certified. Unlike the signed-only result, this remains sound when the
-prime contributions have arbitrary phases. For an arbitrary source,
-the sparse same-mother reconstruction is still an explicit requirement. -/
 theorem actual_four_log_three_prime_norm_family_sign
     {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
     (center : Fin (n + 1) → ℝ)
@@ -439,11 +375,6 @@ theorem actual_four_log_three_prime_norm_family_sign
     AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_arch29_prime_row
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
-
-/-- Arbitrary complex H64/Walsh-style amplitudes on every finite actual
-four-log-three mother-packet lattice. The full complex B cross terms and
-the exact von Mangoldt norm row are retained. Neither dimension nor
-coefficients are restricted. The mother-lattice geometry is explicit. -/
 theorem actual_four_log_three_weighted_norm_coercive
     {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
     (center : Fin (n + 1) → ℝ)
@@ -619,71 +550,6 @@ theorem actual_four_log_three_weighted_norm_coercive
   rw [B_packetSum]
   exact h
 
-
-/-! ## Exact weighted Weil certificate → canonical Mathlib RH
-
-This is the minimal honest global interface. The finite signed source
-inequality is kernel-derived above, while the existence of a compatible
-certificate for EVERY moment-zero source is a separate hypothesis.
-The interface does not identify all arbitrary sources with a sparse
-same-mother translate lattice by definition. -/
-
-/-- A genuine source-preserving finite Weil/Schur representation with
-complex coefficients, all moment annihilations, analytic support, and
-the exact four-log-three prime/Arch geometry. -/
-def HasActualWeightedSparseReconstruction
-    (source : WeilCompactSmoothGV1) : Prop :=
-  ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
-    (center : Fin (n + 1) → ℝ)
-    (K : ℕ) (mother : WeilCompactSmoothGV1) (a : ℝ)
-    (z : Fin (n + 1) → ℂ),
-    source = packetSum z gs ∧
-    (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-      (gs i) (center i)) ∧
-    (∀ i, WeilMomentConditionsV1 (gs i)) ∧
-    (∀ i j : Fin (n + 1), i < j →
-      1 ≤ Nat.dist i j ∧
-        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i) ∧
-    HalfWidthAt mother
-      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a ∧
-    (∀ i, gs i = translatePacket mother (center i)) ∧
-    (∀ i j : Fin (n + 1), i < j →
-      4 * Nat.dist i j ≤ K ∧
-        center j - center i =
-          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
-
-/-- The full complex weighted Weil sign for EACH genuine certificate.
-This is unconditional ON ITS CERTIFICATE, not for arbitrary sources. -/
-theorem actual_weighted_sparse_reconstruction_implies_sign
-    (source : WeilCompactSmoothGV1)
-    (hc : HasActualWeightedSparseReconstruction source) :
-    (B source source).re ≤ 0 := by
-  obtain ⟨n, gs, center, K, mother, a, z,
-    hsource, hwidth, hm, hsep, hmother, hfamily, hgap⟩ := hc
-  have hb := actual_four_log_three_weighted_norm_coercive
-    gs center hwidth hm hsep K mother a hmother hfamily hgap z
-  have he : 0 ≤ (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
-    apply Finset.sum_nonneg
-    intro i _
-    exact mul_nonneg (energy_nonnegative (gs i).1)
-      (sq_nonneg _)
-  rw [hsource]
-  nlinarith [hb, he]
-
-/-- Direct canonical RH consumer. All source-bound four-phase/Bagua
-certificates discharge their own local sign through the preceding
-theorem. To conclude RH the universal producer below must actually be
-constructed; this statement does not claim it has already been built. -/
-theorem riemannHypothesis_of_universal_actual_weighted_sparse_reconstruction
-    (hglobal : ∀ source : WeilCompactSmoothGV1,
-      WeilMomentConditionsV1 source →
-        HasActualWeightedSparseReconstruction source) :
-    RiemannHypothesis := by
-  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
-  intro source hm
-  exact actual_weighted_sparse_reconstruction_implies_sign
-    source (hglobal source hm)
-
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -699,6 +565,3 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
-#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_weighted_sparse_reconstruction_implies_sign
-#print axioms AEGIS.RHFourLogThreeActualPrimeV1.riemannHypothesis_of_universal_actual_weighted_sparse_reconstruction
-#print axioms AEGIS.RHFourLogThreeActualPrimeV1.riemannHypothesis_of_four_log_three_global_reconstruction
