@@ -286,8 +286,19 @@ theorem actual_sign_of_block_signed_split
         actualInterBlockSignedDefect gs block) :
     (B (packetSum (fun _ => (1 : ℂ)) gs)
       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
-  apply (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive gs).mp
-  rw [actual_mixed_defect_eq_block_signed_split gs block]
+  have hbudget :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+    rw [actual_mixed_defect_eq_block_signed_split gs block]
+    linarith
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect at hbudget
+  rw [hgram]
   linarith
 
 /-! ## Exact signed recomposition: replace row-wise loss by a single total budget
