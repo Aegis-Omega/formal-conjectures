@@ -111,8 +111,45 @@ theorem actual_prime_four_log_three_signed_cost
         rw [translate_energy, translate_energy]
         ring
 
+
+/-- Uniform rational prime-row estimate for EVERY number of translated
+same-mother atoms. Unlike finite 4-block row enumeration, n is arbitrary.
+This is the actual geometric budget consumed by Arch-29, not an RH claim. -/
+theorem full_four_log_three_prime_row {n : ℕ} (i : Fin (n + 1)) :
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      (1 / 9 : ℝ) ^ Nat.dist i j) ≤ (1 / 4 : ℝ) := by
+  have hIcc : (Finset.Icc 1 n : Finset ℕ) =
+      Finset.Ico 1 (n + 1) := by
+    ext k
+    simp only [Finset.mem_Icc, Finset.mem_Ico]
+    omega
+  have hgeom :
+      (∑ k ∈ Finset.Icc 1 n, (1 / 9 : ℝ) ^ k) ≤
+        (1 / 8 : ℝ) := by
+    rw [hIcc]
+    exact AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_geometric_tail n
+  have hrow := AEGIS.RHGramExpansionV13.rowSum_le
+    (n := n) (c := fun k => (1 / 9 : ℝ) ^ k)
+    (by intro k; positivity) i
+  calc
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        (1 / 9 : ℝ) ^ Nat.dist i j) ≤
+      2 * (∑ k ∈ Finset.Icc 1 n, (1 / 9 : ℝ) ^ k) := hrow
+    _ ≤ 2 * (1 / 8 : ℝ) :=
+      mul_le_mul_of_nonneg_left hgeom (by norm_num)
+    _ = 1 / 4 := by norm_num
+
+/-- The genuine signed-prime geometric row fits inside the pre-existing
+Arch-29 Schur allowance, uniformly in n. -/
+theorem full_four_log_three_prime_row_arch29 {n : ℕ} (i : Fin (n + 1)) :
+    (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+      (1 / 9 : ℝ) ^ Nat.dist i j) ≤ (57401 / 65536 : ℝ) :=
+  (full_four_log_three_prime_row i).trans (by norm_num)
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_exact
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row_arch29
