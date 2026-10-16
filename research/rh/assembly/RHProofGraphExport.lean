@@ -120,6 +120,8 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_four_phase_mellin_weil_coercive",
     "AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_point_mellin_and_moments",
     "AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_pair_four_phase_mellin_join",
+    "AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_phase_zero",
+    "AEGIS.RHBaguaRotatingTwoPairMellinV1.actual_sparse_walsh_bagua_mode_negative",
     "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive",
     "AEGIS.RHNarrowDetectingTrigramDenseV1.dense_narrow_detector_iff_riemannHypothesis",
     "AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion",
