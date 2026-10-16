@@ -293,7 +293,8 @@ book += "Closed canonical RH roots in this compiled graph: `" + repr(closed_rh_r
 book += "The RH_PROVEN_UNCONDITIONALLY field is true only for a kernel-compiled "
 book += "axiom-clean root with EXACT type RiemannHypothesis. Otherwise it is null "
 book += "(unknown outside this selected DAG), not a hard-coded false assertion.\n"
-book += "\\nStronger producer coverage: `" + str(root_coverage["root_count"]) + "\` roots, " + str(len(mandatory_producers)) + " mandatory lanes retained; NOT an all-branch census.\\n"\nbook += "The previously described producer obligation is retained in RH_BLOCKER.json "
+book += "\nStronger producer coverage: `" + str(root_coverage["root_count"]) + "` roots, " + str(len(mandatory_producers)) + " mandatory lanes retained; NOT an all-branch census.\n"
+book += "The previously described producer obligation is retained in RH_BLOCKER.json "
 book += "as a candidate route, NOT as a global impossibility or closure verdict.\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
