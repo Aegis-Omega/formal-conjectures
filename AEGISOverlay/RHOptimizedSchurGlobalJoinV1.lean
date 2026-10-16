@@ -372,6 +372,39 @@ theorem every_packet_actual_gram_at_time_horizon
       g hm (timeHorizonRadius K)
       (timeHorizonRadius_pos K) (timeHorizonRadius_le_fine K)
 
+
+/-- An arbitrary moment-zero Weil packet admits, at EVERY finite prime
+horizon, an exact local Gram decomposition whose genuine componentwise zero
+quadratics satisfy the already proved analytic Krein/trigram E/16 margin.
+All prime/Arch mixed entries of the reconstructed source remain in the Gram.
+This asserts no sign for their global sum. -/
+theorem every_packet_actual_horizon_gram_with_local_zero_margin
+    (K : ℕ) (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (gs i) (timeHorizonRadius K) (center i)) ∧
+      (∀ i, (1 / 16 : ℝ) * energy (gs i).1 ≤
+        (∑' rho : RiemannNontrivialZeroIndexV2,
+          WeilZeroIndexSummandV1
+            (WeilAutocorrelationV1 (gs i)) rho).re) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+  obtain ⟨n, gs, center, hmom, hdiag, hw, hpacket, hgram⟩ :=
+    every_packet_actual_gram_at_time_horizon K g hm
+  refine ⟨n, gs, center, hmom, hdiag, hw, ?_, hpacket, hgram⟩
+  intro i
+  exact AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
+    (gs i) (timeHorizonRadius K) (center i)
+    (le_of_lt (timeHorizonRadius_pos K))
+    ((timeHorizonRadius_le_fine K).trans (by norm_num))
+    (hw i) (hmom i)
+
 /-- The exact source small-support prime condition holds SIMULTANEOUSLY
 for every index not beyond the chosen integer spectral horizon. -/
 theorem timeHorizonRadius_prime_gap (K k : ℕ) (hk : k ≤ K) :
@@ -942,6 +975,7 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_coercive
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_nonpositive
 
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.every_packet_actual_horizon_gram_with_local_zero_margin
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.every_packet_actual_gram_at_time_horizon
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius_prime_gap
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
