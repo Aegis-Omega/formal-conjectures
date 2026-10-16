@@ -19,6 +19,7 @@ import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import WeilRHImpliesFinalSignV13
 import Mathlib.Algebra.Order.Field.GeomSum
+import AEGISOverlay.H64ZetaMappingAuditV1
 
 /-!
 # Optimized actual Weil–Schur global join
