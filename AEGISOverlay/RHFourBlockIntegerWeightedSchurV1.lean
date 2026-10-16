@@ -65,7 +65,9 @@ theorem fourCost_symmetric (i j : Fin 4) : fourCost i j = fourCost j i := by
 theorem fourCost_weighted_row (i : Fin 4) :
     (∑ j : Fin 4, fourCost i j * (fourWeight j / fourWeight i)) ≤
       (158 / 125 : ℝ) := by
-  fin_cases i <;> norm_num [fourCost, fourWeight, Fin.sum_univ_succ, Nat.dist]
+  fin_cases i <;>
+    simp +decide [fourCost, fourWeight, Fin.sum_univ_succ, Nat.dist] <;>
+    norm_num
 
 theorem fourBlock_margin_exact :
     (32 / 25 : ℝ) - (158 / 125 : ℝ) = 2 / 125 := by
@@ -116,7 +118,7 @@ theorem actual_four_block_coercive_of_three_gap_bounds
   have hcases : Nat.dist i.val j.val = 1 ∨
       Nat.dist i.val j.val = 2 ∨
       Nat.dist i.val j.val = 3 := by
-    fin_cases i <;> fin_cases j <;> norm_num [Nat.dist] at hij ⊢
+    fin_cases i <;> fin_cases j <;> norm_num [Nat.dist] at *
   rcases hcases with h1 | h2 | h3
   · simpa [fourCost, hij, h1] using hgap1 i j h1
   · simpa [fourCost, hij, h2] using hgap2 i j h2
