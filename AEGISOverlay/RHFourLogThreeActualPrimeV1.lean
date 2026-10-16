@@ -375,7 +375,9 @@ theorem actual_four_log_three_prime_norm_family_sign
     AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_arch29_prime_row
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
-theorem actual_four_log_three_weighted_norm_coercive
+/-- The exact prime row 1/4 and Arch row 29/65536 yield the stronger
+uniform actual-Weil margin 20829/16384, for the original sparse family. -/
+theorem actual_four_log_three_weighted_norm_coercive_sharp
     {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
     (center : Fin (n + 1) → ℝ)
     (hwidth : ∀ i,
@@ -395,7 +397,7 @@ theorem actual_four_log_three_weighted_norm_coercive
           ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
     (z : Fin (n + 1) → ℂ) :
     (B (packetSum z gs) (packetSum z gs)).re ≤
-      -(641 / 32768 : ℝ) *
+      -(20829 / 16384 : ℝ) *
         (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
   let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
     fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
@@ -502,8 +504,8 @@ theorem actual_four_log_three_weighted_norm_coercive
               Real.sqrt (energy (gs j).1)) := hcost
   have hrow (i : Fin (n + 1)) :
       (∑ j, c i j * (w j / w i)) ≤
-        (114860 / 65536 : ℝ) := by
-    have hprimeRow := full_four_log_three_prime_row_arch29 i
+        (32826 / 65536 : ℝ) := by
+    have hprimeRow := full_four_log_three_prime_row i
     have harchRow := AEGIS.RHArchRow29V1.geometric_arch_row_29 i
     have hsum :
         (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) =
@@ -529,7 +531,7 @@ theorem actual_four_log_three_weighted_norm_coercive
                 rw [Finset.sum_add_distrib]
                 simp only [Finset.mul_sum]
     have hrow0 :
-        (∑ j, c i j) ≤ (114860 / 65536 : ℝ) := by
+        (∑ j, c i j) ≤ (32826 / 65536 : ℝ) := by
       rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
       simp only [hcdiag i, zero_add]
       rw [hsum]
@@ -540,15 +542,46 @@ theorem actual_four_log_three_weighted_norm_coercive
   have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
     (fun i j => B (gs i) (gs j)) z
     (fun i => energy (gs i).1) c w
-    (116142 / 65536 : ℝ) (114860 / 65536 : ℝ)
+    (116142 / 65536 : ℝ) (32826 / 65536 : ℝ)
     (fun i => energy_nonnegative (gs i).1)
     hcpos hcdiag hcsym hweight hdiag hcross hrow
   have hmargin :
-      (116142 / 65536 : ℝ) - 114860 / 65536 = 641 / 32768 :=
+      (116142 / 65536 : ℝ) - 32826 / 65536 = 20829 / 16384 :=
     by norm_num
   rw [hmargin] at h
   rw [B_packetSum]
   exact h
+
+
+theorem actual_four_log_three_weighted_norm_coercive
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (z : Fin (n + 1) → ℂ) :
+    (B (packetSum z gs) (packetSum z gs)).re ≤
+      -(641 / 32768 : ℝ) *
+        (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
+  have h := actual_four_log_three_weighted_norm_coercive_sharp
+    gs center hwidth hm hsep K g a hw hfamily hgap z
+  have henergy : 0 ≤ (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) :=
+    Finset.sum_nonneg (fun i _ =>
+      mul_nonneg (energy_nonnegative (gs i).1) (sq_nonneg _))
+  exact h.trans (mul_le_mul_of_nonneg_right
+    (by norm_num : -(20829 / 16384 : ℝ) ≤ -(641 / 32768 : ℝ)) henergy)
 
 end AEGIS.RHFourLogThreeActualPrimeV1
 
@@ -564,4 +597,5 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_complex_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
