@@ -15,6 +15,7 @@ limitations under the License.
 -/
 import RHFeshbachWeilClosureV2
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import AEGISOverlay.RHFourLogThreeWeightedRHBridgeV1
 
 /-!
 Construction candidate on the existing certified narrow-window class.
