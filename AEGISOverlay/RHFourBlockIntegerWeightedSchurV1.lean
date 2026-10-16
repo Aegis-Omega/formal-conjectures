@@ -14,12 +14,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
+import AEGISOverlay.RHScaleRowCompositionV1
+
 /-!
 AEGIS Ω — exact four-block integer weighted Schur on the actual Weil B.
 No new mathematical axioms, sorry, admit, RH premise, or surrogate Gram.
 A source candidate until pinned Lean 4.33.1 compiles this exact revision.
 -/
-import AEGISOverlay.RHScaleRowCompositionV1
 
 open Finset Complex
 open scoped BigOperators
