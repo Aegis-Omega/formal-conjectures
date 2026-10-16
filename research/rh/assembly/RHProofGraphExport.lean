@@ -148,7 +148,7 @@ elab "#export_rh_proof_graph" : command => do
      Mathlib RH target instead of comparing pretty-printed type strings.
      Every theorem imported into the kernel environment is considered. -/
   let (semanticRhNames, semanticTheoremsChecked) ← liftTermElabM do
-    let rhType : Expr := mkConst \`\`RiemannHypothesis
+    let rhType : Expr := mkConst ``RiemannHypothesis
     let mut matches : Array Name := #[]
     let mut checked : Nat := 0
     for (n, ci) in env.constants.toList do
