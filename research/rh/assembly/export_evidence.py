@@ -193,9 +193,14 @@ for root, axioms in root_axioms.items():
 # This scan still does NOT claim to cover *unreachable* declarations, branches,
 # other repositories or historical archives.
 def is_admissible_closed_rh(row):
-    return (row["type_expr"].strip() in
-            ("RiemannHypothesis", "_root_.RiemannHypothesis")
-            and row["has_body"] and not row["is_axiom"]
+    # The Lean kernel's definitional-equality result is authoritative.
+    # Legacy root text matching is retained only for selected proof DAG rows.
+    is_canonical = (
+        row.get("type_defeq_riemann_hypothesis") is True
+        or row["type_expr"].strip() in
+        ("RiemannHypothesis", "_root_.RiemannHypothesis")
+    )
+    return (is_canonical and row["has_body"] and not row["is_axiom"]
             and set(row["axioms"]) <= allowed_axioms)
 
 # Independent source of truth: all kernel-imported constants, including
@@ -204,7 +209,13 @@ def is_admissible_closed_rh(row):
 env_rh_census = json.loads((OUT / "environment-rh-candidates.json").read_text())
 if env_rh_census["inspected_count"] < len(rows):
     raise RuntimeError("RH_IMPORTED_ENVIRONMENT_CENSUS_INCOMPLETE")
+if env_rh_census.get("defeq_target_type") != "RiemannHypothesis":
+    raise RuntimeError("RH_SEMANTIC_TARGET_TYPE_SCAN_MISSING")
+if env_rh_census.get("semantic_theorems_checked", 0) <= 0:
+    raise RuntimeError("RH_SEMANTIC_THEOREM_SCAN_EMPTY")
 env_rh_candidates = env_rh_census["declarations"]
+if any(r.get("type_defeq_riemann_hypothesis") is not True for r in env_rh_candidates):
+    raise RuntimeError("RH_SEMANTIC_MATCH_UNWITNESSED")
 env_rh_by_name = {row["identifier"]: row for row in env_rh_candidates}
 closed_rh_from_dependencies = sorted(
     name for name, row in rows.items() if is_admissible_closed_rh(row))
