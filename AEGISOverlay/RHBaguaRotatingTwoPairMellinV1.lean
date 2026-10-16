@@ -29,6 +29,7 @@ open AEGIS.RHActualNarrowGramSignV1
 open AEGIS.RHBaguaActualWeilV1
 open AEGIS.RHFourLogThreeActualPrimeV1
 open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
 open AEGIS.WeilZeroTranslationV11
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHDyadicDiagonalV13
