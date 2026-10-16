@@ -91,7 +91,7 @@ theorem midpoint_twoPoint_window
       ((Real.exp (t / 2) : ℂ) * g.1 (Real.exp t) +
         c * ((Real.exp (t / 2) : ℂ) *
           (AEGIS.WeilThreeBlockTranslatedPacketsV22.translatePacket g d).1
-            (Real.exp t))
+            (Real.exp t)))
     ring
   apply ht
   rw [heq, hfirst, hsecond]
