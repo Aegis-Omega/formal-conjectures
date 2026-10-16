@@ -207,6 +207,76 @@ theorem actual_nine_macro_nonpositive_of_signed_cross_rows
   simpa using h
 
 
+
+/-! ## Exact signed recomposition: replace row-wise loss by a single total budget
+
+On the already-formed macro packets, local 9/64 control pays every
+intra-macro interaction. The only global certificate is the ACTUAL total
+signed inter-macro defect, not a symmetric Schur row or an absolute norm.
+This is strictly more flexible than per-row control but does not assert
+that arbitrary packets admit a certified macro decomposition.
+-/
+
+/-- Global true-Weil coercivity on a finite family of local 9/64 macro
+packets from ONE summed signed cross-macro bound. No pairwise row
+majorant, positivity of mixed coefficients, or equal-energy constraint.
+The full actual signed defect is the only external analytic input. -/
+theorem actual_nine_macro_coercive_of_total_signed_defect
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ) (gap : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) (center i))
+    (htotal :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        ((1 / 10 : ℝ) - gap) * (∑ i, energy (gs i).1)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -gap * (∑ i, energy (gs i).1) := by
+  have hd (i : Fin (n + 1)) :
+      (1 / 10 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re := by
+    have h := AEGIS.RHWindowNineOver64GlobalizationV14.nine_over_64_coercive
+      (gs i) (center i) (hwin i) (hm i)
+    change (B (gs i) (gs i)).re ≤
+      -(1 / 10 : ℝ) * energy (gs i).1 at h
+    linarith
+  have hs :
+      (∑ i, (1 / 10 : ℝ) * energy (gs i).1) ≤
+      ∑ i, -(B (gs i) (gs i)).re :=
+    Finset.sum_le_sum (fun i _ => hd i)
+  have hdiag :
+      (1 / 10 : ℝ) * (∑ i, energy (gs i).1) ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+    rw [Finset.mul_sum]
+    simpa only [Finset.sum_neg_distrib] using hs
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect at htotal
+  rw [← hgram] at htotal
+  nlinarith
+
+/-- The signed-total version can prove a nonpositive complete Gram even
+when no per-row Schur certificate satisfies the 1/20 threshold. -/
+theorem actual_nine_macro_nonpositive_of_total_signed_defect
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (9 / 64) (center i))
+    (htotal :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        (1 / 10 : ℝ) * (∑ i, energy (gs i).1)) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+  have h := actual_nine_macro_coercive_of_total_signed_defect
+    gs center 0 hm hwin (by simpa using htotal)
+  simpa using h
+
 /-! ## Lossless Q16.16 accumulation, exactly as integer time-tick arithmetic
 
 Integer-valued actual pair-cost certificates are accumulated as Nat
@@ -774,6 +844,8 @@ end AEGIS.RHScaleRowCompositionV1
 
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_signed_cross_rows
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_nonpositive_of_signed_cross_rows
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_coercive_of_total_signed_defect
+#print axioms AEGIS.RHScaleRowCompositionV1.actual_nine_macro_nonpositive_of_total_signed_defect
 #print axioms AEGIS.RHScaleRowCompositionV1.q16_nat_row_eq_near_add_far
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_coercive_of_two_scale_integer_row
 #print axioms AEGIS.RHScaleRowCompositionV1.actual_fine_gram_q16_signed_of_two_scale_integer_row
