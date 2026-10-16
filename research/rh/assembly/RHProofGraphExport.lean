@@ -107,6 +107,7 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_complex_at_centers",
     "AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers",
     "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive",
     "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive",
     "AEGIS.RHNarrowDetectingTrigramDenseV1.dense_narrow_detector_iff_riemannHypothesis",
     "AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion",
