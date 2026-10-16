@@ -34,6 +34,7 @@ import RHNineFacesV13
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
+import Lean.Meta.Basic
 
 open Lean Elab Command
 
@@ -143,6 +144,21 @@ elab "#export_rh_proof_graph" : command => do
       ("declarations",Json.arr rows)]).pretty
   logInfo m!"PROOF_TERM_GRAPH_DECLARATIONS {rows.size}"
 
+  /- Canonical proof search: check Lean definitional equality with the actual
+     Mathlib RH target instead of comparing pretty-printed type strings.
+     Every theorem imported into the kernel environment is considered. -/
+  let (semanticRhNames, semanticTheoremsChecked) ← liftTermElabM do
+    let rhType : Expr := mkConst \`\`RiemannHypothesis
+    let mut matches : Array Name := #[]
+    let mut checked : Nat := 0
+    for (n, ci) in env.constants.toList do
+      if let .thmInfo _ := ci then
+        checked := checked + 1
+        if (← Lean.Meta.isDefEq ci.type rhType) then
+          matches := matches.push n
+    return (matches, checked)
+  logInfo m!"RH_SEMANTIC_THEOREMS_CHECKED {semanticTheoremsChecked} DEFEQ_RH_TYPE_CANDIDATES {semanticRhNames.size}"
+
   /- Unlike root-dependency traversal, this independent inventory scans EVERY
      declaration already present in the imported kernel environment. A valid
      theorem need not be referenced by one of our chosen 66 roots. The official
@@ -153,7 +169,7 @@ elab "#export_rh_proof_graph" : command => do
   for (n, ci) in env.constants.toList do
     inspected := inspected + 1
     let ty := toString ci.type
-    if ty == "RiemannHypothesis" || ty == "_root_.RiemannHypothesis" then
+    if semanticRhNames.contains n then
       let axs ← collectAxioms n
       let mod := match env.getModuleIdxFor? n with
         | some i => env.header.modules[i.toNat]!.module.toString
@@ -163,6 +179,7 @@ elab "#export_rh_proof_graph" : command => do
         ("identifier", toJson n.toString),
         ("module", toJson mod),
         ("type_expr", toJson ty),
+        ("type_defeq_riemann_hypothesis", toJson true),
         ("is_axiom", toJson ax),
         ("axioms", toJson (axs.map Name.toString)),
         ("has_body", toJson (ci.value? (allowOpaque := true)).isSome)])
@@ -170,7 +187,9 @@ elab "#export_rh_proof_graph" : command => do
     (Json.mkObj [
       ("scope", toJson "all constants in the compiled/imported Lean environment"),
       ("inspected_count", toJson inspected),
+      ("semantic_theorems_checked", toJson semanticTheoremsChecked),
+      ("defeq_target_type", toJson "RiemannHypothesis"),
       ("declarations", Json.arr importedRh)]).pretty
-  logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} EXACT_TYPE_CANDIDATES {importedRh.size}"
+  logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} DEFEQ_TYPE_CANDIDATES {importedRh.size}"
 
 #export_rh_proof_graph
