@@ -15,6 +15,8 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHScaleRowCompositionV1
+import AEGISOverlay.RHTimeSliceWeilV1
+import WeilRHImpliesFinalSignV13
 
 /-!
 # Optimized actual Weil–Schur global join
@@ -172,9 +174,101 @@ theorem riemannHypothesis_of_optimized_actual_row_producer
     (packetSum (fun _ => (1 : ℂ)) selected)).re ≤ 0
   exact hsign
 
+
+/-! ## Time slices: distinguish the exact shift ledger from its created Weil packet
+
+The time coordinate is an integer spectral-translation label. The created
+packet is the translated test function, with all genuine B-interactions
+retained. The established common-window inequality immediately pays the
+sharp signed defect. This does not assume or imply a global sign for
+unrestricted time shifts.
+-/
+
+/-- Every finite family of exact femtosecond spectral translates of a
+moment-zero narrow packet pays its entire REAL signed Weil mixed defect
+whenever the established common-window span bound holds. Neither Schur
+weights nor absolute off-diagonal bounds are used. -/
+theorem actual_time_slice_sharp_signed_budget
+    {n : ℕ} (g : WeilCompactSmoothGV1) (p origin center : ℝ)
+    (ticks : Fin (n + 1) → ℤ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256) origin)
+    (hspan : ∀ i,
+      |origin + AEGIS.RHTimeSliceWeilV1.fsLogSlice p (ticks i) - center| ≤
+        (507 / 1280 : ℝ)) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n
+      (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks) ≤
+      -(∑ i, (B
+        (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks i)
+        (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks i)).re) := by
+  have hmargin :=
+    AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin
+      g p origin center ticks (fun _ => (1 : ℂ)) hm hw hspan
+  have hfull :=
+    AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_gram
+      g p ticks (fun _ => (1 : ℂ))
+  rw [← hfull] at hmargin
+  have hE : 0 ≤ (1 / 16 : ℝ) *
+      energy (packetSum (fun _ => (1 : ℂ))
+        (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks)).1 :=
+    mul_nonneg (by norm_num) (energy_nonnegative _)
+  apply (actual_signed_defect_iff_packet_nonpositive
+    (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks)).mpr
+  linarith
+
+/-! ## Canonical RH equivalence using ONE sharp signed actual reconstruction
+
+Unlike optimized Schur, this formulation has no hselect, no pointwise
+absolute-value estimates and no diagonal-energy requirements.
+The existential sign estimate is *precisely* the universal RH-equivalent
+mathematical obligation, not an unconditionally proved producer.
+-/
+
+/-- The exact Mathlib RH target is equivalent to one signed actual Weil
+finite reconstruction for each moment-zero source packet. No invented
+matrix estimate, equal-energy reduction, or selected partition is assumed.
+-/
+theorem rh_iff_one_actual_sharp_signed_budget :
+    RiemannHypothesis ↔
+      ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+        ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+          g = packetSum (fun _ => (1 : ℂ)) gs ∧
+          AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+            -(∑ i, (B (gs i) (gs i)).re) := by
+  constructor
+  · intro hRH g hm
+    obtain ⟨n, gs, _hmom, _hd, hpacket, hgram⟩ :=
+      AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram
+        g hm
+    refine ⟨n, gs, hpacket, ?_⟩
+    have hfinal :
+        (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
+      (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+        g hm).mpr
+          ((AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13 hRH) g hm)
+    have hsum : (∑ i, ∑ j, B (gs i) (gs j)).re ≤ 0 := by
+      rw [← hgram]
+      exact hfinal
+    apply (actual_signed_defect_iff_packet_nonpositive gs).mpr
+    rw [B_packetSum]
+    simpa using hsum
+  · intro hcert
+    apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
+    intro g hm
+    obtain ⟨n, gs, hpacket, hsigned⟩ := hcert g hm
+    have hsign := (actual_signed_defect_iff_packet_nonpositive gs).mp hsigned
+    rw [hpacket]
+    change (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
+    exact hsign
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_fine_cluster_sharp_signed_budget
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_packet_sum_nonpositive_of_optimized_rows
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_time_slice_sharp_signed_budget
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget
