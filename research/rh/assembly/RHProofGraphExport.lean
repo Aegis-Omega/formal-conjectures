@@ -77,6 +77,8 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHAssemblyV1.narrow_window_schur_norm_family",
     "AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_RiemannHypothesis",
     "AEGIS.RHAssemblyV1.riemannHypothesis_of_actual_global_signed_weil",
+    "AEGIS.RHFourLogThreeWeightedRHBridgeV1.weighted_reconstruction_arithmetic_nonpositive",
+    "AEGIS.RHFourLogThreeWeightedRHBridgeV1.riemannHypothesis_of_weighted_four_log_three_reconstruction",
     "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",
     "AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram",
     "AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds",
