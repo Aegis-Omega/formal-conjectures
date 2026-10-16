@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import AEGISOverlay.RHPrimeFreeRecompositionJoinV1
 import Mathlib.Tactic
 import WeilTranslationGapInvariantV10
 import AEGISOverlay.RHArchRow29V1
