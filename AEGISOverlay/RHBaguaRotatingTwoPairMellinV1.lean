@@ -273,6 +273,51 @@ theorem rotating_bagua_two_pair_four_phase_mellin_join
       rotating_bagua_two_point_mellin_and_moments
         g hmg (4 * Real.log 3) s q⟩
 
+
+/-! ## Direct Walsh H8 character specialization
+
+The prior rotating proof works for every complex vector; therefore it
+also controls the original certified H8 Bagua character modes, not only
+newly introduced opposite-pair coefficients. -/
+
+/-- The zero quarter-turn reconstructs the original Bagua coefficient
+exactly, using the existing complementary-pair algebra. -/
+theorem rotating_bagua_phase_zero (z : Fin 8 → ℂ) (i : Fin 8) :
+    rotatingBaguaCoeff z (0 : Fin 4) i = z i := by
+  simpa [rotatingBaguaCoeff, quarterTurnPhase] using
+    (bagua_reconstruct z i)
+
+/-- Kernel-ready direct Schur coercivity for the actual H8 Walsh
+character mode. ALL its original eight Weil packets and 64 Gram
+entries occur in the genuine mode packet. -/
+theorem actual_sparse_walsh_bagua_mode_negative
+    (gs : Fin 8 → WeilCompactSmoothGV1)
+    (center : Fin 8 → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin 8, i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin 8, i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (mode : Fin 8) :
+    (B (baguaMode gs mode) (baguaMode gs mode)).re ≤
+      -(641 / 32768 : ℝ) *
+        (∑ i, energy (gs i).1 *
+          ‖(AEGIS.RHBaguaWalshV1.walsh8 mode i : ℂ)‖ ^ 2) := by
+  simpa only [baguaMode] using
+    (actual_four_log_three_weighted_norm_coercive
+      gs center hwidth hm hsep K g a hw hfamily hgap
+        (fun i => (AEGIS.RHBaguaWalshV1.walsh8 mode i : ℂ)))
+
 end AEGIS.RHBaguaRotatingTwoPairMellinV1
 
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotatingBaguaCoeff_opposite
@@ -284,3 +329,5 @@ end AEGIS.RHBaguaRotatingTwoPairMellinV1
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_four_phase_mellin_weil_coercive
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_point_mellin_and_moments
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_pair_four_phase_mellin_join
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_phase_zero
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.actual_sparse_walsh_bagua_mode_negative
