@@ -262,6 +262,60 @@ theorem actual_four_log_three_same_mother_family_sign
     AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
+
+/-! ## Direct bridge to Mathlib's canonical RiemannHypothesis
+
+The exact missing statement is a source-preserving GLOBAL reconstruction,
+not an additional norm inequality for an already separated sparse family.
+Keeping it a transparent Prop prevents a finite-window result from being
+silently promoted to RH. No new axiom or sorry is used. -/
+
+/-- Every moment-zero test packet can be reconstructed from actual
+same-mother, four-log-three-separated Weil atoms, retaining all analytic
+support, gap, moment and source-identity requirements. This is a
+mathematical obligation, NOT a proved global constructor. -/
+def HasActualFourLogThreeReconstruction (source : WeilCompactSmoothGV1) : Prop :=
+  ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (K : ℕ) (mother : WeilCompactSmoothGV1) (a : ℝ),
+    source = packetSum (fun _ => (1 : ℂ)) gs ∧
+    (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (center i)) ∧
+    (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+    (∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i) ∧
+    HalfWidthAt mother
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a ∧
+    (∀ i, gs i = translatePacket mother (center i)) ∧
+    (∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+
+/-- Direct, type-correct proof of the CANONICAL Mathlib RH proposition
+from an explicit global source-preserving sparse-family constructor.
+The prime-row and Arch-29 bounds have been discharged in the preceding
+theorem; the global reconstruction remains the stated premise. -/
+theorem riemannHypothesis_of_four_log_three_global_reconstruction
+    (hglobal : ∀ source : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 source →
+        HasActualFourLogThreeReconstruction source) :
+    RiemannHypothesis := by
+  apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
+  intro source hm
+  obtain ⟨n, gs, center, K, mother, a, hsource, hwidth,
+      hatoms, hsep, hmother, hfamily, hgap⟩ := hglobal source hm
+  have hbound :=
+    actual_four_log_three_same_mother_family_sign
+      gs center hwidth hatoms hsep K mother a hmother hfamily hgap
+  have henergy : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  rw [hsource]
+  change (B (packetSum (fun _ => (1 : ℂ)) gs)
+    (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
+  nlinarith [hbound, henergy]
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -273,3 +327,4 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_same_mother_family_sign
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.riemannHypothesis_of_four_log_three_global_reconstruction
