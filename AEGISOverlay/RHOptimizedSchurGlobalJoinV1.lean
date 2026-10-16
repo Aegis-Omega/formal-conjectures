@@ -661,6 +661,138 @@ its inverse coefficient 1/64 is exactly 1024 Q16.16 units. -/
 theorem hexagramTensor_q16_inverse_exact :
     (1024 : ℤ) * 64 = 65536 := by norm_num
 
+
+/-! ## Six-bit causal poset and an exact 1+3 Lorentzian realization
+
+The Boolean six-cube has exactly 64 states. We assign positive,
+superincreasing femtosecond tick weights 1,2,4,8,16,32 and pair
+opposite null spatial directions along three axes. The following
+is an explicit order-preserving FLAT Lorentzian realization, NOT a
+derivation of a curved physical spacetime from the positive Weil Gram.
+
+Each order-preserving bit addition has a future non-spacelike
+displacement. A finite independent enumeration separately checks all
+4,096 pairs; no converse is asserted (this embedding has additional
+Minkowski-causal pairs that are not Boolean comparable).
+-/
+
+abbrev HexagramBits := Fin 6 → Bool
+
+def hexagramBitValue (s : HexagramBits) (i : Fin 6) : ℤ :=
+  if s i = true then 1 else 0
+
+/-- Exactly the Boolean componentwise subset order. -/
+def hexagramCausal (a b : HexagramBits) : Prop :=
+  ∀ i : Fin 6, hexagramBitValue a i ≤ hexagramBitValue b i
+
+theorem hexagramBits_count :
+    Fintype.card HexagramBits = 64 := by decide
+
+theorem hexagramCausal_refl (a : HexagramBits) :
+    hexagramCausal a a := by
+  intro i
+  exact le_refl _
+
+theorem hexagramCausal_trans (a b c : HexagramBits)
+    (hab : hexagramCausal a b)
+    (hbc : hexagramCausal b c) :
+    hexagramCausal a c := by
+  intro i
+  exact (hab i).trans (hbc i)
+
+theorem hexagramCausal_antisymm (a b : HexagramBits)
+    (hab : hexagramCausal a b)
+    (hba : hexagramCausal b a) : a = b := by
+  funext i
+  have h1 := hab i
+  have h2 := hba i
+  cases ha : a i <;> cases hb : b i <;>
+    simp_all [hexagramBitValue]
+
+/-- Coordinates in femtoseconds and c·femtoseconds (light-fs). -/
+def hexagramClockFs (s : HexagramBits) : ℤ :=
+  hexagramBitValue s 0 + 2 * hexagramBitValue s 1 +
+    4 * hexagramBitValue s 2 + 8 * hexagramBitValue s 3 +
+    16 * hexagramBitValue s 4 + 32 * hexagramBitValue s 5
+
+def hexagramSpaceX (s : HexagramBits) : ℤ :=
+  hexagramBitValue s 0 - 2 * hexagramBitValue s 1
+
+def hexagramSpaceY (s : HexagramBits) : ℤ :=
+  4 * hexagramBitValue s 2 - 8 * hexagramBitValue s 3
+
+def hexagramSpaceZ (s : HexagramBits) : ℤ :=
+  16 * hexagramBitValue s 4 - 32 * hexagramBitValue s 5
+
+/-- (-,+,+,+) signature, with integer arithmetic throughout. -/
+def hexagramMinkowskiIntervalSq (a b : HexagramBits) : ℤ :=
+  -(hexagramClockFs b - hexagramClockFs a)^2 +
+    (hexagramSpaceX b - hexagramSpaceX a)^2 +
+    (hexagramSpaceY b - hexagramSpaceY a)^2 +
+    (hexagramSpaceZ b - hexagramSpaceZ a)^2
+
+/-- Pure algebraic light-cone estimate for six nonnegative bit increments.
+No physics axiom is hidden in the calculation. -/
+private theorem six_nonnegative_increments_causal
+    (d0 d1 d2 d3 d4 d5 : ℤ)
+    (h0 : 0 ≤ d0) (h1 : 0 ≤ d1)
+    (h2 : 0 ≤ d2) (h3 : 0 ≤ d3)
+    (h4 : 0 ≤ d4) (h5 : 0 ≤ d5) :
+    -((d0 + d1 + d2 + d3 + d4 + d5)^2) +
+      (d0 - d1)^2 + (d2 - d3)^2 + (d4 - d5)^2 ≤ 0 := by
+  have h01 : 0 ≤ d0 * d1 := mul_nonneg h0 h1
+  have h23 : 0 ≤ d2 * d3 := mul_nonneg h2 h3
+  have h45 : 0 ≤ d4 * d5 := mul_nonneg h4 h5
+  have hAB : 0 ≤ (d0 + d1) * (d2 + d3) :=
+    mul_nonneg (add_nonneg h0 h1) (add_nonneg h2 h3)
+  have hAC : 0 ≤ (d0 + d1) * (d4 + d5) :=
+    mul_nonneg (add_nonneg h0 h1) (add_nonneg h4 h5)
+  have hBC : 0 ≤ (d2 + d3) * (d4 + d5) :=
+    mul_nonneg (add_nonneg h2 h3) (add_nonneg h4 h5)
+  nlinarith
+
+/-- Every Boolean-causally ordered pair lies in the future Minkowski cone.
+The reverse implication is deliberately NOT asserted. -/
+theorem hexagramCausal_future_nonspacelike
+    (a b : HexagramBits) (hab : hexagramCausal a b) :
+    0 ≤ hexagramClockFs b - hexagramClockFs a ∧
+      hexagramMinkowskiIntervalSq a b ≤ 0 := by
+  let d0 : ℤ := hexagramBitValue b 0 - hexagramBitValue a 0
+  let d1 : ℤ := 2 * (hexagramBitValue b 1 - hexagramBitValue a 1)
+  let d2 : ℤ := 4 * (hexagramBitValue b 2 - hexagramBitValue a 2)
+  let d3 : ℤ := 8 * (hexagramBitValue b 3 - hexagramBitValue a 3)
+  let d4 : ℤ := 16 * (hexagramBitValue b 4 - hexagramBitValue a 4)
+  let d5 : ℤ := 32 * (hexagramBitValue b 5 - hexagramBitValue a 5)
+  have h0 : 0 ≤ d0 := by dsimp [d0]; omega
+  have h1 : 0 ≤ d1 := by dsimp [d1]; nlinarith [hab 1]
+  have h2 : 0 ≤ d2 := by dsimp [d2]; nlinarith [hab 2]
+  have h3 : 0 ≤ d3 := by dsimp [d3]; nlinarith [hab 3]
+  have h4 : 0 ≤ d4 := by dsimp [d4]; nlinarith [hab 4]
+  have h5 : 0 ≤ d5 := by dsimp [d5]; nlinarith [hab 5]
+  have hzero : 0 ≤ d0 := by dsimp [d0]; exact sub_nonneg.mpr (hab 0)
+  have ht :
+      hexagramClockFs b - hexagramClockFs a =
+      d0 + d1 + d2 + d3 + d4 + d5 := by
+    dsimp [hexagramClockFs, d0, d1, d2, d3, d4, d5]
+    ring
+  have hx : hexagramSpaceX b - hexagramSpaceX a = d0 - d1 := by
+    dsimp [hexagramSpaceX, d0, d1]
+    ring
+  have hy : hexagramSpaceY b - hexagramSpaceY a = d2 - d3 := by
+    dsimp [hexagramSpaceY, d2, d3]
+    ring
+  have hz : hexagramSpaceZ b - hexagramSpaceZ a = d4 - d5 := by
+    dsimp [hexagramSpaceZ, d4, d5]
+    ring
+  constructor
+  · rw [ht]
+    omega
+  · unfold hexagramMinkowskiIntervalSq
+    rw [ht, hx, hy, hz]
+    exact six_nonnegative_increments_causal d0 d1 d2 d3 d4 d5
+      hzero h1 h2 h3 h4 h5
+
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -696,3 +828,9 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramTensor_row_orthogonality
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramTensor_q16_inverse_exact
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramBits_count
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramCausal_refl
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramCausal_trans
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramCausal_antisymm
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramCausal_future_nonspacelike
