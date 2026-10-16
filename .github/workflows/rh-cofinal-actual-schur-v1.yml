@@ -291,7 +291,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -419,6 +419,10 @@ jobs:
               "research/rh/aegis_source_4d7578e/lean/WeilOffLineSeedV10.lean.src":"255cfa30537da17af7ee3f7fe64b6845808af246",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/WeilFiniteDilationFilterV10.lean":"6970c598b8af0e25cc051567359f46cff63244bc",
               ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNineFacesV13.lean":"19da141ee9d81c490555364a687fccdca6ae21b5",
+              ".aegis/sovereign-omega-v2/formal/bridges/lean/RHFourBlockPrimeEightV3.lean":"f0905517b12b25eab1e8b9162755afd6ec9c6870",
+              ".aegis/sovereign-omega-v2/formal/bridges/lean/RHFourBlockConcreteV3.lean":"1dbb003a189e7ec7ba3c58265c7b8202214b740a",
+              ".aegis/sovereign-omega-v2/formal/bridges/lean/RHNarrowDiagonalUpgradeV2.lean":"5861f8808015c4bee93efbbac5d032dd30522289",
+              ".aegis/sovereign-omega-v2/formal/bridges/lean/RHFourBlockActualBridgeV2.lean":"af77d02a41d993462b0613055f94a19fffc3d190",
               "research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean":"cb70597230e1cd1863bef40e0901c9e317dedf20",
               "research/rh/m8_kernel_v1/RHKreinM8AnalyticV1.lean":"27c3d8c4c1ebf3d08887af75fd60ecfd39d4db63",
               "research/rh/m8_kernel_v1/RHKreinCorrectionM8BoundV1.lean":"50d60b68282b9f17d25a4f9cacaa50e09ba892dc",
