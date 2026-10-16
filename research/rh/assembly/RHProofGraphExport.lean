@@ -149,14 +149,14 @@ elab "#export_rh_proof_graph" : command => do
      Every theorem imported into the kernel environment is considered. -/
   let (semanticRhNames, semanticTheoremsChecked) ← liftTermElabM do
     let rhType : Expr := mkConst ``RiemannHypothesis
-    let mut matches : Array Name := #[]
+    let mut rhProofNames : Array Name := #[]
     let mut checked : Nat := 0
     for (n, ci) in env.constants.toList do
       if let .thmInfo _ := ci then
         checked := checked + 1
         if (← Lean.Meta.isDefEq ci.type rhType) then
-          matches := matches.push n
-    return (matches, checked)
+          rhProofNames := rhProofNames.push n
+    return (rhProofNames, checked)
   logInfo m!"RH_SEMANTIC_THEOREMS_CHECKED {semanticTheoremsChecked} DEFEQ_RH_TYPE_CANDIDATES {semanticRhNames.size}"
 
   /- Unlike root-dependency traversal, this independent inventory scans EVERY
