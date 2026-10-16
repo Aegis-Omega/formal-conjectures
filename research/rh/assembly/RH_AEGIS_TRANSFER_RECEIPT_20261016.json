@@ -97,8 +97,9 @@
     "upstream_replay_v4": "FAILURE_ZERO_STEPS_REPORTED_NEEDS_HOSTED_VERIFICATION",
     "destination_lean_kernel": "NOT_RUN_FOR_RECOVERED_SOURCES",
     "destination_axiom_audit": "NOT_RUN_FOR_TRANSFER",
-    "rh_unconditional": "NOT_CLAIMED",
-    "authority_effect": "NONE"
+    "rh_unconditional": null,
+    "authority_effect": "NONE",
+    "rh_proof_admission_source": "Exact-head Lean kernel proof-type and axiom audit; transfer receipt does not decide mathematical proof status"
   },
   "next_replay": [
     "materialize the PR631 corrected source instead of the historical PR721 blob in a separate temporary namespace/check-out with source-pinned dependencies",
