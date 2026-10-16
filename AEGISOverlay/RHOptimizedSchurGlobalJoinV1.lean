@@ -462,7 +462,7 @@ theorem fsLogSlice_three_four_second_steps (k : ℤ) :
     AEGIS.RHTimeSliceWeilV1.fsLogSlice 3
       (4000000000000000 * k) =
         4 * (k : ℝ) * Real.log 3 := by
-  norm_num [AEGIS.RHTimeSliceWeilV1.fsLogSlice, Int.cast_mul] <;> ring
+  norm_num [AEGIS.RHTimeSliceWeilV1.fsLogSlice, Int.cast_mul]; ring
 
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
