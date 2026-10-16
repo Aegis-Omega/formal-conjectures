@@ -249,7 +249,7 @@ private theorem complex_twoPoint_sharp_norm
         a * (1 + u ^ 2 + v ^ 2) + 2 * (u * z.re - v * z.im) := by
       simp only [WeilTwoPointValueV1, Complex.normSq_apply,
         Complex.mul_re]
-      dsimp <;> ring
+      ring
     rw [heq] at hh
     exact hh
   have hs := real_twoPoint_discriminant a z.re z.im hreal
