@@ -225,8 +225,7 @@ private theorem real_twoPoint_discriminant
         a * (1 + (-x / a) ^ 2 + (y / a) ^ 2) +
           2 * ((-x / a) * x - (y / a) * y) =
         (a ^ 2 - x ^ 2 - y ^ 2) / a := by
-      field_simp [haz]
-      <;> ring
+      field_simp [haz]; ring
     rw [hident] at htest
     have hprod := mul_nonneg htest (le_of_lt ha_pos)
     have hcancel :
