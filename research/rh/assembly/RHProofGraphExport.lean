@@ -143,4 +143,34 @@ elab "#export_rh_proof_graph" : command => do
       ("declarations",Json.arr rows)]).pretty
   logInfo m!"PROOF_TERM_GRAPH_DECLARATIONS {rows.size}"
 
+  /- Unlike root-dependency traversal, this independent inventory scans EVERY
+     declaration already present in the imported kernel environment. A valid
+     theorem need not be referenced by one of our chosen 66 roots. The official
+     RH target with 'sorry' may also appear, so record full axiom dependencies
+     instead of treating any matching theorem name as proof authority. -/
+  let mut importedRh : Array Json := #[]
+  let mut inspected : Nat := 0
+  for (n, ci) in env.constants.toList do
+    inspected := inspected + 1
+    let ty := toString ci.type
+    if ty == "RiemannHypothesis" || ty == "_root_.RiemannHypothesis" then
+      let axs ← collectAxioms n
+      let mod := match env.getModuleIdxFor? n with
+        | some i => env.header.modules[i.toNat]!.module.toString
+        | none => "RHProofGraphExport"
+      let ax := match ci with | .axiomInfo _ => true | _ => false
+      importedRh := importedRh.push (Json.mkObj [
+        ("identifier", toJson n.toString),
+        ("module", toJson mod),
+        ("type_expr", toJson ty),
+        ("is_axiom", toJson ax),
+        ("axioms", toJson (axs.map Name.toString)),
+        ("has_body", toJson (ci.value? (allowOpaque := true)).isSome)])
+  liftIO <| IO.FS.writeFile "evidence-cofinal/assembly/environment-rh-candidates.json"
+    (Json.mkObj [
+      ("scope", toJson "all constants in the compiled/imported Lean environment"),
+      ("inspected_count", toJson inspected),
+      ("declarations", Json.arr importedRh)]).pretty
+  logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} EXACT_TYPE_CANDIDATES {importedRh.size}"
+
 #export_rh_proof_graph
