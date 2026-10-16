@@ -621,6 +621,46 @@ theorem hexagram64Walsh_full_weighted_margin
     (trigram_full_weighted_gram_margin 63 z
       (hexagram64WalshMode gs) center hmModes hwModes)
 
+
+/-! ## Exact H64² = 64·I via the eight-trigram tensor factorization
+
+This is a dimension-64 theorem, proved from the already kernel-checked
+H8 character orthogonality, not a 4096-entry floating-point probe.
+The product Fin 8 × Fin 8 is precisely the complete 64-hexagram carrier.
+-/
+
+def hexagramTensorCharacter
+    (a b : Fin 8 × Fin 8) : ℤ :=
+  walsh8 a.1 b.1 * walsh8 a.2 b.2
+
+theorem hexagramTensor_row_orthogonality
+    (a b : Fin 8 × Fin 8) :
+    (∑ x : Fin 8 × Fin 8,
+      hexagramTensorCharacter a x * hexagramTensorCharacter b x) =
+    if a = b then (64 : ℤ) else 0 := by
+  have hfactor :
+      (∑ x : Fin 8 × Fin 8,
+        hexagramTensorCharacter a x * hexagramTensorCharacter b x) =
+        (∑ i : Fin 8, walsh8 a.1 i * walsh8 b.1 i) *
+          (∑ j : Fin 8, walsh8 a.2 j * walsh8 b.2 j) := by
+    rw [Fintype.sum_prod_type, Finset.sum_mul_sum]
+    apply Finset.sum_congr rfl
+    intro i _
+    apply Finset.sum_congr rfl
+    intro j _
+    simp only [hexagramTensorCharacter]
+    ring
+  rw [hfactor, walsh8_row_orthogonality, walsh8_row_orthogonality]
+  rcases a with ⟨a₁, a₂⟩
+  rcases b with ⟨b₁, b₂⟩
+  by_cases h₁ : a₁ = b₁ <;> by_cases h₂ : a₂ = b₂ <;>
+    simp [h₁, h₂, Prod.mk.injEq]
+
+/-- The tensor transform is normalized by exactly eight, and
+its inverse coefficient 1/64 is exactly 1024 Q16.16 units. -/
+theorem hexagramTensor_q16_inverse_exact :
+    (1024 : ℤ) * 64 = 65536 := by norm_num
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -653,3 +693,6 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshMode_moments
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshMode_window
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64Walsh_full_weighted_margin
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramTensor_row_orthogonality
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramTensor_q16_inverse_exact
