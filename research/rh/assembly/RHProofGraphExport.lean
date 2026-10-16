@@ -68,7 +68,7 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",
     "AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram",
     "AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds",
-    /-! Source-present stronger producers and independent RH routes.
+    /- Source-present stronger producers and independent RH routes.
         Recording a root does not establish the premises of its terminal. -/
     "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_two_actual_weil_packets",
     "AEGIS.RHKreinMultiplicativeTransportV1.every_packet_actual_two_block_zero_quadratic",
