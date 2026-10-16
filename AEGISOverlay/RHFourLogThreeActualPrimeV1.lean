@@ -583,6 +583,174 @@ theorem actual_four_log_three_weighted_norm_coercive
   exact h.trans (mul_le_mul_of_nonneg_right
     (by norm_num : -(20829 / 16384 : ℝ) ≤ -(641 / 32768 : ℝ)) henergy)
 
+
+/-!
+## Source-bound signed-real row integration
+
+The prime component is the actual von Mangoldt pairing at four-log-three
+gaps. The Arch component is the real-part inequality from RHArchRow29V1.
+Unlike a norm-only conversion, no favorable signed mixed term is deleted.
+
+The row coefficient multiplies Eᵢ + Eⱼ, not sqrt(Eᵢ Eⱼ).
+Accordingly its contribution to the full Gram is 2R.
+-/
+
+theorem actual_four_log_three_source_signed_row_certificate
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3) :
+    ∃ c : Fin (n + 1) → Fin (n + 1) → ℝ,
+      (∀ i j, c i j = c j i) ∧
+      (∀ i j, i ≠ j →
+        (B (gs i) (gs j)).re ≤
+          c i j * (energy (gs i).1 + energy (gs j).1)) ∧
+      (∀ i, (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i,
+          c i j) ≤ (16413 / 65536 : ℝ)) := by
+  let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
+  let archCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => ((1 / 32 : ℝ) * (54 / 53)) *
+      ((1 / 145 : ℝ) ^ Nat.dist i j)
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => primeCost i j + archCost i j
+  have hsym : ∀ i j, c i j = c j i := by
+    intro i j
+    dsimp [c, primeCost, archCost]
+    simp only [Nat.dist_comm]
+  have hprime : ∀ i j : Fin (n + 1), i < j →
+      (WeilPrimeSumV1 (mixed (gs i) (gs j))).re ≤
+        primeCost i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    obtain ⟨hd, _⟩ := hsep i j hij
+    obtain ⟨hdK, hgapij⟩ := hgap i j hij
+    have hp := actual_prime_four_log_three_signed_cost_at_centers
+      K (Nat.dist i j) hd hdK g a hw
+      (center i) (center j) hgapij
+    simpa only [primeCost, hfamily i, hfamily j] using hp
+  have hforward (i j : Fin (n + 1)) (hij : i < j) :
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    obtain ⟨hk, hgeometric⟩ := hsep i j hij
+    have ha := AEGIS.RHArchRow29V1.actual_B_re_le_signed_prime_plus_arch145
+      (gs i) (gs j) (center i) (center j)
+      (hwidth i) (hwidth j) (hm i)
+      (Nat.dist i j) hk hgeometric
+    calc
+      (B (gs i) (gs j)).re ≤
+          (WeilPrimeSumV1 (mixed (gs i) (gs j))).re +
+            archCost i j * (energy (gs i).1 + energy (gs j).1) := by
+              simpa only [archCost] using ha
+      _ ≤ primeCost i j * (energy (gs i).1 + energy (gs j).1) +
+            archCost i j * (energy (gs i).1 + energy (gs j).1) :=
+          add_le_add (hprime i j hij) le_rfl
+      _ = c i j * (energy (gs i).1 + energy (gs j).1) := by
+          dsimp [c]
+          ring
+  have hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        c i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    rcases lt_or_gt_of_ne hij with hijlt | hjilt
+    · exact hforward i j hijlt
+    · have hb := hforward j i hjilt
+      have hre : (B (gs i) (gs j)).re =
+          (B (gs j) (gs i)).re := by
+        rw [B_hermitian, Complex.conj_re]
+      calc
+        (B (gs i) (gs j)).re = (B (gs j) (gs i)).re := hre
+        _ ≤ c j i * (energy (gs j).1 + energy (gs i).1) := hb
+        _ = c i j * (energy (gs i).1 + energy (gs j).1) := by
+            rw [hsym j i, add_comm]
+  have hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+        c i j) ≤ (16413 / 65536 : ℝ) := by
+    intro i
+    have hp : (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i,
+          primeCost i j) ≤ (1 / 4 : ℝ) := by
+      simpa only [primeCost] using full_four_log_three_prime_row i
+    have ha : (∑ j ∈
+        (Finset.univ : Finset (Fin (n + 1))).erase i,
+          archCost i j) ≤ (29 / 65536 : ℝ) := by
+      simpa only [archCost] using AEGIS.RHArchRow29V1.geometric_arch_row_29 i
+    calc
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) =
+          (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            primeCost i j) +
+          (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            archCost i j) := by
+              simp only [c, Finset.sum_add_distrib]
+      _ ≤ (1 / 4 : ℝ) + 29 / 65536 := add_le_add hp ha
+      _ = 16413 / 65536 := by norm_num
+  exact ⟨c, hsym, hcross, hrow⟩
+
+/-- The source-built signed row connects to the unrestricted-energy
+mixed-defect algebra with the exact factor two. The source family still
+retains its actual narrow-support and four-log-three gap conditions. -/
+theorem actual_four_log_three_signed_gram_sharp
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(20829 / 16384 : ℝ) * (∑ i, energy (gs i).1) := by
+  obtain ⟨c, hsym, hcross, hrow⟩ :=
+    actual_four_log_three_source_signed_row_certificate
+      gs center hwidth hm hsep K g a hw hfamily hgap
+  have hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re := by
+    intro i
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hwidth i)
+  have hdefect :=
+    AEGIS.RHActualUniversalFineGramV1.actual_mixed_defect_le_of_signed_symmetric_row
+      gs c (16413 / 65536 : ℝ) hsym hcross hrow
+  have hlocal :=
+    AEGIS.RHActualUniversalFineGramV1.fine_mixed_defect_lower_bound n gs hdiag
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [← hgram] at hlocal
+  have hE : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hfloor :
+      (116142 / 65536 : ℝ) * (∑ i, energy (gs i).1) ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) :=
+    mul_le_mul_of_nonneg_right (by norm_num) hE
+  linarith [hdefect, hlocal, hfloor]
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -599,3 +767,5 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp
