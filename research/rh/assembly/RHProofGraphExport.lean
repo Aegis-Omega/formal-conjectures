@@ -22,6 +22,13 @@ import AEGISOverlay.RHActualUniversalFineGramV1
 import AEGISOverlay.RHArchRow29V1
 import AEGISOverlay.RHScaleRowCompositionV1
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import AEGISOverlay.RHKreinMultiplicativeTransportV1
+import AEGISOverlay.RHTimeSliceWeilV1
+import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
+import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
+import AEGISOverlay.RHGlobalizationChainV13
+import AEGISOverlay.RHCrossRepositoryFiveSpineV1
+import RHCofinalActualTerminalV1
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -60,7 +67,38 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHAssemblyV1.narrow_window_schur_norm_family",
     "AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families",
     "AEGIS.RHFiniteActualGramJoinV1.every_packet_actual_finite_gram",
-    "AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds"].map
+    "AEGIS.RHCofinalSchurAdapterV1.actual_zero_quadratic_nonnegative_of_gram_bounds",
+    /-! Source-present stronger producers and independent RH routes.
+        Recording a root does not establish the premises of its terminal. -/
+    "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_two_actual_weil_packets",
+    "AEGIS.RHKreinMultiplicativeTransportV1.every_packet_actual_two_block_zero_quadratic",
+    "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition",
+    "AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart",
+    "AEGIS.RHActualMixedDefectV1.fine_cluster_nine_mixed_defect_opposite",
+    "AEGIS.RHTimeSliceWeilV1.fsTwoThreeShiftGroup_dense",
+    "AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_iff_riemannHypothesis",
+    "AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin",
+    "AEGIS.RHTimeSliceWeilV1.timeSliceFamily_signed_prime_arch29",
+    "AEGIS.RHTimeSliceWeilV1.timeSliceEight_actual_full_gram",
+    "AEGIS.RHTimeSliceWeilV1.bagua_time_64_pow_2_pow_3_q16",
+    "AEGIS.RHBaguaActualWeilV1.bagua_actual_full_weighted_margin",
+    "AEGIS.RHBaguaActualWeilV1.bagua_complementary_phase_coupling_margin",
+    "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_signed_prime_gap_two_log_three",
+    "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive",
+    "AEGIS.RHNarrowDetectingTrigramDenseV1.dense_narrow_detector_iff_riemannHypothesis",
+    "AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion",
+    "AEGIS.RHCrossRepositoryFiveSpineV1.narrow_packet_local_actual_arithmetic_sign",
+    "AEGIS.RHCrossRepositoryFiveSpineV1.three_nine_faces_of_cofinal",
+    "AEGIS.RHFixedPacketDenseShiftV1.dense_fixed_packet_sign_iff_universal",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_optimized_q16_coercive",
+    "AEGIS.RHActualElevenLatticeV1.all_actual_eleven_diagonal_bounds",
+    "AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_uniform_actual_fine_mixed_budget",
+    "AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_universal_actual_q16_pair_certificates",
+    "AEGIS.RHActualUniversalFineGramV1.actual_fine_gram_coercive_of_signed_real_row_certificate",
+    "AEGIS.RHScaleRowCompositionV1.actual_weighted_schur_unequal_energy_from_fine_diagonals",
+    "AEGIS.RHScaleRowCompositionV1.actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals",
+    "AEGIS.RHCofinalActualTerminalV1.universal_of_cofinal_lower_certificates",
+    "AEGIS.RHCofinalActualTerminalV1.riemannHypothesis_of_cofinal_lower_certificates"].map
       (fun s => (s.splitOn ".").foldl Name.str Name.anonymous)
   let mut pending := roots
   let mut seen : NameSet := {}
@@ -86,6 +124,8 @@ elab "#export_rh_proof_graph" : command => do
         ("is_axiom", toJson ax),
         ("axioms", toJson (axioms.map Name.toString)),
         ("has_body", toJson (ci.value? (allowOpaque := true)).isSome)])
+    else
+      throwError m!"RH_REQUIRED_PROOF_ROOT_NOT_IN_ENV: {n}"
   liftIO <| IO.FS.createDirAll "evidence-cofinal/assembly"
   liftIO <| IO.FS.writeFile "evidence-cofinal/assembly/proof-terms.json"
     (Json.mkObj [("roots",toJson (roots.map Name.toString)),
