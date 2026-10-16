@@ -793,8 +793,118 @@ theorem hexagramCausal_future_nonspacelike
       hzero h1 h2 h3 h4 h5
 
 
+
+/-! ## Real mixed-entry Gershgorin/Schur bound
+
+This theorem is conditional on *actual* Weil cross-entry estimates.
+The 2199 Krein analytic cells do not produce these estimates for
+arbitrary packet partitions. No RH claim follows from this lemma alone.
+-/
+
+/-- A sufficient off-diagonal bound measured against the genuine negative
+Weil diagonal, rather than against a surrogate or numerical Gram. -/
+def mixed_defect_bound (n : ℕ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1) : Prop :=
+  ∀ i j : Fin (n + 1), i ≠ j →
+    ‖(B (gs i) (gs j)).re‖ ≤
+      (1 / (n + 1 : ℝ)) *
+        Real.sqrt (-(B (gs i) (gs i)).re *
+          -(B (gs j) (gs j)).re)
+
+/-- The real Weil Gram is nonpositive on the all-ones vector whenever
+the explicitly supplied off-diagonal bound holds. This is a finite
+Schur estimate, NOT a constructor for the bound. -/
+theorem mixed_defect_bound_satisfies_matrix
+    (n : ℕ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hmix : mixed_defect_bound n gs) :
+    (∑ i : Fin (n + 1), ∑ j : Fin (n + 1),
+      (B (gs i) (gs j)).re) ≤ 0 := by
+  classical
+  let E : Fin (n + 1) → ℝ :=
+    fun i => -(B (gs i) (gs i)).re
+  let H : Fin (n + 1) → Fin (n + 1) → ℂ :=
+    fun i j => ((B (gs i) (gs j)).re : ℂ)
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => if i = j then 0 else 1 / (n + 1 : ℝ)
+  let w : Fin (n + 1) → ℝ := fun _ => 1
+  have hE : ∀ i, 0 ≤ E i := by
+    intro i
+    have he : 0 ≤ energy (gs i).1 := energy_nonnegative _
+    have hh : 0 ≤ (5671 / 3200 : ℝ) * energy (gs i).1 :=
+      mul_nonneg (by norm_num) he
+    exact hh.trans (hd i)
+  have hc : ∀ i j, 0 ≤ c i j := by
+    intro i j
+    dsimp [c]
+    split_ifs <;> positivity
+  have hzero : ∀ i, c i i = 0 := by
+    intro i
+    simp [c]
+  have hsym : ∀ i j, c i j = c j i := by
+    intro i j
+    by_cases hij : i = j
+    · subst j
+      rfl
+    · simp [c, hij, Ne.symm hij]
+  have hw : ∀ i, 0 < w i := by
+    intro i
+    norm_num [w]
+  have hdiag : ∀ i, (1 : ℝ) * E i ≤ -(H i i).re := by
+    intro i
+    simp [E, H]
+  have hcross : ∀ i j, i ≠ j →
+      ‖H i j‖ ≤ c i j * (Real.sqrt (E i) * Real.sqrt (E j)) := by
+    intro i j hij
+    have hr := Real.sqrt_mul (hE i) (E j)
+    change ‖((B (gs i) (gs j)).re : ℂ)‖ ≤
+      (if i = j then 0 else 1 / (n + 1 : ℝ)) *
+        (Real.sqrt (E i) * Real.sqrt (E j))
+    rw [if_neg hij, ← hr, Complex.norm_real]
+    exact hmix i j hij
+  have hrow : ∀ i, (∑ j, c i j * (w j / w i)) ≤ (1 : ℝ) := by
+    intro i
+    have hrow_le :
+        (∑ j : Fin (n + 1), c i j) ≤
+          ∑ _j : Fin (n + 1), (1 / (n + 1 : ℝ)) := by
+      apply Finset.sum_le_sum
+      intro j _
+      by_cases hij : i = j
+      · simp only [c, if_pos hij]
+        positivity
+      · simp only [c, if_neg hij]
+    have hconst :
+        (∑ _j : Fin (n + 1), (1 / (n + 1 : ℝ))) = 1 := by
+      simp only [Finset.sum_const, Finset.card_univ,
+        Fintype.card_fin, nsmul_eq_mul]
+      have hn : (n + 1 : ℝ) ≠ 0 := by positivity
+      field_simp [hn]
+    simpa [w] using hrow_le.trans (le_of_eq hconst)
+  have hschur :=
+    AEGIS.WeightedSchur.weighted_gram_variable_energy
+      H (fun _ => (1 : ℂ)) E c w (1 : ℝ) (1 : ℝ)
+      hE hc hzero hsym hw hdiag hcross hrow
+  simpa [H] using hschur
+
+/-- Exact signed-defect form of the preceding finite Schur criterion. -/
+theorem mixed_defect_bound_implies_signed_budget
+    (n : ℕ)
+    (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hd : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re)
+    (hmix : mixed_defect_bound n gs) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      -(∑ i, (B (gs i) (gs i)).re) := by
+  apply (actual_signed_defect_iff_packet_nonpositive gs).mpr
+  rw [B_packetSum]
+  simpa using mixed_defect_bound_satisfies_matrix n gs hd hmix
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_satisfies_matrix
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_implies_signed_budget
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_fine_cluster_sharp_signed_budget
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_packet_sum_nonpositive_of_optimized_rows
