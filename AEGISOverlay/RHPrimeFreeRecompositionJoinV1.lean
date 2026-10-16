@@ -47,6 +47,7 @@ namespace AEGIS.RHPrimeFreeRecompositionJoinV1
 open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHActualUniversalFineGramV1
+open AEGIS.RHGramExpansionV13
 
 /-- The two genuine-prime-free separation intervals where a uniform
 source-proved fine-pair Q16.16 budget is available. -/
@@ -167,9 +168,11 @@ def combinedFineCost {n : ℕ}
     (center : Fin (n + 1) → ℝ)
     (residual : Fin (n + 1) → Fin (n + 1) → ℝ)
     (i j : Fin (n + 1)) : ℝ :=
-  if FineLogFreeGap |center j - center i| then
-    (676 / 65536 : ℝ)
-  else residual i j
+  by
+    classical
+    exact if FineLogFreeGap |center j - center i| then
+      (676 / 65536 : ℝ)
+    else residual i j
 
 /-- Symmetry of the entire certified row including resonant residuals. -/
 theorem combinedFineCost_symm {n : ℕ}
@@ -179,6 +182,7 @@ theorem combinedFineCost_symm {n : ℕ}
     (i j : Fin (n + 1)) :
     combinedFineCost center residual i j =
       combinedFineCost center residual j i := by
+  classical
   unfold combinedFineCost
   have habs : |center j - center i| = |center i - center j| :=
     abs_sub_comm (center j) (center i)
@@ -212,6 +216,7 @@ theorem actual_source_gram_coercive_of_resonance_row
     (B (packetSum (fun _ => (1 : ℂ)) gs)
       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
         -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  classical
   have hcross : ∀ i j, i ≠ j →
       (B (gs i) (gs j)).re ≤
         combinedFineCost center residual i j *
