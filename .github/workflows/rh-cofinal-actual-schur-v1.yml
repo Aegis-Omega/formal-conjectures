@@ -667,7 +667,7 @@ jobs:
           for thm in packet_zero_quadratic_nonnegative packet_weil_nonpositive riemannHypothesis_of_window_scaled_schur_families; do
             grep -F "AEGIS.RHFeshbachScaledWeilV1.$thm" evidence-cofinal/compile-RHFeshbachScaledWeilV1.log
           done
-          echo "SCALED_WEIL_JOIN=KERNEL_PASS; RH_UNCONDITIONAL=NOT_CLAIMED"
+          echo "SCALED_WEIL_JOIN=KERNEL_PASS; CANONICAL_RH_ADMISSION=EVALUATED_BY_EXACT_HEAD_PROOF_GRAPH_EXPORT"
 
       - name: Export actual proof dependencies and observed closure test
         shell: bash
