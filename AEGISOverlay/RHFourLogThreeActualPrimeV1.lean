@@ -1,0 +1,118 @@
+/-
+Copyright 2026 The Formal Conjectures Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-/
+
+import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import Mathlib.Tactic
+
+/-!
+# Exact signed prime cost at every four-log-three separation
+
+This is a genuine von Mangoldt (not surrogate Gram) estimate at every
+positive lattice displacement d, for any horizon K >= 4*d and an actual
+fine packet of the existing K-dependent support.
+
+It does not assume RH, a Schur signed-row certificate, or a selected
+reconstruction of arbitrary packets. No claim about a fixed positive
+seed radius uniformly in K is made.
+-/
+
+open Complex
+open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilMixedClosureV2
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
+open AEGIS.WeilDisjointEnergyV2
+open AEGIS.RHPrimeThreeWindowV1
+open AEGIS.RHDyadicDiagonalV13
+
+set_option autoImplicit false
+noncomputable section
+
+namespace AEGIS.RHFourLogThreeActualPrimeV1
+
+/-- The exact arithmetic ratio for a 4*d*log(3) gap. -/
+theorem triadicHalf_four_mul (d : ℕ) :
+    triadicHalf (4 * d) = (1 / 9 : ℝ) ^ d := by
+  unfold triadicHalf
+  have harg :
+      -(((4 * d : ℕ) : ℝ) * Real.log 3) / 2 =
+        (d : ℝ) * (-2 * Real.log 3) := by
+    push_cast
+    ring
+  rw [harg, Real.exp_nat_mul]
+  have hexp : Real.exp (-2 * Real.log (3 : ℝ)) = (1 / 9 : ℝ) := by
+    rw [show -2 * Real.log (3 : ℝ) = -(2 * Real.log 3) by ring,
+      Real.exp_neg, Real.exp_nat_mul,
+      Real.exp_log (by norm_num : (0 : ℝ) < 3)]
+    norm_num
+  rw [hexp]
+
+/-- Actual exact signed prime interaction for every positive 4*d gap. -/
+theorem actual_prime_four_log_three_exact
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a) :
+    (WeilPrimeSumV1
+      (mixed (translatePacket g 0)
+        (translatePacket g ((4 * d : ℕ) * Real.log 3)))).re =
+      Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 := by
+  have hp :=
+    AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
+      K (4 * d) (by omega) hdK g a hw
+  have hr := congrArg Complex.re hp
+  simp only [Complex.ofReal_re] at hr
+  simpa only [triadicHalf_four_mul] using hr
+
+/-- Source-proved, uniform-in-d rational cost for the actual prime row
+at any separated same-mother pair. No fabricated sign/cross hypotheses. -/
+theorem actual_prime_four_log_three_signed_cost
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a) :
+    (WeilPrimeSumV1
+      (mixed (translatePacket g 0)
+        (translatePacket g ((4 * d : ℕ) * Real.log 3)))).re ≤
+      (1 / 9 : ℝ) ^ d *
+        (energy (translatePacket g 0).1 +
+         energy (translatePacket g ((4 * d : ℕ) * Real.log 3)).1) := by
+  have hpow : 0 ≤ (1 / 9 : ℝ) ^ d := by positivity
+  have hE : 0 ≤ energy g.1 := energy_nonnegative g.1
+  have hcoeff :
+      Real.log (3 : ℝ) * ((1 / 9 : ℝ) ^ d * energy g.1) ≤
+        2 * ((1 / 9 : ℝ) ^ d * energy g.1) :=
+    mul_le_mul_of_nonneg_right
+      AEGIS.RHLogThreeSignedPrimeProducerV1.log_three_le_two
+      (mul_nonneg hpow hE)
+  calc
+    (WeilPrimeSumV1
+      (mixed (translatePacket g 0)
+        (translatePacket g ((4 * d : ℕ) * Real.log 3)))).re =
+        Real.log 3 * (1 / 9 : ℝ) ^ d * energy g.1 :=
+          actual_prime_four_log_three_exact K d hd hdK g a hw
+    _ = Real.log 3 * ((1 / 9 : ℝ) ^ d * energy g.1) := by ring
+    _ ≤ 2 * ((1 / 9 : ℝ) ^ d * energy g.1) := hcoeff
+    _ = (1 / 9 : ℝ) ^ d *
+        (energy (translatePacket g 0).1 +
+         energy (translatePacket g ((4 * d : ℕ) * Real.log 3)).1) := by
+        rw [translate_energy, translate_energy]
+        ring
+
+end AEGIS.RHFourLogThreeActualPrimeV1
+
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_exact
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost
