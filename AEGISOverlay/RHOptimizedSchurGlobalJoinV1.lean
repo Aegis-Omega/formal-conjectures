@@ -874,13 +874,15 @@ theorem mixed_defect_bound_satisfies_matrix
       by_cases hij : i = j
       · simp only [c, if_pos hij]
         positivity
-      · simp only [c, if_neg hij]
+      · simpa only [c, if_neg hij] using
+          (le_refl (1 / (n + 1 : ℝ)))
     have hconst :
         (∑ _j : Fin (n + 1), (1 / (n + 1 : ℝ))) = 1 := by
       simp only [Finset.sum_const, Finset.card_univ,
         Fintype.card_fin, nsmul_eq_mul]
       have hn : (n + 1 : ℝ) ≠ 0 := by positivity
       field_simp [hn]
+      norm_num [Nat.cast_add]
     simpa [w] using hrow_le.trans (le_of_eq hconst)
   have hschur :=
     AEGIS.WeightedSchur.weighted_gram_variable_energy
