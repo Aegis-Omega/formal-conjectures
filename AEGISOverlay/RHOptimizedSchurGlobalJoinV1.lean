@@ -507,6 +507,120 @@ theorem hexagram64_actual_femtosecond_window_margin
   exact AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin
     (n := 63) g p origin center ticks z hm hw hspan
 
+
+/-! ## Sixty-four hexagrams as the tensor of two eight-trigram characters
+
+Each hexagram is canonically two trigrams (upper, lower).
+No rounding, no physical space-time assumption, and no suppression of
+the genuine 4,096 ordered Weil Gram entries is introduced here.
+-/
+
+open AEGIS.RHBaguaWalshV1
+open AEGIS.RHActualNarrowGramSignV1
+
+/-- The upper three binary lines of a six-bit hexagram. -/
+def hexagramUpper (a : Fin 64) : Fin 8 :=
+  ⟨a.val / 8, by have ha := a.isLt; omega⟩
+
+/-- The lower three binary lines of a six-bit hexagram. -/
+def hexagramLower (a : Fin 64) : Fin 8 :=
+  ⟨a.val % 8, Nat.mod_lt _ (by omega)⟩
+
+/-- Tensor of two already proven integer Walsh characters, H8 ⊗ H8. -/
+def hexagramWalsh64 (a i : Fin 64) : ℤ :=
+  walsh8 (hexagramUpper a) (hexagramUpper i) *
+    walsh8 (hexagramLower a) (hexagramLower i)
+
+/-- The 64 × 64 character kernel is exactly symmetric. -/
+theorem hexagramWalsh64_symmetric (a i : Fin 64) :
+    hexagramWalsh64 a i = hexagramWalsh64 i a := by
+  unfold hexagramWalsh64
+  rw [walsh8_symmetric (hexagramUpper a) (hexagramUpper i),
+    walsh8_symmetric (hexagramLower a) (hexagramLower i)]
+
+/-- Each Walsh spectral mode retains every one of its 64 actual packets. -/
+def hexagram64WalshMode
+    (gs : Fin 64 → WeilCompactSmoothGV1) (a : Fin 64) :
+    WeilCompactSmoothGV1 :=
+  packetSum (fun i : Fin 64 => (hexagramWalsh64 a i : ℂ)) gs
+
+/-- The actual Weil Gram in the 64-mode tensor Bagua basis. -/
+def hexagram64WalshGram
+    (gs : Fin 64 → WeilCompactSmoothGV1) (a b : Fin 64) : ℂ :=
+  B (hexagram64WalshMode gs a) (hexagram64WalshMode gs b)
+
+/-- EXACT congruence H64 * G * H64^T: every transformed entry expands
+to all 4,096 genuine signed original Weil coefficients. No diagonal or
+off-diagonal entry is erased and no positivity is assumed. -/
+theorem hexagram64WalshGram_exact
+    (gs : Fin 64 → WeilCompactSmoothGV1) (a b : Fin 64) :
+    hexagram64WalshGram gs a b =
+      ∑ i : Fin 64, ∑ j : Fin 64,
+        (hexagramWalsh64 a i : ℂ) *
+          star (hexagramWalsh64 b j : ℂ) * B (gs i) (gs j) := by
+  unfold hexagram64WalshGram hexagram64WalshMode
+  rw [B_packetSum_left]
+  apply Finset.sum_congr rfl
+  intro i _
+  rw [B_packetSum_right, Finset.mul_sum]
+  apply Finset.sum_congr rfl
+  intro j _
+  ring
+
+/-- Every full 64-mode Gram, including all cross terms, is the
+untruncated true Weil pairing of its complex weighted sum. -/
+theorem hexagram64WalshGram_weighted_exact
+    (gs : Fin 64 → WeilCompactSmoothGV1) (z : Fin 64 → ℂ) :
+    B (packetSum z (hexagram64WalshMode gs))
+      (packetSum z (hexagram64WalshMode gs)) =
+    ∑ a : Fin 64, ∑ b : Fin 64,
+      z a * star (z b) * hexagram64WalshGram gs a b := by
+  simpa only [hexagram64WalshGram] using
+    (B_packetSum z (hexagram64WalshMode gs))
+
+/-- The two zero moments survive every six-bit Walsh mode. -/
+theorem hexagram64WalshMode_moments
+    (gs : Fin 64 → WeilCompactSmoothGV1)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i)) (a : Fin 64) :
+    WeilMomentConditionsV1 (hexagram64WalshMode gs a) := by
+  unfold hexagram64WalshMode
+  exact trigram_moment_packetSum 63
+    (fun i : Fin 64 => (hexagramWalsh64 a i : ℂ)) gs hm
+
+/-- A common certified log-window survives the full 64-state Walsh
+combination. No separated-family or fake near-neighbour assumption. -/
+theorem hexagram64WalshMode_window
+    (gs : Fin 64 → WeilCompactSmoothGV1) (center : ℝ)
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center) (a : Fin 64) :
+    AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (hexagram64WalshMode gs a) (2 / 5) center := by
+  unfold hexagram64WalshMode
+  exact trigram_window_packetSum 63
+    (fun i : Fin 64 => (hexagramWalsh64 a i : ℂ)) gs center hwin
+
+/-- A true 64×64 transformed Weil sign margin for ANY complex
+amplitudes, under the existing explicitly certified common window.
+This is unconditional in RH, not unconditional in spatial support. -/
+theorem hexagram64Walsh_full_weighted_margin
+    (gs : Fin 64 → WeilCompactSmoothGV1) (center : ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hwin : ∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (gs i) (2 / 5) center)
+    (z : Fin 64 → ℂ) :
+    (1 / 16 : ℝ) * energy
+      (packetSum z (hexagram64WalshMode gs)).1 ≤
+      -(∑ a : Fin 64, ∑ b : Fin 64,
+          z a * star (z b) * hexagram64WalshGram gs a b).re := by
+  have hmModes : ∀ a, WeilMomentConditionsV1 (hexagram64WalshMode gs a) :=
+    fun a => hexagram64WalshMode_moments gs hm a
+  have hwModes : ∀ a, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      (hexagram64WalshMode gs a) (2 / 5) center :=
+    fun a => hexagram64WalshMode_window gs center hwin a
+  simpa only [hexagram64WalshGram] using
+    (trigram_full_weighted_gram_margin 63 z
+      (hexagram64WalshMode gs) center hmModes hwModes)
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -532,3 +646,10 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64_actual_femtosecond_full_gram
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64_actual_femtosecond_window_margin
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagramWalsh64_symmetric
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshGram_exact
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshGram_weighted_exact
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshMode_moments
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64WalshMode_window
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64Walsh_full_weighted_margin
