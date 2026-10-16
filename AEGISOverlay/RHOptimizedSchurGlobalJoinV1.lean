@@ -349,6 +349,29 @@ theorem timeHorizonRadius_le_fine (K : ℕ) :
   unfold timeHorizonRadius
   exact min_le_left _ _
 
+
+/-- Every moment-zero source packet has an actual finite Gram whose individual
+Krein atoms retain the exact prime-horizon radius, with all mixed entries
+preserved. No uniform mixed-sign estimate is inferred here. -/
+theorem every_packet_actual_gram_at_time_horizon
+    (K : ℕ)
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+        (gs i) (timeHorizonRadius K) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+  exact
+    AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_at_radius
+      g hm (timeHorizonRadius K)
+      (timeHorizonRadius_pos K) (timeHorizonRadius_le_fine K)
+
 /-- The exact source small-support prime condition holds SIMULTANEOUSLY
 for every index not beyond the chosen integer spectral horizon. -/
 theorem timeHorizonRadius_prime_gap (K k : ℕ) (hk : k ≤ K) :
@@ -919,6 +942,7 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_coercive
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_nonpositive
 
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.every_packet_actual_gram_at_time_horizon
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius_prime_gap
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_mixed_B_norm_time_horizon
