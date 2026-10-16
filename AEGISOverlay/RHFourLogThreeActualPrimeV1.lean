@@ -44,6 +44,8 @@ noncomputable section
 
 namespace AEGIS.RHFourLogThreeActualPrimeV1
 
+open AEGIS.RHGramExpansionV13
+
 /-- The exact arithmetic ratio for a 4*d*log(3) gap. -/
 theorem triadicHalf_four_mul (d : ℕ) :
     triadicHalf (4 * d) = (1 / 9 : ℝ) ^ d := by
