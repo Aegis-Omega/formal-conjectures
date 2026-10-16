@@ -30,6 +30,7 @@ namespace AEGIS.RHAssemblyV1
 open AEGIS.RHFeshbachWeilClosureV2
 open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilDisjointEnergyV2
+open AEGIS.RHGramExpansionV13
 
 def narrow_window_schur_family
     (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
