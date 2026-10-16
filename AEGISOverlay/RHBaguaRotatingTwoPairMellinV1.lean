@@ -18,21 +18,6 @@ import AEGISOverlay.RHBaguaActualWeilV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import Mathlib.Tactic
 
-/-!
-# AEGIS Ω — actual four-phase rotating Bagua, two moment annihilations,
-# exact Mellin transport, and full sparse Weil Gram
-
-The four opposite-pair Bagua sectors are mixed by the genuine complex
-quarter-turns 1, I, -1, -I. Every cross coefficient of the original
-8x8 Hermitian Weil B remains in the four-block expansion. The existing
-four-log-three actual-prime/Arch Schur estimate controls the SAME
-rotated packet, not a disconnected surrogate Gram.
-
-All sign conclusions explicitly require the existing same-mother,
-separated lattice support/gap assumptions; no arbitrary-packet
-decomposition or unconditional RH theorem is postulated.
--/
-
 open scoped BigOperators
 set_option autoImplicit false
 noncomputable section
@@ -48,16 +33,12 @@ open AEGIS.WeilZeroTranslationV11
 open AEGIS.WeilDisjointEnergyV2
 open AEGIS.RHDyadicDiagonalV13
 
-/-- Four exact complex phases. No numerical phase approximation. -/
 def quarterTurnPhase (q : Fin 4) : ℂ := Complex.I ^ q.val
 
-/-- Rotation of the four opposite trigram pairs in even/odd channels.
-The same coefficients are used in the real Weil packet below. -/
 def rotatingBaguaCoeff (z : Fin 8 → ℂ) (q : Fin 4)
     (i : Fin 8) : ℂ :=
   baguaPlus z i + quarterTurnPhase q * baguaMinus z i
 
-/-- Opposite vertices have identical even and reversed odd channels. -/
 theorem rotatingBaguaCoeff_opposite
     (z : Fin 8 → ℂ) (q : Fin 4) (i : Fin 8) :
     rotatingBaguaCoeff z q (baguaOpp i) =
@@ -65,7 +46,6 @@ theorem rotatingBaguaCoeff_opposite
   simp only [rotatingBaguaCoeff, baguaPlus_even, baguaMinus_odd]
   ring
 
-/-- Both annihilated Weil moments survive all four phase rotations. -/
 theorem rotating_bagua_two_moments
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (hm : ∀ i, WeilMomentConditionsV1 (gs i))
@@ -75,8 +55,6 @@ theorem rotating_bagua_two_moments
   exact AEGIS.RHActualNarrowGramSignV1.trigram_moment_packetSum
     7 (rotatingBaguaCoeff z q) gs hm
 
-/-- Complement-even and complement-odd modes each annihilate both
-Weil moments. These are the original two-pair Bagua modes. -/
 theorem rotating_bagua_complementary_moments
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (hm : ∀ i, WeilMomentConditionsV1 (gs i))
@@ -88,9 +66,6 @@ theorem rotating_bagua_complementary_moments
   exact AEGIS.RHBaguaActualWeilV1.bagua_both_complementary_moments
     gs (rotatingBaguaCoeff z q) hm
 
-/-- EXACT four-block decomposition on the SAME rotated packet.
-The ++, +-, -+, -- entries are retained for all 64 original actual
-Weil B coefficients; no mixed contribution is discarded. -/
 theorem rotating_bagua_four_block_exact
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (z : Fin 8 → ℂ) (q : Fin 4) :
@@ -113,9 +88,6 @@ theorem rotating_bagua_four_block_exact
   simp only [rotatingBaguaCoeff, star_add]
   ring
 
-/-- Source-exact Mellin transport for all eight actual mother-packet
-translations. This is the Mellin component of the rotating four-phase
-construction; no unsupported Mellin linearity assertion is inserted. -/
 theorem rotating_bagua_actual_atom_mellin
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (center : Fin 8 → ℝ)
@@ -128,8 +100,6 @@ theorem rotating_bagua_actual_atom_mellin
   rw [hfamily i]
   exact mellin_translatePacket_v11 g (center i) s
 
-/-- The existing femtosecond time-slice producer gives the same Mellin
-identity for any eight exact integer-tick sample locations. -/
 theorem rotating_bagua_fs_atom_mellin
     (g : WeilCompactSmoothGV1) (p : ℝ)
     (ticks : Fin 8 → ℤ) (s : ℂ) (i : Fin 8) :
@@ -140,12 +110,6 @@ theorem rotating_bagua_fs_atom_mellin
   exact AEGIS.RHTimeSliceWeilV1.timeSlice_mellin
     g s p (ticks i)
 
-/-- DIRECT FUSION: all four rotating Bagua phases, two moment
-annihilations, actual Mellin translation, the exact four-sector
-complex Gram, and source-proved sparse Schur coercivity.
-
-The bound is for the very same \`packetSum (rotatingBaguaCoeff z q) gs\`
-whose genuine 64 cross terms were expanded above. -/
 theorem rotating_bagua_four_phase_mellin_weil_coercive
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (center : Fin 8 → ℝ)
@@ -186,16 +150,6 @@ theorem rotating_bagua_four_phase_mellin_weil_coercive
         gs center hwidth hm hsep K g a hw hfamily hgap
           (rotatingBaguaCoeff z q)
 
-
-/-! ## Existing TWO-POINT actual zero-moment and exact Mellin producer
-
-The \`WeilTwoPointTranslateV11\` constructor is genuine, not a formal
-surrogate. Each Bagua quarter-turn supplies its exact complex phase.
-The full Mellin multiplier is retained, including the off-axis factor
-\`exp ((s - 1/2) * d)\`. -/
-
-/-- One genuine moment-zero Weil two-point packet for EVERY Bagua phase,
-with its exact source-proved Mellin multiplier. -/
 theorem rotating_bagua_two_point_mellin_and_moments
     (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
     (d : ℝ) (s : ℂ) (q : Fin 4) :
@@ -213,11 +167,6 @@ theorem rotating_bagua_two_point_mellin_and_moments
   · exact AEGIS.WeilZeroTwoPointV11.mellin_twoPointTranslate_v11
       g d (quarterTurnPhase q) s
 
-/-- Joint, SOURCE-BOUND two-pair / four-phase / Mellin / genuine
-sparse-Bagua Weil statement. The same four quarter-turns occur in
-the complementary even/odd modes and in the actual Mellin two-point
-factors at gap 4*log 3. This does not identify the widely separated
-lattice with a common-centered narrow-packet family. -/
 theorem rotating_bagua_two_pair_four_phase_mellin_join
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (center : Fin 8 → ℝ)
@@ -273,23 +222,11 @@ theorem rotating_bagua_two_pair_four_phase_mellin_join
       rotating_bagua_two_point_mellin_and_moments
         g hmg (4 * Real.log 3) s q⟩
 
-
-/-! ## Direct Walsh H8 character specialization
-
-The prior rotating proof works for every complex vector; therefore it
-also controls the original certified H8 Bagua character modes, not only
-newly introduced opposite-pair coefficients. -/
-
-/-- The zero quarter-turn reconstructs the original Bagua coefficient
-exactly, using the existing complementary-pair algebra. -/
 theorem rotating_bagua_phase_zero (z : Fin 8 → ℂ) (i : Fin 8) :
     rotatingBaguaCoeff z (0 : Fin 4) i = z i := by
   simpa [rotatingBaguaCoeff, quarterTurnPhase] using
     (bagua_reconstruct z i)
 
-/-- Kernel-ready direct Schur coercivity for the actual H8 Walsh
-character mode. ALL its original eight Weil packets and 64 Gram
-entries occur in the genuine mode packet. -/
 theorem actual_sparse_walsh_bagua_mode_negative
     (gs : Fin 8 → WeilCompactSmoothGV1)
     (center : Fin 8 → ℝ)
@@ -318,71 +255,6 @@ theorem actual_sparse_walsh_bagua_mode_negative
       gs center hwidth hm hsep K g a hw hfamily hgap
         (fun i => (AEGIS.RHBaguaWalshV1.walsh8 mode i : ℂ)))
 
-
-/-! ## End-to-end actual rotating Bagua certificate → canonical RH lane
-
-The same phase-rotated complex coefficient vector is used by the
-source packet, the full Hermitian Weil B sign, and the exact weighted
-certificate consumed by the canonical RH bridge. -/
-
-/-- Every correctly separated, moment-zero rotating Bagua family
-constructs a GENUINE certificate of the exact type consumed by the
-canonical RiemannHypothesis bridge. -/
-theorem rotating_bagua_actual_weighted_certificate
-    (gs : Fin 8 → WeilCompactSmoothGV1)
-    (center : Fin 8 → ℝ)
-    (hwidth : ∀ i,
-      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-        (gs i) (center i))
-    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
-    (hsep : ∀ i j : Fin 8, i < j →
-      1 ≤ Nat.dist i j ∧
-        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
-    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
-    (hw : HalfWidthAt g
-      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
-    (hfamily : ∀ i, gs i = translatePacket g (center i))
-    (hgap : ∀ i j : Fin 8, i < j →
-      4 * Nat.dist i j ≤ K ∧
-        center j - center i =
-          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
-    (z : Fin 8 → ℂ) (q : Fin 4) :
-    HasActualWeightedSparseReconstruction
-      (packetSum (rotatingBaguaCoeff z q) gs) := by
-  exact ⟨7, gs, center, K, g, a, rotatingBaguaCoeff z q,
-    rfl, hwidth, hm, hsep, hw, hfamily, hgap⟩
-
-/-- This is the source-correct REAL Weil negativity that feeds the RH
-bridge, now actually discharged for ALL FOUR rotating Bagua phases
-on every certified sparse mother-lattice. -/
-theorem rotating_bagua_actual_RH_criterion_sign
-    (gs : Fin 8 → WeilCompactSmoothGV1)
-    (center : Fin 8 → ℝ)
-    (hwidth : ∀ i,
-      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-        (gs i) (center i))
-    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
-    (hsep : ∀ i j : Fin 8, i < j →
-      1 ≤ Nat.dist i j ∧
-        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
-    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
-    (hw : HalfWidthAt g
-      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
-    (hfamily : ∀ i, gs i = translatePacket g (center i))
-    (hgap : ∀ i j : Fin 8, i < j →
-      4 * Nat.dist i j ≤ K ∧
-        center j - center i =
-          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
-    (z : Fin 8 → ℂ) :
-    ∀ q : Fin 4,
-      (B (packetSum (rotatingBaguaCoeff z q) gs)
-        (packetSum (rotatingBaguaCoeff z q) gs)).re ≤ 0 := by
-  intro q
-  exact actual_weighted_sparse_reconstruction_implies_sign
-    (packetSum (rotatingBaguaCoeff z q) gs)
-    (rotating_bagua_actual_weighted_certificate
-      gs center hwidth hm hsep K g a hw hfamily hgap z q)
-
 end AEGIS.RHBaguaRotatingTwoPairMellinV1
 
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotatingBaguaCoeff_opposite
@@ -396,5 +268,3 @@ end AEGIS.RHBaguaRotatingTwoPairMellinV1
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_pair_four_phase_mellin_join
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_phase_zero
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.actual_sparse_walsh_bagua_mode_negative
-#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_actual_weighted_certificate
-#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_actual_RH_criterion_sign
