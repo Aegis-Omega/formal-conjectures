@@ -16,6 +16,7 @@ limitations under the License.
 
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import Mathlib.Tactic
+import WeilTranslationGapInvariantV10
 
 /-!
 # Exact signed prime cost at every four-log-three separation
@@ -161,6 +162,52 @@ theorem actual_mixed_B_norm_four_log_three
     (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_mixed_B_norm_time_horizon
       K (4 * d) (by omega) hdK g a hm hw)
 
+/-- The prime-side certificate is invariant under a common translation
+of the mother packet. No hypothesis about the absolute lattice origin. -/
+theorem actual_prime_four_log_three_signed_cost_at_centers
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (u v : ℝ)
+    (hgap : v - u = ((4 * d : ℕ) : ℝ) * Real.log 3) :
+    (WeilPrimeSumV1 (mixed (translatePacket g u)
+      (translatePacket g v))).re ≤
+      (1 / 9 : ℝ) ^ d *
+        (energy (translatePacket g u).1 +
+          energy (translatePacket g v).1) := by
+  have hgap' :
+      v - u = (((4 * d : ℕ) : ℝ) * Real.log 3) - 0 := by
+    simpa using hgap
+  have htranslate :=
+    AEGIS.WeilTranslationGapInvariantV10.mixed_translate_eq_of_gap_v10
+      g u v 0 (((4 * d : ℕ) : ℝ) * Real.log 3) hgap'
+  rw [htranslate]
+  simpa only [translate_energy] using
+    (actual_prime_four_log_three_signed_cost K d hd hdK g a hw)
+
+/-- The actual full complex Weil B bound for any two same-mother
+translations with a four-log-three gap. This preserves the full
+Archimedean term and does not assert a universal packet selector. -/
+theorem actual_mixed_B_norm_at_centers
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (u v : ℝ)
+    (hgap : v - u = ((4 * d : ℕ) : ℝ) * Real.log 3) :
+    ‖B (translatePacket g u) (translatePacket g v)‖ ≤
+      (Real.log 3 * (1 / 9 : ℝ) ^ d + 1 / 100) * energy g.1 := by
+  have hgap' :
+      v - u = (((4 * d : ℕ) : ℝ) * Real.log 3) - 0 := by
+    simpa using hgap
+  have htranslate :=
+    AEGIS.WeilTranslationGapInvariantV10.B_translate_eq_of_gap_v10
+      g u v 0 (((4 * d : ℕ) : ℝ) * Real.log 3) hgap'
+  rw [htranslate]
+  exact actual_mixed_B_norm_four_log_three K d hd hdK g a hm hw
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -169,3 +216,5 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row_arch29
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_four_log_three
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost_at_centers
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_at_centers
