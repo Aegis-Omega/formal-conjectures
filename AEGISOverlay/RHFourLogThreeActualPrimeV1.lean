@@ -565,7 +565,8 @@ theorem actual_four_log_three_weighted_norm_coercive
               (energy (gs j).1 + energy (gs i).1) := hb
         _ = (primeCost i j + archCost i j) *
               (energy (gs i).1 + energy (gs j).1) := by
-              rw [hcost_sym, add_comm]
+              rw [hcost_sym]
+              ring
         _ = c i j * (Real.sqrt (energy (gs i).1) *
               Real.sqrt (energy (gs j).1)) := hcost
   have hrow (i : Fin (n + 1)) :
@@ -601,7 +602,8 @@ theorem actual_four_log_three_weighted_norm_coercive
       rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
       simp only [hcdiag i, zero_add]
       rw [hsum]
-      dsimp [archCost] at harchRow
+      change (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        archCost i j) ≤ (29 / 65536 : ℝ) at harchRow
       linarith
     simpa [w] using hrow0
   have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
