@@ -464,6 +464,49 @@ theorem fsLogSlice_three_four_second_steps (k : ℤ) :
         4 * (k : ℝ) * Real.log 3 := by
   norm_num [AEGIS.RHTimeSliceWeilV1.fsLogSlice, Int.cast_mul]; ring
 
+
+/-! ## Existing full femtosecond Weil Gram specialized to 64 hexagrams
+
+The previous source already proves the full signed Weil Gram for EVERY
+finite family; here n=63 retains ALL 64^2=4096 ordered interactions.
+This is an exact type-level integration, NOT a new assumption that any
+mixed terms vanish or that arbitrary physical spacetimes are described.
+-/
+
+/-- Every one of the 64 × 64 ordered actual Weil coefficients survives.
+No diagonal/off-diagonal suppression and no new arithmetic premise. -/
+theorem hexagram64_actual_femtosecond_full_gram
+    (g : WeilCompactSmoothGV1) (p : ℝ)
+    (ticks : Fin 64 → ℤ) (z : Fin 64 → ℂ) :
+    B (packetSum z (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks))
+      (packetSum z (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks)) =
+    ∑ i : Fin 64, ∑ j : Fin 64,
+      z i * star (z j) *
+        B (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks i)
+          (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks j) := by
+  exact AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_gram
+    (n := 63) g p ticks z
+
+/-- Exact unconditional-in-RH 64-state coercivity on the ALREADY PROVED
+common-window domain. The geometric hypotheses are explicitly retained. -/
+theorem hexagram64_actual_femtosecond_window_margin
+    (g : WeilCompactSmoothGV1) (p origin center : ℝ)
+    (ticks : Fin 64 → ℤ) (z : Fin 64 → ℂ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256) origin)
+    (hspan : ∀ i,
+      |origin + AEGIS.RHTimeSliceWeilV1.fsLogSlice p (ticks i) - center| ≤
+        (507 / 1280 : ℝ)) :
+    (1 / 16 : ℝ) *
+      energy (packetSum z (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks)).1 ≤
+      -(∑ i : Fin 64, ∑ j : Fin 64,
+          z i * star (z j) *
+            B (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks i)
+              (AEGIS.RHTimeSliceWeilV1.timeSliceFamily g p ticks j)).re := by
+  exact AEGIS.RHTimeSliceWeilV1.timeSliceFamily_full_weighted_margin
+    (n := 63) g p origin center ticks z hm hw hspan
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -486,3 +529,6 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_two_sided_row
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_row_below_arch29
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.fsLogSlice_three_four_second_steps
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64_actual_femtosecond_full_gram
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.hexagram64_actual_femtosecond_window_margin
