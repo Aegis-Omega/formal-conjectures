@@ -29,6 +29,8 @@ import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
 import AEGISOverlay.RHGlobalizationChainV13
 import AEGISOverlay.RHCrossRepositoryFiveSpineV1
 import RHCofinalActualTerminalV1
+import RHExistingProofFusionV1
+import RHNineFacesV13
 import RHCofinalSchurAdapterV1
 import Lean.Util.FoldConsts
 import Lean.Util.CollectAxioms
@@ -98,7 +100,16 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHScaleRowCompositionV1.actual_weighted_schur_unequal_energy_from_fine_diagonals",
     "AEGIS.RHScaleRowCompositionV1.actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals",
     "AEGIS.RHCofinalActualTerminalV1.universal_of_cofinal_lower_certificates",
-    "AEGIS.RHCofinalActualTerminalV1.riemannHypothesis_of_cofinal_lower_certificates"].map
+    "AEGIS.RHCofinalActualTerminalV1.riemannHypothesis_of_cofinal_lower_certificates",
+    "AEGIS.RHExistingProofFusionV1.signed_dictionary_and_reflected_tail",
+    "AEGIS.RHExistingProofFusionV1.rh_iff_prime_only_orbit_eventually_bounded",
+    "AEGIS.RHExistingProofFusionV1.complementary_packets_and_signed_dictionary",
+    "AEGIS.RHSignedPrimeIntervalExtensionV8.eventual_signed_prime_equals_combined_v8",
+    "AEGIS.RHSignedPrimeIntervalExtensionV8.eventual_reflected_kernel_remainder_bounded_v8",
+    "AEGIS.RHSignedPrimeIntervalExtensionV8.riemannHypothesis_of_prime_only_subexponential_growth_v8",
+    "AEGIS.RHNineFacesV13.rh_iff_all_windows_v13",
+    "AEGIS.RHNineFacesV13.rh_iff_nat_windows_v13",
+    "AEGIS.RHNineFacesV13.nine_faces_of_rh_v13"].map
       (fun s => (s.splitOn ".").foldl Name.str Name.anonymous)
   let mut pending := roots
   let mut seen : NameSet := {}
