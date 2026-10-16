@@ -88,13 +88,14 @@
     "modified_source_pins": false,
     "modified_workflow": false,
     "modified_protected_main": false,
-    "admission": false
+    "admission": false,
+    "authority_effect": "NONE"
   },
   "evidence_states": {
     "github_blob_identity": "PASS",
     "pr89_head_after_import_before_receipt": "043c9494bd6c668dbf624cbaf9fa01bba164fb88",
     "upstream_replay_v4": "FAILURE_ZERO_STEPS_REPORTED_NEEDS_HOSTED_VERIFICATION",
-    "destination_lean_kernel": "NOT_RUN_FOR_TRANSFER",
+    "destination_lean_kernel": "NOT_RUN_FOR_RECOVERED_SOURCES",
     "destination_axiom_audit": "NOT_RUN_FOR_TRANSFER",
     "rh_unconditional": "NOT_CLAIMED",
     "authority_effect": "NONE"
@@ -105,5 +106,188 @@
     "require real executed hosted steps with pinned Lean 4.33.1 and Mathlib 0df444a360eaa60ab8c11dca51a86af692955474",
     "fail closed on missing or nonstandard #print axioms and sorryAx",
     "compare current head checkouts; do not infer kernel PASS from source identity"
-  ]
+  ],
+  "recovered_after_first_transfer": [
+    {
+      "source_pr": 686,
+      "source_head": "70eace587bfabcc502c30647bcce75d7db3c16b3",
+      "archive": "research/rh/aegis_recovered_20261016/pr686/WeilAutocorrelationPrimeWindowsV1.lean.src",
+      "source_blob": "2d897c3d20e89ee75bef8484e79e8af501ce9814",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_local_kernel_reported_hosted_not_run"
+    },
+    {
+      "source_pr": 687,
+      "source_head": "36d3e3dbf79a78a10286e0097717c7081200164c",
+      "archive": "research/rh/aegis_recovered_20261016/pr687/WeilThreeBlockPrimeWindowsV22.lean.src",
+      "source_blob": "1a5347b8bf351e2a5b033e1e7e0a895f530e71e4",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_local_kernel_reported_hosted_not_run"
+    },
+    {
+      "source_pr": 688,
+      "source_head": "5b0357b8f054d19f94e67e80f2773a44f0747461",
+      "archive": "research/rh/aegis_recovered_20261016/pr688/ZeroNegativeIntegerClassificationV1.lean.src",
+      "source_blob": "34966a5dd78d20a3096b0be1e32fc691374035ce",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_local_kernel_reported_hosted_not_run"
+    },
+    {
+      "source_pr": 689,
+      "source_head": "b169a55fe3dcc0060ac4f7131c3d68ab83a76f1f",
+      "archive": "research/rh/aegis_recovered_20261016/pr689/ZeroRadialTruncationV1.lean.src",
+      "source_blob": "712531567f4e18c54413d9d99fd9ede01ed6859c",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_local_kernel_reported_concat_parent"
+    },
+    {
+      "source_pr": 690,
+      "source_head": "3c1e89037019c8149c0056fce9b07e8d53d6421b",
+      "archive": "research/rh/aegis_recovered_20261016/pr690/ZetaDivisorSupportBridgeV1.lean.src",
+      "source_blob": "1188255e500e3d581e21a469621087401e3021d1",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_local_kernel_reported_hosted_not_run"
+    },
+    {
+      "source_pr": 693,
+      "source_head": "4f93fffcea401e8ede433cc27d525ff7ad1579e3",
+      "archive": "research/rh/aegis_recovered_20261016/pr693/EpsteinGaussCriticalLineV1.lean.src",
+      "source_blob": "d2850a9f0f008bef44451a8f790a3a376f63a124",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_source_replay_not_run_here"
+    },
+    {
+      "source_pr": 693,
+      "source_head": "4f93fffcea401e8ede433cc27d525ff7ad1579e3",
+      "archive": "research/rh/aegis_recovered_20261016/pr693/EpsteinWeilXSpaceIdentityV1.lean.src",
+      "source_blob": "101476488aded736e88d9caa834e672a2be47778",
+      "source_destination_blob_match": "PASS",
+      "classification": "lean_source_replay_not_run_here"
+    },
+    {
+      "source_pr": 693,
+      "source_head": "4f93fffcea401e8ede433cc27d525ff7ad1579e3",
+      "archive": "research/rh/aegis_recovered_20261016/pr693/EPSTEIN_LATTICE_WEIL_CONTROL_V1.md",
+      "source_blob": "da3e1b24481610e4ae3eb750ac8c098658dc90e5",
+      "source_destination_blob_match": "PASS",
+      "classification": "numerical_diagnostic_only"
+    },
+    {
+      "source_pr": 693,
+      "source_head": "4f93fffcea401e8ede433cc27d525ff7ad1579e3",
+      "archive": "research/rh/aegis_recovered_20261016/pr693/epstein_d20_arb_xspace_certificate.py",
+      "source_blob": "bc79122d3d964eb370b09da8fda8c5715bab4fe4",
+      "source_destination_blob_match": "PASS",
+      "classification": "arb_script_not_executed_here"
+    },
+    {
+      "source_pr": 699,
+      "source_head": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+      "archive": "research/rh/aegis_recovered_20261016/pr699/krein_certificate_receipt_v2.py",
+      "source_blob": "9cc83c08fee155dfe09d4bad7551e048fc54d04a",
+      "source_destination_blob_match": "PASS",
+      "classification": "receipt_validator_not_math_proof"
+    },
+    {
+      "source_pr": 699,
+      "source_head": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+      "archive": "research/rh/aegis_recovered_20261016/pr699/test_krein_certificate_receipt_v2.py",
+      "source_blob": "33166922f6e235fa5a6d9fcddc29bc3d5c11c913",
+      "source_destination_blob_match": "PASS",
+      "classification": "test_source_not_run_here"
+    },
+    {
+      "source_pr": 699,
+      "source_head": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+      "archive": "research/rh/aegis_recovered_20261016/pr699/KREIN_CERTIFICATE_RECEIPT_V2_L0.98.json",
+      "source_blob": "7ce5d5d520ed1ec7fd71fd7f14dd3b26153f0a33",
+      "source_destination_blob_match": "PASS",
+      "classification": "receipt_metadata"
+    },
+    {
+      "source_pr": 699,
+      "source_head": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+      "archive": "research/rh/aegis_recovered_20261016/pr699/KREIN_CERTIFICATE_RECEIPT_V2_L1.0.json",
+      "source_blob": "76f114d291af417b3b07b8c8d0eaa1081a7da849",
+      "source_destination_blob_match": "PASS",
+      "classification": "receipt_metadata"
+    }
+  ],
+  "recovery_summary": {
+    "initial_transfers": 5,
+    "additional_transfers": 13,
+    "total_new_archived_files": 18,
+    "previously_present_exact_sources": 3,
+    "old_183_source_manifest": "UNCHANGED",
+    "existing_pr89": "REUSED",
+    "proof_terms": "UNCHANGED",
+    "upstream_mathlib_pin": "UNCHANGED",
+    "source_identity": "PASS",
+    "native_added_proof_imports": "NONE",
+    "current_head_kernel_replay": "NOT_RUN",
+    "automatic_github_actions": "EXISTING_WORKFLOWS_TRIGGER_ON_PR_COMMITS; NO_NEW_WORKFLOWS_ADDED"
+  },
+  "reverified_zero_step_jobs": [
+    {
+      "source_pr": 594,
+      "head": "f707302f79c6a5ce7f5efb84492151234cff5bc7",
+      "workflow": "RH Emergency Lean Replay",
+      "run": 35673539920,
+      "job": 106772442462,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_LEAN_RESULT"
+    },
+    {
+      "source_pr": 594,
+      "head": "f707302f79c6a5ce7f5efb84492151234cff5bc7",
+      "workflow": "Kernel One",
+      "run": 35673539992,
+      "job": 106575114255,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_LEAN_RESULT"
+    },
+    {
+      "source_pr": 631,
+      "head": "91250b2ba324ae025f433643f666332573eb415d",
+      "workflow": "RH Emergency Lean Replay",
+      "run": 35782192062,
+      "job": 106930158580,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_LEAN_RESULT"
+    },
+    {
+      "source_pr": 631,
+      "head": "91250b2ba324ae025f433643f666332573eb415d",
+      "workflow": "Kernel One",
+      "run": 35782192052,
+      "job": 106930157954,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_LEAN_RESULT"
+    },
+    {
+      "source_pr": 693,
+      "head": "4f93fffcea401e8ede433cc27d525ff7ad1579e3",
+      "workflow": "epstein-lattice-weil-control",
+      "run": 36257090839,
+      "job": 108445814785,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_PYTHON_RESULT"
+    },
+    {
+      "source_pr": 699,
+      "head": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+      "workflow": "exact-head",
+      "run": 36501776711,
+      "job": 109194045428,
+      "steps": 0,
+      "conclusion": "failure",
+      "classification": "PRE_EXECUTION_NO_TEST_RESULT"
+    }
+  ],
+  "future_replay_boundary": "All 13 recovered files are source/provenance archives, not imported into live Lean build. Dependencies must be resolved and executed on exact head before promotion. Zero-step failures do not imply theorem errors. PR689 fragment relies on concatenation with verified parent source."
 }
