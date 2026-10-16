@@ -18,6 +18,7 @@ import AEGISOverlay.RHFiniteActualGramJoinV1
 import AEGISOverlay.RHActualLocalGramCoercivityV1
 import AEGISOverlay.RHActualMixedDefectV1
 import AEGISOverlay.RHActualElevenLatticeV1
+import RHFourBlockConcreteV3
 import AEGISOverlay.RHActualUniversalFineGramV1
 import AEGISOverlay.RHArchRow29V1
 import AEGISOverlay.RHScaleRowCompositionV1
@@ -59,6 +60,11 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHOptimizedSchurGlobalJoinV1.actual_packet_sum_nonpositive_of_optimized_rows",
     "AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer",
     "AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound",
+    "AEGIS.RHFourBlockPrimeEightV3.farthest_prime_sum_exact_v3",
+    "AEGIS.RHFourBlockPrimeEightV3.farthest_B_norm_bound_v3",
+    "AEGIS.RHFourBlockConcreteV3.four_packet_coercive_v3",
+    "AEGIS.RHFourBlockConcreteV3.canonical_four_packet_sign_v3",
+    "AEGIS.RHFourBlockIntegerWeightedSchurV1.actual_four_block_coercive_of_three_gap_bounds",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_q16_coercive",
     "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_coercive",
