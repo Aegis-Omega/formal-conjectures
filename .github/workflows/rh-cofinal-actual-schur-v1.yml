@@ -33,6 +33,8 @@ on:
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
+      - 'research/rh/assembly/RHProofGraphExport.lean'
+      - 'research/rh/assembly/export_evidence.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
 
