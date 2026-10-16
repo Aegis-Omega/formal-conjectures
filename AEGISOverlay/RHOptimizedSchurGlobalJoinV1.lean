@@ -18,6 +18,7 @@ import AEGISOverlay.RHScaleRowCompositionV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import WeilRHImpliesFinalSignV13
+import Mathlib.Algebra.Order.Field.GeomSum
 
 /-!
 # Optimized actual Weil–Schur global join
@@ -411,6 +412,55 @@ theorem actual_mixed_B_norm_time_horizon
     ((timeHorizonRadius_le_fine K).trans (by norm_num))
     hw hm
 
+
+/-! ## Uniform exact prime-row arithmetic at four-log-three gaps
+
+For ANY finite horizon the arithmetic rows of a 4·log(3) translation
+lattice are bounded independently of the number of translations.
+This is a row certificate for the specified triadic SAME-SEED lattice,
+not a producer for every arbitrary moment-zero packet. The original
+RiemannHypothesis target is untouched.
+
+The ratio 1/9 is exact: gap 4*d*log(3) contributes
+3^(-2*d) = (1/9)^d to the original von Mangoldt factor.
+-/
+
+/-- Every positive finite geometric tail, for EVERY natural horizon. -/
+theorem four_log_three_prime_geometric_tail (n : ℕ) :
+    (∑ k ∈ Finset.Ico 1 (n + 1), (1 / 9 : ℝ) ^ k) ≤ 1 / 8 := by
+  have h := geom_sum_Ico_le_of_lt_one
+    (x := (1 / 9 : ℝ)) (m := 1) (n := n + 1)
+    (by norm_num) (by norm_num)
+  convert h using 1 <;> norm_num
+
+/-- Two-sided row: no fixed matrix size or finite numerical enumeration. -/
+theorem four_log_three_prime_two_sided_row (left right : ℕ) :
+    (∑ k ∈ Finset.Ico 1 (left + 1), (1 / 9 : ℝ) ^ k) +
+      (∑ k ∈ Finset.Ico 1 (right + 1), (1 / 9 : ℝ) ^ k) ≤
+        (1 / 4 : ℝ) := by
+  have hl := four_log_three_prime_geometric_tail left
+  have hr := four_log_three_prime_geometric_tail right
+  linarith
+
+/-- The exact all-horizon rational row is below the existing Arch-29
+signed-prime producer's ceiling. This proves the arithmetic BUDGET
+for the sparse lattice; the support and arbitrary-packet reconstruction
+requirements are distinct and are not silently erased. -/
+theorem four_log_three_prime_row_below_arch29 (left right : ℕ) :
+    (∑ k ∈ Finset.Ico 1 (left + 1), (1 / 9 : ℝ) ^ k) +
+      (∑ k ∈ Finset.Ico 1 (right + 1), (1 / 9 : ℝ) ^ k) ≤
+        (57401 / 65536 : ℝ) := by
+  have h := four_log_three_prime_two_sided_row left right
+  linarith
+
+/-- Exact, rounding-free triadic spectral clock for EVERY integer
+number of four-second translation steps. -/
+theorem fsLogSlice_three_four_second_steps (k : ℤ) :
+    AEGIS.RHTimeSliceWeilV1.fsLogSlice 3
+      (4000000000000000 * k) =
+        4 * (k : ℝ) * Real.log 3 := by
+  norm_num [AEGIS.RHTimeSliceWeilV1.fsLogSlice, Int.cast_mul] <;> ring
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -428,3 +478,8 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius_prime_gap
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_mixed_B_norm_time_horizon
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_geometric_tail
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_two_sided_row
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.four_log_three_prime_row_below_arch29
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.fsLogSlice_three_four_second_steps
