@@ -17,6 +17,7 @@ limitations under the License.
 import AEGISOverlay.RHNarrowFixedDetectorV1
 import AEGISOverlay.RHActualNarrowGramSignV1
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import Mathlib.Tactic
 
 /-!
 # Centered Mellin detector: exact 59/80 local Weil sign and H64 transport
@@ -201,8 +202,86 @@ theorem narrow_hexagram64_fs_mellin
   exact AEGIS.RHTimeSliceWeilV1.timeSlice_mellin
     narrowDetectingPacket s p (ticks i)
 
+
+/-! ### Sharp local Hermitian norm, using ALL complex amplitudes.
+The previous four-phase estimate is 2*A. No RH premise is introduced. -/
+
+private theorem real_twoPoint_discriminant
+    (a x y : ℝ)
+    (h : ∀ u v : ℝ,
+      0 ≤ a * (1 + u ^ 2 + v ^ 2) + 2 * (u * x - v * y)) :
+    x ^ 2 + y ^ 2 ≤ a ^ 2 := by
+  have ha : 0 ≤ a := by
+    have h0 := h 0 0
+    norm_num at h0
+    exact h0
+  by_cases haz : a = 0
+  · subst a
+    have htest := h (-x) y
+    nlinarith [sq_nonneg x, sq_nonneg y]
+  · have ha_pos : 0 < a := lt_of_le_of_ne ha (Ne.symm haz)
+    have htest := h (-x / a) (y / a)
+    have hident :
+        a * (1 + (-x / a) ^ 2 + (y / a) ^ 2) +
+          2 * ((-x / a) * x - (y / a) * y) =
+        (a ^ 2 - x ^ 2 - y ^ 2) / a := by
+      field_simp [haz]
+      <;> ring
+    rw [hident] at htest
+    have hprod := mul_nonneg htest (le_of_lt ha_pos)
+    have hcancel :
+        (a ^ 2 - x ^ 2 - y ^ 2) / a * a =
+          a ^ 2 - x ^ 2 - y ^ 2 := by
+      field_simp [haz]
+    rw [hcancel] at hprod
+    nlinarith
+
+private theorem complex_twoPoint_sharp_norm
+    (a : ℝ) (z : ℂ)
+    (h : ∀ c : ℂ, 0 ≤ WeilTwoPointValueV1 a z c) :
+    ‖z‖ ≤ a := by
+  have hreal : ∀ u v : ℝ,
+      0 ≤ a * (1 + u ^ 2 + v ^ 2) +
+        2 * (u * z.re - v * z.im) := by
+    intro u v
+    have hh := h (Complex.mk u v)
+    have heq : WeilTwoPointValueV1 a z (Complex.mk u v) =
+        a * (1 + u ^ 2 + v ^ 2) + 2 * (u * z.re - v * z.im) := by
+      simp only [WeilTwoPointValueV1, Complex.normSq_apply,
+        Complex.mk_re, Complex.mk_im, Complex.mul_re]
+      ring
+    rw [heq] at hh
+    exact hh
+  have hs := real_twoPoint_discriminant a z.re z.im hreal
+  have ha : 0 ≤ a := by
+    have hh := hreal 0 0
+    norm_num at hh
+    exact hh
+  have hnorm : ‖z‖ ^ 2 = z.re ^ 2 + z.im ^ 2 := by
+    rw [Complex.sq_norm, Complex.normSq_apply]
+    ring
+  have hn : 0 ≤ ‖z‖ := norm_nonneg _
+  nlinarith
+
+/-- Sharp |K(d)| ≤ Z(g) for |d| ≤ 59/80, for the ACTUAL zero
+translation kernel and ACTUAL narrow detecting packet. This is local
+and does not establish the global RH kernel bound. -/
+theorem narrow_detector_sharp_local_kernel_bound
+    (d : ℝ) (hd : |d| ≤ (59 / 80 : ℝ)) :
+    ‖AEGIS.WeilZeroTwoPointV11.WeilZeroTranslationKernelV11
+      narrowDetectingPacket d‖ ≤
+      (AEGIS.WeilZeroTranslationV11.WeilAutocorrelationZeroQuadraticV11
+        narrowDetectingPacket).re := by
+  apply complex_twoPoint_sharp_norm
+  intro c
+  rw [← AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
+    narrowDetectingPacket narrowDetectingPacket_moments d c]
+  exact midpoint_twoPoint_zero_nonnegative d hd c
+
+
 end AEGIS.RHMellinDetectorCenteredV1
 
+#print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_detector_sharp_local_kernel_bound
 #print axioms AEGIS.RHMellinDetectorCenteredV1.midpoint_twoPoint_actual_margin
 #print axioms AEGIS.RHMellinDetectorCenteredV1.midpoint_twoPoint_kernel_norm_bound
 #print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_hexagram64_full_actual_margin
