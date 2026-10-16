@@ -318,6 +318,71 @@ theorem actual_sparse_walsh_bagua_mode_negative
       gs center hwidth hm hsep K g a hw hfamily hgap
         (fun i => (AEGIS.RHBaguaWalshV1.walsh8 mode i : ℂ)))
 
+
+/-! ## End-to-end actual rotating Bagua certificate → canonical RH lane
+
+The same phase-rotated complex coefficient vector is used by the
+source packet, the full Hermitian Weil B sign, and the exact weighted
+certificate consumed by the canonical RH bridge. -/
+
+/-- Every correctly separated, moment-zero rotating Bagua family
+constructs a GENUINE certificate of the exact type consumed by the
+canonical RiemannHypothesis bridge. -/
+theorem rotating_bagua_actual_weighted_certificate
+    (gs : Fin 8 → WeilCompactSmoothGV1)
+    (center : Fin 8 → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin 8, i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin 8, i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (z : Fin 8 → ℂ) (q : Fin 4) :
+    HasActualWeightedSparseReconstruction
+      (packetSum (rotatingBaguaCoeff z q) gs) := by
+  exact ⟨7, gs, center, K, g, a, rotatingBaguaCoeff z q,
+    rfl, hwidth, hm, hsep, hw, hfamily, hgap⟩
+
+/-- This is the source-correct REAL Weil negativity that feeds the RH
+bridge, now actually discharged for ALL FOUR rotating Bagua phases
+on every certified sparse mother-lattice. -/
+theorem rotating_bagua_actual_RH_criterion_sign
+    (gs : Fin 8 → WeilCompactSmoothGV1)
+    (center : Fin 8 → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin 8, i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin 8, i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (z : Fin 8 → ℂ) :
+    ∀ q : Fin 4,
+      (B (packetSum (rotatingBaguaCoeff z q) gs)
+        (packetSum (rotatingBaguaCoeff z q) gs)).re ≤ 0 := by
+  intro q
+  exact actual_weighted_sparse_reconstruction_implies_sign
+    (packetSum (rotatingBaguaCoeff z q) gs)
+    (rotating_bagua_actual_weighted_certificate
+      gs center hwidth hm hsep K g a hw hfamily hgap z q)
+
 end AEGIS.RHBaguaRotatingTwoPairMellinV1
 
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotatingBaguaCoeff_opposite
@@ -331,3 +396,5 @@ end AEGIS.RHBaguaRotatingTwoPairMellinV1
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_pair_four_phase_mellin_join
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_phase_zero
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.actual_sparse_walsh_bagua_mode_negative
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_actual_weighted_certificate
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_actual_RH_criterion_sign
