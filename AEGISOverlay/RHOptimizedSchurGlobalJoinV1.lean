@@ -23,8 +23,8 @@ This module composes the EXISTING arbitrary-packet fine Gram constructor with
 the EXISTING optimized weighted-Schur bound, using the genuine Weil pairing.
 The optimized Q16.16 diagonal-minus-row margin is 34727/32768.
 
-The only new universal mathematical input is the explicit producer `hrows`,
-which must bound all actual off-diagonal entries of the fine decomposition.
+The universal mathematical input is the explicit producer `hselect`,
+which selects a reconstruction with certified actual off-diagonal entries.
 The premise is NOT constructed here. In particular, this module does not
 assert unconditional RiemannHypothesis or provide an upstream formal_proof.
 -/
@@ -86,7 +86,7 @@ off-diagonal row budget. No universal analytic producer is assumed proved. -/
 theorem riemannHypothesis_of_optimized_actual_row_producer
     (hselect :
       ∀ (g : WeilCompactSmoothGV1)
-        (hm : WeilMomentConditionsV1 g)
+        (_hm : WeilMomentConditionsV1 g)
         (n : ℕ)
         (gs : Fin (n + 1) → WeilCompactSmoothGV1)
         (center : Fin (n + 1) → ℝ),
