@@ -143,6 +143,41 @@ for start in reversed(order):
     components.append(members)
 dag = sorted({(component[n], component[d]) for n, deps in adj.items() for d in deps
               if component[n] != component[d]})
+# The root list is a bounded integration scope, not the whole historical corpus.
+# These previously established stronger lanes MUST remain visible on every
+# subsequent replay. Fail a narrowed audit rather than quietly restarting the
+# search from a single optimized hselect/Schur terminal.
+mandatory_producers = {
+    "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition",
+    "AEGIS.RHKreinMultiplicativeTransportV1.every_packet_actual_two_block_zero_quadratic",
+    "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
+    "AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_arithmetic_nonpositive",
+    "AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_optimized_q16_coercive",
+    "AEGIS.RHTimeSliceWeilV1.fsTwoThreeShiftGroup_dense",
+    "AEGIS.RHTimeSliceWeilV1.fsTwoThreeDetectorSign_iff_riemannHypothesis",
+    "AEGIS.RHBaguaActualWeilV1.bagua_complementary_phase_coupling_margin",
+    "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_signed_prime_gap_two_log_three",
+    "AEGIS.RHNarrowDetectingTrigramDenseV1.dense_narrow_detector_iff_riemannHypothesis",
+    "AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion",
+    "AEGIS.RHCofinalActualTerminalV1.riemannHypothesis_of_cofinal_lower_certificates",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer",
+}
+missing_mandatory = mandatory_producers - set(terms["roots"])
+missing_resolved = set(terms["roots"]) - rows.keys()
+if missing_mandatory or missing_resolved:
+    raise RuntimeError("RH_PROOF_GRAPH_ROOT_COVERAGE_REGRESSION "
+                       + repr({"missing_mandatory": sorted(missing_mandatory),
+                               "missing_resolved": sorted(missing_resolved)}))
+root_coverage = {
+    "scope": "selected current-branch import DAG only; NOT an exhaustive cross-branch audit",
+    "root_count": len(terms["roots"]),
+    "resolved_root_count": len(terms["roots"]) - len(missing_resolved),
+    "mandatory_stronger_roots": sorted(mandatory_producers),
+    "mandatory_stronger_roots_resolved": True,
+    "historical_repository_and_archive_exhaustiveness": False,
+}
+
 root_axioms = {root: rows[root]["axioms"] for root in terms["roots"]}
 allowed_axioms = {"propext", "Classical.choice", "Quot.sound"}
 for root, axioms in root_axioms.items():
@@ -178,7 +213,7 @@ for row in rows.values():
 
 graph = {"status": "selected_root_elaborated_type_and_available_proof_dependency_closure",
          "scope_limit": "Selected terminal/constructor/Gram route; not an all-history repository census",
-         "exact_replay_sha": head, "modules": modules,
+         "exact_replay_sha": head, "modules": modules, "root_coverage": root_coverage,
          "roots": terms["roots"], "root_axioms": root_axioms,
          "declarations": list(rows.values()), "missing_environment_constants": missing,
          "strongly_connected_components": components,
@@ -214,6 +249,7 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + r
                 final_theorem_signature="RiemannHypothesis" if closed_rh_roots else None,
                 final_theorem_axioms={root: root_axioms[root] for root in closed_rh_roots} if closed_rh_roots else None,
                 closed_rh_roots_in_selected_graph=closed_rh_roots,
+                root_coverage=root_coverage,
                 unconditional_proof_scope="Selected kernel-compiled Lean roots only; null means not determined",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
                 active_repository="tarikskalic33/formal-conjectures",
@@ -257,13 +293,14 @@ book += "Closed canonical RH roots in this compiled graph: `" + repr(closed_rh_r
 book += "The RH_PROVEN_UNCONDITIONALLY field is true only for a kernel-compiled "
 book += "axiom-clean root with EXACT type RiemannHypothesis. Otherwise it is null "
 book += "(unknown outside this selected DAG), not a hard-coded false assertion.\n"
-book += "The previously described producer obligation is retained in RH_BLOCKER.json "
+book += "\\nStronger producer coverage: `" + str(root_coverage["root_count"]) + "\` roots, " + str(len(mandatory_producers)) + " mandatory lanes retained; NOT an all-branch census.\\n"\nbook += "The previously described producer obligation is retained in RH_BLOCKER.json "
 book += "as a candidate route, NOT as a global impossibility or closure verdict.\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
 shutil.copyfile(negative_probe_file, OUT / "RH_CLOSURE_NEGATIVE_PI_PROBE.lean")
 print("ASSEMBLY_KERNEL_ROOTS", len(terms["roots"]))
+print("STRONGER_PRODUCER_ROOT_COVERAGE", "PASS", len(mandatory_producers))
 print("ASSEMBLY_PROOF_GRAPH_DECLARATIONS", len(rows))
 print("ASSEMBLY_NARROW_PROBE_PASS", probe.returncode)
 print("ASSEMBLY_PI_NEGATIVE_PROBE_ACTUAL_TYPE_MISMATCH", negative_probe.returncode)
