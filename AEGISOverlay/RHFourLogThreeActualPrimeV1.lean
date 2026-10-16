@@ -145,6 +145,22 @@ theorem full_four_log_three_prime_row_arch29 {n : ℕ} (i : Fin (n + 1)) :
       (1 / 9 : ℝ) ^ Nat.dist i j) ≤ (57401 / 65536 : ℝ) :=
   (full_four_log_three_prime_row i).trans (by norm_num)
 
+/-- Actual complex Weil B interaction at every positive four-log-three
+gap under the source-bound time-horizon support and moment conditions.
+This is not just the prime row: it retains the Archimedean allowance. -/
+theorem actual_mixed_B_norm_four_log_three
+    (K d : ℕ) (hd : 1 ≤ d) (hdK : 4 * d ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a) :
+    ‖B (translatePacket g 0)
+      (translatePacket g ((4 * d : ℕ) * Real.log 3))‖ ≤
+      (Real.log 3 * (1 / 9 : ℝ) ^ d + 1 / 100) * energy g.1 := by
+  simpa only [triadicHalf_four_mul] using
+    (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_mixed_B_norm_time_horizon
+      K (4 * d) (by omega) hdK g a hm hw)
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -152,3 +168,4 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row_arch29
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_four_log_three
