@@ -235,38 +235,50 @@ theorem actual_source_gram_coercive_of_resonance_row
     (combinedFineCost_symm center residual hsym)
     hdiag hcross hrow
 
-/-- Canonical RH handoff: the exact arbitrary-packet partition and every
-log-free mixed certificate are CONSTRUCTED above. The sole analytic
-producer still to be proved is for the other pair costs and their rows.
-Do not confuse this conditional theorem with a proof of its hresidual. -/
+/-- Exact rational obstruction to a per-link Q16.16 row charge
+for unboundedly refined packet partitions: just 85 log-free links
+already exceed the formerly proposed universal row limit. This is
+a finite-arithmetic theorem, not a statement about the true Weil form. -/
+theorem eighty_five_log_free_links_exceed_fixed_row_budget :
+    (57430 / 65536 : ℝ) <
+      85 * (676 / 65536 : ℝ) := by
+  norm_num
+
+/-- The canonical RH handoff with the logically correct QUANTIFIERS:
+the caller may choose ONE certified source-exact decomposition for
+each moment-zero input packet, rather than being forced to certify
+EVERY possible redundant fine decomposition.
+
+The genuinely arithmetic prime-free pair bounds and the signed
+Schur consumer are already proved; source selection and the remaining
+resonant signed costs are an external analytic obligation.
+This theorem makes no unconditional RH claim. -/
 theorem riemannHypothesis_of_canonical_resonance_producer
     (hresidual :
-      ∀ (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
-        (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
-        (center : Fin (n + 1) → ℝ),
-        (∀ i, WeilMomentConditionsV1 (gs i)) →
-        (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
-          -(B (gs i) (gs i)).re) →
-        (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-          (gs i) (center i)) →
-        g = packetSum (fun _ => (1 : ℂ)) gs →
-        ∃ residual : Fin (n + 1) → Fin (n + 1) → ℝ,
-          (∀ i j, residual i j = residual j i) ∧
-          (∀ i j, i ≠ j →
-            ¬ FineLogFreeGap |center j - center i| →
-            (B (gs i) (gs j)).re ≤
-              residual i j * (energy (gs i).1 + energy (gs j).1)) ∧
-          (∀ i, (∑ j ∈
-            (Finset.univ : Finset (Fin (n + 1))).erase i,
-              combinedFineCost center residual i j) ≤
-                (57430 / 65536 : ℝ))) :
+      ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+        ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+          (center : Fin (n + 1) → ℝ),
+          (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+          (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+            -(B (gs i) (gs i)).re) ∧
+          (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+            (gs i) (center i)) ∧
+          g = packetSum (fun _ => (1 : ℂ)) gs ∧
+          ∃ residual : Fin (n + 1) → Fin (n + 1) → ℝ,
+            (∀ i j, residual i j = residual j i) ∧
+            (∀ i j, i ≠ j →
+              ¬ FineLogFreeGap |center j - center i| →
+              (B (gs i) (gs j)).re ≤
+                residual i j * (energy (gs i).1 + energy (gs j).1)) ∧
+            (∀ i, (∑ j ∈
+              (Finset.univ : Finset (Fin (n + 1))).erase i,
+                combinedFineCost center residual i j) ≤
+                  (57430 / 65536 : ℝ))) :
     RiemannHypothesis := by
   apply AEGIS.RHRestrictedWeilBridgeV13.final_sign_implies_rh_v13
   intro g hm
-  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, _hgram, _hfree⟩ :=
-    every_packet_actual_fine_gram_with_log_free_pairs g hm
-  obtain ⟨residual, hsym, hres, hrow⟩ :=
-    hresidual g hm n gs center hmom hdiag hwidth hpacket
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket,
+    residual, hsym, hres, hrow⟩ := hresidual g hm
   have hfull := actual_source_gram_coercive_of_resonance_row
     gs center hmom hwidth hdiag residual hsym hres hrow
   have hE : 0 ≤ (∑ i, energy (gs i).1) :=
@@ -284,3 +296,4 @@ end AEGIS.RHPrimeFreeRecompositionJoinV1
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.combinedFineCost_symm
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_source_gram_coercive_of_resonance_row
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.eighty_five_log_free_links_exceed_fixed_row_budget
