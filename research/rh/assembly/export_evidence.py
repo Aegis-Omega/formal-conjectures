@@ -205,6 +205,7 @@ env_rh_census = json.loads((OUT / "environment-rh-candidates.json").read_text())
 if env_rh_census["inspected_count"] < len(rows):
     raise RuntimeError("RH_IMPORTED_ENVIRONMENT_CENSUS_INCOMPLETE")
 env_rh_candidates = env_rh_census["declarations"]
+env_rh_by_name = {row["identifier"]: row for row in env_rh_candidates}
 closed_rh_from_dependencies = sorted(
     name for name, row in rows.items() if is_admissible_closed_rh(row))
 closed_rh_from_environment = sorted(
@@ -281,7 +282,8 @@ event = json.loads(pathlib.Path(os.environ["GITHUB_EVENT_PATH"]).read_text()) if
 passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + rh_assessment,
                 RH_PROVEN_UNCONDITIONALLY=rh_proven_in_reachable_graph,
                 final_theorem_signature="RiemannHypothesis" if closed_rh_declarations else None,
-                final_theorem_axioms={name: rows[name]["axioms"] for name in closed_rh_declarations}
+                final_theorem_axioms={name: (rows.get(name) or env_rh_by_name[name])["axioms"]
+                                      for name in closed_rh_declarations}
                     if closed_rh_declarations else None,
                 closed_rh_roots_in_selected_graph=closed_rh_roots,
                 closed_rh_declarations_in_reachable_graph=closed_rh_from_dependencies,
