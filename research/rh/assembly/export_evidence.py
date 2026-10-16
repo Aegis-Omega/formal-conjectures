@@ -186,23 +186,36 @@ allowed_axioms = {"propext", "Classical.choice", "Quot.sound"}
 for root, axioms in root_axioms.items():
     assert set(axioms) <= allowed_axioms, (root, axioms)
 
-# Assess only what the kernel-compiled *selected roots* actually establish.
-# A theorem with conclusion RH but a premise (e.g. hselect/hcert) is not a
-# closed proof. Absence of a closed root in this limited graph does not imply
-# that none exists in other branches, repos, or source DAGs.
-closed_rh_roots = [
-    root for root in terms["roots"]
-    if rows[root]["type_expr"].strip() in ("RiemannHypothesis", "_root_.RiemannHypothesis")
-    and rows[root]["has_body"]
-    and not rows[root]["is_axiom"]
-    and set(rows[root]["axioms"]) <= allowed_axioms
-]
+# Never use only the hand-selected roots to decide whether an imported,
+# reachable proof of the official proposition exists. The Lean exporter has
+# already resolved the transitive proof dependencies and collected axioms
+# for every reachable declaration. An unlisted theorem can be a valid proof.
+# This scan still does NOT claim to cover *unreachable* declarations, branches,
+# other repositories or historical archives.
+def is_admissible_closed_rh(row):
+    return (row["type_expr"].strip() in
+            ("RiemannHypothesis", "_root_.RiemannHypothesis")
+            and row["has_body"] and not row["is_axiom"]
+            and set(row["axioms"]) <= allowed_axioms)
+
+closed_rh_declarations = sorted(
+    name for name, row in rows.items() if is_admissible_closed_rh(row))
+closed_rh_roots = sorted(set(terms["roots"]) & set(closed_rh_declarations))
 rh_assessment = (
-    "CLOSED_CANONICAL_RH_ROOT_KERNEL_AND_AXIOM_PASS"
-    if closed_rh_roots else
-    "CANONICAL_RH_CLOSURE_NOT_ASSESSED_OUTSIDE_SELECTED_ROOTS"
+    "CLOSED_CANONICAL_RH_REACHABLE_DECLARATION_KERNEL_AND_AXIOM_PASS"
+    if closed_rh_declarations else
+    "CANONICAL_RH_CLOSURE_NOT_FOUND_IN_REACHABLE_PROOF_GRAPH"
 )
-rh_proven_in_selected_roots = True if closed_rh_roots else None
+# null is *unknown outside the inspected graph*, never proof of absence.
+rh_proven_in_reachable_graph = True if closed_rh_declarations else None
+rh_closure_scan = {
+    "scope": "all transitive declarations of the 66 current-branch roots",
+    "declaration_count": len(rows),
+    "closed_canonical_rh_declarations": closed_rh_declarations,
+    "closed_canonical_rh_selected_roots": closed_rh_roots,
+    "not_scanned": "unreachable declarations, other refs, repos, archives",
+    "negative_result_is_global_nonexistence_claim": False,
+}
 
 for row in rows.values():
     module = row["module"]
@@ -217,6 +230,7 @@ for row in rows.values():
 graph = {"status": "selected_root_elaborated_type_and_available_proof_dependency_closure",
          "scope_limit": "Selected terminal/constructor/Gram route; not an all-history repository census",
          "exact_replay_sha": head, "modules": modules, "root_coverage": root_coverage,
+         "rh_closure_scan": rh_closure_scan,
          "roots": terms["roots"], "root_axioms": root_axioms,
          "declarations": list(rows.values()), "missing_environment_constants": missing,
          "strongly_connected_components": components,
@@ -248,12 +262,15 @@ write("RH_BLOCKER.json", blocker)
 passport = json.loads((META / "RH_EVIDENCE_PASSPORT.json").read_text())
 event = json.loads(pathlib.Path(os.environ["GITHUB_EVENT_PATH"]).read_text()) if os.environ.get("GITHUB_EVENT_PATH") else {}
 passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + rh_assessment,
-                RH_PROVEN_UNCONDITIONALLY=rh_proven_in_selected_roots,
-                final_theorem_signature="RiemannHypothesis" if closed_rh_roots else None,
-                final_theorem_axioms={root: root_axioms[root] for root in closed_rh_roots} if closed_rh_roots else None,
+                RH_PROVEN_UNCONDITIONALLY=rh_proven_in_reachable_graph,
+                final_theorem_signature="RiemannHypothesis" if closed_rh_declarations else None,
+                final_theorem_axioms={name: rows[name]["axioms"] for name in closed_rh_declarations}
+                    if closed_rh_declarations else None,
                 closed_rh_roots_in_selected_graph=closed_rh_roots,
+                closed_rh_declarations_in_reachable_graph=closed_rh_declarations,
+                rh_closure_scan=rh_closure_scan,
                 root_coverage=root_coverage,
-                unconditional_proof_scope="Selected kernel-compiled Lean roots only; null means not determined",
+                unconditional_proof_scope="Reachable imported declarations; null means not determined outside that graph",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
                 active_repository="tarikskalic33/formal-conjectures",
                 active_pull_request=(event.get("pull_request") or {}).get("number"),
@@ -292,10 +309,12 @@ for root, axioms in root_axioms.items():
         book += "- `" + root + "`: `" + ", ".join(axioms) + "`.\n"
 book += "\n## Canonical RH proof admission (observed, not pre-set)\n"
 book += "Selected-root status: `" + rh_assessment + "`.\n"
-book += "Closed canonical RH roots in this compiled graph: `" + repr(closed_rh_roots) + "`.\n"
-book += "The RH_PROVEN_UNCONDITIONALLY field is true only for a kernel-compiled "
-book += "axiom-clean root with EXACT type RiemannHypothesis. Otherwise it is null "
-book += "(unknown outside this selected DAG), not a hard-coded false assertion.\n"
+book += "Closed canonical RH roots in the selected set: `" + repr(closed_rh_roots) + "`.\n"
+book += "Closed canonical RH declarations in the entire reachable import DAG: `" + repr(closed_rh_declarations) + "`.\n"
+book += "The RH_PROVEN_UNCONDITIONALLY field is true only if a compiled "
+book += "axiom-clean, non-axiom declaration in this reachable DAG has EXACT type "
+book += "RiemannHypothesis. Otherwise it is null (unknown outside this DAG), "
+book += "never a hard-coded false assertion.\n"
 book += "\nStronger producer coverage: `" + str(root_coverage["root_count"]) + "` roots, " + str(len(mandatory_producers)) + " mandatory lanes retained; NOT an all-branch census.\n"
 book += "The previously described producer obligation is retained in RH_BLOCKER.json "
 book += "as a candidate route, NOT as a global impossibility or closure verdict.\n"
@@ -308,4 +327,6 @@ print("STRONGER_PRODUCER_ROOT_COVERAGE", "PASS", len(mandatory_producers))
 print("ASSEMBLY_PROOF_GRAPH_DECLARATIONS", len(rows))
 print("ASSEMBLY_NARROW_PROBE_PASS", probe.returncode)
 print("ASSEMBLY_PI_NEGATIVE_PROBE_ACTUAL_TYPE_MISMATCH", negative_probe.returncode)
+print("CANONICAL_RH_REACHABLE_DAG_DECLARATIONS_CHECKED", len(rows))
+print("CANONICAL_RH_CLOSED_REACHABLE_DECLARATIONS", closed_rh_declarations)
 print("CANONICAL_RH_SELECTED_ROOT_ASSESSMENT", rh_assessment)
