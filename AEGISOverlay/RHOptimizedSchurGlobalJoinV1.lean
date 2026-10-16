@@ -763,7 +763,6 @@ theorem hexagramCausal_future_nonspacelike
   let d3 : ℤ := 8 * (hexagramBitValue b 3 - hexagramBitValue a 3)
   let d4 : ℤ := 16 * (hexagramBitValue b 4 - hexagramBitValue a 4)
   let d5 : ℤ := 32 * (hexagramBitValue b 5 - hexagramBitValue a 5)
-  have h0 : 0 ≤ d0 := by dsimp [d0]; omega
   have h1 : 0 ≤ d1 := by dsimp [d1]; nlinarith [hab 1]
   have h2 : 0 ≤ d2 := by dsimp [d2]; nlinarith [hab 2]
   have h3 : 0 ≤ d3 := by dsimp [d3]; nlinarith [hab 3]
