@@ -26,6 +26,7 @@ import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import AEGISOverlay.RHKreinMultiplicativeTransportV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
+import AEGISOverlay.RHFourLogThreeActualPrimeV1
 import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
 import AEGISOverlay.RHGlobalizationChainV13
 import AEGISOverlay.RHCrossRepositoryFiveSpineV1
@@ -93,6 +94,9 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHBaguaActualWeilV1.bagua_actual_full_weighted_margin",
     "AEGIS.RHBaguaActualWeilV1.bagua_complementary_phase_coupling_margin",
     "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_signed_prime_gap_two_log_three",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_exact",
+    "AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row",
+    "AEGIS.RHFourLogThreeActualPrimeV1.full_four_log_three_prime_row_arch29",
     "AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive",
     "AEGIS.RHNarrowDetectingTrigramDenseV1.dense_narrow_detector_iff_riemannHypothesis",
     "AEGIS.RHGlobalizationChainV13.rh_of_vanishing_error_on_exhaustion",
