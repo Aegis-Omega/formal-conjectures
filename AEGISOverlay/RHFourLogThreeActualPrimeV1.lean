@@ -17,6 +17,7 @@ limitations under the License.
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import Mathlib.Tactic
 import WeilTranslationGapInvariantV10
+import AEGISOverlay.RHArchRow29V1
 
 /-!
 # Exact signed prime cost at every four-log-three separation
@@ -208,6 +209,57 @@ theorem actual_mixed_B_norm_at_centers
   rw [htranslate]
   exact actual_mixed_B_norm_four_log_three K d hd hdK g a hm hw
 
+/-- An arbitrary finite sparse, equally-spaced-gap same-mother family
+has a strictly negative real Weil Gram contraction. The actual prime
+row is produced internally from the exact von Mangoldt formula, not
+assumed. The hypotheses retain the separated family and exact
+reconstruction scope; this does not supply a selector for arbitrary g. -/
+theorem actual_four_log_three_same_mother_family_sign
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -(641 / 32768 : ℝ) * (∑ i, energy (gs i).1) := by
+  let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
+  have hsym : ∀ i j, primeCost i j = primeCost j i := by
+    intro i j
+    dsimp [primeCost]
+    rw [Nat.dist_comm]
+  have hprime : ∀ i j : Fin (n + 1), i < j →
+      (WeilPrimeSumV1 (mixed (gs i) (gs j))).re ≤
+        primeCost i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    obtain ⟨hd, _⟩ := hsep i j hij
+    obtain ⟨hdK, hgapij⟩ := hgap i j hij
+    have hp := actual_prime_four_log_three_signed_cost_at_centers
+      K (Nat.dist i j) hd hdK g a hw
+        (center i) (center j) hgapij
+    simpa only [primeCost, hfamily i, hfamily j] using hp
+  have hrow : ∀ i,
+      (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+        primeCost i j) ≤ (57401 / 65536 : ℝ) := by
+    intro i
+    simpa only [primeCost] using full_four_log_three_prime_row_arch29 i
+  exact
+    AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_signed_prime_arch29_row
+      gs center hwidth hm hsep primeCost hsym hprime hrow
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -218,3 +270,4 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_four_log_three
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_signed_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_mixed_B_norm_at_centers
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_same_mother_family_sign
