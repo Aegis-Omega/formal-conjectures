@@ -16,6 +16,7 @@ limitations under the License.
 
 import AEGISOverlay.RHScaleRowCompositionV1
 import AEGISOverlay.RHTimeSliceWeilV1
+import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import WeilRHImpliesFinalSignV13
 
 /-!
@@ -263,6 +264,61 @@ theorem rh_iff_one_actual_sharp_signed_budget :
       (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
     exact hsign
 
+
+/-! ## Exact nonlocal log-three creation of a time slice
+
+The newly created packet at two integer seconds in the declared p=3
+spectral clock is EXACTLY the arithmetic translate by 2*log 3.
+The signed von Mangoldt/Arch theorem therefore applies with its
+original source hypotheses, without any shared 9/64 window and without
+a floating-point approximation of the temporal shift.
+-/
+
+theorem fsLogSlice_three_two_seconds_exact :
+    AEGIS.RHTimeSliceWeilV1.fsLogSlice 3 2000000000000000 =
+      2 * Real.log 3 := by
+  norm_num [AEGIS.RHTimeSliceWeilV1.fsLogSlice]
+
+/-- A genuine nonlocal two-time-slice Weil coercivity with no extra
+prime-row or Schur premise. This is the source-proved two-log-three
+von Mangoldt estimate transported to exact integer time slices. -/
+theorem actual_two_log_three_time_slice_coercive
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256 : ℝ) a) :
+    (B
+      (addPacket (AEGIS.RHTimeSliceWeilV1.timeSlicePacket g 3 0)
+        (AEGIS.RHTimeSliceWeilV1.timeSlicePacket
+          g 3 2000000000000000))
+      (addPacket (AEGIS.RHTimeSliceWeilV1.timeSlicePacket g 3 0)
+        (AEGIS.RHTimeSliceWeilV1.timeSlicePacket
+          g 3 2000000000000000))).re ≤
+      -(10517 / 4800 : ℝ) * energy g.1 := by
+  simpa only [AEGIS.RHTimeSliceWeilV1.timeSlicePacket,
+    AEGIS.RHTimeSliceWeilV1.fsLogSlice_zero,
+    fsLogSlice_three_two_seconds_exact] using
+      AEGIS.RHLogThreeSignedPrimeProducerV1.actual_two_log_three_gram_coercive
+        g a hm hw
+
+/-- The two created, far-separated actual Weil slices have a
+nonpositive complete signed quadratic, including their mixed entry. -/
+theorem actual_two_log_three_time_slice_nonpositive
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (1 / 256 : ℝ) a) :
+    (B
+      (addPacket (AEGIS.RHTimeSliceWeilV1.timeSlicePacket g 3 0)
+        (AEGIS.RHTimeSliceWeilV1.timeSlicePacket
+          g 3 2000000000000000))
+      (addPacket (AEGIS.RHTimeSliceWeilV1.timeSlicePacket g 3 0)
+        (AEGIS.RHTimeSliceWeilV1.timeSlicePacket
+          g 3 2000000000000000))).re ≤ 0 := by
+  have h := actual_two_log_three_time_slice_coercive g a hm hw
+  exact h.trans (mul_nonpos_of_nonpos_of_nonneg
+    (by norm_num) (energy_nonnegative g.1))
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -272,3 +328,7 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_time_slice_sharp_signed_budget
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.fsLogSlice_three_two_seconds_exact
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_coercive
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_nonpositive
