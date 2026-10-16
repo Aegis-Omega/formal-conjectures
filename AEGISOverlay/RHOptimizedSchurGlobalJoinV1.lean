@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHScaleRowCompositionV1
+import RHKreinTrigramAdaptiveV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import WeilRHImpliesFinalSignV13
