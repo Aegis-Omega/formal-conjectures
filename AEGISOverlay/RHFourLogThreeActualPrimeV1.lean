@@ -545,7 +545,7 @@ theorem actual_four_log_three_weighted_norm_coercive
           (energy (gs i).1 + energy (gs j).1) =
           c i j * (Real.sqrt (energy (gs i).1) *
             Real.sqrt (energy (gs j).1)) := by
-      rw [hi, hj, hsqrt]
+      rw [hsqrt, hi, hj]
       simp only [c, if_neg hij]
       ring
     rcases lt_or_gt_of_ne hij with hijlt | hjilt
@@ -579,15 +579,23 @@ theorem actual_four_log_three_weighted_norm_coercive
             primeCost i j) +
           2 * (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
             archCost i j) := by
-      rw [← Finset.sum_add_distrib]
-      simp only [Finset.mul_sum]
-      apply Finset.sum_congr rfl
-      intro j hj
-      have hij : i ≠ j := by
-        intro heq
-        exact (Finset.mem_erase.mp hj).1 heq.symm
-      simp [c, hij]
-      ring
+      calc
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) =
+            ∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+              (2 * primeCost i j + 2 * archCost i j) := by
+                apply Finset.sum_congr rfl
+                intro j hj
+                have hij : i ≠ j := by
+                  intro heq
+                  exact (Finset.mem_erase.mp hj).1 heq.symm
+                simp [c, hij]
+                ring
+        _ = 2 * (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+              primeCost i j) +
+            2 * (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+              archCost i j) := by
+                rw [Finset.sum_add_distrib]
+                simp only [Finset.mul_sum]
     have hrow0 :
         (∑ j, c i j) ≤ (114860 / 65536 : ℝ) := by
       rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
@@ -595,7 +603,7 @@ theorem actual_four_log_three_weighted_norm_coercive
       rw [hsum]
       dsimp [archCost] at harchRow
       linarith
-    simpa only [w, one_div, mul_one] using hrow0
+    simpa [w] using hrow0
   have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
     (fun i j => B (gs i) (gs j)) z
     (fun i => energy (gs i).1) c w
