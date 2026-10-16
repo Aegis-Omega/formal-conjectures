@@ -53,10 +53,9 @@ theorem triadicHalf_four_mul (d : ℕ) :
     ring
   rw [harg, Real.exp_nat_mul]
   have hexp : Real.exp (-2 * Real.log (3 : ℝ)) = (1 / 9 : ℝ) := by
-    rw [show -2 * Real.log (3 : ℝ) = -(2 * Real.log 3) by ring,
-      Real.exp_neg, Real.exp_nat_mul,
-      Real.exp_log (by norm_num : (0 : ℝ) < 3)]
-    norm_num
+    rw [show -2 * Real.log (3 : ℝ) = -(Real.log 3 + Real.log 3) by ring,
+      Real.exp_neg, Real.exp_add]
+    norm_num [Real.exp_log]
   rw [hexp]
 
 /-- Actual exact signed prime interaction for every positive 4*d gap. -/
