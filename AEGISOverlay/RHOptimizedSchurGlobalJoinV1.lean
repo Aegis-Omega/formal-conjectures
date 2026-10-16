@@ -319,6 +319,98 @@ theorem actual_two_log_three_time_slice_nonpositive
   exact h.trans (mul_nonpos_of_nonpos_of_nonneg
     (by norm_num) (energy_nonnegative g.1))
 
+
+/-! ## Horizon-dependent exact spectral resolution
+
+The finite smooth local partition accepts arbitrarily small positive
+widths. For a finite logarithmic-prime horizon K we choose a non-rounded
+width sufficiently fine to isolate 3^k for every 1 <= k <= K.
+No assumption about RH or the sign of distant cross terms enters.
+This is the arithmetic resolution obligation for the *created* moment
+at a given future spectral horizon, not an assertion about physical time.
+-/
+
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
+open AEGIS.WeilMixedClosureV2
+
+/-- Exact spatial resolution that scales with the finite prime horizon. -/
+def timeHorizonRadius (K : ℕ) : ℝ :=
+  min (1 / 256) (1 / (4 * (3 : ℝ) ^ K))
+
+theorem timeHorizonRadius_pos (K : ℕ) :
+    0 < timeHorizonRadius K := by
+  unfold timeHorizonRadius
+  exact lt_min (by norm_num) (by positivity)
+
+theorem timeHorizonRadius_le_fine (K : ℕ) :
+    timeHorizonRadius K ≤ (1 / 256 : ℝ) := by
+  unfold timeHorizonRadius
+  exact min_le_left _ _
+
+/-- The exact source small-support prime condition holds SIMULTANEOUSLY
+for every index not beyond the chosen integer spectral horizon. -/
+theorem timeHorizonRadius_prime_gap (K k : ℕ) (hk : k ≤ K) :
+    2 * timeHorizonRadius K ≤ 1 / (2 * (3 : ℝ) ^ k) := by
+  have hpow : (3 : ℝ) ^ k ≤ (3 : ℝ) ^ K :=
+    pow_le_pow_right₀ (by norm_num) hk
+  have hdenK : 0 < 4 * (3 : ℝ) ^ K := by positivity
+  have hdenk : 0 < 4 * (3 : ℝ) ^ k := by positivity
+  have hinv :
+      (1 : ℝ) / (4 * (3 : ℝ) ^ K) ≤
+        1 / (4 * (3 : ℝ) ^ k) := by
+    apply (div_le_div_iff₀ hdenK hdenk).2
+    nlinarith [hpow]
+  have hsmall : timeHorizonRadius K ≤
+      1 / (4 * (3 : ℝ) ^ K) := by
+    unfold timeHorizonRadius
+    exact min_le_right _ _
+  calc
+    2 * timeHorizonRadius K ≤
+        2 * (1 / (4 * (3 : ℝ) ^ K)) :=
+      mul_le_mul_of_nonneg_left hsmall (by norm_num)
+    _ ≤ 2 * (1 / (4 * (3 : ℝ) ^ k)) := by
+      nlinarith [hinv]
+    _ = 1 / (2 * (3 : ℝ) ^ k) := by ring
+
+/-- A true finite-horizon von Mangoldt identity, valid for EVERY integer
+prime gap k within K when the source packet has adaptive support width.
+This is the original prime row, not a surrogate or norm approximation. -/
+theorem exact_von_mangoldt_time_horizon
+    (K k : ℕ) (hk : 1 ≤ k) (hkK : k ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (timeHorizonRadius K) a) :
+    WeilPrimeSumV1
+      (mixed (translatePacket g 0)
+        (translatePacket g (k * Real.log 3))) =
+      ((Real.log 3 * AEGIS.RHPrimeThreeWindowV1.triadicHalf k *
+        energy g.1 : ℝ) : ℂ) := by
+  exact AEGIS.RHPrimeThreeWindowV1.gap_prime_sum_exact_three
+    g (timeHorizonRadius K) a k hk
+    (timeHorizonRadius_pos K)
+    (timeHorizonRadius_prime_gap K k hkK)
+    ((timeHorizonRadius_le_fine K).trans (by norm_num))
+    hw
+
+/-- The same adaptive exact prime computation controls the genuine
+complex mixed Weil B, retaining the Archimedean 1/100 allowance. -/
+theorem actual_mixed_B_norm_time_horizon
+    (K k : ℕ) (hk : 1 ≤ k) (hkK : k ≤ K)
+    (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hm : WeilMomentConditionsV1 g)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt
+      g (timeHorizonRadius K) a) :
+    ‖B (translatePacket g 0)
+      (translatePacket g (k * Real.log 3))‖ ≤
+      (Real.log 3 * AEGIS.RHPrimeThreeWindowV1.triadicHalf k +
+        1 / 100) * energy g.1 := by
+  exact AEGIS.RHPrimeThreeWindowV1.gap_B_norm_bound_three
+    g (timeHorizonRadius K) a k hk
+    (timeHorizonRadius_pos K)
+    (timeHorizonRadius_prime_gap K k hkK)
+    ((timeHorizonRadius_le_fine K).trans (by norm_num))
+    hw hm
+
 end AEGIS.RHOptimizedSchurGlobalJoinV1
 
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
@@ -332,3 +424,7 @@ end AEGIS.RHOptimizedSchurGlobalJoinV1
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.fsLogSlice_three_two_seconds_exact
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_coercive
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_two_log_three_time_slice_nonpositive
+
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius_prime_gap
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.exact_von_mangoldt_time_horizon
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.actual_mixed_B_norm_time_horizon
