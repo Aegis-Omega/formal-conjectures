@@ -186,6 +186,93 @@ theorem rotating_bagua_four_phase_mellin_weil_coercive
         gs center hwidth hm hsep K g a hw hfamily hgap
           (rotatingBaguaCoeff z q)
 
+
+/-! ## Existing TWO-POINT actual zero-moment and exact Mellin producer
+
+The \`WeilTwoPointTranslateV11\` constructor is genuine, not a formal
+surrogate. Each Bagua quarter-turn supplies its exact complex phase.
+The full Mellin multiplier is retained, including the off-axis factor
+\`exp ((s - 1/2) * d)\`. -/
+
+/-- One genuine moment-zero Weil two-point packet for EVERY Bagua phase,
+with its exact source-proved Mellin multiplier. -/
+theorem rotating_bagua_two_point_mellin_and_moments
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (d : ℝ) (s : ℂ) (q : Fin 4) :
+    WeilMomentConditionsV1
+      (AEGIS.WeilZeroTwoPointV11.WeilTwoPointTranslateV11
+        g d (quarterTurnPhase q)) ∧
+    mellin (AEGIS.WeilZeroTwoPointV11.WeilTwoPointTranslateV11
+      g d (quarterTurnPhase q)).1 s =
+      (1 + quarterTurnPhase q *
+        Complex.exp ((s - (1 / 2 : ℂ)) * (d : ℂ))) *
+          mellin g.1 s := by
+  constructor
+  · exact AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+      g d (quarterTurnPhase q) hm
+  · exact AEGIS.WeilZeroTwoPointV11.mellin_twoPointTranslate_v11
+      g d (quarterTurnPhase q) s
+
+/-- Joint, SOURCE-BOUND two-pair / four-phase / Mellin / genuine
+sparse-Bagua Weil statement. The same four quarter-turns occur in
+the complementary even/odd modes and in the actual Mellin two-point
+factors at gap 4*log 3. This does not identify the widely separated
+lattice with a common-centered narrow-packet family. -/
+theorem rotating_bagua_two_pair_four_phase_mellin_join
+    (gs : Fin 8 → WeilCompactSmoothGV1)
+    (center : Fin 8 → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin 8, i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hmg : WeilMomentConditionsV1 g)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin 8, i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (s : ℂ) (z : Fin 8 → ℂ) :
+    (∀ i, mellin (gs i).1 s =
+      Complex.exp ((s - (1 / 2 : ℂ)) * (center i : ℂ)) *
+        mellin g.1 s) ∧
+    (∀ q : Fin 4,
+      WeilMomentConditionsV1
+        (packetSum (rotatingBaguaCoeff z q) gs) ∧
+      (B (packetSum (rotatingBaguaCoeff z q) gs)
+        (packetSum (rotatingBaguaCoeff z q) gs)).re ≤
+        -(641 / 32768 : ℝ) *
+          (∑ i, energy (gs i).1 *
+            ‖rotatingBaguaCoeff z q i‖ ^ 2) ∧
+      (WeilMomentConditionsV1
+        (baguaEvenPacket gs (rotatingBaguaCoeff z q)) ∧
+       WeilMomentConditionsV1
+        (baguaOddPacket gs (rotatingBaguaCoeff z q))) ∧
+      (WeilMomentConditionsV1
+        (AEGIS.WeilZeroTwoPointV11.WeilTwoPointTranslateV11
+          g (4 * Real.log 3) (quarterTurnPhase q)) ∧
+       mellin (AEGIS.WeilZeroTwoPointV11.WeilTwoPointTranslateV11
+         g (4 * Real.log 3) (quarterTurnPhase q)).1 s =
+         (1 + quarterTurnPhase q *
+           Complex.exp ((s - (1 / 2 : ℂ)) *
+             ((4 * Real.log 3 : ℝ) : ℂ))) *
+           mellin g.1 s)) := by
+  have hbase := rotating_bagua_four_phase_mellin_weil_coercive
+    gs center hwidth hm hsep K g a hw hfamily hgap s z
+  constructor
+  · exact hbase.1
+  · intro q
+    obtain ⟨hpacket, hbound⟩ := hbase.2 q
+    exact ⟨hpacket, hbound,
+      rotating_bagua_complementary_moments gs hm z q,
+      rotating_bagua_two_point_mellin_and_moments
+        g hmg (4 * Real.log 3) s q⟩
+
 end AEGIS.RHBaguaRotatingTwoPairMellinV1
 
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotatingBaguaCoeff_opposite
@@ -195,3 +282,5 @@ end AEGIS.RHBaguaRotatingTwoPairMellinV1
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_actual_atom_mellin
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_fs_atom_mellin
 #print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_four_phase_mellin_weil_coercive
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_point_mellin_and_moments
+#print axioms AEGIS.RHBaguaRotatingTwoPairMellinV1.rotating_bagua_two_pair_four_phase_mellin_join
