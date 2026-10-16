@@ -248,7 +248,8 @@ private theorem complex_twoPoint_sharp_norm
     have heq : WeilTwoPointValueV1 a z (Complex.mk u v) =
         a * (1 + u ^ 2 + v ^ 2) + 2 * (u * z.re - v * z.im) := by
       simp only [WeilTwoPointValueV1, Complex.normSq_apply,
-        Complex.mk_re, Complex.mk_im, Complex.mul_re]
+        Complex.mul_re]
+      dsimp
       ring
     rw [heq] at hh
     exact hh
