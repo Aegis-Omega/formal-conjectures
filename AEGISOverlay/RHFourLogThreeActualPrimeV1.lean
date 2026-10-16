@@ -439,6 +439,176 @@ theorem actual_four_log_three_prime_norm_family_sign
     AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_arch29_prime_row
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
+
+/-- Arbitrary complex H64/Walsh-style amplitudes on every finite actual
+four-log-three mother-packet lattice. The full complex B cross terms and
+the exact von Mangoldt norm row are retained. Neither dimension nor
+coefficients are restricted. The mother-lattice geometry is explicit. -/
+theorem actual_four_log_three_weighted_norm_coercive
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (z : Fin (n + 1) → ℂ) :
+    (B (packetSum z gs) (packetSum z gs)).re ≤
+      -(641 / 32768 : ℝ) *
+        (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
+  let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
+  let archCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => ((1 / 32 : ℝ) * (54 / 53)) *
+      ((1 / 145 : ℝ) ^ Nat.dist i j)
+  let c : Fin (n + 1) → Fin (n + 1) → ℝ :=
+    fun i j => if i = j then 0 else 2 * (primeCost i j + archCost i j)
+  let w : Fin (n + 1) → ℝ := fun _ => 1
+  have hE : 0 ≤ energy g.1 := energy_nonnegative g.1
+  have hweight : ∀ i, 0 < w i := by intro i; norm_num [w]
+  have hcpos : ∀ i j, 0 ≤ c i j := by
+    intro i j
+    dsimp [c, primeCost, archCost]
+    split_ifs <;> positivity
+  have hcdiag : ∀ i, c i i = 0 := by intro i; simp [c]
+  have hcsym : ∀ i j, c i j = c j i := by
+    intro i j
+    by_cases hij : i = j
+    · subst j; rfl
+    · have hji : j ≠ i := Ne.symm hij
+      simp [c, primeCost, archCost, hij, hji, Nat.dist_comm]
+  have hdiag : ∀ i,
+      (116142 / 65536 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re := by
+    intro i
+    have hfine :=
+      AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+        (gs i) (center i) (hwidth i)
+    exact (mul_le_mul_of_nonneg_right
+      (by norm_num : (116142 / 65536 : ℝ) ≤ 5671 / 3200)
+      (energy_nonnegative (gs i).1)).trans hfine
+  have hprime : ∀ i j : Fin (n + 1), i < j →
+      ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
+        primeCost i j * (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    obtain ⟨hd, _⟩ := hsep i j hij
+    obtain ⟨hdK, hgapij⟩ := hgap i j hij
+    have hp := actual_prime_four_log_three_norm_cost_at_centers
+      K (Nat.dist i j) hd hdK g a hw
+      (center i) (center j) hgapij
+    simpa only [primeCost, hfamily i, hfamily j] using hp
+  have hforward (i j : Fin (n + 1)) (hij : i < j) :
+      ‖B (gs i) (gs j)‖ ≤
+        (primeCost i j + archCost i j) *
+          (energy (gs i).1 + energy (gs j).1) := by
+    obtain ⟨hk, hgapij⟩ := hsep i j hij
+    have ha := AEGIS.RHArchRow29V1.actual_B_norm_le_prime_plus_arch145
+      (gs i) (gs j) (center i) (center j)
+      (hwidth i) (hwidth j) (hm i)
+      (Nat.dist i j) hk hgapij
+    calc
+      ‖B (gs i) (gs j)‖ ≤
+          ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ +
+            archCost i j * (energy (gs i).1 + energy (gs j).1) := by
+              simpa only [archCost] using ha
+      _ ≤ primeCost i j *
+          (energy (gs i).1 + energy (gs j).1) +
+          archCost i j * (energy (gs i).1 + energy (gs j).1) :=
+            add_le_add (hprime i j hij) le_rfl
+      _ = (primeCost i j + archCost i j) *
+          (energy (gs i).1 + energy (gs j).1) := by ring
+  have hcross : ∀ i j, i ≠ j →
+      ‖B (gs i) (gs j)‖ ≤
+        c i j * (Real.sqrt (energy (gs i).1) *
+          Real.sqrt (energy (gs j).1)) := by
+    intro i j hij
+    have hi : energy (gs i).1 = energy g.1 := by
+      rw [hfamily i, translate_energy]
+    have hj : energy (gs j).1 = energy g.1 := by
+      rw [hfamily j, translate_energy]
+    have hsqrt :
+        Real.sqrt (energy (gs i).1) *
+          Real.sqrt (energy (gs j).1) = energy g.1 := by
+      rw [hi, hj, ← pow_two, Real.sq_sqrt hE]
+    have hcost :
+        (primeCost i j + archCost i j) *
+          (energy (gs i).1 + energy (gs j).1) =
+          c i j * (Real.sqrt (energy (gs i).1) *
+            Real.sqrt (energy (gs j).1)) := by
+      rw [hi, hj, hsqrt]
+      simp only [c, if_neg hij]
+      ring
+    rcases lt_or_gt_of_ne hij with hijlt | hjilt
+    · exact (hforward i j hijlt).trans_eq hcost
+    · have hb := hforward j i hjilt
+      have hnorm : ‖B (gs i) (gs j)‖ =
+          ‖B (gs j) (gs i)‖ := by
+        rw [B_hermitian, Complex.norm_conj]
+      have hcost_sym :
+          primeCost j i + archCost j i =
+            primeCost i j + archCost i j := by
+        simp [primeCost, archCost, Nat.dist_comm]
+      rw [hnorm]
+      calc
+        ‖B (gs j) (gs i)‖ ≤
+            (primeCost j i + archCost j i) *
+              (energy (gs j).1 + energy (gs i).1) := hb
+        _ = (primeCost i j + archCost i j) *
+              (energy (gs i).1 + energy (gs j).1) := by
+              rw [hcost_sym, add_comm]
+        _ = c i j * (Real.sqrt (energy (gs i).1) *
+              Real.sqrt (energy (gs j).1)) := hcost
+  have hrow (i : Fin (n + 1)) :
+      (∑ j, c i j * (w j / w i)) ≤
+        (114860 / 65536 : ℝ) := by
+    have hprimeRow := full_four_log_three_prime_row_arch29 i
+    have harchRow := AEGIS.RHArchRow29V1.geometric_arch_row_29 i
+    have hsum :
+        (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i, c i j) =
+          2 * (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            primeCost i j) +
+          2 * (∑ j ∈ (Finset.univ : Finset (Fin (n + 1))).erase i,
+            archCost i j) := by
+      rw [← Finset.sum_add_distrib]
+      simp only [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro j hj
+      have hij : i ≠ j := by
+        intro heq
+        exact (Finset.mem_erase.mp hj).1 heq.symm
+      simp [c, hij]
+      ring
+    have hrow0 :
+        (∑ j, c i j) ≤ (114860 / 65536 : ℝ) := by
+      rw [← Finset.add_sum_erase _ _ (Finset.mem_univ i)]
+      simp only [hcdiag i, zero_add]
+      rw [hsum]
+      dsimp [archCost] at harchRow
+      linarith
+    simpa only [w, one_div, mul_one] using hrow0
+  have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
+    (fun i j => B (gs i) (gs j)) z
+    (fun i => energy (gs i).1) c w
+    (116142 / 65536 : ℝ) (114860 / 65536 : ℝ)
+    (fun i => energy_nonnegative (gs i).1)
+    hcpos hcdiag hcsym hweight hdiag hcross hrow
+  have hmargin :
+      (116142 / 65536 : ℝ) - 114860 / 65536 = 641 / 32768 :=
+    by norm_num
+  rw [hmargin] at h
+  rw [B_packetSum]
+  exact h
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -453,4 +623,5 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_complex_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.riemannHypothesis_of_four_log_three_global_reconstruction
