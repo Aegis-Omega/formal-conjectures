@@ -121,6 +121,46 @@ theorem every_packet_actual_fine_gram_with_log_free_pairs
   intro i j hfree
   exact actual_fine_pair_q16_of_log_free_gap gs center hmom hwidth i j hfree
 
+/-- Unconditional multiscale receipt for every moment-zero packet. It joins:
+  * an exact finite source reconstruction,
+  * the genuine, signed intra/inter-block identity for ANY regrouping,
+  * the proved 9/64 exact coercivity IF all centers fit a common window,
+  * the genuine von Mangoldt/Arch Q16.16 pair estimate on log-free gaps.
+
+The common-window hypothesis is NOT inferred globally; the inter-block
+mixed contributions remain present in the signed split. -/
+theorem every_packet_actual_fine_multiscale_receipt
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∀ block : Fin (n + 1) → ℕ,
+        AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs =
+          AEGIS.RHScaleRowCompositionV1.actualIntraBlockSignedDefect gs block +
+            AEGIS.RHScaleRowCompositionV1.actualInterBlockSignedDefect gs block) ∧
+      (∀ common : ℝ,
+        (∀ i, |center i - common| ≤ (35 / 256 : ℝ)) →
+        (1 / 10 : ℝ) * energy g.1 ≤ -(B g g).re) ∧
+      (∀ i j, FineLogFreeGap |center j - center i| →
+        ‖B (gs i) (gs j)‖ ≤
+          (676 / 65536 : ℝ) *
+            (energy (gs i).1 + energy (gs j).1)) := by
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, _hgram, hfree⟩ :=
+    every_packet_actual_fine_gram_with_log_free_pairs g hm
+  refine ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, ?_, ?_, hfree⟩
+  · intro block
+    exact AEGIS.RHScaleRowCompositionV1.actual_mixed_defect_eq_block_signed_split
+      gs block
+  · intro common hnear
+    rw [hpacket]
+    exact AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart
+      n (fun _ => (1 : ℂ)) gs center common hmom hwidth hnear
+
 /-- The EXACT mixed row: the known nonresonant cost plus an independent
 signed residual for the remaining (including prime-resonant) pairs. -/
 def combinedFineCost {n : ℕ}
@@ -240,6 +280,7 @@ end AEGIS.RHPrimeFreeRecompositionJoinV1
 
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_fine_pair_q16_of_log_free_gap
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_gram_with_log_free_pairs
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.combinedFineCost_symm
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_source_gram_coercive_of_resonance_row
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
