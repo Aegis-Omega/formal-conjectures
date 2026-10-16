@@ -431,7 +431,10 @@ theorem four_log_three_prime_geometric_tail (n : ℕ) :
   have h := geom_sum_Ico_le_of_lt_one
     (x := (1 / 9 : ℝ)) (m := 1) (n := n + 1)
     (by norm_num) (by norm_num)
-  convert h using 1 <;> norm_num
+  have hratio : (1 / 9 : ℝ) ^ 1 / (1 - 1 / 9) = 1 / 8 := by
+    norm_num
+  rw [hratio] at h
+  exact h
 
 /-- Two-sided row: no fixed matrix size or finite numerical enumeration. -/
 theorem four_log_three_prime_two_sided_row (left right : ℕ) :
