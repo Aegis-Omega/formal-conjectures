@@ -70,6 +70,13 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
 
+      - name: Reject hardcoded negative RH verdicts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/rh_static_verdict_gate.py
+          python3 scripts/test_rh_official_target_gate.py
+
       - name: Install pinned Lean and Mathlib cache
         shell: bash
         run: |
