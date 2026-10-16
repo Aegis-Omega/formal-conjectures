@@ -1,0 +1,109 @@
+{
+  "schema": "aegis-rh-cross-repo-source-transfer-v1",
+  "created_on": "2026-10-16",
+  "source_repository": "Aegis-Omega/AEGIS-OMEGA",
+  "destination_repository": "tarikskalic33/formal-conjectures",
+  "destination_existing_pr": 89,
+  "destination_branch": "proof/rh-optimized-schur-deepmind-handoff-v1",
+  "destination_baseline_head": "9630c163c2ba552c730f65b69bc666ed49ed0421",
+  "source_anchors": {
+    "four_packet_v3": "f707302f79c6a5ce7f5efb84492151234cff5bc7",
+    "four_packet_v4_elaboration_repair": "91250b2ba324ae025f433643f666332573eb415d",
+    "signed_four_block_preflight": "9061a95afcb69e8b3243ef3e621b0ae0ebabd340",
+    "restricted_weil_criterion": "4d7578ef3df6ae4d1bcd6e2eaefeb2f7f5309afe",
+    "pr721_source_census": "fb983fdc84a6bbeec6960c0e0c54b9695beba837"
+  },
+  "transferred_bytes_verified": [
+    {
+      "path": "research/rh/aegis_pr631_91250b2/lean/RHFourBlockPrimeEightV3.lean.src",
+      "source_blob": "f0905517b12b25eab1e8b9162755afd6ec9c6870",
+      "result": "MATCH",
+      "classification": "source_only_candidate"
+    },
+    {
+      "path": "research/rh/RH_FOUR_PACKET_CONCRETE_V3.md",
+      "source_blob": "d05c5f5ee859b4a661545b2e765097874098f328",
+      "result": "MATCH",
+      "classification": "math_analysis_not_kernel"
+    },
+    {
+      "path": "docs/research/RH_SIGNED_FOUR_BLOCK_V1_PREFLIGHT.md",
+      "source_blob": "db71e0e1318fdbcbff873418cc89738942381ebf",
+      "result": "MATCH",
+      "classification": "finite_preflight"
+    },
+    {
+      "path": "research/rh/aegis_pr594_f707302_original/test_four_packet_concrete_v3.py",
+      "source_blob": "a063099ef1722cdc7506c8d5162d58a621c535f7",
+      "result": "MATCH",
+      "classification": "original_test_source_not_executed"
+    },
+    {
+      "path": "research/rh/aegis_pr660_9061a95_original/rh_signed_four_block_preflight_v1.py",
+      "source_blob": "ff571521e61a62377430e526e7936a3efd8ce87e",
+      "result": "MATCH",
+      "classification": "original_diagnostic_source_not_executed"
+    }
+  ],
+  "already_in_fork_no_duplicate": [
+    {
+      "module": "RHFourBlockConcreteV3",
+      "blob": "1dbb003a189e7ec7ba3c58265c7b8202214b740a",
+      "archive": "research/rh/aegis_source_4d7578e/lean/RHFourBlockConcreteV3.lean.src",
+      "parity": "EXACT_F707"
+    },
+    {
+      "module": "RHFourBlockPrimeEightV3",
+      "blob": "5a2394056d7505774f207ed8e3bbafb0e593ed99",
+      "archive": "research/rh/aegis_pr721_fb983fd/lean/RHFourBlockPrimeEightV3.lean.src",
+      "parity": "EXACT_F707"
+    },
+    {
+      "module": "RHFineMomentPacketV3",
+      "blob": "709bd274400ec98c85756c33d002ae88bf0323f7",
+      "source_f707_blob": "27de7445fa119b5616acff8bfca00689a8bf3f10",
+      "archive": "research/rh/aegis_pr721_fb983fd/lean/RHFineMomentPacketV3.lean.src",
+      "parity": "FORK_ELABORATION_ADAPTED"
+    },
+    {
+      "module": "RHNarrowDiagonalUpgradeV2",
+      "blob": "5861f8808015c4bee93efbbac5d032dd30522289",
+      "archive": "research/rh/aegis_source_4d7578e/lean/RHNarrowDiagonalUpgradeV2.lean.src"
+    },
+    {
+      "module": "RHElevenBlockActualBridgeV1",
+      "blob": "a87a55c179e0933a0cf75373c6e59adba75d02b6",
+      "archive": "research/rh/aegis_pr721_fb983fd/lean/RHElevenBlockActualBridgeV1.lean.src"
+    }
+  ],
+  "existing_wider_integration": {
+    "source_manifest_count": 183,
+    "proof_atlas_roots": 66,
+    "parent_pr": 88,
+    "destination_pr": 89
+  },
+  "safety": {
+    "new_branch": false,
+    "modified_existing_formal_theorem": false,
+    "modified_source_pins": false,
+    "modified_workflow": false,
+    "modified_protected_main": false,
+    "admission": false
+  },
+  "evidence_states": {
+    "github_blob_identity": "PASS",
+    "pr89_head_after_import_before_receipt": "043c9494bd6c668dbf624cbaf9fa01bba164fb88",
+    "upstream_replay_v4": "FAILURE_ZERO_STEPS_REPORTED_NEEDS_HOSTED_VERIFICATION",
+    "destination_lean_kernel": "NOT_RUN_FOR_TRANSFER",
+    "destination_axiom_audit": "NOT_RUN_FOR_TRANSFER",
+    "rh_unconditional": "NOT_CLAIMED",
+    "authority_effect": "NONE"
+  },
+  "next_replay": [
+    "materialize the PR631 corrected source instead of the historical PR721 blob in a separate temporary namespace/check-out with source-pinned dependencies",
+    "compile RHFourBlockPrimeEightV3, RHNarrowDiagonalUpgradeV2, RHFineMomentPacketV3, RHFourBlockConcreteV3 in dependency order",
+    "require real executed hosted steps with pinned Lean 4.33.1 and Mathlib 0df444a360eaa60ab8c11dca51a86af692955474",
+    "fail closed on missing or nonstandard #print axioms and sorryAx",
+    "compare current head checkouts; do not infer kernel PASS from source identity"
+  ]
+}
