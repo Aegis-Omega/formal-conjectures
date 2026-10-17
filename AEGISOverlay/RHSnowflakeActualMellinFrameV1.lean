@@ -124,9 +124,50 @@ theorem one_actual_pair_all_strip_compacts :
   exact actual_mellin_pair_compact_lower_bound p q K hK hne
     (fun z hz => hno z (hstrip z hz).1 (hstrip z hz).2)
 
+/-- The SAME two genuine moment-zero Weil packets satisfy both:
+(1) a positive lower frame bound on every compact subset of the open
+critical strip, and (2) an unconditional cubic-decay UPPER bound on
+all vertical lines throughout the closed strip. The upper bound is
+imported from the existing AEGIS MellinDecayEstimateV1 theorem.
+Neither bound is a positivity assumption on the Weil quadratic form. -/
+theorem one_actual_pair_complex_frame_with_cubic_tail :
+    ∃ p q : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧ WeilMomentConditionsV1 q ∧
+      (∀ (K : Set ℂ), IsCompact K → K.Nonempty →
+        (∀ z : ℂ, z ∈ K → 0 < z.re ∧ z.re < 1) →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ z : ℂ, z ∈ K →
+            δ ≤ ‖mellin p.1 z‖ ^ 2 + ‖mellin q.1 z‖ ^ 2) ∧
+      ∃ D : ℝ, 0 ≤ D ∧
+        ∀ σ : ℝ, σ ∈ Set.Icc 0 1 → ∀ γ : ℝ,
+          (1 + |γ|) ^ 3 *
+            (‖mellin p.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖ +
+             ‖mellin q.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖) ≤ D := by
+  obtain ⟨p, q, hp, hq, hno⟩ :=
+    unconditional_moment_zero_complementary_pair
+  obtain ⟨Dp, hDp, hdecayp⟩ :=
+    weil_compact_smooth_mellin_vertical_cubic_decay_v1 p
+  obtain ⟨Dq, hDq, hdecayq⟩ :=
+    weil_compact_smooth_mellin_vertical_cubic_decay_v1 q
+  refine ⟨p, q, hp, hq, ?_, Dp + Dq, add_nonneg hDp hDq, ?_⟩
+  · intro K hK hne hstrip
+    exact actual_mellin_pair_compact_lower_bound p q K hK hne
+      (fun z hz => hno z (hstrip z hz).1 (hstrip z hz).2)
+  · intro σ hσ γ
+    calc
+      (1 + |γ|) ^ 3 *
+          (‖mellin p.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖ +
+           ‖mellin q.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖) =
+        (1 + |γ|) ^ 3 *
+          ‖mellin p.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖ +
+        (1 + |γ|) ^ 3 *
+          ‖mellin q.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖ := by ring
+      _ ≤ Dp + Dq := add_le_add (hdecayp σ hσ γ) (hdecayq σ hσ γ)
+
 end AEGIS.RHSnowflakeActualMellinFrameV1
 
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_continuous
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_pair_compact_lower_bound
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.unconditional_actual_mellin_compact_frame
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_all_strip_compacts
+#print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_complex_frame_with_cubic_tail
