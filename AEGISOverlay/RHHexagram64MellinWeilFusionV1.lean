@@ -40,6 +40,8 @@ namespace AEGIS.RHHexagram64MellinWeilFusionV1
 open AEGIS.RHGramExpansionV13
 open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilAutocorrelationMellinV11
+open AEGIS.WeilDisjointEnergyV2
+open AEGIS.WeilZeroTranslationV11
 open AEGIS.WeilPairedZeroEvaluationV9
 open AEGIS.RHTimeSliceWeilV1
 open AEGIS.RHOptimizedSchurGlobalJoinV1
