@@ -167,15 +167,16 @@ theorem one_actual_pair_complex_frame_with_cubic_tail :
 
 /-! ## Genuine Mellin pair: exact complex pointwise Bézout
 
-This is a pointwise complex-algebra reconstruction from the two
-source-proved genuine moment-zero Weil packets. The coefficients are
-conjugate-normalized and are NOT claimed holomorphic or compactly
-supported: they must not be used as an unconditional Weil-sign bridge.
+This is a source-exact pointwise reconstruction from the two
+moment-zero Weil packets, by selecting one nonvanishing Mellin factor.
+The piecewise reciprocal coefficients are NOT claimed holomorphic,
+continuous, or compactly supported: this is not a Weil-sign bridge.
 -/
 
-/-- A no-common-zero pair of genuine Mellin transforms admits an exact
-pointwise normalized conjugate Bézout identity throughout the open
-critical strip. This is not a holomorphic Bézout theorem. -/
+/-- Two genuine Mellin transforms without a common zero admit an exact
+pointwise Bézout identity on the open critical strip. The proof selects
+the reciprocal of a nonzero component at each complex parameter.
+No regularity of the coefficient functions is asserted. -/
 theorem actual_mellin_pair_complex_pointwise_bezout
     (p q : WeilCompactSmoothGV1)
     (hno : ∀ z : ℂ, 0 < z.re → z.re < 1 →
@@ -183,48 +184,20 @@ theorem actual_mellin_pair_complex_pointwise_bezout
     ∃ A B : ℂ → ℂ,
       ∀ z : ℂ, 0 < z.re → z.re < 1 →
         A z * mellin p.1 z + B z * mellin q.1 z = 1 := by
-  let F : ℂ → ℂ := fun z => mellin p.1 z
-  let G : ℂ → ℂ := fun z => mellin q.1 z
-  let d : ℂ → ℝ := fun z => ‖F z‖ ^ 2 + ‖G z‖ ^ 2
-  have hpositive (z : ℂ) (hz0 : 0 < z.re) (hz1 : z.re < 1) :
-      0 < d z := by
-    have hn := hno z hz0 hz1
-    have hF : 0 ≤ ‖F z‖ ^ 2 := sq_nonneg _
-    have hG : 0 ≤ ‖G z‖ ^ 2 := sq_nonneg _
-    by_contra hnot
-    have hle : d z ≤ 0 := le_of_not_gt hnot
-    have hFzero : ‖F z‖ = 0 := by
-      dsimp [d] at hle
-      nlinarith
-    have hGzero : ‖G z‖ = 0 := by
-      dsimp [d] at hle
-      nlinarith
-    exact hn ⟨norm_eq_zero.mp hFzero, norm_eq_zero.mp hGzero⟩
-  refine ⟨fun z => Complex.conj (F z) / (d z : ℂ),
-          fun z => Complex.conj (G z) / (d z : ℂ), ?_⟩
+  refine ⟨fun z => if mellin p.1 z = 0 then 0 else (mellin p.1 z)⁻¹,
+          fun z => if mellin p.1 z = 0 then (mellin q.1 z)⁻¹ else 0, ?_⟩
   intro z hz0 hz1
-  have hne : (d z : ℂ) ≠ 0 := by
-    exact_mod_cast (ne_of_gt (hpositive z hz0 hz1))
-  change
-    Complex.conj (F z) / (d z : ℂ) * F z +
-    Complex.conj (G z) / (d z : ℂ) * G z = 1
-  calc
-    Complex.conj (F z) / (d z : ℂ) * F z +
-      Complex.conj (G z) / (d z : ℂ) * G z =
-      (Complex.conj (F z) * F z + Complex.conj (G z) * G z) /
-        (d z : ℂ) := by ring
-    _ = 1 := by
-      rw [Complex.conj_mul', Complex.conj_mul']
-      have heq :
-          ((‖F z‖ : ℂ) ^ 2 + (‖G z‖ : ℂ) ^ 2) = (d z : ℂ) := by
-        simp [d, ← Complex.ofReal_pow]
-      rw [heq]
-      exact div_self hne
+  by_cases hp : mellin p.1 z = 0
+  · have hq : mellin q.1 z ≠ 0 := by
+      intro hzero
+      exact hno z hz0 hz1 ⟨hp, hzero⟩
+    simp [hp, hq]
+  · simp [hp]
 
 /-- One fixed pair of actual smooth moment-zero Weil packets gives
 a global pointwise complex identity in the open critical strip.
-The A/B coefficient functions depend on the spectral parameter;
-their holomorphy and corresponding test-space stability are NOT claimed. -/
+The piecewise A/B coefficients depend on the spectral parameter;
+their continuity, holomorphy and test-space stability are NOT claimed. -/
 theorem one_actual_pair_complex_pointwise_bezout :
     ∃ p q : WeilCompactSmoothGV1,
       WeilMomentConditionsV1 p ∧ WeilMomentConditionsV1 q ∧
