@@ -27,6 +27,7 @@ on:
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
       - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean'
+      - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
       - 'AEGISOverlay/RHFourLogThreeActualPrimeV1.lean'
       - 'AEGISOverlay/RHMellinDetectorCenteredV1.lean'
       - 'AEGISOverlay/RHArchRow29V1.lean'
@@ -300,7 +301,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -435,6 +436,7 @@ jobs:
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
+              "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"3f08a912eaf22befff7802e2e852aeb0afbf5d3e",
               "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean":"3fac46ae976087f75248662af12966dd04ea6770",
               "AegisRH/PR606/Source/WeilOffLineSeedV10.lean":"36a9554f02786b7dd6de41ac9a649f9aad5d36ee",
@@ -582,6 +584,15 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHOptimizedSchurGlobalJoinV1.log
+           python3 scripts/verify_rh_overlay_axioms.py \
+             AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean \
+             evidence-cofinal/compile-AEGISOverlay_RHHexagram64MellinWeilFusionV1.log
+           for fusion_theorem in mellin_packetSum_exact every_moment_zero_packet_actual_mellin_weil_zero_fusion \
+             every_moment_zero_packet_actual_prime_line_mellin_fusion hexagram64_zero_summand_mellin_exact \
+             hexagram64_mellin_weil_joint_exact; do
+             grep -F "AEGIS.RHHexagram64MellinWeilFusionV1.$fusion_theorem" \
+               evidence-cofinal/compile-AEGISOverlay_RHHexagram64MellinWeilFusionV1.log
+           done
           python3 scripts/verify_rh_overlay_axioms.py \
              AEGISOverlay/RHMellinDetectorCenteredV1.lean \
              evidence-cofinal/compile-AEGISOverlay_RHMellinDetectorCenteredV1.log
