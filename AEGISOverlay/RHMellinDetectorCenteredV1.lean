@@ -278,6 +278,120 @@ theorem narrow_detector_sharp_local_kernel_bound
   exact midpoint_twoPoint_zero_nonnegative d hd c
 
 
+
+/-! ## Exact energy-gap composition for separated Mellin detector translates -/
+
+open MeasureTheory
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
+open AEGIS.WeilZeroTranslationV11
+open AEGIS.WeilDisjointEnergyV2
+
+private theorem packet_energy_integrable (g : WeilCompactSmoothGV1) :
+    Integrable (fun t : ℝ => ‖g.1 t‖ ^ 2) := by
+  have hs : tsupport (fun t : ℝ => ‖g.1 t‖ ^ 2) ⊆ tsupport g.1 := by
+    apply closure_minimal ?_ (isClosed_tsupport _)
+    intro t ht
+    have hg : g.1 t ≠ 0 := by
+      intro hz
+      apply ht
+      simp [hz]
+    exact subset_tsupport g.1 hg
+  have hc : HasCompactSupport (fun t : ℝ => ‖g.1 t‖ ^ 2) :=
+    (g.2.2.1).of_isClosed_subset (isClosed_tsupport _) hs
+  exact ((g.2.1.continuous.norm).pow 2).integrable_of_hasCompactSupport hc
+
+/-- The narrow detector and its real translate have disjoint real-space
+supports for a gap strictly greater than the support diameter 1/16. -/
+theorem narrow_detector_disjoint_translates (d : ℝ)
+    (hgap : (1 / 16 : ℝ) < |d|) :
+    ∀ x : ℝ,
+      narrowDetectingPacket.1 x = 0 ∨
+        (translatePacket narrowDetectingPacket d).1 x = 0 := by
+  have hw : LogSupportIn narrowDetectingPacket (-(1 / 32 : ℝ)) (1 / 32 : ℝ) :=
+    narrowDetectingPacket_logWindow
+  have ht := translate_logSupportIn narrowDetectingPacket d
+    (-(1 / 32 : ℝ)) (1 / 32 : ℝ) hw
+  by_cases hd : d < 0
+  · have hlo : d < -(1 / 16 : ℝ) := by
+      rw [abs_of_neg hd] at hgap
+      linarith
+    have hsep := pointwise_disjoint_of_log_intervals
+      (translatePacket narrowDetectingPacket d) narrowDetectingPacket
+      ht hw (by linarith)
+    intro x
+    exact (hsep x).symm
+  · have hnonneg : 0 ≤ d := le_of_not_gt hd
+    have hhi : (1 / 16 : ℝ) < d := by
+      rw [abs_of_nonneg hnonneg] at hgap
+      exact hgap
+    exact pointwise_disjoint_of_log_intervals
+      narrowDetectingPacket (translatePacket narrowDetectingPacket d)
+      hw ht (by linarith)
+
+/-- Exact L2 energy of separated two-point packets, including all
+complex amplitudes, using the existing disjoint-integral theorem. -/
+theorem narrow_detector_disjoint_energy (d : ℝ)
+    (hgap : (1 / 16 : ℝ) < |d|) (c : ℂ) :
+    energy (WeilTwoPointTranslateV11 narrowDetectingPacket d c).1 =
+      energy narrowDetectingPacket.1 * (1 + Complex.normSq c) := by
+  let g := narrowDetectingPacket
+  let h := translatePacket g d
+  have hg : Integrable (fun t : ℝ => ‖g.1 t‖ ^ 2) := packet_energy_integrable g
+  have hh : Integrable (fun t : ℝ => ‖h.1 t‖ ^ 2) := packet_energy_integrable h
+  have hdj : ∀ t : ℝ, g.1 t = 0 ∨ h.1 t = 0 :=
+    narrow_detector_disjoint_translates d hgap
+  have hs := disjoint_integral (1 : ℂ) c (0 : ℂ)
+    g.1 h.1 (fun _ : ℝ => (0 : ℂ)) hg hh
+    (by simp) hdj (by intro t; simp) (by intro t; simp)
+  have hE : energy h.1 = energy g.1 := translate_energy g d
+  change energy (fun t : ℝ => g.1 t + c * h.1 t) = _
+  have hs' : energy (fun t : ℝ => g.1 t + c * h.1 t) =
+      energy g.1 + ‖c‖ ^ 2 * energy h.1 := by
+    simpa [energy] using hs
+  change energy (fun t : ℝ => g.1 t + c * h.1 t) = _
+  rw [hs', hE, ← Complex.sq_norm]
+  ring
+
+/-- The positive 1/16 energy margin upgrades to a shifted 2-by-2
+Hermitian positivity statement for separated translates. -/
+theorem narrow_detector_energy_shifted_twoPoint (d : ℝ)
+    (hlocal : |d| ≤ (59 / 80 : ℝ))
+    (hgap : (1 / 16 : ℝ) < |d|) (c : ℂ) :
+    0 ≤ WeilTwoPointValueV1
+      ((WeilAutocorrelationZeroQuadraticV11 narrowDetectingPacket).re -
+        (1 / 16 : ℝ) * energy narrowDetectingPacket.1)
+      (WeilZeroTranslationKernelV11 narrowDetectingPacket d) c := by
+  let p := WeilTwoPointTranslateV11 narrowDetectingPacket d c
+  have hm := AEGIS.WeilZeroKernelHermitianV11.twoPointTranslate_preserves_moments_v11
+    narrowDetectingPacket d c narrowDetectingPacket_moments
+  have he := AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_explicit_formula_v10 p hm
+  have hmargin := midpoint_twoPoint_actual_margin d hlocal c
+  rw [he] at hmargin
+  have hZ : (1 / 16 : ℝ) * energy p.1 ≤
+      (WeilAutocorrelationZeroQuadraticV11 p).re := by
+    simp only [Complex.neg_re] at hmargin
+    linarith
+  rw [AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
+    narrowDetectingPacket narrowDetectingPacket_moments d c] at hZ
+  have henergy := narrow_detector_disjoint_energy d hgap c
+  change energy p.1 = _ at henergy
+  rw [henergy] at hZ
+  unfold WeilTwoPointValueV1 at *
+  nlinarith [hZ]
+
+/-- Quantitative improvement over the ordinary sharp 2x2 bound.
+The energy gap is genuine and works for every separated local shift. -/
+theorem narrow_detector_strict_local_kernel_gap (d : ℝ)
+    (hlocal : |d| ≤ (59 / 80 : ℝ))
+    (hgap : (1 / 16 : ℝ) < |d|) :
+    ‖WeilZeroTranslationKernelV11 narrowDetectingPacket d‖ ≤
+      (WeilAutocorrelationZeroQuadraticV11 narrowDetectingPacket).re -
+        (1 / 16 : ℝ) * energy narrowDetectingPacket.1 := by
+  apply complex_twoPoint_sharp_norm
+  intro c
+  exact narrow_detector_energy_shifted_twoPoint d hlocal hgap c
+
+
 end AEGIS.RHMellinDetectorCenteredV1
 
 #print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_detector_sharp_local_kernel_bound
@@ -285,3 +399,5 @@ end AEGIS.RHMellinDetectorCenteredV1
 #print axioms AEGIS.RHMellinDetectorCenteredV1.midpoint_twoPoint_kernel_norm_bound
 #print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_hexagram64_full_actual_margin
 #print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_hexagram64_fs_mellin
+
+#print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_detector_strict_local_kernel_gap
