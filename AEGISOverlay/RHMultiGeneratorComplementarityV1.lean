@@ -16,7 +16,6 @@ limitations under the License.
 
 import FormalConjectures.Millennium.RHSnowflakeLog23
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Sinc
-import Mathlib.Topology.Order.Compact
 
 /-!
 # Complementary sinc symbols at irrationally related scales
@@ -140,63 +139,6 @@ theorem log23_continuous_spectral_bezout {order : ℕ} (horder : order ≠ 0) :
   field_simp [hne t]
   ring
 
-/-- The log-2/log-3 complementary moment symbols have a UNIFORM positive
-denominator on EACH bounded spectral window. The bound depends on the
-window; it is not a global spectral lower bound. This is the compact
-part of the snowflake spectral Bézout reconstruction. -/
-theorem log23_finite_window_uniform_gap
-    {order : ℕ} (horder : order ≠ 0)
-    (R : ℝ) (hR : 0 ≤ R) :
-    ∃ δ : ℝ, 0 < δ ∧
-      ∀ t : ℝ, |t| ≤ R →
-        δ ≤ momentSplineSymbol order (Real.log 2) t ^ 2 +
-          momentSplineSymbol order (Real.log 3) t ^ 2 := by
-  let f : ℝ → ℝ := fun t =>
-    momentSplineSymbol order (Real.log 2) t ^ 2 +
-      momentSplineSymbol order (Real.log 3) t ^ 2
-  have hf : Continuous f :=
-    ((continuous_momentSplineSymbol order (Real.log 2)).pow 2).add
-      ((continuous_momentSplineSymbol order (Real.log 3)).pow 2)
-  have hs : IsCompact (Set.Icc (-R) R) := isCompact_Icc
-  have hn : (Set.Icc (-R) R).Nonempty :=
-    ⟨0, ⟨by linarith, hR⟩⟩
-  obtain ⟨t, ht, hmin⟩ := hs.exists_isMinOn hn hf.continuousOn
-  refine ⟨f t, ?_, ?_⟩
-  · exact log23_spectral_denominator_pos horder t
-  · intro u hu
-    exact hmin (abs_le.mp hu)
-
-/-- The 19-point snowflake generator has a strictly positive combined
-symbol floor on every fixed finite frequency window. -/
-theorem order19_log23_finite_window_uniform_gap
-    (R : ℝ) (hR : 0 ≤ R) :
-    ∃ δ : ℝ, 0 < δ ∧
-      ∀ t : ℝ, |t| ≤ R →
-        δ ≤ momentSplineSymbol 19 (Real.log 2) t ^ 2 +
-          momentSplineSymbol 19 (Real.log 3) t ^ 2 :=
-  log23_finite_window_uniform_gap (by norm_num) R hR
-
-/-- Exact stable two-generator snowflake frame estimate for every fixed
-spectral window. One positive local constant pays BOTH generators
-simultaneously, with no invented window-independent margin. -/
-theorem order19_log23_finite_window_frame_bound
-    (R : ℝ) (hR : 0 ≤ R) :
-    ∃ δ : ℝ, 0 < δ ∧ ∀ t u : ℝ, |t| ≤ R →
-      δ * u ^ 2 ≤
-        (momentSplineSymbol 19 (Real.log 2) t * u) ^ 2 +
-        (momentSplineSymbol 19 (Real.log 3) t * u) ^ 2 := by
-  obtain ⟨δ, hδ, hgap⟩ :=
-    order19_log23_finite_window_uniform_gap R hR
-  refine ⟨δ, hδ, ?_⟩
-  intro t u ht
-  calc
-    δ * u ^ 2 ≤
-        (momentSplineSymbol 19 (Real.log 2) t ^ 2 +
-          momentSplineSymbol 19 (Real.log 3) t ^ 2) * u ^ 2 :=
-      mul_le_mul_of_nonneg_right (hgap t ht) (sq_nonneg u)
-    _ = (momentSplineSymbol 19 (Real.log 2) t * u) ^ 2 +
-        (momentSplineSymbol 19 (Real.log 3) t * u) ^ 2 := by ring
-
 /-- Order 19 is one instance of the all-orders complementarity theorem. -/
 theorem order19_log23_continuous_spectral_bezout :
     ∃ A B : ℝ → ℝ, Continuous A ∧ Continuous B ∧
@@ -207,8 +149,5 @@ theorem order19_log23_continuous_spectral_bezout :
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.sinc_no_common_zero_of_irrational
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.log23_momentSpline_no_common_zero
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_continuous_spectral_bezout
-#print axioms AEGIS.RHMultiGeneratorComplementarityV1.log23_finite_window_uniform_gap
-#print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_finite_window_uniform_gap
-#print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_finite_window_frame_bound
 
 end AEGIS.RHMultiGeneratorComplementarityV1
