@@ -240,6 +240,7 @@ jobs:
               "RHMomentNumericsV14": "98db31d2bb9305bdf4ab4062ed982304e1a8005e",
               "RHWindowNineOver64GlobalizationV14": "a9be154062cf131dd0c07cf6405babffc6b2290c",
               "RHFineMomentPacketV3": "709bd274400ec98c85756c33d002ae88bf0323f7",
+              "RHFourBlockPrimeEightV3": "5a2394056d7505774f207ed8e3bbafb0e593ed99",
               "RHRationalNinePacketPrimeWindowV1": "7175f243640df980d9c2effc610cbb6748ffc29b",
               "RHFineDiagonalUpgradeV3": "576d1f3a17851b20d6a5008d79f45e7c067f3e11",
               "RHRationalGapNinePrimeBoundV1": "6f0ce19532bb422649d764a0bea930e3756a8c59",
@@ -348,7 +349,8 @@ jobs:
               # AEGIS checkout ONLY for these manifest-pinned modules.
               # Stage above already verifies each source Git blob.
               if m in ("RHMomentNumericsV14", "RHWindowNineOver64GlobalizationV14",
-                       "RHFineMomentPacketV3", "RHRationalNinePacketPrimeWindowV1",
+                       "RHFineMomentPacketV3", "RHFourBlockPrimeEightV3",
+                        "RHRationalNinePacketPrimeWindowV1",
                        "RHFineDiagonalUpgradeV3", "RHRationalGapNinePrimeBoundV1",
                        "RHRationalGapTenPrimeBoundV1") and p.is_file():
                   return p
@@ -418,6 +420,18 @@ jobs:
           assert hashlib.sha256(archived).hexdigest()=="b5c8c8ee464027694d711a9882135fa76b0e8261e5dcfda8259dae98915196f1", "archived Lean text changed"
           def git_blob(path):
               return subprocess.check_output(["git","hash-object",str(path)],text=True).strip()
+          # The legacy AEGIS checkout is still pinned for provenance, but
+          # RHFourBlockPrimeEightV3 resolves from the manifest-verified PR721
+          # archived blob. Do not silently fall back to the AEGIS checkout.
+          prime_module = "RHFourBlockPrimeEightV3"
+          prime_selected = paths.get(prime_module)
+          prime_expected = pathlib.Path("RHFourBlockPrimeEightV3.lean")
+          if prime_selected != str(prime_expected):
+              raise RuntimeError(f"WRONG_FOUR_BLOCK_SOURCE {prime_selected}")
+          prime_sha = git_blob(prime_selected)
+          if prime_sha != "5a2394056d7505774f207ed8e3bbafb0e593ed99":
+              raise RuntimeError(f"WRONG_FOUR_BLOCK_BLOB {prime_sha}")
+          print("FOUR_BLOCK_PR721_SOURCE_SELECTED", prime_module, prime_sha)
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
