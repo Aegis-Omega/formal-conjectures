@@ -293,6 +293,55 @@ theorem riemannHypothesis_of_canonical_resonance_producer
     (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0
   linarith
 
+
+/-! ## Exact two-block signed Schur certificate for the genuine Weil Gram
+
+The two scalar diagonal reserves can represent fully composed macro blocks.
+Unlike a row-by-row Gershgorin or Schur estimate, this accepts the
+semidefinite boundary c*c = a*b without a strictly positive gap.
+No assertion is made that every moment-zero packet has these reserves.
+-/
+
+/-- The two-block determinant condition bounds the total signed
+off-diagonal contribution, even if the Schur complement is singular. -/
+theorem two_block_schur_signed_scalar
+    (a b c : ℝ) (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (hdet : c * c ≤ a * b) : 2 * c ≤ a + b := by
+  by_contra hc
+  have hleft : 0 < 2 * c - (a + b) := by linarith
+  have hright : 0 < 2 * c + (a + b) := by linarith
+  have hprod : 0 < (2 * c - (a + b)) * (2 * c + (a + b)) :=
+    mul_pos hleft hright
+  nlinarith [sq_nonneg (a - b)]
+
+/-- Signed two-block certificate for the ACTUAL finite Weil form.
+The diagonal reserves may come from exact composed 9/64 clusters.
+The only mixed hypothesis concerns the complete signed cross budget;
+there is no row-wise pair cost, absolute norm, or strict coercivity.
+No RH statement is assumed or asserted. -/
+theorem actual_signed_two_block_schur_certificate
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (a b c : ℝ)
+    (ha : 0 ≤ a) (hb : 0 ≤ b)
+    (hdet : c * c ≤ a * b)
+    (hdiag :
+      (∑ i, (B (gs i) (gs i)).re) ≤ -(a + b))
+    (hmixed :
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤ 2 * c) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+  have hcost : 2 * c ≤ a + b :=
+    two_block_schur_signed_scalar a b c ha hb hdet
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+        (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect at hmixed
+  rw [hgram]
+  linarith
+
 end AEGIS.RHPrimeFreeRecompositionJoinV1
 
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_fine_pair_q16_of_log_free_gap
@@ -302,3 +351,5 @@ end AEGIS.RHPrimeFreeRecompositionJoinV1
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_source_gram_coercive_of_resonance_row
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.eighty_five_log_free_links_exceed_fixed_row_budget
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.two_block_schur_signed_scalar
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate
