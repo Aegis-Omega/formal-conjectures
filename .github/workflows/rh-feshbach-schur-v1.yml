@@ -15,10 +15,17 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+  # Kernel-checked trigram closure (145 modules) from PR #89 run 39025722874, stage 7.
+  CHECKPOINT_RUN_ID: '39025722874'
+  CHECKPOINT_HEAD: 731727bcf8095e87c0efb6824e9bdf5b8d39ac6e
 
 jobs:
   compile:
@@ -68,6 +75,120 @@ jobs:
                        'feshbach_lower_bound_hermitian', 'schur_of_matrix_hermitian',
                        'cross_term_le', 'hermitian_quadratic_nonneg_of_real_part']:
               m = re.search(r"'AEGIS\.FeshbachSchurV1\." + name +
+                            r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
+              if not m:
+                  raise SystemExit(f'AXIOM_AUDIT_MISSING {name}')
+              axioms = {x.strip() for x in m.group(1).split(',') if x.strip()}
+              if not axioms <= {'propext', 'Classical.choice', 'Quot.sound'}:
+                  raise SystemExit(f'UNEXPECTED_AXIOMS {name}: {sorted(axioms)}')
+              print(f'AXIOM_AUDIT_PASS {name}: {sorted(axioms)}')
+          PY
+
+  krein-slack:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 50
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Bind pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+          test "$(git hash-object research/rh/krein_L105_v1/RHKreinHatAtV1.lean)" = 06c59b97987c5b9745e3989181808e87f704ede4
+          if grep -n -E '\bsorry\b|\badmit\b|^axiom ' research/rh/feshbach_lean_v1/KreinSlackV1.lean; then exit 1; fi
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      # Same provider recipe as rh-trigram-exact-head-v1.yml.
+      - name: Checkout immutable PR51 source for the pinned provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+      - name: Checkout exact external provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+      - name: Restore pinned provider build
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .li-provider/.lake/build
+          key: rh-li-provider-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.LI_CRITERION_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
+        run: python3 research/rh/m8_kernel_v1/replay.py provider
+
+      - name: Download kernel-checked trigram closure checkpoint
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: rh-trigram-stage-7-${{ env.CHECKPOINT_HEAD }}-${{ env.CHECKPOINT_RUN_ID }}
+          path: trigram-checkpoint
+          run-id: ${{ env.CHECKPOINT_RUN_ID }}
+          repository: ${{ github.repository }}
+          github-token: ${{ github.token }}
+
+      - name: Validate checkpoint and install its oleans
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, shutil
+          root = pathlib.Path('trigram-checkpoint')
+          m = json.loads((root / 'manifest.json').read_text())
+          assert m['schema'] == 'aegis.rh.trigram.checkpoint.v1', m['schema']
+          assert m['head'] == os.environ['CHECKPOINT_HEAD'], m['head']
+          assert m['stage'] == 7 and m['end'] == 145 and len(m['modules']) == 145
+          oleans = root / 'oleans'
+          expected = set()
+          for rec in m['modules']:
+              rel = pathlib.Path(*rec['name'].split('.')).with_suffix('.olean')
+              f = oleans / rel
+              expected.add(rel.as_posix())
+              if hashlib.sha256(f.read_bytes()).hexdigest() != rec['olean_sha256'] or f.stat().st_size != rec['bytes']:
+                  raise SystemExit(f'CHECKPOINT_OLEAN_MISMATCH {rec["name"]}')
+              dest = pathlib.Path('.lake/build/lib/lean') / rel
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(f, dest)
+          actual = {p.relative_to(oleans).as_posix() for p in oleans.rglob('*.olean')}
+          if actual != expected:
+              raise SystemExit('CHECKPOINT_FILE_SET_MISMATCH')
+          print('CHECKPOINT_VALIDATED', len(expected))
+          PY
+
+      - name: Compile and audit Krein certificate with slack
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/RHKreinHatAtV1.olean research/rh/krein_L105_v1/RHKreinHatAtV1.lean
+          lake env lean research/rh/feshbach_lean_v1/KreinSlackV1.lean 2>&1 | tee slack.log
+          python3 - <<'PY'
+          import re
+          log = open('slack.log').read()
+          if 'sorryAx' in log:
+              raise SystemExit('SORRY_AXIOM')
+          for name in ['actual_margin_with_slack', 'zero_quadratic_margin_with_slack',
+                       'zero_quadratic_margin_with_slack_from_genuine_certificate',
+                       'fourier_finset_sum', 'zero_quadratic_margin_with_slack_of_hats']:
+              m = re.search(r"'AEGIS\.KreinSlackV1\." + name +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
               if not m:
                   raise SystemExit(f'AXIOM_AUDIT_MISSING {name}')
