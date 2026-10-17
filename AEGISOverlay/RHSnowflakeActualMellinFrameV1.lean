@@ -164,6 +164,79 @@ theorem one_actual_pair_complex_frame_with_cubic_tail :
           ‖mellin q.1 ((σ : ℂ) + (γ : ℂ) * Complex.I)‖ := by ring
       _ ≤ Dp + Dq := add_le_add (hdecayp σ hσ γ) (hdecayq σ hσ γ)
 
+
+/-! ## Genuine Mellin pair: exact complex pointwise Bézout
+
+This is a pointwise complex-algebra reconstruction from the two
+source-proved genuine moment-zero Weil packets. The coefficients are
+conjugate-normalized and are NOT claimed holomorphic or compactly
+supported: they must not be used as an unconditional Weil-sign bridge.
+-/
+
+/-- A no-common-zero pair of genuine Mellin transforms admits an exact
+pointwise normalized conjugate Bézout identity throughout the open
+critical strip. This is not a holomorphic Bézout theorem. -/
+theorem actual_mellin_pair_complex_pointwise_bezout
+    (p q : WeilCompactSmoothGV1)
+    (hno : ∀ z : ℂ, 0 < z.re → z.re < 1 →
+      ¬ (mellin p.1 z = 0 ∧ mellin q.1 z = 0)) :
+    ∃ A B : ℂ → ℂ,
+      ∀ z : ℂ, 0 < z.re → z.re < 1 →
+        A z * mellin p.1 z + B z * mellin q.1 z = 1 := by
+  let F : ℂ → ℂ := fun z => mellin p.1 z
+  let G : ℂ → ℂ := fun z => mellin q.1 z
+  let d : ℂ → ℝ := fun z => ‖F z‖ ^ 2 + ‖G z‖ ^ 2
+  have hpositive (z : ℂ) (hz0 : 0 < z.re) (hz1 : z.re < 1) :
+      0 < d z := by
+    have hn := hno z hz0 hz1
+    have hF : 0 ≤ ‖F z‖ ^ 2 := sq_nonneg _
+    have hG : 0 ≤ ‖G z‖ ^ 2 := sq_nonneg _
+    by_contra hnot
+    have hle : d z ≤ 0 := le_of_not_gt hnot
+    have hFzero : ‖F z‖ = 0 := by
+      dsimp [d] at hle
+      nlinarith
+    have hGzero : ‖G z‖ = 0 := by
+      dsimp [d] at hle
+      nlinarith
+    exact hn ⟨norm_eq_zero.mp hFzero, norm_eq_zero.mp hGzero⟩
+  refine ⟨fun z => Complex.conj (F z) / (d z : ℂ),
+          fun z => Complex.conj (G z) / (d z : ℂ), ?_⟩
+  intro z hz0 hz1
+  have hne : (d z : ℂ) ≠ 0 := by
+    exact_mod_cast (ne_of_gt (hpositive z hz0 hz1))
+  change
+    Complex.conj (F z) / (d z : ℂ) * F z +
+    Complex.conj (G z) / (d z : ℂ) * G z = 1
+  calc
+    Complex.conj (F z) / (d z : ℂ) * F z +
+      Complex.conj (G z) / (d z : ℂ) * G z =
+      (Complex.conj (F z) * F z + Complex.conj (G z) * G z) /
+        (d z : ℂ) := by ring
+    _ = 1 := by
+      rw [Complex.conj_mul', Complex.conj_mul']
+      have heq :
+          ((‖F z‖ : ℂ) ^ 2 + (‖G z‖ : ℂ) ^ 2) = (d z : ℂ) := by
+        simp [d, ← Complex.ofReal_pow]
+      rw [heq]
+      exact div_self hne
+
+/-- One fixed pair of actual smooth moment-zero Weil packets gives
+a global pointwise complex identity in the open critical strip.
+The A/B coefficient functions depend on the spectral parameter;
+their holomorphy and corresponding test-space stability are NOT claimed. -/
+theorem one_actual_pair_complex_pointwise_bezout :
+    ∃ p q : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧ WeilMomentConditionsV1 q ∧
+      ∃ A B : ℂ → ℂ,
+        ∀ z : ℂ, 0 < z.re → z.re < 1 →
+          A z * mellin p.1 z + B z * mellin q.1 z = 1 := by
+  obtain ⟨p, q, hp, hq, hno⟩ :=
+    unconditional_moment_zero_complementary_pair
+  obtain ⟨A, B, hAB⟩ :=
+    actual_mellin_pair_complex_pointwise_bezout p q hno
+  exact ⟨p, q, hp, hq, A, B, hAB⟩
+
 end AEGIS.RHSnowflakeActualMellinFrameV1
 
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_continuous
@@ -171,3 +244,5 @@ end AEGIS.RHSnowflakeActualMellinFrameV1
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.unconditional_actual_mellin_compact_frame
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_all_strip_compacts
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_complex_frame_with_cubic_tail
+#print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_pair_complex_pointwise_bezout
+#print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_complex_pointwise_bezout
