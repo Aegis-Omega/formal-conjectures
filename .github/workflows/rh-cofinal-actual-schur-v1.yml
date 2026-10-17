@@ -263,6 +263,37 @@ jobs:
                   raise RuntimeError("MODULE_IDENTITY_COLLISION " + name)
               dst.write_bytes(src.read_bytes())
               print("EXACT_ORIGINAL_V14_SOURCE", name, sha)
+              if name == "RHFourBlockPrimeEightV3":
+                  # Keep the archived PR721 original immutable. Only this staged
+                  # compilation copy receives the type-explicit Lean 4.33.1 repair.
+                  source = dst.read_text(encoding="utf-8")
+                  repairs = [
+                      ("  have hp := farthest_mixed_nat_zero_v3 g a hw 8 (by norm_num)\n",
+                       "  have hp8 :\n"
+                       "      mixed (translatePacket g 0) (translatePacket g (3 * Real.log 2)) (8 : ℝ) = 0 := by\n"
+                       "    simpa only [Nat.cast_ofNat] using\n"
+                       "      farthest_mixed_nat_zero_v3 g a hw 8 (by norm_num)\n"),
+                      ("  rw [hp, farthest_mixed_reciprocal_center_v3, hv]\n",
+                       "  rw [hp8, farthest_mixed_reciprocal_center_v3 g, hv]\n"),
+                  ]
+                  for before, after in repairs:
+                      if source.count(before) != 1:
+                          raise RuntimeError("PR721_LEAN_REPAIR_SOURCE_DRIFT " + name)
+                      source = source.replace(before, after, 1)
+                  dst.write_text(source, encoding="utf-8")
+                  repaired_blob = subprocess.check_output(
+                      ["git", "hash-object", str(dst)], text=True).strip()
+                  receipt = {
+                      "module": name,
+                      "archived_original_blob": sha,
+                      "compiled_repair_blob": repaired_blob,
+                      "repairs": len(repairs),
+                      "head": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+                  }
+                  pathlib.Path("evidence-cofinal").mkdir(exist_ok=True)
+                  pathlib.Path("evidence-cofinal/prime-eight-lean-repair.json").write_text(
+                      json.dumps(receipt, indent=2) + "\n")
+                  print("PR721_SOURCE_BOUND_LEAN_REPAIR", repaired_blob)
           PY
 
       - name: Reproduce pinned trigram fifteenth-cell correction
@@ -430,9 +461,17 @@ jobs:
           if prime_selected != str(prime_expected):
               raise RuntimeError(f"WRONG_FOUR_BLOCK_SOURCE {prime_selected}")
           prime_sha = git_blob(prime_selected)
-          if prime_sha != "5a2394056d7505774f207ed8e3bbafb0e593ed99":
-              raise RuntimeError(f"WRONG_FOUR_BLOCK_BLOB {prime_sha}")
-          print("FOUR_BLOCK_PR721_SOURCE_SELECTED", prime_module, prime_sha)
+          # Check the staged fixed proof against this run's exact PR721
+          # archive-bound transformation; the original source SHA stays pinned.
+          prime_repair = json.loads(pathlib.Path(
+              "evidence-cofinal/prime-eight-lean-repair.json").read_text())
+          if (prime_repair.get("archived_original_blob") !=
+                  "5a2394056d7505774f207ed8e3bbafb0e593ed99" or
+                  prime_repair.get("compiled_repair_blob") != prime_sha or
+                  prime_repair.get("head") !=
+                  subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()):
+              raise RuntimeError(f"PR721_COMPILED_SOURCE_IDENTITY_MISMATCH {prime_sha}")
+          print("FOUR_BLOCK_PR721_REPAIRED_SOURCE_SELECTED", prime_module, prime_sha)
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
