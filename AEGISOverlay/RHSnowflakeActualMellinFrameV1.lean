@@ -104,8 +104,29 @@ theorem unconditional_actual_mellin_compact_frame
       (fun z hz => hno z (hstrip z hz).1 (hstrip z hz).2)
   exact ⟨p, q, hp, hq, δ, hδ, hbound⟩
 
+/-- The SAME two actual smooth moment-zero packets work for EVERY
+nonempty compact subset of the open critical strip. Only the strictly
+positive frame constant is allowed to depend on the compact set.
+This is stronger than choosing new packets separately for each K,
+and explicitly preserves the source quantifier order. -/
+theorem one_actual_pair_all_strip_compacts :
+    ∃ p q : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧ WeilMomentConditionsV1 q ∧
+      ∀ (K : Set ℂ), IsCompact K → K.Nonempty →
+        (∀ z : ℂ, z ∈ K → 0 < z.re ∧ z.re < 1) →
+        ∃ δ : ℝ, 0 < δ ∧
+          ∀ z : ℂ, z ∈ K →
+            δ ≤ ‖mellin p.1 z‖ ^ 2 + ‖mellin q.1 z‖ ^ 2 := by
+  obtain ⟨p, q, hp, hq, hno⟩ :=
+    unconditional_moment_zero_complementary_pair
+  refine ⟨p, q, hp, hq, ?_⟩
+  intro K hK hne hstrip
+  exact actual_mellin_pair_compact_lower_bound p q K hK hne
+    (fun z hz => hno z (hstrip z hz).1 (hstrip z hz).2)
+
 end AEGIS.RHSnowflakeActualMellinFrameV1
 
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_continuous
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_pair_compact_lower_bound
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.unconditional_actual_mellin_compact_frame
+#print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_all_strip_compacts
