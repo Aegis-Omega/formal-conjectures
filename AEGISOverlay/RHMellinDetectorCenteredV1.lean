@@ -369,6 +369,9 @@ theorem narrow_detector_energy_shifted_twoPoint (d : ℝ)
   rw [he] at hmargin
   have hZ : (1 / 16 : ℝ) * energy p.1 ≤
       (WeilAutocorrelationZeroQuadraticV11 p).re := by
+    change (1 / 16 : ℝ) * energy p.1 ≤
+      (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 p) rho).re
     simp only [Complex.neg_re] at hmargin
     linarith
   rw [AEGIS.RHFixedPacketFourPhaseV1.twoPoint_zero_quadratic_re_eq_four_phase_value
