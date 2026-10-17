@@ -176,6 +176,27 @@ theorem order19_log23_finite_window_uniform_gap
           momentSplineSymbol 19 (Real.log 3) t ^ 2 :=
   log23_finite_window_uniform_gap (by norm_num) R hR
 
+/-- Exact stable two-generator snowflake frame estimate for every fixed
+spectral window. One positive local constant pays BOTH generators
+simultaneously, with no invented window-independent margin. -/
+theorem order19_log23_finite_window_frame_bound
+    (R : ℝ) (hR : 0 ≤ R) :
+    ∃ δ : ℝ, 0 < δ ∧ ∀ t u : ℝ, |t| ≤ R →
+      δ * u ^ 2 ≤
+        (momentSplineSymbol 19 (Real.log 2) t * u) ^ 2 +
+        (momentSplineSymbol 19 (Real.log 3) t * u) ^ 2 := by
+  obtain ⟨δ, hδ, hgap⟩ :=
+    order19_log23_finite_window_uniform_gap R hR
+  refine ⟨δ, hδ, ?_⟩
+  intro t u ht
+  calc
+    δ * u ^ 2 ≤
+        (momentSplineSymbol 19 (Real.log 2) t ^ 2 +
+          momentSplineSymbol 19 (Real.log 3) t ^ 2) * u ^ 2 :=
+      mul_le_mul_of_nonneg_right (hgap t ht) (sq_nonneg u)
+    _ = (momentSplineSymbol 19 (Real.log 2) t * u) ^ 2 +
+        (momentSplineSymbol 19 (Real.log 3) t * u) ^ 2 := by ring
+
 /-- Order 19 is one instance of the all-orders complementarity theorem. -/
 theorem order19_log23_continuous_spectral_bezout :
     ∃ A B : ℝ → ℝ, Continuous A ∧ Continuous B ∧
@@ -188,5 +209,6 @@ theorem order19_log23_continuous_spectral_bezout :
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_continuous_spectral_bezout
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.log23_finite_window_uniform_gap
 #print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_finite_window_uniform_gap
+#print axioms AEGIS.RHMultiGeneratorComplementarityV1.order19_log23_finite_window_frame_bound
 
 end AEGIS.RHMultiGeneratorComplementarityV1
