@@ -65,7 +65,8 @@ jobs:
           mkdir -p "$OUT"
           lake env lean -o "$OUT/FeshbachSchurV1.olean" research/rh/feshbach_lean_v1/FeshbachSchurV1.lean 2>&1 | tee feshbach.log
           export LEAN_PATH="$OUT:$(lake env printenv LEAN_PATH)"
-          lean research/rh/feshbach_lean_v1/FeshbachSchurHermitianV1.lean 2>&1 | tee -a feshbach.log
+          lean -o "$OUT/FeshbachSchurHermitianV1.olean" research/rh/feshbach_lean_v1/FeshbachSchurHermitianV1.lean 2>&1 | tee -a feshbach.log
+          lean research/rh/feshbach_lean_v1/FeshbachComplementV1.lean 2>&1 | tee -a feshbach.log
           python3 - <<'PY'
           import re
           log = open('feshbach.log').read()
@@ -73,7 +74,9 @@ jobs:
               raise SystemExit('SORRY_AXIOM')
           for name in ['neg_two_mul_le_of_sq_le', 'feshbach_lower_bound', 'schur_of_matrix',
                        'feshbach_lower_bound_hermitian', 'schur_of_matrix_hermitian',
-                       'cross_term_le', 'hermitian_quadratic_nonneg_of_real_part']:
+                       'cross_term_le', 'hermitian_quadratic_nonneg_of_real_part',
+                       'norm_inner_sq_le_of_mem_orthogonal', 'slack_le_trace_mul_norm_sq',
+                       'complement_lower_bound_of_slack', 'feshbach_of_krein_slack']:
               m = re.search(r"'AEGIS\.FeshbachSchurV1\." + name +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
               if not m:
