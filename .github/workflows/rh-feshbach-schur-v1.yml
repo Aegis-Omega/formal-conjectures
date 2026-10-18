@@ -68,6 +68,7 @@ jobs:
           lean -o "$OUT/FeshbachSchurHermitianV1.olean" research/rh/feshbach_lean_v1/FeshbachSchurHermitianV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/FeshbachComplementV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/CvSPrimeBlockV1.lean 2>&1 | tee -a feshbach.log
+          lean research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean 2>&1 | tee -a feshbach.log
           python3 - <<'PY'
           import re
           log = open('feshbach.log').read()
@@ -83,6 +84,11 @@ jobs:
               'trigAtom_mul_conj', 'trigAtom_autocorrelation', 'atom_exp_eq',
               'trigAtom_hermitian_block', 'trigAtom_mul_conj_integrable',
               'trigPoly_autocorrelation', 'trigPoly_autocorrelation_neg', 'trigPoly_prime_block']]
+          names += ['CvSArchLorentzV1.' + n for n in [
+              'expAbs_integrable', 'expAbs_fourier', 'lorentz_integrable',
+              'expAbs_fourier_integrable', 'lorentz_exp_integral', 'lorentz_cos_integral',
+              "sin_int_mul_two_pi'", 'sin_node', 'sin_exp_hasDerivAt', 'sin_exp_integral',
+              'lorentz_source', 'lorentz_source_value']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
