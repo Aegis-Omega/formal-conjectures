@@ -67,7 +67,8 @@ jobs:
           export LEAN_PATH="$OUT:$(lake env printenv LEAN_PATH)"
           lean -o "$OUT/FeshbachSchurHermitianV1.olean" research/rh/feshbach_lean_v1/FeshbachSchurHermitianV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/FeshbachComplementV1.lean 2>&1 | tee -a feshbach.log
-          lean research/rh/feshbach_lean_v1/CvSPrimeBlockV1.lean 2>&1 | tee -a feshbach.log
+          lean -o "$OUT/CvSPrimeBlockV1.olean" research/rh/feshbach_lean_v1/CvSPrimeBlockV1.lean 2>&1 | tee -a feshbach.log
+          lean research/rh/feshbach_lean_v1/CvSMomentV1.lean 2>&1 | tee -a feshbach.log
           lean -o "$OUT/CvSArchLorentzV1.olean" research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean 2>&1 | tee -a feshbach.log
           lean -o "$OUT/CvSArchSourceV1.olean" research/rh/feshbach_lean_v1/CvSArchSourceV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/CvSArchDiagV1.lean 2>&1 | tee -a feshbach.log
@@ -86,6 +87,8 @@ jobs:
               'trigAtom_mul_conj', 'trigAtom_autocorrelation', 'atom_exp_eq',
               'trigAtom_hermitian_block', 'trigAtom_mul_conj_integrable',
               'trigPoly_autocorrelation', 'trigPoly_autocorrelation_neg', 'trigPoly_prime_block']]
+          names += ['CvSMomentV1.' + n for n in [
+              'trigAtom_moment', 'trigPoly_moment', 'half_add_ne_zero']]
           names += ['CvSArchLorentzV1.' + n for n in [
               'expAbs_integrable', 'expAbs_fourier', 'lorentz_integrable',
               'expAbs_fourier_integrable', 'lorentz_exp_integral', 'lorentz_cos_integral',
