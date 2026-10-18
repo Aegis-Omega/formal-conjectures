@@ -68,7 +68,8 @@ jobs:
           lean -o "$OUT/FeshbachSchurHermitianV1.olean" research/rh/feshbach_lean_v1/FeshbachSchurHermitianV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/FeshbachComplementV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/CvSPrimeBlockV1.lean 2>&1 | tee -a feshbach.log
-          lean research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean 2>&1 | tee -a feshbach.log
+          lean -o "$OUT/CvSArchLorentzV1.olean" research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean 2>&1 | tee -a feshbach.log
+          lean research/rh/feshbach_lean_v1/CvSArchSourceV1.lean 2>&1 | tee -a feshbach.log
           python3 - <<'PY'
           import re
           log = open('feshbach.log').read()
@@ -89,6 +90,13 @@ jobs:
               'expAbs_fourier_integrable', 'lorentz_exp_integral', 'lorentz_cos_integral',
               "sin_int_mul_two_pi'", 'sin_node', 'sin_exp_hasDerivAt', 'sin_exp_integral',
               'lorentz_source', 'lorentz_source_value']]
+          names += ['CvSArchSourceV1.' + n for n in [
+              'source_identity', 'sourceS_abs_le', 'sq_mul_sourceS_abs_le', 'sourceS_continuous',
+              'sourceS_bound', 'sourceS_integrable', 'lorentz_total', 'inv_lorentz_integral',
+              'eq_zero_of_abs_le_div', 'sourceS_integral_eq_zero', 'archTerm_split',
+              'archTerm_abs_le', 'archTerm_summable', 'archTerm_source_integrable',
+              'archTerm_source_integral', 'archTerm_source_norm_integral_le',
+              'archTerm_source_summable', 'arch_series_source']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
@@ -190,21 +198,29 @@ jobs:
           print('CHECKPOINT_VALIDATED', len(expected))
           PY
 
-      - name: Compile and audit Krein certificate with slack
+      - name: Compile and audit Krein certificate with slack and the archimedean digamma bridge
         shell: bash
         run: |
           set -euo pipefail
           lake env lean -o .lake/build/lib/lean/RHKreinHatAtV1.olean research/rh/krein_L105_v1/RHKreinHatAtV1.lean
           lake env lean research/rh/feshbach_lean_v1/KreinSlackV1.lean 2>&1 | tee slack.log
+          lake env lean -o .lake/build/lib/lean/CvSArchLorentzV1.olean research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean
+          lake env lean -o .lake/build/lib/lean/CvSArchSourceV1.olean research/rh/feshbach_lean_v1/CvSArchSourceV1.lean
+          lake env lean research/rh/feshbach_lean_v1/CvSArchDigammaV1.lean 2>&1 | tee -a slack.log
           python3 - <<'PY'
           import re
           log = open('slack.log').read()
           if 'sorryAx' in log:
               raise SystemExit('SORRY_AXIOM')
-          for name in ['actual_margin_with_slack', 'zero_quadratic_margin_with_slack',
-                       'zero_quadratic_margin_with_slack_from_genuine_certificate',
-                       'fourier_finset_sum', 'zero_quadratic_margin_with_slack_of_hats']:
-              m = re.search(r"'AEGIS\.KreinSlackV1\." + name +
+          names = ['KreinSlackV1.' + n for n in [
+              'actual_margin_with_slack', 'zero_quadratic_margin_with_slack',
+              'zero_quadratic_margin_with_slack_from_genuine_certificate',
+              'fourier_finset_sum', 'zero_quadratic_margin_with_slack_of_hats']]
+          names += ['CvSArchDigammaV1.' + n for n in [
+              'seriesTerm_re', 'seriesTerm_im', 'archSymbol_eq_tsum', 'half_im_digamma',
+              'summable_inv_width', 'archSymbol_source_integral']]
+          for name in names:
+              m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
               if not m:
                   raise SystemExit(f'AXIOM_AUDIT_MISSING {name}')
