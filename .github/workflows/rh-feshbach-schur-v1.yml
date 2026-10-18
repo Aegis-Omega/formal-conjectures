@@ -69,7 +69,8 @@ jobs:
           lean research/rh/feshbach_lean_v1/FeshbachComplementV1.lean 2>&1 | tee -a feshbach.log
           lean research/rh/feshbach_lean_v1/CvSPrimeBlockV1.lean 2>&1 | tee -a feshbach.log
           lean -o "$OUT/CvSArchLorentzV1.olean" research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean 2>&1 | tee -a feshbach.log
-          lean research/rh/feshbach_lean_v1/CvSArchSourceV1.lean 2>&1 | tee -a feshbach.log
+          lean -o "$OUT/CvSArchSourceV1.olean" research/rh/feshbach_lean_v1/CvSArchSourceV1.lean 2>&1 | tee -a feshbach.log
+          lean research/rh/feshbach_lean_v1/CvSArchDiagV1.lean 2>&1 | tee -a feshbach.log
           python3 - <<'PY'
           import re
           log = open('feshbach.log').read()
@@ -97,6 +98,12 @@ jobs:
               'archTerm_abs_le', 'archTerm_summable', 'archTerm_source_integrable',
               'archTerm_source_integral', 'archTerm_source_norm_integral_le',
               'archTerm_source_summable', 'arch_series_source']]
+          names += ['CvSArchDiagV1.' + n for n in [
+              'cosT_continuous', 'lorentz_profile', 'integrable_of_bounds', 'archTerm_mul_integrable',
+              'archTerm_mul_norm_integral_le', 'archTerm_mul_summable', 'arch_series_generic',
+              'diag_hasDerivAt', 'diag_identity', 'diagD_abs_le', 'sq_mul_diagD_abs_le',
+              'exp_trig_hasDerivAt', 'diag_exp_integral', 'lorentz_diag', 'eq_of_abs_sub_le_div',
+              'diagD_integral', 'archTerm_diag_integral', 'summable_diag_tail', 'arch_series_diag']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
@@ -206,6 +213,7 @@ jobs:
           lake env lean research/rh/feshbach_lean_v1/KreinSlackV1.lean 2>&1 | tee slack.log
           lake env lean -o .lake/build/lib/lean/CvSArchLorentzV1.olean research/rh/feshbach_lean_v1/CvSArchLorentzV1.lean
           lake env lean -o .lake/build/lib/lean/CvSArchSourceV1.olean research/rh/feshbach_lean_v1/CvSArchSourceV1.lean
+          lake env lean -o .lake/build/lib/lean/CvSArchDiagV1.olean research/rh/feshbach_lean_v1/CvSArchDiagV1.lean
           lake env lean research/rh/feshbach_lean_v1/CvSArchDigammaV1.lean 2>&1 | tee -a slack.log
           python3 - <<'PY'
           import re
@@ -218,7 +226,7 @@ jobs:
               'fourier_finset_sum', 'zero_quadratic_margin_with_slack_of_hats']]
           names += ['CvSArchDigammaV1.' + n for n in [
               'seriesTerm_re', 'seriesTerm_im', 'archSymbol_eq_tsum', 'half_im_digamma',
-              'summable_inv_width', 'archSymbol_source_integral']]
+              'summable_inv_width', 'archSymbol_source_integral', 'archSymbol_diag_integral']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)

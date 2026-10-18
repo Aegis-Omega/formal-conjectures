@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-import CvSArchSourceV1
+import CvSArchDiagV1
 import WeilDigammaSeriesHalfPlaneV1
 import RHKreinSymbolIntegrationV1
 
@@ -26,7 +26,10 @@ series (`digamma_series_halfPlane_v1`), this file proves, for `ω = 2πn/L` and 
 
 `∫ archSymbol(r) S(r, n, L) dr = 2π (½ Im ψ(1/4 + iπn/L) − ω ∑' k, e^{−c_k L}/(c_k² + ω²))`,
 
-which is the closed form `S_n` used by `feshbach_blocks_arb.py` (times `2π`).
+which is the closed form `S_n` used by `feshbach_blocks_arb.py` (times `2π`), and for the
+diagonal source `D(r)` of `2(1 − y/L) cos(ωy)`,
+
+`∫ archSymbol(r) D(r) dr = 2π archSymbol(ω) + (4π/L) ∑' k, (1 − e^{−c_k L})(c_k² − ω²)/(c_k² + ω²)²`.
 -/
 
 open MeasureTheory Set Real Complex
@@ -35,7 +38,7 @@ noncomputable section
 
 namespace AEGIS.CvSArchDigammaV1
 
-open AEGIS.CvSArchLorentzV1 AEGIS.CvSArchSourceV1
+open AEGIS.CvSArchLorentzV1 AEGIS.CvSArchSourceV1 AEGIS.CvSArchDiagV1
 open AEGIS.WeilDigammaIntegralReductionV1 (seriesTerm)
 
 theorem quarter_re_pos (t : ℝ) : 0 < ((1 / 4 : ℂ) + (t : ℂ) * I).re := by
@@ -128,6 +131,16 @@ theorem archSymbol_source_integral {L : ℝ} (hL : 0 < L) (n : ℤ) :
   refine tsum_congr fun k => ?_
   ring
 
+/-- **CvS diagonal archimedean identification.** With `ω = 2πn/L`,
+`∫ archSymbol(r) D(r) dr = 2π archSymbol(ω) + (4π/L) ∑' k, (1 − e^{−c_k L})(c_k² − ω²)/(c_k² + ω²)²`. -/
+theorem archSymbol_diag_integral {L : ℝ} (hL : 0 < L) (n : ℤ) :
+    ∫ r, AEGIS.RHKreinSymbolIntegrationV1.archSymbol r * diagD L r n =
+      2 * π * AEGIS.RHKreinSymbolIntegrationV1.archSymbol (2 * π * n / L) +
+        4 * π / L * ∑' k, (1 - Real.exp (-archWidth k * L)) *
+          (archWidth k ^ 2 - (2 * π * n / L) ^ 2) / (archWidth k ^ 2 + (2 * π * n / L) ^ 2) ^ 2 := by
+  simp_rw [archSymbol_eq_tsum]
+  exact arch_series_diag hL n _
+
 end AEGIS.CvSArchDigammaV1
 
 #print axioms AEGIS.CvSArchDigammaV1.seriesTerm_re
@@ -136,3 +149,4 @@ end AEGIS.CvSArchDigammaV1
 #print axioms AEGIS.CvSArchDigammaV1.half_im_digamma
 #print axioms AEGIS.CvSArchDigammaV1.summable_inv_width
 #print axioms AEGIS.CvSArchDigammaV1.archSymbol_source_integral
+#print axioms AEGIS.CvSArchDigammaV1.archSymbol_diag_integral
