@@ -192,17 +192,19 @@ elab "#export_rh_proof_graph" : command => do
 
   /- Canonical proof search: check Lean definitional equality with the actual
      Mathlib RH target instead of comparing pretty-printed type strings.
-     Every theorem imported into the kernel environment is considered. -/
-  let (semanticRhNames, semanticTheoremsChecked) ← liftTermElabM do
+     Every imported declaration is considered, including def and opaque. -/
+  let (semanticRhNames, semanticTheoremsChecked, semanticDeclarationsChecked) ← liftTermElabM do
     let rhType : Expr := mkConst ``RiemannHypothesis
     let mut rhProofNames : Array Name := #[]
-    let mut checked : Nat := 0
+    let mut theoremsChecked : Nat := 0
+    let mut declarationsChecked : Nat := 0
     for (n, ci) in env.constants.toList do
+      declarationsChecked := declarationsChecked + 1
       if let .thmInfo _ := ci then
-        checked := checked + 1
-        if (← Lean.Meta.isDefEq ci.type rhType) then
-          rhProofNames := rhProofNames.push n
-    return (rhProofNames, checked)
+        theoremsChecked := theoremsChecked + 1
+      if (← Lean.Meta.isDefEq ci.type rhType) then
+        rhProofNames := rhProofNames.push n
+    return (rhProofNames, theoremsChecked, declarationsChecked)
   logInfo m!"RH_SEMANTIC_THEOREMS_CHECKED {semanticTheoremsChecked} DEFEQ_RH_TYPE_CANDIDATES {semanticRhNames.size}"
 
   /- Unlike root-dependency traversal, this independent inventory scans EVERY
@@ -234,6 +236,7 @@ elab "#export_rh_proof_graph" : command => do
       ("scope", toJson "all constants in the compiled/imported Lean environment"),
       ("inspected_count", toJson inspected),
       ("semantic_theorems_checked", toJson semanticTheoremsChecked),
+      ("semantic_declarations_checked", toJson semanticDeclarationsChecked),
       ("defeq_target_type", toJson "RiemannHypothesis"),
       ("declarations", Json.arr importedRh)]).pretty
   logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} DEFEQ_TYPE_CANDIDATES {importedRh.size}"
