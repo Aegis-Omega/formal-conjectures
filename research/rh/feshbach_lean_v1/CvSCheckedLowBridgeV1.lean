@@ -10,6 +10,7 @@ import CvSProjectedTransportL12V1
 The remaining `Fact` is the finite Boolean computation, not a new axiom. -/
 open AEGIS.CvSProjectedEntryL12V1
 open AEGIS.CvSProjectedSchurBridgeL12V1
+open AEGIS.CvSSchurClosureFromBoundsV1
 open AEGIS.CvSProjectedPackedCertificateL12V1
 open AEGIS.CvSPackedGramV1
 open AEGIS.CvSLowBlockMatrixV1
