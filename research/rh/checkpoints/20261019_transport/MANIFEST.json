@@ -1,0 +1,951 @@
+{
+  "archive_sha256": "79ea91e802538b261bc94eac926b475f25f7863e354961271f36eb0d297ac067",
+  "archive_bytes": 3000398,
+  "files": [
+    {
+      "path": "aegis-h140-recovery/AEGIS_RH_LEAN_PATCH.diff",
+      "bytes": 17297,
+      "sha256": "5fcb2e267fc06bcfbe60180f0ed9dd1ce0e1cd3e99356284781bfbcf65c7ea98"
+    },
+    {
+      "path": "aegis-h140-recovery/H140_RECOVERY_RECEIPT.json",
+      "bytes": 13981,
+      "sha256": "0eba5e3911be15b498854636372e149deadadbc5be7442ca31d0d6c282b796da"
+    },
+    {
+      "path": "aegis-h140-recovery/H140_RECOVERY_REPORT.md",
+      "bytes": 6532,
+      "sha256": "58a68767e54df06c8e225fe3c7d8ddda640ecee0212d9ee4f07997b244eb4271"
+    },
+    {
+      "path": "aegis-h140-recovery/RECOVERY_SEARCH.json",
+      "bytes": 959,
+      "sha256": "2d4ca340a54d685fb86a3800b7a3578c361791c8aaea3ce49919e4cab7362ef8"
+    },
+    {
+      "path": "aegis-h140-recovery/baseline-krein-ring.log",
+      "bytes": 107451,
+      "sha256": "2bb82d4ed602cd71e2562954f21158e7979a132425d1ce47a728b5e96ee654a0"
+    },
+    {
+      "path": "aegis-h140-recovery/build_receipt.py",
+      "bytes": 9096,
+      "sha256": "25dc1e30d08448ba2ad8dbe348c5e408bf25024e7c3d4c0d466fca6b4c07386d"
+    },
+    {
+      "path": "aegis-h140-recovery/exact-head-compile.log",
+      "bytes": 62318,
+      "sha256": "9e4142569468bad67b93b11e780569219cb5a35e6319936bb9335e50d469b1f6"
+    },
+    {
+      "path": "aegis-h140-recovery/exact-head-ring.log",
+      "bytes": 108006,
+      "sha256": "824d7ca0b8fdf6f7df8598d31cd1f018e67981805f9265993ff29c508952ab5f"
+    },
+    {
+      "path": "aegis-h140-recovery/exact-head-slack.log",
+      "bytes": 83420,
+      "sha256": "866f34a99919d730af5052cec5443b2fb38dc2c3d39d1a7ccc8def162c47d441"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/.github/workflows/rh-feshbach-schur-v1.yml",
+      "bytes": 29813,
+      "sha256": "06b905534b7517d8b55a08c3b97857d4950b5ee2d7d5b498eace95617732319c"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_ANALYTIC_INTERVAL_EXPERIMENT.json",
+      "bytes": 931063,
+      "sha256": "510471ba1140ff027e6ec3cb6f8e554c0c9ae13e7014b245e98def296e92583b"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_DATA.json",
+      "bytes": 992640,
+      "sha256": "6282f7ca81335eacc81286458e7867ede6312280ca2072bcfbb4f5b6740742c1"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_INTEGER_RECEIPT.json",
+      "bytes": 3942,
+      "sha256": "596467e3aa227eda5b8e832a09c30909ce379b575cf38354f3c9ce6b74b4d58b"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/SOURCE_HASHES.json",
+      "bytes": 4337,
+      "sha256": "2a3e5b049f94fe420737f8ab9d243bd954d86b99ebededb844e2bb1e2293e2d4"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSArctanTailV1.lean",
+      "bytes": 12248,
+      "sha256": "c2a26cbe81bfbffca0ac3318c6609224477e009762e6b168daac02d594d91672"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSDiagL12V1.lean",
+      "bytes": 34984,
+      "sha256": "c20c21de77ff6c494f9b3a8d1d39f8e61d578ef55b1353076021cca70dd2cbf1"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSDiagTelV1.lean",
+      "bytes": 34010,
+      "sha256": "96ead0792c9be73dd14d708f3c9489400c00e9180c5f362a7020de35ef0c6260"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean",
+      "bytes": 1152920,
+      "sha256": "a56736a7c4067638df73c4f98ef336962c88eca5a3613e3abb98ef500c7b0735"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean",
+      "bytes": 4709,
+      "sha256": "9a6610f043977239b42c25ec1ba555d97d5cb8bd998ac800aa05cdde183e725d"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean",
+      "bytes": 2700,
+      "sha256": "e28e4b67e915c071fbd1aebf4fda06baed23186dbf082d8ec8cca72c9a72e04d"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean",
+      "bytes": 4793,
+      "sha256": "3de9cf1f377f5a3f1d8180b8f4c20e7a2a88ad96991564f2f70deb6c86b2e3eb"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean",
+      "bytes": 9368,
+      "sha256": "6f9f81618591dfffa7ebdff04dd4a49f858203190afb3871b3591b6583fefb5d"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSTauL12V1.lean",
+      "bytes": 13003,
+      "sha256": "ac4c2dff5da7fc2fa44acc08bf839f542719af41e14464a93f315837ae5b73c5"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean",
+      "bytes": 28724,
+      "sha256": "75bc4487570c3aa21f4a0c5b81dc2eb7f110e4ace820556ac446035c6a600253"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/CvSTauSourceV1.lean",
+      "bytes": 7917,
+      "sha256": "cd7f3dcdb569615d934e490dcbc8eabd97c7a3e4d1510a8a239db0ba41c33a61"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/HANDOFF_PACKED_GRAM.md",
+      "bytes": 4618,
+      "sha256": "85a3fede4e9dfbee676d7cb375a5c8d5191665f1f4f09d2e700bb325972006f3"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/tools/gen_diag.py",
+      "bytes": 7077,
+      "sha256": "0ace4cd7853bcf54d08466e4d0ea77a7769f0b36d6c6ca3dd487f7281372318d"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/tools/gen_tau.py",
+      "bytes": 2080,
+      "sha256": "a17f076b9915cf94d6b0e0758d0f49bd7a379135f1ffbabe8965dc3ab73136cc"
+    },
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/research/rh/feshbach_lean_v1/tools/gen_tau_prime.py",
+      "bytes": 3566,
+      "sha256": "40c6969c0b2933aa9b65df857a3520a40abcedc32ff2b6e9d5416f2fd01e4c42"
+    },
+    {
+      "path": "aegis-h140-recovery/new-ci-jobs.json",
+      "bytes": 12911,
+      "sha256": "79d802982165c5966c57d096d65b3a983a450d191f0e907c12fe57a738e2f7a7"
+    },
+    {
+      "path": "aegis-h140-recovery/new-ci-run.json",
+      "bytes": 14926,
+      "sha256": "00962f7acc558223e9b43a519eea08ef9d9cc3b64e96235d094db95e04b9c90f"
+    },
+    {
+      "path": "aegis-h140-recovery/preserved/RHSchurRowObstructionV1.lean",
+      "bytes": 3077,
+      "sha256": "354a915be730b80941fb9a5a029bc66b6e0e9a1c017650f728d49ed5f64ee004"
+    },
+    {
+      "path": "aegis-h140-recovery/projected_analytic_interval_experiment.py",
+      "bytes": 4311,
+      "sha256": "5aafcfdb0ac7ae0fd45f46c559299d61e52a45c84708083f46eb14645cab1e76"
+    },
+    {
+      "path": "aegis-h140-recovery/pushed-runs.json",
+      "bytes": 15863,
+      "sha256": "d8efbcf455b6e73cb048380c087604313253cccdfd55bfe3db824367aa6576ff"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/.github/workflows/rh-feshbach-schur-v1.yml",
+      "bytes": 26367,
+      "sha256": "150bd33270968b4d47a25df819a7418c156fe3416dc312a458c9452babfc9db0"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/H140_INTEGER_RECEIPT.json",
+      "bytes": 35790,
+      "sha256": "efce59a426a8db883520dd43708abf4040b13ae1cdf3fa740de5b7b886c3a5fd"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/HilbCert140.generation.json",
+      "bytes": 396,
+      "sha256": "f22123614719e063c745574a0ce53a4ebc025b5f1d47d762428fce20c2e62190"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/HilbCert140.lean",
+      "bytes": 2161040,
+      "sha256": "6660220968a248113e23bc14c318c3b43f6f69dc75d3c328ac1dd8f340dfa0d6"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/ORIGINAL_ARTIFACT_HASHES.json",
+      "bytes": 1426,
+      "sha256": "5a734ac9b722e535faae016cfecf1b3a80eca92751fddfcb5c1b57d436249084"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/full-ci-compile.log",
+      "bytes": 68145,
+      "sha256": "b18e7a647412770b69caa60bd41216d3201fc309590ee957399d625cac4f5982"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/full-ci-ring.log",
+      "bytes": 116541,
+      "sha256": "c99210a776226dd1c4f49b2bf3884c397f60cbf07518ea0cc3dcf6c90bc60120"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/CvSPackedGramV1.lean",
+      "bytes": 1952,
+      "sha256": "7daca83a2fa4ba1c33ab93c0e591f6e49859e387939b8fe9450eb64359569fe7"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/H140-KERNEL-RECEIPT.json",
+      "bytes": 602,
+      "sha256": "2aa7eb78f3e7084f46ba35dea7fae3525e1b97d782ddd9c7df5f195b203ad1e3"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/H140-kernel.log",
+      "bytes": 64,
+      "sha256": "9d3ff76f72473719f86f6e867a2c6707336ea1efd8a51868521c3fd878e97afd"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/PackedCountertestsV1.lean",
+      "bytes": 1605,
+      "sha256": "93721f4c2202dd3d9bcd8d16696b19f61e9c50703d4262acf08e072263c83ca1"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/PackedCountertestsV1.log",
+      "bytes": 505,
+      "sha256": "02f8a5ffe73ab61badf393c26d340ac187fb1ddde7294d5345b5c05bea4ff5eb"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/SLICE_PROVENANCE.json",
+      "bytes": 1807,
+      "sha256": "32b194cd4fb6e329cae77215cb02f9419665edd96a0cbd2dfeb792875777da67"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/native_slice/slice-compile.log",
+      "bytes": 166,
+      "sha256": "ca48631fd237a1179af07892d5d7a956c7937e2dedd22861d42f3b0a69f41d09"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/research/rh/feshbach_lean_v1/CvSPackedGramV1.lean",
+      "bytes": 24908,
+      "sha256": "cb1e6eff7d7b118d8a1b21b174f946e83de267d9ead56aa16ca9234049a4f489"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/research/rh/feshbach_lean_v1/HANDOFF_PACKED_GRAM.md",
+      "bytes": 3649,
+      "sha256": "647b0f72532ded5901b7b69250d35c62d6b30de56c1e1e8e7e516740114e4827"
+    },
+    {
+      "path": "aegis-h140-recovery/recovered_4fabfb66/research/rh/feshbach_lean_v1/tools/packed_gram_cert.py",
+      "bytes": 2842,
+      "sha256": "d56e62db27c529c027621b4d16d85942c7b8f351b591702a25d95b1a7a9a5dee"
+    },
+    {
+      "path": "aegis-h140-recovery/remote-run-baseline.json",
+      "bytes": 16386,
+      "sha256": "f7db5af38ae18f287c67a73bf0882bd2266c0ad0e8fd23a2ab61acc9e1bc0468"
+    },
+    {
+      "path": "aegis-h140-recovery/residual-command.json",
+      "bytes": 523,
+      "sha256": "7c6b6b52cb25a9d3dd6da95797c3fbca8e83535d7bbbd130d2beb417b6dda8ed"
+    },
+    {
+      "path": "aegis-h140-recovery/residual-kernel.log",
+      "bytes": 2102,
+      "sha256": "28c883a8f2e2288d308d6faa447d48cf4000c436721bb49ad8198cc6ad3673a5"
+    },
+    {
+      "path": "aegis-h140-recovery/residual-regression.lean",
+      "bytes": 1303,
+      "sha256": "017ea5ad69d9cdf265778ada1ef8054687d82a3b6679f83c4bceb5fd6ff19b6e"
+    },
+    {
+      "path": "aegis-h140-recovery/residual-regression.log",
+      "bytes": 15,
+      "sha256": "a95f5b73f28d4babcaa3708bba381eea66a32a48575d429dc89014756461014c"
+    },
+    {
+      "path": "aegis-h140-recovery/source-manifest.json",
+      "bytes": 7744,
+      "sha256": "6b779c89aacd20efb5c8a26bc6b659afb674603ce579484c95e97e66157872d3"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/.github/workflows/rh-feshbach-schur-v1.yml",
+      "bytes": 24603,
+      "sha256": "9480689af5df2124247845640dac6badb3a570beea6089aeb9cde959b48521da"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/AEGISOverlay/RHKreinCorrectionTaylorBridgeV1.lean",
+      "bytes": 3266,
+      "sha256": "434c75140127f024c76aa21849b991417760c4c75517cd098a2c7202c2b2545b"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/AEGISOverlay/RHKreinDigammaLowerBoundV1.lean",
+      "bytes": 8443,
+      "sha256": "37577feb54ea093f81219a28498f863624aff9d2ee9ff7018d5979c4076fb219"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/AEGISOverlay/RHKreinDigammaMonotonicityV1.lean",
+      "bytes": 4487,
+      "sha256": "bbd169ac6380565d3616c732c7ab69c3b130bb4f7a529923efa8b799e27f2d7c"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/AEGISOverlay/RHKreinFiniteIntervalKernelV1.lean",
+      "bytes": 14685,
+      "sha256": "6179170c861fe6d151962df89fff8ec1d86dbfa47db63c98ca09651f14d87de5"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/AEGISOverlay/RHKreinFourierTaylorBoundV1.lean",
+      "bytes": 5687,
+      "sha256": "aa7dfd6c7657fcfc17463b22275b070700339aed242fa29582e7f1b6c88bd6e6"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/critical_line_v1/RHFixIntervalV1.lean",
+      "bytes": 6590,
+      "sha256": "9aa8cbde778f4be6464305e05ae0310e3786f04a3ff4b149a7469c90d2b41390"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean",
+      "bytes": 12227,
+      "sha256": "05a0284c2d9d3eba40cb68a563c1d74c170cd16b28f747b633d26aabdcb24db2"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSCrossCertV1.lean",
+      "bytes": 20729,
+      "sha256": "84af2b87653706b094fd52026fcb2ab127ac85f8beb2158879ed43a90f5e547e"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean",
+      "bytes": 5248,
+      "sha256": "b3925ee112304311ee2194786e58038ccd359b922c7be2cdbef1e718d5572590"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean",
+      "bytes": 10544,
+      "sha256": "2af3d38c39548b6e078aed9e7b6f1b2aa605bf80b6986546311e60a8e20dcd2f"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean",
+      "bytes": 9910,
+      "sha256": "cf143cdc22525f55145fde9ca224e40102f8d957492b13b9aee34884e6aed7a9"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+      "bytes": 5796,
+      "sha256": "27255393cb52cde3ba63d1b579425a6b291512b1d0e4cb6d375797b3a044e726"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSRowTailV1.lean",
+      "bytes": 34147,
+      "sha256": "843b0064f90c19c6a8beb99e623bad1479b1066031eb0db4e66a7411b3e2b06d"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/CvSWindowCertV1.lean",
+      "bytes": 18058,
+      "sha256": "df01b6a8628c1b31e27bdd68466bd76269aa7e0e880a211dad595b5cf3de3b6e"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/H140_RECOVERY_REPORT.md",
+      "bytes": 6055,
+      "sha256": "dd0b7bff7dfdc2ac928b0e22b9e1b3f4bf4f66c6d5b21ab97e30576593d6b70f"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/feshbach_lean_v1/tests/CvSResidualCertificateTestV1.lean",
+      "bytes": 1569,
+      "sha256": "34714831ab64e9ef5b986af00cbc9e845e984f762d0105c801c18c2dbc997275"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/krein_L105_v1/RHKreinDigammaSharpTailV1.lean",
+      "bytes": 7768,
+      "sha256": "9fd747731b28f541d3c262e79e14f7ff1537301ee1b20b1dc621ec1defbd0244"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/krein_reflective_v1/RHKreinTaylorModelV1.lean",
+      "bytes": 10804,
+      "sha256": "8d54648a138db062ac5762c4dbd1536039bcd05e08584ae072fb0b371179becc"
+    },
+    {
+      "path": "aegis-h140-recovery/sources/research/rh/krein_ring_v1/RHExactLDLTV1.lean",
+      "bytes": 4530,
+      "sha256": "6892ff4a07aa7de878c3cf046cf22e8d33909dc061cfbf849940433b41d4d7d0"
+    },
+    {
+      "path": "aegis-h140-recovery/verify_recovered_integer_data.py",
+      "bytes": 2758,
+      "sha256": "be303347bc01c7a7cbd7a2e4f96dfb6a5f01edf52056ed75aa5dbe3f490c5e50"
+    },
+    {
+      "path": "aegis-research-execution/AEGIS_PROOF_CONTINUATION.bundle",
+      "bytes": 14438,
+      "sha256": "ffa53532f38929352afd651b22be0261bd809838d4c193ecf4c78ccc2a1a17e9"
+    },
+    {
+      "path": "aegis-research-execution/AEGIS_RH_LEAN_PATCH.diff",
+      "bytes": 35047,
+      "sha256": "d222fd82d1fc505e68872a2eca540dd728afb303ab2e01eac6e33ed573f57754"
+    },
+    {
+      "path": "aegis-research-execution/BASELINE.md",
+      "bytes": 6495,
+      "sha256": "82f79d51116713c0e139f28bda016b3c8f75009d52dd2cfe836327b9eaf6afca"
+    },
+    {
+      "path": "aegis-research-execution/CLASSIFIED_THEOREM_INVENTORY.json",
+      "bytes": 1355709,
+      "sha256": "c1d88a7513090099a13f9628847ce89dcc47546b75a6b7507943c0c855d6981b"
+    },
+    {
+      "path": "aegis-research-execution/DEPENDENCY_GRAPH.json",
+      "bytes": 21394,
+      "sha256": "0dee73cd89e4bf96dcdd86d7ba049820997cb9eb688ca1f2ccb5181eb5994a01"
+    },
+    {
+      "path": "aegis-research-execution/EXECUTION_RECEIPT.json",
+      "bytes": 24205,
+      "sha256": "f41b0e8436b00b7a8eb37e983dc74a116867401e6b5fc59a814fa3baa6353497"
+    },
+    {
+      "path": "aegis-research-execution/FINAL_DECISION.md",
+      "bytes": 4493,
+      "sha256": "9d7dcb126b536f3d539bc20c4ad419ed1d4ade8760f83b5c50c36297ef9f1151"
+    },
+    {
+      "path": "aegis-research-execution/ROUTE_DECISIONS.json",
+      "bytes": 4159,
+      "sha256": "39f875b39e7ee46904c6f3827123b0efda516d375a61a94a9ef1bad496ff117e"
+    },
+    {
+      "path": "aegis-research-execution/SOURCE_PROVENANCE.md",
+      "bytes": 1535,
+      "sha256": "e523e55b3816482e6dca3f78ff57ca7311283215d7b68518e6a62ca2d3b49b9a"
+    },
+    {
+      "path": "aegis-research-execution/UNIVERSAL_TARGETS.md",
+      "bytes": 3266,
+      "sha256": "46c44db966de825e2abacfe4fdb552e1862c5b9fb2a849a280af1847e9b70b58"
+    },
+    {
+      "path": "aegis-research-execution/build_execution_receipt.py",
+      "bytes": 14060,
+      "sha256": "5ccac29466a0c8093e4a7520a707b73c1de7169ed6fd717d1deb0ff8ae59434f"
+    },
+    {
+      "path": "aegis-research-execution/environment/REPRODUCTION.md",
+      "bytes": 1404,
+      "sha256": "1a0c4969081fd3b8268850ade551c1340d42cf2f2757d3c32791c36151a20182"
+    },
+    {
+      "path": "aegis-research-execution/environment/lake-manifest.json",
+      "bytes": 3152,
+      "sha256": "c8ffc0d59f492007162fe54c68396e4b9f2f305fcf69210a7fbaf0b18fcd8cd9"
+    },
+    {
+      "path": "aegis-research-execution/environment/lakefile.toml",
+      "bytes": 2597,
+      "sha256": "ac623524a725d4efc0bc028f6c9c0e73aa9c83c36aff8537874b10102b9f5c93"
+    },
+    {
+      "path": "aegis-research-execution/environment/lean-toolchain",
+      "bytes": 25,
+      "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+    },
+    {
+      "path": "aegis-research-execution/integration/CvSFiniteCongruenceV1.log",
+      "bytes": 868,
+      "sha256": "9a0a2c1adf7f8564941f13f418dc5183802048e31a736361ffd37aa8e29fe124"
+    },
+    {
+      "path": "aegis-research-execution/integration/CvSResidualCertificateV1.log",
+      "bytes": 2425,
+      "sha256": "69a0d5f368606360c08b56a3cc4c462748845a7038e639f2e74963c0a04470a1"
+    },
+    {
+      "path": "aegis-research-execution/integration/ReciprocalPairObstruction.log",
+      "bytes": 434,
+      "sha256": "6207565b3a89d630fd289f0a31211448e58e154c2b8f4e8eb5a68f1c04198f57"
+    },
+    {
+      "path": "aegis-research-execution/integration/SignedCliqueObstruction.log",
+      "bytes": 1508,
+      "sha256": "9e1535e79b0f38739e31729e5b20008adf0d7cb57594569a58999ff033b8c68f"
+    },
+    {
+      "path": "aegis-research-execution/integration/TRANSPORT_SUBMISSION_RECEIPT.json",
+      "bytes": 1467,
+      "sha256": "3a445c509b7effb5ab9931a0d8b3fe3abcdec7046140b1010868c3cac63165e6"
+    },
+    {
+      "path": "aegis-research-execution/integration/TransportFirstPart.lean",
+      "bytes": 6399,
+      "sha256": "516af61b2dff0982e7ea415f45236f65f3087d478fb2ca37fc2adf742d336d0d"
+    },
+    {
+      "path": "aegis-research-execution/integration/TransportGeometryPilot.lean",
+      "bytes": 2558,
+      "sha256": "1b8545a385717499d4ae769e9fa074b5e826e0fa13bde90f5dcf35fd6f55d84a"
+    },
+    {
+      "path": "aegis-research-execution/integration/TransportParameterizedPilot.lean",
+      "bytes": 9148,
+      "sha256": "67685dd6e9880d341a481a63eb3f39b722321fa6a0e745a6711e4942c960dd5a"
+    },
+    {
+      "path": "aegis-research-execution/integration/TransportParameterizedPilot.log",
+      "bytes": 419,
+      "sha256": "e2cf1c0c477513a3c8d25dad25844b61141cefa0169cf99c72eba125a06c72a5"
+    },
+    {
+      "path": "aegis-research-execution/integration/build_transport_pilot.py",
+      "bytes": 4377,
+      "sha256": "4cb23da2679a0fff2db6278f6c5a9e153ea01cfdef751d248f307b04a7868153"
+    },
+    {
+      "path": "aegis-research-execution/integration/exact-head-compile.log",
+      "bytes": 70294,
+      "sha256": "c174e525d47be4345f7f7538619021325a3b65521e4c95edf4d646bfe8b79066"
+    },
+    {
+      "path": "aegis-research-execution/integration/exact-head-ring.log",
+      "bytes": 117531,
+      "sha256": "f994d4f841bd563196a29da76ae04182fa22a21b194a42ddcfb5d5406bce4116"
+    },
+    {
+      "path": "aegis-research-execution/integration/exact-head-slack.log",
+      "bytes": 90484,
+      "sha256": "daa795ca5392ccb7569d1e2ec17935385350b9255a6360070bfd0c9ac22b34d2"
+    },
+    {
+      "path": "aegis-research-execution/integration/jobs.json",
+      "bytes": 12911,
+      "sha256": "031fc6fbbd2323b29c8430461b247732d556c8814e9b3f1be6c6c7ec488e4eff"
+    },
+    {
+      "path": "aegis-research-execution/integration/published-source-manifest.json",
+      "bytes": 1651,
+      "sha256": "125c85e135829d5585375b92e3707b65ae91eaa73877277650a912638049100a"
+    },
+    {
+      "path": "aegis-research-execution/integration/run.json",
+      "bytes": 14927,
+      "sha256": "adf62ea3a17612aca44157c96614425607794c3444547d7d961c54925a38a103"
+    },
+    {
+      "path": "aegis-research-execution/integration/runs.json",
+      "bytes": 15869,
+      "sha256": "f06f075435a939ef7cfa6a909885de0902946be78660b6032f750534e887c6a5"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/.github/workflows/rh-feshbach-schur-v1.yml",
+      "bytes": 25506,
+      "sha256": "03c2bc1590f0b87a725a7cd168ba35ebd9c8117ba255441710fc3e47eeea7d72"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feasibility_v1/README.md",
+      "bytes": 5199,
+      "sha256": "44335ff7cbf7eaed731faa95a912ac9e5bb48f5774dc95e1e0411112da48cd68"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feasibility_v1/ReciprocalPairObstruction.lean",
+      "bytes": 1453,
+      "sha256": "4f52c09d3272148f5cdb72ab5baa930ae3f43e84f0cc4cf4015b5738b34cbc5c"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feasibility_v1/SignedCliqueObstruction.lean",
+      "bytes": 3767,
+      "sha256": "fd810d930534a6d7c5dbf036cf7f302cdb706af4987b40e07ef4872d5b9fe00f"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+      "bytes": 6703,
+      "sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feshbach_lean_v1/CvSRowTailV1.lean",
+      "bytes": 36211,
+      "sha256": "4d38c50c5184ba353a4d2662684ff1e8b8d1e0fd783303f8a1d2f827aae891cd"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feshbach_lean_v1/H140_RECOVERY_REPORT.md",
+      "bytes": 6055,
+      "sha256": "dd0b7bff7dfdc2ac928b0e22b9e1b3f4bf4f66c6d5b21ab97e30576593d6b70f"
+    },
+    {
+      "path": "aegis-research-execution/integration/sources/research/rh/feshbach_lean_v1/tests/CvSResidualCertificateTestV1.lean",
+      "bytes": 1569,
+      "sha256": "34714831ab64e9ef5b986af00cbc9e845e984f762d0105c801c18c2dbc997275"
+    },
+    {
+      "path": "aegis-research-execution/integration/transport-runs.json",
+      "bytes": 15852,
+      "sha256": "a0667f85970d4f4e18c6dc69ff82415f0f72911aa1642c6ef1e74aca850a0951"
+    },
+    {
+      "path": "aegis-research-execution/integration/trig-build.log",
+      "bytes": 9360,
+      "sha256": "51d2d6b4cbe824fac0d20ecb108f95370261ca1a19b6052bdd225467ca64f53f"
+    },
+    {
+      "path": "aegis-research-execution/replay_native.py",
+      "bytes": 2208,
+      "sha256": "2913c277b5fe1304f64e35593088bcaa93551246640de18946681dff05261389"
+    },
+    {
+      "path": "aegis-research-execution/review/CvSResidualCertificateV1-integration-review.log",
+      "bytes": 2425,
+      "sha256": "69a0d5f368606360c08b56a3cc4c462748845a7038e639f2e74963c0a04470a1"
+    },
+    {
+      "path": "aegis-research-execution/review/FINAL_LIVE_GITHUB_READBACK.json",
+      "bytes": 1612,
+      "sha256": "d83383a4ad349b141aa6d508003408d1927c3d9747c9c53d6e6b0c4cb1f4b37f"
+    },
+    {
+      "path": "aegis-research-execution/review/FINAL_PUBLICATION_AUDIT.json",
+      "bytes": 4393,
+      "sha256": "d42ec2ae03393cfd3a6e26d52a471560ec466c1871bbda7a990fa22508c8e0bb"
+    },
+    {
+      "path": "aegis-research-execution/review/INDEPENDENT_INTEGRATION_REVIEW.md",
+      "bytes": 4509,
+      "sha256": "b708c5183ad042db7694988d00e0cf9a6eb93c64adcf5727bb0d5af3d7ff9724"
+    },
+    {
+      "path": "aegis-research-execution/review/INDEPENDENT_PILOT_REPLAY_RECEIPT.json",
+      "bytes": 1150,
+      "sha256": "5252d8ab8c10540868387265e5de95917df1f10ff1f19ce83f4aeb6590e79f0a"
+    },
+    {
+      "path": "aegis-research-execution/review/INDEPENDENT_RESIDUAL_REVIEW.md",
+      "bytes": 6889,
+      "sha256": "9e757b8feef70461f670110b01f014488f9acd9b64d9a185037981c801502b58"
+    },
+    {
+      "path": "aegis-research-execution/review/INDEPENDENT_REVIEW_RECEIPT.json",
+      "bytes": 3170,
+      "sha256": "e6d118f6f13b3d495bd301a16c3af2732d3c59f5d2650b6bde703b08a5359291"
+    },
+    {
+      "path": "aegis-research-execution/review/INDEPENDENT_ROUTE_PILOT_REVIEW.md",
+      "bytes": 5647,
+      "sha256": "8ca6e3360db1909c14927bbe389c6524ddce66fc09c5313aae447cd5a854586a"
+    },
+    {
+      "path": "aegis-research-execution/review/INTEGRATION_NATIVE_REPLAY.json",
+      "bytes": 1315,
+      "sha256": "57b5e631b617bbfc35bfa17041c855d5f685e6ad6f1ebb2608fdf120597b7df7"
+    },
+    {
+      "path": "aegis-research-execution/review/INTEGRATION_REVIEW_SOURCE_HASHES.json",
+      "bytes": 741,
+      "sha256": "6b333cfa5572b02ec0df9a9f6afdeb537115bbff61948cc50f176bcf561df715"
+    },
+    {
+      "path": "aegis-research-execution/review/IndependentResidualReview.lean",
+      "bytes": 2903,
+      "sha256": "48b8f0a2f1a0de275c1a876a5ea2ef06441afc386a1b0e05ae558326ee25c830"
+    },
+    {
+      "path": "aegis-research-execution/review/ReciprocalPairObstruction-integration-review.log",
+      "bytes": 434,
+      "sha256": "6207565b3a89d630fd289f0a31211448e58e154c2b8f4e8eb5a68f1c04198f57"
+    },
+    {
+      "path": "aegis-research-execution/review/SCHUR_BRIDGE_FAILURE_SHAPES.log",
+      "bytes": 228,
+      "sha256": "565cf1942e13f4789389a45139390d0b7b1507e9d12d5768e780b0a6c4c45f87"
+    },
+    {
+      "path": "aegis-research-execution/review/SCHUR_BRIDGE_REPAIR_REVIEW.md",
+      "bytes": 3390,
+      "sha256": "151dfdf902f2ea9e4ef02fddee62dc81095749aaca7f567e54246b43275da689"
+    },
+    {
+      "path": "aegis-research-execution/review/SchurBridgeFailureShapes.lean",
+      "bytes": 1041,
+      "sha256": "e5d231790eacb550b8b613d4a262948c018ff75b4d5d5e861d57bfc2cc741bbc"
+    },
+    {
+      "path": "aegis-research-execution/review/SignedCliqueObstruction-integration-review.log",
+      "bytes": 1508,
+      "sha256": "9e1535e79b0f38739e31729e5b20008adf0d7cb57594569a58999ff033b8c68f"
+    },
+    {
+      "path": "aegis-research-execution/review/TRANSPORT_GENERIC_NATIVE.log",
+      "bytes": 868,
+      "sha256": "9a0a2c1adf7f8564941f13f418dc5183802048e31a736361ffd37aa8e29fe124"
+    },
+    {
+      "path": "aegis-research-execution/review/TRANSPORT_REVIEW.md",
+      "bytes": 5052,
+      "sha256": "1d39ddd17a5dc4b5e25cada8663ce1be3091a73610a783057870da4a6bb98a55"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-edgecases-receipt.json",
+      "bytes": 340,
+      "sha256": "14a78a56ada64f7841d641e9a6e513c1b40d658c0e2192fdb9fba4da626204ed"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-edgecases.log",
+      "bytes": 406,
+      "sha256": "ad34a52929589031cf7c449a9528335e3f0871ebbf1c25f8474c4f811bf5627d"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-regression.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-replay-receipt.json",
+      "bytes": 498,
+      "sha256": "7441fe45c11a12b965688374186f80da836ea569cbc02fde24a3022a331c4a4d"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-source-kernel.log",
+      "bytes": 2102,
+      "sha256": "28c883a8f2e2288d308d6faa447d48cf4000c436721bb49ad8198cc6ad3673a5"
+    },
+    {
+      "path": "aegis-research-execution/review/independent-source-receipt.json",
+      "bytes": 562,
+      "sha256": "3bd6ceaec7052d6874cba8fb5004353745f47bb962d0b37d44ef18578789e263"
+    },
+    {
+      "path": "aegis-research-execution/review/route_b_independent.log",
+      "bytes": 673,
+      "sha256": "27a7b6d1f07e97904893da29ce6264ff7b912a34986f87c9ce6f62e4029de02b"
+    },
+    {
+      "path": "aegis-research-execution/review/route_c_independent.log",
+      "bytes": 1508,
+      "sha256": "9e1535e79b0f38739e31729e5b20008adf0d7cb57594569a58999ff033b8c68f"
+    },
+    {
+      "path": "aegis-research-execution/review/route_d_independent.log",
+      "bytes": 434,
+      "sha256": "6207565b3a89d630fd289f0a31211448e58e154c2b8f4e8eb5a68f1c04198f57"
+    },
+    {
+      "path": "aegis-research-execution/route_a/ROUTE_A_RECEIPT.json",
+      "bytes": 32649,
+      "sha256": "a38636e536006e5b3aaf745ec9289a1f6f9b3dbd7b96d45754466ddda6ebecad"
+    },
+    {
+      "path": "aegis-research-execution/route_a/SPRINT_A.md",
+      "bytes": 11937,
+      "sha256": "fe12fc6f703a568614a7ee927d8d8eb740b0f81965d2b2acd3875412d3c1f388"
+    },
+    {
+      "path": "aegis-research-execution/route_b/ACTUAL_BRIDGE_CANDIDATE.lean.txt",
+      "bytes": 2033,
+      "sha256": "9e86fb963a12fbad5feede4ad97580e1c854da6e391c068b79a637f4f5e0ed90"
+    },
+    {
+      "path": "aegis-research-execution/route_b/DISCOVERY.md",
+      "bytes": 9103,
+      "sha256": "388ce1099f2e3d2e040ba31c5bcee9960baccc32467683ae51cf8c60c8a3406b"
+    },
+    {
+      "path": "aegis-research-execution/route_b/FeshbachTailPilot.lean",
+      "bytes": 4709,
+      "sha256": "bbb74cfdde8cd2d60bb4edcddcb5aaff601f92c1c17dc9a3b2f3b081e4dce03a"
+    },
+    {
+      "path": "aegis-research-execution/route_b/kernel.log",
+      "bytes": 673,
+      "sha256": "27a7b6d1f07e97904893da29ce6264ff7b912a34986f87c9ce6f62e4029de02b"
+    },
+    {
+      "path": "aegis-research-execution/route_b/receipt.json",
+      "bytes": 42830,
+      "sha256": "dda15aad1cff01e495a4c519197d3215b31debf2e6cb274da027be21569d007d"
+    },
+    {
+      "path": "aegis-research-execution/route_c/ROUTE_C_RECEIPT.json",
+      "bytes": 3131,
+      "sha256": "7d6ca37bfc3e9823bc0de63041ab22c679206cc587917abdfa15782c025d1fbd"
+    },
+    {
+      "path": "aegis-research-execution/route_c/ROUTE_C_SIGNED_DEFECT.md",
+      "bytes": 13426,
+      "sha256": "5191f10c8f137920399afe2128694f120d11382eb8d484d10e0ca7cd8d5e1b4b"
+    },
+    {
+      "path": "aegis-research-execution/route_c/SignedCliqueObstruction.lean",
+      "bytes": 3767,
+      "sha256": "fd810d930534a6d7c5dbf036cf7f302cdb706af4987b40e07ef4872d5b9fe00f"
+    },
+    {
+      "path": "aegis-research-execution/route_c/exact_interfaces.txt",
+      "bytes": 14462,
+      "sha256": "9b5d9e48c7287eb48596e8f9af2bcd61ad1e2ccc26283228d465c5f04e921386"
+    },
+    {
+      "path": "aegis-research-execution/route_c/pilot.log",
+      "bytes": 1508,
+      "sha256": "9e1535e79b0f38739e31729e5b20008adf0d7cb57594569a58999ff033b8c68f"
+    },
+    {
+      "path": "aegis-research-execution/route_c/pilot_execution.json",
+      "bytes": 289,
+      "sha256": "7c84660fcaba2a0f26981d24bc242ae9e1f19bd507b6b87e436a314dac3e4a1f"
+    },
+    {
+      "path": "aegis-research-execution/route_c/source_interfaces.json",
+      "bytes": 116315,
+      "sha256": "c41d58169d81c486705a624d58b777266841f2d4863f395158904c32fcededda"
+    },
+    {
+      "path": "aegis-research-execution/route_d/DISCOVERY.md",
+      "bytes": 12152,
+      "sha256": "dc7a31ba312c0a90127bccdeaf64503e086c9f4c82035947054b4225080c26bf"
+    },
+    {
+      "path": "aegis-research-execution/route_d/OUTPUT_MANIFEST.json",
+      "bytes": 3389,
+      "sha256": "319f78162167c0fe46c5d489bdd4b31d5a8baea8fb15287cf57bb7077c147ab9"
+    },
+    {
+      "path": "aegis-research-execution/route_d/ReciprocalPairObstruction.lean",
+      "bytes": 1187,
+      "sha256": "c4e53a18c719a84eb5d1d26d48ffd4e3b4dc631e15bf683bb003bb123c7c7bae"
+    },
+    {
+      "path": "aegis-research-execution/route_d/historical_selected_root_receipts.json",
+      "bytes": 12744,
+      "sha256": "b32f2c7413ed176bafe1fc309051d6169612e76b6058005fb8df3328d6d17887"
+    },
+    {
+      "path": "aegis-research-execution/route_d/pilot_kernel.log",
+      "bytes": 434,
+      "sha256": "6207565b3a89d630fd289f0a31211448e58e154c2b8f4e8eb5a68f1c04198f57"
+    },
+    {
+      "path": "aegis-research-execution/route_d/pilot_kernel_receipt.json",
+      "bytes": 1135,
+      "sha256": "116c8af937e591e8fa3ea3594bac54d9fd65e4ebcdf6299032b78f5a8348cf16"
+    },
+    {
+      "path": "aegis-research-execution/route_d/route_status.json",
+      "bytes": 2984,
+      "sha256": "f298465ab9ec5fa00ba08fdc1f8a7da6fda708c70b617fb389f6b4b99533bfca"
+    },
+    {
+      "path": "aegis-research-execution/route_d/source_evidence.json",
+      "bytes": 84712,
+      "sha256": "5da2c25decbb6cbbb896182209849243af732570db7ce6007bebbe7c47be765c"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/AEGISOverlay/RHGenericSpectralShiftV1.lean",
+      "bytes": 4983,
+      "sha256": "cfff1990a82c904cdd32fc1883e2dc863ec629e8822d343190a3e1c5db055f5b"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/AEGISOverlay/RHKreinCriticalLineBridgeV1.lean",
+      "bytes": 3480,
+      "sha256": "904c0d0132b19950986a6d1b79bdb407acdf3d1d1839336f52c6f8c1b43af28c"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/AEGISOverlay/RHMellinDetectorCenteredV1.lean",
+      "bytes": 17510,
+      "sha256": "eebf26cdedefc11df8f89e5f15086d7eebf63530af3b6615d6b9edc201b6cc89"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/AEGISOverlay/RHTimeSliceWeilV1.lean",
+      "bytes": 31131,
+      "sha256": "93df87f1c58f0553f9e2b635538b86e6504aaef2e09e5dce3b4317ca7cd70546"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/AEGISOverlay/RHTranslateSpectralObstructionV1.lean",
+      "bytes": 5566,
+      "sha256": "98c5bc8513c64701ff10d26de66675170092685bb94d89f03128c838d6f56cb8"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/current/research/rh/aegis_source_4d7578e/lean/ZeroCriticalStripV1.lean.src",
+      "bytes": 4374,
+      "sha256": "3e05b5e32f04354d88844f0cb4c44cdd1d2288e3444f6ed72e58bdd3d3f105a0"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/Basic.lean",
+      "bytes": 254765,
+      "sha256": "e65df2122d0e001e83796b96979a3d90020583432c9ce401c00f97044dc1da9f"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/Fidelity.lean",
+      "bytes": 7104,
+      "sha256": "cd6226dfb8802cb29f5d95ecd02dc9e801d584d5ff22bad51e599e9a33c425c9"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/GenusOnePairedSumFormula.lean",
+      "bytes": 112555,
+      "sha256": "85e64776d3b391b4b20ec1ed26473bd491afa7cbeffec78638281628382e5500"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/MobiusMap.lean",
+      "bytes": 7285,
+      "sha256": "7ba73287750254feaff69592636a3bf1707897e1c76383f506fdb12db766c524"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/RHBridge.lean",
+      "bytes": 4535,
+      "sha256": "bb9a29aee0ba83f5fc86ea2aaf40142afb4928b085f1887429f846f87b0f65f9"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/ReverseDirection.lean",
+      "bytes": 19891,
+      "sha256": "15bbfbe082ae37d0283ff92e2f545339d10e022b98e39ca526afe69853cf6bef"
+    },
+    {
+      "path": "aegis-research-execution/route_d/sources/provider/Lc/LiCriterion/XiOrderBridge.lean",
+      "bytes": 3235,
+      "sha256": "d8f89451e4b0e07a3a8b10f2a6bfd3237b9c9cfa331520e24ff7641ca0b1b345"
+    },
+    {
+      "path": "source_commit_46aa2474/.github/workflows/rh-feshbach-schur-v1.yml",
+      "bytes": 30720,
+      "sha256": "3a032d673aea3e3bb920623055d4aa0e38165cc72a611b4a99569c1e8a7adf4e"
+    },
+    {
+      "path": "source_commit_46aa2474/research/rh/feshbach_lean_v1/CVS_EXACT_TRANSPORT.md",
+      "bytes": 2385,
+      "sha256": "6b893ce25e0707b02304886c831768574933c64a16768970410ddc2543d3db68"
+    },
+    {
+      "path": "source_commit_46aa2474/research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean",
+      "bytes": 3624,
+      "sha256": "a24778f0572b4d98f6fe6f32430ad78f1c0ad0dd26362553ed8db24189749840"
+    },
+    {
+      "path": "source_commit_46aa2474/research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean",
+      "bytes": 4778,
+      "sha256": "d1e512ce8704bf4d16500fa736b77e8006475b227d0d49578bca38a5156f8784"
+    },
+    {
+      "path": "source_commit_46aa2474/research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean",
+      "bytes": 9096,
+      "sha256": "a661012b021ea27c3851d4446ca78cac07937fc5ba25b4330e8c02e7b860ec54"
+    },
+    {
+      "path": "source_commit_46aa2474/research/rh/feshbach_lean_v1/H140_RECOVERY_REPORT.md",
+      "bytes": 7776,
+      "sha256": "1e1c0e94fcec93c7883ab19142331b3e51fefa18a596b3ac83131e052d5297ce"
+    }
+  ]
+}
