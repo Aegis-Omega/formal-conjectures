@@ -26,9 +26,18 @@ Weil-positivity certificate, and positivity for one window does not imply all wi
 - These are the artifacts `H140_RECOVERY_REPORT.md` could not find; they are now in the repo.
   `quad_lower` uses `CvSResidualCertificateV1.residual_quadratic_le` (Codex) for the row-sum
   bound, so there is one Gershgorin lemma, not two.
+- τ_k at L = 6/5 (krein-ring job): `CvSTauL12V1.source_integral_mem` (∫ h₊ S_k, arctan tail,
+  `CvSArctanTailV1`, `CvSTauSourceV1`) and `CvSTauPrimeL12V1.tau_mem` (full τ_k for every prime
+  cutoff M ≥ 3; only p = 2, 3 have nodes inside [0, 6/5]): boxes of width ≤ 2e-7 for
+  k = 1..70, `tau_neg`/`tau_zero` for k ≤ 0. With `CvSRowTailV1.cvsEntry_off` this gives every
+  off-diagonal entry of the L = 1.2 low block. Generators: `tools/gen_tau.py`,
+  `tools/gen_tau_prime.py` (untrusted, reproduce the data exactly).
 
 ## Next steps (in order)
-1. Enclosures of the matrix entries (the real wall): `cvsEntry M L n m` needs proved `Iv` bounds
+1. Enclosures of the matrix entries (the real wall): off-diagonal entries are done via τ_k (above).
+   Still open: the diagonal `cvsEntry M L n n` (`hplus_diag_integral`: h₊(2πn/L) needs Re ψ,
+   see `RHKreinDigammaSharpTailV1`/`RHEulerGammaSharpBaseV1`, plus the series
+   Σ (1 − e^{−c_j L})(c_j² − ω²)/(c_j² + ω²)²) and the prime part of the diagonal. Generic notes
    (integrals ∫ h₊·cosB with digamma terms, τ_k, ppw = Λ(n)/√n weights, log, arctan). Check
    existing enclosure modules first (`critical_line_v1`: RHExpEnclosureV1, RHPi40V1/RHPi80V1 on
    the consolidated branch) before writing new ones. Needed: Taylor series with remainder and

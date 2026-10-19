@@ -366,11 +366,12 @@ jobs:
           lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -440,6 +441,10 @@ jobs:
           names += ['CvSTauL12V1.' + n for n in [
               'pi_bounds', 'e35_bounds', 'head_bounds', 'tauCheck_sound', 'tauBatch0_true',
               'source_integral_mem']]
+          names += ['CvSTauPrimeL12V1.' + n for n in [
+              'log2_bounds', 'log3_bounds', 'sinQ_bounds', 'sinPi_bounds', 'primeSum_eq',
+              'prime_bounds', 'tauFullCheck_sound', 'tauFullAll_true', 'tau_mem', 'tau_neg',
+              'tau_zero']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
