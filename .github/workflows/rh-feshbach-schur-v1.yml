@@ -339,7 +339,11 @@ jobs:
           lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -386,6 +390,18 @@ jobs:
           names += ['CvSLowBlockMatrixV1.' + n for n in [
               'scertM_neg', 'quad_eq_symm', 'lowBlock_eq_trigPoly', 'lowBlock_quad_eq',
               'window_of_certificate_matrix']]
+          names += ['CvSCrossMatrixV1.' + n for n in [
+              'trigPoly_eq_lowBlock', 'trigPoly_scertM_integrable', 'trigPoly_quad_eq',
+              'cross_trigPoly']]
+          names += ['CvSCrossBoundV1.' + n for n in [
+              'archTerm_abs_le_interp', 'hplus_abs_le', 'scertM_abs_le', 'scertM_sq_mul_integrable',
+              'lowBlock_scertM_sq_integrable', 'cross_sq_le']]
+          names += ['CvSFourierIntervalV1.' + n for n in [
+              'coef_eq', 'hasSum_coef', 'integral_normSq_trigPoly', 'integral_mul_conj_trigPoly',
+              'norm_sub_trigPoly', 'tendsto_partialSum']]
+          names += ['CvSCrossCertV1.' + n for n in [
+              'cross_sub', 'tendsto_cross_partialSum', 'cross_trigPoly_row', 'atom_orth',
+              'cross_sq_le_of_rows', 'window_of_certificate_rows']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
