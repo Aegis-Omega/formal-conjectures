@@ -1,0 +1,123 @@
+name: RH PR90 Native Residual Row Proof
+
+on:
+  push:
+    branches:
+      - 'proof/rh-cvs-checked-low-bridge-v1'
+    paths:
+      - '.github/workflows/rh-pr90-native-residual.yml'
+      - 'research/rh/feshbach_lean_v1/CvSResidualRowBudgetV1.lean'
+      - 'research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean'
+  workflow_dispatch:
+
+concurrency:
+  group: rh-pr90-native-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+
+jobs:
+  residual-source-and-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout PR90 exact head (read-only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify source pins and exact 139-row residual bound
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          src=Path('research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean').read_text()
+          def vec(name):
+              m=re.search(r'^def '+name+r' : List ℕ := \[([^\]]+)\]$',src,re.M)
+              if m is None: raise RuntimeError('missing '+name)
+              a=[int(v.strip()) for v in m.group(1).split(',')]
+              assert len(a)==139 and all(x>=0 for x in a)
+              return a
+          def scalar(name):
+              m=re.search(r'^def '+name+r' : ℤ := (\d+)$',src,re.M)
+              if m is None: raise RuntimeError('missing '+name)
+              return int(m.group(1))
+          m=re.search(r'^def radI \(i j : ℕ\) : ℤ :=\s*\n(.*?)\n\s*def ivOk',src,re.S|re.M)
+          assert m
+          formula='(AD.getD i 0 : ℤ) * AD.getD j 0 * T64 + CPI * ((AT.getD i 0 : ℤ) * BT.getD j 0 + (AT.getD j 0 : ℤ) * BT.getD i 0) + RPI'
+          assert ''.join(m.group(1).split())==''.join(formula.split()),'SOURCE_FORMULA_CHANGED'
+          AD,AT,BT=vec('AD'),vec('AT'),vec('BT')
+          CPI,RPI,T64,SR=[scalar(k) for k in ('CPI','RPI','T64','SR')]
+          sums=(sum(AD),sum(AT),sum(BT))
+          rows=[AD[i]*sums[0]*T64+CPI*(AT[i]*sums[2]+BT[i]*sums[1])+139*RPI for i in range(139)]
+          worst=max(range(139),key=lambda i:rows[i])
+          assert all(x>=0 and 230000*x<SR for x in rows),'ROW_BOUND_FAILED'
+          print('EXACT_SOURCE_ROW_BOUND_PASS', 'rows',len(rows),'worst',worst)
+          print('MAX_ROW_NUMERATOR',rows[worst])
+          print('SR',SR)
+          print('GAP',SR-230000*rows[worst])
+          PY
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      - name: Checkout immutable external LiCriterion provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+
+      - name: Build pinned provider with original CvS recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/m8_kernel_v1/replay.py provider
+
+      - name: Replay source-exact CvS closure and compile both PR90 modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          original=Path('.github/workflows/rh-feshbach-schur-v1.yml').read_text()
+          first='          RING="$GITHUB_WORKSPACE/.lake/ringout"'
+          last='          python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py'
+          start=original.index(first)
+          stop=original.index(last,start)
+          original_block='\n'.join(line[10:] for line in original[start:stop].splitlines())
+          old='lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
+          new='lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
+          if original_block.count(old)!=1: raise RuntimeError('SOURCE_BUILD_RECIPE_CHANGED')
+          original_block=original_block.replace(old,new)
+          appended='\n'.join([
+            'lean -DwarningAsError=true -o "$RING/CvSResidualRowBudgetV1.olean" research/rh/feshbach_lean_v1/CvSResidualRowBudgetV1.lean',
+            'lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean',
+            'echo PR90_LEAN_KERNEL_REPLAY_PASS'
+          ])
+          Path('/tmp/aegis-pr90-replay.sh').write_text('set -euo pipefail\n'+original_block+'\n'+appended+'\n')
+          PY
+          bash /tmp/aegis-pr90-replay.sh 2>&1 | tee pr90-replay.log
+          if grep -E 'sorryAx|declaration uses \'sorry\'' pr90-replay.log; then exit 1; fi
+          grep -F PR90_LEAN_KERNEL_REPLAY_PASS pr90-replay.log
