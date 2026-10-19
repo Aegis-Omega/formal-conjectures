@@ -19,6 +19,9 @@ open Finset
 
 namespace AEGIS.CvSProjectedPackedCertificateL12V1
 
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+
 open AEGIS.CvSPackedGramV1
 open AEGIS.RHFixIntervalV1
 open AEGIS.CvSLowBlockMatrixV1
@@ -185,7 +188,7 @@ def certR : List (List ℤ) := [
   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32737984]
 ]
 
-def rCoeff (i j : Fin 139) : ℝ :=
+noncomputable def rCoeff (i j : Fin 139) : ℝ :=
   (((certR.getD i.val []).getD j.val 0 : ℤ) : ℝ) / 2 ^ 40
 
 /-- X = P*R: these vectors span exactly the actual finite moment-atom image
@@ -492,8 +495,6 @@ def certEps : ℤ := 491961989234895
 def certEta : ℤ := 314557127098836
 
 /-- Lean-kernel replay of the fully concrete packed integer check. -/
-set_option maxRecDepth 100000 in
-set_option maxHeartbeats 0 in
 theorem packed_check_true :
     check certBase certB 139 certEps certEta certL certI = true := by
   decide +kernel
