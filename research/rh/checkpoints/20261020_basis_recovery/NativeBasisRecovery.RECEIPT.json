@@ -1,0 +1,17 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/aegis-research-execution/analytic_bridge/NativeBasisRecovery.lean"
+  ],
+  "LEAN_PATH_prefix": "/workspace/aegis-research-execution/integration",
+  "source_sha256": "b2814b219a5d19811220f4b1f71853bfd04bb378ea381e219cb875aefd4868fa",
+  "source_commit": "97f513351488478c12bb3e47075887e9fa17220c",
+  "scope": "Exact actual source declarations certR, rCoeff, R_basis, normSqCoeffs in extracted import context; not full analytic DAG",
+  "seconds": 1.780695214998559,
+  "returncode": 0,
+  "status": "PASS",
+  "compiler_output": "'AEGIS.CvSProjectedSchurBridgeL12V1.rCoeff_diag_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedSchurBridgeL12V1.basisFrobenius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_normSq_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_frobenius_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+}

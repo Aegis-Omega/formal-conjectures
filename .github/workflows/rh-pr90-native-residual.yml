@@ -122,8 +122,10 @@ jobs:
           original_block='\n'.join(line[10:] for line in original[start:stop].splitlines())
           old='lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
           new='lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
-          if original_block.count(old)!=1: raise RuntimeError('SOURCE_BUILD_RECIPE_CHANGED')
-          original_block=original_block.replace(old,new)
+          if original_block.count(old)==1:
+            original_block=original_block.replace(old,new)
+          elif original_block.count(new)!=1:
+            raise RuntimeError('SOURCE_BUILD_RECIPE_CHANGED')
           appended='\n'.join([
             'lean -DwarningAsError=true -o "$RING/CvSResidualRowBudgetV1.olean" research/rh/feshbach_lean_v1/CvSResidualRowBudgetV1.lean',
             'lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean',

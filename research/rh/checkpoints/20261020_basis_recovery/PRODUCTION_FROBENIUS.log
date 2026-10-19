@@ -1,0 +1,3 @@
+'AEGIS.CvSRealBasisBoundV1.real_row_normSq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry' depends on axioms: [propext, Classical.choice, Quot.sound]

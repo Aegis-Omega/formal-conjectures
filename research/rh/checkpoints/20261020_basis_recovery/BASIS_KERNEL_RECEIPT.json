@@ -1,0 +1,40 @@
+{
+  "timestamp_utc": "2026-10-19T22:15:54.359378+00:00",
+  "base_sha": "bad9a7d0a2067275d358c359f40157ac1b38d516",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "native_verified": {
+    "generic_roots": 4,
+    "actual_source_basis_roots": 5,
+    "actual_source_integer_data_roots": 2,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "basis_native_context": "Source-extracted certR, rCoeff, R_basis, normSqCoeffs; full analytic imports not locally replayed",
+  "full_production_module": "NOT_RUN; queued via existing source workflow after push",
+  "new_consumers": "3 source candidates; full-context kernel compilation pending",
+  "still_explicit": [
+    "actual entry enclosure hIv or Fact(bigCheck=true)",
+    "Schur row budget and positive gap for hlow",
+    "universal window or actual Weil packet producer for RH"
+  ],
+  "unchanged_certificate_source_sha256": "86b4cee0fb13866e3b801fe41f09f1afb059cbdbbca7692f56058a836724999d",
+  "sources": {
+    "CvSTriangularTransportV1": {
+      "sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7",
+      "blob_sha": "fe708d0f2596a3a1dbf5f1086df6a4162341a25d"
+    },
+    "CvSRealBasisBoundV1": {
+      "sha256": "7e5aba10dbe4cd114f41e5cd7049d493ffc221c0d4fcc87656770d01e3f27b77",
+      "blob_sha": "cec3fd19dff8c16bfb26a83de90a04947c93e812"
+    },
+    "CvSProjectedBasisL12V1": {
+      "sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366"
+    }
+  },
+  "unconditional_RH": "NOT_PROVED"
+}
