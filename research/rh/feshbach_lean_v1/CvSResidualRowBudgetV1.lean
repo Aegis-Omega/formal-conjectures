@@ -60,7 +60,7 @@ theorem radius_row_real (i : Fin 139) :
       (∑ j : Fin 139, (radI i.val j.val : ℝ)) / (SR : ℝ) <
         (1 / 230000 : ℝ) := by
     apply (div_lt_div_iff₀ hs (by norm_num : (0 : ℝ) < 230000)).2
-    simpa only [mul_one] using hr
+    simpa only [one_mul, mul_comm] using hr
   simpa only [Finset.sum_div] using he
 
 end AEGIS.CvSResidualRowBudgetV1
