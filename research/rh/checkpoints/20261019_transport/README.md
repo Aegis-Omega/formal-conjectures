@@ -38,3 +38,13 @@ readable here. `ANALYTIC_ADDENDUM.zip` preserves the subsequent exact
 interval experiment without folding positive/negative frequencies; all9730
 upper-triangle entries still fit the original certificate boxes. This
 reduces the algebra required for the remaining Lean enclosure bridge.
+
+## Live-work preservation
+
+`LIVE_WORK_CHECKPOINT.zip` and `LIVE_WORK_MANIFEST.json` preserve all
+subsequent scripts, candidate source, source-prefix CI logs, and the full
+9093-declaration closure for eight natively verified roots.
+`LIVE_HANDOFF.json` records the precise in-flight experiments. Raw
+ConstantInfo dependency cycles have not yet been classified; this archive
+does not assert a complete acyclic RH proof graph. Pending computations
+and row-factored data candidates are not labelled kernel PASS.

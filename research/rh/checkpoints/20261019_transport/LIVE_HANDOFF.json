@@ -1,0 +1,37 @@
+{
+  "saved_at_utc": "2026-10-19T17:44:48.962396+00:00",
+  "prior_checkpoint_commit": "b62cb3146c2cb3da758447883bda396f12261f67",
+  "verified_source_proof_commit": "46aa247450aa3a87b99402c45f005ef5196ec77c",
+  "native_generic_verified_roots": 8,
+  "native_proof_term_closure": {
+    "roots": 8,
+    "declarations": 9093,
+    "source_modules": 324,
+    "missing_dependency_names": 0,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "raw_graph": "aegis-research-execution/current/NATIVE_PROOF_GRAPH.json in archive",
+    "acyclicity": "NOT_ASSERTED: ConstantInfo graph has cycles requiring classification/condensation; no false DAG PASS claimed"
+  },
+  "source_hTransport_full_import_CI": {
+    "run": 39292798497,
+    "commit": "46aa247450aa3a87b99402c45f005ef5196ec77c",
+    "status": "IN_PROGRESS"
+  },
+  "obsolete_run": {
+    "run": 39289211798,
+    "commit": "8a8e902e0baa48413ec24cb6c1e92b47fe391497",
+    "status": "CANCELLED; source-prefix tau/diagonal roots have standard-axiom output in saved log; no whole-run PASS"
+  },
+  "live_experiments": {
+    "original_numeric_slice": "RUNNING, no PASS receipt yet",
+    "row_factored_numeric_slice": "data declarations completed; finite check RUNNING, no PASS receipt yet",
+    "row_factoring": "candidate only, exact row bytes/order preserved; repository certificate source not modified"
+  },
+  "exact_Q96_analytic_intervals": "9730/9730 fit original certI, both folded and nonfolded; Python exact arithmetic evidence, actual hIv Lean proof remains open",
+  "next": "Read live finite-check receipts if finished. If row factoring is fast and accepted, source-bound minimal representation repair can be considered without changing any integer or theorem statement. Complete actual transport CI; then formalize the collected interval checker bridge.",
+  "RH": "NOT_PROVED"
+}
