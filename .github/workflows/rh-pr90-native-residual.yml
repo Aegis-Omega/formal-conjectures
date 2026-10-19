@@ -8,6 +8,10 @@ on:
       - '.github/workflows/rh-pr90-native-residual.yml'
       - 'research/rh/feshbach_lean_v1/CvSResidualRowBudgetV1.lean'
       - 'research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean'
+      - 'research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean'
+      - 'research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean'
+      - 'research/rh/feshbach_lean_v1/tests/**'
+      - 'research/rh/checkpoints/20261019_strict_kernel/**'
   workflow_dispatch:
 
 concurrency:
