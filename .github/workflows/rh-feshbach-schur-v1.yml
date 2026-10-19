@@ -382,6 +382,9 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a ring.log
+          python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -478,6 +481,12 @@ jobs:
               'frequency_factor', 'atomWeight_eq', 'transformed_coeff_eq_lowCoeff',
               'projectedQ_eq_signed_form', 'hTransport',
               'original_atom_coercivity_of_transport', 'hlow_of_projected_packed_of_transport']]
+          names += ['CvSDividedDifferenceCollectionV1.' + n for n in [
+              'divided_difference_collection', 'diagonal_divided_difference_collection']]
+          names += ['CvSProjectedEntryL12V1.' + n for n in [
+              'cs_bound', 'entry_error', 'gram_range', 'tabOk_true', 'transformedCoeff_eq', 'signedEntry_eq', 'projectedEntry_collect', 'diag_box',
+              'tau_box', 'pi_sq_bounds', 'X_err', 'Rpi_le', 'ivOk_mem', 'C_bounds', 'hI_eq', 'neI_eq',
+              'kp_real', 'H_err', 'Ehat_eq', 'entry_mem_le', 'projectedEntry_mem_certI_of_check', 'projected_lower_L12_of_check']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
