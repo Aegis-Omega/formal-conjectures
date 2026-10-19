@@ -343,7 +343,8 @@ jobs:
           lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -402,6 +403,11 @@ jobs:
           names += ['CvSCrossCertV1.' + n for n in [
               'cross_sub', 'tendsto_cross_partialSum', 'cross_trigPoly_row', 'atom_orth',
               'cross_sq_le_of_rows', 'window_of_certificate_rows']]
+          names += ['CvSRowTailV1.' + n for n in [
+              'cvsEntry_off', 'cvsEntry_symm', 'tsum_abs_width_le', 'source_integral_abs_le',
+              'tau_abs_le', 'crossRow_off', 'inv_sub_expand', 'crossRow_tail_le',
+              'sum_Ioc_inv_pow_le', 'sum_Ioc_shift_le', 'sum_int_tail_le', 'rows_tail_le',
+              'rows_split', 'window_of_certificate_tail']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
