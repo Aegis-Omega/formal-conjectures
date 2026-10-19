@@ -158,13 +158,15 @@ theorem mfac_continuous (ε : ℝ) (hε : 0 < ε) : Continuous (mfac ε hε) := 
 
 theorem mfac_nonneg (ε : ℝ) (hε : 0 < ε) (t : ℝ) : 0 ≤ mfac ε hε t := Complex.normSq_nonneg _
 
+theorem fourier_moll_norm_le (ε : ℝ) (hε : 0 < ε) (ξ : ℝ) : ‖𝓕 (moll ε hε) ξ‖ ≤ 1 := by
+  rw [Real.fourier_eq]
+  refine (norm_integral_le_integral_norm _).trans (le_of_eq ?_)
+  simp_rw [Circle.norm_smul]
+  simp only [moll, Complex.norm_real, Real.norm_of_nonneg (mollR_nonneg ε hε _)]
+  exact mollR_integral ε hε
+
 theorem mfac_le_one (ε : ℝ) (hε : 0 < ε) (t : ℝ) : mfac ε hε t ≤ 1 := by
-  have hn : ‖𝓕 (moll ε hε) (t / (2 * Real.pi))‖ ≤ 1 := by
-    rw [Real.fourier_eq]
-    refine (norm_integral_le_integral_norm _).trans (le_of_eq ?_)
-    simp_rw [Circle.norm_smul]
-    simp only [moll, Complex.norm_real, Real.norm_of_nonneg (mollR_nonneg ε hε _)]
-    exact mollR_integral ε hε
+  have hn := fourier_moll_norm_le ε hε (t / (2 * Real.pi))
   unfold mfac
   rw [Complex.normSq_eq_norm_sq]
   nlinarith [norm_nonneg (𝓕 (moll ε hε) (t / (2 * Real.pi)))]
@@ -187,19 +189,21 @@ theorem eseq_tendsto (δ : ℝ) : Tendsto (eseq δ) atTop (𝓝 0) := by
   refine h2.congr fun k => ?_
   simp [eseq, div_eq_mul_inv]
 
+theorem fourier_moll_tendsto {δ : ℝ} (hδ : 0 < δ) (ξ : ℝ) :
+    Tendsto (fun k => 𝓕 (moll (eseq δ k) (eseq_pos hδ k)) ξ) atTop (𝓝 1) := by
+  rw [tendsto_iff_norm_sub_tendsto_zero]
+  have hb : Tendsto (fun k => (2 * Real.pi * eseq δ k * ξ) ^ 2 / 2) atTop (𝓝 0) := by
+    have : Tendsto (fun k => (2 * Real.pi * eseq δ k * ξ) ^ 2 / 2) atTop
+        (𝓝 ((2 * Real.pi * 0 * ξ) ^ 2 / 2)) :=
+      ((((eseq_tendsto δ).const_mul (2 * Real.pi)).mul_const ξ).pow 2).div_const 2
+    simpa using this
+  exact squeeze_zero (fun k => norm_nonneg _)
+    (fun k => fourier_moll_sub_one (eseq δ k) (eseq_pos hδ k) ξ) hb
+
 theorem mfac_tendsto {δ : ℝ} (hδ : 0 < δ) (t : ℝ) :
     Tendsto (fun k => mfac (eseq δ k) (eseq_pos hδ k) t) atTop (𝓝 1) := by
-  set ξ := t / (2 * Real.pi)
-  have hF : Tendsto (fun k => 𝓕 (moll (eseq δ k) (eseq_pos hδ k)) ξ) atTop (𝓝 1) := by
-    rw [tendsto_iff_norm_sub_tendsto_zero]
-    have hb : Tendsto (fun k => (2 * Real.pi * eseq δ k * ξ) ^ 2 / 2) atTop (𝓝 0) := by
-      have : Tendsto (fun k => (2 * Real.pi * eseq δ k * ξ) ^ 2 / 2) atTop
-          (𝓝 ((2 * Real.pi * 0 * ξ) ^ 2 / 2)) :=
-        ((((eseq_tendsto δ).const_mul (2 * Real.pi)).mul_const ξ).pow 2).div_const 2
-      simpa using this
-    exact squeeze_zero (fun k => norm_nonneg _)
-      (fun k => fourier_moll_sub_one (eseq δ k) (eseq_pos hδ k) ξ) hb
-  have h := (Complex.continuous_normSq.tendsto 1).comp hF
+  have h := (Complex.continuous_normSq.tendsto 1).comp
+    (fourier_moll_tendsto hδ (t / (2 * Real.pi)))
   rw [map_one] at h
   exact h
 
@@ -264,6 +268,8 @@ end AEGIS.CvSRoughV1
 #print axioms AEGIS.CvSRoughV1.mollify_tsupport
 #print axioms AEGIS.CvSRoughV1.mollify_momentZero
 #print axioms AEGIS.CvSRoughV1.mollify_energy
+#print axioms AEGIS.CvSRoughV1.fourier_moll_norm_le
+#print axioms AEGIS.CvSRoughV1.fourier_moll_tendsto
 #print axioms AEGIS.CvSRoughV1.mfac_le_one
 #print axioms AEGIS.CvSRoughV1.mfac_tendsto
 #print axioms AEGIS.CvSRoughV1.rough_of_smooth

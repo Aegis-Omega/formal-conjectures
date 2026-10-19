@@ -332,7 +332,9 @@ jobs:
           done
           lean research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -354,9 +356,16 @@ jobs:
               'psi_sub_log_eq_hplus', 'scertM_eq_qsym', 'scertM_quad_trigPoly']]
           names += ['CvSRoughV1.' + n for n in [
               'mollify_contDiff', 'mollify_tsupport', 'mollify_momentZero', 'mollify_energy',
-              'mfac_le_one', 'mfac_tendsto', 'rough_of_smooth']]
+              'fourier_moll_norm_le', 'fourier_moll_tendsto', 'mfac_le_one', 'mfac_tendsto',
+              'rough_of_smooth']]
           names += ['CvSKreinRoughV1.' + n for n in [
               'energy_factor', 'krein_smooth', 'krein_rough', 'krein_slack_rough']]
+          names += ['CvSPlancherelRoughV1.' + n for n in [
+              'fourier_self_adjoint', 'fourier_pairing', 'mollify_ae_tendsto', 'mollify_norm_le',
+              'plancherel_rough', 'energy_eq_two_pi_L2']]
+          names += ['CvSTraceV1.' + n for n in [
+              'cauchy_schwarz', 'fourier_eq_pairing', 'energy_le_dist', 'slack_le_trace',
+              'complement_bound']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
