@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "source_sha256": "062997de3eed7376ee4107072240bc5905db767f77d06f7084382780abb1b99b",
+  "roots": [
+    "AEGIS.CvSDyadicEnclosureV1.rescale_endpoint",
+    "AEGIS.CvSDyadicEnclosureV1.enclosure_transport"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "scope": "Exact dyadic endpoint rescaling and containment; specialize p64,d32 for Q96 toQ64. Does not itself establish the real entry fine-scale enclosure."
+}
