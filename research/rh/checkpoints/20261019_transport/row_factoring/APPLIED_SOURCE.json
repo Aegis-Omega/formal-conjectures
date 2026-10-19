@@ -1,0 +1,10 @@
+{
+  "source_path": "research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean",
+  "source_sha256": "86b4cee0fb13866e3b801fe41f09f1afb059cbdbbca7692f56058a836724999d",
+  "original_source_sha256": "a56736a7c4067638df73c4f98ef336962c88eca5a3613e3abb98ef500c7b0735",
+  "transformation": "417 private row definitions with original identical row literal bytes and original order; move existing two #print axioms commands adjacent to their declarations",
+  "constants_and_theorem_statements_and_proofs": "UNCHANGED",
+  "native_numeric_scope": "exact computed numerical certificate only; actual analytic import replay pending new CI",
+  "raw_numeric_probe": "interrupted without compiler result after536.055seconds; not a mathematical failure",
+  "row_factored_numeric_probe": "PASS80.185seconds; axioms[propext]"
+}

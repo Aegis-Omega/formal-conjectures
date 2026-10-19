@@ -27,8 +27,7 @@ They certify no window family or unconditional RH theorem.
 The accompanying repair of `CvSProjectedSchurBridgeL12V1` opens the namespace
 containing `Im` and makes multiplication commutativity explicit in the two
 division inequalities. The mathematical statements are unchanged.
-No bytes in the packed certificate or its `certR`, `certL`, or `certI` data
-are changed.
+The transport change does not alter the packed certificate data.
 
 ## Validation scope at submission
 
@@ -44,3 +43,19 @@ constant. This pilot is a separate algebra test, not the actual analytic
 import context. The existing workflow now compiles that context and checks
 all 14 added roots. Its exact-commit CI result is authoritative for the
 concrete source composition; local pilot success is not a substitute.
+
+## Source table elaboration repair
+
+A subsequent representation-only repair factors `certR`, `certL`, and
+`certI` into417 private row declarations. Every original row literal byte,
+row order, numerical constant, theorem statement, and proof is preserved.
+An independent reconstruction restored the complete original source from
+the factored version before audit-output relocation. Existing `#print axioms`
+commands are moved next to their checked declarations for useful CI progress.
+
+The exact source-extracted numeric check with factored rows passes native
+Lean in80.185seconds with `[propext]`. The unfactored numeric probe was
+interrupted after536.055seconds without a compiler result. These scoped
+measurements diagnose elaboration performance, not a changed mathematical
+certificate. The complete analytic module still requires its own exact-SHA
+CI replay. Receipts are in the repository's20261019 transport checkpoint.

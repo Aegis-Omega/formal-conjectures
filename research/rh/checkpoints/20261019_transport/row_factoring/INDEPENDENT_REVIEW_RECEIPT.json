@@ -1,0 +1,56 @@
+{
+  "base_commit": "8a8e902e0baa48413ec24cb6c1e92b47fe391497",
+  "original_sha256": "a56736a7c4067638df73c4f98ef336962c88eca5a3613e3abb98ef500c7b0735",
+  "candidate_sha256": "eaf36488eca078f2497ddab4e04dc3617a11ae764da23752dc1f40212b447009",
+  "all_other_source_bytes_unchanged_after_expanding_helpers": true,
+  "tables": [
+    {
+      "table": "certR",
+      "rows": 139,
+      "columns_per_row": [
+        139
+      ],
+      "identical_row_bytes": true,
+      "identical_numeric_values": true,
+      "identical_order": true,
+      "provenance_hashes_match": true
+    },
+    {
+      "table": "certL",
+      "rows": 139,
+      "columns_per_row": [
+        139
+      ],
+      "identical_row_bytes": true,
+      "identical_numeric_values": true,
+      "identical_order": true,
+      "provenance_hashes_match": true
+    },
+    {
+      "table": "certI",
+      "rows": 139,
+      "columns_per_row": [
+        139
+      ],
+      "identical_row_bytes": true,
+      "identical_numeric_values": true,
+      "identical_order": true,
+      "provenance_hashes_match": true
+    }
+  ],
+  "kernel_status": "NOT_RERUN_BY_THIS_REVIEW",
+  "supplied_numeric_slice_receipt": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "/workspace/aegis-h140-recovery/recovered_4fabfb66/native_slice/ProjectedNumericSplit.lean"
+    ],
+    "LEAN_PATH_prefix": "/workspace/aegis-h140-recovery/recovered_4fabfb66/native_slice",
+    "returncode": 0,
+    "seconds": 80.18502729199827,
+    "compiler_output": "'AEGIS.CvSProjectedPackedCertificateL12V1.packed_check_true' depends on axioms: [propext]\n",
+    "input_sha256": "85afefbcbe18a67399f16a2a8072a8e90cefd1bef6ce50716d40901ca629c36b",
+    "scope": "native kernel exact packed projected139 numeric check, original row bytes/order unchanged; computational slice, full analytic import graph separately pending CI"
+  }
+}
