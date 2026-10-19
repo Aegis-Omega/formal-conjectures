@@ -28,6 +28,7 @@ import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import AEGISOverlay.RHFourLogThreeActualPrimeV1
 import AEGISOverlay.RHHexagram64MellinWeilFusionV1
+import AEGISOverlay.RHMellinDetectorCenteredV1
 import AEGISOverlay.RHBaguaRotatingTwoPairMellinV1
 import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
 import AEGISOverlay.RHGlobalizationChainV13
