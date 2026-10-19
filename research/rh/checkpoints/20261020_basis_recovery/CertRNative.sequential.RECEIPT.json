@@ -1,0 +1,18 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-research-execution/analytic_bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-research-execution/integration/CertRNative.olean",
+    "/workspace/aegis-research-execution/analytic_bridge/CertRNative.lean"
+  ],
+  "seconds": 41.08714216200315,
+  "returncode": 0,
+  "source_sha256": "7ac64997665f5b2f7b58b8671c2dd9b85e2108fc2dd311afb480fefaa92258ba",
+  "compiler_output": "'AEGIS.CvSProjectedPackedCertificateL12V1.certR_upper' depends on axioms: [propext]\n'AEGIS.CvSProjectedPackedCertificateL12V1.certR_diag_ne_zero' depends on axioms: [propext]\n",
+  "classification": "source-extracted actual certR, sequential elaboration; not full analytic import replay"
+}

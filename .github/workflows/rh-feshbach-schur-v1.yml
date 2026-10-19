@@ -381,9 +381,12 @@ jobs:
           lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSTriangularTransportV1.olean" research/rh/feshbach_lean_v1/CvSTriangularTransportV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSRealBasisBoundV1.olean" research/rh/feshbach_lean_v1/CvSRealBasisBoundV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedBasisL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -487,6 +490,9 @@ jobs:
               'cs_bound', 'entry_error', 'gram_range', 'tabOk_true', 'transformedCoeff_eq', 'signedEntry_eq', 'projectedEntry_collect', 'diag_box',
               'tau_box', 'pi_sq_bounds', 'X_err', 'Rpi_le', 'ivOk_mem', 'C_bounds', 'hI_eq', 'neI_eq',
               'kp_real', 'H_err', 'Ehat_eq', 'entry_mem_le', 'projectedEntry_mem_certI_of_check', 'projected_lower_L12_of_check']]
+          names += ['CvSTriangularTransportV1.upper_triangular_surjective']
+          names += ['CvSRealBasisBoundV1.' + n for n in ['real_row_normSq_le', 'real_matrix_normSq_le', 'frobenius_pos_of_entry']]
+          names += ['CvSProjectedBasisL12V1.' + n for n in ['certR_upper', 'certR_diag_ne_zero', 'rCoeff_diag_ne_zero', 'R_basis_surjective', 'basisFrobenius_pos', 'R_basis_normSq_bound', 'R_basis_frobenius_bound', 'original_atom_coercivity_of_basis', 'original_atom_coercivity_of_checked_source', 'hlow_of_checked_source']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)

@@ -1,0 +1,5 @@
+'AEGIS.CvSProjectedSchurBridgeL12V1.rCoeff_diag_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSProjectedSchurBridgeL12V1.basisFrobenius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_normSq_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSProjectedSchurBridgeL12V1.R_basis_frobenius_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
