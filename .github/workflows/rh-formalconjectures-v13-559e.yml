@@ -335,7 +335,12 @@ jobs:
           print('ALL_STANDARD_AXIOMS_ONLY')
           PY
 
-      - name: Run exact FormalConjectures RH target through V13 criterion
+      # PR validation checks the PINNED, historical V13 criterion and
+      # its theorem-to-canonical-type bridge. The separate unconditional
+      # RH admission check remains fail-closed on workflow_dispatch;
+      # a result from these historical sources must not be attributed to
+      # the changing PR #89 exact-head proof.
+      - name: Run pinned V13 criterion; canonical RH admission on dispatch
         shell: bash
         run: |
           set -euo pipefail
@@ -343,6 +348,11 @@ jobs:
           import FormalConjectures.Millennium.RiemannHypothesis
           import WeilRHImpliesFinalSignV13
           import RHRestrictedWeilBridgeV13
+
+          /-!
+          # V13 conditional bridge to the exact FormalConjectures RH type
+          Its conclusions still require the displayed mathematical inputs.
+          -/
 
           namespace AEGISFormalConjecturesRHV13Probe
 
@@ -368,10 +378,19 @@ jobs:
           lake env lean AEGISFormalConjecturesRHV13Probe.lean \
             2>&1 | tee evidence/aegis-formalconjectures-v13-conditional.log
           ! grep -F 'sorryAx' evidence/aegis-formalconjectures-v13-conditional.log
+          printf 'V13_CONDITIONAL_BRIDGE=KERNEL_COMPILED_STANDARD_AXIOMS\n' > evidence/V13_CHECK_SCOPE.txt
+          printf 'V13_PINNED_FORMAL_CONJECTURES_SHA=%s\nV13_PINNED_AEGIS_SHA=%s\n' \
+            "$FORMAL_CONJECTURES_SHA" "$AEGIS_SHA" >> evidence/V13_CHECK_SCOPE.txt
 
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
           cat > AEGISFormalConjecturesRHV13UnconditionalProbe.lean <<'LEAN'
           import FormalConjectures.Millennium.RiemannHypothesis
           import WeilRHImpliesFinalSignV13
+
+          /-!
+          # Unconditional canonical RH proof admission (strict)
+          A proof by equivalence alone does not close the universal sign goal.
+          -/
 
           namespace AEGISFormalConjecturesRHV13UnconditionalProbe
 
@@ -433,6 +452,10 @@ jobs:
               'UNCONDITIONAL_RH_RESULT=PINNED_RH_TYPE_KERNEL_CLOSED\n')
           print('UNCONDITIONAL_RH_RESULT=PINNED_RH_TYPE_KERNEL_CLOSED')
           PY
+          else
+            printf 'UNCONDITIONAL_RH_RESULT=NOT_ASSESSED_ON_PR\n' > evidence/UNCONDITIONAL_RH_DISPOSITION.txt
+            printf 'Canonical RH admission not attempted by the historical V13 PR criterion check.\n'
+          fi
 
       - name: Emit exact diagnostic disposition
         if: always()
@@ -456,7 +479,10 @@ jobs:
           UPSTREAM_RH_SOURCE_BASELINE=UNMODIFIED_SORRY_CATALOG
           AEGIS_GATE_COMPILED_IN_FORMAL_CONJECTURES_ENV=REQUIRED
           V13_CRITERION_TO_EXTERNAL_TARGET=REQUIRED_GREEN
-          UNCONDITIONAL_EXTERNAL_TARGET=SEE_UNCONDITIONAL_RH_RESULT_AND_AXIOM_LOG
+          UNCONDITIONAL_EXTERNAL_TARGET=STRICT_DISPATCH_GATE_SEE_UNCONDITIONAL_RH_RESULT_AND_AXIOM_LOG
+          V13_SOURCE_SCOPE=HISTORICAL_PINNED_CRITERION_NOT_CURRENT_PR_HEAD
+          CANDIDATE_HEAD_SHA=${{ github.event.pull_request.head.sha || github.sha }}
+          TRIGGER_EVENT=${{ github.event_name }}
           RH_ADMISSION_SOURCE=EXACT_HEAD_LEAN_OFFICIAL_THEOREM_AND_AXIOM_AUDIT
           AUTHORITY_EFFECT=NONE
           EOF
