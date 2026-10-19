@@ -367,6 +367,10 @@ jobs:
           lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log
           lean research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -430,6 +434,12 @@ jobs:
               'tau_abs_le', 'crossRow_off', 'inv_sub_expand', 'crossRow_tail_le',
               'sum_Ioc_inv_pow_le', 'sum_Ioc_shift_le', 'sum_int_tail_le', 'rows_tail_le',
               'rows_split', 'window_of_certificate_tail', 'rowTail_zero', 'exists_uniform_rows_tail_cutoff']]
+          names += ['CvSArctanTailV1.' + n for n in [
+              'arctan_hasSum', 'arctan_le_partial', 'partial_le_arctan', 'arctan_step', 'tail_bracket']]
+          names += ['CvSTauSourceV1.' + n for n in ['source_integral_series', 'source_bracket']]
+          names += ['CvSTauL12V1.' + n for n in [
+              'pi_bounds', 'e35_bounds', 'head_bounds', 'tauCheck_sound', 'tauBatch0_true',
+              'source_integral_mem']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
