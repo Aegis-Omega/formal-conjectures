@@ -331,6 +331,8 @@ jobs:
             lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
           done
           lean research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -350,6 +352,11 @@ jobs:
                     'CvSQuadV1.quad_trigPoly', 'CvSQuadV1.qsym_cosB_integral']
           names += ['CvSRingBridgeV1.' + n for n in [
               'psi_sub_log_eq_hplus', 'scertM_eq_qsym', 'scertM_quad_trigPoly']]
+          names += ['CvSRoughV1.' + n for n in [
+              'mollify_contDiff', 'mollify_tsupport', 'mollify_momentZero', 'mollify_energy',
+              'mfac_le_one', 'mfac_tendsto', 'rough_of_smooth']]
+          names += ['CvSKreinRoughV1.' + n for n in [
+              'energy_factor', 'krein_smooth', 'krein_rough', 'krein_slack_rough']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
