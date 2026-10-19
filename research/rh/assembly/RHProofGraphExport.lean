@@ -27,6 +27,7 @@ import AEGISOverlay.RHKreinMultiplicativeTransportV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import AEGISOverlay.RHFourLogThreeActualPrimeV1
+import AEGISOverlay.RHHexagram64MellinWeilFusionV1
 import AEGISOverlay.RHBaguaRotatingTwoPairMellinV1
 import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
 import AEGISOverlay.RHGlobalizationChainV13
@@ -46,6 +47,16 @@ set_option maxHeartbeats 0
 elab "#export_rh_proof_graph" : command => do
   let env ← getEnv
   let roots : List Name := [
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate",
+    "AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_mellin_weil_zero_fusion",
+    "AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_prime_line_mellin_fusion",
+    "AEGIS.RHMellinDetectorCenteredV1.narrow_detector_strict_local_kernel_gap",
     "AEGIS.RHFiniteFinePartitionV1.exists_finite_smooth_local_partition",
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
@@ -195,7 +206,7 @@ elab "#export_rh_proof_graph" : command => do
 
   /- Unlike root-dependency traversal, this independent inventory scans EVERY
      declaration already present in the imported kernel environment. A valid
-     theorem need not be referenced by one of our chosen 66 roots. The official
+     theorem need not be referenced by one of our selected roots. The official
      RH target with 'sorry' may also appear, so record full axiom dependencies
      instead of treating any matching theorem name as proof authority. -/
   let mut importedRh : Array Json := #[]
@@ -227,3 +238,14 @@ elab "#export_rh_proof_graph" : command => do
   logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} DEFEQ_TYPE_CANDIDATES {importedRh.size}"
 
 #export_rh_proof_graph
+
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate
+#print axioms AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_mellin_weil_zero_fusion
+#print axioms AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_prime_line_mellin_fusion
+#print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_detector_strict_local_kernel_gap
