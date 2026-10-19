@@ -1,0 +1,182 @@
+{
+  "timestamp_utc": "2026-10-19T22:12:35.220549+00:00",
+  "source_head": "97f513351488478c12bb3e47075887e9fa17220c",
+  "pr89_head": "5d7425dcc6f4137b2cf3f57bc953504135a388e6",
+  "pr90_head": "b6d2367e87223d06f99167006fe246a8de45f80b",
+  "classification": "Mixed verified results and explicitly unverified work in progress; not an RH proof",
+  "generic_basis_roots": "4 native PASS; standard axioms only",
+  "certR_data_roots": "2 native no-output-file PASS previously; subsequent -o attempt killed returncode 137; not successful exported-module replay",
+  "NativeBasisRecovery": "NOT_RUN at checkpoint creation",
+  "files": [
+    {
+      "path": "analytic_bridge/build_native_basis_recovery.py",
+      "sha256": "1b94b71ac69293ea28a21f1f7ee31a1ee0ddb82e863a6af8f1baf43b61771126",
+      "bytes": 3433
+    },
+    {
+      "path": "analytic_bridge/CertRNative.lean",
+      "sha256": "9fda9e2bb10ec0e16f9f766b14f17d7f64ac22bc199b257b6ac75c7dc678451a",
+      "bytes": 137134
+    },
+    {
+      "path": "analytic_bridge/kernel.log",
+      "sha256": "21d67d6b2f1febc2df44915cea652de704f4b78abbca51334777a0190cdb38cf",
+      "bytes": 1437
+    },
+    {
+      "path": "analytic_bridge/NativeBasisRecovery.lean",
+      "sha256": "9983f9a24d15ec2b4261eb6485057a8e77e9937057fcd544d807fc609021e093",
+      "bytes": 2658
+    },
+    {
+      "path": "analytic_bridge/TriangularAPIs.lean",
+      "sha256": "11fc39259f300b9fe9052f69fbc3f649bf9001e48421f59fb94f2014283b4cda",
+      "bytes": 321
+    },
+    {
+      "path": "analytic_bridge/CvSTriangularTransportV1.compile.RECEIPT.json",
+      "sha256": "6b68e262747a47c35c85761dce6eacd4100990cd81181a9cd1ddc3488fa78b94",
+      "bytes": 967
+    },
+    {
+      "path": "analytic_bridge/CertRNative.log",
+      "sha256": "5b318d2ac7e2e0f471e348247940bcecd715aea44593c3ea19b6b4f9214ea4e1",
+      "bytes": 175
+    },
+    {
+      "path": "analytic_bridge/CertRNative.RECEIPT.json",
+      "sha256": "cce437141055d07b15ae480e20a0fe2f3ee097d44fa8a450406a8678cd927416",
+      "bytes": 622
+    },
+    {
+      "path": "analytic_bridge/CertRNative.compile.RECEIPT.json",
+      "sha256": "9f48416cb4d9cc2f469bdcc0c375e9f35fe96958fb2d33da1d0ce8effea2d85c",
+      "bytes": 505
+    },
+    {
+      "path": "analytic_bridge/CvSDividedDifferenceCollectionV1.lean",
+      "sha256": "e2125ff81d77badd758759cb0595cd358d0287e31802c92e51eb3db40da1e56c",
+      "bytes": 3052
+    },
+    {
+      "path": "analytic_bridge/CvSTriangularTransportV1.compile.log",
+      "sha256": "eaf747ab4fd85b4d526da48a7f12c42bfd815bee228805f7c566f38545ca3d5b",
+      "bytes": 391
+    },
+    {
+      "path": "analytic_bridge/NativeBasisRecovery.PROVENANCE.json",
+      "sha256": "4b46c35db4e95d21541395f97272adc7f4590da5a0624ba25d857ecf20e57126",
+      "bytes": 710
+    },
+    {
+      "path": "analytic_bridge/CvSRealBasisBoundV1.compile.RECEIPT.json",
+      "sha256": "883f258956ec36e00f818ebb1cdf6c43f593fad3ba4faa4529e8855052932788",
+      "bytes": 854
+    },
+    {
+      "path": "analytic_bridge/CvSDyadicEnclosureV1.lean",
+      "sha256": "062997de3eed7376ee4107072240bc5905db767f77d06f7084382780abb1b99b",
+      "bytes": 1529
+    },
+    {
+      "path": "analytic_bridge/fin-build.log",
+      "sha256": "b15df6c56dc3f673b4fae2bad00f63f44e8b8a6262f257e507c8c5a700317573",
+      "bytes": 436
+    },
+    {
+      "path": "analytic_bridge/CvSRealBasisBoundV1.compile.log",
+      "sha256": "e1c7b5ac4f4920b383f114d29367ecef6f4a69f61df48e3bb400680f52652ba5",
+      "bytes": 325
+    },
+    {
+      "path": "analytic_bridge/CertRNative.compile.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "analytic_bridge/compile_basis_components.py",
+      "sha256": "2cdfbb67125a5e1a2bd748a4c5c8c3c2ce385416266ab924770e20f56d74d135",
+      "bytes": 1076
+    },
+    {
+      "path": "analytic_bridge/complex-norm-build.log",
+      "sha256": "c741d25e6a6282ce82466728c2a672e5f541e5bec0a118d5de12e651d2f42110",
+      "bytes": 18001
+    },
+    {
+      "path": "analytic_bridge/CvSTriangularTransportV1.lean",
+      "sha256": "b8d9020fa8061cd437149be611a253c26a4404adc6b966b0f01e8fc8260dbbb2",
+      "bytes": 2255
+    },
+    {
+      "path": "analytic_bridge/CvSRealBasisBoundV1.lean",
+      "sha256": "35186526023ad1e562208ffbcc166e9258bf2038117a5d5f533fb89a985bb979",
+      "bytes": 2616
+    },
+    {
+      "path": "current/NATIVE_CONDENSED_DAG.json",
+      "sha256": "ad593ed2d99ef881e2fd3603d325872cb691c4ba8669adf2bc747d0a239de018",
+      "bytes": 1567770
+    },
+    {
+      "path": "review/INDEPENDENT_ROUTE_PILOT_REVIEW.md",
+      "sha256": "8ca6e3360db1909c14927bbe389c6524ddce66fc09c5313aae447cd5a854586a",
+      "bytes": 5647
+    },
+    {
+      "path": "review/TRANSPORT_REVIEW.md",
+      "sha256": "1d39ddd17a5dc4b5e25cada8663ce1be3091a73610a783057870da4a6bb98a55",
+      "bytes": 5052
+    },
+    {
+      "path": "review/INDEPENDENT_REVIEW_RECEIPT.json",
+      "sha256": "e6d118f6f13b3d495bd301a16c3af2732d3c59f5d2650b6bde703b08a5359291",
+      "bytes": 3170
+    },
+    {
+      "path": "review/ROW_FACTORING_REVIEW.md",
+      "sha256": "d697546e53a18910fc454901b2b2d93e99ca074f4d4d9f90e69565ecc4cc4de8",
+      "bytes": 1742
+    },
+    {
+      "path": "review/INTEGRATION_REVIEW_SOURCE_HASHES.json",
+      "sha256": "6b333cfa5572b02ec0df9a9f6afdeb537115bbff61948cc50f176bcf561df715",
+      "bytes": 741
+    },
+    {
+      "path": "review/ROW_FACTORING_REVIEW_RECEIPT.json",
+      "sha256": "741497be08392c18fea4d6237b6792e8a2956c8ec8d22fdd5e71b4dbbf2d5d95",
+      "bytes": 1853
+    },
+    {
+      "path": "review/ANALYTIC_INTERVAL_REVIEW.md",
+      "sha256": "632606b0d71dbba11e37a31bde3c7c379819ea39e8efd587d2da05e8f80debf1",
+      "bytes": 6497
+    },
+    {
+      "path": "review/ANALYTIC_INTERVAL_REVIEW_RECEIPT.json",
+      "sha256": "b913a4c593e859be4af6a83ecd50c2bbc28fd6a4bbe4870bf1a55eb488425fd4",
+      "bytes": 2133
+    },
+    {
+      "path": "review/INDEPENDENT_INTEGRATION_REVIEW.md",
+      "sha256": "b708c5183ad042db7694988d00e0cf9a6eb93c64adcf5727bb0d5af3d7ff9724",
+      "bytes": 4509
+    },
+    {
+      "path": "review/INDEPENDENT_RESIDUAL_REVIEW.md",
+      "sha256": "9e757b8feef70461f670110b01f014488f9acd9b64d9a185037981c801502b58",
+      "bytes": 6889
+    },
+    {
+      "path": "review/SCHUR_BRIDGE_REPAIR_REVIEW.md",
+      "sha256": "151dfdf902f2ea9e4ef02fddee62dc81095749aaca7f567e54246b43275da689",
+      "bytes": 3390
+    },
+    {
+      "path": "review/BASIS_DATA_REVIEW.json",
+      "sha256": "c7c3770b9585325cac185c5fa451d03e4bf2f7f7d5426b5a4a1fe2b6e3ae74b9",
+      "bytes": 379
+    }
+  ]
+}
