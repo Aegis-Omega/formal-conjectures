@@ -337,7 +337,9 @@ jobs:
           lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -378,6 +380,12 @@ jobs:
           names += ['CvSLowBlockDecayV1.' + n for n in [
               'fourier_indicator_bound', 'lowBlock_energy_bounds', 'lowBlock_energy_integrable',
               'lowBlock_scertM_integrable', 'window_of_certificate_C1']]
+          names += ['CvSMomentBasisV1.' + n for n in [
+              'ibp_twice', 'momentZero_of_ode', 'basisFun_momentZero', 'momentAtom_momentZero',
+              'window_of_certificate_basis']]
+          names += ['CvSLowBlockMatrixV1.' + n for n in [
+              'scertM_neg', 'quad_eq_symm', 'lowBlock_eq_trigPoly', 'lowBlock_quad_eq',
+              'window_of_certificate_matrix']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
