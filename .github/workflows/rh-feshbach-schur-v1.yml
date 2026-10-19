@@ -330,11 +330,12 @@ jobs:
                    CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do
             lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
           done
-          lean research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -366,6 +367,9 @@ jobs:
           names += ['CvSTraceV1.' + n for n in [
               'cauchy_schwarz', 'fourier_eq_pairing', 'energy_le_dist', 'slack_le_trace',
               'complement_bound']]
+          names += ['CvSFeshbachWindowV1.' + n for n in [
+              'energy_add', 'quad_add', 'scertM_measurable', 'feshbach_combine',
+              'zero_quadratic_eq_energy', 'window_nonneg', 'window_nonneg_of_krein']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
