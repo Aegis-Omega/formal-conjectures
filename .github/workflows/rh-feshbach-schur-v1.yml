@@ -374,6 +374,9 @@ jobs:
           lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
           lean research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -453,6 +456,12 @@ jobs:
           names += ['CvSDiagL12V1.' + n for n in [
               'log_bounds', 'idiv_bounds', 'lpi_bounds', 'hplus_bounds', 'D_bounds', 'cvsEntry_diag_eq',
               'Pd_bounds', 'diagCheck_sound', 'diagAll_true', 'diag_mem', 'cvsEntry_diag_neg']]
+          names += ['CvSProjectedPackedCertificateL12V1.' + n for n in [
+              'packed_check_true', 'projected_lower', 'projected_nonnegative']]
+          names += ['CvSSchurClosureFromBoundsV1.' + n for n in [
+              'hlow_of_coercivity_and_budget', 'cvs_hlow_of_coercivity_and_budget']]
+          names += ['CvSProjectedSchurBridgeL12V1.' + n for n in [
+              'original_atom_coercivity', 'hlow_of_projected_packed']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
