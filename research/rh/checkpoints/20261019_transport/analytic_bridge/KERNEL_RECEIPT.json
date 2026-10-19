@@ -1,0 +1,26 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/formal-conjectures/research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean"
+  ],
+  "returncode": 0,
+  "status": "PASS",
+  "seconds": 1.5133808190003037,
+  "source_sha256": "e2125ff81d77badd758759cb0595cd358d0287e31802c92e51eb3db40da1e56c",
+  "base_commit": "c22af090718efb7e944b2f317ee165edca5b6a50",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "roots": [
+    "AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection",
+    "AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "scope": "Uniform finite real divided-difference identities; source analytic enclosure and finite matrix interval checker not discharged by these lemmas"
+}

@@ -1,5 +1,5 @@
 {
-  "recorded_at_utc": "2026-10-19T17:23:02.375605+00:00",
+  "recorded_at_utc": "2026-10-19T17:29:54.734373+00:00",
   "source_commit": "46aa247450aa3a87b99402c45f005ef5196ec77c",
   "branch": "proof/rh-feshbach-schur-v1",
   "source_baseline": "8a8e902e0baa48413ec24cb6c1e92b47fe391497",
@@ -12,14 +12,16 @@
     "generic_congruence": "4/4 PASS; independently reproduced",
     "parameterized_transport": "PASS; arbitrary real kernel, basis, angular constant; standard axioms only",
     "H140_computational_slice": "PASS 112.195s, [propext]; original full soundness CI separate",
-    "countertests": "9/9 PASS; includes shape/base/bounds/residual rejection and zero-margin/carry edge cases"
+    "countertests": "9/9 PASS; includes shape/base/bounds/residual rejection and zero-margin/carry edge cases",
+    "divided_difference_collection": "2/2 PASS; uniform arbitrary finite real x,y,tau,nu,D,C; standard axioms only"
   },
   "exact_projected_analytic_experiment": {
     "status": "9730/9730 upper triangle intervals contained in certI, Q96 outward exact arithmetic",
     "assumptions": "source tau and diagonal bounds for M>=3; odd tau/even diagonal; pi bounds; exact finite collection identity",
     "formal_status": "Python exact integer validation, NOT Lean proof of hIv",
     "script": "aegis-h140-recovery/projected_analytic_interval_experiment.py",
-    "receipt": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_ANALYTIC_INTERVAL_EXPERIMENT.json"
+    "receipt": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_ANALYTIC_INTERVAL_EXPERIMENT.json",
+    "simplification": "9730/9730 also pass with all141 signed frequency variables left separate after tau collection; no paired-frequency cancellation needed"
   },
   "remaining": [
     "Concrete analytic-import CI replay of transport and repaired Schur bridge",

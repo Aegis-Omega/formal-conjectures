@@ -1,0 +1,10 @@
+@AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection : ∀ {ι : Type u_1} [inst : Fintype ι]
+  (x y tau nu : ι → ℝ) (C : ℝ),
+  ∑ k, ∑ l, x k * y l * (C * ((tau k - tau l) / (nu k - nu l))) =
+    ∑ k, C * tau k * (x k * ∑ l, y l / (nu k - nu l) + y k * ∑ l, x l / (nu k - nu l))
+'AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

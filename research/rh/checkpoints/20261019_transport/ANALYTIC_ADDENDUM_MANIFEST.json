@@ -1,0 +1,27 @@
+{
+  "archive_sha256": "ba08535de40cafd1ed94e621a48a5cd24c491d0835486482176dfbc2d24d67e2",
+  "archive_bytes": 295571,
+  "parent_archive_sha256": "79ea91e802538b261bc94eac926b475f25f7863e354961271f36eb0d297ac067",
+  "files": [
+    {
+      "path": "aegis-h140-recovery/exact_head_8a8e902e/PROJECTED_ANALYTIC_INTERVAL_NO_FOLD.json",
+      "sha256": "690f7dca61c8f854679d74b6eb8ef75110a17e8d1ba4c13eee05542b7082257b",
+      "bytes": 931100
+    },
+    {
+      "path": "aegis-h140-recovery/projected_analytic_interval_no_fold.py",
+      "sha256": "10c5f0904817c6b34175f435c829ded4469ee03a02478a5faddf4de596bebfc4",
+      "bytes": 4288
+    },
+    {
+      "path": "aegis-research-execution/analytic_bridge/CvSDividedDifferenceCollectionV1.lean",
+      "sha256": "e2125ff81d77badd758759cb0595cd358d0287e31802c92e51eb3db40da1e56c",
+      "bytes": 3052
+    },
+    {
+      "path": "aegis-research-execution/analytic_bridge/kernel.log",
+      "sha256": "21d67d6b2f1febc2df44915cea652de704f4b78abbca51334777a0190cdb38cf",
+      "bytes": 1437
+    }
+  ]
+}

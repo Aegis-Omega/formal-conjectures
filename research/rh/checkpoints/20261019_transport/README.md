@@ -28,3 +28,13 @@ identity and interval checker soundness remains necessary to discharge
 
 No unconditional RH proof is claimed. Basis, mixed-row, trace-gap, and
 universal/cofinal obligations remain separate.
+
+## Analytic addendum
+
+`analytic_bridge/CvSDividedDifferenceCollectionV1.lean` contains two
+uniform finite identities checked natively with warnings as errors and
+standard axioms only. Its source, log, and kernel receipt are directly
+readable here. `ANALYTIC_ADDENDUM.zip` preserves the subsequent exact
+interval experiment without folding positive/negative frequencies; all9730
+upper-triangle entries still fit the original certificate boxes. This
+reduces the algebra required for the remaining Lean enclosure bridge.
