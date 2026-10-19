@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 import CvSCrossCertV1
+import CvSResidualCertificateV1
 
 /-!
 # The tail of the rows of the cross block (CvS step 6j, ring tree)
@@ -574,6 +575,41 @@ theorem rows_split {y z : ℤ → ℂ} {NP : ℕ} (hz : ∀ m : ℤ, NP < m.natA
 def tauBound (M : ℕ) : ℝ :=
   4 * Real.pi * (1 + Real.pi / 4) + Real.pi * ∑ j ∈ Finset.range M, |ppw j|
 
+/-- At order zero the actual row-tail budget is an inverse-gap bound. -/
+theorem rowTail_zero (M : ℕ) (L : ℝ) (F : Finset ℤ) (a : ℤ → ℂ)
+    (T : ℝ) (R NP : ℕ) :
+    rowTail M L F a 0 T R NP =
+      16 * (L / Real.pi) ^ 2 * T ^ 2 * (∑ n ∈ F, ‖a n‖) ^ 2 /
+        ((NP : ℝ) - R) := by
+  simp only [rowTail, Nat.cast_zero, Finset.range_zero, Finset.sum_empty,
+    mul_zero, pow_zero, mul_one, one_mul, zero_add]
+  ring
+
+open AEGIS.CvSCrossCertV1 in
+/-- A single cutoff bounds every later actual cross-row tail for all coefficient
+vectors on the fixed frequency range. The bound is relative to squared `l1`
+mass, and the cutoff may depend on `M`, `L`, `R`, and `ε`. -/
+theorem exists_uniform_rows_tail_cutoff (M : ℕ) {L : ℝ} (hL : 0 < L)
+    (R : ℕ) (ε : ℝ) (hε : 0 < ε) :
+    ∃ NP : ℕ, R < NP ∧ ∀ P : ℕ, NP ≤ P →
+      ∀ (F : Finset ℤ), (∀ n ∈ F, |(n : ℝ)| ≤ R) →
+      ∀ (a : ℤ → ℂ) (N : ℕ),
+        (∑ m ∈ (Finset.Icc (-(N : ℤ)) N).filter (fun m => P < m.natAbs),
+          ‖crossRow M L F a m‖ ^ 2) ≤ ε * (∑ n ∈ F, ‖a n‖) ^ 2 := by
+  have hC : 0 ≤ 16 * (L / Real.pi) ^ 2 * tauBound M ^ 2 := by positivity
+  obtain ⟨NP, hNP, hcut⟩ :=
+    AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff
+      (16 * (L / Real.pi) ^ 2 * tauBound M ^ 2) hC R ε hε
+  refine ⟨NP, hNP, fun P hP F hF a N => ?_⟩
+  have hRP : R < P := lt_of_lt_of_le hNP hP
+  calc
+    _ ≤ rowTail M L F a 0 (tauBound M) R P :=
+      rows_tail_le M hL hF hRP a 0 (fun k => tau_abs_le M hL k) N
+    _ = (16 * (L / Real.pi) ^ 2 * tauBound M ^ 2 / ((P : ℝ) - R)) *
+        (∑ n ∈ F, ‖a n‖) ^ 2 := by rw [rowTail_zero]; ring
+    _ ≤ ε * (∑ n ∈ F, ‖a n‖) ^ 2 :=
+      mul_le_mul_of_nonneg_right (hcut P hP).le (sq_nonneg _)
+
 open AEGIS.CvSCrossCertV1 in
 /-- **`window_of_certificate_rows` with finitely many rows and the explicit tail.** The rows
 `|m| ≤ NP` and the tail `rowTail` (order-`K` expansion, `|τ| ≤ tauBound M`) bound the cross block,
@@ -659,3 +695,7 @@ end AEGIS.CvSRowTailV1
 #print axioms AEGIS.CvSRowTailV1.rows_tail_le
 #print axioms AEGIS.CvSRowTailV1.rows_split
 #print axioms AEGIS.CvSRowTailV1.window_of_certificate_tail
+#check @AEGIS.CvSRowTailV1.rowTail_zero
+#check @AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff
+#print axioms AEGIS.CvSRowTailV1.rowTail_zero
+#print axioms AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff

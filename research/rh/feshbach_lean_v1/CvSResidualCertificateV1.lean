@@ -9,6 +9,7 @@ import Mathlib.Algebra.BigOperators.Ring.Finset
 import Mathlib.Data.Fintype.BigOperators
 import Mathlib.Data.Complex.Basic
 import Mathlib.Tactic.Linarith
+import Mathlib.Algebra.Order.Archimedean.Real.Basic
 
 /-!
 # Transfer of a finite rational certificate through entry enclosures
@@ -24,6 +25,23 @@ open scoped BigOperators ComplexConjugate
 namespace AEGIS.CvSResidualCertificateV1
 
 variable {ι : Type*} [Fintype ι]
+
+/-- One cutoff controls an inverse-gap residual at every later truncation. -/
+theorem exists_uniform_shifted_cutoff (C : ℝ) (hC : 0 ≤ C) (R : ℕ)
+    (ε : ℝ) (hε : 0 < ε) :
+    ∃ NP : ℕ, R < NP ∧ ∀ N : ℕ, NP ≤ N → C / ((N : ℝ) - R) < ε := by
+  obtain ⟨NP, hNP⟩ := exists_nat_gt ((R : ℝ) + C / ε + 1)
+  have hr : (R : ℝ) < NP := by
+    have : 0 ≤ C / ε := div_nonneg hC hε.le
+    linarith
+  refine ⟨NP, by exact_mod_cast hr, ?_⟩
+  intro N hN
+  have hNN : (NP : ℝ) ≤ N := by exact_mod_cast hN
+  have hden : 0 < (N : ℝ) - R := by linarith
+  rw [div_lt_iff₀ hden]
+  have hc : C / ε < (N : ℝ) - R := by linarith
+  have := (div_lt_iff₀ hε).mp hc
+  nlinarith
 
 /-- The scalar estimate used for each entry of a symmetric residual. -/
 theorem residual_entry_le (x y e r : ℝ) (he : |e| ≤ r) :
@@ -116,6 +134,8 @@ theorem actual_hermitian_nonneg (A A₀ R : ι → ι → ℝ) (ε : ℝ)
 
 end AEGIS.CvSResidualCertificateV1
 
+#check @AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff
+#print axioms AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff
 #check @AEGIS.CvSResidualCertificateV1.residual_entry_le
 #check @AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure
 #check @AEGIS.CvSResidualCertificateV1.residual_quadratic_le
