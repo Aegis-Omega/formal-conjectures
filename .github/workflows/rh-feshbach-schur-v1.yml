@@ -371,7 +371,9 @@ jobs:
           lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -445,6 +447,12 @@ jobs:
               'log2_bounds', 'log3_bounds', 'sinQ_bounds', 'sinPi_bounds', 'primeSum_eq',
               'prime_bounds', 'tauFullCheck_sound', 'tauFullAll_true', 'tau_mem', 'tau_neg',
               'tau_zero']]
+          names += ['CvSDiagTelV1.' + n for n in [
+              'log_step_bound', 'cube_tel', 'sq_tel', 'tail_limit', 'hplus_limit', 'logG_limit',
+              'step_bound', 'hplus_tel', 'stepD_bound', 'diagSeries_tel']]
+          names += ['CvSDiagL12V1.' + n for n in [
+              'log_bounds', 'idiv_bounds', 'lpi_bounds', 'hplus_bounds', 'D_bounds', 'cvsEntry_diag_eq',
+              'Pd_bounds', 'diagCheck_sound', 'diagAll_true', 'diag_mem', 'cvsEntry_diag_neg']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)

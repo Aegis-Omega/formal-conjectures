@@ -32,16 +32,17 @@ Weil-positivity certificate, and positivity for one window does not imply all wi
   k = 1..70, `tau_neg`/`tau_zero` for k ≤ 0. With `CvSRowTailV1.cvsEntry_off` this gives every
   off-diagonal entry of the L = 1.2 low block. Generators: `tools/gen_tau.py`,
   `tools/gen_tau_prime.py` (untrusted, reproduce the data exactly).
+- Diagonal at L = 6/5 (krein-ring job): `CvSDiagTelV1` (general L: `hplus_tel`, `diagSeries_tel`,
+  telescoped digamma/trigamma tails with explicit errors) and `CvSDiagL12V1.diag_mem`
+  (`cvsEntry M (6/5) n n`, n = 0..70, every M ≥ 3, width ≤ 2e-8; `cvsEntry_diag_neg` for n < 0).
+  Generator `tools/gen_diag.py`. With `tau_mem`/`tau_neg` and `cvsEntry_off`, every entry of the
+  low block |n|, |m| ≤ 70 has a proved enclosure; they are not yet assembled into `Iv` form.
 
 ## Next steps (in order)
-1. Enclosures of the matrix entries (the real wall): off-diagonal entries are done via τ_k (above).
-   Still open: the diagonal `cvsEntry M L n n` (`hplus_diag_integral`: h₊(2πn/L) needs Re ψ,
-   see `RHKreinDigammaSharpTailV1`/`RHEulerGammaSharpBaseV1`, plus the series
-   Σ (1 − e^{−c_j L})(c_j² − ω²)/(c_j² + ω²)²) and the prime part of the diagonal. Generic notes
-   (integrals ∫ h₊·cosB with digamma terms, τ_k, ppw = Λ(n)/√n weights, log, arctan). Check
-   existing enclosure modules first (`critical_line_v1`: RHExpEnclosureV1, RHPi40V1/RHPi80V1 on
-   the consolidated branch) before writing new ones. Needed: Taylor series with remainder and
-   quadrature with explicit error.
+1. Enclosures of the matrix entries: every L = 1.2 low-block entry (|n|, |m| ≤ 70) has a proved
+   enclosure (above). Still open for the window: the atom transform, the cross rows (`hfin`), the
+   trace integral and the Krein cells. Check existing enclosure modules first (`critical_line_v1`:
+   RHExpEnclosureV1, RHPi40V1/RHPi80V1 on the consolidated branch) before writing new ones.
 2. Bridge `hlow` to `quad_lower_complex`: index the low frequencies by `Fin n`, build `A` from
    `cvsEntry` (symmetric by `CvSRowTailV1.cvsEntry_symm`), prove `Iv.Mem` from step 1.
 3. `hfin`: rectangular generalisation of `check` (rows of length m ≠ n) and an interval Gram
