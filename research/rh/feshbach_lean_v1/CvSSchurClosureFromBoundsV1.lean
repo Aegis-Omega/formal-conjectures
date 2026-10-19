@@ -9,7 +9,7 @@ experiment. The bounds below apply to the *actual* lowCoeff map.
 -/
 import CvSRowTailV1
 
-open Finset Complex
+open Finset Complex ComplexConjugate
 
 namespace AEGIS.CvSSchurClosureFromBoundsV1
 
