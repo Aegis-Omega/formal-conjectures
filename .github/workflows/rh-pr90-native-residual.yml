@@ -134,5 +134,5 @@ jobs:
           Path('/tmp/aegis-pr90-replay.sh').write_text('set -euo pipefail\n'+original_block+'\n'+appended+'\n')
           PY
           bash /tmp/aegis-pr90-replay.sh 2>&1 | tee pr90-replay.log
-          if grep -E 'sorryAx|declaration uses \'sorry\'' pr90-replay.log; then exit 1; fi
+          if grep -E "sorryAx|declaration uses 'sorry'" pr90-replay.log; then exit 1; fi
           grep -F PR90_LEAN_KERNEL_REPLAY_PASS pr90-replay.log
