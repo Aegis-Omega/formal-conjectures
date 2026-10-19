@@ -373,8 +373,11 @@ jobs:
           lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
           lean research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
@@ -460,6 +463,9 @@ jobs:
               'packed_check_true', 'projected_lower', 'projected_nonnegative']]
           names += ['CvSSchurClosureFromBoundsV1.' + n for n in [
               'hlow_of_coercivity_and_budget', 'cvs_hlow_of_coercivity_and_budget']]
+          names += ['CvSProjectedSymmetryV1.' + n for n in [
+              'signedEntry_symm', 'projectedEntry_symm',
+              'projected_lower_of_Iv', 'projected_nonnegative_of_Iv']]
           names += ['CvSProjectedSchurBridgeL12V1.' + n for n in [
               'original_atom_coercivity', 'hlow_of_projected_packed']]
           for name in names:

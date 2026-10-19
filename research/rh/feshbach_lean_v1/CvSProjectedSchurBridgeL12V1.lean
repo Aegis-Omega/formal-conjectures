@@ -5,6 +5,7 @@ Not yet compiled in Lean. This theorem accepts explicit proof obligations;
 it does not elevate external numeric checks into kernel evidence.
 -/
 import CvSProjectedPackedCertificateL12V1
+import CvSProjectedSymmetryV1
 import CvSSchurClosureFromBoundsV1
 
 open Finset Complex
@@ -12,6 +13,7 @@ open Finset Complex
 namespace AEGIS.CvSProjectedSchurBridgeL12V1
 
 open AEGIS.CvSProjectedPackedCertificateL12V1
+open AEGIS.CvSProjectedSymmetryV1
 open AEGIS.CvSSchurClosureFromBoundsV1
 open AEGIS.CvSLowBlockMatrixV1
 open AEGIS.CvSMomentBasisV1
@@ -30,12 +32,11 @@ noncomputable def certifiedMu : ℝ :=
   ((certEps - certEta : ℤ) : ℝ) / 2 ^ certQ
 
 /-- A *conditional* source-to-source coercivity bridge.
-The hypotheses to discharge from source are explicitly hIv, hSym,
+The hypotheses to discharge from source are explicitly hIv,
 R_basis surjectivity, a bound on R_basis, and equality of the two actual
 quadratic forms. All numerical factors remain connected to the generated
 packed integer certificate through `projected_lower`. -/
 theorem original_atom_coercivity (M : ℕ) (kappa : ℝ) (hkappa : 0 < kappa)
-    (hSym : ∀ i j : Fin 139, projectedEntry M i j = projectedEntry M j i)
     (hIv : ∀ i j : Fin 139,
       (Im certI i.val j.val).Mem certQ (projectedEntry M i j))
     (hRsurj : Function.Surjective R_basis)
@@ -53,7 +54,7 @@ theorem original_atom_coercivity (M : ℕ) (kappa : ℝ) (hkappa : 0 < kappa)
   obtain ⟨v, rfl⟩ := hRsurj c
   have hratio : normSqCoeffs (R_basis v) / kappa ≤ normSqCoeffs v :=
     (div_le_iff₀ hkappa).2 (hRnorm v)
-  have hpacked := projected_lower (M := M) hSym hIv v
+  have hpacked := projected_lower_of_Iv (M := M) hIv v
   have htwo : (0 : ℝ) < 2 ^ certQ := by positivity
   have hprojected : certifiedMu * normSqCoeffs v ≤ projectedQ M v := by
     have hscaled :
@@ -82,7 +83,6 @@ theorem hlow_of_projected_packed (M : ℕ)
     (Brow : (Fin 139 → ℂ) → ℝ)
     (hkappa : 0 < kappa)
     (hgap : 0 < m - T_trace / (2 * Real.pi))
-    (hSym : ∀ i j : Fin 139, projectedEntry M i j = projectedEntry M j i)
     (hIv : ∀ i j : Fin 139,
       (Im certI i.val j.val).Mem certQ (projectedEntry M i j))
     (hRsurj : Function.Surjective R_basis)
@@ -98,7 +98,7 @@ theorem hlow_of_projected_packed (M : ℕ)
   exact hlow_of_coercivity_and_budget (6 / 5 : ℝ) m T_trace
     (certifiedMu / kappa) beta (Q_CvS M (6 / 5) atomCenter) Brow
     (by norm_num) hgap
-    (original_atom_coercivity M kappa hkappa hSym hIv hRsurj hRnorm hTransport)
+    (original_atom_coercivity M kappa hkappa hIv hRsurj hRnorm hTransport)
     hBrow hbeta
 
 end AEGIS.CvSProjectedSchurBridgeL12V1
