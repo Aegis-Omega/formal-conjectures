@@ -21,6 +21,8 @@ env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
 
 jobs:
   residual-source-and-native:
@@ -80,6 +82,13 @@ jobs:
           lake exe cache get
           test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
           lean --version
+
+      - name: Checkout immutable PR51 provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
 
       - name: Checkout immutable external LiCriterion provider
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
