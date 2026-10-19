@@ -37,6 +37,8 @@ theorem hlow_of_checked_projected_source
     (projectedEntry_mem_certI_of_check hM)
     hRsurj hRnorm hBrow hbeta
 
+end
+
 end AEGIS.CvSCheckedLowBridgeV1
 
 #print axioms AEGIS.CvSCheckedLowBridgeV1.hlow_of_checked_projected_source
