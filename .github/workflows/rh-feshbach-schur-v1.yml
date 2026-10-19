@@ -336,7 +336,8 @@ jobs:
           lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
+          lean research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -374,6 +375,9 @@ jobs:
           names += ['CvSWindowCertV1.' + n for n in [
               'exists_orth_coeffs', 'energy_translate', 'momentZero_translate',
               'lowBlock_momentZero', 'energy_sub_le', 'window_of_certificate']]
+          names += ['CvSLowBlockDecayV1.' + n for n in [
+              'fourier_indicator_bound', 'lowBlock_energy_bounds', 'lowBlock_energy_integrable',
+              'lowBlock_scertM_integrable', 'window_of_certificate_C1']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
