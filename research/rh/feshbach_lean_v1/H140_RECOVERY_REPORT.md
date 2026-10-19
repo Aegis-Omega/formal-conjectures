@@ -119,3 +119,34 @@ A certified fixed finite matrix or fixed window would still require the
 existing cofinal/all-window producer and limiting control before the
 canonical unconditional `RiemannHypothesis` target follows. This session
 does not claim that target or a recovered H140 kernel certificate.
+
+
+## Subsequent remote recovery (supersedes the earlier availability finding)
+
+Commit `4fabfb66821a97a5df1521cf0bb27b3ec410b4a1`, published after the
+initial search, contains the interrupted original `CvSPackedGramV1.lean`,
+`tools/packed_gram_cert.py`, and `HANDOFF_PACKED_GRAM.md`. Original bytes
+were preserved before inspection. Their SHA-256 hashes are, respectively:
+
+- `cb1e6eff7d7b118d8a1b21b174f946e83de267d9ead56aa16ca9234049a4f489`
+- `d56e62db27c529c027621b4d16d85942c7b8f351b591702a25d95b1a7a9a5dee`
+- `647b0f72532ded5901b7b69250d35c62d6b30de56c1e1e8e7e516740114e4827`
+
+[Full source-context CI run 39247067552](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39247067552)
+passed all three jobs on that exact commit. The compile job emitted 13
+packed-library/generated-H140 axiom audit passes, including `hilb_check`,
+whose axioms are `[propext]`. This is the observed count, distinct from the
+interrupted session's reported 14/14.
+
+The unmodified recovered generator regenerated the 140-dimensional Hilbert
+certificate at q=1508. Its 2,161,040-byte Lean output has SHA-256
+`6660220968a248113e23bc14c318c3b43f6f69dc75d3c328ac1dd8f340dfa0d6`.
+This generated output is new reproduction of the recovered generator, not
+a claim to have recovered the original output file. Independent native
+kernel execution over the exact source-extracted computational definitions
+passed in 112.195 seconds with `[propext]`; the full imported soundness
+context is certified separately by the linked CI.
+
+H140 is a Hilbert checker stress test. The subsequent projected CvS
+certificate has dimension 139 on 141 signed frequencies. Its actual entry
+enclosure and global/window obligations are separate propositions.

@@ -13,6 +13,7 @@ open Finset Complex
 namespace AEGIS.CvSProjectedSchurBridgeL12V1
 
 open AEGIS.CvSProjectedPackedCertificateL12V1
+open AEGIS.CvSPackedGramV1
 open AEGIS.CvSProjectedSymmetryV1
 open AEGIS.CvSSchurClosureFromBoundsV1
 open AEGIS.CvSLowBlockMatrixV1
@@ -53,7 +54,7 @@ theorem original_atom_coercivity (M : ℕ) (kappa : ℝ) (hkappa : 0 < kappa)
   intro c
   obtain ⟨v, rfl⟩ := hRsurj c
   have hratio : normSqCoeffs (R_basis v) / kappa ≤ normSqCoeffs v :=
-    (div_le_iff₀ hkappa).2 (hRnorm v)
+    (div_le_iff₀ hkappa).2 (by simpa only [mul_comm] using hRnorm v)
   have hpacked := projected_lower_of_Iv (M := M) hIv v
   have htwo : (0 : ℝ) < 2 ^ certQ := by positivity
   have hprojected : certifiedMu * normSqCoeffs v ≤ projectedQ M v := by
@@ -61,7 +62,7 @@ theorem original_atom_coercivity (M : ℕ) (kappa : ℝ) (hkappa : 0 < kappa)
         ((certEps - certEta : ℤ) : ℝ) * normSqCoeffs v /
           2 ^ certQ ≤ projectedQ M v := by
       apply (div_le_iff₀ htwo).2
-      simpa [normSqCoeffs, projectedQ] using hpacked
+      simpa [normSqCoeffs, projectedQ, mul_comm] using hpacked
     calc
       certifiedMu * normSqCoeffs v =
           ((certEps - certEta : ℤ) : ℝ) * normSqCoeffs v / 2 ^ certQ := by

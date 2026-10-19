@@ -379,7 +379,9 @@ jobs:
           lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
-          lean research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
+          lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
           python3 - <<'PY'
           import re
           log = open('ring.log').read()
@@ -468,6 +470,14 @@ jobs:
               'projected_lower_of_Iv', 'projected_nonnegative_of_Iv']]
           names += ['CvSProjectedSchurBridgeL12V1.' + n for n in [
               'original_atom_coercivity', 'hlow_of_projected_packed']]
+          names += ['CvSFiniteCongruenceV1.' + n for n in [
+              'rotate_four_sums', 'quadratic_form_finite_congruence',
+              'transformed_coeff_linear', 'quadratic_form_real_congruence']]
+          names += ['CvSProjectedTransportL12V1.' + n for n in [
+              'signedFreq_injective', 'lowFreq_mem_iff', 'sum_signedFreq',
+              'frequency_factor', 'atomWeight_eq', 'transformed_coeff_eq_lowCoeff',
+              'projectedQ_eq_signed_form', 'hTransport',
+              'original_atom_coercivity_of_transport', 'hlow_of_projected_packed_of_transport']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
