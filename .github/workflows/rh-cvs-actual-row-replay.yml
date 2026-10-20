@@ -78,7 +78,6 @@ jobs:
       - name: Replay unchanged source DAG and actual row bridge
         shell: bash
         run: |
-        run: |
           set -euo pipefail
           RING="$GITHUB_WORKSPACE/.lake/ringout"
           export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
