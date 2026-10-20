@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.olean",
+    "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.lean"
+  ],
+  "seconds": 1.3933336600002804,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "c576e71a7b54af911daa329b2a420d9fbc7c9980d265e5e6bd343b26b2c4a303",
+  "compiler_output": "'AEGIS.SourceRowDistributionV1.distribute_source_row' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native exact-shape reproduction and repair of CI failure; full actual-source replay pending"
+}

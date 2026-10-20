@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean"
+  ],
+  "seconds": 1.7128803850000622,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "2c4e261be0c1c57d23dc7d46712ae4cb2a458d7363d9de16fea6481eb400e778",
+  "compiler_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Uniform interval-expression soundness"
+}

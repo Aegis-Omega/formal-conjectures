@@ -71,7 +71,7 @@ theorem sourceY_eq_actual_crossRow (M : ℕ) (m : ℤ) (v : Fin 139 → ℂ) :
     _ = ∑ i : Fin 139, ∑ k : Fin 141,
         ((transformedCoeff k i : ℂ) *
           (sourceKernel M m (signedFreq k) : ℂ)) * v i := by
-          simp only [sourceY, Complex.ofReal_sum, Complex.ofReal_mul]
+          simp only [sourceY, Complex.ofReal_sum, Complex.ofReal_mul, Finset.sum_mul]
     _ = ∑ k : Fin 141, ∑ i : Fin 139,
         ((transformedCoeff k i : ℂ) * v i) *
           (sourceKernel M m (signedFreq k) : ℂ) := by
