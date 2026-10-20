@@ -1,0 +1,31 @@
+{
+  "status": "EXACT_INTEGER_FINITE_CERTIFICATE_PASS; analytic enclosure not yet formalized in Lean",
+  "source_head": "6a3a25c60e93d1b133e1f78acd12267366ba5afd",
+  "source_hashes": {
+    "CvSProjectedPackedCertificateL12V1.lean": "86b4cee0fb13866e3b801fe41f09f1afb059cbdbbca7692f56058a836724999d",
+    "CvSTauPrimeL12V1.lean": "75bc4487570c3aa21f4a0c5b81dc2eb7f110e4ace820556ac446035c6a600253",
+    "CvSTauR1PrimeL12V1.lean": "2fed2fe110649d5a7821efa1703ed7cb980a64a19135d3e6e85181a3e3a96278",
+    "CvSDiagL12V1.lean": "c20c21de77ff6c494f9b3a8d1d39f8e61d578ef55b1353076021cca70dd2cbf1",
+    "CvSGramTailV1.lean": "41c0ca0e457f7ef9c54b7226c29b4a09e24d9f88ea2dbebd0063bc0423e9f1da",
+    "CvSRowTailV1.lean": "4d38c50c5184ba353a4d2662684ff1e8b8d1e0fd783303f8a1d2f827aae891cd"
+  },
+  "dimension": 139,
+  "NP": 150,
+  "kappa": 40,
+  "epsilon": 1,
+  "tau_far_bound": 13,
+  "row_budget": "40 R^T Q_actual R - (finite residual Gram + Gram tail) with chosen rational projection",
+  "arithmetic": "Q96 outward exact integer midpoint-radius matrix products; exact rational harmonic G; Q80 outward final enclosure",
+  "certificate": {
+    "base": 40564819207303340847894502572032,
+    "B": 15795288160149,
+    "eps": 1208196817027810721792,
+    "eta": 873002480980930375314
+  },
+  "margin_numerator": 335194336046880346478,
+  "margin_denominator": 1208925819614629174706176,
+  "maximum_interval_radius_q96": 525838537874249234416739,
+  "floating_point_use": "Least-squares proposes an exact rational projection; an eigenvalue hint proposes the shift; Decimal Cholesky proposes the integer factor. Only exact integer checks accept the certificate.",
+  "seconds": 5.822598214999971,
+  "remaining_Lean_obligation": "Prove correspondence and outward enclosure for the actual residual/tail form, then apply packed soundness; original-function projection defined by basis surjectivity."
+}

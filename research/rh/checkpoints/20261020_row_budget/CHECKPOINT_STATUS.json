@@ -1,0 +1,30 @@
+{
+  "timestamp_utc": "2026-10-20T09:53:47.790464+00:00",
+  "source_commit": "6a3a25c60e93d1b133e1f78acd12267366ba5afd",
+  "certificate": "KERNEL_PASS finite Boolean; dimension139, Q80, NP150, kappa40; analytic source bridge not yet formalized",
+  "margin_numerator": "335194336046880346478",
+  "margin_denominator": "1208925819614629174706176",
+  "kernel_axioms": [
+    "propext"
+  ],
+  "actual_row_budget": "NOT_KERNEL_VERIFIED",
+  "uniform_product_lemmas": "Native source log PASS; final receipt replay pending",
+  "row_energy_identity": "See compiler log; do not treat as PASS unless receipt says PASS",
+  "input_archive": [
+    {
+      "path": "ROW_BUDGET_DATA.json",
+      "bytes": 1475161,
+      "sha256": "0b6e43d5690a51a604840a661d511c56b3a740113ff12f95224c28cdef47cda4"
+    },
+    {
+      "path": "native_slice/CvSPackedGramV1.lean",
+      "bytes": 1952,
+      "sha256": "7daca83a2fa4ba1c33ab93c0e591f6e49859e387939b8fe9450eb64359569fe7"
+    },
+    {
+      "path": "native_slice/SLICE_PROVENANCE.json",
+      "bytes": 1807,
+      "sha256": "32b194cd4fb6e329cae77215cb02f9419665edd96a0cbd2dfeb792875777da67"
+    }
+  ]
+}
