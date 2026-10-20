@@ -128,6 +128,12 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
           lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
           lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
+          lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
           python3 - <<'PY'
           import pathlib, re
           log = pathlib.Path('actual-row-bridge.log').read_text()
@@ -136,6 +142,7 @@ jobs:
           ]
           names = ['AEGIS.CvSActualCrossRowL12V1.' + n for n in names]
           names += ['AEGIS.CvSMidpointRadiusV1.product_error', 'AEGIS.CvSMidpointRadiusV1.sum_product_error', 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure', 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds', 'AEGIS.CvSRationalIntervalV1.rationalRange_mem', 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error', 'AEGIS.CvSIntervalMatrixProductV1.dot_mem', 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem', 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem', 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left', 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains', 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound', 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check', 'AEGIS.CvSTauSigned150L12V1.positive_mem', 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds', 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval']
+          names += ['AEGIS.CvSIntervalDivideV1.divPos_mem', 'AEGIS.CvSIntervalDivideV1.divInt_mem', 'AEGIS.CvSFrequencyIntervalV1.pi_bounds', 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds', 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem', 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem', 'AEGIS.CvSActualRowInputL12V1.gramRat_cast', 'AEGIS.CvSActualRowInputL12V1.gramUp_mem', 'AEGIS.CvSActualRowInputL12V1.gramUp_symm', 'AEGIS.CvSActualRowInputL12V1.diagonal_mem', 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem', 'AEGIS.CvSActualRowInputL12V1.sourceY_mem']
           allowed = {'propext','Classical.choice','Quot.sound'}
           if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
             raise SystemExit('SORRYAX_OR_PROOF_HOLE')

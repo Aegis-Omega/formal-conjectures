@@ -1,0 +1,5 @@
+'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.CvSIntervalDivideV1.divInt_mem : ∀ (p : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+  AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+    ∀ {d : ℤ}, d ≠ 0 → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / ↑d)

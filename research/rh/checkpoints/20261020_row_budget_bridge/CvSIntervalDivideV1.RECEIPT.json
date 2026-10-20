@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "source_base_commit": "8d7280a99f4608a015ac63813d95681474582d62",
+  "source_sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean"
+  ],
+  "cwd": "/workspace/formal-conjectures",
+  "seconds": 1.7445644680010446,
+  "returncode": 0,
+  "compiler_output": "'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSIntervalDivideV1.divInt_mem : \u2200 (p : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    \u2200 {d : \u2124}, d \u2260 0 \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / \u2191d)\n",
+  "roots": [
+    {
+      "name": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    },
+    {
+      "name": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    }
+  ],
+  "mathlib_sha": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "lean_version": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "native_import_scope": "Existing RHFixInterval mathematical body unchanged, import Mathlib narrowed as archived earlier. Full actual-source imports require separate CI.",
+  "utc": "2026-10-20T12:51:10.240264+00:00"
+}

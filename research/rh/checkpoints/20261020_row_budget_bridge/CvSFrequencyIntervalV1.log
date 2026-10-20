@@ -1,0 +1,17 @@
+'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.CvSFrequencyIntervalV1.pi_bounds : ↑AEGIS.CvSFrequencyIntervalV1.piLo ≤ Real.pi ∧
+  Real.pi ≤ ↑AEGIS.CvSFrequencyIntervalV1.piHi
+AEGIS.CvSFrequencyIntervalV1.frequency_bounds : ∀ (n : ℤ),
+  ↑(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) ≤ -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ∧
+    -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ≤ ↑(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)
+AEGIS.CvSFrequencyIntervalV1.coefficient_mem : ∀ (p : ℕ) (n w : ℤ),
+  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)
+    ((-(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4) * ↑w / 2 ^ 42)
+AEGIS.CvSFrequencyIntervalV1.lp_mem : ∀ (p : ℕ),
+  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)
+AEGIS.CvSFrequencyIntervalV1.lp_squared_mem : ∀ (p : ℕ),
+  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)
