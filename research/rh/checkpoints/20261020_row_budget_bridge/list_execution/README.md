@@ -1,6 +1,6 @@
 # Verified list execution and first complete output cell
 
-The two uniform lemmas listDot_eq_dot and listCongruence_eq prove exact equality to the existing midpoint-radius dot and congruence, with all lengths explicit. They preserve every rounding endpoint.
+The three uniform lemmas listDot_eq_dot, listCongruence_eq and mixed_listCongruence_eq prove exact equality to the existing midpoint-radius dot and congruence, with all lengths explicit. They preserve every rounding endpoint. The mixed identity handles two distinct columns and requires neither symmetry nor positivity.
 
 RowBudgetListCell0Pilot.stored_cell0_original passes native Lean 4.33.1 kernel checking, using the original envelope and the same recovered CELL0_INPUTS.json bytes as the prior resource-terminated attempt. The two inner Gram column witnesses are computed with exact integers and independently checked by decide +kernel. The original weighted column is imported from RowBudgetStagedDotPilot. The complete native compile takes 49.48 seconds; the reported maximum child-process RSS is 4,518,076 KiB. All five emitted cell-root axiom audits contain only standard axioms.
 

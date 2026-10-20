@@ -1,11 +1,11 @@
 {
   "source_base_commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
-  "timestamp_utc": "2026-10-20T12:56:52.384688+00:00",
+  "timestamp_utc": "2026-10-20T13:18:52.156634+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
-  "native_roots": 26,
-  "native_declarations": 26988,
-  "source_modules": 1029,
+  "native_roots": 34,
+  "native_declarations": 27188,
+  "source_modules": 1033,
   "missing_sources": 0,
   "missing_dependencies": 0,
   "proof_cycles": 0,
@@ -15,7 +15,7 @@
     "Quot.sound",
     "propext"
   ],
-  "graph_sha256": "8f8e0ef805e23bbbd20732e3fd40148dd75e2d802504f08e59903fe254886dd2",
+  "graph_sha256": "df9ec302c1507215547d410d2a7da61ae6a927bcc4f7f9f0774395b7449573b5",
   "numeric_experiments": [
     {
       "path": "RowBudgetCell0Pilot.lean",
@@ -150,5 +150,34 @@
     "receipt": "INPUT_SOURCE_KERNEL_RECEIPT.json",
     "graph_archive": "NATIVE_INPUT_GRAPH.zip",
     "scope": "Uniform signed integer division, frequency-factor and L/pi input enclosures; no output table or RH conclusion."
+  },
+  "new_list_execution": {
+    "scope": "Three uniform list/dot/mixed-congruence execution identities plus five closed first-cell roots; no full-table or analytic input conclusion",
+    "status": "NATIVE_PASS",
+    "sources": "list_execution/",
+    "complete_cell_receipt": {
+      "status": "PASS",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.olean",
+        "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean"
+      ],
+      "seconds": 49.480160376999265,
+      "returncode": 0,
+      "max_rss_kib": 4518076,
+      "source_sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+      "source_base_commit": "049196e74e25e878e2f4f4e144dbcff8cdaf6c01",
+      "compiler_output": "'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "One complete recovered output cell and its equality to the original interval-envelope formula. Not full output table, analytic input correspondence, hB or RH."
+    },
+    "graph_archive": "NATIVE_CELL_GRAPH.zip",
+    "verified_output_entries": 1,
+    "total_output_entries": 19321
   }
 }

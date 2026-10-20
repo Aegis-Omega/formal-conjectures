@@ -1,0 +1,54 @@
+{
+  "source_base_commit": "83c96edf6d32d5fcb9c30afcf963d092eda52ac0",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "scope": "Exact execution identities for every finite dimension; explicit equal vector lengths and row lengths; mixed vectors allowed; no symmetry, positivity or RH hypothesis. Not a positivity result for all dimensions.",
+  "native_import_scope": "Same unchanged RHFixInterval mathematical body with archived native import narrowing.",
+  "modules": [
+    {
+      "module": "CvSListIntervalDotV1",
+      "source_sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+      "status": "PASS",
+      "returncode": 0,
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.lean"
+      ],
+      "roots": [
+        "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+        "AEGIS.CvSListIntervalDotV1.listCongruence_eq"
+      ],
+      "compiler_output": "'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "timing": "NOT_RECORDED"
+    },
+    {
+      "module": "CvSListIntervalMixedV1",
+      "source_sha256": "38221cf9a53a805ec7f80c9022b4702126682a6102f0fe3ac97bfd0a021292b5",
+      "status": "PASS",
+      "returncode": 0,
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSListIntervalMixedV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSListIntervalMixedV1.lean"
+      ],
+      "roots": [
+        "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq"
+      ],
+      "compiler_output": "'AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq : \u2200 (p : \u2115) {n : \u2115} (X Y : List AEGIS.RHFixIntervalV1.Iv)\n  (G : List (List AEGIS.RHFixIntervalV1.Iv)),\n  X.length = n \u2192\n    Y.length = n \u2192\n      G.length = n \u2192\n        (\u2200 (k : Fin n), (G.getD \u2191k []).length = n) \u2192\n          AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun x k => X.getD \u2191k { lo := 0, hi := 0 })\n              (AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun k l => (G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 })\n                fun k x => Y.getD \u2191k { lo := 0, hi := 0 })\n              0 0 =\n            AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row Y) G)\n",
+      "timing": "NOT_RECORDED"
+    }
+  ]
+}

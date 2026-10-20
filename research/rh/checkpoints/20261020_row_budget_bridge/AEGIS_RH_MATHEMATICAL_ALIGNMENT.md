@@ -19,3 +19,9 @@ Seven additional native roots prove outward signed integer division and exact pi
 PR90 was re-inspected at 7fc73ce1ae0eb2afbaac778ae8ca8e7fbac07fcc. Its radius_row_real bounds the error radii radI of the original projected matrix by 1/230000. It does not assert the finite cross-residual-plus-Gram-tail hB bound; substituting one for the other would change the mathematical quantity.
 
 The complete current native selected-root graph has 26 roots, 26,988 declarations, 1,029 located modules and zero proof cycles. Its raw graph, exporters and custom source bytes are preserved in NATIVE_INPUT_GRAPH.zip. This native graph scope is distinct from the original-import CI scope.
+
+## Complete first-cell replay and uniform mixed execution
+
+At source checkpoint 83c96edf6d32d5fcb9c30afcf963d092eda52ac0, RowBudgetListCell0Pilot.stored_cell0_original closes the exact first stored Q80 output equality. It uses the same input bytes as the previously resource-terminated direct replay. listDot_eq_dot and listCongruence_eq identify one-pass list execution with the existing finite-index dot and congruence; original_eq_fast applies these identities to the complete original envelope. Exact integer witnesses for the two Gram-column products are separately checked by decide +kernel. The compile passes in 49.48 seconds, maximum child-process RSS 4,518,076 KiB. This certifies one output entry, not the complete table or actual Z input correspondence.
+
+The subsequent mixed_listCongruence_eq proves the corresponding identity for two different columns, with explicit lengths and no symmetry or positivity hypothesis. It provides the uniform mechanism needed to process off-diagonal entries. The current native selected-root graph includes 34 roots and 27,188 declarations from 1,033 located sources. Original-import source-input CI remains a separate status.

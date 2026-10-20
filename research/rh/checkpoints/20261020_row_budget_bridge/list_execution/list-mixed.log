@@ -1,0 +1,12 @@
+'AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq : ∀ (p : ℕ) {n : ℕ} (X Y : List AEGIS.RHFixIntervalV1.Iv)
+  (G : List (List AEGIS.RHFixIntervalV1.Iv)),
+  X.length = n →
+    Y.length = n →
+      G.length = n →
+        (∀ (k : Fin n), (G.getD ↑k []).length = n) →
+          AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun x k => X.getD ↑k { lo := 0, hi := 0 })
+              (AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun k l => (G.getD ↑k []).getD ↑l { lo := 0, hi := 0 })
+                fun k x => Y.getD ↑k { lo := 0, hi := 0 })
+              0 0 =
+            AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row Y) G)
