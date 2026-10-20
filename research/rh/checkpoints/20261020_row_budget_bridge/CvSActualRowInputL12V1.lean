@@ -102,7 +102,7 @@ theorem sourceKernel_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (m : ℤ)
       (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM (signedFreq k) (by omega))
       (Iv.mem_neg p (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM m hm))
     have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr (Ne.symm h))
-    simpa only [tauBox, sub_eq_add_neg, Int.cast_sub] using
+    simpa only [tauBox, sub_eq_add_neg, Int.cast_add, Int.cast_neg, Int.cast_sub] using
       Iv.mem_mul p (AEGIS.CvSFrequencyIntervalV1.lp_mem p) hdiv
 
 def sourceYBox (p : ℕ) (m : ℤ) (i : Fin 139) : Iv :=
