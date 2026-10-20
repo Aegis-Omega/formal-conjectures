@@ -126,6 +126,65 @@ theorem sourceY_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (m : ℤ)
   rw [heq] at h
   exact h
 
+
+/-- The generator indexes 301 actual cross rows by m = -150,...,150. -/
+def rowIndex (r : Fin 301) : ℤ := (r.val : ℤ) - 150
+
+/-- The existing actual transformed source coefficient at Q96. -/
+def xBox (k : Fin 141) (i : Fin 139) : Iv :=
+  AEGIS.CvSFrequencyIntervalV1.coefficientInterval 96
+    (signedFreq k) (wZ (signedFreq k) i)
+
+/-- The actual residual Y - X*Lambda, with the subtraction restricted to
+the 141 inner source rows. Lambda is an arbitrary real projection. -/
+noncomputable def sourceZ (M : ℕ) (lam : Fin 139 → Fin 139 → ℝ)
+    (r : Fin 301) (i : Fin 139) : ℝ :=
+  if hr : 80 ≤ r.val ∧ r.val < 221 then
+    AEGIS.CvSActualCrossRowL12V1.sourceY M (rowIndex r) i -
+      ∑ j : Fin 139,
+        transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j * lam j i
+  else AEGIS.CvSActualCrossRowL12V1.sourceY M (rowIndex r) i
+
+/-- Exactly the existing outward Q96 residual formula, with no altered
+endpoints, rounding, or choice of numerical projection. -/
+def zBox (Lam : Fin 139 → Fin 139 → Iv)
+    (r : Fin 301) (i : Fin 139) : Iv :=
+  if hr : 80 ≤ r.val ∧ r.val < 221 then
+    (sourceYBox 96 (rowIndex r) i).add
+      (AEGIS.CvSIntervalMatrixProductV1.dot 96
+        (xBox (⟨r.val - 80, by omega⟩ : Fin 141))
+        (fun j => Lam j i)).neg
+  else sourceYBox 96 (rowIndex r) i
+
+/-- The 301x139 residual input is enclosed for every real projection whose
+entries are enclosed at Q96. This does not assume Q80 tableCheck or positivity. -/
+theorem sourceZ_mem (M : ℕ) (hM : 3 ≤ M)
+    (lam : Fin 139 → Fin 139 → ℝ)
+    (Lam : Fin 139 → Fin 139 → Iv)
+    (hLam : ∀ j i, (Lam j i).Mem 96 (lam j i)) :
+    ∀ r i, (zBox Lam r i).Mem 96 (sourceZ M lam r i) := by
+  intro r i
+  have hm : (rowIndex r).natAbs ≤ 150 := by
+    unfold rowIndex
+    have hr := r.isLt
+    omega
+  have hy := sourceY_mem 96 hM (rowIndex r) hm i
+  by_cases hr : 80 ≤ r.val ∧ r.val < 221
+  · have hx : ∀ j : Fin 139,
+        (xBox (⟨r.val - 80, by omega⟩ : Fin 141) j).Mem 96
+          (transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j) := by
+      intro j
+      simpa only [xBox] using
+        (transformedCoeff_mem 96 (⟨r.val - 80, by omega⟩ : Fin 141) j)
+    have hdot := AEGIS.CvSIntervalMatrixProductV1.dot_mem 96
+      (xBox (⟨r.val - 80, by omega⟩ : Fin 141)) (fun j => Lam j i)
+      (fun j => transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j)
+      (fun j => lam j i) hx (fun j => hLam j i)
+    have hres := Iv.mem_add 96 hy (Iv.mem_neg 96 hdot)
+    simpa only [zBox, sourceZ, dif_pos hr, sub_eq_add_neg] using hres
+  · simpa only [zBox, sourceZ, dif_neg hr] using hy
+
+
 end AEGIS.CvSActualRowInputL12V1
 #print axioms AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem
 #print axioms AEGIS.CvSActualRowInputL12V1.gramRat_cast
@@ -140,4 +199,5 @@ end AEGIS.CvSActualRowInputL12V1
 #print axioms AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
 #check @AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
 #print axioms AEGIS.CvSActualRowInputL12V1.sourceY_mem
+#print axioms AEGIS.CvSActualRowInputL12V1.sourceZ_mem
 #check @AEGIS.CvSActualRowInputL12V1.sourceY_mem
