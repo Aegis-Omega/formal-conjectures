@@ -136,3 +136,99 @@ jobs:
           bash /tmp/aegis-pr90-replay.sh 2>&1 | tee pr90-replay.log
           if grep -E "sorryAx|declaration uses 'sorry'" pr90-replay.log; then exit 1; fi
           grep -F PR90_LEAN_KERNEL_REPLAY_PASS pr90-replay.log
+
+      - name: Checkout pinned CvS proof source (read-only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: tarikskalic33/formal-conjectures
+          ref: df6077dab393bc496d9e1205f1b325f4857d7b21
+          path: .claude-proof
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Kernel-check PR90 plus CvS source-bound composition
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .claude-proof rev-parse HEAD)" = "df6077dab393bc496d9e1205f1b325f4857d7b21"
+          test "$(git hash-object research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean)" = "4a2ebb8a49bf8a523eed9f8601263f18018745a1"
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          test -d "$RING"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/CvSCheckedLowBridgeV1.olean" research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean
+          for name in FastKronV1 CvSProjectedEntryFastL12V1 CvSProjectedEntryReplayL12V1 CvSLowCoercivityL12V1 CvSRelativeBudgetL12V1; do
+            f=".claude-proof/research/rh/feshbach_lean_v1/$name.lean"
+            test -f "$f"
+            case "$name" in
+              FastKronV1) expected=a8e81d2bf1ce2832bcc946643ba248ab8154f2b3 ;;
+              CvSProjectedEntryFastL12V1) expected=dd51dd4de972d347524982147f0e69ff5f398856 ;;
+              CvSProjectedEntryReplayL12V1) expected=0a1a925b5d5475a854cc732ea488189e15a535bd ;;
+              CvSLowCoercivityL12V1) expected=0a1f0971414319c1e1bf13e50d5dc1b508b280a0 ;;
+              CvSRelativeBudgetL12V1) expected=e0a51e636296905746fecf9cd72ae36ad974129e ;;
+              *) exit 1 ;;
+            esac
+            test "$(git hash-object "$f")" = "$expected"
+            lean -DwarningAsError=true -o "$RING/$name.olean" "$f" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+          done
+          cat > "$RUNNER_TEMP/CvSPR90ClaudeJoinProbeV1.lean" <<'LEAN'
+          import CvSCheckedLowBridgeV1
+          import CvSProjectedEntryReplayL12V1
+          import CvSProjectedBasisL12V1
+          import CvSRelativeBudgetL12V1
+          import CvSResidualRowBudgetV1
+          
+          open AEGIS.CvSProjectedEntryL12V1
+          open AEGIS.CvSProjectedEntryReplayL12V1
+          open AEGIS.CvSProjectedBasisL12V1
+          open AEGIS.CvSMomentBasisV1
+          open AEGIS.CvSSchurClosureFromBoundsV1
+          open AEGIS.CvSProjectedPackedCertificateL12V1
+          open AEGIS.CvSLowBlockMatrixV1
+          
+          namespace AEGIS.CvSPR90ClaudeJoinProbeV1
+          theorem identical_bigCheck_closed : bigCheck = true :=
+            AEGIS.CvSProjectedEntryReplayL12V1.bigCheck_true
+          
+          example : Fact (bigCheck = true) := ⟨identical_bigCheck_closed⟩
+          #synth Fact (bigCheck = true)
+          
+          theorem pr90_checked_hlow_replayed
+              (M : ℕ) (hM : 3 ≤ M)
+              (m T_trace beta kappa : ℝ) (Brow : (Fin 139 → ℂ) → ℝ)
+              (hkappa : 0 < kappa) (hgap : 0 < m - T_trace / (2 * Real.pi))
+              (hRsurj : Function.Surjective R_basis)
+              (hRnorm : ∀ v, normSqCoeffs (R_basis v) ≤ kappa * normSqCoeffs v)
+              (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
+              (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
+                 (m - T_trace / (2 * Real.pi)) * (certifiedMu / kappa)) :
+              ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
+                (m - T_trace / (2 * Real.pi)) ≤
+                2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
+            letI : Fact (bigCheck = true) := ⟨identical_bigCheck_closed⟩
+            exact AEGIS.CvSCheckedLowBridgeV1.hlow_of_checked_projected_source
+              M hM m T_trace beta kappa Brow hkappa hgap hRsurj hRnorm hBrow hbeta
+          
+          theorem pr90_checked_hlow_with_basis
+              (M : ℕ) (hM : 3 ≤ M)
+              (m T_trace beta : ℝ) (Brow : (Fin 139 → ℂ) → ℝ)
+              (hgap : 0 < m - T_trace / (2 * Real.pi))
+              (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
+              (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
+                 (m - T_trace / (2 * Real.pi)) * (certifiedMu / basisFrobenius)) :
+              ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
+                (m - T_trace / (2 * Real.pi)) ≤
+                2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
+            exact pr90_checked_hlow_replayed M hM m T_trace beta basisFrobenius Brow
+              basisFrobenius_pos hgap R_basis_surjective R_basis_frobenius_bound hBrow hbeta
+          
+          #check AEGIS.CvSRelativeBudgetL12V1.hlow_L12_relative
+          #check AEGIS.CvSResidualRowBudgetV1.radius_row_real
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.identical_bigCheck_closed
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_replayed
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_with_basis
+          end AEGIS.CvSPR90ClaudeJoinProbeV1
+          LEAN
+          lean -DwarningAsError=true "$RUNNER_TEMP/CvSPR90ClaudeJoinProbeV1.lean" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+          if grep -E "sorryAx|declaration uses 'sorry'" "$RUNNER_TEMP/pr90-cvs-join.log"; then exit 1; fi
+          grep -F 'AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_with_basis' "$RUNNER_TEMP/pr90-cvs-join.log"
+          echo PR90_CLAUDE_EXACT_HEAD_JOIN_KERNEL_PASS
