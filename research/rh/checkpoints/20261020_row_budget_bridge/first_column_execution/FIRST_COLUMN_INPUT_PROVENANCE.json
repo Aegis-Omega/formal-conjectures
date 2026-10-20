@@ -1,0 +1,120 @@
+{
+  "scope": "139 first-column entries only; not complete 139-square table, actual input identification or hB/RH",
+  "input_reconstruction": "Existing exact integer interval generator, fixed stored rational Q48 projection, no floating fitting",
+  "python_all_19321_output_cells_match_stored": true,
+  "target_source": "Original CvSRelativeRowCertificateL12V1.intervals; kernel target_source checks per batch",
+  "files": [
+    {
+      "path": "RowBudgetFirstColumnBatch0.lean",
+      "rows": [
+        0,
+        10
+      ],
+      "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch1.lean",
+      "rows": [
+        10,
+        20
+      ],
+      "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch2.lean",
+      "rows": [
+        20,
+        30
+      ],
+      "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch3.lean",
+      "rows": [
+        30,
+        40
+      ],
+      "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch4.lean",
+      "rows": [
+        40,
+        50
+      ],
+      "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch5.lean",
+      "rows": [
+        50,
+        60
+      ],
+      "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch6.lean",
+      "rows": [
+        60,
+        70
+      ],
+      "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch7.lean",
+      "rows": [
+        70,
+        80
+      ],
+      "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch8.lean",
+      "rows": [
+        80,
+        90
+      ],
+      "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch9.lean",
+      "rows": [
+        90,
+        100
+      ],
+      "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch10.lean",
+      "rows": [
+        100,
+        110
+      ],
+      "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch11.lean",
+      "rows": [
+        110,
+        120
+      ],
+      "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch12.lean",
+      "rows": [
+        120,
+        130
+      ],
+      "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d"
+    },
+    {
+      "path": "RowBudgetFirstColumnBatch13.lean",
+      "rows": [
+        130,
+        139
+      ],
+      "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222"
+    }
+  ]
+}

@@ -1,0 +1,1397 @@
+﻿2026-10-20T13:36:17.2407489Z Current runner version: '2.337.0'
+2026-10-20T13:36:17.2434501Z ##[group]Runner Image Provisioner
+2026-10-20T13:36:17.2435510Z Hosted Compute Agent
+2026-10-20T13:36:17.2436161Z Version: 20261015.610
+2026-10-20T13:36:17.2436879Z Commit: 267fdb4e8bbec4ab5ea31367f3a00d5c480c7656
+2026-10-20T13:36:17.2437713Z Build Date: 2026-10-14T17:06:54Z
+2026-10-20T13:36:17.2438438Z Worker ID: {ea8a3c90-1ca2-4958-a45c-7d597f8f7274}
+2026-10-20T13:36:17.2439342Z Region: westus
+2026-10-20T13:36:17.2440005Z Cloud: Azure
+2026-10-20T13:36:17.2440627Z ##[endgroup]
+2026-10-20T13:36:17.2442054Z ##[group]Operating System
+2026-10-20T13:36:17.2442784Z Ubuntu
+2026-10-20T13:36:17.2443326Z 24.04.5
+2026-10-20T13:36:17.2443946Z LTS
+2026-10-20T13:36:17.2444548Z ##[endgroup]
+2026-10-20T13:36:17.2445156Z ##[group]Runner Image
+2026-10-20T13:36:17.2445855Z Image: ubuntu-24.04
+2026-10-20T13:36:17.2446471Z Version: 20261018.339.1
+2026-10-20T13:36:17.2447866Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261018.339/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T13:36:17.2449641Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261018.339
+2026-10-20T13:36:17.2450674Z ##[endgroup]
+2026-10-20T13:36:17.2452008Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T13:36:17.2454273Z Actions: read
+2026-10-20T13:36:17.2454921Z Contents: read
+2026-10-20T13:36:17.2455612Z Metadata: read
+2026-10-20T13:36:17.2456216Z ##[endgroup]
+2026-10-20T13:36:17.2458430Z Secret source: Actions
+2026-10-20T13:36:17.2459836Z Cache mode: write
+2026-10-20T13:36:17.2460564Z Prepare workflow directory
+2026-10-20T13:36:17.2900641Z Prepare all required actions
+2026-10-20T13:36:17.2947514Z Getting action download info
+2026-10-20T13:36:17.6736328Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-20T13:36:17.7858990Z Download action repository 'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9' (SHA:55cc8345863c7cc4c66a329aec7e433d2d1c52a9)
+2026-10-20T13:36:17.9011951Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-20T13:36:18.1303256Z Complete job name: source-cross-row
+2026-10-20T13:36:18.2180749Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T13:36:18.2181757Z with:
+2026-10-20T13:36:18.2182179Z   fetch-depth: 1
+2026-10-20T13:36:18.2182643Z   persist-credentials: false
+2026-10-20T13:36:18.2183197Z   repository: tarikskalic33/formal-conjectures
+2026-10-20T13:36:18.2187427Z   token: ***
+2026-10-20T13:36:18.2187860Z   ssh-strict: true
+2026-10-20T13:36:18.2188308Z   ssh-user: git
+2026-10-20T13:36:18.2188726Z   clean: true
+2026-10-20T13:36:18.2189381Z   sparse-checkout-cone-mode: true
+2026-10-20T13:36:18.2189915Z   fetch-tags: false
+2026-10-20T13:36:18.2190360Z   show-progress: true
+2026-10-20T13:36:18.2190797Z   lfs: false
+2026-10-20T13:36:18.2191207Z   submodules: false
+2026-10-20T13:36:18.2191654Z   set-safe-directory: true
+2026-10-20T13:36:18.2192182Z   allow-unsafe-pr-checkout: false
+2026-10-20T13:36:18.2192888Z env:
+2026-10-20T13:36:18.2193371Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:36:18.2194050Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:36:18.2194699Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:36:18.2195532Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:36:18.2196427Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:36:18.2197109Z ##[endgroup]
+2026-10-20T13:36:18.3285340Z Syncing repository: tarikskalic33/formal-conjectures
+2026-10-20T13:36:18.3288538Z ##[group]Getting Git version info
+2026-10-20T13:36:18.3290143Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures'
+2026-10-20T13:36:18.3330763Z [command]/usr/bin/git version
+2026-10-20T13:36:18.3425433Z git version 2.55.0
+2026-10-20T13:36:18.3448353Z ##[endgroup]
+2026-10-20T13:36:18.3470014Z Temporarily overriding HOME='/home/runner/work/_temp/9f2e9053-8692-4518-ae9c-d37f8cc2c295' before making global git config changes
+2026-10-20T13:36:18.3472723Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T13:36:18.3483768Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T13:36:18.3563147Z Deleting the contents of '/home/runner/work/formal-conjectures/formal-conjectures'
+2026-10-20T13:36:18.3565326Z ##[group]Initializing the repository
+2026-10-20T13:36:18.3566740Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T13:36:18.3692364Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T13:36:18.3713823Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T13:36:18.3715363Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T13:36:18.3716595Z hint: call:
+2026-10-20T13:36:18.3717263Z hint:
+2026-10-20T13:36:18.3718088Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T13:36:18.3719092Z hint:
+2026-10-20T13:36:18.3720205Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T13:36:18.3823153Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T13:36:18.3824562Z hint:
+2026-10-20T13:36:18.3825415Z hint: 	git branch -m <name>
+2026-10-20T13:36:18.3826321Z hint:
+2026-10-20T13:36:18.3827347Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T13:36:18.3829652Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.git/
+2026-10-20T13:36:18.3832854Z [command]/usr/bin/git remote add origin https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T13:36:18.3835814Z ##[endgroup]
+2026-10-20T13:36:18.3837139Z ##[group]Disabling automatic garbage collection
+2026-10-20T13:36:18.3838147Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T13:36:18.3840982Z ##[endgroup]
+2026-10-20T13:36:18.3842200Z ##[group]Setting up auth
+2026-10-20T13:36:18.3846196Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:36:18.3885728Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:36:18.4280803Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:36:18.4343160Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:36:18.4598671Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:36:18.4644695Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:36:18.4909094Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T13:36:18.4961539Z ##[endgroup]
+2026-10-20T13:36:18.4962499Z ##[group]Fetching the repository
+2026-10-20T13:36:18.4971833Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +c3e40d699f06bb3e3bebacc6261fffe6cc2be007:refs/remotes/origin/proof/rh-feshbach-schur-v1
+2026-10-20T13:36:20.7831232Z From https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T13:36:20.7833355Z  * [new ref]         c3e40d699f06bb3e3bebacc6261fffe6cc2be007 -> origin/proof/rh-feshbach-schur-v1
+2026-10-20T13:36:20.7836391Z ##[endgroup]
+2026-10-20T13:36:20.7837588Z ##[group]Determining the checkout info
+2026-10-20T13:36:20.7838978Z ##[endgroup]
+2026-10-20T13:36:20.7840403Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T13:36:20.7905624Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T13:36:20.7953114Z ##[group]Checking out the ref
+2026-10-20T13:36:20.7958044Z [command]/usr/bin/git checkout --progress --force -B proof/rh-feshbach-schur-v1 refs/remotes/origin/proof/rh-feshbach-schur-v1
+2026-10-20T13:36:21.0931208Z Switched to a new branch 'proof/rh-feshbach-schur-v1'
+2026-10-20T13:36:21.0935722Z branch 'proof/rh-feshbach-schur-v1' set up to track 'origin/proof/rh-feshbach-schur-v1'.
+2026-10-20T13:36:21.0963497Z ##[endgroup]
+2026-10-20T13:36:21.1024753Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T13:36:21.1061851Z c3e40d699f06bb3e3bebacc6261fffe6cc2be007
+2026-10-20T13:36:21.1072040Z ##[group]Removing auth
+2026-10-20T13:36:21.1075726Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:36:21.1119957Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:36:21.1390934Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:36:21.1430370Z http.https://github.com/.extraheader
+2026-10-20T13:36:21.1439728Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T13:36:21.1485335Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:36:21.1747893Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:36:21.1791690Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:36:21.2053427Z ##[endgroup]
+2026-10-20T13:36:21.2276062Z ##[group]Run set -euo pipefail
+2026-10-20T13:36:21.2276534Z [36;1mset -euo pipefail[0m
+2026-10-20T13:36:21.2276971Z [36;1mtest "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"[0m
+2026-10-20T13:36:21.2277415Z [36;1mgrep -F "$MATHLIB_SHA" lake-manifest.json[0m
+2026-10-20T13:36:21.2447151Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T13:36:21.2447617Z env:
+2026-10-20T13:36:21.2447980Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:36:21.2448383Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:36:21.2448782Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:36:21.2449490Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:36:21.2450021Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:36:21.2450430Z ##[endgroup]
+2026-10-20T13:36:21.2581696Z    "rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+2026-10-20T13:36:21.2625057Z ##[group]Run set -euo pipefail
+2026-10-20T13:36:21.2625457Z [36;1mset -euo pipefail[0m
+2026-10-20T13:36:21.2626120Z [36;1mcurl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz[0m
+2026-10-20T13:36:21.2626812Z [36;1m./elan-init -y --default-toolchain none[0m
+2026-10-20T13:36:21.2627205Z [36;1mecho "$HOME/.elan/bin" >> "$GITHUB_PATH"[0m
+2026-10-20T13:36:21.2627584Z [36;1mexport PATH="$HOME/.elan/bin:$PATH"[0m
+2026-10-20T13:36:21.2627927Z [36;1mlake exe cache get[0m
+2026-10-20T13:36:21.2628332Z [36;1mtest "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"[0m
+2026-10-20T13:36:21.2628762Z [36;1mlean --version[0m
+2026-10-20T13:36:21.2685365Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T13:36:21.2685779Z env:
+2026-10-20T13:36:21.2686100Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:36:21.2686494Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:36:21.2686933Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:36:21.2687434Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:36:21.2688178Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:36:21.2688583Z ##[endgroup]
+2026-10-20T13:36:21.7545488Z info: skipping toolchain installation
+2026-10-20T13:36:21.7545839Z 
+2026-10-20T13:36:21.7583066Z info: downloading component 'lean'
+2026-10-20T13:36:24.8627298Z info: installing component 'lean'
+2026-10-20T13:36:32.2204033Z info: mathlib: cloning https://github.com/leanprover-community/mathlib4
+2026-10-20T13:37:13.1949558Z info: mathlib: checking out revision '0df444a360eaa60ab8c11dca51a86af692955474'
+2026-10-20T13:37:15.3527762Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-10-20T13:37:15.7861613Z info: plausible: checking out revision 'b7eb3304aeae834b12dda98993a37f6a41f6f0bb'
+2026-10-20T13:37:15.8003650Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-10-20T13:37:16.2391733Z info: LeanSearchClient: checking out revision '5f4d51b81cbd3f6b32b156bfad9056621a040404'
+2026-10-20T13:37:16.2537161Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-10-20T13:37:16.7106730Z info: importGraph: checking out revision '16f02aa7642864af59f1ff0e384a015994db9118'
+2026-10-20T13:37:16.7308691Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-10-20T13:37:17.4142939Z info: proofwidgets: checking out revision '4be2e3d5087eeb272cf5a8853b8f9dd025ef5957'
+2026-10-20T13:37:18.0422657Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-10-20T13:37:18.8218125Z info: aesop: checking out revision '3448c0bcc5ce01b2d1546e483ec3620e32df3d0e'
+2026-10-20T13:37:18.8424680Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-10-20T13:37:19.2800758Z info: Qq: checking out revision '92c15be17b7caf78c2ad767ec40f89052d908d81'
+2026-10-20T13:37:19.2947437Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-10-20T13:37:25.0905627Z info: batteries: checking out revision '4488d40d070b9700d4d5a6aa342f0d40c31b2a2d'
+2026-10-20T13:37:25.1300211Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-10-20T13:37:25.6312367Z info: Cli: checking out revision '6130a47896ce867c6a4a55373441e59e565bad0f'
+2026-10-20T13:37:26.7571020Z ✔ [3/27] Built Cache.Cli (385ms)
+2026-10-20T13:37:26.7590842Z ✔ [4/27] Built Cache.Lean (466ms)
+2026-10-20T13:37:26.9571366Z ✔ [7/27] Built Cache.Cli:c.o (220ms)
+2026-10-20T13:37:27.0564575Z ✔ [8/27] Built Cache.Lean:c.o (227ms)
+2026-10-20T13:37:27.2568074Z ✔ [9/27] Built Cache.Infra (550ms)
+2026-10-20T13:37:27.4571284Z ✔ [10/27] Built Cache.Infra:c.o (207ms)
+2026-10-20T13:37:27.7574196Z ✔ [11/27] Built Batteries.Tactic.OpenPrivate (973ms)
+2026-10-20T13:37:28.9592941Z ✔ [12/27] Built Batteries.Tactic.OpenPrivate:c.o (1.3s)
+2026-10-20T13:37:29.1614346Z ✔ [13/27] Built Cache.IO (1.5s)
+2026-10-20T13:37:29.9627066Z ✔ [14/27] Built Cache.Hashing (822ms)
+2026-10-20T13:37:30.4633242Z ✔ [15/27] Built Cache.Hashing:c.o (441ms)
+2026-10-20T13:37:30.9644929Z ✔ [16/27] Built Cache.IO:c.o (1.7s)
+2026-10-20T13:37:32.0666479Z ✔ [17/27] Built Cache.Requests (2.1s)
+2026-10-20T13:37:32.6682572Z ✔ [18/27] Built Cache.Marker (605ms)
+2026-10-20T13:37:32.8684751Z ✔ [19/27] Built Cache.Marker:c.o (160ms)
+2026-10-20T13:37:33.4691267Z ✔ [20/27] Built Cache.Query (765ms)
+2026-10-20T13:37:33.8688976Z ✔ [21/27] Built Cache.Query:c.o (424ms)
+2026-10-20T13:37:34.2703663Z ✔ [22/27] Built Cache.Warning (832ms)
+2026-10-20T13:37:34.5706361Z ✔ [23/27] Built Cache.Warning:c.o (271ms)
+2026-10-20T13:37:35.0711930Z ✔ [24/27] Built Cache.Requests:c.o (2.0s)
+2026-10-20T13:37:35.5718960Z ✔ [25/27] Built Cache.Main (1.2s)
+2026-10-20T13:37:36.4729875Z ✔ [26/27] Built Cache.Main:c.o (914ms)
+2026-10-20T13:37:37.2743833Z ✔ [27/27] Built cache:exe (803ms)
+2026-10-20T13:37:40.2682473Z Current branch: HEAD
+2026-10-20T13:37:40.2682926Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T13:37:40.2683696Z Attempting to download 8690 file(s) from leanprover-community/mathlib4 cache at https://lakecache.blob.core.windows.net/mathlib4-master
+2026-10-20T13:37:41.5633820Z 
+2026-10-20T13:37:41.6663238Z Downloaded: 1 file(s) [attempted 1/8690 = 0%, 14 KB/s], Decompressed: 0
+2026-10-20T13:37:41.7695247Z Downloaded: 78 file(s) [attempted 78/8690 = 0%, 562 KB/s], Decompressed: 13
+2026-10-20T13:37:41.8702568Z Downloaded: 176 file(s) [attempted 176/8690 = 2%, 672 KB/s], Decompressed: 41
+2026-10-20T13:37:41.9762294Z Downloaded: 276 file(s) [attempted 276/8690 = 3%, 865 KB/s], Decompressed: 41
+2026-10-20T13:37:42.0776448Z Downloaded: 381 file(s) [attempted 381/8690 = 4%, 1864 KB/s], Decompressed: 120
+2026-10-20T13:37:42.1800266Z Downloaded: 488 file(s) [attempted 488/8690 = 5%, 1047 KB/s], Decompressed: 120
+2026-10-20T13:37:42.2892755Z Downloaded: 595 file(s) [attempted 595/8690 = 6%, 302 KB/s], Decompressed: 120
+2026-10-20T13:37:42.3929573Z Downloaded: 700 file(s) [attempted 700/8690 = 8%, 2317 KB/s], Decompressed: 120
+2026-10-20T13:37:42.4910637Z Downloaded: 812 file(s) [attempted 812/8690 = 9%, 420 KB/s], Decompressed: 120
+2026-10-20T13:37:42.5930708Z Downloaded: 926 file(s) [attempted 926/8690 = 10%, 551 KB/s], Decompressed: 120
+2026-10-20T13:37:42.6932013Z Downloaded: 1038 file(s) [attempted 1038/8690 = 11%, 353 KB/s], Decompressed: 120
+2026-10-20T13:37:42.7940813Z Downloaded: 1150 file(s) [attempted 1150/8690 = 13%, 563 KB/s], Decompressed: 120
+2026-10-20T13:37:42.8938672Z Downloaded: 1273 file(s) [attempted 1273/8690 = 14%, 710 KB/s], Decompressed: 120
+2026-10-20T13:37:42.9984126Z Downloaded: 1385 file(s) [attempted 1385/8690 = 15%, 668 KB/s], Decompressed: 379
+2026-10-20T13:37:43.1056871Z Downloaded: 1492 file(s) [attempted 1492/8690 = 17%, 3500 KB/s], Decompressed: 379
+2026-10-20T13:37:43.2075508Z Downloaded: 1597 file(s) [attempted 1597/8690 = 18%, 281 KB/s], Decompressed: 379
+2026-10-20T13:37:43.3082560Z Downloaded: 1716 file(s) [attempted 1716/8690 = 19%, 1062 KB/s], Decompressed: 379
+2026-10-20T13:37:43.4159403Z Downloaded: 1817 file(s) [attempted 1817/8690 = 20%, 1743 KB/s], Decompressed: 379
+2026-10-20T13:37:43.5171156Z Downloaded: 1925 file(s) [attempted 1925/8690 = 22%, 1421 KB/s], Decompressed: 379
+2026-10-20T13:37:43.6256638Z Downloaded: 2035 file(s) [attempted 2035/8690 = 23%, 631 KB/s], Decompressed: 379
+2026-10-20T13:37:43.7242878Z Downloaded: 2147 file(s) [attempted 2147/8690 = 24%, 927 KB/s], Decompressed: 379
+2026-10-20T13:37:43.8288330Z Downloaded: 2264 file(s) [attempted 2264/8690 = 26%, 604 KB/s], Decompressed: 379
+2026-10-20T13:37:43.9390795Z Downloaded: 2377 file(s) [attempted 2377/8690 = 27%, 217 KB/s], Decompressed: 379
+2026-10-20T13:37:44.0521288Z Downloaded: 2470 file(s) [attempted 2470/8690 = 28%, 1628 KB/s], Decompressed: 379
+2026-10-20T13:37:44.1553845Z Downloaded: 2568 file(s) [attempted 2568/8690 = 29%, 634 KB/s], Decompressed: 379
+2026-10-20T13:37:44.2661097Z Downloaded: 2670 file(s) [attempted 2670/8690 = 30%, 405 KB/s], Decompressed: 379
+2026-10-20T13:37:44.3666181Z Downloaded: 2775 file(s) [attempted 2775/8690 = 31%, 766 KB/s], Decompressed: 379
+2026-10-20T13:37:44.4796714Z Downloaded: 2880 file(s) [attempted 2880/8690 = 33%, 403 KB/s], Decompressed: 379
+2026-10-20T13:37:44.5781475Z Downloaded: 2983 file(s) [attempted 2983/8690 = 34%, 330 KB/s], Decompressed: 379
+2026-10-20T13:37:44.6836522Z Downloaded: 3087 file(s) [attempted 3087/8690 = 35%, 948 KB/s], Decompressed: 379
+2026-10-20T13:37:44.7875072Z Downloaded: 3155 file(s) [attempted 3155/8690 = 36%, 358 KB/s], Decompressed: 379
+2026-10-20T13:37:44.9110868Z Downloaded: 3257 file(s) [attempted 3257/8690 = 37%, 469 KB/s], Decompressed: 379
+2026-10-20T13:37:45.0090938Z Downloaded: 3360 file(s) [attempted 3360/8690 = 38%, 1249 KB/s], Decompressed: 379
+2026-10-20T13:37:45.1209850Z Downloaded: 3463 file(s) [attempted 3463/8690 = 39%, 243 KB/s], Decompressed: 379
+2026-10-20T13:37:45.2211957Z Downloaded: 3569 file(s) [attempted 3569/8690 = 41%, 407 KB/s], Decompressed: 379
+2026-10-20T13:37:45.3212264Z Downloaded: 3686 file(s) [attempted 3686/8690 = 42%, 584 KB/s], Decompressed: 379
+2026-10-20T13:37:45.4271611Z Downloaded: 3790 file(s) [attempted 3790/8690 = 43%, 1665 KB/s], Decompressed: 379
+2026-10-20T13:37:45.5310655Z Downloaded: 3898 file(s) [attempted 3898/8690 = 44%, 1341 KB/s], Decompressed: 379
+2026-10-20T13:37:45.6283202Z Downloaded: 3998 file(s) [attempted 3998/8690 = 46%, 1696 KB/s], Decompressed: 379
+2026-10-20T13:37:45.7742887Z Downloaded: 4098 file(s) [attempted 4098/8690 = 47%, 4453 KB/s], Decompressed: 379
+2026-10-20T13:37:45.9130473Z Downloaded: 4212 file(s) [attempted 4212/8690 = 48%, 2223 KB/s], Decompressed: 379
+2026-10-20T13:37:46.0143254Z Downloaded: 4312 file(s) [attempted 4312/8690 = 49%, 4229 KB/s], Decompressed: 379
+2026-10-20T13:37:46.1565496Z Downloaded: 4410 file(s) [attempted 4410/8690 = 50%, 2946 KB/s], Decompressed: 379
+2026-10-20T13:37:46.2695335Z Downloaded: 4515 file(s) [attempted 4515/8690 = 51%, 84 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.3904108Z Downloaded: 4615 file(s) [attempted 4615/8690 = 53%, 354 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.5220782Z Downloaded: 4713 file(s) [attempted 4713/8690 = 54%, 716 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.6354064Z Downloaded: 4810 file(s) [attempted 4810/8690 = 55%, 3505 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.7415498Z Downloaded: 4910 file(s) [attempted 4910/8690 = 56%, 165 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.8512213Z Downloaded: 5015 file(s) [attempted 5015/8690 = 57%, 277 KB/s], Decompressed: 1339
+2026-10-20T13:37:46.9676454Z Downloaded: 5122 file(s) [attempted 5122/8690 = 58%, 183 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.0675654Z Downloaded: 5222 file(s) [attempted 5222/8690 = 60%, 1498 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.1701261Z Downloaded: 5324 file(s) [attempted 5324/8690 = 61%, 348 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.2710633Z Downloaded: 5427 file(s) [attempted 5427/8690 = 62%, 380 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.3762658Z Downloaded: 5489 file(s) [attempted 5489/8690 = 63%, 962 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.4800789Z Downloaded: 5590 file(s) [attempted 5590/8690 = 64%, 483 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.5946597Z Downloaded: 5691 file(s) [attempted 5691/8690 = 65%, 445 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.6945697Z Downloaded: 5793 file(s) [attempted 5793/8690 = 66%, 4195 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.8000817Z Downloaded: 5893 file(s) [attempted 5893/8690 = 67%, 23 KB/s], Decompressed: 1339
+2026-10-20T13:37:47.8972905Z Downloaded: 5965 file(s) [attempted 5965/8690 = 68%, 1417 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.0026462Z Downloaded: 6057 file(s) [attempted 6057/8690 = 69%, 330 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.1322268Z Downloaded: 6159 file(s) [attempted 6159/8690 = 70%, 805 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.2320629Z Downloaded: 6261 file(s) [attempted 6261/8690 = 72%, 4207 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.3342616Z Downloaded: 6363 file(s) [attempted 6363/8690 = 73%, 1191 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.4350534Z Downloaded: 6468 file(s) [attempted 6468/8690 = 74%, 591 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.5396096Z Downloaded: 6571 file(s) [attempted 6571/8690 = 75%, 1186 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.6503354Z Downloaded: 6680 file(s) [attempted 6680/8690 = 76%, 2071 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.7720650Z Downloaded: 6783 file(s) [attempted 6783/8690 = 78%, 723 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.8788583Z Downloaded: 6892 file(s) [attempted 6892/8690 = 79%, 270 KB/s], Decompressed: 1339
+2026-10-20T13:37:48.9786475Z Downloaded: 6994 file(s) [attempted 6994/8690 = 80%, 74 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.1271096Z Downloaded: 7095 file(s) [attempted 7095/8690 = 81%, 291 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.2340546Z Downloaded: 7129 file(s) [attempted 7129/8690 = 82%, 3454 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.3330501Z Downloaded: 7202 file(s) [attempted 7202/8690 = 82%, 3482 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.4401259Z Downloaded: 7302 file(s) [attempted 7302/8690 = 84%, 2303 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.5583218Z Downloaded: 7404 file(s) [attempted 7404/8690 = 85%, 852 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.6702141Z Downloaded: 7507 file(s) [attempted 7507/8690 = 86%, 338 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.7761950Z Downloaded: 7611 file(s) [attempted 7611/8690 = 87%, 1216 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.8741722Z Downloaded: 7716 file(s) [attempted 7716/8690 = 88%, 2520 KB/s], Decompressed: 1339
+2026-10-20T13:37:49.9755186Z Downloaded: 7829 file(s) [attempted 7829/8690 = 90%, 298 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.0797980Z Downloaded: 7924 file(s) [attempted 7924/8690 = 91%, 163 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.1808879Z Downloaded: 8000 file(s) [attempted 8000/8690 = 92%, 3047 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.2890723Z Downloaded: 8100 file(s) [attempted 8100/8690 = 93%, 2549 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.3992239Z Downloaded: 8203 file(s) [attempted 8203/8690 = 94%, 892 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.5017252Z Downloaded: 8305 file(s) [attempted 8305/8690 = 95%, 1071 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.6051848Z Downloaded: 8375 file(s) [attempted 8375/8690 = 96%, 375 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.7070128Z Downloaded: 8468 file(s) [attempted 8468/8690 = 97%, 402 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.8070678Z Downloaded: 8568 file(s) [attempted 8568/8690 = 98%, 1347 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.9270748Z Downloaded: 8655 file(s) [attempted 8655/8690 = 99%, 1062 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.9322809Z Downloaded: 8690 file(s) [attempted 8690/8690 = 100%, 555 KB/s], Decompressed: 1339
+2026-10-20T13:37:50.9349800Z Downloaded: 8690 file(s) [attempted 8690/8690 = 100%, 555 KB/s], Decompressed: 1339
+2026-10-20T13:38:09.8471503Z Decompressed 8690 file(s)
+2026-10-20T13:38:09.8471983Z Already decompressed 8690 file(s)
+2026-10-20T13:38:09.9661763Z Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+2026-10-20T13:38:09.9814603Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T13:38:09.9814999Z with:
+2026-10-20T13:38:09.9815248Z   ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T13:38:09.9815546Z   path: .baseline
+2026-10-20T13:38:09.9815785Z   persist-credentials: false
+2026-10-20T13:38:09.9816074Z   repository: tarikskalic33/formal-conjectures
+2026-10-20T13:38:09.9818747Z   token: ***
+2026-10-20T13:38:09.9818956Z   ssh-strict: true
+2026-10-20T13:38:09.9819330Z   ssh-user: git
+2026-10-20T13:38:09.9819535Z   clean: true
+2026-10-20T13:38:09.9819772Z   sparse-checkout-cone-mode: true
+2026-10-20T13:38:09.9820039Z   fetch-depth: 1
+2026-10-20T13:38:09.9820249Z   fetch-tags: false
+2026-10-20T13:38:09.9820464Z   show-progress: true
+2026-10-20T13:38:09.9820682Z   lfs: false
+2026-10-20T13:38:09.9820885Z   submodules: false
+2026-10-20T13:38:09.9821107Z   set-safe-directory: true
+2026-10-20T13:38:09.9821363Z   allow-unsafe-pr-checkout: false
+2026-10-20T13:38:09.9821632Z env:
+2026-10-20T13:38:09.9821920Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:38:09.9822263Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:38:09.9822608Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:09.9823057Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:38:09.9823532Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:09.9823883Z ##[endgroup]
+2026-10-20T13:38:10.0690652Z Syncing repository: tarikskalic33/formal-conjectures
+2026-10-20T13:38:10.0696767Z ##[group]Getting Git version info
+2026-10-20T13:38:10.0697549Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures/.baseline'
+2026-10-20T13:38:10.0750958Z [command]/usr/bin/git version
+2026-10-20T13:38:10.0782694Z git version 2.55.0
+2026-10-20T13:38:10.0802097Z ##[endgroup]
+2026-10-20T13:38:10.0817459Z Temporarily overriding HOME='/home/runner/work/_temp/68ff18fe-c175-4879-a0ef-4f661288c907' before making global git config changes
+2026-10-20T13:38:10.0819308Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T13:38:10.0834127Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T13:38:10.0869043Z ##[group]Initializing the repository
+2026-10-20T13:38:10.0873821Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T13:38:10.0920282Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T13:38:10.0921492Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T13:38:10.0922561Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T13:38:10.0923173Z hint: call:
+2026-10-20T13:38:10.0923484Z hint:
+2026-10-20T13:38:10.0923856Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T13:38:10.0924339Z hint:
+2026-10-20T13:38:10.0924790Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T13:38:10.0925551Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T13:38:10.0926127Z hint:
+2026-10-20T13:38:10.0926426Z hint: 	git branch -m <name>
+2026-10-20T13:38:10.0926681Z hint:
+2026-10-20T13:38:10.0927025Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T13:38:10.0927657Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.baseline/.git/
+2026-10-20T13:38:10.0938217Z [command]/usr/bin/git remote add origin https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T13:38:10.0982877Z ##[endgroup]
+2026-10-20T13:38:10.0983549Z ##[group]Disabling automatic garbage collection
+2026-10-20T13:38:10.0987088Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T13:38:10.1022662Z ##[endgroup]
+2026-10-20T13:38:10.1023299Z ##[group]Setting up auth
+2026-10-20T13:38:10.1030238Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:38:10.1067817Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:38:10.1369908Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:38:10.1409797Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:38:10.1695083Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:38:10.1744187Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:38:10.2029687Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T13:38:10.2081250Z ##[endgroup]
+2026-10-20T13:38:10.2081733Z ##[group]Fetching the repository
+2026-10-20T13:38:10.2092507Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T13:38:10.9903158Z From https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T13:38:10.9903750Z  * branch            e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121 -> FETCH_HEAD
+2026-10-20T13:38:10.9908813Z ##[endgroup]
+2026-10-20T13:38:10.9909415Z ##[group]Determining the checkout info
+2026-10-20T13:38:10.9911957Z ##[endgroup]
+2026-10-20T13:38:10.9919737Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T13:38:10.9974975Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T13:38:11.0017082Z ##[group]Checking out the ref
+2026-10-20T13:38:11.0057685Z [command]/usr/bin/git checkout --progress --force e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T13:38:11.1164500Z Note: switching to 'e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121'.
+2026-10-20T13:38:11.1164947Z 
+2026-10-20T13:38:11.1165276Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T13:38:11.1165770Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T13:38:11.1166243Z state without impacting any branches by switching back to a branch.
+2026-10-20T13:38:11.1166521Z 
+2026-10-20T13:38:11.1166705Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T13:38:11.1167159Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T13:38:11.1167411Z 
+2026-10-20T13:38:11.1167525Z   git switch -c <new-branch-name>
+2026-10-20T13:38:11.1167697Z 
+2026-10-20T13:38:11.1167812Z Or undo this operation with:
+2026-10-20T13:38:11.1168017Z 
+2026-10-20T13:38:11.1168116Z   git switch -
+2026-10-20T13:38:11.1168244Z 
+2026-10-20T13:38:11.1168517Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T13:38:11.1168861Z 
+2026-10-20T13:38:11.1169371Z HEAD is now at e279d57 fix(rh): instantiate translated norm functions and derivative shifts explicitly
+2026-10-20T13:38:11.1174038Z ##[endgroup]
+2026-10-20T13:38:11.1231368Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T13:38:11.1268152Z e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T13:38:11.1278017Z ##[group]Removing auth
+2026-10-20T13:38:11.1282677Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:38:11.1325922Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:38:11.1590447Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:38:11.1625834Z http.https://github.com/.extraheader
+2026-10-20T13:38:11.1634527Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T13:38:11.1678760Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:38:11.1940076Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:38:11.1982605Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:38:11.2239845Z ##[endgroup]
+2026-10-20T13:38:11.2455649Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T13:38:11.2456040Z with:
+2026-10-20T13:38:11.2456332Z   repository: nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T13:38:11.2456726Z   ref: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:11.2457031Z   path: .li-provider
+2026-10-20T13:38:11.2457279Z   persist-credentials: false
+2026-10-20T13:38:11.2460237Z   token: ***
+2026-10-20T13:38:11.2460453Z   ssh-strict: true
+2026-10-20T13:38:11.2460669Z   ssh-user: git
+2026-10-20T13:38:11.2460878Z   clean: true
+2026-10-20T13:38:11.2461102Z   sparse-checkout-cone-mode: true
+2026-10-20T13:38:11.2461370Z   fetch-depth: 1
+2026-10-20T13:38:11.2461581Z   fetch-tags: false
+2026-10-20T13:38:11.2461798Z   show-progress: true
+2026-10-20T13:38:11.2462013Z   lfs: false
+2026-10-20T13:38:11.2462208Z   submodules: false
+2026-10-20T13:38:11.2462433Z   set-safe-directory: true
+2026-10-20T13:38:11.2462690Z   allow-unsafe-pr-checkout: false
+2026-10-20T13:38:11.2462994Z env:
+2026-10-20T13:38:11.2463255Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:38:11.2463594Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:38:11.2463939Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:11.2464377Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:38:11.2465077Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:11.2465434Z ##[endgroup]
+2026-10-20T13:38:11.3340399Z Syncing repository: nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T13:38:11.3341814Z ##[group]Getting Git version info
+2026-10-20T13:38:11.3342972Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures/.li-provider'
+2026-10-20T13:38:11.3376737Z [command]/usr/bin/git version
+2026-10-20T13:38:11.3422410Z git version 2.55.0
+2026-10-20T13:38:11.3447748Z ##[endgroup]
+2026-10-20T13:38:11.3461125Z Temporarily overriding HOME='/home/runner/work/_temp/135f9453-b89f-487b-92fa-de7beb7beffe' before making global git config changes
+2026-10-20T13:38:11.3470341Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T13:38:11.3471651Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T13:38:11.3500944Z ##[group]Initializing the repository
+2026-10-20T13:38:11.3507146Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T13:38:11.3555427Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T13:38:11.3556875Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T13:38:11.3563107Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T13:38:11.3566869Z hint: call:
+2026-10-20T13:38:11.3567898Z hint:
+2026-10-20T13:38:11.3568513Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T13:38:11.3569410Z hint:
+2026-10-20T13:38:11.3570089Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T13:38:11.3571068Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T13:38:11.3571804Z hint:
+2026-10-20T13:38:11.3572262Z hint: 	git branch -m <name>
+2026-10-20T13:38:11.3572789Z hint:
+2026-10-20T13:38:11.3573474Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T13:38:11.3574692Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.li-provider/.git/
+2026-10-20T13:38:11.3577219Z [command]/usr/bin/git remote add origin https://github.com/nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T13:38:11.3614155Z ##[endgroup]
+2026-10-20T13:38:11.3614938Z ##[group]Disabling automatic garbage collection
+2026-10-20T13:38:11.3620293Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T13:38:11.3656646Z ##[endgroup]
+2026-10-20T13:38:11.3657788Z ##[group]Setting up auth
+2026-10-20T13:38:11.3670050Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:38:11.3702756Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:38:11.3979802Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:38:11.4022414Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:38:11.4305288Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:38:11.4354387Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:38:11.4648789Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T13:38:11.4700360Z ##[endgroup]
+2026-10-20T13:38:11.4700972Z ##[group]Fetching the repository
+2026-10-20T13:38:11.4709946Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:11.9537859Z From https://github.com/nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T13:38:11.9538710Z  * branch            35df682f3b709ffe5fbcfdd452dfa964bd622b87 -> FETCH_HEAD
+2026-10-20T13:38:11.9543645Z ##[endgroup]
+2026-10-20T13:38:11.9544093Z ##[group]Determining the checkout info
+2026-10-20T13:38:11.9546332Z ##[endgroup]
+2026-10-20T13:38:11.9554333Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T13:38:11.9609918Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T13:38:11.9652970Z ##[group]Checking out the ref
+2026-10-20T13:38:11.9692411Z [command]/usr/bin/git checkout --progress --force 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:11.9818733Z Note: switching to '35df682f3b709ffe5fbcfdd452dfa964bd622b87'.
+2026-10-20T13:38:11.9819373Z 
+2026-10-20T13:38:11.9819613Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T13:38:11.9820110Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T13:38:11.9820598Z state without impacting any branches by switching back to a branch.
+2026-10-20T13:38:11.9820870Z 
+2026-10-20T13:38:11.9821050Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T13:38:11.9821492Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T13:38:11.9821740Z 
+2026-10-20T13:38:11.9821858Z   git switch -c <new-branch-name>
+2026-10-20T13:38:11.9822026Z 
+2026-10-20T13:38:11.9822136Z Or undo this operation with:
+2026-10-20T13:38:11.9822291Z 
+2026-10-20T13:38:11.9822385Z   git switch -
+2026-10-20T13:38:11.9822517Z 
+2026-10-20T13:38:11.9822737Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T13:38:11.9823039Z 
+2026-10-20T13:38:11.9823807Z HEAD is now at 35df682 Establish summability in the second compared theorem; credit Bombieri–Lagarias
+2026-10-20T13:38:11.9828315Z ##[endgroup]
+2026-10-20T13:38:11.9879782Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T13:38:11.9916944Z 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:11.9927049Z ##[group]Removing auth
+2026-10-20T13:38:11.9931538Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T13:38:11.9974084Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T13:38:12.0240278Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T13:38:12.0275431Z http.https://github.com/.extraheader
+2026-10-20T13:38:12.0283074Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T13:38:12.0327634Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T13:38:12.0588838Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T13:38:12.0632107Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T13:38:12.0890314Z ##[endgroup]
+2026-10-20T13:38:12.1650118Z ##[group]Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+2026-10-20T13:38:12.1650549Z with:
+2026-10-20T13:38:12.1650778Z   path: .li-provider/.lake/build
+2026-10-20T13:38:12.1651810Z   key: rh-li-provider-v1-Linux-3000596d704f59b6df5e67c1632d260077e1b74e1b501dc4471251c10634bb8f-35df682f3b709ffe5fbcfdd452dfa964bd622b87-0df444a360eaa60ab8c11dca51a86af692955474-10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:12.1652855Z   enableCrossOsArchive: false
+2026-10-20T13:38:12.1653125Z   fail-on-cache-miss: false
+2026-10-20T13:38:12.1653362Z   lookup-only: false
+2026-10-20T13:38:12.1653570Z env:
+2026-10-20T13:38:12.1653810Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:38:12.1654418Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:38:12.1654773Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:12.1655215Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:38:12.1655738Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:12.1656089Z ##[endgroup]
+2026-10-20T13:38:12.5469357Z Cache not found for input keys: rh-li-provider-v1-Linux-3000596d704f59b6df5e67c1632d260077e1b74e1b501dc4471251c10634bb8f-35df682f3b709ffe5fbcfdd452dfa964bd622b87-0df444a360eaa60ab8c11dca51a86af692955474-10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:12.5572646Z ##[group]Run python3 research/rh/m8_kernel_v1/replay.py provider
+2026-10-20T13:38:12.5573134Z [36;1mpython3 research/rh/m8_kernel_v1/replay.py provider[0m
+2026-10-20T13:38:12.5633292Z shell: /usr/bin/bash -e {0}
+2026-10-20T13:38:12.5633563Z env:
+2026-10-20T13:38:12.5633823Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:38:12.5634196Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:38:12.5634547Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:38:12.5635002Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:38:12.5635478Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:38:12.5635833Z ##[endgroup]
+2026-10-20T13:42:55.0096481Z info: LiCriterion: no previous manifest, creating one from scratch
+2026-10-20T13:42:55.0097456Z info: mathlib: cloning https://github.com/leanprover-community/mathlib4.git
+2026-10-20T13:42:55.0098349Z info: mathlib: checking out revision '0df444a360eaa60ab8c11dca51a86af692955474'
+2026-10-20T13:42:55.0098966Z info: toolchain not updated; already up-to-date
+2026-10-20T13:42:55.0099781Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-10-20T13:42:55.0100522Z info: plausible: checking out revision 'b7eb3304aeae834b12dda98993a37f6a41f6f0bb'
+2026-10-20T13:42:55.0101335Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-10-20T13:42:55.0102152Z info: LeanSearchClient: checking out revision '5f4d51b81cbd3f6b32b156bfad9056621a040404'
+2026-10-20T13:42:55.0102922Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-10-20T13:42:55.0103692Z info: importGraph: checking out revision '16f02aa7642864af59f1ff0e384a015994db9118'
+2026-10-20T13:42:55.0104443Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-10-20T13:42:55.0105214Z info: proofwidgets: checking out revision '4be2e3d5087eeb272cf5a8853b8f9dd025ef5957'
+2026-10-20T13:42:55.0105916Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-10-20T13:42:55.0106578Z info: aesop: checking out revision '3448c0bcc5ce01b2d1546e483ec3620e32df3d0e'
+2026-10-20T13:42:55.0107264Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-10-20T13:42:55.0107992Z info: Qq: checking out revision '92c15be17b7caf78c2ad767ec40f89052d908d81'
+2026-10-20T13:42:55.0108801Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-10-20T13:42:55.0109827Z info: batteries: checking out revision '4488d40d070b9700d4d5a6aa342f0d40c31b2a2d'
+2026-10-20T13:42:55.0110568Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-10-20T13:42:55.0111253Z info: Cli: checking out revision '6130a47896ce867c6a4a55373441e59e565bad0f'
+2026-10-20T13:42:55.0111880Z info: mathlib: running post-update hooks
+2026-10-20T13:42:55.0112659Z ✔ [4/26] Built Cache.Cli (448ms)
+2026-10-20T13:42:55.0113178Z ✔ [5/26] Built Cache.Lean (662ms)
+2026-10-20T13:42:55.0113647Z ✔ [6/26] Built Cache.Cli:c.o (210ms)
+2026-10-20T13:42:55.0114089Z ✔ [7/26] Built Cache.Infra (585ms)
+2026-10-20T13:42:55.0114487Z ✔ [8/26] Built Cache.Lean:c.o (200ms)
+2026-10-20T13:42:55.0114920Z ✔ [9/26] Built Cache.Infra:c.o (228ms)
+2026-10-20T13:42:55.0115479Z ✔ [10/26] Built Batteries.Tactic.OpenPrivate (1.2s)
+2026-10-20T13:42:55.0116781Z ✔ [11/26] Built Batteries.Tactic.OpenPrivate:c.o (1.3s)
+2026-10-20T13:42:55.0117378Z ✔ [12/26] Built Cache.IO (1.4s)
+2026-10-20T13:42:55.0117858Z ✔ [13/26] Built Cache.Hashing (821ms)
+2026-10-20T13:42:55.0118375Z ✔ [14/26] Built Cache.Hashing:c.o (660ms)
+2026-10-20T13:42:55.0118890Z ✔ [15/26] Built Cache.IO:c.o (1.8s)
+2026-10-20T13:42:55.0119675Z ✔ [16/26] Built Cache.Requests (2.0s)
+2026-10-20T13:42:55.0120211Z ✔ [17/26] Built Cache.Marker (611ms)
+2026-10-20T13:42:55.0120710Z ✔ [18/26] Built Cache.Marker:c.o (141ms)
+2026-10-20T13:42:55.0121205Z ✔ [19/26] Built Cache.Query (799ms)
+2026-10-20T13:42:55.0121677Z ✔ [20/26] Built Cache.Query:c.o (452ms)
+2026-10-20T13:42:55.0122511Z ✔ [21/26] Built Cache.Warning (732ms)
+2026-10-20T13:42:55.0123026Z ✔ [22/26] Built Cache.Warning:c.o (371ms)
+2026-10-20T13:42:55.0123493Z ✔ [23/26] Built Cache.Requests:c.o (3.0s)
+2026-10-20T13:42:55.0123976Z ✔ [24/26] Built Cache.Main (1.3s)
+2026-10-20T13:42:55.0124429Z ✔ [25/26] Built Cache.Main:c.o (915ms)
+2026-10-20T13:42:55.0124872Z ✔ [26/26] Built cache:exe (827ms)
+2026-10-20T13:42:55.0125286Z Current branch: HEAD
+2026-10-20T13:42:55.0125777Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T13:42:55.0126499Z Decompressing 8689 already-cached file(s) (1 already decompressed)
+2026-10-20T13:42:55.0127118Z No files to download
+2026-10-20T13:42:55.0127498Z Decompressed 8689 already-cached file(s)
+2026-10-20T13:42:55.0128057Z Completed successfully in 26727 ms!
+2026-10-20T13:42:55.0128425Z Current branch: HEAD
+2026-10-20T13:42:55.0128895Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T13:42:55.0129634Z No files to download
+2026-10-20T13:42:55.0129989Z Already decompressed 8690 file(s)
+2026-10-20T13:42:55.0130569Z ✔ [3654/3669] Built Hadamard.OrderOne.CofiniteControl (5.3s)
+2026-10-20T13:42:55.0131310Z ✔ [3655/3671] Built FunctionsOfOneComplexVariable.EntireLog (5.7s)
+2026-10-20T13:42:55.0132004Z ✔ [3658/3671] Built Lc.LiCriterion.MobiusMap (5.2s)
+2026-10-20T13:42:55.0132589Z ✔ [3659/3709] Built Lc.LiCriterion.GenusOne (4.2s)
+2026-10-20T13:42:55.0133348Z ✔ [3691/3713] Built FunctionsOfOneComplexVariable.BorelCaratheodory (10s)
+2026-10-20T13:42:55.0134032Z ✔ [3692/3713] Built Lc.XiZeros (4.9s)
+2026-10-20T13:42:55.0134565Z ✔ [3693/3713] Built Lc.LiCriterion.Pringsheim (5.1s)
+2026-10-20T13:42:55.0135261Z ✔ [3694/3713] Built Hadamard.OrderOne.QuotientCancellation (2.7s)
+2026-10-20T13:42:55.0135872Z ✔ [3695/3713] Built Hadamard.Basic (10s)
+2026-10-20T13:42:55.0136365Z ✔ [3696/3713] Built Hadamard.ZeroSet (3.5s)
+2026-10-20T13:42:55.0136868Z ✔ [3697/3713] Built Hadamard.Theorem (3.7s)
+2026-10-20T13:42:55.0137506Z ✔ [3698/3713] Built Hadamard.OrderOne.OrderFromMaxModulus (6.2s)
+2026-10-20T13:42:55.0138289Z ✔ [3699/3713] Built Hadamard.OrderOne.LocallyUniformProduct (8.8s)
+2026-10-20T13:42:55.0139055Z ✔ [3700/3713] Built Hadamard.OrderOne.MultipliableFactors (8.8s)
+2026-10-20T13:42:55.0139879Z ✔ [3701/3713] Built Hadamard.ZeroSetMultiplicity (6.2s)
+2026-10-20T13:42:55.0140490Z ✔ [3702/3713] Built Hadamard.ZeroCounting (12s)
+2026-10-20T13:42:55.0141094Z ✔ [3703/3713] Built Hadamard.OrderOne.LogDeriv (8.2s)
+2026-10-20T13:42:55.0141768Z ✔ [3704/3713] Built Hadamard.OrderOne.ZeroCountingBounds (15s)
+2026-10-20T13:42:55.0142467Z ✔ [3705/3713] Built Hadamard.OrderOne.TailEstimates (20s)
+2026-10-20T13:42:55.0143196Z ✔ [3706/3713] Built Hadamard.OrderOne.LogDerivMultiplicity (32s)
+2026-10-20T13:42:55.0143843Z ✔ [3707/3713] Built Lc.LiCriterion.Basic (44s)
+2026-10-20T13:42:55.0144547Z ✔ [3708/3713] Built Hadamard.OrderOne.SummabilityMultiplicity (13s)
+2026-10-20T13:42:55.0145355Z ✔ [3709/3713] Built Lc.LiCriterion.HadamardSummabilityBridge (5.8s)
+2026-10-20T13:42:55.0146017Z ✔ [3710/3713] Built Lc.LiCriterion.XiGrowth (17s)
+2026-10-20T13:42:55.0146677Z ✔ [3711/3713] Built Hadamard.General.Factorization (80s)
+2026-10-20T13:42:55.0147247Z ✔ [3712/3713] Built Hadamard.General (2.0s)
+2026-10-20T13:42:55.0147826Z ✔ [3713/3713] Built Lc.LiCriterion.HadamardBridge (2.7s)
+2026-10-20T13:42:55.0148344Z Build completed successfully (3713 jobs).
+2026-10-20T13:42:55.0148868Z 
+2026-10-20T13:42:55.0241822Z ##[group]Run set -euo pipefail
+2026-10-20T13:42:55.0242257Z [36;1mset -euo pipefail[0m
+2026-10-20T13:42:55.0242546Z [36;1mRING="$GITHUB_WORKSPACE/.lake/ringout"[0m
+2026-10-20T13:42:55.0242935Z [36;1mexport LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"[0m
+2026-10-20T13:42:55.0243393Z [36;1mpython3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \[0m
+2026-10-20T13:42:55.0243911Z [36;1m  research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log[0m
+2026-10-20T13:42:55.0244542Z [36;1mfor m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \[0m
+2026-10-20T13:42:55.0245129Z [36;1m         CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do[0m
+2026-10-20T13:42:55.0245653Z [36;1m  lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0246070Z [36;1mdone[0m
+2026-10-20T13:42:55.0246580Z [36;1mlean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0247309Z [36;1mlean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0248007Z [36;1mlean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0248781Z [36;1mlean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0249777Z [36;1mlean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0250536Z [36;1mlean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0251299Z [36;1mlean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0252067Z [36;1mlean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0252829Z [36;1mlean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0253596Z [36;1mlean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0254382Z [36;1mlean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0255129Z [36;1mlean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0255916Z [36;1mlean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0256690Z [36;1mlean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0257580Z [36;1mlean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0258452Z [36;1mlean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0259329Z [36;1mlean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0260068Z [36;1mlean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0260766Z [36;1mlean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0261460Z [36;1mlean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0262486Z [36;1mlean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0263499Z [36;1mlean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0264428Z [36;1mlean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0265230Z [36;1mlean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0265939Z [36;1mlean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0266664Z [36;1mlean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0267362Z [36;1mlean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0268235Z [36;1mlean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0269454Z [36;1mlean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0270358Z [36;1mlean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0271323Z [36;1mlean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0272280Z [36;1mlean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0273285Z [36;1mlean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T13:42:55.0274413Z [36;1mlean -DwarningAsError=true -o "$RING/CvSActualCrossRowL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean 2>&1 | tee actual-row-bridge.log[0m
+2026-10-20T13:42:55.0275571Z [36;1mlean -DwarningAsError=true -o "$RING/CvSMidpointRadiusV1.olean" research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0276775Z [36;1mlean -DwarningAsError=true -o "$RING/CvSOddSignedEnclosureV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSOddSignedEnclosureV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0278062Z [36;1mlean -DwarningAsError=true -o "$RING/CvSRationalIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRationalIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0279630Z [36;1mlean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0280909Z [36;1mlean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0282108Z [36;1mlean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0283288Z [36;1mlean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0284483Z [36;1mlean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0286141Z [36;1mlean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0287432Z [36;1mlean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0288459Z [36;1mlean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0289779Z [36;1mlean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T13:42:55.0290542Z [36;1mpython3 - <<'PY'[0m
+2026-10-20T13:42:55.0290797Z [36;1mimport pathlib, re[0m
+2026-10-20T13:42:55.0291135Z [36;1mlog = pathlib.Path('actual-row-bridge.log').read_text()[0m
+2026-10-20T13:42:55.0291482Z [36;1mnames = [[0m
+2026-10-20T13:42:55.0291831Z [36;1m  'sourceKernel_diag', 'sourceKernel_off', 'sourceY_eq_actual_crossRow'[0m
+2026-10-20T13:42:55.0292222Z [36;1m][0m
+2026-10-20T13:42:55.0292519Z [36;1mnames = ['AEGIS.CvSActualCrossRowL12V1.' + n for n in names][0m
+2026-10-20T13:42:55.0296210Z [36;1mnames += ['AEGIS.CvSMidpointRadiusV1.product_error', 'AEGIS.CvSMidpointRadiusV1.sum_product_error', 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure', 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds', 'AEGIS.CvSRationalIntervalV1.rationalRange_mem', 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error', 'AEGIS.CvSIntervalMatrixProductV1.dot_mem', 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem', 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem', 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left', 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains', 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound', 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check', 'AEGIS.CvSTauSigned150L12V1.positive_mem', 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds', 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval'][0m
+2026-10-20T13:42:55.0301973Z [36;1mnames += ['AEGIS.CvSIntervalDivideV1.divPos_mem', 'AEGIS.CvSIntervalDivideV1.divInt_mem', 'AEGIS.CvSFrequencyIntervalV1.pi_bounds', 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds', 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem', 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem', 'AEGIS.CvSActualRowInputL12V1.gramRat_cast', 'AEGIS.CvSActualRowInputL12V1.gramUp_mem', 'AEGIS.CvSActualRowInputL12V1.gramUp_symm', 'AEGIS.CvSActualRowInputL12V1.diagonal_mem', 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem', 'AEGIS.CvSActualRowInputL12V1.sourceY_mem'][0m
+2026-10-20T13:42:55.0304365Z [36;1mallowed = {'propext','Classical.choice','Quot.sound'}[0m
+2026-10-20T13:42:55.0304765Z [36;1mif re.search(r'sorryAx|\bsorry\b|\badmit\b', log):[0m
+2026-10-20T13:42:55.0305129Z [36;1m  raise SystemExit('SORRYAX_OR_PROOF_HOLE')[0m
+2026-10-20T13:42:55.0305432Z [36;1mfor name in names:[0m
+2026-10-20T13:42:55.0305665Z [36;1m  decl = name[0m
+2026-10-20T13:42:55.0306030Z [36;1m  h = re.search(r"'" + re.escape(decl) + r"' depends on axioms:\s*\[([^]]*)\]", log, re.S)[0m
+2026-10-20T13:42:55.0306541Z [36;1m  h0 = re.search(r"'" + re.escape(decl) + r"' does not depend on any axioms", log)[0m
+2026-10-20T13:42:55.0306940Z [36;1m  if h is None and h0 is None:[0m
+2026-10-20T13:42:55.0307256Z [36;1m    raise SystemExit('MISSING_AXIOM_AUDIT '+decl)[0m
+2026-10-20T13:42:55.0307682Z [36;1m  axioms = {x.strip() for x in h.group(1).split(',') if x.strip()} if h else set()[0m
+2026-10-20T13:42:55.0308073Z [36;1m  if not axioms <= allowed:[0m
+2026-10-20T13:42:55.0308722Z [36;1m    raise SystemExit('UNEXPECTED_AXIOMS '+decl+' '+repr(axioms))[0m
+2026-10-20T13:42:55.0309386Z [36;1m  print('SOURCE_ROW_AXIOM_AUDIT_PASS',decl,sorted(axioms))[0m
+2026-10-20T13:42:55.0309890Z [36;1mprint('ACTUAL_CVS_ROW_SOURCE_REPLAY_PASS; Q80_ENTRY_MEMBERSHIP=NOT_YET_PROVED')[0m
+2026-10-20T13:42:55.0310314Z [36;1mPY[0m
+2026-10-20T13:42:55.1177496Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T13:42:55.1177868Z env:
+2026-10-20T13:42:55.1178149Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T13:42:55.1178495Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T13:42:55.1178845Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T13:42:55.1179433Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T13:42:55.1179917Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T13:42:55.1180275Z ##[endgroup]
+2026-10-20T13:43:06.1756273Z OK ZeroHeightFiniteSumV1
+2026-10-20T13:43:08.9394227Z OK ZeroHeightLimitContractV1
+2026-10-20T13:43:11.7572996Z OK ZeroHeightSummabilityBridgeV1
+2026-10-20T13:43:14.4033612Z OK ZeroMajorantSummabilityV1
+2026-10-20T13:43:17.2681712Z OK ZeroCriticalStripV1
+2026-10-20T13:43:20.0394563Z OK ZeroHeightShellMassV1
+2026-10-20T13:43:22.7251317Z OK ZeroShellQuadraticBoundV1
+2026-10-20T13:43:26.2935450Z OK ZeroShellAnalyticSynthesisV1
+2026-10-20T13:43:29.9019973Z OK ZeroCountingBoundV1
+2026-10-20T13:43:32.3030209Z OK WeilCriterionCompactSmoothV1
+2026-10-20T13:43:36.9074118Z OK MellinDecayEstimateV1
+2026-10-20T13:43:39.8844226Z OK ZeroCountingMellinSummabilityV1
+2026-10-20T13:43:42.7966378Z OK WeilMellinInversionV1
+2026-10-20T13:43:45.7646380Z OK WeilPrimeLineIdentityV1
+2026-10-20T13:43:48.2842309Z OK WeilPrimeSummabilityV1
+2026-10-20T13:43:51.5290330Z OK WeilArchimedeanConvergenceV1
+2026-10-20T13:43:54.8692755Z OK WeilAutocorrelationRealityV1
+2026-10-20T13:43:57.9508058Z OK WeilAutocorrelationClosureV1
+2026-10-20T13:44:01.2198704Z OK WeilAutocorrelationPoleAggregationV1
+2026-10-20T13:44:03.8247534Z OK WeilPoleTermV1
+2026-10-20T13:44:06.6783034Z OK WeilFixedLineExplicitFormulaContractV2
+2026-10-20T13:44:09.7237216Z OK WeilPairedHadamardFixedLineV1
+2026-10-20T13:44:13.2811120Z OK WeilPairedHadamardKernelTsumV2
+2026-10-20T13:44:21.1978312Z OK WeilFixedLineFubiniCoreV3
+2026-10-20T13:44:24.4922625Z OK WeilMellinWeightedFixedLineV2
+2026-10-20T13:44:27.5422096Z OK WeilFixedLineFubiniSwapV4
+2026-10-20T13:44:30.9139880Z OK WeilPairedMellinProfileV5
+2026-10-20T13:44:34.1466340Z OK WeilFixedLineKernelIntegralV6
+2026-10-20T13:44:37.0364073Z OK WeilFixedLineXSpaceTailV7
+2026-10-20T13:44:40.0060270Z OK WeilReciprocalPairedTestV8
+2026-10-20T13:44:44.1903433Z OK WeilDigammaIntegralReductionV1
+2026-10-20T13:44:47.5934966Z OK WeilDigammaSeriesRealV1
+2026-10-20T13:44:51.9977037Z OK WeilDigammaSeriesHalfPlaneV1
+2026-10-20T13:44:54.9016515Z OK WeilFixedLineGammaCoreV10
+2026-10-20T13:44:58.4759477Z OK WeilFixedLineGammaFubiniV10
+2026-10-20T13:45:01.9194534Z OK WeilFixedLineGammaAssemblyV10
+2026-10-20T13:45:04.9549845Z OK WeilArchimedeanCorrectionV10
+2026-10-20T13:45:08.3692693Z OK WeilFixedLineGammaXSpaceV10
+2026-10-20T13:45:11.5772822Z OK WeilPairedZeroEvaluationV9
+2026-10-20T13:45:14.6638485Z OK WeilMixedClosureV2
+2026-10-20T13:45:16.5454427Z OK WeilThreeBlockRationalV1
+2026-10-20T13:45:19.5911945Z OK WeilThreeBlockComplexV2
+2026-10-20T13:45:23.0781992Z OK WeilMixedAlgebraV2
+2026-10-20T13:45:25.9630717Z OK WeilDisjointEnergyV2
+2026-10-20T13:45:28.8065495Z OK WeilLogCoordinateIsometryV21
+2026-10-20T13:45:32.4808012Z OK WeilThreeBlockAnalyticConstantsV21
+2026-10-20T13:45:35.5506254Z OK WeilDiagonalKernelReductionV21
+2026-10-20T13:45:39.0132459Z OK WeilThreeBlockTranslatedPacketsV22
+2026-10-20T13:45:41.9342821Z OK WeilWidthPrimeVanishingV23
+2026-10-20T13:45:45.0568914Z OK WeilArchimedeanCothTailV1
+2026-10-20T13:45:47.7844759Z OK WeilWidthDiagonalArchFrontierV24
+2026-10-20T13:45:51.2038411Z OK WeilWidthArchCorrelationV25
+2026-10-20T13:45:54.4791172Z OK WeilAutocorrelationMellinV11
+2026-10-20T13:45:57.7532946Z OK WeilCriticalLineArchV1
+2026-10-20T13:46:00.9808080Z OK WeilCriticalLinePrimeV1
+2026-10-20T13:46:04.1218798Z OK WeilFixedLineCompletedGammaV10
+2026-10-20T13:46:08.0808941Z OK WeilPairedHadamardTsumFusionV1
+2026-10-20T13:46:11.0349944Z OK WeilZeroCarrierBridgeV10
+2026-10-20T13:46:20.5597835Z OK WeilFixedLineZeroSideV10
+2026-10-20T13:46:24.1293859Z OK WeilXiLogDerivDecompositionV10
+2026-10-20T13:46:27.3641969Z OK WeilFixedLineArithmeticV10
+2026-10-20T13:46:30.9208001Z OK WeilExplicitFormulaV10
+2026-10-20T13:46:34.3178956Z OK WeilWidthArchBudgetV26
+2026-10-20T13:46:37.4305259Z OK WeilWidthArchIntegralV27
+2026-10-20T13:46:40.5145971Z OK WeilThreeBlockCrossPrimeV28
+2026-10-20T13:46:44.4128492Z OK WeilThreeBlockCrossPrimeWindowV29
+2026-10-20T13:46:47.5381675Z OK WeilThreeBlockPrimeEvaluationV30
+2026-10-20T13:46:50.7353823Z OK WeilThreeBlockNormBridgeV21
+2026-10-20T13:46:54.1003105Z OK WeilThreeBlockCrossAssemblyV30
+2026-10-20T13:46:58.4038701Z OK WeilSeparatedArchBridgeV31
+2026-10-20T13:47:01.2291774Z OK RHFinalClosureSpineV1
+2026-10-20T13:47:04.0688921Z OK WeilAutocorrelationExplicitFormulaV10
+2026-10-20T13:47:07.1223893Z OK WeilCriticalLineBridgeV1
+2026-10-20T13:47:10.3042188Z OK WeilCriticalLineKreinFormV1
+2026-10-20T13:47:26.1972560Z OK RHKreinFactorV13
+2026-10-20T13:47:31.9560439Z OK RHKreinPairingV13
+2026-10-20T13:47:37.8594230Z OK RHKreinDeltaPairingV1
+2026-10-20T13:47:44.0073862Z OK RHKreinCertificateV1
+2026-10-20T13:47:47.8863196Z OK RHNarrowDiagonalUpgradeV2
+2026-10-20T13:47:51.6432178Z OK RHDyadicDiagonalV13
+2026-10-20T13:47:58.5532205Z OK RHKreinZetaBridgeV1
+2026-10-20T13:48:04.3532516Z OK RHKreinZetaBridgeV2
+2026-10-20T13:48:10.3072836Z OK RHKreinZetaBridgeV3
+2026-10-20T13:48:15.8173459Z OK RHKreinZetaBridgeV4
+2026-10-20T13:48:21.1188411Z OK RHPlancherelPacketV1
+2026-10-20T13:48:26.2146471Z OK RHExactLDLTV1
+2026-10-20T13:48:32.9441623Z OK RHMollifyV1
+2026-10-20T13:48:38.5739106Z OK RHFeshbachCoreV1
+2026-10-20T13:48:38.5739703Z KREIN_RING_BUILT 88
+2026-10-20T13:48:41.9191715Z 'AEGIS.CvSArchLorentzV1.expAbs_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9192473Z 'AEGIS.CvSArchLorentzV1.expAbs_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9193160Z 'AEGIS.CvSArchLorentzV1.lorentz_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9193898Z 'AEGIS.CvSArchLorentzV1.expAbs_fourier_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9194612Z 'AEGIS.CvSArchLorentzV1.lorentz_exp_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9195281Z 'AEGIS.CvSArchLorentzV1.lorentz_cos_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9195950Z 'AEGIS.CvSArchLorentzV1.sin_int_mul_two_pi'' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9196570Z 'AEGIS.CvSArchLorentzV1.sin_node' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9197226Z 'AEGIS.CvSArchLorentzV1.sin_exp_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9197877Z 'AEGIS.CvSArchLorentzV1.sin_exp_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9198534Z 'AEGIS.CvSArchLorentzV1.lorentz_source' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:41.9199658Z 'AEGIS.CvSArchLorentzV1.lorentz_source_value' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4620022Z 'AEGIS.CvSArchSourceV1.source_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4620973Z 'AEGIS.CvSArchSourceV1.sourceS_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4621794Z 'AEGIS.CvSArchSourceV1.sq_mul_sourceS_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4622695Z 'AEGIS.CvSArchSourceV1.sourceS_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4637205Z 'AEGIS.CvSArchSourceV1.sourceS_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4638214Z 'AEGIS.CvSArchSourceV1.sourceS_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4639112Z 'AEGIS.CvSArchSourceV1.lorentz_total' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4640198Z 'AEGIS.CvSArchSourceV1.inv_lorentz_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4641139Z 'AEGIS.CvSArchSourceV1.eq_zero_of_abs_le_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4642139Z 'AEGIS.CvSArchSourceV1.sourceS_integral_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4642912Z 'AEGIS.CvSArchSourceV1.archTerm_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4643558Z 'AEGIS.CvSArchSourceV1.archTerm_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4644207Z 'AEGIS.CvSArchSourceV1.archTerm_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4644966Z 'AEGIS.CvSArchSourceV1.archTerm_source_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4645707Z 'AEGIS.CvSArchSourceV1.archTerm_source_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4646439Z 'AEGIS.CvSArchSourceV1.archTerm_source_norm_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4647163Z 'AEGIS.CvSArchSourceV1.archTerm_source_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:47.4647865Z 'AEGIS.CvSArchSourceV1.arch_series_source' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8830117Z 'AEGIS.CvSArchDiagV1.cosT_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8830967Z 'AEGIS.CvSArchDiagV1.lorentz_profile' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8831652Z 'AEGIS.CvSArchDiagV1.integrable_of_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8832362Z 'AEGIS.CvSArchDiagV1.archTerm_mul_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8833071Z 'AEGIS.CvSArchDiagV1.archTerm_mul_norm_integral_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8833777Z 'AEGIS.CvSArchDiagV1.archTerm_mul_summable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8834439Z 'AEGIS.CvSArchDiagV1.arch_series_generic' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8835074Z 'AEGIS.CvSArchDiagV1.diag_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8835691Z 'AEGIS.CvSArchDiagV1.diag_identity' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8836289Z 'AEGIS.CvSArchDiagV1.diagD_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8836894Z 'AEGIS.CvSArchDiagV1.sq_mul_diagD_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8837528Z 'AEGIS.CvSArchDiagV1.exp_trig_hasDerivAt' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8838177Z 'AEGIS.CvSArchDiagV1.diag_exp_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8838815Z 'AEGIS.CvSArchDiagV1.lorentz_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8839622Z 'AEGIS.CvSArchDiagV1.eq_of_abs_sub_le_div' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8840261Z 'AEGIS.CvSArchDiagV1.diagD_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8840912Z 'AEGIS.CvSArchDiagV1.archTerm_diag_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8844044Z 'AEGIS.CvSArchDiagV1.summable_diag_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:56.8845043Z 'AEGIS.CvSArchDiagV1.arch_series_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:59.3916970Z 'AEGIS.CvSArchIntegrableV1.integrable_tsum_of_summable_integral_norm' depends on axioms: [propext,
+2026-10-20T13:48:59.3917700Z  Classical.choice,
+2026-10-20T13:48:59.3917989Z  Quot.sound]
+2026-10-20T13:48:59.3918587Z 'AEGIS.CvSArchIntegrableV1.arch_mul_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:59.3919861Z 'AEGIS.CvSArchIntegrableV1.arch_mul_sourceS_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:48:59.3920890Z 'AEGIS.CvSArchIntegrableV1.arch_mul_diagD_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5682431Z 'AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5683428Z 'AEGIS.CvSPrimeBlockV1.trigAtom_autocorrelation' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5684132Z 'AEGIS.CvSPrimeBlockV1.atom_exp_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5684803Z 'AEGIS.CvSPrimeBlockV1.trigAtom_hermitian_block' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5685544Z 'AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5686504Z 'AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5687221Z 'AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:02.5687925Z 'AEGIS.CvSPrimeBlockV1.trigPoly_prime_block' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7322159Z 'AEGIS.CvSMassV1.conjRefl_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7322943Z 'AEGIS.CvSMassV1.fourier_conjRefl' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7323569Z 'AEGIS.CvSMassV1.conv_conjRefl' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7324161Z 'AEGIS.CvSMassV1.normSq_fourier' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7324766Z 'AEGIS.CvSMassV1.autocorr_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7325347Z 'AEGIS.CvSMassV1.mass_eq_cos' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7325921Z 'AEGIS.CvSMassV1.trigPoly_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7326548Z 'AEGIS.CvSMassV1.autocorr_trigPoly_eq_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7327178Z 'AEGIS.CvSMassV1.cos_autocorr_fold' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:05.7327774Z 'AEGIS.CvSMassV1.mass_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6897202Z 'AEGIS.CvSPrimePairV1.evenExt_continuous' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6897996Z 'AEGIS.CvSPrimePairV1.evenExt_eq_indicator' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6898722Z 'AEGIS.CvSPrimePairV1.evenExt_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6899692Z 'AEGIS.CvSPrimePairV1.fourier_evenExt' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6900320Z 'AEGIS.CvSPrimePairV1.cosT_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6900980Z 'AEGIS.CvSPrimePairV1.fourier_evenExt_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:08.6901631Z 'AEGIS.CvSPrimePairV1.cos_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0244294Z 'AEGIS.CvSDigammaSeriesV1.quarter_re_pos' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0245076Z 'AEGIS.CvSDigammaSeriesV1.seriesTerm_re' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0245733Z 'AEGIS.CvSDigammaSeriesV1.seriesTerm_im' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0246360Z 'AEGIS.CvSDigammaSeriesV1.hplus_eq_tsum' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0247014Z 'AEGIS.CvSDigammaSeriesV1.half_im_digamma' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0247685Z 'AEGIS.CvSDigammaSeriesV1.summable_inv_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0248379Z 'AEGIS.CvSDigammaSeriesV1.hplus_source_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0249091Z 'AEGIS.CvSDigammaSeriesV1.hplus_diag_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0250568Z 'AEGIS.CvSDigammaSeriesV1.hplus_mul_sourceS_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:12.0251386Z 'AEGIS.CvSDigammaSeriesV1.hplus_mul_diagD_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4655207Z 'AEGIS.CvSQuadV1.blockFn_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4660312Z 'AEGIS.CvSQuadV1.blockFn_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4661153Z 'AEGIS.CvSQuadV1.cosB_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4661891Z 'AEGIS.CvSQuadV1.cosB_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4662657Z 'AEGIS.CvSQuadV1.blockFn_at_L' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4663429Z 'AEGIS.CvSQuadV1.cosB_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4664290Z 'AEGIS.CvSQuadV1.cosB_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4665063Z 'AEGIS.CvSQuadV1.cos_cosB' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4665865Z 'AEGIS.CvSQuadV1.hplus_cosB_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4666695Z 'AEGIS.CvSQuadV1.hplus_cosB_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4667479Z 'AEGIS.CvSQuadV1.hplus_cosB_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4668307Z 'AEGIS.CvSQuadV1.qsym_cosB_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4669393Z 'AEGIS.CvSQuadV1.qsym_cosB_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:15.4670200Z 'AEGIS.CvSQuadV1.quad_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:20.3765550Z 'AEGIS.CvSRingBridgeV1.psi_sub_log_eq_hplus' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:20.3766345Z 'AEGIS.CvSRingBridgeV1.scertM_eq_qsym' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:20.3767030Z 'AEGIS.CvSRingBridgeV1.scertM_quad_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2910314Z 'AEGIS.CvSRoughV1.mollify_contDiff' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2911056Z 'AEGIS.CvSRoughV1.mollify_tsupport' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2911696Z 'AEGIS.CvSRoughV1.mollify_momentZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2912302Z 'AEGIS.CvSRoughV1.mollify_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2912904Z 'AEGIS.CvSRoughV1.fourier_moll_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2913848Z 'AEGIS.CvSRoughV1.fourier_moll_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2914626Z 'AEGIS.CvSRoughV1.mfac_le_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2915195Z 'AEGIS.CvSRoughV1.mfac_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:26.2915778Z 'AEGIS.CvSRoughV1.rough_of_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:31.9676328Z 'AEGIS.CvSKreinRoughV1.energy_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:31.9677320Z 'AEGIS.CvSKreinRoughV1.krein_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:31.9678190Z 'AEGIS.CvSKreinRoughV1.krein_rough' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:31.9679064Z 'AEGIS.CvSKreinRoughV1.krein_slack_rough' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9045596Z 'AEGIS.CvSPlancherelRoughV1.fourier_self_adjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9046739Z 'AEGIS.CvSPlancherelRoughV1.fourier_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9047720Z 'AEGIS.CvSPlancherelRoughV1.mollify_ae_tendsto' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9048693Z 'AEGIS.CvSPlancherelRoughV1.mollify_norm_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9049873Z 'AEGIS.CvSPlancherelRoughV1.plancherel_rough' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:37.9050838Z 'AEGIS.CvSPlancherelRoughV1.energy_eq_two_pi_L2' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:43.6235138Z 'AEGIS.CvSTraceV1.cauchy_schwarz' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:43.6236106Z 'AEGIS.CvSTraceV1.fourier_eq_pairing' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:43.6237005Z 'AEGIS.CvSTraceV1.energy_le_dist' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:43.6237825Z 'AEGIS.CvSTraceV1.slack_le_trace' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:43.6238638Z 'AEGIS.CvSTraceV1.complement_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4878682Z 'AEGIS.CvSFeshbachWindowV1.energy_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4881385Z 'AEGIS.CvSFeshbachWindowV1.quad_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4882537Z 'AEGIS.CvSFeshbachWindowV1.scertM_measurable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4883303Z 'AEGIS.CvSFeshbachWindowV1.feshbach_combine' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4884065Z 'AEGIS.CvSFeshbachWindowV1.zero_quadratic_eq_energy' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4884866Z 'AEGIS.CvSFeshbachWindowV1.window_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:49.4885553Z 'AEGIS.CvSFeshbachWindowV1.window_nonneg_of_krein' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0780971Z 'AEGIS.CvSWindowCertV1.exists_orth_coeffs' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0781742Z 'AEGIS.CvSWindowCertV1.energy_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0782437Z 'AEGIS.CvSWindowCertV1.momentZero_translate' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0783146Z 'AEGIS.CvSWindowCertV1.lowBlock_momentZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0783794Z 'AEGIS.CvSWindowCertV1.energy_sub_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:49:56.0784443Z 'AEGIS.CvSWindowCertV1.window_of_certificate' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:02.1085985Z 'AEGIS.CvSLowBlockDecayV1.fourier_indicator_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:02.1087107Z 'AEGIS.CvSLowBlockDecayV1.lowBlock_energy_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:02.1088125Z 'AEGIS.CvSLowBlockDecayV1.lowBlock_energy_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:02.1089378Z 'AEGIS.CvSLowBlockDecayV1.lowBlock_scertM_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:02.1090393Z 'AEGIS.CvSLowBlockDecayV1.window_of_certificate_C1' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:07.8821222Z 'AEGIS.CvSMomentBasisV1.ibp_twice' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:07.8821994Z 'AEGIS.CvSMomentBasisV1.momentZero_of_ode' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:07.8822763Z 'AEGIS.CvSMomentBasisV1.basisFun_momentZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:07.8823510Z 'AEGIS.CvSMomentBasisV1.momentAtom_momentZero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:07.8824221Z 'AEGIS.CvSMomentBasisV1.window_of_certificate_basis' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:13.3717161Z 'AEGIS.CvSLowBlockMatrixV1.scertM_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:13.3718191Z 'AEGIS.CvSLowBlockMatrixV1.quad_eq_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:13.3719340Z 'AEGIS.CvSLowBlockMatrixV1.lowBlock_eq_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:13.3720318Z 'AEGIS.CvSLowBlockMatrixV1.lowBlock_quad_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:13.3721307Z 'AEGIS.CvSLowBlockMatrixV1.window_of_certificate_matrix' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:18.7139436Z 'AEGIS.CvSCrossMatrixV1.trigPoly_eq_lowBlock' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:18.7140724Z 'AEGIS.CvSCrossMatrixV1.trigPoly_scertM_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:18.7141868Z 'AEGIS.CvSCrossMatrixV1.trigPoly_quad_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:18.7142735Z 'AEGIS.CvSCrossMatrixV1.cross_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2616046Z 'AEGIS.CvSCrossBoundV1.archTerm_abs_le_interp' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2616807Z 'AEGIS.CvSCrossBoundV1.hplus_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2617461Z 'AEGIS.CvSCrossBoundV1.scertM_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2618136Z 'AEGIS.CvSCrossBoundV1.scertM_sq_mul_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2618923Z 'AEGIS.CvSCrossBoundV1.lowBlock_scertM_sq_integrable' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:25.2619878Z 'AEGIS.CvSCrossBoundV1.cross_sq_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1913594Z 'AEGIS.CvSFourierIntervalV1.coef_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1914383Z 'AEGIS.CvSFourierIntervalV1.hasSum_coef' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1915118Z 'AEGIS.CvSFourierIntervalV1.integral_normSq_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1915858Z 'AEGIS.CvSFourierIntervalV1.integral_mul_conj_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1916600Z 'AEGIS.CvSFourierIntervalV1.norm_sub_trigPoly' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:31.1917642Z 'AEGIS.CvSFourierIntervalV1.tendsto_partialSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8961036Z 'AEGIS.CvSCrossCertV1.cross_sub' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8961829Z 'AEGIS.CvSCrossCertV1.tendsto_cross_partialSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8962551Z 'AEGIS.CvSCrossCertV1.cross_trigPoly_row' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8963204Z 'AEGIS.CvSCrossCertV1.atom_orth' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8963824Z 'AEGIS.CvSCrossCertV1.cross_sq_le_of_rows' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:37.8964494Z 'AEGIS.CvSCrossCertV1.window_of_certificate_rows' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:40.0880862Z AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : ∀ (C : ℝ),
+2026-10-20T13:50:40.0881841Z   0 ≤ C → ∀ (R : ℕ) (ε : ℝ), 0 < ε → ∃ NP, R < NP ∧ ∀ (N : ℕ), NP ≤ N → C / (↑N - ↑R) < ε
+2026-10-20T13:50:40.0882846Z 'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,
+2026-10-20T13:50:40.0883558Z  Classical.choice,
+2026-10-20T13:50:40.0883881Z  Quot.sound]
+2026-10-20T13:50:40.0884727Z AEGIS.CvSResidualCertificateV1.residual_entry_le : ∀ (x y e r : ℝ), |e| ≤ r → x * y * e ≤ r * (x ^ 2 + y ^ 2) / 2
+2026-10-20T13:50:40.0885807Z AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : ∀ (a c lo hi : ℝ),
+2026-10-20T13:50:40.0886562Z   lo ≤ a → a ≤ hi → |a - c| ≤ max (c - lo) (hi - c)
+2026-10-20T13:50:40.0887542Z @AEGIS.CvSResidualCertificateV1.residual_quadratic_le : ∀ {ι : Type u_1} [inst : Fintype ι] (E R : ι → ι → ℝ) (ε : ℝ),
+2026-10-20T13:50:40.0888208Z   (∀ (i j : ι), |E i j| ≤ R i j) →
+2026-10-20T13:50:40.0888496Z     (∀ (i j : ι), R i j = R j i) →
+2026-10-20T13:50:40.0888908Z       (∀ (i : ι), ∑ j, R i j ≤ ε) → ∀ (x : ι → ℝ), ∑ i, ∑ j, x i * x j * E i j ≤ ε * ∑ i, x i ^ 2
+2026-10-20T13:50:40.0889867Z @AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : ∀ {ι : Type u_1} [inst : Fintype ι] (A A₀ R : ι → ι → ℝ)
+2026-10-20T13:50:40.0890448Z   (ε : ℝ),
+2026-10-20T13:50:40.0890744Z   (∀ (i j : ι), |A i j - A₀ i j| ≤ R i j) →
+2026-10-20T13:50:40.0891057Z     (∀ (i j : ι), R i j = R j i) →
+2026-10-20T13:50:40.0891349Z       (∀ (i : ι), ∑ j, R i j ≤ ε) →
+2026-10-20T13:50:40.0891717Z         (∀ (x : ι → ℝ), ε * ∑ i, x i ^ 2 ≤ ∑ i, ∑ j, x i * x j * A₀ i j) →
+2026-10-20T13:50:40.0892108Z           ∀ (x : ι → ℝ), 0 ≤ ∑ i, ∑ j, x i * x j * A i j
+2026-10-20T13:50:40.0892706Z @AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : ∀ {ι : Type u_1} [inst : Fintype ι] (A A₀ R : ι → ι → ℝ)
+2026-10-20T13:50:40.0893202Z   (ε : ℝ),
+2026-10-20T13:50:40.0893447Z   (∀ (i j : ι), |A i j - A₀ i j| ≤ R i j) →
+2026-10-20T13:50:40.0893741Z     (∀ (i j : ι), R i j = R j i) →
+2026-10-20T13:50:40.0894016Z       (∀ (i : ι), ∑ j, R i j ≤ ε) →
+2026-10-20T13:50:40.0894352Z         (∀ (x : ι → ℝ), ε * ∑ i, x i ^ 2 ≤ ∑ i, ∑ j, x i * x j * A₀ i j) →
+2026-10-20T13:50:40.0894838Z           ∀ (z : ι → ℂ), 0 ≤ (∑ i, ∑ j, (starRingEnd ℂ) (z i) * z j * ↑(A i j)).re
+2026-10-20T13:50:40.0895412Z 'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:40.0896161Z 'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:40.0896919Z 'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:40.0897672Z 'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:40.0898463Z 'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7055782Z 'AEGIS.CvSRowTailV1.cvsEntry_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7057096Z 'AEGIS.CvSRowTailV1.cvsEntry_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7057924Z 'AEGIS.CvSRowTailV1.tsum_abs_width_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7058563Z 'AEGIS.CvSRowTailV1.source_integral_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7059407Z 'AEGIS.CvSRowTailV1.tau_abs_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7060163Z 'AEGIS.CvSRowTailV1.crossRow_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7060760Z 'AEGIS.CvSRowTailV1.inv_sub_expand' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7061357Z 'AEGIS.CvSRowTailV1.crossRow_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7061963Z 'AEGIS.CvSRowTailV1.sum_Ioc_inv_pow_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7062555Z 'AEGIS.CvSRowTailV1.sum_Ioc_shift_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7063153Z 'AEGIS.CvSRowTailV1.sum_int_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7063723Z 'AEGIS.CvSRowTailV1.rows_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7064286Z 'AEGIS.CvSRowTailV1.rows_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7064912Z 'AEGIS.CvSRowTailV1.window_of_certificate_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7065873Z AEGIS.CvSRowTailV1.rowTail_zero : ∀ (M : ℕ) (L : ℝ) (F : Finset ℤ) (a : ℤ → ℂ) (T : ℝ) (R NP : ℕ),
+2026-10-20T13:50:50.7066649Z   AEGIS.CvSRowTailV1.rowTail M L F a 0 T R NP = 16 * (L / Real.pi) ^ 2 * T ^ 2 * (∑ n ∈ F, ‖a n‖) ^ 2 / (↑NP - ↑R)
+2026-10-20T13:50:50.7071640Z AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff : ∀ (M : ℕ) {L : ℝ},
+2026-10-20T13:50:50.7072167Z   0 < L →
+2026-10-20T13:50:50.7072470Z     ∀ (R : ℕ) (ε : ℝ),
+2026-10-20T13:50:50.7072813Z       0 < ε →
+2026-10-20T13:50:50.7073118Z         ∃ NP,
+2026-10-20T13:50:50.7073391Z           R < NP ∧
+2026-10-20T13:50:50.7073685Z             ∀ (P : ℕ),
+2026-10-20T13:50:50.7074003Z               NP ≤ P →
+2026-10-20T13:50:50.7074330Z                 ∀ (F : Finset ℤ),
+2026-10-20T13:50:50.7074713Z                   (∀ n ∈ F, |↑n| ≤ ↑R) →
+2026-10-20T13:50:50.7075172Z                     ∀ (a : ℤ → ℂ) (N : ℕ),
+2026-10-20T13:50:50.7075994Z                       ∑ m ∈ Finset.Icc (-↑N) ↑N with P < m.natAbs, ‖AEGIS.CvSCrossCertV1.crossRow M L F a m‖ ^ 2 ≤
+2026-10-20T13:50:50.7076755Z                         ε * (∑ n ∈ F, ‖a n‖) ^ 2
+2026-10-20T13:50:50.7077448Z 'AEGIS.CvSRowTailV1.rowTail_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:50.7078556Z 'AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:58.8633981Z 'AEGIS.CvSArctanTailV1.arctan_hasSum' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:58.8635273Z 'AEGIS.CvSArctanTailV1.arctan_le_partial' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:58.8636503Z 'AEGIS.CvSArctanTailV1.partial_le_arctan' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:58.8637491Z 'AEGIS.CvSArctanTailV1.arctan_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:50:58.8638337Z 'AEGIS.CvSArctanTailV1.tail_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:51:07.7939707Z 'AEGIS.CvSTauSourceV1.source_integral_series' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:51:07.7940990Z 'AEGIS.CvSTauSourceV1.source_bracket' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:51:18.6220792Z 'AEGIS.CvSTauL12V1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:51:18.6221953Z 'AEGIS.CvSTauL12V1.e35_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:51:18.6223647Z 'AEGIS.CvSTauL12V1.head_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:22.6156991Z 'AEGIS.CvSTauL12V1.tauCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:22.6166428Z 'AEGIS.CvSTauL12V1.tauBatch0_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:22.6172605Z 'AEGIS.CvSTauL12V1.source_integral_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3763125Z 'AEGIS.CvSTauPrimeL12V1.log2_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3768536Z 'AEGIS.CvSTauPrimeL12V1.log3_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3771950Z 'AEGIS.CvSTauPrimeL12V1.sinQ_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3776911Z 'AEGIS.CvSTauPrimeL12V1.sinPi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3782098Z 'AEGIS.CvSTauPrimeL12V1.primeSum_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3785684Z 'AEGIS.CvSTauPrimeL12V1.prime_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3788000Z 'AEGIS.CvSTauPrimeL12V1.tauFullCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3788816Z 'AEGIS.CvSTauPrimeL12V1.tauFullAll_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3791263Z 'AEGIS.CvSTauPrimeL12V1.tau_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3794841Z 'AEGIS.CvSTauPrimeL12V1.tau_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T13:54:41.3797209Z 'AEGIS.CvSTauPrimeL12V1.tau_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:02:43.5960637Z 'AEGIS.CvSTauR1SourceL12V1.source_integral_mem_R1' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:00.9976810Z 'AEGIS.CvSTauR1PrimeL12V1.tau_mem_R1' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0798639Z 'AEGIS.CvSDiagTelV1.log_step_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0805001Z 'AEGIS.CvSDiagTelV1.cube_tel' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0805959Z 'AEGIS.CvSDiagTelV1.sq_tel' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0808404Z 'AEGIS.CvSDiagTelV1.tail_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0811161Z 'AEGIS.CvSDiagTelV1.hplus_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0813799Z 'AEGIS.CvSDiagTelV1.logG_limit' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0816884Z 'AEGIS.CvSDiagTelV1.step_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0819751Z 'AEGIS.CvSDiagTelV1.hplus_tel' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0820777Z 'AEGIS.CvSDiagTelV1.stepD_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:15.0823250Z 'AEGIS.CvSDiagTelV1.diagSeries_tel' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:20.4908496Z 'AEGIS.RHFixIntervalV1.Iv.mem_mul' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:20.4911462Z 'AEGIS.RHFixIntervalV1.Iv.mem_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3132181Z 'AEGIS.CvSPackedGramV1.pack_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3136197Z 'AEGIS.CvSPackedGramV1.packDot_core' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3142068Z 'AEGIS.CvSPackedGramV1.packDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3145547Z 'AEGIS.CvSPackedGramV1.gramEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3167605Z 'AEGIS.CvSPackedGramV1.rowErr_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3172735Z 'AEGIS.CvSPackedGramV1.rowsOk_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3913315Z 'AEGIS.CvSPackedGramV1.check_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3916616Z 'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3919560Z 'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3921583Z 'AEGIS.CvSPackedGramV1.hilbIv_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:03:27.3924876Z 'AEGIS.CvSPackedGramV1.hilb8_check' depends on axioms: [propext]
+2026-10-20T14:03:27.3928532Z 'AEGIS.CvSPackedGramV1.hilbert8_posDef' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4434050Z 'AEGIS.CvSDiagL12V1.log_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4436897Z 'AEGIS.CvSDiagL12V1.idiv_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4441596Z 'AEGIS.CvSDiagL12V1.lpi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4447314Z 'AEGIS.CvSDiagL12V1.hplus_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4451888Z 'AEGIS.CvSDiagL12V1.D_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4454324Z 'AEGIS.CvSDiagL12V1.cvsEntry_diag_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4458337Z 'AEGIS.CvSDiagL12V1.Pd_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4462019Z 'AEGIS.CvSDiagL12V1.diagCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4464157Z 'AEGIS.CvSDiagL12V1.diagAll_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4466988Z 'AEGIS.CvSDiagL12V1.diag_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:05:47.4469459Z 'AEGIS.CvSDiagL12V1.cvsEntry_diag_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:07:59.8689649Z 'AEGIS.CvSProjectedPackedCertificateL12V1.packed_check_true' depends on axioms: [propext]
+2026-10-20T14:07:59.8695464Z 'AEGIS.CvSProjectedPackedCertificateL12V1.projected_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:07:59.8699441Z 'AEGIS.CvSProjectedPackedCertificateL12V1.projected_nonnegative' depends on axioms: [propext,
+2026-10-20T14:07:59.8701388Z  Classical.choice,
+2026-10-20T14:07:59.8704328Z  Quot.sound]
+2026-10-20T14:08:05.0401737Z 'AEGIS.CvSProjectedSymmetryV1.signedEntry_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:05.0417039Z 'AEGIS.CvSProjectedSymmetryV1.projectedEntry_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:05.0421920Z 'AEGIS.CvSProjectedSymmetryV1.projected_lower_of_Iv' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:05.0425292Z 'AEGIS.CvSProjectedSymmetryV1.projected_nonnegative_of_Iv' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:10.1821392Z 'AEGIS.CvSSchurClosureFromBoundsV1.hlow_of_coercivity_and_budget' depends on axioms: [propext,
+2026-10-20T14:08:10.1824676Z  Classical.choice,
+2026-10-20T14:08:10.1827261Z  Quot.sound]
+2026-10-20T14:08:10.1829824Z 'AEGIS.CvSSchurClosureFromBoundsV1.cvs_hlow_of_coercivity_and_budget' depends on axioms: [propext,
+2026-10-20T14:08:10.1830507Z  Classical.choice,
+2026-10-20T14:08:10.1832411Z  Quot.sound]
+2026-10-20T14:08:12.0257457Z @AEGIS.CvSFiniteCongruenceV1.quadratic_form_finite_congruence : ∀ {ι : Type u_1} {κ : Type u_2} [inst : Fintype ι]
+2026-10-20T14:08:12.0260418Z   [inst_1 : Fintype κ] (A : κ → κ → ℂ) (X : κ → ι → ℂ) (v : ι → ℂ),
+2026-10-20T14:08:12.0263774Z   ∑ i, ∑ j, v i * (starRingEnd ℂ) (v j) * ∑ k, ∑ l, X k i * (starRingEnd ℂ) (X l j) * A k l =
+2026-10-20T14:08:12.0265101Z     ∑ k, ∑ l, (∑ i, X k i * v i) * (starRingEnd ℂ) (∑ j, X l j * v j) * A k l
+2026-10-20T14:08:12.0267374Z 'AEGIS.CvSFiniteCongruenceV1.rotate_four_sums' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:12.0272223Z 'AEGIS.CvSFiniteCongruenceV1.quadratic_form_finite_congruence' depends on axioms: [propext,
+2026-10-20T14:08:12.0274520Z  Classical.choice,
+2026-10-20T14:08:12.0276754Z  Quot.sound]
+2026-10-20T14:08:12.0278997Z 'AEGIS.CvSFiniteCongruenceV1.transformed_coeff_linear' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:12.0280135Z 'AEGIS.CvSFiniteCongruenceV1.quadratic_form_real_congruence' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:17.2704027Z 'AEGIS.CvSProjectedSchurBridgeL12V1.original_atom_coercivity' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:17.2708722Z 'AEGIS.CvSProjectedSchurBridgeL12V1.hlow_of_projected_packed' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4581676Z 'AEGIS.CvSProjectedTransportL12V1.signedFreq_injective' depends on axioms: [propext, Quot.sound]
+2026-10-20T14:08:24.4585399Z 'AEGIS.CvSProjectedTransportL12V1.lowFreq_mem_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4588069Z 'AEGIS.CvSProjectedTransportL12V1.sum_signedFreq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4590442Z 'AEGIS.CvSProjectedTransportL12V1.frequency_factor' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4591398Z 'AEGIS.CvSProjectedTransportL12V1.atomWeight_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4595267Z 'AEGIS.CvSProjectedTransportL12V1.transformed_coeff_eq_lowCoeff' depends on axioms: [propext,
+2026-10-20T14:08:24.4598008Z  Classical.choice,
+2026-10-20T14:08:24.4598359Z  Quot.sound]
+2026-10-20T14:08:24.4601049Z 'AEGIS.CvSProjectedTransportL12V1.projectedQ_eq_signed_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4603487Z 'AEGIS.CvSProjectedTransportL12V1.hTransport' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:24.4605906Z 'AEGIS.CvSProjectedTransportL12V1.original_atom_coercivity_of_transport' depends on axioms: [propext,
+2026-10-20T14:08:24.4606487Z  Classical.choice,
+2026-10-20T14:08:24.4608253Z  Quot.sound]
+2026-10-20T14:08:24.4610470Z 'AEGIS.CvSProjectedTransportL12V1.hlow_of_projected_packed_of_transport' depends on axioms: [propext,
+2026-10-20T14:08:24.4612428Z  Classical.choice,
+2026-10-20T14:08:24.4614752Z  Quot.sound]
+2026-10-20T14:08:29.6993994Z 'AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:29.6997031Z 'AEGIS.CvSActualCrossRowL12V1.sourceKernel_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:29.6998227Z 'AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:31.4541380Z 'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:31.4544416Z 'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:33.1792409Z 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:33.1798359Z 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:38.0129573Z 'AEGIS.CvSRationalIntervalV1.rationalRange_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5750452Z 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5751461Z 'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5754937Z 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5757629Z 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5760011Z 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5762788Z 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5765196Z 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5766072Z 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:43.5768610Z 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:48.6438580Z 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:48.6441457Z 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:48.6445350Z 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:53.6766057Z 'AEGIS.CvSTauSigned150L12V1.positive_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:53.6769892Z 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:53.6772557Z 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:58.8966560Z 'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:58.8967725Z 'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:08:58.8969453Z AEGIS.CvSIntervalDivideV1.divInt_mem : ∀ (p : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T14:08:58.8973797Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+2026-10-20T14:08:58.8977306Z     ∀ {d : ℤ}, d ≠ 0 → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / ↑d)
+2026-10-20T14:09:04.8639576Z 'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:04.8642125Z 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:04.8644128Z 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:04.8644899Z 'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:04.8646638Z 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:04.8651280Z AEGIS.CvSFrequencyIntervalV1.pi_bounds : ↑AEGIS.CvSFrequencyIntervalV1.piLo ≤ Real.pi ∧
+2026-10-20T14:09:04.8651998Z   Real.pi ≤ ↑AEGIS.CvSFrequencyIntervalV1.piHi
+2026-10-20T14:09:04.8653616Z AEGIS.CvSFrequencyIntervalV1.frequency_bounds : ∀ (n : ℤ),
+2026-10-20T14:09:04.8659922Z   ↑(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) ≤ -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ∧
+2026-10-20T14:09:04.8663767Z     -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ≤ ↑(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)
+2026-10-20T14:09:04.8665706Z AEGIS.CvSFrequencyIntervalV1.coefficient_mem : ∀ (p : ℕ) (n w : ℤ),
+2026-10-20T14:09:04.8668147Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)
+2026-10-20T14:09:04.8670232Z     ((-(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4) * ↑w / 2 ^ 42)
+2026-10-20T14:09:04.8670798Z AEGIS.CvSFrequencyIntervalV1.lp_mem : ∀ (p : ℕ),
+2026-10-20T14:09:04.8672932Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)
+2026-10-20T14:09:04.8675208Z AEGIS.CvSFrequencyIntervalV1.lp_squared_mem : ∀ (p : ℕ),
+2026-10-20T14:09:04.8677930Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)
+2026-10-20T14:09:06.6350214Z @AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection : ∀ {ι : Type u_1} [inst : Fintype ι]
+2026-10-20T14:09:06.6350875Z   (x y tau nu : ι → ℝ) (C : ℝ),
+2026-10-20T14:09:06.6351287Z   ∑ k, ∑ l, x k * y l * (C * ((tau k - tau l) / (nu k - nu l))) =
+2026-10-20T14:09:06.6351794Z     ∑ k, C * tau k * (x k * ∑ l, y l / (nu k - nu l) + y k * ∑ l, x l / (nu k - nu l))
+2026-10-20T14:09:06.6352406Z 'AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection' depends on axioms: [propext,
+2026-10-20T14:09:06.6352928Z  Classical.choice,
+2026-10-20T14:09:06.6353153Z  Quot.sound]
+2026-10-20T14:09:06.6353630Z 'AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection' depends on axioms: [propext,
+2026-10-20T14:09:06.6354168Z  Classical.choice,
+2026-10-20T14:09:06.6354383Z  Quot.sound]
+2026-10-20T14:09:29.2861342Z 'AEGIS.CvSProjectedEntryL12V1.cs_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2862602Z 'AEGIS.CvSProjectedEntryL12V1.entry_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2863846Z 'AEGIS.CvSProjectedEntryL12V1.gram_range' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2864926Z 'AEGIS.CvSProjectedEntryL12V1.tabOk_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2866052Z 'AEGIS.CvSProjectedEntryL12V1.transformedCoeff_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2867228Z 'AEGIS.CvSProjectedEntryL12V1.signedEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2868406Z 'AEGIS.CvSProjectedEntryL12V1.projectedEntry_collect' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2869701Z 'AEGIS.CvSProjectedEntryL12V1.diag_box' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2870773Z 'AEGIS.CvSProjectedEntryL12V1.tau_box' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2871829Z 'AEGIS.CvSProjectedEntryL12V1.pi_sq_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2872897Z 'AEGIS.CvSProjectedEntryL12V1.X_err' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2873911Z 'AEGIS.CvSProjectedEntryL12V1.Rpi_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2874933Z 'AEGIS.CvSProjectedEntryL12V1.ivOk_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2875962Z 'AEGIS.CvSProjectedEntryL12V1.C_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2876965Z 'AEGIS.CvSProjectedEntryL12V1.hI_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2877960Z 'AEGIS.CvSProjectedEntryL12V1.neI_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2878991Z 'AEGIS.CvSProjectedEntryL12V1.kp_real' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2880174Z 'AEGIS.CvSProjectedEntryL12V1.H_err' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2881180Z 'AEGIS.CvSProjectedEntryL12V1.Ehat_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2882232Z 'AEGIS.CvSProjectedEntryL12V1.entry_mem_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:29.2883300Z 'AEGIS.CvSProjectedEntryL12V1.projectedEntry_mem_certI_of_check' depends on axioms: [propext,
+2026-10-20T14:09:29.2884079Z  Classical.choice,
+2026-10-20T14:09:29.2884519Z  Quot.sound]
+2026-10-20T14:09:29.2885305Z 'AEGIS.CvSProjectedEntryL12V1.projected_lower_L12_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:38.3978284Z 'AEGIS.CvSGramTailV1.gram_tail_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:38.3979716Z 'AEGIS.CvSGramTailV1.rows_gram_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:38.3980602Z 'AEGIS.CvSGramTailV1.window_of_certificate_gram' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4567665Z research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean:105:4: error: Type mismatch: After simplification, term
+2026-10-20T14:09:43.4568897Z   Iv.mem_mul p (CvSFrequencyIntervalV1.lp_mem p) hdiv
+2026-10-20T14:09:43.4569745Z  has type
+2026-10-20T14:09:43.4570055Z   Iv.Mem p
+2026-10-20T14:09:43.4572127Z     (Iv.mul p (CvSFrequencyIntervalV1.lpInterval p)
+2026-10-20T14:09:43.4572502Z       (CvSIntervalDivideV1.divInt
+2026-10-20T14:09:43.4572900Z         ((rationalRange p (CvSTauSigned150L12V1.signedLo (signedFreq k))
+2026-10-20T14:09:43.4573332Z               (CvSTauSigned150L12V1.signedHi (signedFreq k))).add
+2026-10-20T14:09:43.4573864Z           (rationalRange p (CvSTauSigned150L12V1.signedLo m) (CvSTauSigned150L12V1.signedHi m)).neg)
+2026-10-20T14:09:43.4574385Z         (signedFreq k + -m)))
+2026-10-20T14:09:43.4574656Z     (6 / 5 / Real.pi *
+2026-10-20T14:09:43.4575399Z       ((CvSRowTailV1.tau M (6 / 5) (signedFreq k) + -CvSRowTailV1.tau M (6 / 5) m) / ↑(signedFreq k + -m)))
+2026-10-20T14:09:43.4575884Z but is expected to have type
+2026-10-20T14:09:43.4576128Z   Iv.Mem p
+2026-10-20T14:09:43.4576386Z     (Iv.mul p (CvSFrequencyIntervalV1.lpInterval p)
+2026-10-20T14:09:43.4576720Z       (CvSIntervalDivideV1.divInt
+2026-10-20T14:09:43.4577082Z         ((rationalRange p (CvSTauSigned150L12V1.signedLo (signedFreq k))
+2026-10-20T14:09:43.4577513Z               (CvSTauSigned150L12V1.signedHi (signedFreq k))).add
+2026-10-20T14:09:43.4578013Z           (rationalRange p (CvSTauSigned150L12V1.signedLo m) (CvSTauSigned150L12V1.signedHi m)).neg)
+2026-10-20T14:09:43.4578473Z         (signedFreq k + -m)))
+2026-10-20T14:09:43.4578718Z     (6 / 5 / Real.pi *
+2026-10-20T14:09:43.4579445Z       ((CvSRowTailV1.tau M (6 / 5) (signedFreq k) + -CvSRowTailV1.tau M (6 / 5) m) / (↑(signedFreq k) + -↑m)))
+2026-10-20T14:09:43.4580186Z 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4580903Z 'AEGIS.CvSActualRowInputL12V1.gramRat_cast' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4581578Z 'AEGIS.CvSActualRowInputL12V1.gramUp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4582234Z 'AEGIS.CvSActualRowInputL12V1.gramUp_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4582965Z AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem : ∀ (p : ℕ) (k : Fin 141) (i : Fin 139),
+2026-10-20T14:09:43.4583432Z   AEGIS.RHFixIntervalV1.Iv.Mem p
+2026-10-20T14:09:43.4583972Z     (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)
+2026-10-20T14:09:43.4584805Z       (AEGIS.CvSProjectedEntryL12V1.wZ (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k) ↑i))
+2026-10-20T14:09:43.4585413Z     (AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff k i)
+2026-10-20T14:09:43.4585927Z AEGIS.CvSActualRowInputL12V1.gramRat_cast : ∀ (NP : ℕ) (n m : ℤ),
+2026-10-20T14:09:43.4586505Z   ↑(AEGIS.CvSActualRowInputL12V1.gramRat NP n m) = AEGIS.CvSGramTailV1.gramUp NP n m
+2026-10-20T14:09:43.4587082Z AEGIS.CvSActualRowInputL12V1.gramUp_mem : ∀ (p NP : ℕ) (n m : ℤ),
+2026-10-20T14:09:43.4587446Z   AEGIS.RHFixIntervalV1.Iv.Mem p
+2026-10-20T14:09:43.4587896Z     (AEGIS.CvSRationalIntervalV1.rationalRange p (AEGIS.CvSActualRowInputL12V1.gramRat NP n m)
+2026-10-20T14:09:43.4588415Z       (AEGIS.CvSActualRowInputL12V1.gramRat NP n m))
+2026-10-20T14:09:43.4588733Z     (AEGIS.CvSGramTailV1.gramUp NP n m)
+2026-10-20T14:09:43.4589378Z AEGIS.CvSActualRowInputL12V1.gramUp_symm : ∀ (NP : ℕ) (n m : ℤ),
+2026-10-20T14:09:43.4589899Z   AEGIS.CvSGramTailV1.gramUp NP n m = AEGIS.CvSGramTailV1.gramUp NP m n
+2026-10-20T14:09:43.4590498Z 'AEGIS.CvSActualRowInputL12V1.diagonal_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4591659Z AEGIS.CvSActualRowInputL12V1.diagonal_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T14:09:43.4592023Z   3 ≤ M →
+2026-10-20T14:09:43.4592232Z     ∀ (n : ℤ),
+2026-10-20T14:09:43.4592465Z       n.natAbs ≤ 70 →
+2026-10-20T14:09:43.4592840Z         AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.diagonalBox p n)
+2026-10-20T14:09:43.4593320Z           (AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n)
+2026-10-20T14:09:43.4593899Z 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4594572Z AEGIS.CvSActualRowInputL12V1.sourceKernel_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T14:09:43.4594940Z   3 ≤ M →
+2026-10-20T14:09:43.4595146Z     ∀ (m : ℤ),
+2026-10-20T14:09:43.4595370Z       m.natAbs ≤ 150 →
+2026-10-20T14:09:43.4595617Z         ∀ (k : Fin 141),
+2026-10-20T14:09:43.4596025Z           AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.kernelBox p m k)
+2026-10-20T14:09:43.4596714Z             (AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k))
+2026-10-20T14:09:43.4597461Z 'AEGIS.CvSActualRowInputL12V1.sourceY_mem' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+2026-10-20T14:09:43.4598082Z AEGIS.CvSActualRowInputL12V1.sourceY_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T14:09:43.4598428Z   3 ≤ M →
+2026-10-20T14:09:43.4598631Z     ∀ (m : ℤ),
+2026-10-20T14:09:43.4598848Z       m.natAbs ≤ 150 →
+2026-10-20T14:09:43.4599082Z         ∀ (i : Fin 139),
+2026-10-20T14:09:43.4599854Z           AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.sourceYBox p m i)
+2026-10-20T14:09:43.4600316Z             (AEGIS.CvSActualCrossRowL12V1.sourceY M m i)
+2026-10-20T14:09:43.8610616Z ##[error]Process completed with exit code 1.
+2026-10-20T14:09:43.8897335Z ##[group]Run python3 - <<'PY_SNAPSHOT'
+2026-10-20T14:09:43.8897739Z [36;1mpython3 - <<'PY_SNAPSHOT'[0m
+2026-10-20T14:09:43.8898064Z [36;1mimport hashlib, json, os, pathlib, subprocess[0m
+2026-10-20T14:09:43.8898435Z [36;1mroot = pathlib.Path.cwd()[0m
+2026-10-20T14:09:43.8898784Z [36;1mdigest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()[0m
+2026-10-20T14:09:43.8899561Z [36;1msources = subprocess.check_output(['git', 'ls-files', '--', '*.lean'], text=True).splitlines()[0m
+2026-10-20T14:09:43.8900114Z [36;1mobjects = sorted((root / '.lake/ringout').rglob('*.olean'))[0m
+2026-10-20T14:09:43.8900670Z [36;1mlogs = [root / n for n in ['ring.log', 'actual-row-bridge.log'] if (root / n).is_file()][0m
+2026-10-20T14:09:43.8901083Z [36;1mreceipt = {[0m
+2026-10-20T14:09:43.8901487Z [36;1m  'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),[0m
+2026-10-20T14:09:43.8902128Z [36;1m  'math_step_outcome': os.environ.get('REPLAY_OUTCOME'),[0m
+2026-10-20T14:09:43.8902571Z [36;1m  'lean_toolchain': (root / 'lean-toolchain').read_text().strip(),[0m
+2026-10-20T14:09:43.8902969Z [36;1m  'mathlib_sha': os.environ['MATHLIB_SHA'],[0m
+2026-10-20T14:09:43.8903514Z [36;1m  'li_criterion_sha': os.environ['LI_CRITERION_SHA'],[0m
+2026-10-20T14:09:43.8903911Z [36;1m  'source_sha256': {n: digest(root / n) for n in sources},[0m
+2026-10-20T14:09:43.8904360Z [36;1m  'binary_sha256': {str(p.relative_to(root)): digest(p) for p in objects},[0m
+2026-10-20T14:09:43.8904881Z [36;1m  'log_sha256': {p.name: digest(p) for p in logs},[0m
+2026-10-20T14:09:43.8905544Z [36;1m  'scope': 'Compilation state. Only the named axiom audits in actual-row-bridge.log are certified; failed replay state is evidence, not a PASS.'[0m
+2026-10-20T14:09:43.8906142Z [36;1m}[0m
+2026-10-20T14:09:43.8906528Z [36;1m(root / 'SOURCE_CROSS_ROW_CHECKPOINT.json').write_text(json.dumps(receipt, indent=2) + '\n')[0m
+2026-10-20T14:09:43.8907116Z [36;1mprint('REPLAY_STATE_PRESERVED', receipt['math_step_outcome'], len(objects))[0m
+2026-10-20T14:09:43.8907533Z [36;1mPY_SNAPSHOT[0m
+2026-10-20T14:09:44.0077710Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T14:09:44.0078453Z env:
+2026-10-20T14:09:44.0078736Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T14:09:44.0079087Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T14:09:44.0079579Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T14:09:44.0080042Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T14:09:44.0080527Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T14:09:44.0080895Z   REPLAY_OUTCOME: failure
+2026-10-20T14:09:44.0081137Z ##[endgroup]
+2026-10-20T14:09:44.6833164Z REPLAY_STATE_PRESERVED failure 142
+2026-10-20T14:09:44.7153240Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-20T14:09:44.7155536Z with:
+2026-10-20T14:09:44.7157288Z   name: source-cross-row-c3e40d699f06bb3e3bebacc6261fffe6cc2be007
+2026-10-20T14:09:44.7159797Z   retention-days: 1
+2026-10-20T14:09:44.7160170Z   include-hidden-files: true
+2026-10-20T14:09:44.7162058Z   if-no-files-found: warn
+2026-10-20T14:09:44.7163915Z   path: SOURCE_CROSS_ROW_CHECKPOINT.json
+ring.log
+actual-row-bridge.log
+.lake/ringout/**/*.olean
+
+2026-10-20T14:09:44.7164494Z   compression-level: 6
+2026-10-20T14:09:44.7166046Z   overwrite: false
+2026-10-20T14:09:44.7167776Z env:
+2026-10-20T14:09:44.7169628Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T14:09:44.7171918Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T14:09:44.7172390Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T14:09:44.7175378Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T14:09:44.7177584Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T14:09:44.7177937Z ##[endgroup]
+2026-10-20T14:09:45.0107529Z (node:5955) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T14:09:45.0108687Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T14:09:45.0557959Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-20T14:09:45.0561753Z The least common ancestor is /home/runner/work/formal-conjectures/formal-conjectures. This will be the root directory of the artifact
+2026-10-20T14:09:45.0562619Z With the provided path, there will be 145 files uploaded
+2026-10-20T14:09:45.0571246Z Artifact name is valid!
+2026-10-20T14:09:45.0571814Z Root directory input is valid!
+2026-10-20T14:09:45.4850313Z Beginning upload of artifact content to blob storage
+2026-10-20T14:09:46.4523465Z (node:5955) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-20T14:09:47.3498135Z Uploaded bytes 8388608
+2026-10-20T14:09:47.7513657Z Uploaded bytes 16777216
+2026-10-20T14:09:48.8009375Z Uploaded bytes 25165824
+2026-10-20T14:09:49.7831421Z Uploaded bytes 33554432
+2026-10-20T14:09:50.8600315Z Uploaded bytes 41943040
+2026-10-20T14:09:51.8494898Z Uploaded bytes 50331648
+2026-10-20T14:09:51.9685748Z Uploaded bytes 51438965
+2026-10-20T14:09:52.0457668Z Finished uploading artifact content to blob storage!
+2026-10-20T14:09:52.0461045Z SHA256 digest of uploaded artifact zip is 30b8d580e2fc2803047e7a0a3c5e64c489ccdf603efe179f5ecb883f19131ff0
+2026-10-20T14:09:52.0463450Z Finalizing artifact upload
+2026-10-20T14:09:54.0546619Z Artifact source-cross-row-c3e40d699f06bb3e3bebacc6261fffe6cc2be007.zip successfully finalized. Artifact ID 12272655971
+2026-10-20T14:09:54.0548085Z Artifact source-cross-row-c3e40d699f06bb3e3bebacc6261fffe6cc2be007 has been successfully uploaded! Final size is 51438965 bytes. Artifact ID is 12272655971
+2026-10-20T14:09:54.0556325Z Artifact download URL: https://github.com/tarikskalic33/formal-conjectures/actions/runs/39431826314/artifacts/12272655971
+2026-10-20T14:09:54.0886563Z Post job cleanup.
+2026-10-20T14:09:54.1816710Z [command]/usr/bin/git version
+2026-10-20T14:09:54.1864983Z git version 2.55.0
+2026-10-20T14:09:54.1909578Z Temporarily overriding HOME='/home/runner/work/_temp/702bfe6d-2677-4154-a46f-8001da5fbcd2' before making global git config changes
+2026-10-20T14:09:54.1911017Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T14:09:54.1915170Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T14:09:54.1970744Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T14:09:54.2010179Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T14:09:54.2433277Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T14:09:54.2474404Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T14:09:54.2758687Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T14:09:54.2806198Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T14:09:54.3360845Z Post job cleanup.
+2026-10-20T14:09:54.4271320Z [command]/usr/bin/git version
+2026-10-20T14:09:54.4320060Z git version 2.55.0
+2026-10-20T14:09:54.4357008Z Temporarily overriding HOME='/home/runner/work/_temp/d8689190-a6d4-4f18-b373-57adef73479c' before making global git config changes
+2026-10-20T14:09:54.4358353Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T14:09:54.4363394Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T14:09:54.4411441Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T14:09:54.4451558Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T14:09:54.4743291Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T14:09:54.4786693Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T14:09:54.5070837Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T14:09:54.5112388Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T14:09:54.5603956Z Post job cleanup.
+2026-10-20T14:09:54.6519030Z [command]/usr/bin/git version
+2026-10-20T14:09:54.6585459Z git version 2.55.0
+2026-10-20T14:09:54.6636957Z Temporarily overriding HOME='/home/runner/work/_temp/d82d39f4-8bd6-40b0-a433-11b3c2c50e31' before making global git config changes
+2026-10-20T14:09:54.6638219Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T14:09:54.6644358Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T14:09:54.6688178Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T14:09:54.6728485Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T14:09:54.7026182Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T14:09:54.7064921Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T14:09:54.7360157Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T14:09:54.7399821Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T14:09:54.7887421Z Cleaning up orphan processes
+2026-10-20T14:09:54.8354441Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

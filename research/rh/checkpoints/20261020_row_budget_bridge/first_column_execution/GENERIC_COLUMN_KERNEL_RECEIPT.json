@@ -1,0 +1,25 @@
+{
+  "status": "PASS",
+  "roots": [
+    "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+    "AEGIS.CvSFirstColumnCheckerV1.check_sound"
+  ],
+  "source_base_commit": "177dcd648c5497d923586f1d94eb701880389c04",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "commands": [
+    "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.olean /workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.lean",
+    "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.olean /workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.lean"
+  ],
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "native_context": "Same explicitly narrowed RHFixInterval native context as existing list pilot. No original CvS imports required by these generic execution identities.",
+  "scope": "Two distinct columns at arbitrary finite sizes; exact equality to existing envelope. Checker soundness for a single first-column entry when its explicit Boolean check is true. No positivity conclusion or universal RH premise.",
+  "sources": {
+    "CvSColumnEnvelopeV1.lean": "7fb26fba57266552fe95417d516488c035861990797e90ca51149c292ccecfbc",
+    "CvSFirstColumnCheckerV1.lean": "93a0e14a81c56731c80d26b1de607f983c798d511558f0559ae0ccaf96857cd1"
+  }
+}
