@@ -41,7 +41,7 @@ For the proposed exact Q48 projection, the unchanged interval computation is
 C = 40 Q - ZᵀZ - (L/π)² [2 (diag(tau)X)ᵀ G (diag(tau)X) + 338 Xᵀ G X].
 ```
 
-Here `338=2*13²`, corresponding to the existing Gram-tail estimate with Young parameter 1 and far tau bound 13. The remaining actual tail/residual identification must preserve this normalization.
+Here `338=2*13²`, corresponding to the existing Gram-tail estimate with Young parameter 1 and far tau bound 13. The remaining tail/residual identification must preserve this normalization. G is the matrix representation of the proved Gram-tail majorant; equality of its diagonal upper bound with the exact infinite tail is not required.
 
 `CvSIntervalMatrixProductV1` proves the outward midpoint-radius dot and matrix product. `CvSRowBudgetEnvelopeV1.envelope_mem` composes those input memberships, and `stored_envelope_mem_of_check` transports the result into the stored Q80 box only after its concrete output comparison is proved.
 
@@ -85,3 +85,5 @@ PR90's existing `radius_row_real` bounds projected-entry approximation radii by 
 ## Verification boundary
 
 The native selected graph now contains 102 roots, 28,139 declarations and 1,058 located source modules. It has zero missing dependencies and zero theorem/definition cycles; 684 inductive/constructor metadata groups are separately condensed. All axioms are among propext, Classical.choice and Quot.sound. Native RHFixInterval and PackedGram copies change only imports; their complete mathematical bodies are byte-identical after import-line removal. Original-import analytic CI is a separate receipt. The new packed closure was also freshly compiled from the published archive in an isolated custom-module directory: 11 modules, same host, no pre-existing custom module cache. No independent human mathematical sign-off or unconditional RH theorem is claimed.
+
+Final verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.

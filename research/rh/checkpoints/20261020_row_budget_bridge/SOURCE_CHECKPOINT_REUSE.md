@@ -7,3 +7,5 @@ The artifact has ID 12286013964, 174309882 bytes, SHA256 8f251ff3df3412556be71d4
 The repaired existing workflow reuses that state only if every check passes. It generates and compiles a fresh import/type/axiom audit of the 105 roots. Reused dependencies are labelled as reused, rather than freshly source-compiled. Any failed validation falls back to the full original source build under set -euo pipefail and warningAsError. Missing packed outputs and injected sorryAx are independently rejected by regression checks. The cache does not assert any analytic premise, full hI, window positivity or RH.
 
 No new job, branch, repository, paid resource or billing setting is introduced. The source archive and compiler evidence are permanently committed; large binary artifacts keep the existing one-day retention and can expire safely because full source replay remains available.
+
+The repaired workflow passed at 16d487f1 in run 39470677222. Its log confirms validation/reuse of all 166 binaries, successful fresh import/type/axiom checks and all 105 strict named audits. This is not a relabelling of the earlier overall failure.

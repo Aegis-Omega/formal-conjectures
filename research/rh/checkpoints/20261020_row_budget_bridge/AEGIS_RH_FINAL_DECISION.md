@@ -15,7 +15,7 @@ The selected native graph has 102 roots, 28,139 declarations, 1,058 located sour
 Identify the literal Q96 data with the already proved actual Q/X/G/tau/Z/LP2 input formulas and the chosen exact rational projection. Prove every stored output entry encloses the actual matrix
 
 ```
-40*A(i,j) - budgetMatrix(actualZ, actualGramTail)(i,j).
+40*A(i,j) - budgetMatrix(actualZ, matrixOfProvedGramTailMajorant)(i,j).
 ```
 
 The pure finite comparison may use the existing hull/tableCheck or a complete entrywise producer. One sufficient explicit target remains
@@ -44,3 +44,5 @@ The exact universal target retained from `rh_iff_one_actual_sharp_signed_budget`
 It is RH-equivalent. Requiring it as an assumption would not close RH. The hselect route instead needs one valid selected reconstruction per supplied source packet/decomposition; arbitrary repeated or nearly coincident decompositions are not required to pass. Neither an RH-independent universal signed estimate nor such a universal Schur selector is constructed here.
 
 The earlier route review therefore remains scoped: continue the actual finite Feshbach component and targeted signed estimates; hold universal promotion until a non-circular producer is proved. This is a mathematical gap, not a claim that an uncompiled or unexamined source has no proof.
+
+Final verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.

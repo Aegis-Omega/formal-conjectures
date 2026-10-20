@@ -187,7 +187,33 @@
       "status": "FAIL_AUDIT_LOG_ROUTING",
       "kernel_status": "ALL_SOURCE_MODULES_AND_105_NAMED_AXIOMS_PASS"
     },
-    "new_packed_interval_extension": "NATIVE_KERNEL_PASS; not included in the first-column CI"
+    "new_packed_interval_extension": "NATIVE_KERNEL_PASS; not included in the first-column CI",
+    "repaired_original_import_reaudit": {
+      "status": "PASS",
+      "run": 39470677222,
+      "source_commit": "16d487f11ed122113c186c573b9268f5bfc4d1e7",
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222",
+      "explicit_axiom_audits": 105,
+      "dependency_reuse": "166 source/pin/log/binary validated f8ff0e20 binaries; original source compilation and earlier CI audit failure remain separately recorded."
+    }
   },
-  "scope_warning": "No CI success is attributed to a later source SHA. Final report-only commits may follow this exact mathematical source snapshot."
+  "scope_warning": "No CI success is attributed to a later source SHA. Final report-only commits may follow this exact mathematical source snapshot.",
+  "verification_workflow_snapshot_commit": "16d487f11ed122113c186c573b9268f5bfc4d1e7",
+  "verification_workflow_remote_bytes": [
+    {
+      "path": ".github/workflows/rh-cvs-actual-row-replay.yml",
+      "sha256": "c0d45f394457a449fb3cca48d1aa054e5d5d83b229fbaefd9faf7209426089f8",
+      "git_blob_sha": "25041b6bf8aa8c320ea21aace9c16ec27494856e"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py",
+      "sha256": "1011a77b6a75e94ffdb2700e3889d1d198da0b900cca89f0e622247f871038ef",
+      "git_blob_sha": "b1a693b50eaca41c9ab18c4d59698f2e29904ac8"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py",
+      "sha256": "86b5c261e493a63a4799995c23a22d1087f854436dd84c5b34d0373317d09907",
+      "git_blob_sha": "d0811aa0fc315bd6298e5634b50e18ebf2384280"
+    }
+  ]
 }
