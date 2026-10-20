@@ -37,7 +37,7 @@ theorem budgetEnergy_eq_matrix {κ : Type*} [Fintype κ]
       (∑ i, ∑ j, v i * conj (v j) * (budgetMatrix Z G i j : ℂ)).re := by
   rw [budgetEnergy, AEGIS.CvSRowBudgetAlgebraV1.row_energy_eq]
   simp only [budgetMatrix, Complex.ofReal_add, mul_add,
-    Finset.sum_add_distrib, Complex.re_add]
+    Finset.sum_add_distrib, Complex.add_re]
 
 theorem budgetMatrix_symm {κ : Type*} [Fintype κ]
     (Z : κ → Fin 139 → ℝ) (G : Fin 139 → Fin 139 → ℝ)
