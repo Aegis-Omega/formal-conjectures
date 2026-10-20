@@ -1,0 +1,39 @@
+{
+  "source_commit": "7879410cbe9854a856db00183afcb0d4eb74e1e8",
+  "branch": "proof/rh-feshbach-schur-v1",
+  "timestamp_utc": "2026-10-20T12:19:03.925057+00:00",
+  "files": [
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean",
+      "sha256": "be2a17f0d0f8451f21372755e989b1a7366ab6b440b40032a67383f23fd6970d",
+      "blob_sha": "a3a4d49e966b9699a211e307371648ed92243dbc",
+      "remote_readback": "EXACT_BYTES_PASS"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean",
+      "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+      "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09",
+      "remote_readback": "EXACT_BYTES_PASS"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean",
+      "sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
+      "blob_sha": "2b22c661acd53e392d36b5955a1c20fba0763ee7",
+      "remote_readback": "EXACT_BYTES_PASS"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_KERNEL_RECEIPT.json",
+      "sha256": "91c4003d480cc8330e39d6db84503e3257328dcc8b43767ed452a0bb5f27b413",
+      "blob_sha": "0f92aca82e771775bc8c60105005c06ae65d63de",
+      "remote_readback": "EXACT_BYTES_PASS"
+    }
+  ],
+  "source_row_kernel_PASS_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "source_row_kernel_PASS_run": 39417825478,
+  "new_signed_tau_import_CI": {
+    "id": 39419296326,
+    "status": "in_progress at report finalization; no PASS claimed"
+  },
+  "unconditional_RH": "NOT_PROVED",
+  "actual_hB": "NOT_PROVED"
+}
