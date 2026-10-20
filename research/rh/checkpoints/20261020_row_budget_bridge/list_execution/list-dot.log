@@ -1,0 +1,2 @@
+'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

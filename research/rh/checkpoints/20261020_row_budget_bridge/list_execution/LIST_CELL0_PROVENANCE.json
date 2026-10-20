@@ -1,0 +1,8 @@
+{
+  "input_source": "CELL0_INPUTS.json",
+  "input_sha256": "1bcf1419ed38775c23248810edb618a7f196dfba5b7d95ead68cd10baaac8324",
+  "source_sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+  "scope": "Complete first output entry, plus equivalence to original envelope. Not all 19,321 entries, actual input memberships, hB or RH.",
+  "unchanged_input": "Same Q00, X0, T, G, Z0 and LP2 from the earlier resource-terminated monolithic attempt; old X0/T/DX0 imported from previously verified staged source.",
+  "new_witnesses": "Only GX0/GDX0, proposed by exact integer arithmetic and checked by kernel."
+}
