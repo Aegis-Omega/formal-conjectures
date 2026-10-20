@@ -1,0 +1,115 @@
+name: RH Row Budget Native Kernel Replay (isolated)
+
+on:
+  push:
+    branches:
+      - proof/rh-feshbach-schur-v1
+    paths:
+      - .github/workflows/rh-row-budget-native-replay.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-row-budget-native-replay-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  row-budget-kernel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact push head (read-only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Fail closed on pins and native proof bytes
+        shell: bash
+        env:
+          LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+          MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+          test "$(git hash-object research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean)" = 37d6bb87580a2ae7ffde7a92dcaeda31b5546d98
+          test "$(git hash-object research/rh/checkpoints/20261020_row_budget/CvSRowBudgetAlgebraV1.lean)" = 4f80c4392fe797593241b4168b269c31a340aa19
+          test "$(git hash-object research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean)" = cb77b25c7474751460a248fe87a5e6f34dd1c7e0
+          test "$(git hash-object research/rh/critical_line_v1/RHFixIntervalV1.lean)" = 0ee94b9be264c170986500bc95598eb5a7e365f6
+          echo "SOURCE_IDENTITY_PASS $(git rev-parse HEAD)"
+
+      - name: Install existing pinned Lean / cached Mathlib (no proof regeneration)
+        shell: bash
+        env:
+          MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      - name: Isolated Lean kernel replay — original source only
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$RUNNER_TEMP/row-budget-oleans"
+          LOG="$RUNNER_TEMP/row-budget-native-replay.log"
+          mkdir -p "$OUT"
+          : > "$LOG"
+          export LEAN_PATH="$OUT:$(lake env printenv LEAN_PATH)"
+          replay () {
+            local mod="$1" src="$2"
+            echo "KERNEL_REPLAY_BEGIN $mod"
+            lean -DwarningAsError=true -o "$OUT/$mod.olean" "$src" 2>&1 | tee -a "$LOG"
+            echo "KERNEL_REPLAY_PASS $mod"
+          }
+          replay RHFixIntervalV1 research/rh/critical_line_v1/RHFixIntervalV1.lean
+          replay CvSResidualCertificateV1 research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean
+          replay CvSFiniteCongruenceV1 research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean
+          replay CvSPackedGramV1 research/rh/feshbach_lean_v1/CvSPackedGramV1.lean
+          replay CvSMidpointRadiusV1 research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean
+          replay CvSRowBudgetAlgebraV1 research/rh/checkpoints/20261020_row_budget/CvSRowBudgetAlgebraV1.lean
+          replay CvSRelativeRowCertificateL12V1 research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean
+          echo "KERNEL_SOURCE_REPLAY_PASS"
+
+      - name: Strict axiom audit (source-bound, no RH claim)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, re, os
+          log = (pathlib.Path(os.environ['RUNNER_TEMP'])/'row-budget-native-replay.log').read_text()
+          allowed = {'propext', 'Classical.choice', 'Quot.sound'}
+          declarations = {
+            'CvSMidpointRadiusV1.product_error',
+            'CvSMidpointRadiusV1.sum_product_error',
+            'CvSRowBudgetAlgebraV1.row_energy_eq',
+            'CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg',
+            'CvSRelativeRowCertificateL12V1.row_budget_check_true',
+            'CvSRelativeRowCertificateL12V1.row_budget_margin_positive',
+          }
+          if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
+            raise SystemExit('PROOF_HOLE_DETECTED')
+          for name in sorted(declarations):
+            label = 'AEGIS.' + name
+            hit = re.search(r"'" + re.escape(label) + r"' depends on axioms:\s*\[([^]]*)\]", log, re.S)
+            none = re.search(r"'" + re.escape(label) + r"' does not depend on any axioms", log)
+            if hit is None and none is None:
+              raise SystemExit('MISSING_AXIOM_AUDIT ' + label)
+            axioms = {x.strip() for x in hit.group(1).split(',') if x.strip()} if hit else set()
+            if not axioms <= allowed:
+              raise SystemExit('UNEXPECTED_AXIOMS ' + label + ' ' + repr(axioms))
+            print('AXIOM_AUDIT_PASS', label, sorted(axioms))
+          print('NATIVE_ROW_BUDGET_REPLAY_PASS; ACTUAL_CVS_ENCLOSURE=NOT_PROVED; RH=NOT_PROVED')
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
+            f.write('## Q80 Native Lean replay — PASS\n')
+            f.write('Seven source modules replayed with pinned Lean/Mathlib; six declared targets audited.\n\n')
+            f.write('Actual CvS analytic interval enclosure and RH remain **NOT PROVED**.\n')
+          PY
