@@ -10,6 +10,8 @@ All numerical premises of `CvSWindowL12V1.window_L12` pass a validated numerical
 - The trace bound gives a gap m − T/(2π) ≥ 1.2199.
 - The relative budget `50·Q_CvS − B ⪰ 0` holds with the existing Lean `rowTail`, at NP = 2000.
   It is robust to the widths of the certified boxes, and it needs a gap ≥ 1.0554.
+- With the Lean Gram tail (`CvSWindowGramL12V1.window_L12_gram`, §6), `40·Q_CvS − B ⪰ 0` holds
+  already at NP = 150, and it needs a gap ≥ 0.8443.
 
 The float exploration below found the route. It needs two conditions:
 
@@ -129,11 +131,36 @@ Result: PASS. 27157 cells are verified, with min (lower bound)/Wt = 1.05e-4. The
 Result: PASS. All 139 pivots are > 0, with minimum 108.29. κ* = 50 needs a gap ≥ 1.0554, and the
 Krein gap is 1.2199: a margin of 1.16×.
 
+## 6. The Gram row tail in Lean
+
+`CvSGramTailV1.gram_tail_le` proves the tail-Gram lemma of §2 with the rational kernel
+`gramUp NP`:
+
+- off the diagonal, the exact value (H(NP−n') − H(NP−n) + H(NP+n) − H(NP+n'))/(n − n'), with H the
+  harmonic numbers;
+- on the diagonal, the upper bound 1/(NP + 1/2 − n) + 1/(NP + 1/2 + n).
+
+`CvSTauFarL12V1.tau_abs_le_far` gives |τ_m| ≤ 13 for |m| ≥ 71, so
+`CvSWindowGramL12V1.window_L12_gram` needs τ only for |m| ≤ NP.
+
+### `tools/validate_rows_gram_l12.py . 150 1 40 0.0000003`
+
+- **B, the finite rows.** These are the rows |m| ≤ 150.
+- **B, the tail.** It is the Lean `gramTail M (6/5) F a 13 1 150` written as a matrix in c, with G
+  in exact rationals.
+- **Robustness.** It is the same as in §5. It also covers the certified τ box radii (≤ 1.97e-7) in
+  D = diag(τ_n), using (1 + 1/100) and (1 + 100)·|G|₁·ρ²·AᵀA, where |G|₁ = 2.087.
+
+Result: PASS (45 s). All 139 pivots are > 0, with minimum 80.65. κ* = 40 needs a gap ≥ 0.8443,
+and the Krein gap is 1.2199: a margin of 1.44×.
+
+The τ_m with 70 < |m| ≤ 150 come from mpmath here. They have no Lean boxes yet.
+
 ## What a certificate still needs
 
-- **Row budget:** certify `50·Q_CvS − B ⪰ 0` in Lean (it passes the validated check in §5), a
-  139×139 matrix inequality for the packed checker. B also needs τ_k enclosures up to k ≈ NP + 70: up to about 2070 for the
-  existing lemma, or about 470 with a tail-Gram lemma.
+- **Row budget:** certify `40·Q_CvS − B ⪰ 0` in Lean (it passes the validated check in §6), a
+  139×139 matrix inequality for the packed checker. B also needs Lean τ_k enclosures for
+  71 ≤ k ≤ 150.
 - **Krein certificate:** prove `hcert` rigorously for all t, either with interval arithmetic in
   t or with a Lipschitz bound between grid points. The LP coefficients reach about 2e7, so the
   rational data must be exact.
