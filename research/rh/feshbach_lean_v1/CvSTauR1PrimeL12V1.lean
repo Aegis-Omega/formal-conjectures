@@ -1,0 +1,306 @@
+/-
+Copyright 2026 The Formal Conjectures Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-/
+
+import CvSTauR1SourceL12V1
+import CvSTauPrimeL12V1
+
+/-!
+# Full τ intervals, 71 ≤ k ≤ 150
+
+Combines the newly checked source-integral enclosure with the ORIGINAL
+`CvSTauPrimeL12V1.prime_bounds` and `tau_eq` for every M ≥ 3.
+No new mathematical axioms. Requires a real Lean kernel replay.
+-/
+
+open Finset
+namespace AEGIS.CvSTauR1PrimeL12V1
+open AEGIS.CvSTauR1SourceL12V1 AEGIS.CvSTauPrimeL12V1
+open AEGIS.CvSTauL12V1 AEGIS.CvSRowTailV1
+open AEGIS.CvSDigammaSeriesV1 AEGIS.CvSArchLorentzV1
+
+def tauFLoExtra : List ℚ := [
+  1456983911397169/281474976710656,
+  367833733427356/281474976710656,
+  1162212062492085/281474976710656,
+  -600470323488378/281474976710656,
+  1208488603004047/281474976710656,
+  342106620185290/281474976710656,
+  1552852977040447/281474976710656,
+  2281167627163347/281474976710656,
+  1746035591261867/281474976710656,
+  3346768261740538/281474976710656,
+  1477622061411819/281474976710656,
+  2526900173446834/281474976710656,
+  993034621969264/281474976710656,
+  634380534333669/281474976710656,
+  868095006638548/281474976710656,
+  -502080609069755/281474976710656,
+  1349300707235055/281474976710656,
+  185285888618041/281474976710656,
+  1997127266420739/281474976710656,
+  1994149958339781/281474976710656,
+  2089395538942260/281474976710656,
+  3170075823102605/281474976710656,
+  1412659506942925/281474976710656,
+  2617360650436688/281474976710656,
+  585466013231528/281474976710656,
+  925883861379119/281474976710656,
+  490336498059790/281474976710656,
+  -254030041410588/281474976710656,
+  1338729781315364/281474976710656,
+  170076299422766/281474976710656,
+  2354192267137067/281474976710656,
+  1715762758968739/281474976710656,
+  2486432932578393/281474976710656,
+  2862171408464055/281474976710656,
+  1496230468210766/281474976710656,
+  2553220306650701/281474976710656,
+  291755884094291/281474976710656,
+  1175605143969722/281474976710656,
+  91506225623627/281474976710656,
+  100918882943054/281474976710656,
+  1189452870803579/281474976710656,
+  315285112573354/281474976710656,
+  2575780655905557/281474976710656,
+  1509979690618566/281474976710656,
+  2870454992862473/281474976710656,
+  2476098731051625/281474976710656,
+  1701848124413719/281474976710656,
+  2329992077311918/281474976710656,
+  148828939144304/281474976710656,
+  1325375728390523/281474976710656,
+  -260589441923157/281474976710656,
+  501940340802556/281474976710656,
+  940575940508347/281474976710656,
+  610892568124622/281474976710656,
+  2638032674041035/281474976710656,
+  1426502192728465/281474976710656,
+  3175708533090658/281474976710656,
+  2077709004590022/281474976710656,
+  1979657968688415/281474976710656,
+  1971812304596648/281474976710656,
+  166449416458917/281474976710656,
+  1336317109256189/281474976710656,
+  -505241691358729/281474976710656,
+  881224129843064/281474976710656,
+  650410241132826/281474976710656,
+  1019760634375451/281474976710656,
+  2545730328179661/281474976710656,
+  1491598822054296/281474976710656,
+  3349354317689904/281474976710656,
+  1733679111732140/281474976710656,
+  2265636149078829/281474976710656,
+  1527164612979531/281474976710656,
+  325566225068159/281474976710656,
+  1196029187033399/281474976710656,
+  -599891241273342/281474976710656,
+  1176316419392011/281474976710656,
+  385732790206347/281474976710656,
+  1484287509612904/281474976710656,
+  2331304490336940/281474976710656,
+  1703228774677120/281474976710656
+]
+
+def tauFHiExtra : List ℚ := [
+  1456983944556586/281474976710656,
+  367833765734849/281474976710656,
+  1162212093856853/281474976710656,
+  -600470292907730/281474976710656,
+  1208488632716015/281474976710656,
+  342106649173932/281474976710656,
+  1552853005226900/281474976710656,
+  2281167654681142/281474976710656,
+  1746035618037346/281474976710656,
+  3346768287896654/281474976710656,
+  1477622086879680/281474976710656,
+  2526900198339899/281474976710656,
+  993034646223010/281474976710656,
+  634380558053009/281474976710656,
+  868095029762974/281474976710656,
+  -502080586443042/281474976710656,
+  1349300729307241/281474976710656,
+  185285910225923/281474976710656,
+  1997127287510904/281474976710656,
+  1994149978996129/281474976710656,
+  2089395559178031/281474976710656,
+  3170075842868915/281474976710656,
+  1412659526315415/281474976710656,
+  2617360669369270/281474976710656,
+  585466031794826/281474976710656,
+  925883879529633/281474976710656,
+  490336515863558/281474976710656,
+  -254030023994667/281474976710656,
+  1338729798405279/281474976710656,
+  170076316147805/281474976710656,
+  2354192283555220/281474976710656,
+  1715762775043208/281474976710656,
+  2486432948363627/281474976710656,
+  2862171423925185/281474976710656,
+  1496230483398987/281474976710656,
+  2553220321532942/281474976710656,
+  291755898718740/281474976710656,
+  1175605158343016/281474976710656,
+  91506239715120/281474976710656,
+  100918896796941/281474976710656,
+  1189452884390730/281474976710656,
+  315285125935488/281474976710656,
+  2575780669014964/281474976710656,
+  1509979703514673/281474976710656,
+  2870455005518899/281474976710656,
+  2476098743505667/281474976710656,
+  1701848136640243/281474976710656,
+  2329992089346243/281474976710656,
+  148828950962463/281474976710656,
+  1325375740025995/281474976710656,
+  -260589430493238/281474976710656,
+  501940352058683/281474976710656,
+  940575951568845/281474976710656,
+  610892579019655/281474976710656,
+  2638032684774286/281474976710656,
+  1426502203279507/281474976710656,
+  3175708543487493/281474976710656,
+  2077709014813111/281474976710656,
+  1979657978764404/281474976710656,
+  1971812314506841/281474976710656,
+  166449426228687/281474976710656,
+  1336317118867633/281474976710656,
+  -505241681881426/281474976710656,
+  881224139169069/281474976710656,
+  650410250330601/281474976710656,
+  1019760643428545/281474976710656,
+  2545730337110095/281474976710656,
+  1491598830846287/281474976710656,
+  3349354326364485/281474976710656,
+  1733679120274164/281474976710656,
+  2265636157508398/281474976710656,
+  1527164621282097/281474976710656,
+  325566233262950/281474976710656,
+  1196029195122500/281474976710656,
+  -599891233303653/281474976710656,
+  1176316427260322/281474976710656,
+  385732797960082/281474976710656,
+  1484287517269341/281474976710656,
+  2331304497883383/281474976710656,
+  1703228782130127/281474976710656
+]
+
+/-- Outward rounded τ bounds, using the source enclosure and the existing prime bounds. -/
+def tauFullCheckR1 (k : ℕ) (lo hi : ℚ) : Bool :=
+  decide (|thLo (5 * k * l2Lo / 3)| ≤ 2) &&
+    decide (|thLo (5 * k * l3Lo / 3)| ≤ 2) &&
+    decide (lo ≤ tauSrcLoExtra.getD (k - 71) 0 + primeLo k) &&
+    decide (tauSrcHiExtra.getD (k - 71) 0 + primeHi k ≤ hi)
+
+theorem tauFullCheckR1_sound {M : ℕ} (hM : 3 ≤ M) {k : ℕ}
+    (hk1 : 71 ≤ k) (hk : k ≤ 150) {lo hi : ℚ}
+    (h : tauFullCheckR1 k lo hi = true) :
+    (lo : ℝ) ≤ tau M (6 / 5) k ∧ tau M (6 / 5) k ≤ hi := by
+  simp only [tauFullCheckR1, Bool.and_eq_true, decide_eq_true_eq] at h
+  obtain ⟨⟨⟨h2, h3⟩, hl⟩, hh⟩ := h
+  have hs := source_integral_mem_R1 hk1 hk
+  have hp := prime_bounds k h2 h3
+  have hl' : (lo : ℝ) ≤ ((tauSrcLoExtra.getD (k - 71) 0 : ℚ) : ℝ) + (primeLo k : ℝ) := by
+    exact_mod_cast hl
+  have hh' : ((tauSrcHiExtra.getD (k - 71) 0 : ℚ) : ℝ) + (primeHi k : ℝ) ≤ hi := by
+    exact_mod_cast hh
+  rw [tau_eq hM]
+  push_cast at hs hp ⊢
+  constructor <;> linarith [hs.1, hs.2, hp.1, hp.2]
+
+/-- Five checks per certificate to limit kernel peak memory. -/
+def tauPrimeBatchR1 (s : ℕ) : Bool :=
+  (List.range 5).all fun i =>
+    tauFullCheckR1 (s + i + 71)
+      (tauFLoExtra.getD (s + i) 0) (tauFHiExtra.getD (s + i) 0)
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_0 : tauPrimeBatchR1 0 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_5 : tauPrimeBatchR1 5 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_10 : tauPrimeBatchR1 10 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_15 : tauPrimeBatchR1 15 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_20 : tauPrimeBatchR1 20 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_25 : tauPrimeBatchR1 25 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_30 : tauPrimeBatchR1 30 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_35 : tauPrimeBatchR1 35 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_40 : tauPrimeBatchR1 40 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_45 : tauPrimeBatchR1 45 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_50 : tauPrimeBatchR1 50 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_55 : tauPrimeBatchR1 55 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_60 : tauPrimeBatchR1 60 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_65 : tauPrimeBatchR1 65 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_70 : tauPrimeBatchR1 70 = true := by decide +kernel
+
+set_option maxRecDepth 100000 in
+theorem tauPrimeBatchR1_75 : tauPrimeBatchR1 75 = true := by decide +kernel
+
+theorem tauPrimeBatchR1_all {s : ℕ}
+    (hs : s ∈ [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75]) : tauPrimeBatchR1 s = true := by
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hs
+  rcases hs with rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl | rfl
+  exacts [tauPrimeBatchR1_0, tauPrimeBatchR1_5, tauPrimeBatchR1_10, tauPrimeBatchR1_15, tauPrimeBatchR1_20, tauPrimeBatchR1_25, tauPrimeBatchR1_30, tauPrimeBatchR1_35, tauPrimeBatchR1_40, tauPrimeBatchR1_45, tauPrimeBatchR1_50, tauPrimeBatchR1_55, tauPrimeBatchR1_60, tauPrimeBatchR1_65, tauPrimeBatchR1_70, tauPrimeBatchR1_75]
+
+/-- Every new full τ enclosure is checked against exact rational arithmetic. -/
+theorem tauFullCheckR1_all {k : ℕ} (hk1 : 71 ≤ k) (hk : k ≤ 150) :
+    tauFullCheckR1 k (tauFLoExtra.getD (k - 71) 0)
+      (tauFHiExtra.getD (k - 71) 0) = true := by
+  have hs : 5 * ((k - 71) / 5) ∈ [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75] := by
+    have : (k - 71) / 5 < 16 := by omega
+    interval_cases (k - 71) / 5 <;> simp
+  have h := tauPrimeBatchR1_all hs
+  simp only [tauPrimeBatchR1, List.all_eq_true, List.mem_range] at h
+  have h' := h ((k - 71) % 5) (Nat.mod_lt _ (by norm_num))
+  have hi : 5 * ((k - 71) / 5) + (k - 71) % 5 = k - 71 := by omega
+  have he : 5 * ((k - 71) / 5) + (k - 71) % 5 + 71 = k := by omega
+  simpa only [hi, he] using h'
+
+/-- Exact target for R1: rational enclosure of τ_k, 71 ≤ k ≤ 150, for any M ≥ 3. -/
+theorem tau_mem_R1 {M : ℕ} (hM : 3 ≤ M) {k : ℕ}
+    (hk1 : 71 ≤ k) (hk : k ≤ 150) :
+    ((tauFLoExtra.getD (k - 71) 0 : ℚ) : ℝ) ≤ tau M (6 / 5) k ∧
+      tau M (6 / 5) k ≤ ((tauFHiExtra.getD (k - 71) 0 : ℚ) : ℝ) :=
+  tauFullCheckR1_sound hM hk1 hk (tauFullCheckR1_all hk1 hk)
+
+end AEGIS.CvSTauR1PrimeL12V1
+
+#print axioms AEGIS.CvSTauR1PrimeL12V1.tau_mem_R1
