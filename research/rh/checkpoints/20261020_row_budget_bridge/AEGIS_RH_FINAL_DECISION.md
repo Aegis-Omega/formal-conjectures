@@ -1,48 +1,13 @@
 # STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION
 
-No term of `unconditional_riemannHypothesis : RiemannHypothesis` was constructed. No new axiom or weakened Mathlib definition was introduced.
+No unconditional canonical RH theorem was constructed.
 
-The concrete new result is a native kernel-verified complete first column of the existing Q96/Q80 interval envelope: all 139 entries match their original target boxes and have the checked containment, weighted-column and row-order proofs. The composition theorems are `RowBudgetFirstColumnV1.first_column_contains`, `first_column_mem` and `all_rows_covered`. They cover 139 of 19,321 entries. They are not by themselves entry enclosures of the actual analytic matrix.
+The new verified result is the complete 139 by 139 finite output enclosure and its quantitative complex row-budget composition. All 19321 ordered entries, all 278 source Gram-column products, every input-column packing witness, and three rejection controls pass Lean 4.33.1. The original numerical certificate and projection are unchanged. The exact positive margin is 167597168023440173239 / 604462909807314587353088.
 
-A uniform new execution theorem, `CvSColumnEnvelopeV1.envelope_pair_eq`, preserves the exact mixed entry at every finite dimension. Another, `CvSPackedIntervalDotV1.cachedIntervalDot_eq`, proves that signed, carry-safe cached packing gives exactly the existing outward interval dot. Its real 301-element Z0 pilot passes all six kernel audits, including rejection of corrupted packing. These are proved computational identities, not dimension-uniform positivity claims.
+The terminal is `AEGIS.CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs`. It retains symmetry of q/g and six explicit real input-membership families. It no longer assumes an output-table check or positivity of the output matrix. Its full type, compiler output and standard axiom audit are in AEGIS_RH_KERNEL_RECEIPT.json and full_table_execution/FULL_TABLE_KERNEL_RECEIPT.json.
 
-The actual-source input continuation at commit 177dcd64 passed original-import CI 39455515829. It includes sourceZ_mem for every one of the 301 residual rows, every atom index, M≥3 and every explicitly enclosed real projection. The observed 37 workflow audits and the additional emitted sourceZ audit all use only standard axioms. All first-column modules compiled in original-import CI 39463716271 at f8ff0e20, and all 105 named compiler axiom outputs pass an independent corrected audit. The overall CI run is FAIL because its old audit looked in the wrong log for two packed soundness declarations. That failure is retained in the receipts. The repaired workflow validates exact source/pin/log/binary hashes before any dependency reuse and then performs a fresh import/type/axiom audit. Consult the machine receipt for that later run. The packed-dot extension is outside the original-import CI scope; its 11-module closure also passed a fresh isolated native reproduction on the same host.
+The next finite source obligation is to identify those literal Q96 input arrays with the already-proved source memberships in CvSActualRowInputL12V1, including the fixed exact projection and sourceZ. This is distinct from the now-completed 19321 output comparisons. SOURCE_BINDING_NEXT_INPUTS.zip preserves exact reconstructed E, Y, Lambda and X*Lambda data, explicitly without a Lean membership claim.
 
-The selected native graph has 102 roots, 28,139 declarations, 1,058 located sources, no missing dependencies and no proof cycles. All axioms are standard. Raw graphs, exact custom sources, full compiler outputs and immutable source bindings are preserved alongside this report. No independent human review or global proof sign-off is implied.
+The existing fixed-window consumer also retains its all-real-t Krein certificate, trace/integrability and compatible Schur gap. The universal terminal still needs the exact signed Weil producer in RHOptimizedSchurGlobalJoinV1 or a genuine cofinal-window producer. No theorem generalizing the fixed L=6/5 window to every admissible packet was constructed. The RH-equivalence alone is not such a producer.
 
-## Immediate finite obligation
-
-Identify the literal Q96 data with the already proved actual Q/X/G/tau/Z/LP2 input formulas and the chosen exact rational projection. Prove every stored output entry encloses the actual matrix
-
-```
-40*A(i,j) - budgetMatrix(actualZ, matrixOfProvedGramTailMajorant)(i,j).
-```
-
-The pure finite comparison may use the existing hull/tableCheck or a complete entrywise producer. One sufficient explicit target remains
-
-```
-tableCheck 139 target (fun i j => downscale 16 (hull
-  (envelope 96 Q X G tau Z LP2 i j)
-  (envelope 96 Q X G tau Z LP2 j i))) = true.
-```
-
-The first column and the new packed evaluator are verified progress toward that target; the full Boolean has not been proved. `CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv` consumes the completed hI, with its symmetry hypotheses, once the actual residual and tail are identified. The existing finite positive certificate and its margin are preserved.
-
-## Remaining analytic and universal obligation
-
-The fixed-window consumer still requires a genuine all-real-t Krein certificate, trace/integrability control and the compatible scalar gap. A certificate for L=6/5 does not imply a cofinal/all-window family.
-
-The exact universal target retained from `rh_iff_one_actual_sharp_signed_budget` is
-
-```text
-∀ g : WeilCompactSmoothGV1, WeilMomentConditionsV1 g →
-  ∃ n (gs : Fin (n+1) → WeilCompactSmoothGV1),
-    g = packetSum (fun _ => (1 : ℂ)) gs ∧
-    actualMixedDefect n gs ≤ -(∑ i, (B (gs i) (gs i)).re).
-```
-
-It is RH-equivalent. Requiring it as an assumption would not close RH. The hselect route instead needs one valid selected reconstruction per supplied source packet/decomposition; arbitrary repeated or nearly coincident decompositions are not required to pass. Neither an RH-independent universal signed estimate nor such a universal Schur selector is constructed here.
-
-The earlier route review therefore remains scoped: continue the actual finite Feshbach component and targeted signed estimates; hold universal promotion until a non-circular producer is proved. This is a mathematical gap, not a claim that an uncompiled or unexamined source has no proof.
-
-Final verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.
+The selected native closure has 12 roots, 19752 declarations, 984 located sources, no missing dependencies or proof cycles, and only propext, Classical.choice and Quot.sound. A separate original-import CI replay of this extension is configured; its actual outcome must be read at the new commit. Earlier green 105-root CI is not a certificate of this extension.

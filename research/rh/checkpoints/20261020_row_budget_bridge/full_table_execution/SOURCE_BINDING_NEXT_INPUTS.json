@@ -1,0 +1,11 @@
+{
+  "sha256": "b483249a42ede68a7236692f77de201762010a485228b1f104d4bc562cd5f8e9",
+  "status": "EXACT_INTEGER_RECONSTRUCTION; NOT_A_LEAN_SOURCE_MEMBERSHIP_PROOF",
+  "data": [
+    "original E kernel interval rows",
+    "original Y finite products",
+    "unchanged Q48 projection at Q96",
+    "original X*Lambda interval products"
+  ],
+  "source_archive_sha256": "aab5ed7cc495f6b37fb1ab250a824b29cf8a3c85a1e9454cce87f9faa6e8b339"
+}

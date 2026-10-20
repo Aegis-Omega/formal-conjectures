@@ -1,3 +1,5 @@
+The new complete finite row-budget verification does not locate any new zeta zero, prove a multiplicity statement, or calculate an exact ordinate. Its 141 signed Fourier indices are source frequencies, not zeta ordinates.
+
 # Zero and coordinate audit
 
 This continuation adds no theorem locating a zeta zero. The canonical Mathlib RiemannHypothesis definition, zero carriers and multiplicity conventions are unchanged.

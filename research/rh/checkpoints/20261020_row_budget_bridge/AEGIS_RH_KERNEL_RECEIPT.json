@@ -2,7 +2,7 @@
   "decision": "STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION",
   "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
   "source_binding": "Exact theorem/import module hashes in graph and receipts; source commits read back from GitHub recorded in FINAL_SOURCE_BINDING.json. A base commit is not a claim that later new files were already present.",
-  "timestamp_utc": "2026-10-20T18:08:40.315316+00:00",
+  "timestamp_utc": "2026-10-20T22:02:02.357993+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
   "native_selected_graph": {
@@ -2798,18 +2798,11 @@
     }
   ],
   "remaining_obligations": [
-    "Literal identity/enclosure of concrete Q96 input tables with source Q/X/G/tau/Z/LP2 and the chosen exact rational projection. Generic actual sourceZ_mem now passes original-import CI.",
-    "All 19,321 output entries, or another complete hI producer. Exactly 139 entries of the first column are now kernel checked.",
-    "Identify the resulting actual residual and Gram tail with the hypotheses of budgetEnergy_le_of_Iv and the actual row-bound consumer.",
-    "All-real-t Krein certificate, trace bound and compatible scalar gap for the one-window consumer.",
-    "Existing universal actual signed mixed-budget producer or a genuine cofinal/all-window producer; no finite-to-universal transition is supplied."
+    "Identify the six literal Q/X/G/tau/Z/LP2 input families with their already-proved actual analytic input formulas and the fixed Q48 projection. All 19321 finite output comparisons are now discharged.",
+    "Produce the fixed-window all-real-t Krein certificate, regularity/integrability and compatible trace/Schur gap required by CvSWindowGramL12V1.window_L12_gram.",
+    "Construct a genuine cofinal/all-window or universal signed Weil producer. A fixed L=6/5 certificate does not discharge this quantifier."
   ],
-  "canonical_unconditional_RH": {
-    "status": "NOT_PROVED",
-    "type": "unconditional_riemannHypothesis : RiemannHypothesis",
-    "new_axioms": false,
-    "changed_Mathlib_definition": false
-  },
+  "canonical_unconditional_RH": "NOT_PROVED",
   "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
   "graph_sha256": "b6a5f0b57d7295e14d1c703b7ec3fa216cfbfb23d6245f85500cd644a1c966ca",
   "native_source_archive_sha256": "082b96c8a35d3bf1b396eaba9a4deca4e38f3945cbcf777261e0aa4ec2ed97df",
@@ -5583,5 +5576,52 @@
     "Mathlib_manifest_and_checkout": "0df444a360eaa60ab8c11dca51a86af692955474",
     "Mathlib_worktree": "CLEAN",
     "scope": "Current workspace independently checked; CI also binds pinned setup and exact-source checkpoint pins."
+  },
+  "full_table_extension": {
+    "status": "NATIVE_KERNEL_PASS",
+    "dimension": 139,
+    "ordered_output_entries": 19321,
+    "frequency_count": 141,
+    "finite_residual_rows": 301,
+    "original_gram_product_columns": 278,
+    "input_json_sha256": "69014b7fbf4246f20f6bc0a8ee1245b4d401315899511308b8c226b0606ec63c",
+    "sources_unchanged_data": "Original Q48 projection, Q96 outward inputs and Q80 target intervals; no refit or numerical tightening.",
+    "quantitative_margin": {
+      "numerator": "167597168023440173239",
+      "denominator": "604462909807314587353088",
+      "rounding": "exact rational, positive"
+    },
+    "selected_graph": {
+      "roots": 12,
+      "declarations": 19752,
+      "located_sources": 984,
+      "proof_cycles": 0,
+      "missing_dependencies": 0,
+      "kernel_inductive_metadata_scc": 451,
+      "archive_sha256": "9b4e79d8ee95a8c90a0168fb4ab635d14d7c7a81d0e13fc286b1e1ceace7b53c"
+    },
+    "native_receipt": "full_table_execution/FULL_TABLE_KERNEL_RECEIPT.json",
+    "source_archive_sha256": "d8e569b6c9fd48969ec5693df823a97b3b44c644970a5aa71e8670326677003c",
+    "graph_scope": "Finite table and conditional real input composition. No canonical RH declaration, actual source membership producer or universal window/Weil producer is asserted.",
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "terminal_compiler_output": "AEGIS.CvSFullBudgetJoinV1.budgetEnergy_le_of_inputs : \u2200 (q : Fin 139 \u2192 Fin 139 \u2192 \u211d) (x : Fin 141 \u2192 Fin 139 \u2192 \u211d)\n  (g : Fin 141 \u2192 Fin 141 \u2192 \u211d) (t : Fin 141 \u2192 \u211d) (z : Fin 301 \u2192 Fin 139 \u2192 \u211d) (lp2 : \u211d),\n  (\u2200 (i j : Fin 139), q i j = q j i) \u2192\n    (\u2200 (k l : Fin 141), g k l = g l k) \u2192\n      (\u2200 (i j : Fin 139), AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSFullTableClosureV1.Q i j) (q i j)) \u2192\n        (\u2200 (k : Fin 141) (i : Fin 139),\n            AEGIS.RHFixIntervalV1.Iv.Mem 96\n              (AEGIS.CvSCachedEnvelopeJoinV1.coeff AEGIS.CvSFullTableClosureV1.columns k i) (x k i)) \u2192\n          (\u2200 (k l : Fin 141),\n              AEGIS.RHFixIntervalV1.Iv.Mem 96\n                ((AEGIS.RowBudgetListCell0Pilot.G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 }) (g k l)) \u2192\n            (\u2200 (k : Fin 141),\n                AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.RowBudgetStagedDotPilot.T.getD \u2191k { lo := 0, hi := 0 }) (t k)) \u2192\n              (\u2200 (r : Fin 301) (i : Fin 139),\n                  AEGIS.RHFixIntervalV1.Iv.Mem 96\n                    (AEGIS.CvSCachedEnvelopeJoinV1.residual AEGIS.CvSFullTableClosureV1.columns r i) (z r i)) \u2192\n                AEGIS.RHFixIntervalV1.Iv.Mem 96 AEGIS.RowBudgetListCell0Pilot.LP2 lp2 \u2192\n                  \u2200 (v : Fin 139 \u2192 \u2102),\n                    AEGIS.CvSRowBudgetGramBridgeV1.budgetEnergy z (AEGIS.CvSRealTailMatrixV1.tailMatrix x g t lp2) v \u2264\n                      40 * (\u2211 i, \u2211 j, v i * (starRingEnd \u2102) (v j) * \u2191(q i j)).re\n'AEGIS.CvSFullBudgetJoinV1.budgetEnergy_le_of_inputs' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs : \u2200 (q : Fin 139 \u2192 Fin 139 \u2192 \u211d) (x : Fin 141 \u2192 Fin 139 \u2192 \u211d)\n  (g : Fin 141 \u2192 Fin 141 \u2192 \u211d) (t : Fin 141 \u2192 \u211d) (z : Fin 301 \u2192 Fin 139 \u2192 \u211d) (lp2 : \u211d),\n  (\u2200 (i j : Fin 139), q i j = q j i) \u2192\n    (\u2200 (k l : Fin 141), g k l = g l k) \u2192\n      (\u2200 (i j : Fin 139), AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSFullTableClosureV1.Q i j) (q i j)) \u2192\n        (\u2200 (k : Fin 141) (i : Fin 139),\n            AEGIS.RHFixIntervalV1.Iv.Mem 96\n              (AEGIS.CvSCachedEnvelopeJoinV1.coeff AEGIS.CvSFullTableClosureV1.columns k i) (x k i)) \u2192\n          (\u2200 (k l : Fin 141),\n              AEGIS.RHFixIntervalV1.Iv.Mem 96\n                ((AEGIS.RowBudgetListCell0Pilot.G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 }) (g k l)) \u2192\n            (\u2200 (k : Fin 141),\n                AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.RowBudgetStagedDotPilot.T.getD \u2191k { lo := 0, hi := 0 }) (t k)) \u2192\n              (\u2200 (r : Fin 301) (i : Fin 139),\n                  AEGIS.RHFixIntervalV1.Iv.Mem 96\n                    (AEGIS.CvSCachedEnvelopeJoinV1.residual AEGIS.CvSFullTableClosureV1.columns r i) (z r i)) \u2192\n                AEGIS.RHFixIntervalV1.Iv.Mem 96 AEGIS.RowBudgetListCell0Pilot.LP2 lp2 \u2192\n                  \u2200 (v : Fin 139 \u2192 \u2102),\n                    AEGIS.CvSStrictRowBudgetV1.margin * \u2211 i, \u2016v i\u2016 ^ 2 +\n                        AEGIS.CvSRowBudgetGramBridgeV1.budgetEnergy z (AEGIS.CvSRealTailMatrixV1.tailMatrix x g t lp2)\n                          v \u2264\n                      40 * (\u2211 i, \u2211 j, v i * (starRingEnd \u2102) (v j) * \u2191(q i j)).re\n'AEGIS.CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+    "terminal_command": [
+      "lake",
+      "env",
+      "lean",
+      "-DwarningAsError=true",
+      "-R",
+      "/workspace/aegis-full-table-bridge",
+      "-o",
+      "/workspace/aegis-full-table-bridge/CvSFullBudgetJoinV1.olean",
+      "/workspace/aegis-full-table-bridge/CvSFullBudgetJoinV1.lean"
+    ],
+    "terminal_source_sha256": "d7f832527760ce5b6da853815a7fa45c78cb129e555d02c33866b0fd6bd704f4",
+    "original_import_CI": "NOT_RUN_AT_THIS_SNAPSHOT",
+    "push_status": "PENDING_SOURCE_COMMIT"
   }
 }

@@ -1,3 +1,22 @@
+## Full-table continuation
+
+The complete ordered 139 by 139 output comparison now passes the native kernel, replacing the earlier first-column-only scope. `CvSFullTableClosureV1.full_table_contains` relates every checked entry to the original Q96 interval envelope, with no unproved output check. `real_envelope_mem` transfers all entries to Q80, retaining exactly six real input-membership families.
+
+`CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs` composes the complete finite table with the original complex interval-box positivity theorem. For every complex vector v it gives
+
+```
+delta * sum_i ||v_i||^2 + budgetEnergy(z, tailMatrix(x,g,t,lp2), v)
+  <= 40 * Re sum_ij v_i * conjugate(v_j) * q_ij
+
+delta = 167597168023440173239 / 604462909807314587353088 > 0.
+```
+
+Its premises are symmetry of q and g and the explicit Q96 memberships of q, x, g, t, z and lp2 in the unchanged literal inputs. It has no output-table, matrix-positivity or RH premise. These memberships still need to be connected to the original CvS definitions; the theorem must not be described as an unconditional actual-CvS bound before that connection is proved.
+
+All 139 input-column caches, 278 original Gram-column products and 19321 ordered output entries compiled. Signed packing includes bounds, lengths and carry control. The source JSON reconstructs byte-for-byte from the original stored Q48 projection and source tables without executing a floating fit. Existing first-column proofs now supply the weighted identities directly, avoiding an unnecessary global re-evaluation. Only proof composition changed; no interval endpoint changed.
+
+The selected new graph has 12 roots, 19752 declarations and 984 located source modules. It has no missing dependency or proof cycle and only the standard three axioms. The 451 inductive/constructor metadata groups are separately condensed. The earlier 102-root graph and original-import CI receipts remain historical evidence in Git and the archived native graph; their scopes are not relabelled.
+
 # Mathematical alignment at the continued source checkpoint
 
 This is a scoped research result, not an unconditional RH proof. Lean is 4.33.1 and Mathlib is pinned to `0df444a360eaa60ab8c11dca51a86af692955474`. The canonical definition in `Mathlib/NumberTheory/LSeries/RiemannZeta.lean:185` is unchanged:

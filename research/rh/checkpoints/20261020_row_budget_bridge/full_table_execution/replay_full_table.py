@@ -10,7 +10,7 @@ for name in names:
  cmd=['lake','env','lean','-DwarningAsError=true','-R',str(w),'-o',str(w/(name+'.olean')),str(p)]
  with log.open('w') as f:r=subprocess.run(cmd,cwd=root,env=env,stdout=f,stderr=subprocess.STDOUT)
  data=log.read_text();audits=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",data)
- bad=[(n,a) for n,a in audits if set(a.split(', ')) - {'propext','Classical.choice','Quot.sound',''}]
- row={'module':name,'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'command':cmd,'seconds':time.monotonic()-t,'exit_code':r.returncode,'status':'PASS' if r.returncode==0 and not bad else 'FAIL','log':log.name,'log_sha256':hashlib.sha256(log.read_bytes()).hexdigest(),'audits':[{'theorem':n,'axioms':a.split(', ') if a else []} for n,a in audits],'bad_axioms':bad,'max_child_rss_kib':resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss}
+ bad=[(n,a) for n,a in audits if set(x.strip() for x in a.split(',') if x.strip()) - {'propext','Classical.choice','Quot.sound',''}]
+ row={'module':name,'source_sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'command':cmd,'seconds':time.monotonic()-t,'exit_code':r.returncode,'status':'PASS' if r.returncode==0 and not bad else 'FAIL','log':log.name,'log_sha256':hashlib.sha256(log.read_bytes()).hexdigest(),'audits':[{'theorem':n,'axioms':[x.strip() for x in a.split(',') if x.strip()] if a else []} for n,a in audits],'bad_axioms':bad,'max_child_rss_kib':resource.getrusage(resource.RUSAGE_CHILDREN).ru_maxrss}
  (w/(name+'.RECEIPT.json')).write_text(json.dumps(row,indent=2)+'\n');receipt['runs'].append(row);receipt_path.write_text(json.dumps(receipt,indent=2)+'\n');print(name,row['status'],round(row['seconds'],3),'s',flush=True)
  if row['status']!='PASS':print(data[-6000:],flush=True);sys.exit(1)
