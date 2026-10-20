@@ -1,0 +1,27 @@
+{
+  "exact_source_commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+  "source_readback": [
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean",
+      "sha256": "1af5117865deaca3765aa2532726850f89ad75874a5e45e917630ba03f1493c7"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean",
+      "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean",
+      "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722"
+    }
+  ],
+  "source_ci": {
+    "run_id": 39425665414,
+    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39425665414",
+    "status": "IN_PROGRESS_NOT_PASS"
+  },
+  "superseded_duplicate_run": {
+    "run_id": 39421226934,
+    "action": "CANCELLED_CONFIRMED",
+    "reason": "Only changed Lean file since verified d69f8f24 is RowBudgetStagedDotPilot.lean, not compiled by this workflow. All 23 selected roots and imports unchanged. The new 37-root source replay supersedes this duplicate."
+  }
+}

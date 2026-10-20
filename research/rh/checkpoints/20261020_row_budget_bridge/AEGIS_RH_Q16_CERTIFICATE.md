@@ -13,3 +13,7 @@ Float least squares, a float eigenvalue hint and Decimal Cholesky propose witnes
 ## Verified bridge in this continuation
 
 The arbitrary-precision outward dot/matrix product, congruence, interval hull, downward rescaling and exact upward embedding now have native Lean soundness proofs. The complete envelope has an explicit finite tableCheck premise. No positive margin was increased, no stored factor changed and no generated interval was narrowed. The monolithic computational attempt has status RESOURCE_TERMINATED_NOT_VERIFIED. Three smaller exact staged computations pass; this is not a claim for all output entries.
+
+## Exact source input arithmetic at a1862b9b
+
+The new source input layer retains arbitrary p, including Q96. Integer division uses lo/d rounded down and hi/d rounded up for d>0; for d<0 it divides by -d, reverses and negates endpoints. Its two soundness theorems pass natively. The pi enclosure is the established rational [314159265358979323846/10^20,314159265358979323847/10^20]. The frequency factor is enclosed by [-25*piHi^2*n^2/9-1/4,-25*piLo^2*n^2/9-1/4], then multiplied by the exact signed second difference w/2^42 with outward rounding. The factor L/pi is enclosed by [(6/5)/piHi,(6/5)/piLo], and its square uses the original interval multiplication. These five frequency-input roots pass natively. No Q16 or Q80 positivity margin or data was altered. The actual source-input application remains separately gated by its original-import CI.

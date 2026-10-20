@@ -1,21 +1,21 @@
 {
-  "source_base_commit": "d69f8f242f258166e29a98d6fac8c32a4a3ab6b0",
-  "timestamp_utc": "2026-10-20T12:15:13.878283+00:00",
+  "source_base_commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+  "timestamp_utc": "2026-10-20T12:56:52.384688+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
-  "native_roots": 19,
-  "native_declarations": 8577,
-  "source_modules": 317,
+  "native_roots": 26,
+  "native_declarations": 26988,
+  "source_modules": 1029,
   "missing_sources": 0,
   "missing_dependencies": 0,
   "proof_cycles": 0,
-  "datatype_metadata_groups": 349,
+  "datatype_metadata_groups": 681,
   "axioms": [
     "Classical.choice",
     "Quot.sound",
     "propext"
   ],
-  "graph_sha256": "4ae17c38069a0e51d5d5fb93403b58da81d2a708d7e1b6f9947515c05511829d",
+  "graph_sha256": "8f8e0ef805e23bbbd20732e3fd40148dd75e2d802504f08e59903fe254886dd2",
   "numeric_experiments": [
     {
       "path": "RowBudgetCell0Pilot.lean",
@@ -122,6 +122,14 @@
         "2026-10-20T12:38:39.0223574Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_interval ['Classical.choice', 'Quot.sound', 'propext']"
       ],
       "current_source_bytes_match_verified_commit": true
+    },
+    "new_actual_input_layer": {
+      "id": 39425665414,
+      "job_id": 118638278061,
+      "sha": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39425665414",
+      "status": "IN_PROGRESS_NOT_PASS",
+      "expected_named_audits": 37
     }
   },
   "remaining_actual_budget": "Source input instantiation and executable output-table check; not supplied by abstract envelope theorem alone",
@@ -135,5 +143,12 @@
     "source": "CvSTauSigned150L12V1.lean",
     "source_sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
     "kernel_status": "PASS: original-import source CI 39419296326; three roots with only standard axioms"
+  },
+  "native_input_layer": {
+    "status": "PASS",
+    "roots": 7,
+    "receipt": "INPUT_SOURCE_KERNEL_RECEIPT.json",
+    "graph_archive": "NATIVE_INPUT_GRAPH.zip",
+    "scope": "Uniform signed integer division, frequency-factor and L/pi input enclosures; no output table or RH conclusion."
   }
 }

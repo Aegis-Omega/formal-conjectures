@@ -1,13 +1,305 @@
-diff --git a/research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean b/research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean
-index e8aa1073..a3a4d49e 100644
---- a/research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean
-+++ b/research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean
-@@ -71,7 +71,7 @@ theorem sourceY_eq_actual_crossRow (M : ℕ) (m : ℤ) (v : Fin 139 → ℂ) :
-     _ = ∑ i : Fin 139, ∑ k : Fin 141,
-         ((transformedCoeff k i : ℂ) *
-           (sourceKernel M m (signedFreq k) : ℂ)) * v i := by
--          simp only [sourceY, Complex.ofReal_sum, Complex.ofReal_mul]
-+          simp only [sourceY, Complex.ofReal_sum, Complex.ofReal_mul, Finset.sum_mul]
-     _ = ∑ k : Fin 141, ∑ i : Fin 139,
-         ((transformedCoeff k i : ℂ) * v i) *
-           (sourceKernel M m (signedFreq k) : ℂ) := by
+diff --git a/.github/workflows/rh-cvs-actual-row-replay.yml b/.github/workflows/rh-cvs-actual-row-replay.yml
+index cc66487c..33198da4 100644
+--- a/.github/workflows/rh-cvs-actual-row-replay.yml
++++ b/.github/workflows/rh-cvs-actual-row-replay.yml
+@@ -128,6 +128,12 @@ jobs:
+           lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
+           lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
+           lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
++          lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+           python3 - <<'PY'
+           import pathlib, re
+           log = pathlib.Path('actual-row-bridge.log').read_text()
+@@ -136,6 +142,7 @@ jobs:
+           ]
+           names = ['AEGIS.CvSActualCrossRowL12V1.' + n for n in names]
+           names += ['AEGIS.CvSMidpointRadiusV1.product_error', 'AEGIS.CvSMidpointRadiusV1.sum_product_error', 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure', 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds', 'AEGIS.CvSRationalIntervalV1.rationalRange_mem', 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error', 'AEGIS.CvSIntervalMatrixProductV1.dot_mem', 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem', 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem', 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left', 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains', 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound', 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check', 'AEGIS.CvSTauSigned150L12V1.positive_mem', 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds', 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval']
++          names += ['AEGIS.CvSIntervalDivideV1.divPos_mem', 'AEGIS.CvSIntervalDivideV1.divInt_mem', 'AEGIS.CvSFrequencyIntervalV1.pi_bounds', 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds', 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem', 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem', 'AEGIS.CvSActualRowInputL12V1.gramRat_cast', 'AEGIS.CvSActualRowInputL12V1.gramUp_mem', 'AEGIS.CvSActualRowInputL12V1.gramUp_symm', 'AEGIS.CvSActualRowInputL12V1.diagonal_mem', 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem', 'AEGIS.CvSActualRowInputL12V1.sourceY_mem']
+           allowed = {'propext','Classical.choice','Quot.sound'}
+           if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
+             raise SystemExit('SORRYAX_OR_PROOF_HOLE')
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean
+new file mode 100644
+index 00000000..2ccb3ec6
+--- /dev/null
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean
+@@ -0,0 +1,143 @@
++/- Source memberships for the fixed L=6/5 relative row-budget calculation.
++No output-table or positivity assumption is discharged by this input layer. -/
++import CvSProjectedEntryL12V1
++import CvSGramTailV1
++import CvSTauSigned150L12V1
++import CvSFrequencyIntervalV1
++import CvSIntervalDivideV1
++import CvSActualCrossRowL12V1
++import CvSIntervalMatrixProductV1
++
++open scoped BigOperators
++
++namespace AEGIS.CvSActualRowInputL12V1
++open AEGIS.RHFixIntervalV1 AEGIS.CvSRationalIntervalV1
++open AEGIS.CvSProjectedPackedCertificateL12V1 AEGIS.CvSProjectedEntryL12V1
++
++/-- The actual transformed source coefficient, enclosed at arbitrary precision. -/
++theorem transformedCoeff_mem (p : ℕ) (k : Fin 141) (i : Fin 139) :
++    (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (signedFreq k)
++      (wZ (signedFreq k) i)).Mem p (transformedCoeff k i) := by
++  rw [transformedCoeff_eq]
++  exact AEGIS.CvSFrequencyIntervalV1.coefficient_mem p (signedFreq k) (wZ (signedFreq k) i)
++
++/-- Exact rational harmonic Gram kernel; the diagonal is the source upper bound. -/
++def gramRat (NP : ℕ) (n m : ℤ) : ℚ :=
++  if n = m then 1 / ((NP : ℚ) - n + 1 / 2) + 1 / ((NP : ℚ) + n + 1 / 2)
++  else (harmonic ((NP : ℤ) - m).toNat - harmonic ((NP : ℤ) - n).toNat +
++    (harmonic ((NP : ℤ) + n).toNat - harmonic ((NP : ℤ) + m).toNat)) / ((n : ℚ) - m)
++
++/-- Identifies the rational data with the original real source definition. -/
++theorem gramRat_cast (NP : ℕ) (n m : ℤ) :
++    (gramRat NP n m : ℝ) = AEGIS.CvSGramTailV1.gramUp NP n m := by
++  simp only [gramRat, AEGIS.CvSGramTailV1.gramUp, AEGIS.CvSGramTailV1.H]
++  split_ifs <;> push_cast <;> rfl
++
++/-- No numerical harmonic approximation is used. -/
++theorem gramUp_mem (p NP : ℕ) (n m : ℤ) :
++    (rationalRange p (gramRat NP n m) (gramRat NP n m)).Mem p
++      (AEGIS.CvSGramTailV1.gramUp NP n m) := by
++  rw [← gramRat_cast]
++  exact rationalRange_mem p _ _ le_rfl le_rfl
++
++/-- The exact source Gram kernel is symmetric at every cutoff. -/
++theorem gramUp_symm (NP : ℕ) (n m : ℤ) :
++    AEGIS.CvSGramTailV1.gramUp NP n m = AEGIS.CvSGramTailV1.gramUp NP m n := by
++  by_cases h : n = m
++  · subst m
++    rfl
++  · simp only [AEGIS.CvSGramTailV1.gramUp, if_neg h, if_neg h.symm]
++    rw [show (m : ℝ) - n = -((n : ℝ) - m) by ring, div_neg, ← neg_div]
++    congr 1
++    ring
++
++def diagonalBox (p : ℕ) (n : ℤ) : Iv :=
++  rationalRange p (AEGIS.CvSDiagL12V1.diagLo.getD n.natAbs 0)
++    (AEGIS.CvSDiagL12V1.diagHi.getD n.natAbs 0)
++
++/-- Existing positive diagonal boxes transported to both signed frequencies. -/
++theorem diagonal_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (n : ℤ) (hn : n.natAbs ≤ 70) :
++    (diagonalBox p n).Mem p (AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n) := by
++  set a := n.natAbs with ha
++  have hcv : AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n =
++      AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) (a : ℤ) (a : ℤ) := by
++    rcases Int.natAbs_eq n with h | h
++    · rw [← ha] at h
++      rw [h]
++    · rw [← ha] at h
++      rw [h, AEGIS.CvSDiagL12V1.cvsEntry_diag_neg hM]
++  rw [hcv]
++  exact rationalRange_mem p _ _ (AEGIS.CvSDiagL12V1.diag_mem hM hn).1
++    (AEGIS.CvSDiagL12V1.diag_mem hM hn).2
++
++def tauBox (p : ℕ) (n : ℤ) : Iv := rationalRange p
++  (AEGIS.CvSTauSigned150L12V1.signedLo n) (AEGIS.CvSTauSigned150L12V1.signedHi n)
++
++/-- Same diagonal doubling, signed difference and integer division as the generator. -/
++def kernelBox (p : ℕ) (m : ℤ) (k : Fin 141) : Iv :=
++  if m = signedFreq k then
++    ((rationalRange p AEGIS.CvSFrequencyIntervalV1.piLo AEGIS.CvSFrequencyIntervalV1.piHi).add
++      (rationalRange p AEGIS.CvSFrequencyIntervalV1.piLo AEGIS.CvSFrequencyIntervalV1.piHi)).mul p
++        (diagonalBox p (signedFreq k))
++  else (AEGIS.CvSFrequencyIntervalV1.lpInterval p).mul p
++    (AEGIS.CvSIntervalDivideV1.divInt ((tauBox p (signedFreq k)).add (tauBox p m).neg)
++      (signedFreq k - m))
++
++/-- The actual CvS cross kernel is enclosed, including the signed diagonal branch. -/
++theorem sourceKernel_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (m : ℤ)
++    (hm : m.natAbs ≤ 150) (k : Fin 141) :
++    (kernelBox p m k).Mem p (AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (signedFreq k)) := by
++  have hn : (signedFreq k).natAbs ≤ 70 := by
++    have hk := k.isLt
++    simp only [signedFreq]
++    omega
++  by_cases h : m = signedFreq k
++  · rw [kernelBox, if_pos h, h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag]
++    have hpi := rationalRange_mem p _ _ AEGIS.CvSFrequencyIntervalV1.pi_bounds.1
++      AEGIS.CvSFrequencyIntervalV1.pi_bounds.2
++    simpa only [two_mul] using Iv.mem_mul p (Iv.mem_add p hpi hpi)
++      (diagonal_mem p hM (signedFreq k) hn)
++  · rw [kernelBox, if_neg h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_off M m (signedFreq k) h.symm]
++    have ht := Iv.mem_add p
++      (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM (signedFreq k) (by omega))
++      (Iv.mem_neg p (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM m hm))
++    have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr h.symm)
++    simpa only [tauBox, sub_eq_add_neg, Int.cast_sub] using
++      Iv.mem_mul p (AEGIS.CvSFrequencyIntervalV1.lp_mem p) hdiv
++
++def sourceYBox (p : ℕ) (m : ℤ) (i : Fin 139) : Iv :=
++  AEGIS.CvSIntervalMatrixProductV1.dot p (kernelBox p m)
++    (fun k => AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (signedFreq k) (wZ (signedFreq k) i))
++
++/-- Input enclosure for every genuine finite cross row; no positivity premise. -/
++theorem sourceY_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (m : ℤ)
++    (hm : m.natAbs ≤ 150) (i : Fin 139) :
++    (sourceYBox p m i).Mem p (AEGIS.CvSActualCrossRowL12V1.sourceY M m i) := by
++  have h := AEGIS.CvSIntervalMatrixProductV1.dot_mem p (kernelBox p m)
++    (fun k => AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (signedFreq k) (wZ (signedFreq k) i))
++    (fun k => AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (signedFreq k))
++    (fun k => transformedCoeff k i) (sourceKernel_mem p hM m hm)
++    (fun k => transformedCoeff_mem p k i)
++  have heq : (∑ k : Fin 141,
++      AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (signedFreq k) * transformedCoeff k i) =
++      AEGIS.CvSActualCrossRowL12V1.sourceY M m i := by
++    unfold AEGIS.CvSActualCrossRowL12V1.sourceY
++    exact Finset.sum_congr rfl (fun k _ => mul_comm _ _)
++  rw [heq] at h
++  exact h
++
++end AEGIS.CvSActualRowInputL12V1
++#print axioms AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem
++#print axioms AEGIS.CvSActualRowInputL12V1.gramRat_cast
++#print axioms AEGIS.CvSActualRowInputL12V1.gramUp_mem
++#print axioms AEGIS.CvSActualRowInputL12V1.gramUp_symm
++#check @AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem
++#check @AEGIS.CvSActualRowInputL12V1.gramRat_cast
++#check @AEGIS.CvSActualRowInputL12V1.gramUp_mem
++#check @AEGIS.CvSActualRowInputL12V1.gramUp_symm
++#print axioms AEGIS.CvSActualRowInputL12V1.diagonal_mem
++#check @AEGIS.CvSActualRowInputL12V1.diagonal_mem
++#print axioms AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
++#check @AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
++#print axioms AEGIS.CvSActualRowInputL12V1.sourceY_mem
++#check @AEGIS.CvSActualRowInputL12V1.sourceY_mem
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean
+new file mode 100644
+index 00000000..24230584
+--- /dev/null
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean
+@@ -0,0 +1,78 @@
++/- Source-independent interval encoding of the CvS L=6/5 frequency factor.
++Uses Mathlib's proved decimal pi bounds and the existing outward interval primitives. -/
++import CvSRationalIntervalV1
++import Mathlib.Analysis.Real.Pi.Bounds
++
++namespace AEGIS.CvSFrequencyIntervalV1
++open AEGIS.RHFixIntervalV1 AEGIS.CvSRationalIntervalV1
++
++def piLo : ℚ := 314159265358979323846 / 100000000000000000000
++def piHi : ℚ := 314159265358979323847 / 100000000000000000000
++
++theorem pi_bounds : (piLo : ℝ) ≤ Real.pi ∧ Real.pi ≤ piHi := by
++  constructor
++  · have h := Real.pi_gt_d20
++    norm_num [piLo] at h ⊢
++    exact h.le
++  · have h := Real.pi_lt_d20
++    norm_num [piHi] at h ⊢
++    exact h.le
++
++def frequencyLo (n : ℤ) : ℚ := -(25 / 9) * piHi ^ 2 * (n : ℚ) ^ 2 - 1 / 4
++def frequencyHi (n : ℤ) : ℚ := -(25 / 9) * piLo ^ 2 * (n : ℚ) ^ 2 - 1 / 4
++
++theorem frequency_bounds (n : ℤ) :
++    (frequencyLo n : ℝ) ≤ -(2 * Real.pi * (n : ℝ) / (6 / 5 : ℝ)) ^ 2 - 1 / 4 ∧
++    -(2 * Real.pi * (n : ℝ) / (6 / 5 : ℝ)) ^ 2 - 1 / 4 ≤ (frequencyHi n : ℝ) := by
++  obtain ⟨hl, hh⟩ := pi_bounds
++  have hlo : (0 : ℝ) ≤ piLo := by norm_num [piLo]
++  have hslo : (piLo : ℝ) ^ 2 ≤ Real.pi ^ 2 := pow_le_pow_left₀ hlo hl 2
++  have hshi : Real.pi ^ 2 ≤ (piHi : ℝ) ^ 2 := pow_le_pow_left₀ Real.pi_pos.le hh 2
++  have hn := sq_nonneg (n : ℝ)
++  have ha := mul_le_mul_of_nonneg_right hslo hn
++  have hb := mul_le_mul_of_nonneg_right hshi hn
++  simp only [frequencyLo, frequencyHi]
++  push_cast
++  constructor <;> nlinarith
++
++/-- Matches the generator's two outward multiplications: the frequency factor
++and the exact second-difference coefficient w/2^42. -/
++def coefficientInterval (p : ℕ) (n w : ℤ) : Iv :=
++  (rationalRange p (frequencyLo n) (frequencyHi n)).mul p
++    (rationalRange p ((w : ℚ) / 2 ^ 42) ((w : ℚ) / 2 ^ 42))
++
++theorem coefficient_mem (p : ℕ) (n w : ℤ) :
++    (coefficientInterval p n w).Mem p
++      ((-(2 * Real.pi * (n : ℝ) / (6 / 5 : ℝ)) ^ 2 - 1 / 4) * (w : ℝ) / 2 ^ 42) := by
++  have hf := rationalRange_mem p _ _ (frequency_bounds n).1 (frequency_bounds n).2
++  have hw : (rationalRange p ((w : ℚ) / 2 ^ 42) ((w : ℚ) / 2 ^ 42)).Mem p
++      ((w : ℝ) / 2 ^ 42) := by
++    apply rationalRange_mem <;> push_cast <;> exact le_rfl
++  simpa only [mul_div_assoc, coefficientInterval] using Iv.mem_mul p hf hw
++
++def lpInterval (p : ℕ) : Iv := rationalRange p ((6 / 5) / piHi) ((6 / 5) / piLo)
++
++theorem lp_mem (p : ℕ) : (lpInterval p).Mem p ((6 / 5 : ℝ) / Real.pi) := by
++  obtain ⟨hl, hh⟩ := pi_bounds
++  have hlo : (0 : ℝ) < piLo := by norm_num [piLo]
++  apply rationalRange_mem <;> push_cast
++  · exact div_le_div_of_nonneg_left (by norm_num) Real.pi_pos hh
++  · exact div_le_div_of_nonneg_left (by norm_num) hlo hl
++
++def lpSquaredInterval (p : ℕ) : Iv := (lpInterval p).mul p (lpInterval p)
++
++theorem lp_squared_mem (p : ℕ) :
++    (lpSquaredInterval p).Mem p (((6 / 5 : ℝ) / Real.pi) ^ 2) := by
++  simpa only [pow_two, lpSquaredInterval] using Iv.mem_mul p (lp_mem p) (lp_mem p)
++
++end AEGIS.CvSFrequencyIntervalV1
++#print axioms AEGIS.CvSFrequencyIntervalV1.pi_bounds
++#print axioms AEGIS.CvSFrequencyIntervalV1.frequency_bounds
++#print axioms AEGIS.CvSFrequencyIntervalV1.coefficient_mem
++#print axioms AEGIS.CvSFrequencyIntervalV1.lp_mem
++#print axioms AEGIS.CvSFrequencyIntervalV1.lp_squared_mem
++#check @AEGIS.CvSFrequencyIntervalV1.pi_bounds
++#check @AEGIS.CvSFrequencyIntervalV1.frequency_bounds
++#check @AEGIS.CvSFrequencyIntervalV1.coefficient_mem
++#check @AEGIS.CvSFrequencyIntervalV1.lp_mem
++#check @AEGIS.CvSFrequencyIntervalV1.lp_squared_mem
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean
+new file mode 100644
+index 00000000..a8f4e25d
+--- /dev/null
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean
+@@ -0,0 +1,41 @@
++/- Outward integer division used by the actual CvS divided-difference rows. -/
++import RHFixIntervalV1
++namespace AEGIS.CvSIntervalDivideV1
++open AEGIS.RHFixIntervalV1
++
++def divPos (I : Iv) (d : ℤ) : Iv := ⟨I.lo / d, -((-I.hi) / d)⟩
++
++theorem divPos_mem (p : ℕ) {I : Iv} {x : ℝ} (hx : I.Mem p x) {d : ℤ}
++    (hd : 0 < d) : (divPos I d).Mem p (x / (d : ℝ)) := by
++  have hp : (0 : ℝ) < 2 ^ p := by positivity
++  have hdR : (0 : ℝ) < d := by exact_mod_cast hd
++  have hf : ((I.lo / d : ℤ) : ℝ) * (d : ℝ) ≤ (I.lo : ℝ) := by
++    exact_mod_cast Int.ediv_mul_le I.lo (ne_of_gt hd)
++  have hc : (((-I.hi) / d : ℤ) : ℝ) * (d : ℝ) ≤ -(I.hi : ℝ) := by
++    exact_mod_cast Int.ediv_mul_le (-I.hi) (ne_of_gt hd)
++  constructor
++  · change ((I.lo / d : ℤ) : ℝ) / 2 ^ p ≤ x / (d : ℝ)
++    exact (div_le_div_iff₀ hp hdR).2 (hf.trans ((div_le_iff₀ hp).1 hx.1))
++  · change x / (d : ℝ) ≤ ((-((-I.hi) / d) : ℤ) : ℝ) / 2 ^ p
++    apply (div_le_div_iff₀ hdR hp).2
++    simp only [Int.cast_neg]
++    have hu := (le_div_iff₀ hp).1 hx.2
++    linarith
++
++def divInt (I : Iv) (d : ℤ) : Iv :=
++  if d < 0 then (divPos I (-d)).neg else divPos I d
++
++/-- A negative divisor reverses and negates the endpoints. -/
++theorem divInt_mem (p : ℕ) {I : Iv} {x : ℝ} (hx : I.Mem p x) {d : ℤ}
++    (hd : d ≠ 0) : (divInt I d).Mem p (x / (d : ℝ)) := by
++  by_cases hn : d < 0
++  · rw [divInt, if_pos hn]
++    have h := Iv.mem_neg p (divPos_mem p hx (neg_pos.mpr hn))
++    simpa only [Int.cast_neg, div_neg, neg_neg] using h
++  · rw [divInt, if_neg hn]
++    exact divPos_mem p hx (by omega)
++
++end AEGIS.CvSIntervalDivideV1
++#print axioms AEGIS.CvSIntervalDivideV1.divPos_mem
++#print axioms AEGIS.CvSIntervalDivideV1.divInt_mem
++#check @AEGIS.CvSIntervalDivideV1.divInt_mem
