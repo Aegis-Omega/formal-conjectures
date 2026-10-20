@@ -16455,5 +16455,26 @@
   "verified_product_columns": 139,
   "verified_output_columns": 139,
   "canonical_RH": "NOT_PROVED",
-  "analytic_input_memberships": "Not discharged by the finite table. Existing actual source lemmas and exact literal identities must be composed."
+  "analytic_input_memberships": "Not discharged by the finite table. Existing actual source lemmas and exact literal identities must be composed.",
+  "mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
+  "push_succeeded": true,
+  "CI": {
+    "run_id": 39505154095,
+    "job_id": 118912111608,
+    "source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
+    "status": "IN_PROGRESS",
+    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39505154095"
+  },
+  "github_readback": [
+    {
+      "path": "full_table_execution/CvSFullBudgetJoinV1.lean",
+      "blob_sha": "ab71e0d3c499a8b74ee9eec0118bfe2ed269f4b3",
+      "sha256": "d7f832527760ce5b6da853815a7fa45c78cb129e555d02c33866b0fd6bd704f4"
+    },
+    {
+      "path": "full_table_execution/SOURCE_MANIFEST.json",
+      "blob_sha": "02d443a9e1d6dd1e148466edbc7ebb80f38adda5",
+      "sha256": "7672ea028dd61f3a2bbad05db0e27a4bc5bc8307a8d0a7703d8b6c12355ea79f"
+    }
+  ]
 }

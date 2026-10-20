@@ -1,3 +1,20 @@
+## Exact next source joins
+
+The actual analytic enclosure lemmas already exist. The remaining input step is their finite integration with the literal data, not an assertion that those analytic estimates are absent. Sufficient exact identities are:
+
+```
+coeff(columns)(k,i) = CvSActualRowInputL12V1.xBox(k,i)
+residual(columns)(r,i) = CvSActualRowInputL12V1.zBox(Lambda96)(r,i)
+T[k] = CvSActualRowInputL12V1.tauBox(96, signedFreq(k))
+G[k,l] = rationalRange(96, gramRat(150,signedFreq(k),signedFreq(l)), same)
+LP2 = CvSFrequencyIntervalV1.lpSquaredInterval(96)
+Q[i,j] = upscale(32, Im(CvSProjectedPackedCertificateL12V1.certI,i,j)).
+```
+
+Lambda96 must encode the unchanged stored Q48 projection exactly. SourceZ_mem already handles this arbitrary enclosed projection. The Y=E*X and inner X*Lambda interval products are distinct from the now-verified G*X/G*(tau*X) products. Their exact integer reconstruction is preserved for the next staged source join. An identity or rigorously outward containment is sufficient; no input may be silently tightened.
+
+The fixed-window consumer still needs its all-real-t Krein certificate and scalar/trace conditions. Universal closure then requires a cofinal/all-window producer or the existing signed Weil producer for every admissible moment-zero packet. A finite congruence identity preserves the index domain. It does not supply these quantifiers. The time-slice unit-modulus condition remains RH-equivalent and cannot be introduced as an unconditional lemma. No failure of tooling is used as a mathematical nonexistence argument.
+
 ## Full-table continuation
 
 The complete ordered 139 by 139 output comparison now passes the native kernel, replacing the earlier first-column-only scope. `CvSFullTableClosureV1.full_table_contains` relates every checked entry to the original Q96 interval envelope, with no unproved output check. `real_envelope_mem` transfers all entries to Q80, retaining exactly six real input-membership families.

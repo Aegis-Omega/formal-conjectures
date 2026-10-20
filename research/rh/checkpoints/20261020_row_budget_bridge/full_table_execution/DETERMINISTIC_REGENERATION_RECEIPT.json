@@ -1,0 +1,14 @@
+{
+  "source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
+  "status": "PASS",
+  "regenerated_source_modules": 445,
+  "source_archive_sha256": "d8e569b6c9fd48969ec5693df823a97b3b44c644970a5aa71e8670326677003c",
+  "commands": [
+    "python generate_full_table.py",
+    "python generate_products_and_checks.py",
+    "python make_aggregate_interface.py",
+    "python generate_full_closure.py"
+  ],
+  "validation": "SHA256 of every regenerated Lean source equals the archived source; input reconstruction separately verified byte-for-byte from original source and Q48 witness.",
+  "kernel_scope": "This receipt describes exact regeneration, not repeated Lean compilation."
+}

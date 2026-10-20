@@ -1,0 +1,373 @@
+{
+  "utc": "2026-10-20T22:15:34.271275+00:00",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "status": "PARTIAL_NATIVE_REPLAY",
+  "archive_sha256": "a87a9b3053286a70c52b2b920625f24dd31d49593f4392b91beee97de23d0698",
+  "runs": [
+    {
+      "module": "CvSCachedSourceProductV1",
+      "source_sha256": "ca1df809219ddbcfab77a70366665b1c8ca4e0c0d0cd29bb586b3779ea7079ad",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSCachedSourceProductV1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSCachedSourceProductV1.lean"
+      ],
+      "seconds": 1.5289315080008237,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSCachedSourceProductV1.log",
+      "log_sha256": "cde6c14abe80538226efdad8b541a7ed9c6e541dcd08a7f94131ce1f9de7b76c",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSCachedSourceProductV1.mapped_dots_eq",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSCachedSourceProductV1.product_entry_eq",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2123316
+    },
+    {
+      "module": "CvSSourceERows0",
+      "source_sha256": "c171587c58d6a486798ce6aeced3602abd9f09c1c536d576e507d02a4f4477b3",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows0.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows0.lean"
+      ],
+      "seconds": 9.796543960997951,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceERows0.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audits": [],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2284416
+    },
+    {
+      "module": "CvSSourceERows1",
+      "source_sha256": "505ab6e611cad01ed26cd7114063f5f3776d5f66466dfd894a5543a1d7bcccb4",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows1.lean"
+      ],
+      "seconds": 9.956344195001293,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceERows1.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audits": [],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2271744
+    },
+    {
+      "module": "CvSSourceERows2",
+      "source_sha256": "6bfd7d3cce83afef53e81fe85251a01d40a8141a22fa1513ccc293d57f4354d9",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows2.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceERows2.lean"
+      ],
+      "seconds": 9.97029132500029,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceERows2.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "audits": [],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2271744
+    },
+    {
+      "module": "CvSSourceLambdaRows0",
+      "source_sha256": "10f867a8f4f961777740bcda1f14c0f9e423406c749e7bc062a28ab1204f7f58",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceLambdaRows0.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceLambdaRows0.lean"
+      ],
+      "seconds": 9.793311623994668,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceLambdaRows0.log",
+      "log_sha256": "4e989019ae5e0d10fab14cbb478ce3a087281408ad9abd83805db29305b2af73",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point0",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point1",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point2",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point3",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point4",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point5",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point6",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point7",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point8",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceLambdaRows0.point9",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2671824
+    },
+    {
+      "module": "CvSSourceXRows0",
+      "source_sha256": "72518c60324c3f98ceb591635eb25d61f74e433d0217fa115f25862a57f40113",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceXRows0.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceXRows0.lean"
+      ],
+      "seconds": 17.67260749500565,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceXRows0.log",
+      "log_sha256": "57e7d7d6f35fedd03f4772e5e27a3e1b55c06b0fa0ffef63c8b26e40b7c7dd14",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose0",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose1",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose2",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose3",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose4",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose5",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose6",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose7",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose8",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows0.transpose9",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2671824
+    },
+    {
+      "module": "CvSSourceXRows1",
+      "source_sha256": "2a9ec640e42b131239b33e2f5a80ef076e91300c17b258a8a0f7dd4104c53e8e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSSourceXRows1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSSourceXRows1.lean"
+      ],
+      "seconds": 18.673945923001156,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSSourceXRows1.log",
+      "log_sha256": "f8f45f90f401421b21432ec29786a3afae3a2c416618b64b02e7b2cf259ecdc0",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose10",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose11",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose12",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose13",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose14",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose15",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose16",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose17",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose18",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSSourceXRows1.transpose19",
+          "axioms": [
+            "propext"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2684008
+    }
+  ],
+  "actual_analytic_input_membership_producer": "NOT_YET_KERNEL_VERIFIED",
+  "canonical_RH": "NOT_PROVED",
+  "scope": "Cached E rows, transposed X rows, point Lambda columns and staged Y=E*X / inner=X*Lambda / Z=Y-inner equality checks. Only explicit successful runs are certified."
+}
