@@ -5704,5 +5704,27 @@
     "artifact_bytes": 279638929,
     "job_log_sha256": "ef99273c6cc69ceb9e1a05bfe80e66311a2b22f3206a34ac9819a6cb758019be",
     "scope": "Fresh original-import complete finite envelope and quantitative budget. Actual input producer is a later unverified candidate; canonical RH not asserted."
+  },
+  "full_table_original_import_artifact_validation": {
+    "status": "PASS",
+    "binary_count": 611,
+    "module_count": 445,
+    "axiom_audit_count": 868,
+    "receipt": "full_table_execution/ORIGINAL_IMPORT_ARTIFACT_VALIDATION.json",
+    "source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
+    "artifact_zip_sha256": "37bdab4ae6fa70baa96c01023650c7280e9e43940883e107d2c050e160045c13"
+  },
+  "actual_input_extension_CI": {
+    "status": "IN_PROGRESS",
+    "run_id": 39514026659,
+    "job_id": 118941735861,
+    "source_commit": "f9bff86e94698a80b2cce396420e2f35fa0d4cd9",
+    "planned_modules": 430,
+    "terminal_candidates": [
+      "AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin",
+      "AEGIS.CvSActualRowConsumerV1.hfin",
+      "AEGIS.CvSActualRowConsumerV1.hB"
+    ],
+    "canonical_RH": "NOT_PROVED"
   }
 }

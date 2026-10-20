@@ -1,0 +1,3371 @@
+{
+  "status": "EXACT_SUCCESSFUL_FULL_TABLE_DEPENDENCIES_REUSED",
+  "source_run": 39505154095,
+  "source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
+  "verified_binary_count": 611,
+  "validated_full_table_modules": 445,
+  "validated_axiom_audits": {
+    "AEGIS.CvSPackedIntervalDotV1.packedDot_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq": [
+      "propext"
+    ],
+    "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedColumnV1.evalDot_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedColumnV1.value_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedColumnV1.gram_product_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedEnvelopeJoinV1.envelope_entry_as_pair": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedEnvelopeJoinV1.envelope_eq_cached": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedEnvelopeJoinV1.stored_mem_of_cached": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedGramV1.source_exact": [
+      "propext"
+    ],
+    "AEGIS.CvSFullCachedTableV1.column_count": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct0.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct0.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct0.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct0.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct1.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct1.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct1.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct1.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct2.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct2.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct2.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct2.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct3.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct3.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct3.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct3.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct4.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct4.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct4.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct4.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct5.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct5.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct5.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct5.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct6.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct6.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct6.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct6.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct7.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct7.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct7.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct7.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct8.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct8.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct8.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct8.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct9.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct9.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct9.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct9.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct10.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct10.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct10.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct10.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct11.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct11.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct11.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct11.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct12.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct12.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct12.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct12.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct13.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct13.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct13.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct13.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct14.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct14.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct14.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct14.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct15.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct15.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct15.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct15.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct16.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct16.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct16.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct16.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct17.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct17.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct17.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct17.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct18.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct18.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct18.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct18.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct19.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct19.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct19.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct19.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct20.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct20.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct20.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct20.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct21.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct21.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct21.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct21.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct22.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct22.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct22.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct22.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct23.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct23.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct23.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct23.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct24.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct24.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct24.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct24.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct25.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct25.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct25.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct25.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct26.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct26.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct26.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct26.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct27.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct27.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct27.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct27.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct28.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct28.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct28.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct28.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct29.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct29.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct29.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct29.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct30.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct30.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct30.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct30.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct31.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct31.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct31.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct31.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct32.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct32.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct32.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct32.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct33.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct33.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct33.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct33.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct34.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct34.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct34.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct34.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct35.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct35.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct35.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct35.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct36.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct36.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct36.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct36.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct37.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct37.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct37.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct37.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct38.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct38.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct38.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct38.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct39.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct39.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct39.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct39.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct40.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct40.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct40.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct40.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct41.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct41.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct41.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct41.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct42.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct42.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct42.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct42.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct43.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct43.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct43.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct43.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct44.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct44.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct44.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct44.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct45.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct45.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct45.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct45.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct46.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct46.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct46.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct46.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct47.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct47.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct47.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct47.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct48.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct48.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct48.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct48.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct49.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct49.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct49.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct49.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct50.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct50.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct50.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct50.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct51.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct51.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct51.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct51.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct52.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct52.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct52.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct52.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct53.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct53.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct53.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct53.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct54.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct54.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct54.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct54.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct55.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct55.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct55.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct55.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct56.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct56.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct56.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct56.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct57.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct57.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct57.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct57.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct58.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct58.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct58.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct58.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct59.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct59.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct59.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct59.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct60.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct60.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct60.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct60.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct61.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct61.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct61.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct61.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct62.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct62.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct62.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct62.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct63.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct63.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct63.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct63.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct64.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct64.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct64.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct64.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct65.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct65.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct65.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct65.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct66.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct66.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct66.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct66.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct67.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct67.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct67.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct67.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct68.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct68.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct68.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct68.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct69.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct69.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct69.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct69.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct70.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct70.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct70.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct70.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct71.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct71.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct71.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct71.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct72.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct72.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct72.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct72.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct73.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct73.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct73.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct73.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct74.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct74.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct74.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct74.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct75.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct75.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct75.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct75.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct76.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct76.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct76.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct76.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct77.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct77.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct77.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct77.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct78.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct78.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct78.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct78.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct79.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct79.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct79.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct79.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct80.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct80.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct80.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct80.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct81.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct81.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct81.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct81.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct82.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct82.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct82.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct82.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct83.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct83.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct83.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct83.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct84.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct84.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct84.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct84.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct85.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct85.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct85.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct85.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct86.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct86.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct86.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct86.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct87.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct87.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct87.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct87.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct88.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct88.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct88.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct88.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct89.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct89.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct89.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct89.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct90.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct90.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct90.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct90.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct91.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct91.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct91.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct91.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct92.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct92.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct92.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct92.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct93.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct93.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct93.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct93.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct94.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct94.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct94.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct94.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct95.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct95.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct95.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct95.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct96.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct96.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct96.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct96.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct97.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct97.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct97.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct97.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct98.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct98.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct98.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct98.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct99.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct99.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct99.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct99.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct100.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct100.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct100.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct100.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct101.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct101.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct101.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct101.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct102.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct102.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct102.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct102.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct103.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct103.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct103.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct103.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct104.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct104.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct104.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct104.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct105.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct105.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct105.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct105.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct106.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct106.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct106.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct106.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct107.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct107.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct107.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct107.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct108.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct108.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct108.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct108.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct109.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct109.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct109.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct109.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct110.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct110.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct110.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct110.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct111.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct111.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct111.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct111.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct112.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct112.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct112.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct112.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct113.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct113.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct113.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct113.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct114.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct114.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct114.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct114.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct115.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct115.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct115.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct115.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct116.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct116.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct116.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct116.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct117.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct117.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct117.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct117.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct118.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct118.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct118.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct118.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct119.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct119.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct119.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct119.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct120.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct120.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct120.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct120.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct121.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct121.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct121.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct121.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct122.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct122.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct122.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct122.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct123.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct123.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct123.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct123.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct124.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct124.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct124.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct124.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct125.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct125.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct125.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct125.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct126.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct126.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct126.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct126.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct127.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct127.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct127.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct127.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct128.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct128.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct128.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct128.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct129.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct129.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct129.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct129.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct130.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct130.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct130.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct130.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct131.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct131.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct131.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct131.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct132.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct132.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct132.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct132.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct133.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct133.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct133.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct133.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct134.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct134.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct134.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct134.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct135.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct135.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct135.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct135.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct136.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct136.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct136.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct136.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct137.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct137.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct137.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct137.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct138.gx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct138.gx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedProduct138.gdx_checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedProduct138.gdx_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput0.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput0.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput1.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput1.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput2.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput2.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput3.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput3.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput4.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput4.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput5.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput5.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput6.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput6.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput7.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput7.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput8.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput8.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput9.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput9.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput10.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput10.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput11.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput11.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput12.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput12.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput13.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput13.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput14.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput14.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput15.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput15.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput16.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput16.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput17.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput17.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput18.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput18.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput19.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput19.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput20.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput20.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput21.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput21.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput22.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput22.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput23.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput23.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput24.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput24.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput25.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput25.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput26.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput26.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput27.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput27.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput28.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput28.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput29.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput29.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput30.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput30.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput31.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput31.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput32.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput32.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput33.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput33.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput34.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput34.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput35.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput35.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput36.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput36.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput37.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput37.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput38.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput38.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput39.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput39.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput40.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput40.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput41.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput41.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput42.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput42.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput43.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput43.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput44.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput44.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput45.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput45.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput46.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput46.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput47.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput47.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput48.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput48.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput49.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput49.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput50.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput50.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput51.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput51.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput52.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput52.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput53.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput53.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput54.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput54.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput55.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput55.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput56.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput56.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput57.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput57.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput58.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput58.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput59.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput59.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput60.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput60.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput61.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput61.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput62.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput62.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput63.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput63.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput64.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput64.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput65.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput65.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput66.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput66.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput67.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput67.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput68.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput68.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput69.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput69.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput70.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput70.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput71.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput71.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput72.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput72.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput73.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput73.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput74.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput74.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput75.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput75.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput76.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput76.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput77.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput77.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput78.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput78.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput79.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput79.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput80.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput80.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput81.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput81.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput82.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput82.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput83.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput83.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput84.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput84.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput85.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput85.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput86.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput86.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput87.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput87.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput88.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput88.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput89.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput89.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput90.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput90.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput91.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput91.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput92.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput92.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput93.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput93.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput94.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput94.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput95.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput95.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput96.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput96.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput97.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput97.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput98.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput98.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput99.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput99.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput100.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput100.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput101.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput101.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput102.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput102.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput103.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput103.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput104.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput104.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput105.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput105.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput106.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput106.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput107.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput107.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput108.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput108.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput109.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput109.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput110.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput110.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput111.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput111.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput112.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput112.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput113.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput113.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput114.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput114.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput115.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput115.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput116.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput116.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput117.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput117.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput118.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput118.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput119.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput119.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput120.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput120.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput121.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput121.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput122.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput122.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput123.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput123.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput124.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput124.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput125.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput125.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput126.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput126.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput127.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput127.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput128.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput128.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput129.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput129.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput130.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput130.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput131.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput131.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput132.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput132.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput133.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput133.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput134.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput134.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput135.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput135.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput136.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput136.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput137.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput137.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSCachedOutput138.checked": [
+      "propext"
+    ],
+    "AEGIS.CvSCachedOutput138.all_rows": [
+      "propext",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRowBudgetAlgebraV1.row_energy_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRowBudgetGramBridgeV1.budgetEnergy_eq_matrix": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRowBudgetGramBridgeV1.budgetMatrix_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRealTailMatrixV1.realCongruence_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRealTailMatrixV1.tailMatrix_symm": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSStrictRowBudgetV1.budgetEnergy_margin_of_Iv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSStrictRowBudgetV1.margin_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSStrictRowBudgetV1.margin_positive": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.weighted_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.gram_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.gram_weighted_exact": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.checked": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.full_table_contains": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.full_table_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableClosureV1.real_envelope_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullBudgetJoinV1.budgetEnergy_le_of_inputs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSFullTableRejectV1.reject_zero_output": [
+      "propext"
+    ],
+    "AEGIS.CvSFullTableRejectV1.reject_missing_diagonal": [
+      "propext"
+    ],
+    "AEGIS.CvSFullTableRejectV1.reject_modified_cache": [
+      "propext"
+    ]
+  },
+  "manifest_sha256": "64ca5d605b23342e79b889409bd52b0d36de87aa1789bb848b25dbe4a569fc0b",
+  "full_table_receipt_sha256": "566a07e9158efe2f740f9a2f3f061d18e0715d997ae2f2664366c3d1c8325d69",
+  "scope": "Reused original-import source compilation after exact source, archive, pin, compiler, axiom and binary validation. New actual-input sources require fresh compilation.",
+  "artifact_id": 12306423649,
+  "artifact_zip_sha256": "37bdab4ae6fa70baa96c01023650c7280e9e43940883e107d2c050e160045c13",
+  "fresh_local_kernel_replay": false,
+  "local_validation_note": "All 611 binaries and 445 original source receipts independently validated. Local pinned original-import re-elaboration is not claimed; Mathlib umbrella absent locally."
+}
