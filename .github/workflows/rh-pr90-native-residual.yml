@@ -196,15 +196,14 @@ jobs:
               (M : ℕ) (hM : 3 ≤ M)
               (m T_trace beta kappa : ℝ) (Brow : (Fin 139 → ℂ) → ℝ)
               (hkappa : 0 < kappa) (hgap : 0 < m - T_trace / (2 * Real.pi))
-              (hRsurj : Function.Surjective R_basis)
-              (hRnorm : ∀ v, normSqCoeffs (R_basis v) ≤ kappa * normSqCoeffs v)
+              (hRsurj : Function.Surjective AEGIS.CvSProjectedSchurBridgeL12V1.R_basis)
+              (hRnorm : ∀ v, normSqCoeffs (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v) ≤ kappa * normSqCoeffs v)
               (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
               (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
                  (m - T_trace / (2 * Real.pi)) * (certifiedMu / kappa)) :
               ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
                 (m - T_trace / (2 * Real.pi)) ≤
                 2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
-            letI : Fact (bigCheck = true) := ⟨identical_bigCheck_closed⟩
             exact AEGIS.CvSCheckedLowBridgeV1.hlow_of_checked_projected_source
               M hM m T_trace beta kappa Brow hkappa hgap hRsurj hRnorm hBrow hbeta
           
