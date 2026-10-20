@@ -1,0 +1,2 @@
+'AEGIS.CvSNeSymmRegressionV1.reverse_ne' does not depend on any axioms
+'AEGIS.CvSNeSymmRegressionV1.gram_symm' depends on axioms: [propext, Classical.choice, Quot.sound]

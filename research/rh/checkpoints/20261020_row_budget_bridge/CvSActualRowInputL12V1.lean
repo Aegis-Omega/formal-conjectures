@@ -46,7 +46,7 @@ theorem gramUp_symm (NP : ℕ) (n m : ℤ) :
   by_cases h : n = m
   · subst m
     rfl
-  · simp only [AEGIS.CvSGramTailV1.gramUp, if_neg h, if_neg h.symm]
+  · simp only [AEGIS.CvSGramTailV1.gramUp, if_neg h, if_neg (Ne.symm h)]
     rw [show (m : ℝ) - n = -((n : ℝ) - m) by ring, div_neg, ← neg_div]
     congr 1
     ring
@@ -97,11 +97,11 @@ theorem sourceKernel_mem (p : ℕ) {M : ℕ} (hM : 3 ≤ M) (m : ℤ)
       AEGIS.CvSFrequencyIntervalV1.pi_bounds.2
     simpa only [two_mul] using Iv.mem_mul p (Iv.mem_add p hpi hpi)
       (diagonal_mem p hM (signedFreq k) hn)
-  · rw [kernelBox, if_neg h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_off M m (signedFreq k) h.symm]
+  · rw [kernelBox, if_neg h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_off M m (signedFreq k) (Ne.symm h)]
     have ht := Iv.mem_add p
       (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM (signedFreq k) (by omega))
       (Iv.mem_neg p (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM m hm))
-    have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr h.symm)
+    have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr (Ne.symm h))
     simpa only [tauBox, sub_eq_add_neg, Int.cast_sub] using
       Iv.mem_mul p (AEGIS.CvSFrequencyIntervalV1.lp_mem p) hdiv
 

@@ -131,7 +131,8 @@
       "sourceKernel_mem",
       "sourceY_mem"
     ],
-    "status": "SOURCE_PRESENT; FULL_ORIGINAL_IMPORT_CI_NOT_YET_RUN"
+    "status": "FAILED_at_a1862b9b; three Ne.symm proof expressions repaired; new original-import replay pending",
+    "source_sha256": "6bcd563ddde97f214e9e8eb0271d1d01d43e96a5d7a1a5b1b0c5566940774356"
   },
   "ci_scope": "Existing isolated source-cross-row job extended from 23 to 37 explicit axiom audits. No new job or workflow.",
   "unchanged_data": "Original certR, certI, packed factor and stored Q80 output, projection and all source tau/diag tables unchanged.",

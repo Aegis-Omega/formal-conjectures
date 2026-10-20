@@ -77,6 +77,7 @@ jobs:
       - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
         run: python3 research/rh/m8_kernel_v1/replay.py provider
       - name: Replay unchanged source DAG and actual row bridge
+        id: replay
         shell: bash
         run: |
           set -euo pipefail
@@ -158,3 +159,47 @@ jobs:
             print('SOURCE_ROW_AXIOM_AUDIT_PASS',decl,sorted(axioms))
           print('ACTUAL_CVS_ROW_SOURCE_REPLAY_PASS; Q80_ENTRY_MEMBERSHIP=NOT_YET_PROVED')
           PY
+
+      - name: Preserve exact replay state
+        if: always()
+        continue-on-error: true
+        env:
+          REPLAY_OUTCOME: ${{ steps.replay.outcome }}
+        shell: bash
+        run: |
+          python3 - <<'PY_SNAPSHOT'
+          import hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path.cwd()
+          digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+          sources = subprocess.check_output(['git', 'ls-files', '--', '*.lean'], text=True).splitlines()
+          objects = sorted((root / '.lake/ringout').rglob('*.olean'))
+          logs = [root / n for n in ['ring.log', 'actual-row-bridge.log'] if (root / n).is_file()]
+          receipt = {
+            'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+            'math_step_outcome': os.environ.get('REPLAY_OUTCOME'),
+            'lean_toolchain': (root / 'lean-toolchain').read_text().strip(),
+            'mathlib_sha': os.environ['MATHLIB_SHA'],
+            'li_criterion_sha': os.environ['LI_CRITERION_SHA'],
+            'source_sha256': {n: digest(root / n) for n in sources},
+            'binary_sha256': {str(p.relative_to(root)): digest(p) for p in objects},
+            'log_sha256': {p.name: digest(p) for p in logs},
+            'scope': 'Compilation state. Only the named axiom audits in actual-row-bridge.log are certified; failed replay state is evidence, not a PASS.'
+          }
+          (root / 'SOURCE_CROSS_ROW_CHECKPOINT.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          print('REPLAY_STATE_PRESERVED', receipt['math_step_outcome'], len(objects))
+          PY_SNAPSHOT
+
+      - name: Upload source-bound replay checkpoint
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-cross-row-${{ github.sha }}
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: |
+            SOURCE_CROSS_ROW_CHECKPOINT.json
+            ring.log
+            actual-row-bridge.log
+            .lake/ringout/**/*.olean

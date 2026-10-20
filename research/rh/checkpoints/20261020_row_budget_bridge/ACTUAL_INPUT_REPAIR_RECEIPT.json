@@ -1,0 +1,28 @@
+{
+  "failed_commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+  "ci_run": 39425665414,
+  "status": "FAIL",
+  "log_sha256": "21a44483c8b5e25c0eec7a397ee052a568e00bd25d1c1cb40174b32889f3a7aa",
+  "cause": "Invalid h.symm field for h : Not (n=m), producing elaboration recovery sorryAx in gramUp_symm, sourceKernel_mem and sourceY_mem. No PASS is credited for that module.",
+  "repair": "Three proof-expression replacements to explicit Ne.symm h. No theorem type, data or interval endpoint changed.",
+  "native_regression": {
+    "status": "PASS",
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "-DwarningAsError=true",
+      "-R",
+      "/workspace/aegis-row-budget-bridge",
+      "-o",
+      "/workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.olean",
+      "/workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.lean"
+    ],
+    "compiler_output": "'AEGIS.CvSNeSymmRegressionV1.reverse_ne' does not depend on any axioms\n'AEGIS.CvSNeSymmRegressionV1.gram_symm' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+    "source_sha256": "fe267da4f75f7949cf6f5e97fe69adbac67436a483ce026b08f97eb0f9e2ba6c",
+    "scope": "Old h.symm must fail; explicit reversal and the same Gram symmetry argument work for every real-valued H. Not a replay of the full actual module."
+  },
+  "new_actual_module_sha256": "6bcd563ddde97f214e9e8eb0271d1d01d43e96a5d7a1a5b1b0c5566940774356",
+  "new_original_import_status": "NOT_YET_RUN",
+  "checkpoint_improvement": "Existing workflow additionally preserves binary/log/source hashes and raw compiled state even if a later leaf fails. Auxiliary snapshot/export errors do not weaken the mathematical replay gate."
+}

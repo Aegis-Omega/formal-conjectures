@@ -128,8 +128,11 @@
       "job_id": 118638278061,
       "sha": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
       "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39425665414",
-      "status": "IN_PROGRESS_NOT_PASS",
-      "expected_named_audits": 37
+      "status": "FAIL_REPAIRED_SOURCE_AWAITING_NEW_REPLAY",
+      "expected_named_audits": 37,
+      "conclusion": "failure",
+      "log": "CI_a1862b9b_ACTUAL_INPUT_FAILURE.log",
+      "repair_receipt": "ACTUAL_INPUT_REPAIR_RECEIPT.json"
     }
   },
   "remaining_actual_budget": "Source input instantiation and executable output-table check; not supplied by abstract envelope theorem alone",
