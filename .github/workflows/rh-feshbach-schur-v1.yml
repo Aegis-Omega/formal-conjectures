@@ -391,6 +391,7 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSProjectedEntryFastL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryFastL12V1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSProjectedEntryReplayL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSLowCoercivityL12V1.olean" research/rh/feshbach_lean_v1/CvSLowCoercivityL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSRelativeBudgetL12V1.olean" research/rh/feshbach_lean_v1/CvSRelativeBudgetL12V1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -506,6 +507,8 @@ jobs:
               'bigCheck_true', 'projectedEntry_mem_certI', 'projected_lower_L12']]
           names += ['CvSLowCoercivityL12V1.' + n for n in [
               'coercivity_const_pos', 'original_atom_coercivity_L12', 'hlow_L12']]
+          names += ['CvSRelativeBudgetL12V1.' + n for n in [
+              'hlow_of_relative_budget', 'Q_nonneg_L12', 'hlow_L12_relative']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
