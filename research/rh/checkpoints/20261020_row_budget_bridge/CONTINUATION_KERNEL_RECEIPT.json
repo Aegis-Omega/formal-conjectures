@@ -1,0 +1,109 @@
+{
+  "source_base_commit": "d69f8f242f258166e29a98d6fac8c32a4a3ab6b0",
+  "timestamp_utc": "2026-10-20T12:15:13.878283+00:00",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "native_roots": 19,
+  "native_declarations": 8577,
+  "source_modules": 317,
+  "missing_sources": 0,
+  "missing_dependencies": 0,
+  "proof_cycles": 0,
+  "datatype_metadata_groups": 349,
+  "axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "graph_sha256": "4ae17c38069a0e51d5d5fb93403b58da81d2a708d7e1b6f9947515c05511829d",
+  "numeric_experiments": [
+    {
+      "path": "RowBudgetCell0Pilot.lean",
+      "sha256": "f022e967e4778a62c06501c80aa720f02504350263775b74c5fb6cb4ae605763",
+      "bytes": 1350727
+    },
+    {
+      "path": "CELL0_INPUTS.json",
+      "sha256": "1bcf1419ed38775c23248810edb618a7f196dfba5b7d95ead68cd10baaac8324",
+      "bytes": 1221256
+    },
+    {
+      "path": "CELL0_KERNEL_RECEIPT.json",
+      "sha256": "1eda3e5bf021e400e2c50d9f95bf28c88084f514e49ef2f4ac870e66030d462b",
+      "bytes": 444
+    },
+    {
+      "path": "CELL0_PROVENANCE.json",
+      "sha256": "98ddb8a3f01f997bb0c3f5595f36e6be1f38f88c5529e6a1cba4a51936915ad5",
+      "bytes": 1117
+    },
+    {
+      "path": "build_cell_pilot.py",
+      "sha256": "51c35f3e0a5237c0661e2ea950ea73580d1f0633c9b8606eea6604b0f49fc9f4",
+      "bytes": 3597
+    },
+    {
+      "path": "build_staged_dot_pilot.py",
+      "sha256": "a2c91d898a8f6a608a82126e53e6feb805ec52ddb6388e7a24cb1c278331ea4c",
+      "bytes": 1834
+    },
+    {
+      "path": "build-cell.log",
+      "sha256": "2c3e282b466e9187a198d1289d3e351952b497270331a4ee096aa0c081b65be8",
+      "bytes": 127
+    },
+    {
+      "path": "cell0.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "staged_replay": {
+    "command": [
+      "lake",
+      "env",
+      "lean",
+      "-DwarningAsError=true",
+      "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean"
+    ],
+    "seconds": 7.475530436000554,
+    "returncode": 0,
+    "status": "PASS",
+    "compiler_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+    "source_sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+    "scope": "Three closed arithmetic pilot roots: actual X tau-weighted column and two row0 Gram products. Not full output cell, output table, actual hB or RH."
+  },
+  "actual_source_CI": {
+    "repair": {
+      "id": 39417825478,
+      "sha": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "status": "PASS",
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39417825478",
+      "log_sha256": "e5bfcbfab6d3df3d9ac052e1b0e2fed35af6c346bccbba4a6ed0250716f1cf1b",
+      "roots": [
+        "sourceKernel_diag",
+        "sourceKernel_off",
+        "sourceY_eq_actual_crossRow"
+      ]
+    },
+    "signed_tau_and_extended_layer": {
+      "id": 39419296326,
+      "sha": "d69f8f242f258166e29a98d6fac8c32a4a3ab6b0",
+      "status": "in_progress",
+      "conclusion": null,
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39419296326"
+    }
+  },
+  "remaining_actual_budget": "Source input instantiation and executable output-table check; not supplied by abstract envelope theorem alone",
+  "unconditional_RH": "NOT_PROVED",
+  "new_actual_signed_tau_theorems": {
+    "names": [
+      "positive_mem",
+      "signed_tau_bounds",
+      "signed_tau_interval"
+    ],
+    "source": "CvSTauSigned150L12V1.lean",
+    "source_sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
+    "kernel_status": "NOT_RUN locally; full actual-import CI in_progress"
+  }
+}

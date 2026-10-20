@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/aegis-row-budget-bridge/RowBudgetCell0Pilot.lean"
+  ],
+  "seconds": 120.77877123399958,
+  "returncode": -9,
+  "status": "RESOURCE_TERMINATED_NOT_VERIFIED",
+  "source_sha256": "f022e967e4778a62c06501c80aa720f02504350263775b74c5fb6cb4ae605763",
+  "compiler_output": "",
+  "scope": "Only output cell (0,0) of interval program. No full table or actual-source enclosure claim.",
+  "observed_Lean_RSS_KiB": 7648616,
+  "observed_lake_RSS_KiB": 814252,
+  "memory_limit_bytes": 8589934592,
+  "mathematical_failure": "NO; SIGKILL produced no theorem result"
+}

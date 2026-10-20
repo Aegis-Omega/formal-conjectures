@@ -1,0 +1,3 @@
+'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]
+'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
