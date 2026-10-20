@@ -1,6 +1,6 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "aeac6dc5afe4d6ebf61f7db7528c68ec94f9336354248b4f8bf1ed9d89c911f6",
+  "archive_sha256": "00258da798f90eaebaed844d60bd1247769f5afc4c9772a169bc681013bc0e97",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
@@ -401,6 +401,11 @@
     {
       "name": "CvSCachedSourceProductV1.lean",
       "sha256": "ca1df809219ddbcfab77a70366665b1c8ca4e0c0d0cd29bb586b3779ea7079ad",
+      "kernel_status": "PASS"
+    },
+    {
+      "name": "CvSRealTailFormV1.lean",
+      "sha256": "ad333b9e91596c5d68e6a76546d28eb6b72d04281858d444b53e5bfb5746df9b",
       "kernel_status": "PASS"
     },
     {

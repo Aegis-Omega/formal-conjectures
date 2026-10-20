@@ -1,9 +1,9 @@
 {
-  "utc": "2026-10-20T23:00:26.137825+00:00",
+  "utc": "2026-10-20T23:11:47.779540+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
   "status": "PARTIAL_NATIVE_REPLAY",
-  "archive_sha256": "aeac6dc5afe4d6ebf61f7db7528c68ec94f9336354248b4f8bf1ed9d89c911f6",
+  "archive_sha256": "00258da798f90eaebaed844d60bd1247769f5afc4c9772a169bc681013bc0e97",
   "runs": [
     {
       "module": "CvSCachedPointV1",
@@ -113,6 +113,62 @@
       ],
       "bad_axioms": [],
       "max_child_rss_kib": 2123316
+    },
+    {
+      "module": "CvSRealTailFormV1",
+      "source_sha256": "ad333b9e91596c5d68e6a76546d28eb6b72d04281858d444b53e5bfb5746df9b",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSRealTailFormV1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSRealTailFormV1.lean"
+      ],
+      "seconds": 2.458848511996621,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSRealTailFormV1.log",
+      "log_sha256": "ab0ad94ab6fab0a19a5c53e9a5fe3ba8b02a67ea5041cee67f70e0e4c691b426",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSRealTailFormV1.weighted_apply",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRealTailFormV1.tail_form_eq",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRealTailFormV1.residual_apply",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRealTailFormV1.sum_centered_rows",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2166916
     },
     {
       "module": "CvSSourceECacheV1",
