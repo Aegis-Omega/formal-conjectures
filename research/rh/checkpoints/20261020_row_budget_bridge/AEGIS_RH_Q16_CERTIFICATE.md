@@ -1,23 +1,51 @@
-# Exact arithmetic certificate
+# Exact integer and interval certificates
 
-The PR89 Q16 data remain D=116142, conservative row=57430 and optimized row=46688. Exactly (116142-57430)/65536=7339/8192>0 and (116142-46688)/65536=34727/32768>0. The latter requires its optimized Schur hypotheses. These finite/local budgets are not a universal producer.
+## Q16.16 source budgets
 
-The new row experiment uses Q96 for interval operations and Q80 for the final matrix box. Every lower endpoint is floored and every upper endpoint is ceiled. Q96 to Q80 divides integer endpoints by 2^16 outward. Source projected intervals at Q64 are embedded at Q96 by multiplying endpoints by 2^32, exactly. The original rational R denominator is 2^40; its three-point second difference has denominator 2^42. Projection Lambda has denominator 2^48 and is merely a proposed exact witness.
+The fixed scale is `Q=65536`, diagonal numerator `D=116142`, conservative row numerator `57430`, optimized row numerator `46688`. Exact rational identities are
 
-For interval matrices, the exact midpoint-radius product uses m=floor((lo+hi)/2), r=max(m-lo,hi-m), central integer product A0*B0 and radius |A0|*rB+rA*|B0|+rA*rB. Divide by 2^96 outward. A symmetric hull takes the smaller lower and larger upper of the two orientations; this only widens bounds. Gram kernel entries are exact rational harmonic differences, with the proved rational diagonal upper bound.
+```
+(116142-57430)/65536 = 7339/8192 > 0,
+(116142-46688)/65536 = 34727/32768 > 0.
+```
 
-The new 139x139 certificate factors the generated interval C=40*Q_projected-B_projected at NP=150, epsilon=1 and far |tau|<=13. Its exact integer shift is eps=1208196817027810721792, residual row budget eta=873002480980930375314. The kernel checks the packed factor against every interval and proves eps-eta=335194336046880346478>0. Its positive rational margin is this numerator divided by 2^80. Base, bound, all factor/interval entries and projection integers are in ROW_BUDGET_INPUTS.zip. Packing digit width is derived to exceed n^2*(2B)^2; no fixed-width overflow is assumed.
+The second requires the actual optimized Schur hypotheses. Neither is a universal mixed-budget producer. `RHActualElevenLatticeV1.q16_integer_certificate` checks the integer rounding budget. Its separate `q16_budget_exact` is literally
 
-Float least squares, a float eigenvalue hint and Decimal Cholesky propose witnesses only. Python exact integers and then the Lean kernel decide their validity. The generator's interval model still needs formal correspondence to the actual source definitions before this certificate proves hB. This Q80 result is separate from the Q16 constants and the historical Hilbert H140 stress test.
+```
+116142/65536 - 2*sum(k=1..10) q16Cost(k) = 641/32768.
+```
 
-## Verified bridge in this continuation
+It must not be confused with the sharper per-row margin obtained from `q16_row_bound`. The diagonal numerator is a conservative lower bound; upper mixed costs are rounded outward. The exact Q16 identities and the Q80 margin are independently checked in `packed_execution/ExactBudgetRegression.lean`.
 
-The arbitrary-precision outward dot/matrix product, congruence, interval hull, downward rescaling and exact upward embedding now have native Lean soundness proofs. The complete envelope has an explicit finite tableCheck premise. No positive margin was increased, no stored factor changed and no generated interval was narrowed. The monolithic computational attempt has status RESOURCE_TERMINATED_NOT_VERIFIED. Three smaller exact staged computations pass; this is not a claim for all output entries.
+## Unchanged Q96-to-Q80 finite certificate
 
-## Exact source input arithmetic at a1862b9b
+The projected certificate is 139-dimensional; this differs from the Hilbert H140 stress test. The low Fourier dimension is 141 and the residual dimension is 301. The interval envelope uses Q96, the proposed projection uses exact Q48 rationals, and the stored final matrix uses Q80. An existing Q64 interval embeds exactly by multiplying its endpoints by 2^32. Q96 to Q80 divides the lower endpoint downwards and upper endpoint upwards by 2^16.
 
-The new source input layer retains arbitrary p, including Q96. Integer division uses lo/d rounded down and hi/d rounded up for d>0; for d<0 it divides by -d, reverses and negates endpoints. Its two soundness theorems pass natively. The pi enclosure is the established rational [314159265358979323846/10^20,314159265358979323847/10^20]. The frequency factor is enclosed by [-25*piHi^2*n^2/9-1/4,-25*piLo^2*n^2/9-1/4], then multiplied by the exact signed second difference w/2^42 with outward rounding. The factor L/pi is enclosed by [(6/5)/piHi,(6/5)/piLo], and its square uses the original interval multiplication. These five frequency-input roots pass natively. No Q16 or Q80 positivity margin or data was altered. The actual source-input application remains separately gated by its original-import CI.
+For intervals A,B use midpoint `floor((lo+hi)/2)` and radius `max(mid-lo,hi-mid)`. A dot has integer center `sum midA*midB` and radius `sum (abs(midA)*radB+radA*abs(midB)+radA*radB)`, then floors/ceils by 2^96. Hull takes the smaller lower and larger upper endpoint. Negative integer division reverses and negates endpoints as proved in `CvSIntervalDivideV1`. No floating estimate enters as a theorem.
 
-## First complete Q80 output entry
+The original factor certificate has
 
-The exact stored target is [230447228664518330681051593, 230447240865162189386044426], interpreted at scale 2^-80. Its complete original-envelope calculation now passes the native kernel through proved list-execution identities. Q00, X0, T, G, Z0 and LP2 are unchanged from the preserved CELL0_INPUTS.json. New GX0/GDX0 values are untrusted intermediate witnesses, each checked by the kernel. This establishes one closed output equality and does not enlarge the positivity margin or supply missing analytic input identifications. The mixed execution theorem covers two distinct columns without changing the interval operations or rounding.
+```
+eps = 1208196817027810721792
+eta =  873002480980930375314
+eps - eta = 335194336046880346478 > 0
+margin = (eps-eta)/2^80.
+```
+
+The base is `40564819207303340847894502572032` and factor bound is `15795288160149`. Full original numerical source `CvSRelativeRowCertificateL12V1` was recompiled: row_budget_check_true uses propext; row_budget_margin_positive uses no axioms. The complete packed soundness body, including its complex form, also compiles with standard axioms. Numerical matrix positivity remains conditional on correct enclosures of the actual entries.
+
+All fourteen first-column batches now check their concrete endpoints against the original target data. They preserve every input number, outward rescaling and containment direction. Their 139 checks do not imply the remaining 19,182 output entries. Missing weighted-column data and a false zero target are both rejected by kernel tests.
+
+## Analytic input enclosures and packed reuse
+
+The source pi interval is `[314159265358979323846/10^20,314159265358979323847/10^20]`. The frequency factor has endpoints `-25*piHi²*n²/9-1/4` and `-25*piLo²*n²/9-1/4`; signed w/2^42 multiplies this through the proved outward interval multiplication. L/pi is enclosed using the reversed positive pi endpoints. Original-import CI now validates the source application through actual sourceZ for M≥3 and an explicitly enclosed projection.
+
+The new packed interval theorem uses four existing signed packed dot products, and proves exact equality to the old evaluator. For length n and component bound B the carry hypothesis is `n*n*(2*B*(2*B)) < base`; this prevents digit collisions. Signed values are shifted by B, and the original gramEntry correction removes both shift cross terms and n*B² exactly. This is arbitrary-precision Nat/Int arithmetic, without fixed-width overflow or native_decide.
+
+The actual Z0 pilot has n=301, B=2^128 and base=2^280. Every component bound, the carry inequality, all six forward/reverse packed natural numbers and the resulting interval are kernel checked. The exact Q96 self-dot is
+
+```
+[90409755428085542605520956409, 90409777030268093176323279969] / 2^96.
+```
+
+A modified packed coefficient is rejected. The pilot takes 3.440 seconds; this verifies correctness and is not a measured full-matrix scaling claim. None of these constants is an enclosure of an arbitrary zeta-zero ordinate.

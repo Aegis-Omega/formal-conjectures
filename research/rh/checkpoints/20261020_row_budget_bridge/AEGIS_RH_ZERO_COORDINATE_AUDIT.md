@@ -1,9 +1,17 @@
-# Zero-coordinate continuation audit
+# Zero and coordinate audit
 
-This session adds no asserted zeta-zero location, multiplicity or imaginary ordinate. The canonical Mathlib RH definition is unchanged. The actual zero-side sums in window_L12_gram retain their indexed carrier and support assumptions.
+This continuation adds no theorem locating a zeta zero. The canonical Mathlib RiemannHypothesis definition, zero carriers and multiplicity conventions are unchanged.
 
-Known exact trivial-zero locations, intervals containing analytic quantities, multiplicity, and ordinate computation remain distinct. Multiplicity three is not third-order Mellin decay. Cubic auxiliary algebraic roots are not triple zeta zeros. No inference about simplicity, critical-line position or an exact ordinate is made from fixed-point matrix data.
+| Object | Exact status and boundary |
+| --- | --- |
+| Trivial zeros | Their known locations are the negative even integers. The canonical RH predicate explicitly excludes `s=-2*(n+1)` and s=1. No new simplicity theorem was proved here. |
+| Nontrivial real coordinate | The required equality remains Re(rho)=1/2. Finite matrix positivity does not prove it for all rho. |
+| Imaginary coordinate | No new exact ordinate or rigorously isolated zero interval was computed in this continuation. |
+| Multiplicity three | An order-three zeta zero is different from a cubic algebraic auxiliary root or cubic Mellin decay. No new triple-zero claim is made. |
+| Mellin decay | A third-order decay estimate is an estimate on transforms, not an analyticOrderNatAt assertion. |
+| Fourier rows | The integers -70..70 and -150..150 index Fourier/cross rows, not zeta zeros. Oddness used here is tau(-k)=-tau(k). |
+| Q16/Q48/Q80/Q96 data | Exact encodings of certificate numbers and intervals; they do not calculate an arbitrary imaginary ordinate. |
 
-For rho=beta+i*gamma and real nonzero log shift d, zero transport has modulus exp((beta-1/2)d) and phase gamma*d. Unit modulus is equivalent to beta=1/2. No unconditional unit-modulus premise is imported. A Q16/Q80/Q96 encoding of an ordinate would not compute that ordinate. The new fixed-point values here are matrix/certificate data, not zero coordinates.
+For rho=beta+i*gamma and a declared real log shift d, transport is exp((rho-1/2)d), its modulus is exp((beta-1/2)d), and its phase is gamma*d. The existing `RHTimeSliceWeilV1.zeroSliceFactor_unit_iff_critical` explicitly requires d=fsLogSlice p ticks to be nonzero. Its conclusion is unit modulus iff beta=1/2. No unconditional unitary-transport premise is introduced, and the declared log shift is not inferred to be physical time.
 
-The new signed integers index Fourier/cross rows (-150..150), not zeta-zero ordinates. The oddness identity used is tau(-k)=-tau(k), not an unproved zero-location assertion. No multiplicity or exact imaginary coordinate is newly claimed.
+The actual zero-side window conclusions retain `RiemannNontrivialZeroIndexV2` and the original summand; this continuation does not reindex them by Fourier rows, drop multiplicities, or assert a new carrier bijection. Detailed earlier carrier/multiplicity sources remain separate from the new interval proof graph. Kernel verification of arithmetic cannot substitute for those analytic identifications.

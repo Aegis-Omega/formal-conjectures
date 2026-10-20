@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.olean /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+  "source_sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+  "compiler_output": "'AEGIS.CvSPackedIntervalDotV1.packedDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq' depends on axioms: [propext]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq : \u2200 (p base bound : \u2115) (a b : List AEGIS.RHFixIntervalV1.Iv),\n  0 < a.length \u2192\n    b.length = a.length \u2192\n      AEGIS.CvSPackedIntervalDotV1.bounded bound a \u2192\n        AEGIS.CvSPackedIntervalDotV1.bounded bound b \u2192\n          a.length * a.length * (2 * bound * (2 * bound)) < base \u2192\n            AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b = AEGIS.CvSListIntervalDotV1.listDot p a b\n",
+  "scope": "Uniform exact equality of packed/cached interval dot to the existing midpoint-radius list dot. Positive length, equal lengths, all signed component bounds and n^2*(2B)^2 < base are explicit. Caches require exact preparation identities. Native context uses same original-body narrowed PackedGram/RHFix imports as first-column receipts. No whole-matrix or analytic input-identification claim."
+}

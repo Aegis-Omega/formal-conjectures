@@ -1,34 +1,9 @@
-diff --git a/.github/workflows/rh-cvs-actual-row-replay.yml b/.github/workflows/rh-cvs-actual-row-replay.yml
-index cc66487c..33198da4 100644
---- a/.github/workflows/rh-cvs-actual-row-replay.yml
-+++ b/.github/workflows/rh-cvs-actual-row-replay.yml
-@@ -128,6 +128,12 @@ jobs:
-           lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
-           lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
-           lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
-+          lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
-           python3 - <<'PY'
-           import pathlib, re
-           log = pathlib.Path('actual-row-bridge.log').read_text()
-@@ -136,6 +142,7 @@ jobs:
-           ]
-           names = ['AEGIS.CvSActualCrossRowL12V1.' + n for n in names]
-           names += ['AEGIS.CvSMidpointRadiusV1.product_error', 'AEGIS.CvSMidpointRadiusV1.sum_product_error', 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure', 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds', 'AEGIS.CvSRationalIntervalV1.rationalRange_mem', 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error', 'AEGIS.CvSIntervalMatrixProductV1.dot_mem', 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem', 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem', 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left', 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains', 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound', 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check', 'AEGIS.CvSTauSigned150L12V1.positive_mem', 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds', 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval']
-+          names += ['AEGIS.CvSIntervalDivideV1.divPos_mem', 'AEGIS.CvSIntervalDivideV1.divInt_mem', 'AEGIS.CvSFrequencyIntervalV1.pi_bounds', 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds', 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem', 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem', 'AEGIS.CvSActualRowInputL12V1.gramRat_cast', 'AEGIS.CvSActualRowInputL12V1.gramUp_mem', 'AEGIS.CvSActualRowInputL12V1.gramUp_symm', 'AEGIS.CvSActualRowInputL12V1.diagonal_mem', 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem', 'AEGIS.CvSActualRowInputL12V1.sourceY_mem']
-           allowed = {'propext','Classical.choice','Quot.sound'}
-           if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
-             raise SystemExit('SORRYAX_OR_PROOF_HOLE')
 diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean
 new file mode 100644
-index 00000000..2ccb3ec6
+index 00000000..28523e24
 --- /dev/null
 +++ b/research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean
-@@ -0,0 +1,143 @@
+@@ -0,0 +1,203 @@
 +/- Source memberships for the fixed L=6/5 relative row-budget calculation.
 +No output-table or positivity assumption is discharged by this input layer. -/
 +import CvSProjectedEntryL12V1
@@ -77,7 +52,7 @@ index 00000000..2ccb3ec6
 +  by_cases h : n = m
 +  · subst m
 +    rfl
-+  · simp only [AEGIS.CvSGramTailV1.gramUp, if_neg h, if_neg h.symm]
++  · simp only [AEGIS.CvSGramTailV1.gramUp, if_neg h, if_neg (Ne.symm h)]
 +    rw [show (m : ℝ) - n = -((n : ℝ) - m) by ring, div_neg, ← neg_div]
 +    congr 1
 +    ring
@@ -128,12 +103,12 @@ index 00000000..2ccb3ec6
 +      AEGIS.CvSFrequencyIntervalV1.pi_bounds.2
 +    simpa only [two_mul] using Iv.mem_mul p (Iv.mem_add p hpi hpi)
 +      (diagonal_mem p hM (signedFreq k) hn)
-+  · rw [kernelBox, if_neg h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_off M m (signedFreq k) h.symm]
++  · rw [kernelBox, if_neg h, AEGIS.CvSActualCrossRowL12V1.sourceKernel_off M m (signedFreq k) (Ne.symm h)]
 +    have ht := Iv.mem_add p
 +      (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM (signedFreq k) (by omega))
 +      (Iv.mem_neg p (AEGIS.CvSTauSigned150L12V1.signed_tau_interval p hM m hm))
-+    have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr h.symm)
-+    simpa only [tauBox, sub_eq_add_neg, Int.cast_sub] using
++    have hdiv := AEGIS.CvSIntervalDivideV1.divInt_mem p ht (sub_ne_zero.mpr (Ne.symm h))
++    simpa only [tauBox, sub_eq_add_neg, Int.cast_add, Int.cast_neg, Int.cast_sub] using
 +      Iv.mem_mul p (AEGIS.CvSFrequencyIntervalV1.lp_mem p) hdiv
 +
 +def sourceYBox (p : ℕ) (m : ℤ) (i : Fin 139) : Iv :=
@@ -157,6 +132,65 @@ index 00000000..2ccb3ec6
 +  rw [heq] at h
 +  exact h
 +
++
++/-- The generator indexes 301 actual cross rows by m = -150,...,150. -/
++def rowIndex (r : Fin 301) : ℤ := (r.val : ℤ) - 150
++
++/-- The existing actual transformed source coefficient at Q96. -/
++def xBox (k : Fin 141) (i : Fin 139) : Iv :=
++  AEGIS.CvSFrequencyIntervalV1.coefficientInterval 96
++    (signedFreq k) (wZ (signedFreq k) i)
++
++/-- The actual residual Y - X*Lambda, with the subtraction restricted to
++the 141 inner source rows. Lambda is an arbitrary real projection. -/
++noncomputable def sourceZ (M : ℕ) (lam : Fin 139 → Fin 139 → ℝ)
++    (r : Fin 301) (i : Fin 139) : ℝ :=
++  if hr : 80 ≤ r.val ∧ r.val < 221 then
++    AEGIS.CvSActualCrossRowL12V1.sourceY M (rowIndex r) i -
++      ∑ j : Fin 139,
++        transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j * lam j i
++  else AEGIS.CvSActualCrossRowL12V1.sourceY M (rowIndex r) i
++
++/-- Exactly the existing outward Q96 residual formula, with no altered
++endpoints, rounding, or choice of numerical projection. -/
++def zBox (Lam : Fin 139 → Fin 139 → Iv)
++    (r : Fin 301) (i : Fin 139) : Iv :=
++  if hr : 80 ≤ r.val ∧ r.val < 221 then
++    (sourceYBox 96 (rowIndex r) i).add
++      (AEGIS.CvSIntervalMatrixProductV1.dot 96
++        (xBox (⟨r.val - 80, by omega⟩ : Fin 141))
++        (fun j => Lam j i)).neg
++  else sourceYBox 96 (rowIndex r) i
++
++/-- The 301x139 residual input is enclosed for every real projection whose
++entries are enclosed at Q96. This does not assume Q80 tableCheck or positivity. -/
++theorem sourceZ_mem (M : ℕ) (hM : 3 ≤ M)
++    (lam : Fin 139 → Fin 139 → ℝ)
++    (Lam : Fin 139 → Fin 139 → Iv)
++    (hLam : ∀ j i, (Lam j i).Mem 96 (lam j i)) :
++    ∀ r i, (zBox Lam r i).Mem 96 (sourceZ M lam r i) := by
++  intro r i
++  have hm : (rowIndex r).natAbs ≤ 150 := by
++    unfold rowIndex
++    have hr := r.isLt
++    omega
++  have hy := sourceY_mem 96 hM (rowIndex r) hm i
++  by_cases hr : 80 ≤ r.val ∧ r.val < 221
++  · have hx : ∀ j : Fin 139,
++        (xBox (⟨r.val - 80, by omega⟩ : Fin 141) j).Mem 96
++          (transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j) := by
++      intro j
++      simpa only [xBox] using
++        (transformedCoeff_mem 96 (⟨r.val - 80, by omega⟩ : Fin 141) j)
++    have hdot := AEGIS.CvSIntervalMatrixProductV1.dot_mem 96
++      (xBox (⟨r.val - 80, by omega⟩ : Fin 141)) (fun j => Lam j i)
++      (fun j => transformedCoeff (⟨r.val - 80, by omega⟩ : Fin 141) j)
++      (fun j => lam j i) hx (fun j => hLam j i)
++    have hres := Iv.mem_add 96 hy (Iv.mem_neg 96 hdot)
++    simpa only [zBox, sourceZ, dif_pos hr, sub_eq_add_neg] using hres
++  · simpa only [zBox, sourceZ, dif_neg hr] using hy
++
++
 +end AEGIS.CvSActualRowInputL12V1
 +#print axioms AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem
 +#print axioms AEGIS.CvSActualRowInputL12V1.gramRat_cast
@@ -171,6 +205,7 @@ index 00000000..2ccb3ec6
 +#print axioms AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
 +#check @AEGIS.CvSActualRowInputL12V1.sourceKernel_mem
 +#print axioms AEGIS.CvSActualRowInputL12V1.sourceY_mem
++#print axioms AEGIS.CvSActualRowInputL12V1.sourceZ_mem
 +#check @AEGIS.CvSActualRowInputL12V1.sourceY_mem
 diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean
 new file mode 100644
@@ -303,6 +338,63 @@ index 00000000..a8f4e25d
 +#print axioms AEGIS.CvSIntervalDivideV1.divPos_mem
 +#print axioms AEGIS.CvSIntervalDivideV1.divInt_mem
 +#check @AEGIS.CvSIntervalDivideV1.divInt_mem
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean
+new file mode 100644
+index 00000000..137eb1bd
+--- /dev/null
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean
+@@ -0,0 +1,51 @@
++/- Exact two-column execution of the existing complete interval envelope. -/
++import CvSListIntervalMixedV1
++import CvSRowBudgetEnvelopeV1
++namespace AEGIS.CvSColumnEnvelopeV1
++open AEGIS.RHFixIntervalV1 AEGIS.CvSIntervalMatrixProductV1
++open AEGIS.CvSRowBudgetEnvelopeV1 AEGIS.CvSListIntervalDotV1 AEGIS.CvSListIntervalMixedV1
++
++def twoColumns {n : ℕ} (a b : List Iv) : Fin n → Fin 2 → Iv :=
++  fun k j => if j.val = 0 then a.getD k.val ⟨0, 0⟩ else b.getD k.val ⟨0, 0⟩
++
++def columnValue (p : ℕ) (q : Iv) (a da u v gy gdy : List Iv) (lp2 : Iv) : Iv :=
++  (((point p 40).mul p q).add (listDot p u v).neg).add
++    (lp2.mul p (((point p 2).mul p (listDot p da gdy)).add
++      ((point p 338).mul p (listDot p a gy)))).neg
++
++/-- Each mixed entry uses one cached right Gram column, at every finite size. -/
++theorem envelope_pair_eq (p : ℕ) {n r : ℕ} (q lp2 : Iv)
++    (a b da db T u v : List Iv) (G : List (List Iv))
++    (ha : a.length = n) (hb : b.length = n) (hda : da.length = n) (hdb : db.length = n)
++    (hu : u.length = r) (hv : v.length = r) (hG : G.length = n)
++    (hrows : ∀ k : Fin n, (G.getD k.val []).length = n)
++    (hDa : ∀ k : Fin n, (T.getD k.val ⟨0, 0⟩).mul p (a.getD k.val ⟨0, 0⟩) = da.getD k.val ⟨0, 0⟩)
++    (hDb : ∀ k : Fin n, (T.getD k.val ⟨0, 0⟩).mul p (b.getD k.val ⟨0, 0⟩) = db.getD k.val ⟨0, 0⟩) :
++    envelope p (fun (_ _ : Fin 2) => q) (twoColumns (n := n) a b)
++      (fun k l : Fin n => (G.getD k.val []).getD l.val ⟨0, 0⟩)
++      (fun k : Fin n => T.getD k.val ⟨0, 0⟩) (twoColumns (n := r) u v) lp2 0 1 =
++      columnValue p q a da u v (G.map (fun row => listDot p row b))
++        (G.map (fun row => listDot p row db)) lp2 := by
++  have hw : weighted p (fun k : Fin n => T.getD k.val ⟨0, 0⟩) (twoColumns a b) =
++      twoColumns da db := by
++    funext k j
++    by_cases h : j.val = 0
++    · simpa only [weighted, twoColumns, if_pos h] using hDa k
++    · simpa only [weighted, twoColumns, if_neg h] using hDb k
++  have hd : congruence p (twoColumns (n := n) da db)
++      (fun k l : Fin n => (G.getD k.val []).getD l.val ⟨0, 0⟩) (0 : Fin 2) 1 =
++      listDot p da (G.map (fun row => listDot p row db)) :=
++    mixed_listCongruence_eq p da db G hda hdb hG hrows
++  have hg : congruence p (twoColumns (n := n) a b)
++      (fun k l : Fin n => (G.getD k.val []).getD l.val ⟨0, 0⟩) (0 : Fin 2) 1 =
++      listDot p a (G.map (fun row => listDot p row b)) :=
++    mixed_listCongruence_eq p a b G ha hb hG hrows
++  have hz : matrixMul p (fun (i : Fin 2) (k : Fin r) => twoColumns u v k i)
++      (twoColumns u v) (0 : Fin 2) 1 = listDot p u v :=
++    (listDot_eq_dot p u v hu hv).symm
++  simp only [envelope, sub, scale, add]
++  rw [hw, hd, hg, hz]
++  rfl
++
++end AEGIS.CvSColumnEnvelopeV1
++#print axioms AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq
 diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean
 new file mode 100644
 index 00000000..ff1c8185
@@ -403,3 +495,155 @@ index 00000000..8040571c
 +end AEGIS.CvSListIntervalMixedV1
 +#print axioms AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq
 +#check @AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/packed_execution/CvSPackedIntervalDotV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/packed_execution/CvSPackedIntervalDotV1.lean
+new file mode 100644
+index 00000000..9bbc8510
+--- /dev/null
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/packed_execution/CvSPackedIntervalDotV1.lean
+@@ -0,0 +1,146 @@
++/- Reuse the existing signed Kronecker dot proof; preserve all interval endpoints. -/
++import CvSPackedGramV1
++import CvSListIntervalDotV1
++namespace AEGIS.CvSPackedIntervalDotV1
++open Finset AEGIS.RHFixIntervalV1 AEGIS.CvSPackedGramV1
++open AEGIS.CvSIntervalMatrixProductV1 AEGIS.CvSListIntervalDotV1
++
++def intDot (a b : List ℤ) : ℤ := (List.zipWith (fun x y => x * y) a b).sum
++
++theorem intDot_eq_range (a b : List ℤ) (h : b.length = a.length) :
++    intDot a b = ∑ k ∈ range a.length, a.getD k 0 * b.getD k 0 := by
++  induction a generalizing b with
++  | nil => cases b <;> simp_all [intDot]
++  | cons x xs ih =>
++    cases b with
++    | nil => simp at h
++    | cons y ys =>
++      have hy : ys.length = xs.length := by simpa using h
++      change x * y + intDot xs ys = _
++      rw [ih ys hy, List.length_cons, sum_range_succ']
++      simp only [List.getD_cons_succ, List.getD_cons_zero]
++      ring
++
++def packedDot (base bound : ℕ) (a b : List ℤ) : ℤ :=
++  gramEntry base bound a.length (pack base (offRow bound a)) a.sum
++    (pack base (offRow bound b).reverse) b.sum
++
++/-- Signed entries, length and carry bound are explicit; no finite-width overflow. -/
++theorem packedDot_eq (base bound : ℕ) (a b : List ℤ)
++    (hn : 0 < a.length) (hlen : b.length = a.length)
++    (ha : ∀ x ∈ a, -(bound : ℤ) ≤ x ∧ x ≤ bound)
++    (hb : ∀ x ∈ b, -(bound : ℤ) ≤ x ∧ x ≤ bound)
++    (hcarry : a.length * a.length * (2 * bound * (2 * bound)) < base) :
++    packedDot base bound a b = intDot a b := by
++  exact (gramEntry_eq hn hlen ha hb hcarry).trans (intDot_eq_range a b hlen).symm
++
++def bounded (bound : ℕ) (a : List Iv) : Prop :=
++  ∀ x ∈ a, (-(bound : ℤ) ≤ mid x ∧ mid x ≤ bound) ∧
++    (-(bound : ℤ) ≤ |mid x| ∧ |mid x| ≤ bound) ∧
++    (-(bound : ℤ) ≤ rad x ∧ rad x ≤ bound)
++
++def packedIntervalDot (p base bound : ℕ) (a b : List Iv) : Iv :=
++  let c := packedDot base bound (a.map mid) (b.map mid)
++  let r := packedDot base bound (a.map (fun x => |mid x|)) (b.map rad) +
++    packedDot base bound (a.map rad) (b.map (fun x => |mid x|)) +
++    packedDot base bound (a.map rad) (b.map rad)
++  ⟨fdiv p (c - r), cdiv p (c + r)⟩
++
++theorem component_bound (bound : ℕ) (a : List Iv)
++    (f : Iv → ℤ) (hf : ∀ x ∈ a, -(bound : ℤ) ≤ f x ∧ f x ≤ bound) :
++    ∀ z ∈ a.map f, -(bound : ℤ) ≤ z ∧ z ≤ bound := by
++  intro z hz
++  obtain ⟨x, hx, rfl⟩ := List.mem_map.mp hz
++  exact hf x hx
++
++theorem radius_split (a b : List Iv) :
++    (List.zipWith (fun x y => |mid x| * rad y + rad x * |mid y| + rad x * rad y) a b).sum =
++      intDot (a.map (fun x => |mid x|)) (b.map rad) +
++      intDot (a.map rad) (b.map (fun x => |mid x|)) +
++      intDot (a.map rad) (b.map rad) := by
++  induction a generalizing b with
++  | nil => simp [intDot]
++  | cons x xs ih =>
++    cases b with
++    | nil => simp [intDot]
++    | cons y ys =>
++      simp only [List.zipWith_cons_cons, List.sum_cons, List.map_cons]
++      rw [ih ys]
++      simp only [intDot, List.zipWith_cons_cons, List.sum_cons]
++      ring
++
++/-- The packed evaluator equals the original midpoint-radius list evaluator exactly. -/
++theorem packedIntervalDot_eq (p base bound : ℕ) (a b : List Iv)
++    (hn : 0 < a.length) (hlen : b.length = a.length)
++    (ha : bounded bound a) (hb : bounded bound b)
++    (hcarry : a.length * a.length * (2 * bound * (2 * bound)) < base) :
++    packedIntervalDot p base bound a b = listDot p a b := by
++  have hp (f g : Iv → ℤ)
++      (hf : ∀ x ∈ a, -(bound : ℤ) ≤ f x ∧ f x ≤ bound)
++      (hg : ∀ x ∈ b, -(bound : ℤ) ≤ g x ∧ g x ≤ bound) :
++      packedDot base bound (a.map f) (b.map g) = intDot (a.map f) (b.map g) := by
++    apply packedDot_eq
++    · simpa using hn
++    · simpa using hlen
++    · exact component_bound bound a f hf
++    · exact component_bound bound b g hg
++    · simpa using hcarry
++  unfold packedIntervalDot
++  rw [hp mid mid (fun x hx => (ha x hx).1) (fun x hx => (hb x hx).1),
++    hp (fun x => |mid x|) rad (fun x hx => (ha x hx).2.1) (fun x hx => (hb x hx).2.2),
++    hp rad (fun x => |mid x|) (fun x hx => (ha x hx).2.2) (fun x hx => (hb x hx).2.1),
++    hp rad rad (fun x hx => (ha x hx).2.2) (fun x hx => (hb x hx).2.2),
++    ← radius_split]
++  simp only [listDot, intDot, List.zipWith_map]
++
++structure PackedRow where
++  forward : ℕ
++  reverse : ℕ
++  total : ℤ
++  length : ℕ
++  deriving DecidableEq
++
++def prepareRow (base bound : ℕ) (r : List ℤ) : PackedRow :=
++  ⟨pack base (offRow bound r), pack base (offRow bound r).reverse, r.sum, r.length⟩
++
++def cachedDot (base bound : ℕ) (a b : PackedRow) : ℤ :=
++  gramEntry base bound a.length a.forward a.total b.reverse b.total
++
++structure PackedIntervalRow where
++  middle : PackedRow
++  absolute : PackedRow
++  radius : PackedRow
++  deriving DecidableEq
++
++def prepareInterval (base bound : ℕ) (a : List Iv) : PackedIntervalRow :=
++  ⟨prepareRow base bound (a.map mid), prepareRow base bound (a.map (fun x => |mid x|)),
++    prepareRow base bound (a.map rad)⟩
++
++def cachedIntervalDot (p base bound : ℕ) (a b : PackedIntervalRow) : Iv :=
++  let c := cachedDot base bound a.middle b.middle
++  let r := cachedDot base bound a.absolute b.radius +
++    cachedDot base bound a.radius b.absolute + cachedDot base bound a.radius b.radius
++  ⟨fdiv p (c - r), cdiv p (c + r)⟩
++
++/-- Exact cached packing can be shared by every matrix entry using a row. -/
++theorem cachedIntervalDot_prepare_eq (p base bound : ℕ) (a b : List Iv) :
++    cachedIntervalDot p base bound (prepareInterval base bound a) (prepareInterval base bound b) =
++      packedIntervalDot p base bound a b := rfl
++
++/-- Cached witnesses are trusted only after their exact preparation identities. -/
++theorem cachedIntervalDot_eq (p base bound : ℕ) (a b : List Iv)
++    (A B : PackedIntervalRow) (hA : A = prepareInterval base bound a)
++    (hB : B = prepareInterval base bound b)
++    (hn : 0 < a.length) (hlen : b.length = a.length)
++    (ha : bounded bound a) (hb : bounded bound b)
++    (hcarry : a.length * a.length * (2 * bound * (2 * bound)) < base) :
++    cachedIntervalDot p base bound A B = listDot p a b := by
++  rw [hA, hB, cachedIntervalDot_prepare_eq]
++  exact packedIntervalDot_eq p base bound a b hn hlen ha hb hcarry
++
++end AEGIS.CvSPackedIntervalDotV1
++#print axioms AEGIS.CvSPackedIntervalDotV1.packedDot_eq
++#print axioms AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq
++#print axioms AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq
++#print axioms AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq
++#check @AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq

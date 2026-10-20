@@ -1,0 +1,6 @@
+'AEGIS.RowBudgetPackedZ0Pilot.packing_exact' depends on axioms: [propext]
+'AEGIS.RowBudgetPackedZ0Pilot.components_bounded' depends on axioms: [propext]
+'AEGIS.RowBudgetPackedZ0Pilot.carry_bound' depends on axioms: [propext]
+'AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact' depends on axioms: [propext]
+'AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing' depends on axioms: [propext]

@@ -1,186 +1,2310 @@
 {
-  "source_base_commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
-  "timestamp_utc": "2026-10-20T13:18:52.156634+00:00",
+  "decision": "STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION",
+  "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+  "source_binding": "Exact theorem/import module hashes in graph and receipts; source commits read back from GitHub recorded in FINAL_SOURCE_BINDING.json. A base commit is not a claim that later new files were already present.",
+  "timestamp_utc": "2026-10-20T17:18:47.039520+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
-  "native_roots": 34,
-  "native_declarations": 27188,
-  "source_modules": 1033,
-  "missing_sources": 0,
-  "missing_dependencies": 0,
-  "proof_cycles": 0,
-  "datatype_metadata_groups": 681,
-  "axioms": [
-    "Classical.choice",
-    "Quot.sound",
-    "propext"
-  ],
-  "graph_sha256": "df9ec302c1507215547d410d2a7da61ae6a927bcc4f7f9f0774395b7449573b5",
-  "numeric_experiments": [
+  "native_selected_graph": {
+    "roots": 102,
+    "declarations": 28139,
+    "modules": 1058,
+    "missing_sources": 0,
+    "missing_dependencies": 0,
+    "proof_cycles": 0,
+    "datatype_metadata_groups": 684,
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "graph_file": "AEGIS_RH_EXACT_HEAD_PROOF_GRAPH.json",
+    "archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+    "scope": "Native selected roots. This is not the complete RH corpus graph or the original-import analytic source DAG."
+  },
+  "native_root_types": [
     {
-      "path": "RowBudgetCell0Pilot.lean",
-      "sha256": "f022e967e4778a62c06501c80aa720f02504350263775b74c5fb6cb4ae605763",
-      "bytes": 1350727
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+      "type_expr": "forall (p : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem p I x) -> (LE.le.{0} Real Real.instLE (abs.{0} Real Real.lattice Real.instAddGroup (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) x (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (Int.cast.{0} Real Real.instIntCast (AEGIS.CvSIntervalMatrixProductV1.mid I)) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) p)))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (Int.cast.{0} Real Real.instIntCast (AEGIS.CvSIntervalMatrixProductV1.rad I)) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) p)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "CELL0_INPUTS.json",
-      "sha256": "1bcf1419ed38775c23248810edb618a7f196dfba5b7d95ead68cd10baaac8324",
-      "bytes": 1221256
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+      "type_expr": "forall {\u03b9 : Type.{u_1}} [inst._@.CvSIntervalMatrixProductV1.2114872084._hygCtx._hyg.3 : Fintype.{u_1} \u03b9] (p : Nat) (A : \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (B : \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (a : \u03b9 -> Real) (b : \u03b9 -> Real), (forall (k : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (A k) (a k)) -> (forall (k : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (B k) (b k)) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.dot.{u_1} \u03b9 inst._@.CvSIntervalMatrixProductV1.2114872084._hygCtx._hyg.3 p A B) (Finset.sum.{u_1, 0} \u03b9 Real Real.instAddCommMonoid (Finset.univ.{u_1} \u03b9 inst._@.CvSIntervalMatrixProductV1.2114872084._hygCtx._hyg.3) (fun (k : \u03b9) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (a k) (b k))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "CELL0_KERNEL_RECEIPT.json",
-      "sha256": "1eda3e5bf021e400e2c50d9f95bf28c88084f514e49ef2f4ac870e66030d462b",
-      "bytes": 444
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+      "type_expr": "forall {\u03b9 : Type.{u_1}} {\u03ba : Type.{u_2}} {\u03bd : Type.{u_3}} [inst._@.CvSIntervalMatrixProductV1.2439808019._hygCtx._hyg.5 : Fintype.{u_2} \u03ba] (p : Nat) (A : \u03b9 -> \u03ba -> AEGIS.RHFixIntervalV1.Iv) (B : \u03ba -> \u03bd -> AEGIS.RHFixIntervalV1.Iv) (a : \u03b9 -> \u03ba -> Real) (b : \u03ba -> \u03bd -> Real), (forall (i : \u03b9) (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (A i k) (a i k)) -> (forall (k : \u03ba) (j : \u03bd), AEGIS.RHFixIntervalV1.Iv.Mem p (B k j) (b k j)) -> (forall (i : \u03b9) (j : \u03bd), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.matrixMul.{u_1, u_2, u_3} \u03b9 \u03ba \u03bd inst._@.CvSIntervalMatrixProductV1.2439808019._hygCtx._hyg.5 p A B i j) (Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSIntervalMatrixProductV1.2439808019._hygCtx._hyg.5) (fun (k : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (a i k) (b k j))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "CELL0_PROVENANCE.json",
-      "sha256": "98ddb8a3f01f997bb0c3f5595f36e6be1f38f88c5529e6a1cba4a51936915ad5",
-      "bytes": 1117
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+      "type_expr": "forall {\u03b9 : Type.{u_1}} {\u03ba : Type.{u_2}} [inst._@.CvSIntervalMatrixProductV1.2682117681._hygCtx._hyg.4 : Fintype.{u_2} \u03ba] (p : Nat) (X : \u03ba -> \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (G : \u03ba -> \u03ba -> AEGIS.RHFixIntervalV1.Iv) (x : \u03ba -> \u03b9 -> Real) (g : \u03ba -> \u03ba -> Real), (forall (k : \u03ba) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) -> (forall (k : \u03ba) (l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) -> (forall (i : \u03b9) (j : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.congruence.{u_1, u_2} \u03b9 \u03ba inst._@.CvSIntervalMatrixProductV1.2682117681._hygCtx._hyg.4 p X G i j) (Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSIntervalMatrixProductV1.2682117681._hygCtx._hyg.4) (fun (k : \u03ba) => Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSIntervalMatrixProductV1.2682117681._hygCtx._hyg.4) (fun (l : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (x k i) (x l j)) (g k l)))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "build_cell_pilot.py",
-      "sha256": "51c35f3e0a5237c0661e2ea950ea73580d1f0633c9b8606eea6604b0f49fc9f4",
-      "bytes": 3597
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+      "type_expr": "forall (p : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {J : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem p I x) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.hull I J) x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "build_staged_dot_pilot.py",
-      "sha256": "a2c91d898a8f6a608a82126e53e6feb805ec52ddb6388e7a24cb1c278331ea4c",
-      "bytes": 1834
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+      "type_expr": "forall (p : Nat) (d : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) I x) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.downscale d I) x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "build-cell.log",
-      "sha256": "2c3e282b466e9187a198d1289d3e351952b497270331a4ee096aa0c081b65be8",
-      "bytes": 127
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+      "type_expr": "forall (p : Nat) (d : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem p I x) -> (AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (AEGIS.CvSIntervalMatrixProductV1.upscale d I) x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
     },
     {
-      "path": "cell0.log",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "bytes": 0
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+      "type_expr": "forall (p : Nat) {target : AEGIS.RHFixIntervalV1.Iv} {evaluated : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (Eq.{1} Bool (AEGIS.CvSIntervalMatrixProductV1.contains target evaluated) Bool.true) -> (AEGIS.RHFixIntervalV1.Iv.Mem p evaluated x) -> (AEGIS.RHFixIntervalV1.Iv.Mem p target x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+      "type_expr": "forall {n : Nat} (p : Nat) (target : (Fin n) -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (evaluated : (Fin n) -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (a : (Fin n) -> (Fin n) -> Real), (Eq.{1} Bool (AEGIS.CvSIntervalMatrixProductV1.tableCheck n target evaluated) Bool.true) -> (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (evaluated i j) (a i j)) -> (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (target i j) (a i j))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalMatrixProductV1",
+      "source": {
+        "module": "CvSIntervalMatrixProductV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+        "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+      "type_expr": "forall (p : Nat) (z : Int), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.point p z) (Int.cast.{0} Real Real.instIntCast z)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSRowBudgetEnvelopeV1",
+      "source": {
+        "module": "CvSRowBudgetEnvelopeV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+        "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+        "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+      "type_expr": "forall {\u03b9 : Type.{u_1}} {\u03ba : Type.{u_2}} {\u03bd : Type.{u_3}} [inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5 : Fintype.{u_2} \u03ba] [inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.8 : Fintype.{u_3} \u03bd] (p : Nat) (Q : \u03b9 -> \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (X : \u03ba -> \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (G : \u03ba -> \u03ba -> AEGIS.RHFixIntervalV1.Iv) (T : \u03ba -> AEGIS.RHFixIntervalV1.Iv) (Z : \u03bd -> \u03b9 -> AEGIS.RHFixIntervalV1.Iv) (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : \u03b9 -> \u03b9 -> Real) (x : \u03ba -> \u03b9 -> Real) (g : \u03ba -> \u03ba -> Real) (t : \u03ba -> Real) (z : \u03bd -> \u03b9 -> Real) (lp2 : Real), (forall (i : \u03b9) (j : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (Q i j) (q i j)) -> (forall (k : \u03ba) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) -> (forall (k : \u03ba) (l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) -> (forall (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (T k) (t k)) -> (forall (r : \u03bd) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (Z r i) (z r i)) -> (AEGIS.RHFixIntervalV1.Iv.Mem p LP2 lp2) -> (forall (i : \u03b9) (j : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.envelope.{u_1, u_2, u_3} \u03b9 \u03ba \u03bd inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5 inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.8 p Q X G T Z LP2 i j) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 40 (instOfNatAtLeastTwo.{0} Real 40 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 39 (instOfNatNat 39)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 38 (instOfNatNat 38)))))) (q i j)) (Finset.sum.{u_3, 0} \u03bd Real Real.instAddCommMonoid (Finset.univ.{u_3} \u03bd inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.8) (fun (r : \u03bd) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (z r i) (z r j)))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) lp2 (HAdd.hAdd.{0, 0, 0} Real Real Real (instHAdd.{0} Real Real.instAdd) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) (Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5) (fun (k : \u03ba) => Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5) (fun (l : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (t k) (x k i)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (t l) (x l j))) (g k l))))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 338 (instOfNatAtLeastTwo.{0} Real 338 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 337 (instOfNatNat 337)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 336 (instOfNatNat 336)))))) (Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5) (fun (k : \u03ba) => Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.CvSRowBudgetEnvelopeV1.3964181130._hygCtx._hyg.5) (fun (l : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (x k i) (x l j)) (g k l)))))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSRowBudgetEnvelopeV1",
+      "source": {
+        "module": "CvSRowBudgetEnvelopeV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+        "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+        "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+      "type_expr": "forall {n : Nat} {\u03ba : Type.{u_1}} {\u03bd : Type.{u_2}} [inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7 : Fintype.{u_1} \u03ba] [inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.10 : Fintype.{u_2} \u03bd] (p : Nat) (d : Nat) (target : (Fin n) -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (Q : (Fin n) -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (X : \u03ba -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (G : \u03ba -> \u03ba -> AEGIS.RHFixIntervalV1.Iv) (T : \u03ba -> AEGIS.RHFixIntervalV1.Iv) (Z : \u03bd -> (Fin n) -> AEGIS.RHFixIntervalV1.Iv) (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : (Fin n) -> (Fin n) -> Real) (x : \u03ba -> (Fin n) -> Real) (g : \u03ba -> \u03ba -> Real) (t : \u03ba -> Real) (z : \u03bd -> (Fin n) -> Real) (lp2 : Real), (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (Q i j) (q i j)) -> (forall (k : \u03ba) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (X k i) (x k i)) -> (forall (k : \u03ba) (l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (G k l) (g k l)) -> (forall (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (T k) (t k)) -> (forall (r : \u03bd) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) (Z r i) (z r i)) -> (AEGIS.RHFixIntervalV1.Iv.Mem (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) LP2 lp2) -> (Eq.{1} Bool (AEGIS.CvSIntervalMatrixProductV1.tableCheck n target (fun (i : Fin n) (j : Fin n) => AEGIS.CvSIntervalMatrixProductV1.downscale d (AEGIS.CvSIntervalMatrixProductV1.hull (AEGIS.CvSRowBudgetEnvelopeV1.envelope.{0, u_1, u_2} (Fin n) \u03ba \u03bd inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7 inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.10 (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) Q X G T Z LP2 i j) (AEGIS.CvSRowBudgetEnvelopeV1.envelope.{0, u_1, u_2} (Fin n) \u03ba \u03bd inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7 inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.10 (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) p d) Q X G T Z LP2 j i)))) Bool.true) -> (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (target i j) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 40 (instOfNatAtLeastTwo.{0} Real 40 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 39 (instOfNatNat 39)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 38 (instOfNatNat 38)))))) (q i j)) (Finset.sum.{u_2, 0} \u03bd Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03bd inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.10) (fun (r : \u03bd) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (z r i) (z r j)))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) lp2 (HAdd.hAdd.{0, 0, 0} Real Real Real (instHAdd.{0} Real Real.instAdd) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) (Finset.sum.{u_1, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_1} \u03ba inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7) (fun (k : \u03ba) => Finset.sum.{u_1, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_1} \u03ba inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7) (fun (l : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (t k) (x k i)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (t l) (x l j))) (g k l))))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 338 (instOfNatAtLeastTwo.{0} Real 338 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 337 (instOfNatNat 337)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 336 (instOfNatNat 336)))))) (Finset.sum.{u_1, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_1} \u03ba inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7) (fun (k : \u03ba) => Finset.sum.{u_1, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_1} \u03ba inst._@.CvSRowBudgetEnvelopeV1.624304102._hygCtx._hyg.7) (fun (l : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (x k i) (x l j)) (g k l)))))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSRowBudgetEnvelopeV1",
+      "source": {
+        "module": "CvSRowBudgetEnvelopeV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+        "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+        "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+      "type_expr": "forall (t : Int -> Real) (lo : Nat -> Real) (hi : Nat -> Real) (N : Nat), (Eq.{1} Real (t (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (OfNat.ofNat.{0} Real 0 (Zero.toOfNat0.{0} Real Real.instZero))) -> (forall (k : Int), Eq.{1} Real (t (Neg.neg.{0} Int Int.instNegInt k)) (Neg.neg.{0} Real Real.instNeg (t k))) -> (forall (n : Nat), (LE.le.{0} Nat instLENat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) n) -> (LE.le.{0} Nat instLENat n N) -> (And (LE.le.{0} Real Real.instLE (lo n) (t (Nat.cast.{0} Int instNatCastInt n))) (LE.le.{0} Real Real.instLE (t (Nat.cast.{0} Int instNatCastInt n)) (hi n)))) -> (forall (k : Int), (LE.le.{0} Nat instLENat (Int.natAbs k) N) -> (And (LE.le.{0} Real Real.instLE (AEGIS.CvSOddSignedEnclosureV1.lower lo hi k) (t k)) (LE.le.{0} Real Real.instLE (t k) (AEGIS.CvSOddSignedEnclosureV1.upper lo hi k))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSOddSignedEnclosureV1",
+      "source": {
+        "module": "CvSOddSignedEnclosureV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean",
+        "sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
+        "blob_sha": "d03424cade9814928e75d2b70ee3727281de9944"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+      "type_expr": "forall (t : Int -> Real) (lo : Nat -> Rat) (hi : Nat -> Rat) (N : Nat), (Eq.{1} Real (t (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (OfNat.ofNat.{0} Real 0 (Zero.toOfNat0.{0} Real Real.instZero))) -> (forall (k : Int), Eq.{1} Real (t (Neg.neg.{0} Int Int.instNegInt k)) (Neg.neg.{0} Real Real.instNeg (t k))) -> (forall (n : Nat), (LE.le.{0} Nat instLENat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) n) -> (LE.le.{0} Nat instLENat n N) -> (And (LE.le.{0} Real Real.instLE (Rat.cast.{0} Real Real.instRatCast (lo n)) (t (Nat.cast.{0} Int instNatCastInt n))) (LE.le.{0} Real Real.instLE (t (Nat.cast.{0} Int instNatCastInt n)) (Rat.cast.{0} Real Real.instRatCast (hi n))))) -> (forall (k : Int), (LE.le.{0} Nat instLENat (Int.natAbs k) N) -> (And (LE.le.{0} Real Real.instLE (Rat.cast.{0} Real Real.instRatCast (ite.{1} Rat (LT.lt.{0} Int Int.instLTInt k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Int.decLt k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Neg.neg.{0} Rat Rat.instNeg (hi (Int.natAbs k))) (ite.{1} Rat (Eq.{1} Int k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Int.instDecidableEq k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (OfNat.ofNat.{0} Rat 0 (Rat.instOfNat 0)) (lo (Int.natAbs k))))) (t k)) (LE.le.{0} Real Real.instLE (t k) (Rat.cast.{0} Real Real.instRatCast (ite.{1} Rat (LT.lt.{0} Int Int.instLTInt k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Int.decLt k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Neg.neg.{0} Rat Rat.instNeg (lo (Int.natAbs k))) (ite.{1} Rat (Eq.{1} Int k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (Int.instDecidableEq k (OfNat.ofNat.{0} Int 0 (instOfNat 0))) (OfNat.ofNat.{0} Rat 0 (Rat.instOfNat 0)) (hi (Int.natAbs k))))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSOddSignedEnclosureV1",
+      "source": {
+        "module": "CvSOddSignedEnclosureV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean",
+        "sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
+        "blob_sha": "d03424cade9814928e75d2b70ee3727281de9944"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+      "type_expr": "forall (p : Nat) (lo : Rat) (hi : Rat) {x : Real}, (LE.le.{0} Real Real.instLE (Rat.cast.{0} Real Real.instRatCast lo) x) -> (LE.le.{0} Real Real.instLE x (Rat.cast.{0} Real Real.instRatCast hi)) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRationalIntervalV1.rationalRange p lo hi) x)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSRationalIntervalV1",
+      "source": {
+        "module": "CvSRationalIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.lean",
+        "sha256": "93842354f31033bae21ddb3be528be8a896ae489f605b0534145da51f0754d78",
+        "blob_sha": "0d3c9b1699245d61a36b1f13384f78896fd2dae0"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.SourceRowDistributionV1.distribute_source_row",
+      "type_expr": "forall {\u03b9 : Type.{u_1}} {\u03ba : Type.{u_2}} [inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.4 : Fintype.{u_1} \u03b9] [inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.7 : Fintype.{u_2} \u03ba] (X : \u03ba -> \u03b9 -> Real) (K : \u03ba -> Real) (v : \u03b9 -> Complex), Eq.{1} Complex (Finset.sum.{u_1, 0} \u03b9 Complex Complex.instAddCommMonoid (Finset.univ.{u_1} \u03b9 inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.4) (fun (i : \u03b9) => HMul.hMul.{0, 0, 0} Complex Complex Complex (instHMul.{0} Complex Complex.instMul) (Complex.ofReal (Finset.sum.{u_2, 0} \u03ba Real Real.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.7) (fun (k : \u03ba) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (X k i) (K k)))) (v i))) (Finset.sum.{u_1, 0} \u03b9 Complex Complex.instAddCommMonoid (Finset.univ.{u_1} \u03b9 inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.4) (fun (i : \u03b9) => Finset.sum.{u_2, 0} \u03ba Complex Complex.instAddCommMonoid (Finset.univ.{u_2} \u03ba inst._@.SourceRowDistributionV1.1332566371._hygCtx._hyg.7) (fun (k : \u03ba) => HMul.hMul.{0, 0, 0} Complex Complex Complex (instHMul.{0} Complex Complex.instMul) (HMul.hMul.{0, 0, 0} Complex Complex Complex (instHMul.{0} Complex Complex.instMul) (Complex.ofReal (X k i)) (Complex.ofReal (K k))) (v i))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "SourceRowDistributionV1",
+      "source": {
+        "module": "SourceRowDistributionV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.lean",
+        "sha256": "c576e71a7b54af911daa329b2a420d9fbc7c9980d265e5e6bd343b26b2c4a303",
+        "blob_sha": "0a73242646284b21cc4378af304a697c41f0f1bd"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
+      "type_expr": "forall (k : Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))), Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.RHFixIntervalV1.Iv.mul (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.T (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.X0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.DX0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetStagedDotPilot",
+      "source": {
+        "module": "RowBudgetStagedDotPilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+        "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+        "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSIntervalMatrixProductV1.dot.{0} (Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) (Fin.fintype (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) (fun (k : Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.G0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.X0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (AEGIS.RHFixIntervalV1.Iv.mk (Neg.neg.{0} Int Int.instNegInt (OfNat.ofNat.{0} Int 400159206593443821288191 (instOfNat 400159206593443821288191))) (Neg.neg.{0} Int Int.instNegInt (OfNat.ofNat.{0} Int 400159206593443807376161 (instOfNat 400159206593443807376161))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetStagedDotPilot",
+      "source": {
+        "module": "RowBudgetStagedDotPilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+        "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+        "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSIntervalMatrixProductV1.dot.{0} (Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) (Fin.fintype (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) (fun (k : Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.G0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetStagedDotPilot.DX0 (Fin.val (OfNat.ofNat.{0} Nat 141 (instOfNatNat 141)) k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 4394801782732671274923651402 (instOfNat 4394801782732671274923651402)) (OfNat.ofNat.{0} Int 4394802055012090975575075585 (instOfNat 4394802055012090975575075585)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetStagedDotPilot",
+      "source": {
+        "module": "RowBudgetStagedDotPilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+        "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+        "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+      "type_expr": "forall (p : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem p I x) -> (forall {d : Int}, (LT.lt.{0} Int Int.instLTInt (OfNat.ofNat.{0} Int 0 (instOfNat 0)) d) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divPos I d) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) x (Int.cast.{0} Real Real.instIntCast d))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalDivideV1",
+      "source": {
+        "module": "CvSIntervalDivideV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean",
+        "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+        "blob_sha": "a8f4e25dba9aef87567d5b572782304f3773a289"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+      "type_expr": "forall (p : Nat) {I : AEGIS.RHFixIntervalV1.Iv} {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem p I x) -> (forall {d : Int}, (Ne.{1} Int d (OfNat.ofNat.{0} Int 0 (instOfNat 0))) -> (AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) x (Int.cast.{0} Real Real.instIntCast d))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSIntervalDivideV1",
+      "source": {
+        "module": "CvSIntervalDivideV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean",
+        "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+        "blob_sha": "a8f4e25dba9aef87567d5b572782304f3773a289"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+      "type_expr": "And (LE.le.{0} Real Real.instLE (Rat.cast.{0} Real Real.instRatCast AEGIS.CvSFrequencyIntervalV1.piLo) Real.pi) (LE.le.{0} Real Real.instLE Real.pi (Rat.cast.{0} Real Real.instRatCast AEGIS.CvSFrequencyIntervalV1.piHi))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFrequencyIntervalV1",
+      "source": {
+        "module": "CvSFrequencyIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+        "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+        "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+      "type_expr": "forall (n : Int), And (LE.le.{0} Real Real.instLE (Rat.cast.{0} Real Real.instRatCast (AEGIS.CvSFrequencyIntervalV1.frequencyLo n)) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (Neg.neg.{0} Real Real.instNeg (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Real.pi) (Int.cast.{0} Real Real.instIntCast n)) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 6 (instOfNatAtLeastTwo.{0} Real 6 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 5 (instOfNatNat 5)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)))))) (OfNat.ofNat.{0} Real 5 (instOfNatAtLeastTwo.{0} Real 5 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)))))))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 1 (One.toOfNat1.{0} Real Real.instOne)) (OfNat.ofNat.{0} Real 4 (instOfNatAtLeastTwo.{0} Real 4 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))))))))) (LE.le.{0} Real Real.instLE (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (Neg.neg.{0} Real Real.instNeg (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Real.pi) (Int.cast.{0} Real Real.instIntCast n)) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 6 (instOfNatAtLeastTwo.{0} Real 6 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 5 (instOfNatNat 5)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)))))) (OfNat.ofNat.{0} Real 5 (instOfNatAtLeastTwo.{0} Real 5 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)))))))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 1 (One.toOfNat1.{0} Real Real.instOne)) (OfNat.ofNat.{0} Real 4 (instOfNatAtLeastTwo.{0} Real 4 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))))))) (Rat.cast.{0} Real Real.instRatCast (AEGIS.CvSFrequencyIntervalV1.frequencyHi n)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFrequencyIntervalV1",
+      "source": {
+        "module": "CvSFrequencyIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+        "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+        "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+      "type_expr": "forall (p : Nat) (n : Int) (w : Int), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HSub.hSub.{0, 0, 0} Real Real Real (instHSub.{0} Real Real.instSub) (Neg.neg.{0} Real Real.instNeg (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Real.pi) (Int.cast.{0} Real Real.instIntCast n)) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 6 (instOfNatAtLeastTwo.{0} Real 6 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 5 (instOfNatNat 5)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)))))) (OfNat.ofNat.{0} Real 5 (instOfNatAtLeastTwo.{0} Real 5 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)))))))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 1 (One.toOfNat1.{0} Real Real.instOne)) (OfNat.ofNat.{0} Real 4 (instOfNatAtLeastTwo.{0} Real 4 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))))))) (Int.cast.{0} Real Real.instIntCast w)) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) (OfNat.ofNat.{0} Nat 42 (instOfNatNat 42))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFrequencyIntervalV1",
+      "source": {
+        "module": "CvSFrequencyIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+        "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+        "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+      "type_expr": "forall (p : Nat), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 6 (instOfNatAtLeastTwo.{0} Real 6 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 5 (instOfNatNat 5)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)))))) (OfNat.ofNat.{0} Real 5 (instOfNatAtLeastTwo.{0} Real 5 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3))))))) Real.pi)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFrequencyIntervalV1",
+      "source": {
+        "module": "CvSFrequencyIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+        "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+        "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+      "type_expr": "forall (p : Nat), AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (HDiv.hDiv.{0, 0, 0} Real Real Real (instHDiv.{0} Real (DivInvMonoid.toDiv.{0} Real Real.instDivInvMonoid)) (OfNat.ofNat.{0} Real 6 (instOfNatAtLeastTwo.{0} Real 6 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 5 (instOfNatNat 5)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)))))) (OfNat.ofNat.{0} Real 5 (instOfNatAtLeastTwo.{0} Real 5 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 4 (instOfNatNat 4)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 3 (instOfNatNat 3))))))) Real.pi) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFrequencyIntervalV1",
+      "source": {
+        "module": "CvSFrequencyIntervalV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+        "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+        "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+      "type_expr": "forall (p : Nat) {n : Nat} (A : List.{0} AEGIS.RHFixIntervalV1.Iv) (B : List.{0} AEGIS.RHFixIntervalV1.Iv), (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv A) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv B) n) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSListIntervalDotV1.listDot p A B) (AEGIS.CvSIntervalMatrixProductV1.dot.{0} (Fin n) (Fin.fintype n) p (fun (k : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv A (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv B (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSListIntervalDotV1",
+      "source": {
+        "module": "CvSListIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.lean",
+        "sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+        "blob_sha": "ff1c81854887730e29966f7c773b9f5c5ce55590"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
+      "type_expr": "forall (p : Nat) {n : Nat} (X : List.{0} AEGIS.RHFixIntervalV1.Iv) (G : List.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv)), (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv X) n) -> (Eq.{1} Nat (List.length.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G) n) -> (forall (k : Fin n), Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv))) n) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSIntervalMatrixProductV1.congruence.{0, 0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (Fin n) (Fin.fintype n) p (fun (k : Fin n) (x._@.CvSListIntervalDotV1.3428742249._hygCtx._hyg.54 : Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv X (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin n) (l : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv)) (Fin.val n l) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 0 (Fin.instOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) 0)) (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 0 (Fin.instOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) 0))) (AEGIS.CvSListIntervalDotV1.listDot p X (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot p row X) G)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSListIntervalDotV1",
+      "source": {
+        "module": "CvSListIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.lean",
+        "sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+        "blob_sha": "ff1c81854887730e29966f7c773b9f5c5ce55590"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
+      "type_expr": "Eq.{1} (List.{0} AEGIS.RHFixIntervalV1.Iv) (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) row AEGIS.RowBudgetStagedDotPilot.X0) AEGIS.RowBudgetListCell0Pilot.G) AEGIS.RowBudgetListCell0Pilot.GX0",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetListCell0Pilot",
+      "source": {
+        "module": "RowBudgetListCell0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+        "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
+      "type_expr": "Eq.{1} (List.{0} AEGIS.RHFixIntervalV1.Iv) (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) row AEGIS.RowBudgetStagedDotPilot.DX0) AEGIS.RowBudgetListCell0Pilot.G) AEGIS.RowBudgetListCell0Pilot.GDX0",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetListCell0Pilot",
+      "source": {
+        "module": "RowBudgetListCell0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+        "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetListCell0Pilot.fastEnvelope AEGIS.RowBudgetListCell0Pilot.target",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetListCell0Pilot",
+      "source": {
+        "module": "RowBudgetListCell0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+        "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetListCell0Pilot.originalEnvelope AEGIS.RowBudgetListCell0Pilot.fastEnvelope",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetListCell0Pilot",
+      "source": {
+        "module": "RowBudgetListCell0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+        "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv AEGIS.RowBudgetListCell0Pilot.originalEnvelope AEGIS.RowBudgetListCell0Pilot.target",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetListCell0Pilot",
+      "source": {
+        "module": "RowBudgetListCell0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+        "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
+      "type_expr": "forall (p : Nat) {n : Nat} (X : List.{0} AEGIS.RHFixIntervalV1.Iv) (Y : List.{0} AEGIS.RHFixIntervalV1.Iv) (G : List.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv)), (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv X) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv Y) n) -> (Eq.{1} Nat (List.length.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G) n) -> (forall (k : Fin n), Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv))) n) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSIntervalMatrixProductV1.matrixMul.{0, 0, 0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (Fin n) (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (Fin.fintype n) p (fun (x._@.CvSListIntervalMixedV1.1589646788._hygCtx._hyg.59 : Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (k : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv X (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (AEGIS.CvSIntervalMatrixProductV1.matrixMul.{0, 0, 0} (Fin n) (Fin n) (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (Fin.fintype n) p (fun (k : Fin n) (l : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv)) (Fin.val n l) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin n) (x._@.CvSListIntervalMixedV1.1589646788._hygCtx._hyg.103 : Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv Y (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 0 (Fin.instOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) 0)) (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 0 (Fin.instOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) 0))) (AEGIS.CvSListIntervalDotV1.listDot p X (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot p row Y) G)))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSListIntervalMixedV1",
+      "source": {
+        "module": "CvSListIntervalMixedV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSListIntervalMixedV1.lean",
+        "sha256": "38221cf9a53a805ec7f80c9022b4702126682a6102f0fe3ac97bfd0a021292b5",
+        "blob_sha": "8040571ca4de226a16086946628ee65f5fbe627d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSNeSymmRegressionV1.reverse_ne",
+      "type_expr": "forall (n : Int) (m : Int), (Not (Eq.{1} Int n m)) -> (Ne.{1} Int m n)",
+      "axioms": [],
+      "origin_module": "CvSNeSymmRegressionV1",
+      "source": {
+        "module": "CvSNeSymmRegressionV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.lean",
+        "sha256": "fe267da4f75f7949cf6f5e97fe69adbac67436a483ce026b08f97eb0f9e2ba6c",
+        "blob_sha": "4d1d1de4454c5ccc36d76a7cc7ec7a3b4fbf4854"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSNeSymmRegressionV1.gram_symm",
+      "type_expr": "forall (H : Int -> Real) (NP : Nat) (n : Int) (m : Int), Eq.{1} Real (AEGIS.CvSNeSymmRegressionV1.gram H NP n m) (AEGIS.CvSNeSymmRegressionV1.gram H NP m n)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSNeSymmRegressionV1",
+      "source": {
+        "module": "CvSNeSymmRegressionV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.lean",
+        "sha256": "fe267da4f75f7949cf6f5e97fe69adbac67436a483ce026b08f97eb0f9e2ba6c",
+        "blob_sha": "4d1d1de4454c5ccc36d76a7cc7ec7a3b4fbf4854"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+      "type_expr": "forall (p : Nat) {n : Nat} {r : Nat} (q : AEGIS.RHFixIntervalV1.Iv) (lp2 : AEGIS.RHFixIntervalV1.Iv) (a : List.{0} AEGIS.RHFixIntervalV1.Iv) (b : List.{0} AEGIS.RHFixIntervalV1.Iv) (da : List.{0} AEGIS.RHFixIntervalV1.Iv) (db : List.{0} AEGIS.RHFixIntervalV1.Iv) (T : List.{0} AEGIS.RHFixIntervalV1.Iv) (u : List.{0} AEGIS.RHFixIntervalV1.Iv) (v : List.{0} AEGIS.RHFixIntervalV1.Iv) (G : List.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv)), (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv a) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv b) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv da) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv db) n) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv u) r) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv v) r) -> (Eq.{1} Nat (List.length.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G) n) -> (forall (k : Fin n), Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv))) n) -> (forall (k : Fin n), Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.RHFixIntervalV1.Iv.mul p (List.getD.{0} AEGIS.RHFixIntervalV1.Iv T (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv a (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv da (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) -> (forall (k : Fin n), Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.RHFixIntervalV1.Iv.mul p (List.getD.{0} AEGIS.RHFixIntervalV1.Iv T (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv b (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) (List.getD.{0} AEGIS.RHFixIntervalV1.Iv db (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSRowBudgetEnvelopeV1.envelope.{0, 0, 0} (Fin (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) (Fin n) (Fin r) (Fin.fintype n) (Fin.fintype r) p (fun (x._@.CvSColumnEnvelopeV1.3780953095._hygCtx._hyg.160 : Fin (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) (x._@.CvSColumnEnvelopeV1.3780953095._hygCtx._hyg.163 : Fin (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) => q) (AEGIS.CvSColumnEnvelopeV1.twoColumns n a b) (fun (k : Fin n) (l : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv (List.getD.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv) G (Fin.val n k) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv)) (Fin.val n l) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (fun (k : Fin n) => List.getD.{0} AEGIS.RHFixIntervalV1.Iv T (Fin.val n k) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0)))) (AEGIS.CvSColumnEnvelopeV1.twoColumns r u v) lp2 (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) 0 (Fin.instOfNat (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 0)) (OfNat.ofNat.{0} (Fin (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))) 1 (Fin.instOfNat (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) 1))) (AEGIS.CvSColumnEnvelopeV1.columnValue p q a da u v (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot p row b) G) (List.map.{0, 0} (List.{0} AEGIS.RHFixIntervalV1.Iv) AEGIS.RHFixIntervalV1.Iv (fun (row : List.{0} AEGIS.RHFixIntervalV1.Iv) => AEGIS.CvSListIntervalDotV1.listDot p row db) G) lp2))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSColumnEnvelopeV1",
+      "source": {
+        "module": "CvSColumnEnvelopeV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.lean",
+        "sha256": "7fb26fba57266552fe95417d516488c035861990797e90ca51149c292ccecfbc",
+        "blob_sha": "137eb1bd72ae818a2cb9c24688517222c9c81301"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
+      "type_expr": "forall (e : AEGIS.CvSFirstColumnCheckerV1.Entry), (Eq.{1} Bool (AEGIS.CvSFirstColumnCheckerV1.check e) Bool.true) -> (Eq.{1} Bool (AEGIS.CvSIntervalMatrixProductV1.contains (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSFirstColumnCheckerV1.originalEntry e)) Bool.true)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSFirstColumnCheckerV1",
+      "source": {
+        "module": "CvSFirstColumnCheckerV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.lean",
+        "sha256": "93a0e14a81c56731c80d26b1de607f983c798d511558f0559ae0ccaf96857cd1",
+        "blob_sha": "a49825baabf3d576624cdc39433913af46d2c339"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch0.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch0",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch0",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+        "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
+        "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch0.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch0",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch0",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+        "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
+        "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch0.entries) (List.range' (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch0",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch0",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+        "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
+        "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch1.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch1",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+        "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
+        "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch1.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch1",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+        "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
+        "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch1.entries) (List.range' (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch1",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+        "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
+        "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch2.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch2",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch2",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+        "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
+        "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch2.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch2",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch2",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+        "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
+        "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch2.entries) (List.range' (OfNat.ofNat.{0} Nat 20 (instOfNatNat 20)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch2",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch2",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+        "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
+        "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch3.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch3",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch3",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+        "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
+        "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch3.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch3",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch3",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+        "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
+        "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch3.entries) (List.range' (OfNat.ofNat.{0} Nat 30 (instOfNatNat 30)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch3",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch3",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+        "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
+        "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch4.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch4",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch4",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+        "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
+        "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch4.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch4",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch4",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+        "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
+        "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch4.entries) (List.range' (OfNat.ofNat.{0} Nat 40 (instOfNatNat 40)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch4",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch4",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+        "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
+        "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch5.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch5",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch5",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+        "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
+        "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch5.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch5",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch5",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+        "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
+        "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch5.entries) (List.range' (OfNat.ofNat.{0} Nat 50 (instOfNatNat 50)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch5",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch5",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+        "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
+        "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch6.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch6",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch6",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+        "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
+        "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch6.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch6",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch6",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+        "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
+        "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch6.entries) (List.range' (OfNat.ofNat.{0} Nat 60 (instOfNatNat 60)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch6",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch6",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+        "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
+        "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch7.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch7",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch7",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+        "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
+        "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch7.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch7",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch7",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+        "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
+        "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch7.entries) (List.range' (OfNat.ofNat.{0} Nat 70 (instOfNatNat 70)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch7",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch7",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+        "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
+        "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch8.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch8",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch8",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+        "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
+        "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch8.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch8",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch8",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+        "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
+        "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch8.entries) (List.range' (OfNat.ofNat.{0} Nat 80 (instOfNatNat 80)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch8",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch8",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+        "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
+        "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch9.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch9",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch9",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+        "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
+        "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch9.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch9",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch9",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+        "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
+        "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch9.entries) (List.range' (OfNat.ofNat.{0} Nat 90 (instOfNatNat 90)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch9",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch9",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+        "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
+        "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch10.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch10",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch10",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+        "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
+        "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch10.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch10",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch10",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+        "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
+        "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch10.entries) (List.range' (OfNat.ofNat.{0} Nat 100 (instOfNatNat 100)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch10",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch10",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+        "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
+        "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch11.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch11",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch11",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+        "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
+        "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch11.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch11",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch11",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+        "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
+        "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch11.entries) (List.range' (OfNat.ofNat.{0} Nat 110 (instOfNatNat 110)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch11",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch11",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+        "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
+        "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch12.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch12",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch12",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+        "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
+        "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch12.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch12",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch12",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+        "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
+        "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch12.entries) (List.range' (OfNat.ofNat.{0} Nat 120 (instOfNatNat 120)) (OfNat.ofNat.{0} Nat 10 (instOfNatNat 10)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch12",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch12",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+        "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
+        "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch13.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch13",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch13",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+        "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
+        "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnBatch13.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnBatch13",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch13",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+        "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
+        "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnBatch13.entries) (List.range' (OfNat.ofNat.{0} Nat 130 (instOfNatNat 130)) (OfNat.ofNat.{0} Nat 9 (instOfNatNat 9)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnBatch13",
+      "source": {
+        "module": "RowBudgetFirstColumnBatch13",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+        "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
+        "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnV1.entries AEGIS.CvSFirstColumnCheckerV1.check) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
+      "type_expr": "Eq.{1} Bool (List.all.{0} AEGIS.CvSFirstColumnCheckerV1.Entry AEGIS.RowBudgetFirstColumnV1.entries (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Decidable.decide (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))) (AEGIS.RHFixIntervalV1.instDecidableEqIv (AEGIS.CvSFirstColumnCheckerV1.Entry.target e) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
+      "type_expr": "Eq.{1} (List.{0} Nat) (List.map.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry Nat (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) AEGIS.RowBudgetFirstColumnV1.entries) (List.range (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)))",
+      "axioms": [],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+      "type_expr": "forall (e : AEGIS.CvSFirstColumnCheckerV1.Entry), (Membership.mem.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry (List.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) (List.instMembership.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) AEGIS.RowBudgetFirstColumnV1.entries e) -> (Eq.{1} Bool (AEGIS.CvSIntervalMatrixProductV1.contains (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) (AEGIS.CvSFirstColumnCheckerV1.originalEntry e)) Bool.true)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+      "type_expr": "forall (e : AEGIS.CvSFirstColumnCheckerV1.Entry), (Membership.mem.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry (List.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) (List.instMembership.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) AEGIS.RowBudgetFirstColumnV1.entries e) -> (forall {x : Real}, (AEGIS.RHFixIntervalV1.Iv.Mem (OfNat.ofNat.{0} Nat 80 (instOfNatNat 80)) (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) x) -> (AEGIS.RHFixIntervalV1.Iv.Mem (OfNat.ofNat.{0} Nat 80 (instOfNatNat 80)) (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (Fin.val (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e)) (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0))) x))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
+      "type_expr": "forall (i : Fin (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139))), Exists.{1} AEGIS.CvSFirstColumnCheckerV1.Entry (fun (e : AEGIS.CvSFirstColumnCheckerV1.Entry) => And (Membership.mem.{0, 0} AEGIS.CvSFirstColumnCheckerV1.Entry (List.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) (List.instMembership.{0} AEGIS.CvSFirstColumnCheckerV1.Entry) AEGIS.RowBudgetFirstColumnV1.entries e) (Eq.{1} (Fin (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139))) (AEGIS.CvSFirstColumnCheckerV1.Entry.row e) i))",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetFirstColumnV1",
+      "source": {
+        "module": "RowBudgetFirstColumnV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+        "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+        "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
+      "type_expr": "Eq.{1} Bool (AEGIS.CvSFirstColumnCheckerV1.check (have __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10 : AEGIS.CvSFirstColumnCheckerV1.Entry := AEGIS.RowBudgetFirstColumnBatch0.entry0; AEGIS.CvSFirstColumnCheckerV1.Entry.mk (AEGIS.CvSFirstColumnCheckerV1.Entry.row __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.q __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.a __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10) (List.nil.{0} AEGIS.RHFixIntervalV1.Iv) (AEGIS.CvSFirstColumnCheckerV1.Entry.u __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.target __src._@.CvSFirstColumnRejectV1.182781919._hygCtx._hyg.10))) Bool.false",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "CvSFirstColumnRejectV1",
+      "source": {
+        "module": "CvSFirstColumnRejectV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.lean",
+        "sha256": "3926c8c1a233b72642acdca43d84f4aeabd33ad538fb5cc3c893bf882e8481fb",
+        "blob_sha": "a2b92a45eb7a102d4776e33cea2625d291a5648b"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
+      "type_expr": "Eq.{1} Bool (AEGIS.CvSFirstColumnCheckerV1.check (have __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10 : AEGIS.CvSFirstColumnCheckerV1.Entry := AEGIS.RowBudgetFirstColumnBatch0.entry0; AEGIS.CvSFirstColumnCheckerV1.Entry.mk (AEGIS.CvSFirstColumnCheckerV1.Entry.row __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.q __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.a __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.da __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10) (AEGIS.CvSFirstColumnCheckerV1.Entry.u __src._@.CvSFirstColumnRejectV1.1432699013._hygCtx._hyg.10) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (OfNat.ofNat.{0} Int 0 (instOfNat 0))))) Bool.false",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "CvSFirstColumnRejectV1",
+      "source": {
+        "module": "CvSFirstColumnRejectV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.lean",
+        "sha256": "3926c8c1a233b72642acdca43d84f4aeabd33ad538fb5cc3c893bf882e8481fb",
+        "blob_sha": "a2b92a45eb7a102d4776e33cea2625d291a5648b"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
+      "type_expr": "Eq.{1} Bool (AEGIS.CvSPackedGramV1.check AEGIS.CvSRelativeRowCertificateL12V1.base AEGIS.CvSRelativeRowCertificateL12V1.B (OfNat.ofNat.{0} Nat 139 (instOfNatNat 139)) AEGIS.CvSRelativeRowCertificateL12V1.eps AEGIS.CvSRelativeRowCertificateL12V1.eta AEGIS.CvSRelativeRowCertificateL12V1.factor AEGIS.CvSRelativeRowCertificateL12V1.intervals) Bool.true",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "CvSRelativeRowCertificateL12V1",
+      "source": {
+        "module": "CvSRelativeRowCertificateL12V1",
+        "status": "FOUND",
+        "path": "/workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+        "sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+        "blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
+      "type_expr": "LT.lt.{0} Int Int.instLTInt (OfNat.ofNat.{0} Int 0 (instOfNat 0)) (HSub.hSub.{0, 0, 0} Int Int Int (instHSub.{0} Int Int.instSub) AEGIS.CvSRelativeRowCertificateL12V1.eps AEGIS.CvSRelativeRowCertificateL12V1.eta)",
+      "axioms": [],
+      "origin_module": "CvSRelativeRowCertificateL12V1",
+      "source": {
+        "module": "CvSRelativeRowCertificateL12V1",
+        "status": "FOUND",
+        "path": "/workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+        "sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+        "blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
+      "type_expr": "forall {n : Nat} (q : Nat) (b : Nat) (B : Nat) (eps : Int) (eta : Int) (L : List.{0} (List.{0} Int)) (I : List.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv)), (Eq.{1} Bool (AEGIS.CvSPackedGramV1.check b B n eps eta L I) Bool.true) -> (forall (A : (Fin n) -> (Fin n) -> Real), (forall (i : Fin n) (j : Fin n), Eq.{1} Real (A i j) (A j i)) -> (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I (Fin.val n i) (Fin.val n j)) (A i j)) -> (forall (x : (Fin n) -> Real), LE.le.{0} Real Real.instLE (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (Int.cast.{0} Real Real.instIntCast (HSub.hSub.{0, 0, 0} Int Int Int (instHSub.{0} Int Int.instSub) eps eta)) (Finset.sum.{0, 0} (Fin n) Real Real.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (i : Fin n) => HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (x i) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) q) (Finset.sum.{0, 0} (Fin n) Real Real.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (i : Fin n) => Finset.sum.{0, 0} (Fin n) Real Real.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (j : Fin n) => HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (A i j) (x i)) (x j)))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSPackedGramV1",
+      "source": {
+        "module": "CvSPackedGramV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+        "sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+        "blob_sha": "5169f8ef689494f4342b68455b70c975aafb4a97"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
+      "type_expr": "forall {n : Nat} (q : Nat) (b : Nat) (B : Nat) (eps : Int) (eta : Int) (L : List.{0} (List.{0} Int)) (I : List.{0} (List.{0} AEGIS.RHFixIntervalV1.Iv)), (Eq.{1} Bool (AEGIS.CvSPackedGramV1.check b B n eps eta L I) Bool.true) -> (forall (A : (Fin n) -> (Fin n) -> Real), (forall (i : Fin n) (j : Fin n), Eq.{1} Real (A i j) (A j i)) -> (forall (i : Fin n) (j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I (Fin.val n i) (Fin.val n j)) (A i j)) -> (forall (c : (Fin n) -> Complex), LE.le.{0} Real Real.instLE (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (Int.cast.{0} Real Real.instIntCast (HSub.hSub.{0, 0, 0} Int Int Int (instHSub.{0} Int Int.instSub) eps eta)) (Finset.sum.{0, 0} (Fin n) Real Real.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (i : Fin n) => HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (Norm.norm.{0} Complex Complex.instNorm (c i)) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2))))) (HMul.hMul.{0, 0, 0} Real Real Real (instHMul.{0} Real Real.instMul) (HPow.hPow.{0, 0, 0} Real Nat Real (instHPow.{0, 0} Real Nat (NPow.toPow.{0} Real (Monoid.toNPow.{0} Real Real.instMonoid))) (OfNat.ofNat.{0} Real 2 (instOfNatAtLeastTwo.{0} Real 2 Real.instNatCast (Nat.instAtLeastTwoHAddOfNat (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1)) (Nat.instNeZeroSucc (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)))))) q) (Complex.re (Finset.sum.{0, 0} (Fin n) Complex Complex.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (i : Fin n) => Finset.sum.{0, 0} (Fin n) Complex Complex.instAddCommMonoid (Finset.univ.{0} (Fin n) (Fin.fintype n)) (fun (j : Fin n) => HMul.hMul.{0, 0, 0} Complex Complex Complex (instHMul.{0} Complex Complex.instMul) (HMul.hMul.{0, 0, 0} Complex Complex Complex (instHMul.{0} Complex Complex.instMul) (c i) (DFunLike.coe.{1, 1, 1} (RingHom.{0, 0} Complex Complex (Semiring.toNonAssocSemiring.{0} Complex (CommSemiring.toSemiring.{0} Complex Complex.instCommSemiring)) (Semiring.toNonAssocSemiring.{0} Complex (CommSemiring.toSemiring.{0} Complex Complex.instCommSemiring))) Complex (fun (x._@.Mathlib.Data.FunLike.Basic.2582841819._hygCtx._hyg.11 : Complex) => Complex) (RingHom.instFunLike.{0, 0} Complex Complex (Semiring.toNonAssocSemiring.{0} Complex (CommSemiring.toSemiring.{0} Complex Complex.instCommSemiring)) (Semiring.toNonAssocSemiring.{0} Complex (CommSemiring.toSemiring.{0} Complex Complex.instCommSemiring))) (starRingEnd.{0} Complex Complex.instCommSemiring Complex.instStarRing) (c j))) (Complex.ofReal (A i j)))))))))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSPackedGramV1",
+      "source": {
+        "module": "CvSPackedGramV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+        "sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+        "blob_sha": "5169f8ef689494f4342b68455b70c975aafb4a97"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedIntervalDotV1.packedDot_eq",
+      "type_expr": "forall (base : Nat) (bound : Nat) (a : List.{0} Int) (b : List.{0} Int), (LT.lt.{0} Nat instLTNat (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)) (List.length.{0} Int a)) -> (Eq.{1} Nat (List.length.{0} Int b) (List.length.{0} Int a)) -> (forall (x : Int), (Membership.mem.{0, 0} Int (List.{0} Int) (List.instMembership.{0} Int) a x) -> (And (LE.le.{0} Int Int.instLEInt (Neg.neg.{0} Int Int.instNegInt (Nat.cast.{0} Int instNatCastInt bound)) x) (LE.le.{0} Int Int.instLEInt x (Nat.cast.{0} Int instNatCastInt bound)))) -> (forall (x : Int), (Membership.mem.{0, 0} Int (List.{0} Int) (List.instMembership.{0} Int) b x) -> (And (LE.le.{0} Int Int.instLEInt (Neg.neg.{0} Int Int.instNegInt (Nat.cast.{0} Int instNatCastInt bound)) x) (LE.le.{0} Int Int.instLEInt x (Nat.cast.{0} Int instNatCastInt bound)))) -> (LT.lt.{0} Nat instLTNat (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (List.length.{0} Int a) (List.length.{0} Int a)) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound))) base) -> (Eq.{1} Int (AEGIS.CvSPackedIntervalDotV1.packedDot base bound a b) (AEGIS.CvSPackedIntervalDotV1.intDot a b))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSPackedIntervalDotV1",
+      "source": {
+        "module": "CvSPackedIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+        "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+        "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq",
+      "type_expr": "forall (p : Nat) (base : Nat) (bound : Nat) (a : List.{0} AEGIS.RHFixIntervalV1.Iv) (b : List.{0} AEGIS.RHFixIntervalV1.Iv), (LT.lt.{0} Nat instLTNat (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv b) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) -> (AEGIS.CvSPackedIntervalDotV1.bounded bound a) -> (AEGIS.CvSPackedIntervalDotV1.bounded bound b) -> (LT.lt.{0} Nat instLTNat (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound))) base) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b) (AEGIS.CvSListIntervalDotV1.listDot p a b))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSPackedIntervalDotV1",
+      "source": {
+        "module": "CvSPackedIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+        "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+        "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq",
+      "type_expr": "forall (p : Nat) (base : Nat) (bound : Nat) (a : List.{0} AEGIS.RHFixIntervalV1.Iv) (b : List.{0} AEGIS.RHFixIntervalV1.Iv), Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot p base bound (AEGIS.CvSPackedIntervalDotV1.prepareInterval base bound a) (AEGIS.CvSPackedIntervalDotV1.prepareInterval base bound b)) (AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b)",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "CvSPackedIntervalDotV1",
+      "source": {
+        "module": "CvSPackedIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+        "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+        "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq",
+      "type_expr": "forall (p : Nat) (base : Nat) (bound : Nat) (a : List.{0} AEGIS.RHFixIntervalV1.Iv) (b : List.{0} AEGIS.RHFixIntervalV1.Iv) (A : AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow) (B : AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow), (Eq.{1} AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow A (AEGIS.CvSPackedIntervalDotV1.prepareInterval base bound a)) -> (Eq.{1} AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow B (AEGIS.CvSPackedIntervalDotV1.prepareInterval base bound b)) -> (LT.lt.{0} Nat instLTNat (OfNat.ofNat.{0} Nat 0 (instOfNatNat 0)) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) -> (Eq.{1} Nat (List.length.{0} AEGIS.RHFixIntervalV1.Iv b) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) -> (AEGIS.CvSPackedIntervalDotV1.bounded bound a) -> (AEGIS.CvSPackedIntervalDotV1.bounded bound b) -> (LT.lt.{0} Nat instLTNat (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a) (List.length.{0} AEGIS.RHFixIntervalV1.Iv a)) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) bound))) base) -> (Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot p base bound A B) (AEGIS.CvSListIntervalDotV1.listDot p a b))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "CvSPackedIntervalDotV1",
+      "source": {
+        "module": "CvSPackedIntervalDotV1",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+        "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+        "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.packing_exact",
+      "type_expr": "Eq.{1} AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow AEGIS.RowBudgetPackedZ0Pilot.cache (AEGIS.CvSPackedIntervalDotV1.prepareInterval (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 280 (instOfNatNat 280))) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128))) AEGIS.RowBudgetListCell0Pilot.Z0)",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.components_bounded",
+      "type_expr": "AEGIS.CvSPackedIntervalDotV1.bounded (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128))) AEGIS.RowBudgetListCell0Pilot.Z0",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.carry_bound",
+      "type_expr": "LT.lt.{0} Nat instLTNat (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 301 (instOfNatNat 301)) (OfNat.ofNat.{0} Nat 301 (instOfNatNat 301))) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128)))) (HMul.hMul.{0, 0, 0} Nat Nat Nat (instHMul.{0} Nat instMulNat) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128)))))) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 280 (instOfNatNat 280)))",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 280 (instOfNatNat 280))) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128))) AEGIS.RowBudgetPackedZ0Pilot.cache AEGIS.RowBudgetPackedZ0Pilot.cache) (AEGIS.RHFixIntervalV1.Iv.mk (OfNat.ofNat.{0} Int 90409755428085542605520956409 (instOfNat 90409755428085542605520956409)) (OfNat.ofNat.{0} Int 90409777030268093176323279969 (instOfNat 90409777030268093176323279969)))",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached",
+      "type_expr": "Eq.{1} AEGIS.RHFixIntervalV1.Iv (AEGIS.CvSListIntervalDotV1.listDot (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) AEGIS.RowBudgetListCell0Pilot.Z0 AEGIS.RowBudgetListCell0Pilot.Z0) (AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot (OfNat.ofNat.{0} Nat 96 (instOfNatNat 96)) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 280 (instOfNatNat 280))) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128))) AEGIS.RowBudgetPackedZ0Pilot.cache AEGIS.RowBudgetPackedZ0Pilot.cache)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing",
+      "type_expr": "Ne.{1} AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow (have __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.13 : AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow := AEGIS.RowBudgetPackedZ0Pilot.cache; AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow.mk (have __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.25 : AEGIS.CvSPackedIntervalDotV1.PackedRow := AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow.middle AEGIS.RowBudgetPackedZ0Pilot.cache; AEGIS.CvSPackedIntervalDotV1.PackedRow.mk (HAdd.hAdd.{0, 0, 0} Nat Nat Nat (instHAdd.{0} Nat instAddNat) (AEGIS.CvSPackedIntervalDotV1.PackedRow.forward (AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow.middle AEGIS.RowBudgetPackedZ0Pilot.cache)) (OfNat.ofNat.{0} Nat 1 (instOfNatNat 1))) (AEGIS.CvSPackedIntervalDotV1.PackedRow.reverse __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.25) (AEGIS.CvSPackedIntervalDotV1.PackedRow.total __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.25) (AEGIS.CvSPackedIntervalDotV1.PackedRow.length __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.25)) (AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow.absolute __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.13) (AEGIS.CvSPackedIntervalDotV1.PackedIntervalRow.radius __src._@.RowBudgetPackedZ0Pilot.1280587225._hygCtx._hyg.13)) (AEGIS.CvSPackedIntervalDotV1.prepareInterval (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 280 (instOfNatNat 280))) (HPow.hPow.{0, 0, 0} Nat Nat Nat (instHPow.{0, 0} Nat Nat (NPow.toPow.{0} Nat (Monoid.toNPow.{0} Nat Nat.instMonoid))) (OfNat.ofNat.{0} Nat 2 (instOfNatNat 2)) (OfNat.ofNat.{0} Nat 128 (instOfNatNat 128))) AEGIS.RowBudgetListCell0Pilot.Z0)",
+      "axioms": [
+        "propext"
+      ],
+      "origin_module": "RowBudgetPackedZ0Pilot",
+      "source": {
+        "module": "RowBudgetPackedZ0Pilot",
+        "status": "FOUND",
+        "path": "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+        "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
+      },
+      "status": "PASS"
     }
   ],
-  "staged_replay": {
+  "first_column": {
+    "status": "PASS",
+    "source_base_commit": "8b00b0b73e6164cbac52dfecd096287d81bfeca6",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "native_context": "Original mathematical bodies; RHFixIntervalV1 and CvSPackedGramV1 use explicit narrower imports in local work copies. Original CvSRelativeRowCertificateL12V1 source unchanged.",
+    "scope": "139 first-column interval-envelope output comparisons and original target identities only; not full matrix/actual hB/RH",
+    "batches": [
+      {
+        "module": "RowBudgetFirstColumnBatch0",
+        "source_sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 17.523865778999607,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch0.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch0.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch0.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch1",
+        "source_sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 19.1012398999992,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch1.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch1.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch1.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch2",
+        "source_sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 20.752934176001872,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch2.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch2.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch2.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch3",
+        "source_sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 22.166154747999826,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch3.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch3.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch3.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch4",
+        "source_sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 23.03044290300022,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch4.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch4.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch4.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch5",
+        "source_sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 23.722074378001707,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch5.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch5.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch5.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch6",
+        "source_sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 25.77168521099884,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch6.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch6.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch6.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch7",
+        "source_sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 25.578747798997938,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch7.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch7.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch7.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch8",
+        "source_sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 27.57118816900038,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch8.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch8.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch8.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch9",
+        "source_sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 28.088477664001402,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch9.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch9.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch9.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch10",
+        "source_sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 30.28448879699863,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch10.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch10.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch10.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch11",
+        "source_sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 32.61518879800133,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch11.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch11.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch11.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch12",
+        "source_sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 31.410492122002324,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch12.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch12.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch12.row_order' does not depend on any axioms\n"
+      },
+      {
+        "module": "RowBudgetFirstColumnBatch13",
+        "source_sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-row-budget-bridge",
+          "-o",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.olean",
+          "/workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 29.494136323999555,
+        "compiler_output": "'AEGIS.RowBudgetFirstColumnBatch13.checked' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch13.target_source' depends on axioms: [propext]\n'AEGIS.RowBudgetFirstColumnBatch13.row_order' does not depend on any axioms\n"
+      }
+    ],
+    "max_child_rss_kib": 5697540,
+    "composition": {
+      "status": "PASS",
+      "source_sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
+      "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.olean /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_output": "'AEGIS.RowBudgetFirstColumnV1.checked' depends on axioms: [propext]\nAEGIS.RowBudgetFirstColumnV1.checked : AEGIS.RowBudgetFirstColumnV1.entries.all AEGIS.CvSFirstColumnCheckerV1.check =\n  true\n'AEGIS.RowBudgetFirstColumnV1.target_source' depends on axioms: [propext]\nAEGIS.RowBudgetFirstColumnV1.target_source : (AEGIS.RowBudgetFirstColumnV1.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true\n'AEGIS.RowBudgetFirstColumnV1.row_order' does not depend on any axioms\nAEGIS.RowBudgetFirstColumnV1.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnV1.entries =\n  List.range 139\n'AEGIS.RowBudgetFirstColumnV1.first_column_contains' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.RowBudgetFirstColumnV1.first_column_contains : \u2200 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries,\n  AEGIS.CvSIntervalMatrixProductV1.contains\n      (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)\n      (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) =\n    true\n'AEGIS.RowBudgetFirstColumnV1.all_rows_covered' depends on axioms: [propext, Quot.sound]\nAEGIS.RowBudgetFirstColumnV1.all_rows_covered : \u2200 (i : Fin 139), \u2203 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries, e.row = i\n'AEGIS.RowBudgetFirstColumnV1.first_column_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.RowBudgetFirstColumnV1.first_column_mem : \u2200 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries,\n  \u2200 {x : \u211d},\n    AEGIS.RHFixIntervalV1.Iv.Mem 80 (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) x \u2192\n      AEGIS.RHFixIntervalV1.Iv.Mem 80\n        (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0) x\n",
+      "roots": [
+        "AEGIS.RowBudgetFirstColumnV1.checked",
+        "AEGIS.RowBudgetFirstColumnV1.target_source",
+        "AEGIS.RowBudgetFirstColumnV1.row_order",
+        "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+        "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+        "AEGIS.RowBudgetFirstColumnV1.all_rows_covered"
+      ]
+    },
+    "negative_controls": {
+      "status": "PASS",
+      "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.olean /workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.lean",
+      "compiler_output": "'AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted' depends on axioms: [propext]\n'AEGIS.CvSFirstColumnRejectV1.reject_zero_target' depends on axioms: [propext]\n",
+      "scope": "Missing weighted column and zero replacement target are both rejected."
+    },
+    "checked_entries": 139,
+    "total_matrix_entries": 19321,
+    "batch_seconds": 357.11111676800283
+  },
+  "generic_column": {
+    "status": "PASS",
+    "roots": [
+      "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+      "AEGIS.CvSFirstColumnCheckerV1.check_sound"
+    ],
+    "source_base_commit": "177dcd648c5497d923586f1d94eb701880389c04",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "commands": [
+      "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.olean /workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.lean",
+      "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.olean /workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.lean"
+    ],
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "native_context": "Same explicitly narrowed RHFixInterval native context as existing list pilot. No original CvS imports required by these generic execution identities.",
+    "scope": "Two distinct columns at arbitrary finite sizes; exact equality to existing envelope. Checker soundness for a single first-column entry when its explicit Boolean check is true. No positivity conclusion or universal RH premise.",
+    "sources": {
+      "CvSColumnEnvelopeV1.lean": "7fb26fba57266552fe95417d516488c035861990797e90ca51149c292ccecfbc",
+      "CvSFirstColumnCheckerV1.lean": "93a0e14a81c56731c80d26b1de607f983c798d511558f0559ae0ccaf96857cd1"
+    }
+  },
+  "packed_interval": {
+    "status": "PASS",
+    "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.olean /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+    "source_sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+    "compiler_output": "'AEGIS.CvSPackedIntervalDotV1.packedDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq' depends on axioms: [propext]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq : \u2200 (p base bound : \u2115) (a b : List AEGIS.RHFixIntervalV1.Iv),\n  0 < a.length \u2192\n    b.length = a.length \u2192\n      AEGIS.CvSPackedIntervalDotV1.bounded bound a \u2192\n        AEGIS.CvSPackedIntervalDotV1.bounded bound b \u2192\n          a.length * a.length * (2 * bound * (2 * bound)) < base \u2192\n            AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b = AEGIS.CvSListIntervalDotV1.listDot p a b\n",
+    "scope": "Uniform exact equality of packed/cached interval dot to the existing midpoint-radius list dot. Positive length, equal lengths, all signed component bounds and n^2*(2B)^2 < base are explicit. Caches require exact preparation identities. Native context uses same original-body narrowed PackedGram/RHFix imports as first-column receipts. No whole-matrix or analytic input-identification claim."
+  },
+  "packed_z0": {
+    "status": "PASS",
     "command": [
       "lake",
       "env",
       "lean",
       "-DwarningAsError=true",
-      "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean"
+      "-R",
+      "/workspace/aegis-row-budget-bridge",
+      "-o",
+      "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.olean",
+      "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean"
     ],
-    "seconds": 7.475530436000554,
+    "seconds": 3.439614303999406,
+    "max_child_rss_kib": 2227376,
     "returncode": 0,
+    "source_sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+    "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "compiler_output": "'AEGIS.RowBudgetPackedZ0Pilot.packing_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.components_bounded' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.carry_bound' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing' depends on axioms: [propext]\n",
+    "scope": "Packed exact evaluation of existing 301-element residual Z0 self-dot; exact cache, component and carry bounds, original-list equality and bad-packing rejection. Not full table, actual input identity or RH."
+  },
+  "original_numeric_layer": {
     "status": "PASS",
-    "compiler_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
-    "source_sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
-    "scope": "Three closed arithmetic pilot roots: actual X tau-weighted column and two row0 Gram products. Not full output cell, output table, actual hB or RH."
+    "source_base_commit": "177dcd648c5497d923586f1d94eb701880389c04",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "context": "RHFixInterval mathematical body unchanged, explicit imports replace Mathlib umbrella. PackedGram similarly narrows imports; full original mathematical bodies are compiled, including complex soundness. Actual analytic CvS source imports are separately verified by original-import CI.",
+    "records": [
+      {
+        "original_source": "research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+        "compiled_source": "/workspace/formal-conjectures/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+        "source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+        "original_source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+        "mathematical_body_unchanged": true,
+        "imports_narrowed_only": false,
+        "command": "lake env lean -DwarningAsError=true -o /workspace/aegis-row-budget-bridge/CvSResidualCertificateV1.olean /workspace/formal-conjectures/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+        "status": "PASS",
+        "compiler_output": "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : \u2200 (C : \u211d),\n  0 \u2264 C \u2192 \u2200 (R : \u2115) (\u03b5 : \u211d), 0 < \u03b5 \u2192 \u2203 NP, R < NP \u2227 \u2200 (N : \u2115), NP \u2264 N \u2192 C / (\u2191N - \u2191R) < \u03b5\n'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nAEGIS.CvSResidualCertificateV1.residual_entry_le : \u2200 (x y e r : \u211d), |e| \u2264 r \u2192 x * y * e \u2264 r * (x ^ 2 + y ^ 2) / 2\nAEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : \u2200 (a c lo hi : \u211d),\n  lo \u2264 a \u2192 a \u2264 hi \u2192 |a - c| \u2264 max (c - lo) (hi - c)\n@AEGIS.CvSResidualCertificateV1.residual_quadratic_le : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (E R : \u03b9 \u2192 \u03b9 \u2192 \u211d) (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |E i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192 \u2200 (x : \u03b9 \u2192 \u211d), \u2211 i, \u2211 j, x i * x j * E i j \u2264 \u03b5 * \u2211 i, x i ^ 2\n@AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (x : \u03b9 \u2192 \u211d), 0 \u2264 \u2211 i, \u2211 j, x i * x j * A i j\n@AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (z : \u03b9 \u2192 \u2102), 0 \u2264 (\u2211 i, \u2211 j, (starRingEnd \u2102) (z i) * z j * \u2191(A i j)).re\n'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "original_source": "research/rh/feshbach_lean_v1/CvSPackedGramV1.lean",
+        "compiled_source": "/workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+        "source_sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+        "original_source_sha256": "cb1e6eff7d7b118d8a1b21b174f946e83de267d9ead56aa16ca9234049a4f489",
+        "mathematical_body_unchanged": true,
+        "imports_narrowed_only": true,
+        "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSPackedGramV1.olean /workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+        "status": "PASS",
+        "compiler_output": "'AEGIS.CvSPackedGramV1.pack_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_core' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.gramEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowErr_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowsOk_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.check_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilbIv_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilb8_check' depends on axioms: [propext]\n'AEGIS.CvSPackedGramV1.hilbert8_posDef' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "original_source": "research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+        "compiled_source": "/workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+        "source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+        "original_source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+        "mathematical_body_unchanged": true,
+        "imports_narrowed_only": false,
+        "command": "lake env lean -DwarningAsError=true -o /workspace/aegis-row-budget-bridge/CvSRelativeRowCertificateL12V1.olean /workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+        "status": "PASS",
+        "compiler_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]\n'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms\n"
+      }
+    ]
   },
-  "actual_source_CI": {
-    "repair": {
-      "id": 39417825478,
-      "sha": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
-      "status": "PASS",
-      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39417825478",
-      "log_sha256": "e5bfcbfab6d3df3d9ac052e1b0e2fed35af6c346bccbba4a6ed0250716f1cf1b",
-      "roots": [
-        "sourceKernel_diag",
-        "sourceKernel_off",
-        "sourceY_eq_actual_crossRow"
-      ]
-    },
-    "signed_tau_and_extended_layer": {
-      "id": 39419296326,
-      "sha": "d69f8f242f258166e29a98d6fac8c32a4a3ab6b0",
-      "status": "PASS",
-      "conclusion": "success",
-      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39419296326",
-      "job_id": 118621258249,
-      "log_path": "CI_d69f8f24_SIGNED_TAU_AND_INTERVAL_PASS.log",
-      "log_sha256": "50fd44f4fce45ae41fbd0b19e38d8249cf63cfee2c9c8fc92c9023980c399f1a",
-      "audited_roots": 23,
-      "emitted_audit_lines": [
-        "2026-10-20T12:38:39.0192434Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0196435Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_off ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0197366Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0198066Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.product_error ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0200447Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.sum_product_error ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0202310Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_enclosure ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0203922Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0205449Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRationalIntervalV1.rationalRange_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0206276Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.midpoint_error ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0208297Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.dot_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0209613Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0211661Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.congruence_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0212374Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.hull_mem_left ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0213762Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.downscale_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0214747Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.upscale_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0215455Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.mem_of_contains ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0217090Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0217779Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.point_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0219340Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0220738Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0221450Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.positive_mem ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0222494Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_bounds ['Classical.choice', 'Quot.sound', 'propext']",
-        "2026-10-20T12:38:39.0223574Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_interval ['Classical.choice', 'Quot.sound', 'propext']"
-      ],
-      "current_source_bytes_match_verified_commit": true
-    },
-    "new_actual_input_layer": {
-      "id": 39425665414,
-      "job_id": 118638278061,
-      "sha": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
-      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39425665414",
-      "status": "FAIL_REPAIRED_SOURCE_AWAITING_NEW_REPLAY",
-      "expected_named_audits": 37,
-      "conclusion": "failure",
-      "log": "CI_a1862b9b_ACTUAL_INPUT_FAILURE.log",
-      "repair_receipt": "ACTUAL_INPUT_REPAIR_RECEIPT.json"
-    }
-  },
-  "remaining_actual_budget": "Source input instantiation and executable output-table check; not supplied by abstract envelope theorem alone",
-  "unconditional_RH": "NOT_PROVED",
-  "new_actual_signed_tau_theorems": {
-    "names": [
-      "positive_mem",
-      "signed_tau_bounds",
-      "signed_tau_interval"
+  "actual_source_original_import": {
+    "status": "PASS",
+    "repository": "tarikskalic33/formal-conjectures",
+    "branch": "proof/rh-feshbach-schur-v1",
+    "commit": "177dcd648c5497d923586f1d94eb701880389c04",
+    "run_id": 39455515829,
+    "job_id": 118741227813,
+    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39455515829",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "source_path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean",
+    "source_sha256": "2c0c8fa448fa006b2523f6a0a635321981521db41553e56cadf196bf2f99fe51",
+    "source_blob_sha": "28523e24451e4e69d7ac738011296ba36e2222f2",
+    "explicit_workflow_audits": [
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+        "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+      }
     ],
-    "source": "CvSTauSigned150L12V1.lean",
-    "source_sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
-    "kernel_status": "PASS: original-import source CI 39419296326; three roots with only standard axioms"
-  },
-  "native_input_layer": {
-    "status": "PASS",
-    "roots": 7,
-    "receipt": "INPUT_SOURCE_KERNEL_RECEIPT.json",
-    "graph_archive": "NATIVE_INPUT_GRAPH.zip",
-    "scope": "Uniform signed integer division, frequency-factor and L/pi input enclosures; no output table or RH conclusion."
-  },
-  "new_list_execution": {
-    "scope": "Three uniform list/dot/mixed-congruence execution identities plus five closed first-cell roots; no full-table or analytic input conclusion",
-    "status": "NATIVE_PASS",
-    "sources": "list_execution/",
-    "complete_cell_receipt": {
-      "status": "PASS",
-      "command": [
-        "lake",
-        "env",
-        "lean",
-        "-DwarningAsError=true",
-        "-R",
-        "/workspace/aegis-row-budget-bridge",
-        "-o",
-        "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.olean",
-        "/workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean"
-      ],
-      "seconds": 49.480160376999265,
-      "returncode": 0,
-      "max_rss_kib": 4518076,
-      "source_sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
-      "source_base_commit": "049196e74e25e878e2f4f4e144dbcff8cdaf6c01",
-      "compiler_output": "'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
-      "scope": "One complete recovered output cell and its equality to the original interval-envelope formula. Not full output table, analytic input correspondence, hB or RH."
+    "additional_source_audit": {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+      "axioms_output": "[propext, Classical.choice, Quot.sound]",
+      "status": "Source compiled and #print axioms inspected; not yet included in workflow explicit 37-name list"
     },
-    "graph_archive": "NATIVE_CELL_GRAPH.zip",
-    "verified_output_entries": 1,
-    "total_output_entries": 19321
+    "scope": "Original-import actual CvS input enclosures including signed source kernels, all 301 residual rows for arbitrary enclosed real projection and M>=3. Does not prove literal table identities, full Q80 output enclosure, hB, one-window Krein producer or universal RH."
+  },
+  "current_extended_CI": {
+    "run": 39463716271,
+    "source_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39463716271",
+    "status": "IN_PROGRESS",
+    "scope": "Original CvS analytic DAG plus complete first-column continuation, 105 named audits; new packed interval extension is not included."
+  },
+  "historical_failed_CI": [
+    {
+      "run": 39425665414,
+      "commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+      "status": "FAIL",
+      "reason": "Disequality field notation elaboration error."
+    },
+    {
+      "run": 39431826314,
+      "commit": "c3e40d699f06bb3e3bebacc6261fffe6cc2be007",
+      "status": "FAIL",
+      "reason": "Int-to-real subtraction cast was normalized in wrong order."
+    }
+  ],
+  "remaining_obligations": [
+    "Literal identity/enclosure of concrete Q96 input tables with source Q/X/G/tau/Z/LP2 and the chosen exact rational projection. Generic actual sourceZ_mem now passes original-import CI.",
+    "All 19,321 output entries, or another complete hI producer. Exactly 139 entries of the first column are now kernel checked.",
+    "Identify the resulting actual residual and Gram tail with the hypotheses of budgetEnergy_le_of_Iv and the actual row-bound consumer.",
+    "All-real-t Krein certificate, trace bound and compatible scalar gap for the one-window consumer.",
+    "Existing universal actual signed mixed-budget producer or a genuine cofinal/all-window producer; no finite-to-universal transition is supplied."
+  ],
+  "canonical_unconditional_RH": {
+    "status": "NOT_PROVED",
+    "type": "unconditional_riemannHypothesis : RiemannHypothesis",
+    "new_axioms": false,
+    "changed_Mathlib_definition": false
   }
 }
