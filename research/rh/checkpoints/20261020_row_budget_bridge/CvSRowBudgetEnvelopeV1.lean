@@ -65,6 +65,33 @@ theorem envelope_mem {ι κ ν : Type*} [Fintype κ] [Fintype ν] (p : ℕ)
     (Iv.mem_neg p htail)
   simpa only [envelope, sub, scale, add, Int.cast_ofNat, sub_eq_add_neg] using h
 
+/-- The remaining output-table comparison is a finite executable condition.
+This composes the full real envelope, symmetric hull and outward scale change. -/
+theorem stored_envelope_mem_of_check {n : ℕ} {κ ν : Type*} [Fintype κ] [Fintype ν]
+    (p d : ℕ) (target : Fin n → Fin n → Iv)
+    (Q : Fin n → Fin n → Iv) (X : κ → Fin n → Iv) (G : κ → κ → Iv)
+    (T : κ → Iv) (Z : ν → Fin n → Iv) (LP2 : Iv)
+    (q : Fin n → Fin n → ℝ) (x : κ → Fin n → ℝ) (g : κ → κ → ℝ)
+    (t : κ → ℝ) (z : ν → Fin n → ℝ) (lp2 : ℝ)
+    (hQ : ∀ i j, (Q i j).Mem (p + d) (q i j))
+    (hX : ∀ k i, (X k i).Mem (p + d) (x k i))
+    (hG : ∀ k l, (G k l).Mem (p + d) (g k l))
+    (hT : ∀ k, (T k).Mem (p + d) (t k))
+    (hZ : ∀ r i, (Z r i).Mem (p + d) (z r i)) (hLP : LP2.Mem (p + d) lp2)
+    (hc : tableCheck n target (fun i j => downscale d
+      (hull (envelope (p + d) Q X G T Z LP2 i j)
+        (envelope (p + d) Q X G T Z LP2 j i))) = true) :
+    ∀ i j, (target i j).Mem p
+      (40 * q i j - (∑ r, z r i * z r j) -
+        lp2 * (2 * (∑ k, ∑ l, (t k * x k i) * (t l * x l j) * g k l) +
+          338 * (∑ k, ∑ l, x k i * x l j * g k l))) := by
+  apply tableCheck_sound p target _ _ hc
+  intro i j
+  exact downscale_mem p d (hull_mem_left (p + d)
+    (envelope_mem (p + d) Q X G T Z LP2 q x g t z lp2 hQ hX hG hT hZ hLP i j))
+
 end AEGIS.CvSRowBudgetEnvelopeV1
 #print axioms AEGIS.CvSRowBudgetEnvelopeV1.point_mem
 #print axioms AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem
+
+#print axioms AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check

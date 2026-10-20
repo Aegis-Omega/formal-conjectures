@@ -1,0 +1,109 @@
+{
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "receipts": [
+    {
+      "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean"
+      ],
+      "seconds": 1.7447239220000483,
+      "returncode": 0,
+      "status": "PASS",
+      "source_sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
+      "compiler_output": "'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+    },
+    {
+      "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.lean"
+      ],
+      "seconds": 1.6541782510012126,
+      "returncode": 0,
+      "status": "PASS",
+      "source_sha256": "93842354f31033bae21ddb3be528be8a896ae489f605b0534145da51f0754d78",
+      "compiler_output": "'AEGIS.CvSRationalIntervalV1.rationalRange_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+    },
+    {
+      "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean"
+      ],
+      "seconds": 1.9747472890012432,
+      "returncode": 0,
+      "status": "PASS",
+      "source_sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+      "compiler_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+    },
+    {
+      "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean"
+      ],
+      "seconds": 1.6402147949993378,
+      "returncode": 0,
+      "status": "PASS",
+      "source_sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+      "compiler_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+    },
+    {
+      "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.olean",
+        "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.lean"
+      ],
+      "seconds": 1.3818969550011388,
+      "returncode": 0,
+      "status": "PASS",
+      "source_sha256": "c576e71a7b54af911daa329b2a420d9fbc7c9980d265e5e6bd343b26b2c4a303",
+      "compiler_output": "'AEGIS.SourceRowDistributionV1.distribute_source_row' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+    }
+  ],
+  "actual_signed_tau_source": "NOT_RUN locally; queued for full original-import CI",
+  "actual_hB": "NOT_PROVED",
+  "unconditional_RH": "NOT_PROVED"
+}

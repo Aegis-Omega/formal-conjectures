@@ -134,6 +134,42 @@ theorem downscale_mem (p d : ℕ) {I : Iv} {x : ℝ} (h : I.Mem (p + d) x) :
   rw [div_div, ← he] at hlo hhi
   exact ⟨hlo.trans h.1, h.2.trans hhi⟩
 
+/-- Exact embedding into a scale with d additional fractional bits. -/
+def upscale (d : ℕ) (I : Iv) : Iv := ⟨I.lo * 2 ^ d, I.hi * 2 ^ d⟩
+
+theorem upscale_mem (p d : ℕ) {I : Iv} {x : ℝ} (h : I.Mem p x) :
+    (upscale d I).Mem (p + d) x := by
+  have he : ∀ z : ℤ, ((z * 2 ^ d : ℤ) : ℝ) / 2 ^ (p + d) = (z : ℝ) / 2 ^ p := by
+    intro z
+    push_cast
+    rw [pow_add]
+    field_simp
+  simpa only [Iv.Mem, upscale, he] using h
+
+/-- Executable containment in a stored certificate interval. -/
+def contains (target evaluated : Iv) : Bool :=
+  decide (target.lo ≤ evaluated.lo) && decide (evaluated.hi ≤ target.hi)
+
+theorem mem_of_contains (p : ℕ) {target evaluated : Iv} {x : ℝ}
+    (hc : contains target evaluated = true) (hx : evaluated.Mem p x) :
+    target.Mem p x := by
+  simp only [contains, Bool.and_eq_true, decide_eq_true_eq] at hc
+  have hp : (0 : ℝ) ≤ 2 ^ p := by positivity
+  exact ⟨(div_le_div_of_nonneg_right (by exact_mod_cast hc.1) hp).trans hx.1,
+    hx.2.trans (div_le_div_of_nonneg_right (by exact_mod_cast hc.2) hp)⟩
+
+/-- Pure finite output-table comparison; contains no analytic assumption. -/
+def tableCheck (n : ℕ) (target evaluated : Fin n → Fin n → Iv) : Bool :=
+  (List.finRange n).all fun i => (List.finRange n).all fun j => contains (target i j) (evaluated i j)
+
+theorem tableCheck_sound {n : ℕ} (p : ℕ) (target evaluated : Fin n → Fin n → Iv)
+    (a : Fin n → Fin n → ℝ) (hc : tableCheck n target evaluated = true)
+    (ha : ∀ i j, (evaluated i j).Mem p (a i j)) :
+    ∀ i j, (target i j).Mem p (a i j) := by
+  simp only [tableCheck, List.all_eq_true, List.mem_finRange, forall_const] at hc
+  intro i j
+  exact mem_of_contains p (hc i j) (ha i j)
+
 end AEGIS.CvSIntervalMatrixProductV1
 #print axioms AEGIS.CvSIntervalMatrixProductV1.midpoint_error
 #print axioms AEGIS.CvSIntervalMatrixProductV1.dot_mem
@@ -142,3 +178,7 @@ end AEGIS.CvSIntervalMatrixProductV1
 #print axioms AEGIS.CvSIntervalMatrixProductV1.congruence_mem
 #print axioms AEGIS.CvSIntervalMatrixProductV1.hull_mem_left
 #print axioms AEGIS.CvSIntervalMatrixProductV1.downscale_mem
+
+#print axioms AEGIS.CvSIntervalMatrixProductV1.upscale_mem
+#print axioms AEGIS.CvSIntervalMatrixProductV1.mem_of_contains
+#print axioms AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound
