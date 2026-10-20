@@ -8,7 +8,8 @@ for p in sorted(w.glob('*.RECEIPT.json')):
  r=json.loads(p.read_text());src=w/(r['module']+'.lean');log=w/r['log']
  if r['status']=='PASS' and r['source_sha256']==digest(src) and r['log_sha256']==digest(log):records.append(r)
 passed={r['module'] for r in records}
-for n in ['CvSCachedSourceProductV1.lean','generate_source_products.py','replay_source_products.py','save_actual_input_checkpoint.py']:shutil.copyfile(w/n,d/n)
+for p in w.glob('*.py'):shutil.copyfile(p,d/p.name)
+for n in ['CvSCachedSourceProductV1','CvSCachedPointV1','CvSCachedSliceV1','CvSSourceQNormalizeV1','CvSSourceProductAllV1','CvSSourceQAllV1','CvSSourceQRejectV1','CvSActualLiteralInputsV1','CvSActualBasisBudgetV1']:shutil.copyfile(w/(n+'.lean'),d/(n+'.lean'))
 with zipfile.ZipFile(d/'ACTUAL_INPUT_SOURCES.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p in sorted(w.glob('*.lean')):z.write(p,p.name)
  z.write(w/'EXACT_SOURCE_BRIDGE_INPUTS.json','EXACT_SOURCE_BRIDGE_INPUTS.json')
