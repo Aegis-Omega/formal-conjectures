@@ -1,0 +1,37 @@
+{
+  "base_commit": "0deb38e2bb30754ef160e3ce30766cb557369d5b",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean"
+  ],
+  "LEAN_PATH_prefix": [
+    "/workspace/aegis-row-budget-bridge",
+    "/workspace/aegis-research-execution/integration"
+  ],
+  "seconds": 2.1109396629999537,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "c7fc4be497fde5e422fd12b139547ff2bfd2ea1eab65d07141848bd4ea34b316",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "compiler_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "roots": 6,
+  "scope": "Uniform soundness of midpoint-radius matrix multiplication, congruence, symmetric hull and outward downscaling. Actual CvS table instantiation remains separate.",
+  "interval_dependency": {
+    "original_sha256": "9aa8cbde778f4be6464305e05ae0310e3786f04a3ff4b149a7469c90d2b41390",
+    "native_sha256": "fe2fb10a263876f1451c7a46c4e5762fc0f23bcff33d061e13d71e4d7b698979",
+    "mathematical_body": "BYTE_IDENTICAL; only umbrella import replaced by two narrower Mathlib imports",
+    "axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+}
