@@ -387,6 +387,9 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSTriangularTransportV1.olean" research/rh/feshbach_lean_v1/CvSTriangularTransportV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSRealBasisBoundV1.olean" research/rh/feshbach_lean_v1/CvSRealBasisBoundV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSProjectedBasisL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/FastKronV1.olean" research/rh/feshbach_lean_v1/FastKronV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryFastL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryFastL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryReplayL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -493,6 +496,13 @@ jobs:
           names += ['CvSTriangularTransportV1.upper_triangular_surjective']
           names += ['CvSRealBasisBoundV1.' + n for n in ['real_row_normSq_le', 'real_matrix_normSq_le', 'frobenius_pos_of_entry']]
           names += ['CvSProjectedBasisL12V1.' + n for n in ['certR_upper', 'certR_diag_ne_zero', 'rCoeff_diag_ne_zero', 'R_basis_surjective', 'basisFrobenius_pos', 'R_basis_normSq_bound', 'R_basis_frobenius_bound', 'original_atom_coercivity_of_basis', 'original_atom_coercivity_of_checked_source', 'hlow_of_checked_source']]
+          names += ['FastKronV1.' + n for n in [
+              'packS_eq', 'ldotS_eq', 'unpackZ_getD', 'unpackR_getD', 'transC_eq', 'transP_getD']]
+          names += ['CvSProjectedEntryFastL12V1.' + n for n in [
+              'xsF_getD', 'xpF_getD', 'hpF_getD', 'row_value_of', 'ivF_ivOk', 'rowOk_of_chunk',
+              'bigCheck_of_rows', 'rows_ok_of_chunks']]
+          names += ['CvSProjectedEntryReplayL12V1.' + n for n in [
+              'bigCheck_true', 'projectedEntry_mem_certI', 'projected_lower_L12']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
