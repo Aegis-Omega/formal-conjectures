@@ -108,7 +108,14 @@ jobs:
           set -euo pipefail
           python3 research/rh/m8_kernel_v1/replay.py provider
 
+      - name: Restore native CvS source checkpoint
+        id: pr90-ring-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: .lake/ringout
+          key: aegis-pr90-ring-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean', 'research/rh/feshbach_lean_v1/tools/**/*.py') }}-li35df682f
       - name: Replay source-exact CvS closure and compile both PR90 modules
+        if: steps.pr90-ring-cache.outputs.cache-hit != 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -137,6 +144,12 @@ jobs:
           if grep -E "sorryAx|declaration uses 'sorry'" pr90-replay.log; then exit 1; fi
           grep -F PR90_LEAN_KERNEL_REPLAY_PASS pr90-replay.log
 
+      - name: Save native CvS source checkpoint
+        if: steps.pr90-ring-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: .lake/ringout
+          key: aegis-pr90-ring-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean', 'research/rh/feshbach_lean_v1/tools/**/*.py') }}-li35df682f
       - name: Checkout pinned CvS proof source (read-only)
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
@@ -146,7 +159,18 @@ jobs:
           fetch-depth: 1
           persist-credentials: false
 
-      - name: Kernel-check PR90 plus CvS source-bound composition
+      - name: Restore kernel-proven bigCheck checkpoint
+        id: cvs-proof-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: |
+            .lake/ringout/FastKronV1.olean
+            .lake/ringout/CvSProjectedEntryFastL12V1.olean
+            .lake/ringout/CvSProjectedEntryReplayL12V1.olean
+            .lake/ringout/CvSLowCoercivityL12V1.olean
+            .lake/ringout/CvSRelativeBudgetL12V1.olean
+          key: aegis-pr90-bigcheck-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean') }}-df6077dab393
+      - name: Compile or reuse exact-source CvS proof modules
         shell: bash
         run: |
           set -euo pipefail
@@ -168,8 +192,30 @@ jobs:
               *) exit 1 ;;
             esac
             test "$(git hash-object "$f")" = "$expected"
-            lean -DwarningAsError=true -o "$RING/$name.olean" "$f" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+            if [[ "${{ steps.cvs-proof-cache.outputs.cache-hit }}" != "true" ]]; then
+              lean -DwarningAsError=true -o "$RING/$name.olean" "$f" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+            else
+              test -s "$RING/$name.olean"
+            fi
           done
+          echo CVS_KERNEL_MODULES_AVAILABLE
+      - name: Save kernel-proven bigCheck checkpoint
+        if: steps.cvs-proof-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: |
+            .lake/ringout/FastKronV1.olean
+            .lake/ringout/CvSProjectedEntryFastL12V1.olean
+            .lake/ringout/CvSProjectedEntryReplayL12V1.olean
+            .lake/ringout/CvSLowCoercivityL12V1.olean
+            .lake/ringout/CvSRelativeBudgetL12V1.olean
+          key: aegis-pr90-bigcheck-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean') }}-df6077dab393
+      - name: Kernel-check PR90 plus CvS source-bound composition
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
           cat > "$RUNNER_TEMP/CvSPR90ClaudeJoinProbeV1.lean" <<'LEAN'
           import CvSCheckedLowBridgeV1
           import CvSProjectedEntryReplayL12V1
@@ -200,7 +246,7 @@ jobs:
               (hRnorm : ∀ v, normSqCoeffs (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v) ≤ kappa * normSqCoeffs v)
               (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
               (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
-                 (m - T_trace / (2 * Real.pi)) * (certifiedMu / kappa)) :
+                 (m - T_trace / (2 * Real.pi)) * (AEGIS.CvSProjectedSchurBridgeL12V1.certifiedMu / kappa)) :
               ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
                 (m - T_trace / (2 * Real.pi)) ≤
                 2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
@@ -213,7 +259,7 @@ jobs:
               (hgap : 0 < m - T_trace / (2 * Real.pi))
               (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
               (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
-                 (m - T_trace / (2 * Real.pi)) * (certifiedMu / basisFrobenius)) :
+                 (m - T_trace / (2 * Real.pi)) * (AEGIS.CvSProjectedSchurBridgeL12V1.certifiedMu / basisFrobenius)) :
               ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
                 (m - T_trace / (2 * Real.pi)) ≤
                 2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
