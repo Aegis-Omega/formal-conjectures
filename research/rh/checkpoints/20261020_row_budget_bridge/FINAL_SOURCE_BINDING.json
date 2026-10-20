@@ -1,39 +1,47 @@
 {
-  "source_commit": "7879410cbe9854a856db00183afcb0d4eb74e1e8",
+  "repository": "tarikskalic33/formal-conjectures",
   "branch": "proof/rh-feshbach-schur-v1",
-  "timestamp_utc": "2026-10-20T12:19:03.925057+00:00",
-  "files": [
+  "source_snapshot_commit": "97782198bb7cdf288aafb7666cac91d14b1d68ab",
+  "source_exact_remote_bytes": [
     {
-      "path": "research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean",
-      "sha256": "be2a17f0d0f8451f21372755e989b1a7366ab6b440b40032a67383f23fd6970d",
-      "blob_sha": "a3a4d49e966b9699a211e307371648ed92243dbc",
-      "remote_readback": "EXACT_BYTES_PASS"
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean",
+      "sha256": "1af5117865deaca3765aa2532726850f89ad75874a5e45e917630ba03f1493c7",
+      "git_blob_sha": "2ccb3ec6329c1e1d0bfa68888da98790cf2f8556"
     },
     {
-      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean",
-      "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
-      "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09",
-      "remote_readback": "EXACT_BYTES_PASS"
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean",
+      "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+      "git_blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
     },
     {
-      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean",
-      "sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
-      "blob_sha": "2b22c661acd53e392d36b5955a1c20fba0763ee7",
-      "remote_readback": "EXACT_BYTES_PASS"
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean",
+      "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+      "git_blob_sha": "a8f4e25dba9aef87567d5b572782304f3773a289"
     },
     {
-      "path": "research/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_KERNEL_RECEIPT.json",
-      "sha256": "91c4003d480cc8330e39d6db84503e3257328dcc8b43767ed452a0bb5f27b413",
-      "blob_sha": "0f92aca82e771775bc8c60105005c06ae65d63de",
-      "remote_readback": "EXACT_BYTES_PASS"
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean",
+      "sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+      "git_blob_sha": "ff1c81854887730e29966f7c773b9f5c5ce55590"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalMixedV1.lean",
+      "sha256": "38221cf9a53a805ec7f80c9022b4702126682a6102f0fe3ac97bfd0a021292b5",
+      "git_blob_sha": "8040571ca4de226a16086946628ee65f5fbe627d"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/list_execution/RowBudgetListCell0Pilot.lean",
+      "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+      "git_blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
     }
   ],
-  "source_row_kernel_PASS_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
-  "source_row_kernel_PASS_run": 39417825478,
-  "new_signed_tau_import_CI": {
-    "id": 39419296326,
-    "status": "in_progress at report finalization; no PASS claimed"
+  "actual_source_ci": {
+    "run_id": 39425665414,
+    "sha": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+    "status": "IN_PROGRESS_NOT_PASS"
   },
+  "native_cell_source_commit": "83c96edf6d32d5fcb9c30afcf963d092eda52ac0",
+  "native_selected_graph_roots": 34,
+  "native_selected_graph_declarations": 27188,
   "unconditional_RH": "NOT_PROVED",
-  "actual_hB": "NOT_PROVED"
+  "unrelated_untracked_file_preserved_sha256": "354a915be730b80941fb9a5a029bc66b6e0e9a1c017650f728d49ed5f64ee004"
 }
