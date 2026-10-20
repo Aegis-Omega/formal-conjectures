@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "source_base_commit": "177dcd648c5497d923586f1d94eb701880389c04",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "context": "RHFixInterval mathematical body unchanged, explicit imports replace Mathlib umbrella. PackedGram similarly narrows imports; full original mathematical bodies are compiled, including complex soundness. Actual analytic CvS source imports are separately verified by original-import CI.",
+  "records": [
+    {
+      "original_source": "research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+      "compiled_source": "/workspace/formal-conjectures/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+      "source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+      "original_source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+      "mathematical_body_unchanged": true,
+      "imports_narrowed_only": false,
+      "command": "lake env lean -DwarningAsError=true -o /workspace/aegis-row-budget-bridge/CvSResidualCertificateV1.olean /workspace/formal-conjectures/research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean",
+      "status": "PASS",
+      "compiler_output": "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : \u2200 (C : \u211d),\n  0 \u2264 C \u2192 \u2200 (R : \u2115) (\u03b5 : \u211d), 0 < \u03b5 \u2192 \u2203 NP, R < NP \u2227 \u2200 (N : \u2115), NP \u2264 N \u2192 C / (\u2191N - \u2191R) < \u03b5\n'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nAEGIS.CvSResidualCertificateV1.residual_entry_le : \u2200 (x y e r : \u211d), |e| \u2264 r \u2192 x * y * e \u2264 r * (x ^ 2 + y ^ 2) / 2\nAEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : \u2200 (a c lo hi : \u211d),\n  lo \u2264 a \u2192 a \u2264 hi \u2192 |a - c| \u2264 max (c - lo) (hi - c)\n@AEGIS.CvSResidualCertificateV1.residual_quadratic_le : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (E R : \u03b9 \u2192 \u03b9 \u2192 \u211d) (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |E i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192 \u2200 (x : \u03b9 \u2192 \u211d), \u2211 i, \u2211 j, x i * x j * E i j \u2264 \u03b5 * \u2211 i, x i ^ 2\n@AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (x : \u03b9 \u2192 \u211d), 0 \u2264 \u2211 i, \u2211 j, x i * x j * A i j\n@AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (z : \u03b9 \u2192 \u2102), 0 \u2264 (\u2211 i, \u2211 j, (starRingEnd \u2102) (z i) * z j * \u2191(A i j)).re\n'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "original_source": "research/rh/feshbach_lean_v1/CvSPackedGramV1.lean",
+      "compiled_source": "/workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+      "source_sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+      "original_source_sha256": "cb1e6eff7d7b118d8a1b21b174f946e83de267d9ead56aa16ca9234049a4f489",
+      "mathematical_body_unchanged": true,
+      "imports_narrowed_only": true,
+      "command": "lake env lean -DwarningAsError=true -R /workspace/aegis-row-budget-bridge -o /workspace/aegis-row-budget-bridge/CvSPackedGramV1.olean /workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+      "status": "PASS",
+      "compiler_output": "'AEGIS.CvSPackedGramV1.pack_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_core' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.gramEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowErr_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowsOk_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.check_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilbIv_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilb8_check' depends on axioms: [propext]\n'AEGIS.CvSPackedGramV1.hilbert8_posDef' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "original_source": "research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "compiled_source": "/workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+      "original_source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+      "mathematical_body_unchanged": true,
+      "imports_narrowed_only": false,
+      "command": "lake env lean -DwarningAsError=true -o /workspace/aegis-row-budget-bridge/CvSRelativeRowCertificateL12V1.olean /workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "status": "PASS",
+      "compiler_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]\n'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms\n"
+    }
+  ]
+}
