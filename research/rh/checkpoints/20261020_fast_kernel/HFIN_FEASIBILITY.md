@@ -1,11 +1,17 @@
 # Cross-row budget and Krein gap at L = 6/5: numerical feasibility (2026-10-20)
 
-Status: float numerics, untrusted, no certificate. One window only. Not RH.
+Status: validated numerics, not a Lean certificate. One window only. Not RH.
 
 ## Verdict
 
-`hfin` together with `hlow` is numerically feasible at L = 6/5, with a margin of about 1.4–1.9×.
-It needs two conditions:
+All numerical premises of `CvSWindowL12V1.window_L12` pass a validated numerical check (§5):
+
+- `hcert` holds for every t, with the bisection bound on [0, 500] and an envelope bound beyond 500.
+- The trace bound gives a gap m − T/(2π) ≥ 1.2199.
+- The relative budget `50·Q_CvS − B ⪰ 0` holds with the existing Lean `rowTail`, at NP = 2000.
+  It is robust to the widths of the certified boxes, and it needs a gap ≥ 1.0554.
+
+The float exploration below found the route. It needs two conditions:
 
 1. The budget must be measured against `Q_CvS`, using `CvSRelativeBudgetL12V1.hlow_L12_relative`,
    not against `‖c‖²`.
@@ -82,10 +88,51 @@ The best Krein gap is 1.32. Against each row-budget route:
 | new tail-Gram lemma, NP = 400 | 0.96 | 1.4× |
 | tail-Gram lemma and \|τ\| ≤ 12, NP = 200 | 0.70 | 1.9× |
 
+## 5. Validated check
+
+These checks are rigorous for their inputs. The node values of ScertM and of τ come from the
+mpmath digamma at 30–40 digits. For k ≤ 70 the τ values agree with the certified boxes.
+
+### `tools/validate_krein_l12.py sol.npz`
+
+The input `sol.npz` comes from `krein_gap_l12.py 1.25 0.05 40 500 0.02 0.05 sol.npz`.
+F = Wt(S − m + s) + K is the `hcert` integrand.
+
+- **Cells on [0, 500].** On each cell, F ≥ min(F(a), F(b)) − w²/8 · sup|F''|. The supremum is
+  bounded with:
+  - |K'''| ≤ Σ|a_j|·2h(u_j + h)³ + Σ_j |d_j|·Σ_i C(3,i)·(j)_i·t^{j−i}·L^{3−i}, using the hat
+    Fourier representation;
+  - |S'| ≤ (4/t² + π/t)/2 + 2.08 for t ≥ 2, and 10.7 otherwise (ζ(2,1/4)/2 + 2.073 = 10.672);
+  - |S''| ≤ (16/t³ + 8/t²)/4 + 2.01 for t ≥ 2, and 34.4 otherwise (ζ(3,1/4)/2 + 2.002 = 34.334).
+
+  Cells that fail are bisected.
+- **Tail t ≥ 500.** Re ψ(1/4 + it/2) is increasing (Im ψ' < 0), and the H and d terms are bounded
+  by explicit envelopes.
+- **Trace T.** T is bounded above on a 0.002 grid with trialDist' ≤ 2√(LT⁴/3) < 1.67.
+
+Result: PASS. 27157 cells are verified, with min (lower bound)/Wt = 1.05e-4. The tail margin is
+0.05, T ≤ 4.5874, and **m − T/(2π) ≥ 1.2199**.
+
+### `tools/validate_rows_l12.py . 2000 2 3 50 0.0000003`
+
+- **B, the finite rows.** These are the rows |m| ≤ 2000, with lam the rounded projection. Any lam
+  is admissible.
+- **B, the tail.** The existing `rowTail M (6/5) F a 2 (tauBound 3) 70 2000` is bounded by a
+  quadratic majorant, with ε = 3.
+- **Arithmetic.** All products are exact integers at scale 2^100. The final LDLᵀ of
+  50·Q_CvS − B runs at 80 digits.
+- **Robustness.** The check also holds under any error of operator norm ≤ 3e-7, both in the
+  low-block entries and in the entries of the outside rows. The certified τ and diagonal boxes
+  give at most 2.3e-7 inside (twice λ_max of the box radii) and 2.6e-7 outside (a Frobenius
+  bound).
+
+Result: PASS. All 139 pivots are > 0, with minimum 108.29. κ* = 50 needs a gap ≥ 1.0554, and the
+Krein gap is 1.2199: a margin of 1.16×.
+
 ## What a certificate still needs
 
-- **Row budget:** certify `κ·Q_CvS − B ⪰ 0` with κ ≈ 40–45, a 139×139 matrix inequality for the
-  packed checker. B also needs τ_k enclosures up to k ≈ NP + 70: up to about 2070 for the
+- **Row budget:** certify `50·Q_CvS − B ⪰ 0` in Lean (it passes the validated check in §5), a
+  139×139 matrix inequality for the packed checker. B also needs τ_k enclosures up to k ≈ NP + 70: up to about 2070 for the
   existing lemma, or about 470 with a tail-Gram lemma.
 - **Krein certificate:** prove `hcert` rigorously for all t, either with interval arithmetic in
   t or with a Lipschitz bound between grid points. The LP coefficients reach about 2e7, so the

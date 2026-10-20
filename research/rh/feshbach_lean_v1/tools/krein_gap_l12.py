@@ -12,7 +12,8 @@ t >= tmax the constraint is replaced by an envelope bound (ScertM >= Re psi(1/4 
 log pi - 2.25, |F(hat)| <= min(h, 4/(h t^2))). The optimum is re-checked on a 5x finer grid up
 to 2 tmax.
 
-usage: python3 -I krein_gap_l12.py L h J tmax dt MU      e.g. 1.25 0.05 40 500 0.01 0.05
+usage: python3 -I krein_gap_l12.py L h J tmax dt MU [out.npz]   e.g. 1.25 0.05 40 500 0.02 0.05 sol.npz
+The optional out.npz stores the solution for validate_krein_l12.py.
 """
 import sys
 
@@ -85,6 +86,8 @@ def main():
     m, c, s = res.x[0], res.x[1:1 + p], res.x[1 + p:1 + p + n]
     T = 2 * np.sum(wq * s * TD)
     print("m = %.4f  T = %.4f  gap m - T/(2 pi) = %.4f" % (m, T, m - T / (2 * np.pi)))
+    if len(sys.argv) > 7:
+        np.savez(sys.argv[7], m=m, c=c, s=s, ts=ts, L=L, h=h, J=J, TMAX=TMAX, DT=DT, MU=MU)
     tv = np.arange(0, 2 * TMAX, DT / 5)
     sv_ = np.interp(tv, ts, S, right=np.nan)
     near = (tv < 60) | np.isnan(sv_)
