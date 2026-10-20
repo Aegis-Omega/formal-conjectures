@@ -77,6 +77,7 @@ jobs:
           replay CvSMidpointRadiusV1 research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean
           replay CvSRowBudgetAlgebraV1 research/rh/checkpoints/20261020_row_budget/CvSRowBudgetAlgebraV1.lean
           replay CvSRelativeRowCertificateL12V1 research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean
+          replay CvSRowBudgetGramBridgeV1 research/rh/checkpoints/20261020_row_budget/CvSRowBudgetGramBridgeV1.lean
           echo "KERNEL_SOURCE_REPLAY_PASS"
 
       - name: Strict axiom audit (source-bound, no RH claim)
@@ -94,6 +95,9 @@ jobs:
             'CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg',
             'CvSRelativeRowCertificateL12V1.row_budget_check_true',
             'CvSRelativeRowCertificateL12V1.row_budget_margin_positive',
+            'CvSRowBudgetGramBridgeV1.budgetEnergy_eq_matrix',
+            'CvSRowBudgetGramBridgeV1.budgetMatrix_symm',
+            'CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv',
           }
           if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
             raise SystemExit('PROOF_HOLE_DETECTED')
@@ -110,6 +114,6 @@ jobs:
           print('NATIVE_ROW_BUDGET_REPLAY_PASS; ACTUAL_CVS_ENCLOSURE=NOT_PROVED; RH=NOT_PROVED')
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as f:
             f.write('## Q80 Native Lean replay — PASS\n')
-            f.write('Seven source modules replayed with pinned Lean/Mathlib; six declared targets audited.\n\n')
+            f.write('Eight source modules replayed with pinned Lean/Mathlib; nine declared targets audited.\n\n')
             f.write('Actual CvS analytic interval enclosure and RH remain **NOT PROVED**.\n')
           PY
