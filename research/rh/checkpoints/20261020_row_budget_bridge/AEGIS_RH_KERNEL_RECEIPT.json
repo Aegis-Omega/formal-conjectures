@@ -89,9 +89,39 @@
     "signed_tau_and_extended_layer": {
       "id": 39419296326,
       "sha": "d69f8f242f258166e29a98d6fac8c32a4a3ab6b0",
-      "status": "in_progress",
-      "conclusion": null,
-      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39419296326"
+      "status": "PASS",
+      "conclusion": "success",
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39419296326",
+      "job_id": 118621258249,
+      "log_path": "CI_d69f8f24_SIGNED_TAU_AND_INTERVAL_PASS.log",
+      "log_sha256": "50fd44f4fce45ae41fbd0b19e38d8249cf63cfee2c9c8fc92c9023980c399f1a",
+      "audited_roots": 23,
+      "emitted_audit_lines": [
+        "2026-10-20T12:38:39.0192434Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0196435Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_off ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0197366Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0198066Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.product_error ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0200447Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.sum_product_error ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0202310Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_enclosure ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0203922Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0205449Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRationalIntervalV1.rationalRange_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0206276Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.midpoint_error ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0208297Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.dot_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0209613Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0211661Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.congruence_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0212374Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.hull_mem_left ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0213762Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.downscale_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0214747Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.upscale_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0215455Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.mem_of_contains ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0217090Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0217779Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.point_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0219340Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0220738Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0221450Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.positive_mem ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0222494Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_bounds ['Classical.choice', 'Quot.sound', 'propext']",
+        "2026-10-20T12:38:39.0223574Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_interval ['Classical.choice', 'Quot.sound', 'propext']"
+      ],
+      "current_source_bytes_match_verified_commit": true
     }
   },
   "remaining_actual_budget": "Source input instantiation and executable output-table check; not supplied by abstract envelope theorem alone",
@@ -104,6 +134,6 @@
     ],
     "source": "CvSTauSigned150L12V1.lean",
     "source_sha256": "26eca82e15f8e407226f6881016790b7ade284bb58df7bb892a8d19c42a94236",
-    "kernel_status": "NOT_RUN locally; full actual-import CI in_progress"
+    "kernel_status": "PASS: original-import source CI 39419296326; three roots with only standard axioms"
   }
 }
