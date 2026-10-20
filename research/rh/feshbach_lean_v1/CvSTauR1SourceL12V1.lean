@@ -350,7 +350,8 @@ theorem tauSourceCheckR1_all {k : ℕ} (hk1 : 71 ≤ k) (hk : k ≤ 150) :
   have h' := h ((k - 71) % 5) (Nat.mod_lt _ (by norm_num))
   have hi : 5 * ((k - 71) / 5) + (k - 71) % 5 = k - 71 := by omega
   have he : 5 * ((k - 71) / 5) + (k - 71) % 5 + 71 = k := by omega
-  simpa only [hi, he] using h'
+  have hkcancel : k - 71 + 71 = k := by omega
+  simpa only [hi, hkcancel] using h'
 
 /-- All new source-integral intervals, from the original analytic soundness theorem. -/
 theorem source_integral_mem_R1 {k : ℕ} (hk1 : 71 ≤ k) (hk : k ≤ 150) :

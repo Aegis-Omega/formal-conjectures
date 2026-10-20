@@ -292,7 +292,8 @@ theorem tauFullCheckR1_all {k : ℕ} (hk1 : 71 ≤ k) (hk : k ≤ 150) :
   have h' := h ((k - 71) % 5) (Nat.mod_lt _ (by norm_num))
   have hi : 5 * ((k - 71) / 5) + (k - 71) % 5 = k - 71 := by omega
   have he : 5 * ((k - 71) / 5) + (k - 71) % 5 + 71 = k := by omega
-  simpa only [hi, he] using h'
+  have hkcancel : k - 71 + 71 = k := by omega
+  simpa only [hi, hkcancel] using h'
 
 /-- Exact target for R1: rational enclosure of τ_k, 71 ≤ k ≤ 150, for any M ≥ 3. -/
 theorem tau_mem_R1 {M : ℕ} (hM : 3 ≤ M) {k : ℕ}
