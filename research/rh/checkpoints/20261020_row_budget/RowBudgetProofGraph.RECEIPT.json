@@ -1,0 +1,15 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/aegis-row-budget-recovery/RowBudgetProofGraph.lean"
+  ],
+  "seconds": 103.91307587799997,
+  "returncode": 0,
+  "status": "PASS",
+  "compiler_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]\n'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms\nNATIVE_PROOF_GRAPH_DECLARATIONS 13263\n",
+  "source_sha256": "c30f98c4299c521b0e4f6716211d57005b6dca8aa645edf8b895acfe576ecf4b",
+  "scope": "Combined 25-root extracted native proof closure; actual CvS interval bridge remains separate"
+}

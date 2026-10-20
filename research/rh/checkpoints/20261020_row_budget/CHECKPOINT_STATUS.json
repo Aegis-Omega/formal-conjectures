@@ -8,8 +8,8 @@
     "propext"
   ],
   "actual_row_budget": "NOT_KERNEL_VERIFIED",
-  "uniform_product_lemmas": "Native source log PASS; final receipt replay pending",
-  "row_energy_identity": "See compiler log; do not treat as PASS unless receipt says PASS",
+  "uniform_product_lemmas": "2/2 native PASS, standard axioms only",
+  "row_energy_identity": "Native PASS, standard axioms only",
   "input_archive": [
     {
       "path": "ROW_BUDGET_DATA.json",
@@ -26,5 +26,22 @@
       "bytes": 1807,
       "sha256": "32b194cd4fb6e329cae77215cb02f9419665edd96a0cbd2dfeb792875777da67"
     }
-  ]
+  ],
+  "signed_matrix_budget": "Native PASS, standard axioms only",
+  "complete_native_graph": {
+    "status": "PASS",
+    "roots": 25,
+    "declarations": 13263,
+    "modules": 503,
+    "missing_dependencies": 0,
+    "proof_cycles": 0,
+    "metadata_groups": 442,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "raw_proof_graph": "NATIVE_ROW_BUDGET_GRAPH.zip",
+    "replay": "RowBudgetProofGraph.RECEIPT.json"
+  }
 }

@@ -16,5 +16,32 @@ theorem row_energy_eq {ι κ : Type*} [Fintype ι] [Fintype κ]
   simpa [mul_ite, Complex.re_sum, Complex.mul_conj, Complex.sq_norm, Complex.normSq_apply] using
     (congrArg Complex.re h).symm
 
+/-- A signed matrix certificate supplies the relative budget for every complex vector.
+No absolute bounds on individual mixed Gram terms are required. -/
+theorem relative_budget_of_matrix_nonneg {ι : Type*} [Fintype ι]
+    (A B : ι → ι → ℝ) (kappa : ℝ)
+    (h : ∀ v : ι → ℂ, 0 ≤
+      (∑ i, ∑ j, v i * conj (v j) * ((kappa * A i j - B i j : ℝ) : ℂ)).re) :
+    ∀ v : ι → ℂ,
+      (∑ i, ∑ j, v i * conj (v j) * (B i j : ℂ)).re ≤
+        kappa * (∑ i, ∑ j, v i * conj (v j) * (A i j : ℂ)).re := by
+  intro v
+  have hc : (∑ i, ∑ j, v i * conj (v j) * ((kappa * A i j - B i j : ℝ) : ℂ)) =
+      (kappa : ℂ) * (∑ i, ∑ j, v i * conj (v j) * (A i j : ℂ)) -
+        ∑ i, ∑ j, v i * conj (v j) * (B i j : ℂ) := by
+    simp only [Complex.ofReal_sub, Complex.ofReal_mul, mul_sub,
+      Finset.sum_sub_distrib, Finset.mul_sum]
+    congr 1
+    apply Finset.sum_congr rfl
+    intro i _
+    apply Finset.sum_congr rfl
+    intro j _
+    ring
+  have hp := h v
+  rw [hc, Complex.sub_re, Complex.re_ofReal_mul] at hp
+  exact sub_nonneg.mp hp
+
 end AEGIS.CvSRowBudgetAlgebraV1
 #print axioms AEGIS.CvSRowBudgetAlgebraV1.row_energy_eq
+
+#print axioms AEGIS.CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg
