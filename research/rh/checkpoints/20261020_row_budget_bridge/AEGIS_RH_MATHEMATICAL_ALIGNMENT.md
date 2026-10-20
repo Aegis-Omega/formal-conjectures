@@ -11,7 +11,7 @@ This is a scoped research result, not an unconditional RH proof. Lean is 4.33.1 
 
 PR #89 is still `5d7425dcc6f4137b2cf3f57bc953504135a388e6`; PR #90 is still `7fc73ce1ae0eb2afbaac778ae8ca8e7fbac07fcc` on the API reread. Work continues on the existing Feshbach branch. No branch, definition, factor or stored interval was replaced. Final published source hashes are recorded in `FINAL_SOURCE_BINDING.json`.
 
-The original-import actual source continuation passed CI 39455515829 at `177dcd648c5497d923586f1d94eb701880389c04`. Its 37 explicit workflow audits pass; the additional emitted `sourceZ_mem` audit also contains only standard axioms. The subsequent first-column continuation is at `f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1`, with CI 39463716271 tracked separately. A previous CI failure is never relabelled as a PASS.
+The original-import actual source continuation passed CI 39455515829 at `177dcd648c5497d923586f1d94eb701880389c04`. Its 37 explicit workflow audits pass; the additional emitted `sourceZ_mem` audit also contains only standard axioms. The subsequent first-column continuation is at `f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1`, with all original-import source modules compiled in CI 39463716271. That run failed only because its final Python audit searched the wrong log for two packed soundness declarations. All 105 relevant compiler axiom outputs pass the corrected audit. The overall run remains FAIL; the repaired workflow records validated dependency reuse separately from fresh compilation.
 
 ## Local Krein certificate and the universal target
 
@@ -55,6 +55,8 @@ The new packed extension reuses `CvSPackedGramV1.gramEntry_eq`. `packedIntervalD
 
 The existing consumer is `CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv`. It requires symmetry and **every** stored entry to enclose `40*A(i,j)-budgetMatrix Z G(i,j)` at Q80. Our first-column result supplies a checked computation for one column; it does not discharge this universal-over-entries premise. The literal Q96 inputs must be identified with the actual source formulas, all output entries must be covered, and the actual complex residual/tail must match the consumer.
 
+The existing `CvSGramTailV1.rows_gram_le` already bounds every outer cutoff N by a right side independent of N, under its explicit finite support, far-tau and positive Young-parameter hypotheses. That uniform tail theorem is preserved; it is not a missing all-frequency estimate. It controls frequency exhaustion for a fixed window, rather than supplying positivity at every window width.
+
 The next window consumer is `CvSWindowGramL12V1.window_L12_gram`. Even after the row budget it retains an all-real-t Krein certificate, integrability/trace hypotheses and the scalar Schur-gap inequality. Its conclusion covers packets with `2r≤6/5`, not every packet.
 
 The existing universal sharp target is exactly:
@@ -68,6 +70,18 @@ The existing universal sharp target is exactly:
 
 `RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget` proves equivalence with RH. This is an explicit remaining mathematical obligation, not a premise-free RH proof. Its hselect alternative chooses one certified reconstruction for each admitted source/decomposition; it does not bound every arbitrary decomposition. Absolute Schur bounds can lose cancellation; no uniform mixed-cost bound is inferred from the eleven-shift or any fixed matrix certificate.
 
+## Closing-route comparison
+
+| Route | Proved logical relation | Current decisive obligation |
+| --- | --- | --- |
+| Adaptive actual Schur selector hselect | Sufficient for RH; no converse or strict-strength claim is established here | For each admitted source packet, construct one exact reconstruction and its actual diagonal/mixed weights within 46688/65536. |
+| Sharp signed mixed budget | Exactly RH-equivalent by the existing source theorem | Prove the universal signed inequality from independent analytic information; the equivalence supplies no sign. |
+| Local Krein positivity plus transfer | The existing bounded-support theorem is a scoped local result | Supply a cofinal/all-window producer, or a valid density/continuity argument controlling the form on every finite combination. |
+
+A spanning or dense collection of individually positive vectors is insufficient by itself: the real symmetric matrix [[1,2],[2,1]] is positive on each coordinate vector, but its quadratic form at (1,-1) is -2. This is a countertest to the proposed inference, not a counterexample about the actual Weil form. Likewise, a successful finite certificate gives no all-dimension or all-window quantifier.
+
+PR90's existing `radius_row_real` bounds projected-entry approximation radii by 1/230000. That is a different matrix quantity from the cross-residual-plus-tail hB. It cannot be substituted for the missing hI/hB producer. Cached exact arithmetic changes execution cost, not these analytic Schur budgets.
+
 ## Verification boundary
 
-The native selected graph now contains 102 roots, 28,139 declarations and 1,058 located source modules. It has zero missing dependencies and zero theorem/definition cycles; 684 inductive/constructor metadata groups are separately condensed. All axioms are among propext, Classical.choice and Quot.sound. Native RHFixInterval and PackedGram copies change only imports; their complete mathematical bodies are byte-identical after import-line removal. Original-import analytic CI is a separate receipt. No independent human mathematical sign-off or unconditional RH theorem is claimed.
+The native selected graph now contains 102 roots, 28,139 declarations and 1,058 located source modules. It has zero missing dependencies and zero theorem/definition cycles; 684 inductive/constructor metadata groups are separately condensed. All axioms are among propext, Classical.choice and Quot.sound. Native RHFixInterval and PackedGram copies change only imports; their complete mathematical bodies are byte-identical after import-line removal. Original-import analytic CI is a separate receipt. The new packed closure was also freshly compiled from the published archive in an isolated custom-module directory: 11 modules, same host, no pre-existing custom module cache. No independent human mathematical sign-off or unconditional RH theorem is claimed.

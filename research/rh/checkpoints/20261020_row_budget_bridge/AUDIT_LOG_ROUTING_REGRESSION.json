@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "scope": "Audit-plumbing regression, not new mathematical proof or a completed CI run",
+  "positive": "105 named audits accepted when routed to their actual separate compiler logs",
+  "negative": [
+    {
+      "test": "missing_packed_log",
+      "status": "REJECTED",
+      "reason": "MISSING_AXIOM_AUDIT AEGIS.CvSPackedGramV1.quad_lower"
+    },
+    {
+      "test": "sorry_in_packed_log",
+      "status": "REJECTED",
+      "reason": "SORRYAX_OR_PROOF_HOLE"
+    }
+  ]
+}

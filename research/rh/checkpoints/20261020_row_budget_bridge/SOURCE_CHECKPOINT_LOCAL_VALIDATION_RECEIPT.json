@@ -1,0 +1,748 @@
+{
+  "status": "PASS",
+  "source_artifact": {
+    "id": 12286013964,
+    "bytes": 174309882,
+    "sha256": "8f251ff3df3412556be71d45df7988c2f3a1e98301639d8ee497e9f5a3df3097"
+  },
+  "transport": "Connected GitHub artifact tool supplied the original ZIP; bytes match the upload SHA256. Direct shell artifact download was blocked by the local network.",
+  "validation": {
+    "status": "SOURCE_IDENTICAL_DEPENDENCIES_REUSED",
+    "source_run": 39463716271,
+    "source_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "prior_math_step_outcome": "failure",
+    "prior_run_is_not_relabelled_success": true,
+    "validated_axiom_roots": [
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
+        "axioms": [
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    ],
+    "verified_binary_count": 166,
+    "source_tree_changes_checked": [
+      "M\t.github/workflows/rh-cvs-actual-row-replay.yml",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_EXACT_HEAD_PROOF_GRAPH.json",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_FINAL_DECISION.md",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_KERNEL_RECEIPT.json",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_LEAN_PATCH.diff",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_MATHEMATICAL_ALIGNMENT.md",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_Q16_CERTIFICATE.md",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_ZERO_COORDINATE_AUDIT.md",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/BASELINE.md",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/FINAL_SOURCE_BINDING.json",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/SOURCE_STATUS_MANIFEST.json",
+      "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/README.md",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/CvSPackedIntervalDotV1.lean",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/ExactBudgetRegression.lean",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/PACKED_INTERVAL_KERNEL_RECEIPT.json",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/PACKED_Z0_KERNEL_RECEIPT.json",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/README.md",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/RowBudgetPackedZ0Pilot.lean",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/exact-budget-regression.log",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/packed-interval-dot.log",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/packed-z0.log",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/regenerate_packed_z0.py"
+    ],
+    "source_manifest_sha256": "aa623677f0992f78ae67c37f39351eff0141b5ae1993749134e4950084fbd3fd",
+    "scope": "Previously kernel-compiled, source-identical dependencies. All 105 relevant axiom audits are present across the two original logs. Fresh import/type/axiom re-audit follows. No cached theorem is represented as newly source-compiled."
+  },
+  "scope": "Positive source/pin/binary/log/105-axiom validation, not a fresh local import of original Mathlib-umbrella modules. The new CI runs that import re-audit."
+}

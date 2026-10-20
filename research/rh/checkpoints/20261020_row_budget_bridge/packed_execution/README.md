@@ -6,3 +6,5 @@ Exact packed interval execution
 The actual unchanged 301-element residual column Z0 supplies a native kernel pilot. B=2^128 and base=2^280 satisfy the checked component and carry bounds. Kernel evaluation verifies the complete cache, computes the dot endpoints, proves equality to the old list evaluator, and rejects a one-unit corruption of the packed middle row. All six pilot audits pass; 3.440 seconds and 2,227,376 KiB maximum child RSS. This is a correctness pilot, not a measured full-matrix speedup or a full table/analytic/RH proof.
 
 The source is new work reusing the recovered library, not recovered Claude bytes. Current full original-import CI covers the first-column continuation separately; this packed extension is native-verified and not included in that CI run.
+
+The published source archive was subsequently replayed in an isolated custom-module directory. All 11 modules in the new packed pilot import closure compiled freshly on the same host with the pinned Mathlib cache; see ISOLATED_PACKED_REPLAY_RECEIPT.json. This is separate from an independent human review.

@@ -39,7 +39,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
@@ -57,7 +62,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
@@ -75,7 +85,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
@@ -93,7 +108,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
@@ -111,7 +131,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
@@ -129,7 +154,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
@@ -147,7 +177,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
@@ -165,7 +200,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
@@ -183,7 +223,12 @@
         "sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
         "blob_sha": "780b5b628ac45109defc1cf8c7937781b8df19b1"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalMatrixProductV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
@@ -201,7 +246,12 @@
         "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
         "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRowBudgetEnvelopeV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
@@ -219,7 +269,12 @@
         "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
         "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRowBudgetEnvelopeV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
@@ -237,7 +292,12 @@
         "sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
         "blob_sha": "a202d7259b6813c6733898c4f1c5a773f49b8b09"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRowBudgetEnvelopeV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
@@ -255,7 +315,12 @@
         "sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
         "blob_sha": "d03424cade9814928e75d2b70ee3727281de9944"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSOddSignedEnclosureV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
@@ -273,7 +338,12 @@
         "sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
         "blob_sha": "d03424cade9814928e75d2b70ee3727281de9944"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSOddSignedEnclosureV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
@@ -291,7 +361,12 @@
         "sha256": "93842354f31033bae21ddb3be528be8a896ae489f605b0534145da51f0754d78",
         "blob_sha": "0d3c9b1699245d61a36b1f13384f78896fd2dae0"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRationalIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.SourceRowDistributionV1.distribute_source_row",
@@ -309,7 +384,12 @@
         "sha256": "c576e71a7b54af911daa329b2a420d9fbc7c9980d265e5e6bd343b26b2c4a303",
         "blob_sha": "0a73242646284b21cc4378af304a697c41f0f1bd"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/SourceRowDistributionV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/SourceRowDistributionV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
@@ -325,7 +405,12 @@
         "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
         "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetStagedDotPilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
@@ -343,7 +428,12 @@
         "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
         "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetStagedDotPilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
@@ -361,7 +451,12 @@
         "sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
         "blob_sha": "5726604528a59273d096d9940713fb77056701fd"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetStagedDotPilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
@@ -379,7 +474,12 @@
         "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
         "blob_sha": "a8f4e25dba9aef87567d5b572782304f3773a289"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalDivideV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
@@ -397,7 +497,12 @@
         "sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
         "blob_sha": "a8f4e25dba9aef87567d5b572782304f3773a289"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSIntervalDivideV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
@@ -415,7 +520,12 @@
         "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
         "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFrequencyIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
@@ -433,7 +543,12 @@
         "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
         "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFrequencyIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
@@ -451,7 +566,12 @@
         "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
         "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFrequencyIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
@@ -469,7 +589,12 @@
         "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
         "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFrequencyIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
@@ -487,7 +612,12 @@
         "sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
         "blob_sha": "24230584cb36df2eae7f43a236ebc6ee97cd0416"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFrequencyIntervalV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
@@ -505,7 +635,12 @@
         "sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
         "blob_sha": "ff1c81854887730e29966f7c773b9f5c5ce55590"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSListIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
@@ -523,7 +658,12 @@
         "sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
         "blob_sha": "ff1c81854887730e29966f7c773b9f5c5ce55590"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSListIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSListIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
@@ -539,7 +679,12 @@
         "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
         "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetListCell0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
@@ -555,7 +700,12 @@
         "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
         "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetListCell0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
@@ -571,7 +721,12 @@
         "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
         "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetListCell0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
@@ -589,7 +744,12 @@
         "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
         "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetListCell0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
@@ -607,7 +767,12 @@
         "sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
         "blob_sha": "2e0d9302d0d8048b0d548bfb56515866141f556c"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetListCell0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetListCell0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
@@ -625,7 +790,12 @@
         "sha256": "38221cf9a53a805ec7f80c9022b4702126682a6102f0fe3ac97bfd0a021292b5",
         "blob_sha": "8040571ca4de226a16086946628ee65f5fbe627d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSListIntervalMixedV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSListIntervalMixedV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSNeSymmRegressionV1.reverse_ne",
@@ -639,7 +809,12 @@
         "sha256": "fe267da4f75f7949cf6f5e97fe69adbac67436a483ce026b08f97eb0f9e2ba6c",
         "blob_sha": "4d1d1de4454c5ccc36d76a7cc7ec7a3b4fbf4854"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSNeSymmRegressionV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSNeSymmRegressionV1.gram_symm",
@@ -657,7 +832,12 @@
         "sha256": "fe267da4f75f7949cf6f5e97fe69adbac67436a483ce026b08f97eb0f9e2ba6c",
         "blob_sha": "4d1d1de4454c5ccc36d76a7cc7ec7a3b4fbf4854"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSNeSymmRegressionV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSNeSymmRegressionV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
@@ -675,7 +855,12 @@
         "sha256": "7fb26fba57266552fe95417d516488c035861990797e90ca51149c292ccecfbc",
         "blob_sha": "137eb1bd72ae818a2cb9c24688517222c9c81301"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSColumnEnvelopeV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSColumnEnvelopeV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
@@ -693,7 +878,12 @@
         "sha256": "93a0e14a81c56731c80d26b1de607f983c798d511558f0559ae0ccaf96857cd1",
         "blob_sha": "a49825baabf3d576624cdc39433913af46d2c339"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFirstColumnCheckerV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFirstColumnCheckerV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
@@ -709,7 +899,12 @@
         "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
         "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch0.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
@@ -725,7 +920,12 @@
         "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
         "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch0.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
@@ -739,7 +939,12 @@
         "sha256": "d2d3f6def9464a11c87b57c68b055b8c94d5ecfec9ce866b334d4a9779867fb8",
         "blob_sha": "e94cac5bbfd04a0f13d2ddc7a0a6993828fb0268"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch0.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch0.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
@@ -755,7 +960,12 @@
         "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
         "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
@@ -771,7 +981,12 @@
         "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
         "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
@@ -785,7 +1000,12 @@
         "sha256": "4e213e582c38efa28f358f45a782b031b719f1b37f48a59d543d23d447e53e03",
         "blob_sha": "e6939a20517bd2cd2083a75dc6960dde833f7465"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
@@ -801,7 +1021,12 @@
         "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
         "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch2.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
@@ -817,7 +1042,12 @@
         "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
         "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch2.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
@@ -831,7 +1061,12 @@
         "sha256": "b5e0999518bf39a1afcc51d507dbbf48aa9bc3c56c25d234715748f982cd65ce",
         "blob_sha": "b08b7b5a9c481ec9ea7a8d634dbbc4f29a59eb25"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch2.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch2.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
@@ -847,7 +1082,12 @@
         "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
         "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch3.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
@@ -863,7 +1103,12 @@
         "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
         "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch3.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
@@ -877,7 +1122,12 @@
         "sha256": "3c747bed663918224176da79b5b9202e8de29572815fea70acc4d2ae88a68de6",
         "blob_sha": "260888188cf2cca551b1c78b6f4c6503a96dabb9"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch3.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch3.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
@@ -893,7 +1143,12 @@
         "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
         "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch4.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
@@ -909,7 +1164,12 @@
         "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
         "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch4.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
@@ -923,7 +1183,12 @@
         "sha256": "c251e39b3561bb6b66e69893ecadbf579cac1210f072830c875e30a274753d57",
         "blob_sha": "763a05b53bc64bcf5685492de45e1732d208875d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch4.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch4.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
@@ -939,7 +1204,12 @@
         "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
         "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch5.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
@@ -955,7 +1225,12 @@
         "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
         "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch5.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
@@ -969,7 +1244,12 @@
         "sha256": "7b8d57eea724f0330480c2e57f4ddcabe5c0435f24649119274063ba6ab1a17f",
         "blob_sha": "291b8ec6da06e64639f991c3a5302623e813205a"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch5.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch5.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
@@ -985,7 +1265,12 @@
         "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
         "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch6.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
@@ -1001,7 +1286,12 @@
         "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
         "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch6.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
@@ -1015,7 +1305,12 @@
         "sha256": "cff9fed1f0f382d408f04650a77388826d9361c51de8909d678d7a1252878591",
         "blob_sha": "7ec6053969a59dcfb387beb9f8ad39b100723149"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch6.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch6.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
@@ -1031,7 +1326,12 @@
         "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
         "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch7.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
@@ -1047,7 +1347,12 @@
         "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
         "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch7.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
@@ -1061,7 +1366,12 @@
         "sha256": "272816d574c549d82119f8460b524d03594ce5581d8428219dc6ffd2d8099445",
         "blob_sha": "9470ca8a28accf6eb597fd962ccb707005ad580f"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch7.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch7.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
@@ -1077,7 +1387,12 @@
         "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
         "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch8.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
@@ -1093,7 +1408,12 @@
         "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
         "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch8.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
@@ -1107,7 +1427,12 @@
         "sha256": "fa907e16dcf46da55ee5522449f23f68dff22abc58e16a1e9246e83fe6c594f2",
         "blob_sha": "3cd4011f2a797ca8693b1e9454cc4356e2416ace"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch8.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch8.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
@@ -1123,7 +1448,12 @@
         "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
         "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch9.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
@@ -1139,7 +1469,12 @@
         "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
         "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch9.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
@@ -1153,7 +1488,12 @@
         "sha256": "1a2a070c38d0bc08a6cc85c6067388dc7e632f59cd6d1c62474c8c072184befa",
         "blob_sha": "9dfd88ff9e1fff25c5d492c56037323e6d8273f6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch9.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch9.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
@@ -1169,7 +1509,12 @@
         "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
         "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch10.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
@@ -1185,7 +1530,12 @@
         "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
         "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch10.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
@@ -1199,7 +1549,12 @@
         "sha256": "644660483cacb5f911dcd24e85eec0c28d639bcfd682706987dfc3bcab1dfac7",
         "blob_sha": "2f331ba264373bda745c0f836ab2125aa2d7d18e"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch10.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch10.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
@@ -1215,7 +1570,12 @@
         "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
         "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch11.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
@@ -1231,7 +1591,12 @@
         "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
         "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch11.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
@@ -1245,7 +1610,12 @@
         "sha256": "314e436dbfbc983e13efadddee206927130e6ca250b0455fc0f6b85498d1eeb9",
         "blob_sha": "a8cd8f7a872122a8847df7af84f4200cfa2e3abf"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch11.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch11.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
@@ -1261,7 +1631,12 @@
         "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
         "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch12.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
@@ -1277,7 +1652,12 @@
         "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
         "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch12.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
@@ -1291,7 +1671,12 @@
         "sha256": "8650a563c7c623e32beb14efe9ac1cb6e6ffabdfb40d6f829d610a9ba2b4a96d",
         "blob_sha": "a117cb8696e7bd58ff17dc9d2afd7d9084244ad8"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch12.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch12.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
@@ -1307,7 +1692,12 @@
         "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
         "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch13.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
@@ -1323,7 +1713,12 @@
         "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
         "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch13.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
@@ -1337,7 +1732,12 @@
         "sha256": "24e5ebf326883a4bce8ada1213b7e447a0b7aadbcdea58c7dfe891fc174e9222",
         "blob_sha": "9af593c8686f3ea0e5928f683b5cd06a5ec0517d"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnBatch13.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnBatch13.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
@@ -1353,7 +1753,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
@@ -1369,7 +1774,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
@@ -1383,7 +1793,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
@@ -1401,7 +1816,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
@@ -1419,7 +1839,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
@@ -1436,7 +1861,12 @@
         "sha256": "ec5a14a80d24eaa401c3d28f867a682f493f456700a30ac66ae2fbe13ae8a804",
         "blob_sha": "51881383e158e09900348e1d56570fa2be960794"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetFirstColumnV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetFirstColumnV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
@@ -1452,7 +1882,12 @@
         "sha256": "3926c8c1a233b72642acdca43d84f4aeabd33ad538fb5cc3c893bf882e8481fb",
         "blob_sha": "a2b92a45eb7a102d4776e33cea2625d291a5648b"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFirstColumnRejectV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
@@ -1468,7 +1903,12 @@
         "sha256": "3926c8c1a233b72642acdca43d84f4aeabd33ad538fb5cc3c893bf882e8481fb",
         "blob_sha": "a2b92a45eb7a102d4776e33cea2625d291a5648b"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSFirstColumnRejectV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSFirstColumnRejectV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
@@ -1484,7 +1924,12 @@
         "sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
         "blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRelativeRowCertificateL12V1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
@@ -1498,7 +1943,12 @@
         "sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
         "blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSRelativeRowCertificateL12V1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/formal-conjectures/research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
@@ -1516,7 +1966,12 @@
         "sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
         "blob_sha": "5169f8ef689494f4342b68455b70c975aafb4a97"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedGramV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
@@ -1534,7 +1989,12 @@
         "sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
         "blob_sha": "5169f8ef689494f4342b68455b70c975aafb4a97"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedGramV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedGramV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedIntervalDotV1.packedDot_eq",
@@ -1552,7 +2012,12 @@
         "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
         "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq",
@@ -1570,7 +2035,12 @@
         "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
         "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq",
@@ -1586,7 +2056,12 @@
         "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
         "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq",
@@ -1604,7 +2079,12 @@
         "sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
         "blob_sha": "9bbc8510e0159fb08d700d6f295c99c084786581"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/CvSPackedIntervalDotV1.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/CvSPackedIntervalDotV1.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.packing_exact",
@@ -1620,7 +2100,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.components_bounded",
@@ -1636,7 +2121,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.carry_bound",
@@ -1652,7 +2142,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact",
@@ -1668,7 +2163,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached",
@@ -1686,7 +2186,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     },
     {
       "theorem": "AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing",
@@ -1702,7 +2207,12 @@
         "sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
         "blob_sha": "084d60c33b007b1c6e87f27f0d59c8e07e6d43d6"
       },
-      "status": "PASS"
+      "status": "PASS",
+      "source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+      "source_archive": "NATIVE_PACKED_COLUMN_GRAPH.zip",
+      "source_archive_member": "native_sources/RowBudgetPackedZ0Pilot.lean",
+      "native_compile_command": "lake env lean -DwarningAsError=true /workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean",
+      "compiler_context": "Native archive imports; exact options/additional command arguments and compiler output are in the relevant module receipt. Older proof receipts remain in the historical receipt and previous Git commits."
     }
   ],
   "first_column": {
@@ -2277,8 +2787,9 @@
     "run": 39463716271,
     "source_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
     "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39463716271",
-    "status": "IN_PROGRESS",
-    "scope": "Original CvS analytic DAG plus complete first-column continuation, 105 named audits; new packed interval extension is not included."
+    "status": "FAIL_AUDIT_LOG_ROUTING",
+    "scope": "Original CvS analytic DAG plus complete first-column continuation, 105 named audits; new packed interval extension is not included.",
+    "kernel_status": "ALL_SOURCE_MODULES_AND_105_NAMED_AXIOMS_PASS"
   },
   "historical_failed_CI": [
     {
@@ -2306,5 +2817,1709 @@
     "type": "unconditional_riemannHypothesis : RiemannHypothesis",
     "new_axioms": false,
     "changed_Mathlib_definition": false
+  },
+  "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+  "graph_sha256": "b6a5f0b57d7295e14d1c703b7ec3fa216cfbfb23d6245f85500cd644a1c966ca",
+  "native_source_archive_sha256": "082b96c8a35d3bf1b396eaba9a4deca4e38f3945cbcf777261e0aa4ec2ed97df",
+  "push_succeeded": true,
+  "immutable_source_readback": "FINAL_SOURCE_BINDING.json",
+  "historical_native_receipt": "HISTORICAL_NATIVE_RECEIPT_BEFORE_COLUMN.json",
+  "isolated_new_packed_replay": {
+    "status": "PASS",
+    "machine": "Same workspace host; isolated native custom-module directory, not independent human review",
+    "archive_sha256": "082b96c8a35d3bf1b396eaba9a4deca4e38f3945cbcf777261e0aa4ec2ed97df",
+    "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+    "lean": "4.33.1",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "scope": "New packed interval correctness and unchanged 301-element Z0 pilot, with their complete native custom import closure. Narrowed original-body import context; original-import first-column CI is separate.",
+    "modules": [
+      {
+        "module": "RHFixIntervalV1",
+        "source_sha256": "fe2fb10a263876f1451c7a46c4e5762fc0f23bcff33d061e13d71e4d7b698979",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/RHFixIntervalV1.olean",
+          "/workspace/aegis-packed-independent-replay/RHFixIntervalV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 2.294016613999702,
+        "compiler_output": "'AEGIS.RHFixIntervalV1.Iv.mem_mul' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RHFixIntervalV1.Iv.mem_add' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSResidualCertificateV1",
+        "source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSResidualCertificateV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSResidualCertificateV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 1.9654661069980648,
+        "compiler_output": "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : \u2200 (C : \u211d),\n  0 \u2264 C \u2192 \u2200 (R : \u2115) (\u03b5 : \u211d), 0 < \u03b5 \u2192 \u2203 NP, R < NP \u2227 \u2200 (N : \u2115), NP \u2264 N \u2192 C / (\u2191N - \u2191R) < \u03b5\n'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nAEGIS.CvSResidualCertificateV1.residual_entry_le : \u2200 (x y e r : \u211d), |e| \u2264 r \u2192 x * y * e \u2264 r * (x ^ 2 + y ^ 2) / 2\nAEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : \u2200 (a c lo hi : \u211d),\n  lo \u2264 a \u2192 a \u2264 hi \u2192 |a - c| \u2264 max (c - lo) (hi - c)\n@AEGIS.CvSResidualCertificateV1.residual_quadratic_le : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (E R : \u03b9 \u2192 \u03b9 \u2192 \u211d) (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |E i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192 \u2200 (x : \u03b9 \u2192 \u211d), \u2211 i, \u2211 j, x i * x j * E i j \u2264 \u03b5 * \u2211 i, x i ^ 2\n@AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (x : \u03b9 \u2192 \u211d), 0 \u2264 \u2211 i, \u2211 j, x i * x j * A i j\n@AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (z : \u03b9 \u2192 \u2102), 0 \u2264 (\u2211 i, \u2211 j, (starRingEnd \u2102) (z i) * z j * \u2191(A i j)).re\n'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSPackedGramV1",
+        "source_sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSPackedGramV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSPackedGramV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 3.2849209339983645,
+        "compiler_output": "'AEGIS.CvSPackedGramV1.pack_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_core' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.gramEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowErr_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowsOk_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.check_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilbIv_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilb8_check' depends on axioms: [propext]\n'AEGIS.CvSPackedGramV1.hilbert8_posDef' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSMidpointRadiusV1",
+        "source_sha256": "cf41e386ca1b9b003dda97ce8c2d49b031f26c46c6a0edf8c96d4471317f47e6",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSMidpointRadiusV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSMidpointRadiusV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 1.5804310409985192,
+        "compiler_output": "'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSIntervalMatrixProductV1",
+        "source_sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSIntervalMatrixProductV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSIntervalMatrixProductV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 2.311559486999613,
+        "compiler_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSListIntervalDotV1",
+        "source_sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSListIntervalDotV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSListIntervalDotV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 1.8235874229976616,
+        "compiler_output": "'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "CvSPackedIntervalDotV1",
+        "source_sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSPackedIntervalDotV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSPackedIntervalDotV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 1.8994858129990462,
+        "compiler_output": "'AEGIS.CvSPackedIntervalDotV1.packedDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq' depends on axioms: [propext]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq : \u2200 (p base bound : \u2115) (a b : List AEGIS.RHFixIntervalV1.Iv),\n  0 < a.length \u2192\n    b.length = a.length \u2192\n      AEGIS.CvSPackedIntervalDotV1.bounded bound a \u2192\n        AEGIS.CvSPackedIntervalDotV1.bounded bound b \u2192\n          a.length * a.length * (2 * bound * (2 * bound)) < base \u2192\n            AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b = AEGIS.CvSListIntervalDotV1.listDot p a b\n"
+      },
+      {
+        "module": "CvSRowBudgetEnvelopeV1",
+        "source_sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/CvSRowBudgetEnvelopeV1.olean",
+          "/workspace/aegis-packed-independent-replay/CvSRowBudgetEnvelopeV1.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 1.671700900002179,
+        "compiler_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "RowBudgetStagedDotPilot",
+        "source_sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/RowBudgetStagedDotPilot.olean",
+          "/workspace/aegis-packed-independent-replay/RowBudgetStagedDotPilot.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 4.782004921999032,
+        "compiler_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "RowBudgetListCell0Pilot",
+        "source_sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/RowBudgetListCell0Pilot.olean",
+          "/workspace/aegis-packed-independent-replay/RowBudgetListCell0Pilot.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 50.131913351997355,
+        "compiler_output": "'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+      },
+      {
+        "module": "RowBudgetPackedZ0Pilot",
+        "source_sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+        "command": [
+          "lake",
+          "env",
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/workspace/aegis-packed-independent-replay",
+          "-o",
+          "/workspace/aegis-packed-independent-replay/RowBudgetPackedZ0Pilot.olean",
+          "/workspace/aegis-packed-independent-replay/RowBudgetPackedZ0Pilot.lean"
+        ],
+        "returncode": 0,
+        "status": "PASS",
+        "seconds": 3.608661114001734,
+        "compiler_output": "'AEGIS.RowBudgetPackedZ0Pilot.packing_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.components_bounded' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.carry_bound' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing' depends on axioms: [propext]\n"
+      }
+    ],
+    "timestamp_utc": "2026-10-20T17:37:23.068548+00:00",
+    "max_child_rss_kib": 4543188
+  },
+  "audit_log_routing_repair": {
+    "status": "REGRESSION_PASS",
+    "reason": "Two existing packed soundness roots print to ring.log; the previous audit looked only at actual-row-bridge.log.",
+    "receipt": "AUDIT_LOG_ROUTING_REGRESSION.json"
+  },
+  "first_column_original_import": {
+    "status": "KERNEL_AND_NAMED_AXIOM_AUDIT_PASS",
+    "overall_CI_status": "FAIL",
+    "overall_CI_reason": "The original audit searched only actual-row-bridge.log; quad_lower and quad_lower_complex were correctly printed to ring.log.",
+    "source_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "run": 39463716271,
+    "job": 118769464394,
+    "compiler_scope": "All original-import source compilation commands completed; all 14 first-column batches and composition/rejection modules compiled successfully before the final Python audit ran.",
+    "audit_scope": "105 named compiler axiom outputs extracted from the completed exact-source job across both logs, independently checked by the corrected fail-closed audit. This does not relabel the failed CI run as successful.",
+    "axiom_roots": [
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
+        "axioms": []
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
+        "axioms": [
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
+        "axioms": [
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      },
+      {
+        "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
+        "axioms": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    ],
+    "audit_input_sha256": "e5b66808bb0be8891e92b710118335b15e222dbf0d4d7144b4e4d92e21f43062",
+    "URL": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39463716271"
+  },
+  "source_checkpoint_validation": {
+    "status": "PASS",
+    "source_artifact": {
+      "id": 12286013964,
+      "bytes": 174309882,
+      "sha256": "8f251ff3df3412556be71d45df7988c2f3a1e98301639d8ee497e9f5a3df3097"
+    },
+    "transport": "Connected GitHub artifact tool supplied the original ZIP; bytes match the upload SHA256. Direct shell artifact download was blocked by the local network.",
+    "validation": {
+      "status": "SOURCE_IDENTICAL_DEPENDENCIES_REUSED",
+      "source_run": 39463716271,
+      "source_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+      "prior_math_step_outcome": "failure",
+      "prior_run_is_not_relabelled_success": true,
+      "validated_axiom_roots": [
+        {
+          "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
+          "axioms": []
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
+          "axioms": [
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ],
+      "verified_binary_count": 166,
+      "source_tree_changes_checked": [
+        "M\t.github/workflows/rh-cvs-actual-row-replay.yml",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_EXACT_HEAD_PROOF_GRAPH.json",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_FINAL_DECISION.md",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_KERNEL_RECEIPT.json",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_LEAN_PATCH.diff",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_MATHEMATICAL_ALIGNMENT.md",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_Q16_CERTIFICATE.md",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/AEGIS_RH_ZERO_COORDINATE_AUDIT.md",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/BASELINE.md",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/FINAL_SOURCE_BINDING.json",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/NATIVE_PACKED_COLUMN_GRAPH.zip",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/SOURCE_STATUS_MANIFEST.json",
+        "M\tresearch/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/README.md",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/CvSPackedIntervalDotV1.lean",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/ExactBudgetRegression.lean",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/PACKED_INTERVAL_KERNEL_RECEIPT.json",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/PACKED_Z0_KERNEL_RECEIPT.json",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/README.md",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/RowBudgetPackedZ0Pilot.lean",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/exact-budget-regression.log",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/packed-interval-dot.log",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/packed-z0.log",
+        "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/packed_execution/regenerate_packed_z0.py"
+      ],
+      "source_manifest_sha256": "aa623677f0992f78ae67c37f39351eff0141b5ae1993749134e4950084fbd3fd",
+      "scope": "Previously kernel-compiled, source-identical dependencies. All 105 relevant axiom audits are present across the two original logs. Fresh import/type/axiom re-audit follows. No cached theorem is represented as newly source-compiled."
+    },
+    "scope": "Positive source/pin/binary/log/105-axiom validation, not a fresh local import of original Mathlib-umbrella modules. The new CI runs that import re-audit."
+  },
+  "CI_audit_repair": {
+    "status": "SOURCE_READY_AND_LOCAL_VALIDATION_PASS",
+    "mathematical_sources_changed": false,
+    "canonical_audit_script": "audit_source_rows.py",
+    "dependency_validation_script": "reuse_source_checkpoint.py",
+    "negative_regressions": "AUDIT_LOG_ROUTING_REGRESSION.json",
+    "description": "Source-identical archived compilation reuse is explicitly labelled; any source/pin/binary/log/axiom validation failure triggers the complete original source build."
   }
 }

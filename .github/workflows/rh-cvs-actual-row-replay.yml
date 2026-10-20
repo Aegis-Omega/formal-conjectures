@@ -10,6 +10,8 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/*.lean
       - research/rh/checkpoints/20261020_row_budget_bridge/list_execution/*.lean
       - research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
   workflow_dispatch:
 
 concurrency:
@@ -80,111 +82,93 @@ jobs:
         run: python3 research/rh/m8_kernel_v1/replay.py provider
       - name: Replay unchanged source DAG and actual row bridge
         id: replay
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
           RING="$GITHUB_WORKSPACE/.lake/ringout"
           export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
-          python3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \
-            research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log
-          for m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \
-                   CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do
-            lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
-          done
-          lean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
-          lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
-          lean -DwarningAsError=true -o "$RING/CvSActualCrossRowL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean 2>&1 | tee actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSMidpointRadiusV1.olean" research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSOddSignedEnclosureV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSOddSignedEnclosureV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSRationalIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRationalIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSListIntervalDotV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSListIntervalMixedV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalMixedV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetStagedDotPilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/RowBudgetStagedDotPilot.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetListCell0Pilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/RowBudgetListCell0Pilot.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSColumnEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSFirstColumnCheckerV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnCheckerV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSRelativeRowCertificateL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch0.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch0.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch2.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch2.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch3.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch3.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch4.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch4.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch5.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch5.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch6.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch6.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch7.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch7.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch8.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch8.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch9.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch9.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch10.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch10.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch11.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch11.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch12.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch12.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch13.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch13.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnV1.lean 2>&1 | tee -a actual-row-bridge.log
-          lean -DwarningAsError=true -o "$RING/CvSFirstColumnRejectV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnRejectV1.lean 2>&1 | tee -a actual-row-bridge.log
-          python3 - <<'PY'
-          import pathlib, re
-          log = pathlib.Path('actual-row-bridge.log').read_text()
-          names = [
-            'sourceKernel_diag', 'sourceKernel_off', 'sourceY_eq_actual_crossRow'
-          ]
-          names = ['AEGIS.CvSActualCrossRowL12V1.' + n for n in names]
-          names += ['AEGIS.CvSMidpointRadiusV1.product_error', 'AEGIS.CvSMidpointRadiusV1.sum_product_error', 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure', 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds', 'AEGIS.CvSRationalIntervalV1.rationalRange_mem', 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error', 'AEGIS.CvSIntervalMatrixProductV1.dot_mem', 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem', 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem', 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left', 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem', 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains', 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound', 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem', 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check', 'AEGIS.CvSTauSigned150L12V1.positive_mem', 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds', 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval']
-          names += ['AEGIS.CvSIntervalDivideV1.divPos_mem', 'AEGIS.CvSIntervalDivideV1.divInt_mem', 'AEGIS.CvSFrequencyIntervalV1.pi_bounds', 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds', 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_mem', 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem', 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem', 'AEGIS.CvSActualRowInputL12V1.gramRat_cast', 'AEGIS.CvSActualRowInputL12V1.gramUp_mem', 'AEGIS.CvSActualRowInputL12V1.gramUp_symm', 'AEGIS.CvSActualRowInputL12V1.diagonal_mem', 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem', 'AEGIS.CvSActualRowInputL12V1.sourceY_mem']
-          names += ['AEGIS.CvSActualRowInputL12V1.sourceZ_mem', 'AEGIS.CvSListIntervalDotV1.listDot_eq_dot', 'AEGIS.CvSListIntervalDotV1.listCongruence_eq', 'AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq', 'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact', 'AEGIS.RowBudgetStagedDotPilot.gram_source_dot', 'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot', 'AEGIS.RowBudgetListCell0Pilot.gram_source_exact', 'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact', 'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast', 'AEGIS.RowBudgetListCell0Pilot.original_eq_fast', 'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original', 'AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq', 'AEGIS.CvSFirstColumnCheckerV1.check_sound', 'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true', 'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive', 'AEGIS.RowBudgetFirstColumnBatch0.checked', 'AEGIS.RowBudgetFirstColumnBatch0.target_source', 'AEGIS.RowBudgetFirstColumnBatch0.row_order', 'AEGIS.RowBudgetFirstColumnBatch1.checked', 'AEGIS.RowBudgetFirstColumnBatch1.target_source', 'AEGIS.RowBudgetFirstColumnBatch1.row_order', 'AEGIS.RowBudgetFirstColumnBatch2.checked', 'AEGIS.RowBudgetFirstColumnBatch2.target_source', 'AEGIS.RowBudgetFirstColumnBatch2.row_order', 'AEGIS.RowBudgetFirstColumnBatch3.checked', 'AEGIS.RowBudgetFirstColumnBatch3.target_source', 'AEGIS.RowBudgetFirstColumnBatch3.row_order', 'AEGIS.RowBudgetFirstColumnBatch4.checked', 'AEGIS.RowBudgetFirstColumnBatch4.target_source', 'AEGIS.RowBudgetFirstColumnBatch4.row_order', 'AEGIS.RowBudgetFirstColumnBatch5.checked', 'AEGIS.RowBudgetFirstColumnBatch5.target_source', 'AEGIS.RowBudgetFirstColumnBatch5.row_order', 'AEGIS.RowBudgetFirstColumnBatch6.checked', 'AEGIS.RowBudgetFirstColumnBatch6.target_source', 'AEGIS.RowBudgetFirstColumnBatch6.row_order', 'AEGIS.RowBudgetFirstColumnBatch7.checked', 'AEGIS.RowBudgetFirstColumnBatch7.target_source', 'AEGIS.RowBudgetFirstColumnBatch7.row_order', 'AEGIS.RowBudgetFirstColumnBatch8.checked', 'AEGIS.RowBudgetFirstColumnBatch8.target_source', 'AEGIS.RowBudgetFirstColumnBatch8.row_order', 'AEGIS.RowBudgetFirstColumnBatch9.checked', 'AEGIS.RowBudgetFirstColumnBatch9.target_source', 'AEGIS.RowBudgetFirstColumnBatch9.row_order', 'AEGIS.RowBudgetFirstColumnBatch10.checked', 'AEGIS.RowBudgetFirstColumnBatch10.target_source', 'AEGIS.RowBudgetFirstColumnBatch10.row_order', 'AEGIS.RowBudgetFirstColumnBatch11.checked', 'AEGIS.RowBudgetFirstColumnBatch11.target_source', 'AEGIS.RowBudgetFirstColumnBatch11.row_order', 'AEGIS.RowBudgetFirstColumnBatch12.checked', 'AEGIS.RowBudgetFirstColumnBatch12.target_source', 'AEGIS.RowBudgetFirstColumnBatch12.row_order', 'AEGIS.RowBudgetFirstColumnBatch13.checked', 'AEGIS.RowBudgetFirstColumnBatch13.target_source', 'AEGIS.RowBudgetFirstColumnBatch13.row_order', 'AEGIS.RowBudgetFirstColumnV1.checked', 'AEGIS.RowBudgetFirstColumnV1.target_source', 'AEGIS.RowBudgetFirstColumnV1.row_order', 'AEGIS.RowBudgetFirstColumnV1.first_column_contains', 'AEGIS.RowBudgetFirstColumnV1.all_rows_covered', 'AEGIS.RowBudgetFirstColumnV1.first_column_mem', 'AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted', 'AEGIS.CvSFirstColumnRejectV1.reject_zero_target', 'AEGIS.CvSPackedGramV1.quad_lower', 'AEGIS.CvSPackedGramV1.quad_lower_complex']
-          allowed = {'propext','Classical.choice','Quot.sound'}
-          if re.search(r'sorryAx|\bsorry\b|\badmit\b', log):
-            raise SystemExit('SORRYAX_OR_PROOF_HOLE')
-          for name in names:
-            decl = name
-            h = re.search(r"'" + re.escape(decl) + r"' depends on axioms:\s*\[([^]]*)\]", log, re.S)
-            h0 = re.search(r"'" + re.escape(decl) + r"' does not depend on any axioms", log)
-            if h is None and h0 is None:
-              raise SystemExit('MISSING_AXIOM_AUDIT '+decl)
-            axioms = {x.strip() for x in h.group(1).split(',') if x.strip()} if h else set()
-            if not axioms <= allowed:
-              raise SystemExit('UNEXPECTED_AXIOMS '+decl+' '+repr(axioms))
-            print('SOURCE_ROW_AXIOM_AUDIT_PASS',decl,sorted(axioms))
-          print('ACTUAL_CVS_ROW_SOURCE_REPLAY_PASS; FIRST_COLUMN_OUTPUT_ENTRIES=139; FULL_Q80_ACTUAL_MEMBERSHIP=NOT_YET_PROVED')
-          PY
+          if python3 research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py "$RING"; then
+            lean -DwarningAsError=true SOURCE_CHECKPOINT_REAUDIT.lean 2>&1 | tee -a actual-row-bridge.log
+          else
+            python3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \
+              research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log
+            for m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \
+                     CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do
+              lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
+            done
+            lean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSActualCrossRowL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean 2>&1 | tee actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSMidpointRadiusV1.olean" research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSOddSignedEnclosureV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSOddSignedEnclosureV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRationalIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRationalIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSListIntervalDotV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSListIntervalMixedV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalMixedV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetStagedDotPilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/RowBudgetStagedDotPilot.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetListCell0Pilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/RowBudgetListCell0Pilot.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSColumnEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFirstColumnCheckerV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnCheckerV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRelativeRowCertificateL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch0.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch0.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch2.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch2.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch3.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch3.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch4.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch4.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch5.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch5.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch6.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch6.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch7.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch7.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch8.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch8.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch9.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch9.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch10.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch10.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch11.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch11.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch12.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch12.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch13.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch13.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFirstColumnRejectV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnRejectV1.lean 2>&1 | tee -a actual-row-bridge.log
+          fi
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
 
       - name: Preserve exact replay state
         if: always()
@@ -209,7 +193,8 @@ jobs:
             'source_sha256': {n: digest(root / n) for n in sources},
             'binary_sha256': {str(p.relative_to(root)): digest(p) for p in objects},
             'log_sha256': {p.name: digest(p) for p in logs},
-            'scope': 'Compilation state. Only the named axiom audits in actual-row-bridge.log are certified; failed replay state is evidence, not a PASS.'
+            'dependency_reuse': json.loads((root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').read_text()) if (root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').is_file() else None,
+            'scope': 'Source compilation or explicitly validated source-identical dependency reuse, as recorded above. Only named axiom roots are certified; failed state is evidence, not a PASS.'
           }
           (root / 'SOURCE_CROSS_ROW_CHECKPOINT.json').write_text(json.dumps(receipt, indent=2) + '\n')
           print('REPLAY_STATE_PRESERVED', receipt['math_step_outcome'], len(objects))
@@ -226,6 +211,7 @@ jobs:
           if-no-files-found: warn
           path: |
             SOURCE_CROSS_ROW_CHECKPOINT.json
+            SOURCE_CROSS_ROW_REUSE_RECEIPT.json
             ring.log
             actual-row-bridge.log
             .lake/ringout/**/*.olean
