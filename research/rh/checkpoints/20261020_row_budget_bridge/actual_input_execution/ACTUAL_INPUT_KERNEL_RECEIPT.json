@@ -1,9 +1,9 @@
 {
-  "utc": "2026-10-20T23:11:47.779540+00:00",
+  "utc": "2026-10-20T23:17:08.954971+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
   "status": "PARTIAL_NATIVE_REPLAY",
-  "archive_sha256": "00258da798f90eaebaed844d60bd1247769f5afc4c9772a169bc681013bc0e97",
+  "archive_sha256": "80020f5b3fee0e578e582b03e4081a31dad8cd69b41f0b72932cd04e496ddb02",
   "runs": [
     {
       "module": "CvSCachedPointV1",
@@ -113,6 +113,54 @@
       ],
       "bad_axioms": [],
       "max_child_rss_kib": 2123316
+    },
+    {
+      "module": "CvSRealBasisBoundV1",
+      "source_sha256": "7e5aba10dbe4cd114f41e5cd7049d493ffc221c0d4fcc87656770d01e3f27b77",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSRealBasisBoundV1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSRealBasisBoundV1.lean"
+      ],
+      "seconds": 1.4512448710011085,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSRealBasisBoundV1.log",
+      "log_sha256": "e1c7b5ac4f4920b383f114d29367ecef6f4a69f61df48e3bb400680f52652ba5",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSRealBasisBoundV1.real_row_normSq_le",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 1827788
     },
     {
       "module": "CvSRealTailFormV1",
@@ -18463,6 +18511,38 @@
       ],
       "bad_axioms": [],
       "max_child_rss_kib": 2737840
+    },
+    {
+      "module": "CvSTriangularTransportV1",
+      "source_sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSTriangularTransportV1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSTriangularTransportV1.lean"
+      ],
+      "seconds": 1.409389396001643,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSTriangularTransportV1.log",
+      "log_sha256": "eaf747ab4fd85b4d526da48a7f12c42bfd815bee228805f7c566f38545ca3d5b",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSTriangularTransportV1.upper_triangular_surjective",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 1798792
     }
   ],
   "actual_analytic_input_membership_producer": "NOT_YET_KERNEL_VERIFIED",

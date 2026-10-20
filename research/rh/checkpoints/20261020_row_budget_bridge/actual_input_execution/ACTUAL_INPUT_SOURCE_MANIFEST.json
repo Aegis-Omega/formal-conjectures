@@ -1,6 +1,6 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "00258da798f90eaebaed844d60bd1247769f5afc4c9772a169bc681013bc0e97",
+  "archive_sha256": "80020f5b3fee0e578e582b03e4081a31dad8cd69b41f0b72932cd04e496ddb02",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
@@ -11,6 +11,11 @@
     {
       "name": "CvSActualLiteralInputsV1.lean",
       "sha256": "2e32e48e5fd73306b5ff731b9df0e4a428989d303e20a3b6832b5aefaf375446",
+      "kernel_status": "NOT_RUN"
+    },
+    {
+      "name": "CvSActualRowConsumerV1.lean",
+      "sha256": "efeb3755d3170f314d54e24705b19d525a82a2ac6195cab19671e401df7cb6a8",
       "kernel_status": "NOT_RUN"
     },
     {
@@ -401,6 +406,16 @@
     {
       "name": "CvSCachedSourceProductV1.lean",
       "sha256": "ca1df809219ddbcfab77a70366665b1c8ca4e0c0d0cd29bb586b3779ea7079ad",
+      "kernel_status": "PASS"
+    },
+    {
+      "name": "CvSProjectedBasisL12V1.lean",
+      "sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "kernel_status": "NOT_RUN"
+    },
+    {
+      "name": "CvSRealBasisBoundV1.lean",
+      "sha256": "7e5aba10dbe4cd114f41e5cd7049d493ffc221c0d4fcc87656770d01e3f27b77",
       "kernel_status": "PASS"
     },
     {
@@ -2202,6 +2217,25 @@
       "name": "CvSSourceXRows9.lean",
       "sha256": "882d4fd2affb2f06f2534c6f7030a6273cd9e61f1912dbe1e5755c5c38ba37df",
       "kernel_status": "PASS"
+    },
+    {
+      "name": "CvSTriangularTransportV1.lean",
+      "sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7",
+      "kernel_status": "PASS"
     }
-  ]
+  ],
+  "unchanged_existing_source_copies": {
+    "CvSTriangularTransportV1.lean": {
+      "original_path": "research/rh/feshbach_lean_v1/CvSTriangularTransportV1.lean",
+      "sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7"
+    },
+    "CvSRealBasisBoundV1.lean": {
+      "original_path": "research/rh/feshbach_lean_v1/CvSRealBasisBoundV1.lean",
+      "sha256": "7e5aba10dbe4cd114f41e5cd7049d493ffc221c0d4fcc87656770d01e3f27b77"
+    },
+    "CvSProjectedBasisL12V1.lean": {
+      "original_path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba"
+    }
+  }
 }

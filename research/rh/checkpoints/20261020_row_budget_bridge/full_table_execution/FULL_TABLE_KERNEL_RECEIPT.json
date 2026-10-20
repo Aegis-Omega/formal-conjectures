@@ -16462,8 +16462,15 @@
     "run_id": 39505154095,
     "job_id": 118912111608,
     "source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-    "status": "IN_PROGRESS",
-    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39505154095"
+    "status": "SUCCESS",
+    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39505154095",
+    "fresh_source_modules": 445,
+    "reported_axiom_audits": 868,
+    "ordered_output_cells": 19321,
+    "artifact_id": 12306423649,
+    "artifact_bytes": 279638929,
+    "job_log_sha256": "ef99273c6cc69ceb9e1a05bfe80e66311a2b22f3206a34ac9819a6cb758019be",
+    "scope": "Fresh original-import complete finite envelope and quantitative budget. Actual input producer is a later unverified candidate; canonical RH not asserted."
   },
   "github_readback": [
     {

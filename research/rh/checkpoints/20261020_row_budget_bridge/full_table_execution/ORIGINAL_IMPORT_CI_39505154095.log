@@ -1,0 +1,1959 @@
+﻿2026-10-20T22:02:53.4025688Z Current runner version: '2.338.0'
+2026-10-20T22:02:53.4051000Z ##[group]Runner Image Provisioner
+2026-10-20T22:02:53.4051894Z Hosted Compute Agent
+2026-10-20T22:02:53.4052605Z Version: 20261012.601
+2026-10-20T22:02:53.4053241Z Commit: f3dc54e1fb89da6852db922499a0233137369e1d
+2026-10-20T22:02:53.4054009Z Build Date: 2026-10-12T17:48:21Z
+2026-10-20T22:02:53.4054741Z Worker ID: {77cf12c2-2ca2-4987-97f8-1d3648ecfe34}
+2026-10-20T22:02:53.4055547Z Region: westus2
+2026-10-20T22:02:53.4056261Z Cloud: Azure
+2026-10-20T22:02:53.4056808Z ##[endgroup]
+2026-10-20T22:02:53.4058533Z ##[group]Operating System
+2026-10-20T22:02:53.4059211Z Ubuntu
+2026-10-20T22:02:53.4059770Z 24.04.5
+2026-10-20T22:02:53.4060324Z LTS
+2026-10-20T22:02:53.4060846Z ##[endgroup]
+2026-10-20T22:02:53.4061388Z ##[group]Runner Image
+2026-10-20T22:02:53.4062092Z Image: ubuntu-24.04
+2026-10-20T22:02:53.4062693Z Version: 20261012.334.1
+2026-10-20T22:02:53.4063979Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261012.334/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-20T22:02:53.4065514Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261012.334
+2026-10-20T22:02:53.4066619Z ##[endgroup]
+2026-10-20T22:02:53.4067751Z ##[group]GITHUB_TOKEN Permissions
+2026-10-20T22:02:53.4069965Z Actions: read
+2026-10-20T22:02:53.4070578Z Contents: read
+2026-10-20T22:02:53.4071233Z Metadata: read
+2026-10-20T22:02:53.4071829Z ##[endgroup]
+2026-10-20T22:02:53.4073932Z Secret source: Actions
+2026-10-20T22:02:53.4075041Z Cache mode: write
+2026-10-20T22:02:53.4075722Z Prepare workflow directory
+2026-10-20T22:02:53.4524755Z Prepare all required actions
+2026-10-20T22:02:53.4573560Z Getting action download info
+2026-10-20T22:02:53.8264214Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-10-20T22:02:53.9615988Z Download action repository 'actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9' (SHA:55cc8345863c7cc4c66a329aec7e433d2d1c52a9)
+2026-10-20T22:02:54.1322740Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-20T22:02:54.3576968Z Complete job name: source-cross-row
+2026-10-20T22:02:54.4363001Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T22:02:54.4364059Z with:
+2026-10-20T22:02:54.4364503Z   fetch-depth: 1
+2026-10-20T22:02:54.4364998Z   persist-credentials: false
+2026-10-20T22:02:54.4365599Z   repository: tarikskalic33/formal-conjectures
+2026-10-20T22:02:54.4369902Z   token: ***
+2026-10-20T22:02:54.4370337Z   ssh-strict: true
+2026-10-20T22:02:54.4370774Z   ssh-user: git
+2026-10-20T22:02:54.4371198Z   clean: true
+2026-10-20T22:02:54.4371641Z   sparse-checkout-cone-mode: true
+2026-10-20T22:02:54.4372175Z   fetch-tags: false
+2026-10-20T22:02:54.4372624Z   show-progress: true
+2026-10-20T22:02:54.4373069Z   lfs: false
+2026-10-20T22:02:54.4373485Z   submodules: false
+2026-10-20T22:02:54.4373965Z   set-safe-directory: true
+2026-10-20T22:02:54.4374512Z   allow-unsafe-pr-checkout: false
+2026-10-20T22:02:54.4375279Z env:
+2026-10-20T22:02:54.4375782Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:02:54.4376473Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:02:54.4377143Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:02:54.4378292Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:02:54.4379421Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:02:54.4380123Z ##[endgroup]
+2026-10-20T22:02:54.5395936Z Syncing repository: tarikskalic33/formal-conjectures
+2026-10-20T22:02:54.5399202Z ##[group]Getting Git version info
+2026-10-20T22:02:54.5400228Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures'
+2026-10-20T22:02:54.5401370Z [command]/usr/bin/git version
+2026-10-20T22:02:54.5546224Z git version 2.55.0
+2026-10-20T22:02:54.5572199Z ##[endgroup]
+2026-10-20T22:02:54.5589989Z Temporarily overriding HOME='/home/runner/work/_temp/b0c71b52-26c7-4a1d-bc20-41d6c14208d7' before making global git config changes
+2026-10-20T22:02:54.5592920Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:02:54.5597296Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T22:02:54.5665738Z Deleting the contents of '/home/runner/work/formal-conjectures/formal-conjectures'
+2026-10-20T22:02:54.5671447Z ##[group]Initializing the repository
+2026-10-20T22:02:54.5675472Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T22:02:54.5817546Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:02:54.5819420Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:02:54.5820917Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:02:54.5822229Z hint: call:
+2026-10-20T22:02:54.5822883Z hint:
+2026-10-20T22:02:54.5823669Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:02:54.5824640Z hint:
+2026-10-20T22:02:54.5825573Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:02:54.5827123Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:02:54.5828616Z hint:
+2026-10-20T22:02:54.5829391Z hint: 	git branch -m <name>
+2026-10-20T22:02:54.5830172Z hint:
+2026-10-20T22:02:54.5831162Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:02:54.5837757Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.git/
+2026-10-20T22:02:54.5849080Z [command]/usr/bin/git remote add origin https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T22:02:54.5906487Z ##[endgroup]
+2026-10-20T22:02:54.5907745Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:02:54.5910788Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:02:54.5951525Z ##[endgroup]
+2026-10-20T22:02:54.5953514Z ##[group]Setting up auth
+2026-10-20T22:02:54.5959678Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:02:54.5996145Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:02:54.6408336Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:02:54.6518818Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:02:54.6685456Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:02:54.6723629Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:02:54.6949702Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:02:54.6990525Z ##[endgroup]
+2026-10-20T22:02:54.6991626Z ##[group]Fetching the repository
+2026-10-20T22:02:54.7001536Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925:refs/remotes/origin/proof/rh-feshbach-schur-v1
+2026-10-20T22:02:58.3450382Z From https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T22:02:58.3451830Z  * [new ref]         2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925 -> origin/proof/rh-feshbach-schur-v1
+2026-10-20T22:02:58.3455677Z ##[endgroup]
+2026-10-20T22:02:58.3456625Z ##[group]Determining the checkout info
+2026-10-20T22:02:58.3459148Z ##[endgroup]
+2026-10-20T22:02:58.3467155Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:02:58.3524229Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:02:58.3556547Z ##[group]Checking out the ref
+2026-10-20T22:02:58.3561734Z [command]/usr/bin/git checkout --progress --force -B proof/rh-feshbach-schur-v1 refs/remotes/origin/proof/rh-feshbach-schur-v1
+2026-10-20T22:02:58.9237420Z Switched to a new branch 'proof/rh-feshbach-schur-v1'
+2026-10-20T22:02:58.9243378Z branch 'proof/rh-feshbach-schur-v1' set up to track 'origin/proof/rh-feshbach-schur-v1'.
+2026-10-20T22:02:58.9273824Z ##[endgroup]
+2026-10-20T22:02:58.9323490Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:02:58.9350447Z 2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925
+2026-10-20T22:02:58.9360305Z ##[group]Removing auth
+2026-10-20T22:02:58.9364771Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:02:58.9399147Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:02:58.9627180Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:02:58.9656488Z http.https://github.com/.extraheader
+2026-10-20T22:02:58.9666140Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:02:58.9702098Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:02:58.9926439Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:02:58.9957961Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:02:59.0178915Z ##[endgroup]
+2026-10-20T22:02:59.0383969Z ##[group]Run set -euo pipefail
+2026-10-20T22:02:59.0384416Z [36;1mset -euo pipefail[0m
+2026-10-20T22:02:59.0384821Z [36;1mtest "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"[0m
+2026-10-20T22:02:59.0385254Z [36;1mgrep -F "$MATHLIB_SHA" lake-manifest.json[0m
+2026-10-20T22:02:59.0687801Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:02:59.0688573Z env:
+2026-10-20T22:02:59.0688959Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:02:59.0689428Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:02:59.0689912Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:02:59.0690540Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:02:59.0691202Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:02:59.0691687Z ##[endgroup]
+2026-10-20T22:02:59.0817217Z    "rev": "0df444a360eaa60ab8c11dca51a86af692955474",
+2026-10-20T22:02:59.0857698Z ##[group]Run set -euo pipefail
+2026-10-20T22:02:59.0858284Z [36;1mset -euo pipefail[0m
+2026-10-20T22:02:59.0858947Z [36;1mcurl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz[0m
+2026-10-20T22:02:59.0859658Z [36;1m./elan-init -y --default-toolchain none[0m
+2026-10-20T22:02:59.0860046Z [36;1mecho "$HOME/.elan/bin" >> "$GITHUB_PATH"[0m
+2026-10-20T22:02:59.0860412Z [36;1mexport PATH="$HOME/.elan/bin:$PATH"[0m
+2026-10-20T22:02:59.0860745Z [36;1mlake exe cache get[0m
+2026-10-20T22:02:59.0861152Z [36;1mtest "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"[0m
+2026-10-20T22:02:59.0861590Z [36;1mlean --version[0m
+2026-10-20T22:02:59.0921269Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:02:59.0921669Z env:
+2026-10-20T22:02:59.0921964Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:02:59.0922341Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:02:59.0922759Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:02:59.0923251Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:02:59.0923954Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:02:59.0924361Z ##[endgroup]
+2026-10-20T22:02:59.4848252Z info: skipping toolchain installation
+2026-10-20T22:02:59.4848748Z 
+2026-10-20T22:02:59.4884242Z info: downloading component 'lean'
+2026-10-20T22:03:03.9022703Z info: installing component 'lean'
+2026-10-20T22:03:10.8439571Z info: mathlib: cloning https://github.com/leanprover-community/mathlib4
+2026-10-20T22:03:42.3832597Z info: mathlib: checking out revision '0df444a360eaa60ab8c11dca51a86af692955474'
+2026-10-20T22:03:44.5205668Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-10-20T22:03:44.7801697Z info: plausible: checking out revision 'b7eb3304aeae834b12dda98993a37f6a41f6f0bb'
+2026-10-20T22:03:44.7925829Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-10-20T22:03:45.0433369Z info: LeanSearchClient: checking out revision '5f4d51b81cbd3f6b32b156bfad9056621a040404'
+2026-10-20T22:03:45.0572158Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-10-20T22:03:45.3655500Z info: importGraph: checking out revision '16f02aa7642864af59f1ff0e384a015994db9118'
+2026-10-20T22:03:45.3841073Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-10-20T22:03:45.8375980Z info: proofwidgets: checking out revision '4be2e3d5087eeb272cf5a8853b8f9dd025ef5957'
+2026-10-20T22:03:46.4826915Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-10-20T22:03:47.0289194Z info: aesop: checking out revision '3448c0bcc5ce01b2d1546e483ec3620e32df3d0e'
+2026-10-20T22:03:47.0479696Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-10-20T22:03:47.4021516Z info: Qq: checking out revision '92c15be17b7caf78c2ad767ec40f89052d908d81'
+2026-10-20T22:03:47.4150676Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-10-20T22:03:52.1425689Z info: batteries: checking out revision '4488d40d070b9700d4d5a6aa342f0d40c31b2a2d'
+2026-10-20T22:03:52.1792288Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-10-20T22:03:52.4503895Z info: Cli: checking out revision '6130a47896ce867c6a4a55373441e59e565bad0f'
+2026-10-20T22:03:53.5642591Z ✔ [2/6] Built Cache.Cli (358ms)
+2026-10-20T22:03:53.6669825Z ✔ [4/27] Built Cache.Lean (426ms)
+2026-10-20T22:03:53.8664042Z ✔ [7/27] Built Cache.Cli:c.o (212ms)
+2026-10-20T22:03:53.8699216Z ✔ [8/27] Built Cache.Lean:c.o (243ms)
+2026-10-20T22:03:54.1668224Z ✔ [9/27] Built Cache.Infra (492ms)
+2026-10-20T22:03:54.3670985Z ✔ [10/27] Built Cache.Infra:c.o (243ms)
+2026-10-20T22:03:54.6674810Z ✔ [11/27] Built Batteries.Tactic.OpenPrivate (1.0s)
+2026-10-20T22:03:56.0702721Z ✔ [12/27] Built Cache.IO (1.4s)
+2026-10-20T22:03:56.0759803Z ✔ [13/27] Built Batteries.Tactic.OpenPrivate:c.o (1.4s)
+2026-10-20T22:03:56.8719878Z ✔ [14/27] Built Cache.Hashing (800ms)
+2026-10-20T22:03:57.4727439Z ✔ [15/27] Built Cache.Hashing:c.o (632ms)
+2026-10-20T22:03:57.8731313Z ✔ [16/27] Built Cache.IO:c.o (1.8s)
+2026-10-20T22:03:58.9742222Z ✔ [17/27] Built Cache.Requests (2.1s)
+2026-10-20T22:03:59.5741342Z ✔ [18/27] Built Cache.Marker (551ms)
+2026-10-20T22:03:59.7744398Z ✔ [19/27] Built Cache.Marker:c.o (186ms)
+2026-10-20T22:04:00.3751895Z ✔ [20/27] Built Cache.Query (762ms)
+2026-10-20T22:04:00.8757747Z ✔ [21/27] Built Cache.Query:c.o (521ms)
+2026-10-20T22:04:01.0769430Z ✔ [22/27] Built Cache.Warning (709ms)
+2026-10-20T22:04:01.3764800Z ✔ [23/27] Built Cache.Warning:c.o (379ms)
+2026-10-20T22:04:02.3776176Z ✔ [24/27] Built Cache.Main (1.3s)
+2026-10-20T22:04:02.3777264Z ✔ [25/27] Built Cache.Requests:c.o (3.3s)
+2026-10-20T22:04:03.3787134Z ✔ [26/27] Built Cache.Main:c.o (981ms)
+2026-10-20T22:04:04.0795312Z ✔ [27/27] Built cache:exe (716ms)
+2026-10-20T22:04:06.8913624Z Current branch: HEAD
+2026-10-20T22:04:06.8916500Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T22:04:06.8918751Z Attempting to download 8690 file(s) from leanprover-community/mathlib4 cache at https://lakecache.blob.core.windows.net/mathlib4-master
+2026-10-20T22:04:08.1308737Z 
+2026-10-20T22:04:08.2323166Z Downloaded: 1 file(s) [attempted 1/8690 = 0%, 15 KB/s], Decompressed: 0
+2026-10-20T22:04:08.3329224Z Downloaded: 78 file(s) [attempted 78/8690 = 0%, 1546 KB/s], Decompressed: 10
+2026-10-20T22:04:08.4344466Z Downloaded: 173 file(s) [attempted 173/8690 = 1%, 1081 KB/s], Decompressed: 36
+2026-10-20T22:04:08.5355101Z Downloaded: 262 file(s) [attempted 262/8690 = 3%, 364 KB/s], Decompressed: 36
+2026-10-20T22:04:08.6429373Z Downloaded: 367 file(s) [attempted 367/8690 = 4%, 1820 KB/s], Decompressed: 97
+2026-10-20T22:04:08.7397541Z Downloaded: 467 file(s) [attempted 467/8690 = 5%, 615 KB/s], Decompressed: 97
+2026-10-20T22:04:08.8461941Z Downloaded: 565 file(s) [attempted 565/8690 = 6%, 3167 KB/s], Decompressed: 97
+2026-10-20T22:04:08.9699599Z Downloaded: 670 file(s) [attempted 670/8690 = 7%, 840 KB/s], Decompressed: 97
+2026-10-20T22:04:09.0731267Z Downloaded: 775 file(s) [attempted 775/8690 = 8%, 472 KB/s], Decompressed: 97
+2026-10-20T22:04:09.1771108Z Downloaded: 870 file(s) [attempted 870/8690 = 10%, 3446 KB/s], Decompressed: 97
+2026-10-20T22:04:09.2819230Z Downloaded: 926 file(s) [attempted 926/8690 = 10%, 2695 KB/s], Decompressed: 285
+2026-10-20T22:04:09.4156926Z Downloaded: 1024 file(s) [attempted 1024/8690 = 11%, 586 KB/s], Decompressed: 285
+2026-10-20T22:04:09.5224788Z Downloaded: 1124 file(s) [attempted 1124/8690 = 12%, 270 KB/s], Decompressed: 285
+2026-10-20T22:04:09.6233970Z Downloaded: 1225 file(s) [attempted 1225/8690 = 14%, 1690 KB/s], Decompressed: 285
+2026-10-20T22:04:09.7298832Z Downloaded: 1322 file(s) [attempted 1322/8690 = 15%, 268 KB/s], Decompressed: 285
+2026-10-20T22:04:09.8342447Z Downloaded: 1378 file(s) [attempted 1378/8690 = 15%, 1130 KB/s], Decompressed: 285
+2026-10-20T22:04:09.9529462Z Downloaded: 1476 file(s) [attempted 1476/8690 = 16%, 673 KB/s], Decompressed: 285
+2026-10-20T22:04:10.0604490Z Downloaded: 1571 file(s) [attempted 1571/8690 = 18%, 447 KB/s], Decompressed: 285
+2026-10-20T22:04:10.1593845Z Downloaded: 1674 file(s) [attempted 1674/8690 = 19%, 364 KB/s], Decompressed: 285
+2026-10-20T22:04:10.2613462Z Downloaded: 1769 file(s) [attempted 1769/8690 = 20%, 661 KB/s], Decompressed: 285
+2026-10-20T22:04:10.3635144Z Downloaded: 1837 file(s) [attempted 1837/8690 = 21%, 560 KB/s], Decompressed: 285
+2026-10-20T22:04:10.4632462Z Downloaded: 1930 file(s) [attempted 1930/8690 = 22%, 2671 KB/s], Decompressed: 285
+2026-10-20T22:04:10.5689573Z Downloaded: 2026 file(s) [attempted 2026/8690 = 23%, 125 KB/s], Decompressed: 285
+2026-10-20T22:04:10.6679817Z Downloaded: 2097 file(s) [attempted 2097/8690 = 24%, 908 KB/s], Decompressed: 285
+2026-10-20T22:04:10.7835034Z Downloaded: 2182 file(s) [attempted 2182/8690 = 25%, 408 KB/s], Decompressed: 285
+2026-10-20T22:04:10.8864756Z Downloaded: 2284 file(s) [attempted 2284/8690 = 26%, 114 KB/s], Decompressed: 285
+2026-10-20T22:04:10.9969264Z Downloaded: 2349 file(s) [attempted 2349/8690 = 27%, 996 KB/s], Decompressed: 285
+2026-10-20T22:04:11.1146768Z Downloaded: 2440 file(s) [attempted 2440/8690 = 28%, 918 KB/s], Decompressed: 285
+2026-10-20T22:04:11.2330014Z Downloaded: 2536 file(s) [attempted 2536/8690 = 29%, 497 KB/s], Decompressed: 285
+2026-10-20T22:04:11.3669360Z Downloaded: 2640 file(s) [attempted 2640/8690 = 30%, 2389 KB/s], Decompressed: 915
+2026-10-20T22:04:11.4659579Z Downloaded: 2743 file(s) [attempted 2743/8690 = 31%, 552 KB/s], Decompressed: 915
+2026-10-20T22:04:11.5729422Z Downloaded: 2841 file(s) [attempted 2841/8690 = 32%, 225 KB/s], Decompressed: 915
+2026-10-20T22:04:11.6774120Z Downloaded: 2945 file(s) [attempted 2945/8690 = 33%, 810 KB/s], Decompressed: 915
+2026-10-20T22:04:11.8147798Z Downloaded: 3052 file(s) [attempted 3052/8690 = 35%, 885 KB/s], Decompressed: 915
+2026-10-20T22:04:11.9163517Z Downloaded: 3155 file(s) [attempted 3155/8690 = 36%, 1840 KB/s], Decompressed: 915
+2026-10-20T22:04:12.0369846Z Downloaded: 3255 file(s) [attempted 3255/8690 = 37%, 464 KB/s], Decompressed: 915
+2026-10-20T22:04:12.1794431Z Downloaded: 3357 file(s) [attempted 3357/8690 = 38%, 483 KB/s], Decompressed: 915
+2026-10-20T22:04:12.2862831Z Downloaded: 3458 file(s) [attempted 3458/8690 = 39%, 491 KB/s], Decompressed: 915
+2026-10-20T22:04:12.3889330Z Downloaded: 3555 file(s) [attempted 3555/8690 = 40%, 723 KB/s], Decompressed: 915
+2026-10-20T22:04:12.5170631Z Downloaded: 3607 file(s) [attempted 3607/8690 = 41%, 411 KB/s], Decompressed: 915
+2026-10-20T22:04:12.6440117Z Downloaded: 3704 file(s) [attempted 3704/8690 = 42%, 119 KB/s], Decompressed: 915
+2026-10-20T22:04:12.7596990Z Downloaded: 3805 file(s) [attempted 3805/8690 = 43%, 549 KB/s], Decompressed: 915
+2026-10-20T22:04:12.8619696Z Downloaded: 3907 file(s) [attempted 3907/8690 = 44%, 182 KB/s], Decompressed: 915
+2026-10-20T22:04:12.9590824Z Downloaded: 3986 file(s) [attempted 3986/8690 = 45%, 377 KB/s], Decompressed: 915
+2026-10-20T22:04:13.0636967Z Downloaded: 4078 file(s) [attempted 4078/8690 = 46%, 308 KB/s], Decompressed: 915
+2026-10-20T22:04:13.1663241Z Downloaded: 4177 file(s) [attempted 4177/8690 = 48%, 2080 KB/s], Decompressed: 915
+2026-10-20T22:04:13.2669718Z Downloaded: 4273 file(s) [attempted 4273/8690 = 49%, 198 KB/s], Decompressed: 915
+2026-10-20T22:04:13.3779437Z Downloaded: 4368 file(s) [attempted 4368/8690 = 50%, 1873 KB/s], Decompressed: 915
+2026-10-20T22:04:13.4979790Z Downloaded: 4424 file(s) [attempted 4424/8690 = 50%, 1046 KB/s], Decompressed: 915
+2026-10-20T22:04:13.6081955Z Downloaded: 4524 file(s) [attempted 4524/8690 = 52%, 948 KB/s], Decompressed: 915
+2026-10-20T22:04:13.7103102Z Downloaded: 4619 file(s) [attempted 4619/8690 = 53%, 1524 KB/s], Decompressed: 915
+2026-10-20T22:04:13.8205822Z Downloaded: 4717 file(s) [attempted 4717/8690 = 54%, 1197 KB/s], Decompressed: 915
+2026-10-20T22:04:13.9205776Z Downloaded: 4824 file(s) [attempted 4824/8690 = 55%, 4235 KB/s], Decompressed: 915
+2026-10-20T22:04:14.0217419Z Downloaded: 4929 file(s) [attempted 4929/8690 = 56%, 1517 KB/s], Decompressed: 915
+2026-10-20T22:04:14.1339032Z Downloaded: 5018 file(s) [attempted 5018/8690 = 57%, 1388 KB/s], Decompressed: 915
+2026-10-20T22:04:14.2372032Z Downloaded: 5078 file(s) [attempted 5078/8690 = 58%, 987 KB/s], Decompressed: 915
+2026-10-20T22:04:14.3371855Z Downloaded: 5171 file(s) [attempted 5171/8690 = 59%, 295 KB/s], Decompressed: 915
+2026-10-20T22:04:14.4619519Z Downloaded: 5250 file(s) [attempted 5250/8690 = 60%, 658 KB/s], Decompressed: 915
+2026-10-20T22:04:14.5849256Z Downloaded: 5320 file(s) [attempted 5320/8690 = 61%, 1213 KB/s], Decompressed: 915
+2026-10-20T22:04:14.7112375Z Downloaded: 5421 file(s) [attempted 5421/8690 = 62%, 1836 KB/s], Decompressed: 915
+2026-10-20T22:04:14.8279335Z Downloaded: 5523 file(s) [attempted 5523/8690 = 63%, 2694 KB/s], Decompressed: 915
+2026-10-20T22:04:14.9473724Z Downloaded: 5623 file(s) [attempted 5623/8690 = 64%, 203 KB/s], Decompressed: 915
+2026-10-20T22:04:15.0584539Z Downloaded: 5723 file(s) [attempted 5723/8690 = 65%, 1181 KB/s], Decompressed: 915
+2026-10-20T22:04:15.1869638Z Downloaded: 5774 file(s) [attempted 5774/8690 = 66%, 1236 KB/s], Decompressed: 915
+2026-10-20T22:04:15.3084312Z Downloaded: 5875 file(s) [attempted 5875/8690 = 67%, 1209 KB/s], Decompressed: 915
+2026-10-20T22:04:15.4344879Z Downloaded: 5975 file(s) [attempted 5975/8690 = 68%, 816 KB/s], Decompressed: 915
+2026-10-20T22:04:15.5992079Z Downloaded: 6075 file(s) [attempted 6075/8690 = 69%, 6195 KB/s], Decompressed: 915
+2026-10-20T22:04:15.7062409Z Downloaded: 6175 file(s) [attempted 6175/8690 = 71%, 129 KB/s], Decompressed: 915
+2026-10-20T22:04:15.8300564Z Downloaded: 6275 file(s) [attempted 6275/8690 = 72%, 1291 KB/s], Decompressed: 915
+2026-10-20T22:04:15.9989734Z Downloaded: 6378 file(s) [attempted 6378/8690 = 73%, 1568 KB/s], Decompressed: 915
+2026-10-20T22:04:16.1012886Z Downloaded: 6475 file(s) [attempted 6475/8690 = 74%, 6430 KB/s], Decompressed: 915
+2026-10-20T22:04:16.2089944Z Downloaded: 6527 file(s) [attempted 6527/8690 = 75%, 362 KB/s], Decompressed: 915
+2026-10-20T22:04:16.3280047Z Downloaded: 6627 file(s) [attempted 6627/8690 = 76%, 73 KB/s], Decompressed: 915
+2026-10-20T22:04:16.4289455Z Downloaded: 6731 file(s) [attempted 6731/8690 = 77%, 962 KB/s], Decompressed: 915
+2026-10-20T22:04:16.5389507Z Downloaded: 6836 file(s) [attempted 6836/8690 = 78%, 161 KB/s], Decompressed: 915
+2026-10-20T22:04:16.6790899Z Downloaded: 6899 file(s) [attempted 6899/8690 = 79%, 497 KB/s], Decompressed: 915
+2026-10-20T22:04:16.7932375Z Downloaded: 7004 file(s) [attempted 7004/8690 = 80%, 520 KB/s], Decompressed: 915
+2026-10-20T22:04:16.9149491Z Downloaded: 7104 file(s) [attempted 7104/8690 = 81%, 705 KB/s], Decompressed: 915
+2026-10-20T22:04:17.0239436Z Downloaded: 7204 file(s) [attempted 7204/8690 = 82%, 5220 KB/s], Decompressed: 915
+2026-10-20T22:04:17.1375317Z Downloaded: 7307 file(s) [attempted 7307/8690 = 84%, 161 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.2462814Z Downloaded: 7407 file(s) [attempted 7407/8690 = 85%, 1622 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.3469794Z Downloaded: 7504 file(s) [attempted 7504/8690 = 86%, 234 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.4634922Z Downloaded: 7614 file(s) [attempted 7614/8690 = 87%, 324 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.5748584Z Downloaded: 7723 file(s) [attempted 7723/8690 = 88%, 471 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.6739434Z Downloaded: 7828 file(s) [attempted 7828/8690 = 90%, 452 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.7870560Z Downloaded: 7933 file(s) [attempted 7933/8690 = 91%, 617 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.8903689Z Downloaded: 8013 file(s) [attempted 8013/8690 = 92%, 1830 KB/s], Decompressed: 2584
+2026-10-20T22:04:17.9936024Z Downloaded: 8105 file(s) [attempted 8105/8690 = 93%, 3501 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.0929317Z Downloaded: 8208 file(s) [attempted 8208/8690 = 94%, 238 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.1984059Z Downloaded: 8278 file(s) [attempted 8278/8690 = 95%, 397 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.3002910Z Downloaded: 8378 file(s) [attempted 8378/8690 = 96%, 356 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.4268394Z Downloaded: 8480 file(s) [attempted 8480/8690 = 97%, 458 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.5390880Z Downloaded: 8580 file(s) [attempted 8580/8690 = 98%, 789 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.6089279Z Downloaded: 8685 file(s) [attempted 8685/8690 = 99%, 1294 KB/s], Decompressed: 2584
+2026-10-20T22:04:18.6092487Z Downloaded: 8690 file(s) [attempted 8690/8690 = 100%, 1294 KB/s], Decompressed: 2584
+2026-10-20T22:04:36.3937848Z Decompressed 8690 file(s)
+2026-10-20T22:04:36.3939686Z Already decompressed 8690 file(s)
+2026-10-20T22:04:36.4884205Z Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)
+2026-10-20T22:04:36.5013550Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T22:04:36.5013952Z with:
+2026-10-20T22:04:36.5014187Z   ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T22:04:36.5014481Z   path: .baseline
+2026-10-20T22:04:36.5014707Z   persist-credentials: false
+2026-10-20T22:04:36.5014988Z   repository: tarikskalic33/formal-conjectures
+2026-10-20T22:04:36.5017938Z   token: ***
+2026-10-20T22:04:36.5018342Z   ssh-strict: true
+2026-10-20T22:04:36.5018581Z   ssh-user: git
+2026-10-20T22:04:36.5018770Z   clean: true
+2026-10-20T22:04:36.5018984Z   sparse-checkout-cone-mode: true
+2026-10-20T22:04:36.5019241Z   fetch-depth: 1
+2026-10-20T22:04:36.5019438Z   fetch-tags: false
+2026-10-20T22:04:36.5019644Z   show-progress: true
+2026-10-20T22:04:36.5019852Z   lfs: false
+2026-10-20T22:04:36.5020041Z   submodules: false
+2026-10-20T22:04:36.5020246Z   set-safe-directory: true
+2026-10-20T22:04:36.5020493Z   allow-unsafe-pr-checkout: false
+2026-10-20T22:04:36.5020738Z env:
+2026-10-20T22:04:36.5021017Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:04:36.5021346Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:04:36.5021678Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:36.5022114Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:04:36.5022773Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:36.5023119Z ##[endgroup]
+2026-10-20T22:04:36.5915728Z Syncing repository: tarikskalic33/formal-conjectures
+2026-10-20T22:04:36.5916757Z ##[group]Getting Git version info
+2026-10-20T22:04:36.5917599Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures/.baseline'
+2026-10-20T22:04:36.5933113Z [command]/usr/bin/git version
+2026-10-20T22:04:36.5974849Z git version 2.55.0
+2026-10-20T22:04:36.5995691Z ##[endgroup]
+2026-10-20T22:04:36.6009519Z Temporarily overriding HOME='/home/runner/work/_temp/73a944c1-2ba3-4bc5-b4dd-9c57e24b3a75' before making global git config changes
+2026-10-20T22:04:36.6010877Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:04:36.6045606Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T22:04:36.6061869Z ##[group]Initializing the repository
+2026-10-20T22:04:36.6063361Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T22:04:36.6095662Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:04:36.6096876Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:04:36.6098370Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:04:36.6099215Z hint: call:
+2026-10-20T22:04:36.6099556Z hint:
+2026-10-20T22:04:36.6099939Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:04:36.6100492Z hint:
+2026-10-20T22:04:36.6101229Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:04:36.6102351Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:04:36.6102932Z hint:
+2026-10-20T22:04:36.6103257Z hint: 	git branch -m <name>
+2026-10-20T22:04:36.6103593Z hint:
+2026-10-20T22:04:36.6104029Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:04:36.6104808Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.baseline/.git/
+2026-10-20T22:04:36.6108533Z [command]/usr/bin/git remote add origin https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T22:04:36.6144441Z ##[endgroup]
+2026-10-20T22:04:36.6145068Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:04:36.6150744Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:04:36.6182290Z ##[endgroup]
+2026-10-20T22:04:36.6182896Z ##[group]Setting up auth
+2026-10-20T22:04:36.6190364Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:04:36.6223585Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:04:36.6487416Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:04:36.6538695Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:04:36.6782759Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:04:36.6827248Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:04:36.7084086Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:04:36.7159008Z ##[endgroup]
+2026-10-20T22:04:36.7159762Z ##[group]Fetching the repository
+2026-10-20T22:04:36.7168965Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T22:04:37.3300649Z From https://github.com/tarikskalic33/formal-conjectures
+2026-10-20T22:04:37.3301349Z  * branch            e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121 -> FETCH_HEAD
+2026-10-20T22:04:37.3307367Z ##[endgroup]
+2026-10-20T22:04:37.3308385Z ##[group]Determining the checkout info
+2026-10-20T22:04:37.3309792Z ##[endgroup]
+2026-10-20T22:04:37.3315767Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:04:37.3361282Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:04:37.3392606Z ##[group]Checking out the ref
+2026-10-20T22:04:37.3397297Z [command]/usr/bin/git checkout --progress --force e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T22:04:37.4435481Z Note: switching to 'e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121'.
+2026-10-20T22:04:37.4436005Z 
+2026-10-20T22:04:37.4436347Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:04:37.4437193Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:04:37.4438281Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:04:37.4438780Z 
+2026-10-20T22:04:37.4439093Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:04:37.4439850Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:04:37.4440309Z 
+2026-10-20T22:04:37.4440492Z   git switch -c <new-branch-name>
+2026-10-20T22:04:37.4440794Z 
+2026-10-20T22:04:37.4440965Z Or undo this operation with:
+2026-10-20T22:04:37.4441231Z 
+2026-10-20T22:04:37.4441378Z   git switch -
+2026-10-20T22:04:37.4441589Z 
+2026-10-20T22:04:37.4441821Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:04:37.4442141Z 
+2026-10-20T22:04:37.4442438Z HEAD is now at e279d57 fix(rh): instantiate translated norm functions and derivative shifts explicitly
+2026-10-20T22:04:37.4445907Z ##[endgroup]
+2026-10-20T22:04:37.4491130Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:04:37.4518504Z e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+2026-10-20T22:04:37.4527148Z ##[group]Removing auth
+2026-10-20T22:04:37.4531528Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:04:37.4564522Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:04:37.4791511Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:04:37.4817084Z http.https://github.com/.extraheader
+2026-10-20T22:04:37.4825330Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:04:37.4862001Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:04:37.5084431Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:04:37.5116244Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:04:37.5334005Z ##[endgroup]
+2026-10-20T22:04:37.5526278Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-10-20T22:04:37.5526666Z with:
+2026-10-20T22:04:37.5526951Z   repository: nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T22:04:37.5527335Z   ref: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:37.5527625Z   path: .li-provider
+2026-10-20T22:04:37.5527848Z   persist-credentials: false
+2026-10-20T22:04:37.5531097Z   token: ***
+2026-10-20T22:04:37.5531301Z   ssh-strict: true
+2026-10-20T22:04:37.5531498Z   ssh-user: git
+2026-10-20T22:04:37.5531687Z   clean: true
+2026-10-20T22:04:37.5531898Z   sparse-checkout-cone-mode: true
+2026-10-20T22:04:37.5532153Z   fetch-depth: 1
+2026-10-20T22:04:37.5532353Z   fetch-tags: false
+2026-10-20T22:04:37.5532561Z   show-progress: true
+2026-10-20T22:04:37.5532960Z   lfs: false
+2026-10-20T22:04:37.5533147Z   submodules: false
+2026-10-20T22:04:37.5533362Z   set-safe-directory: true
+2026-10-20T22:04:37.5533610Z   allow-unsafe-pr-checkout: false
+2026-10-20T22:04:37.5533893Z env:
+2026-10-20T22:04:37.5534135Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:04:37.5534462Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:04:37.5534795Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:37.5535244Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:04:37.5535721Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:37.5536073Z ##[endgroup]
+2026-10-20T22:04:37.6363244Z Syncing repository: nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T22:04:37.6364530Z ##[group]Getting Git version info
+2026-10-20T22:04:37.6365601Z Working directory is '/home/runner/work/formal-conjectures/formal-conjectures/.li-provider'
+2026-10-20T22:04:37.6398050Z [command]/usr/bin/git version
+2026-10-20T22:04:37.6439940Z git version 2.55.0
+2026-10-20T22:04:37.6459928Z ##[endgroup]
+2026-10-20T22:04:37.6473794Z Temporarily overriding HOME='/home/runner/work/_temp/102e2fc7-afd3-49cd-8d1d-75307399b7cf' before making global git config changes
+2026-10-20T22:04:37.6475184Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T22:04:37.6480591Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T22:04:37.6512770Z ##[group]Initializing the repository
+2026-10-20T22:04:37.6517460Z [command]/usr/bin/git init /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T22:04:37.6604263Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-20T22:04:37.6605303Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-20T22:04:37.6606410Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-20T22:04:37.6607247Z hint: call:
+2026-10-20T22:04:37.6607750Z hint:
+2026-10-20T22:04:37.6608482Z hint: 	git config --global init.defaultBranch <name>
+2026-10-20T22:04:37.6609150Z hint:
+2026-10-20T22:04:37.6609768Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-20T22:04:37.6610731Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-20T22:04:37.6611502Z hint:
+2026-10-20T22:04:37.6611941Z hint: 	git branch -m <name>
+2026-10-20T22:04:37.6612437Z hint:
+2026-10-20T22:04:37.6613093Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-20T22:04:37.6614373Z Initialized empty Git repository in /home/runner/work/formal-conjectures/formal-conjectures/.li-provider/.git/
+2026-10-20T22:04:37.6619253Z [command]/usr/bin/git remote add origin https://github.com/nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T22:04:37.6653047Z ##[endgroup]
+2026-10-20T22:04:37.6653743Z ##[group]Disabling automatic garbage collection
+2026-10-20T22:04:37.6658466Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-20T22:04:37.6689284Z ##[endgroup]
+2026-10-20T22:04:37.6690257Z ##[group]Setting up auth
+2026-10-20T22:04:37.6696599Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:04:37.6739565Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:04:37.6986231Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:04:37.7026422Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:04:37.7277339Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:04:37.7319617Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:04:37.7571296Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-20T22:04:37.7617781Z ##[endgroup]
+2026-10-20T22:04:37.7618723Z ##[group]Fetching the repository
+2026-10-20T22:04:37.7627628Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:38.0530158Z From https://github.com/nicholasbulka/li-criterion-rh-equivalence-lean
+2026-10-20T22:04:38.0530753Z  * branch            35df682f3b709ffe5fbcfdd452dfa964bd622b87 -> FETCH_HEAD
+2026-10-20T22:04:38.0535105Z ##[endgroup]
+2026-10-20T22:04:38.0535509Z ##[group]Determining the checkout info
+2026-10-20T22:04:38.0537531Z ##[endgroup]
+2026-10-20T22:04:38.0544107Z [command]/usr/bin/git sparse-checkout disable
+2026-10-20T22:04:38.0590382Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-20T22:04:38.0622652Z ##[group]Checking out the ref
+2026-10-20T22:04:38.0627810Z [command]/usr/bin/git checkout --progress --force 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:38.0776888Z Note: switching to '35df682f3b709ffe5fbcfdd452dfa964bd622b87'.
+2026-10-20T22:04:38.0777511Z 
+2026-10-20T22:04:38.0777882Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-10-20T22:04:38.0778916Z changes and commit them, and you can discard any commits you make in this
+2026-10-20T22:04:38.0779493Z state without impacting any branches by switching back to a branch.
+2026-10-20T22:04:38.0779830Z 
+2026-10-20T22:04:38.0780055Z If you want to create a new branch to retain commits you create, you may
+2026-10-20T22:04:38.0780599Z do so (now or later) by using -c with the switch command. Example:
+2026-10-20T22:04:38.0780915Z 
+2026-10-20T22:04:38.0781052Z   git switch -c <new-branch-name>
+2026-10-20T22:04:38.0781261Z 
+2026-10-20T22:04:38.0781375Z Or undo this operation with:
+2026-10-20T22:04:38.0781566Z 
+2026-10-20T22:04:38.0781663Z   git switch -
+2026-10-20T22:04:38.0781806Z 
+2026-10-20T22:04:38.0782239Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-10-20T22:04:38.0782899Z 
+2026-10-20T22:04:38.0783925Z HEAD is now at 35df682 Establish summability in the second compared theorem; credit Bombieri–Lagarias
+2026-10-20T22:04:38.0786506Z ##[endgroup]
+2026-10-20T22:04:38.0826272Z [command]/usr/bin/git log -1 --format=%H
+2026-10-20T22:04:38.0853429Z 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:38.0862602Z ##[group]Removing auth
+2026-10-20T22:04:38.0866775Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T22:04:38.0899798Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T22:04:38.1123895Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T22:04:38.1149755Z http.https://github.com/.extraheader
+2026-10-20T22:04:38.1158872Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-10-20T22:04:38.1194937Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T22:04:38.1416026Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T22:04:38.1448396Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T22:04:38.1665381Z ##[endgroup]
+2026-10-20T22:04:38.2410582Z ##[group]Run actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+2026-10-20T22:04:38.2411229Z with:
+2026-10-20T22:04:38.2411445Z   path: .li-provider/.lake/build
+2026-10-20T22:04:38.2412530Z   key: rh-li-provider-v1-Linux-3000596d704f59b6df5e67c1632d260077e1b74e1b501dc4471251c10634bb8f-35df682f3b709ffe5fbcfdd452dfa964bd622b87-0df444a360eaa60ab8c11dca51a86af692955474-10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:38.2413620Z   enableCrossOsArchive: false
+2026-10-20T22:04:38.2413879Z   fail-on-cache-miss: false
+2026-10-20T22:04:38.2414149Z   lookup-only: false
+2026-10-20T22:04:38.2414349Z env:
+2026-10-20T22:04:38.2414580Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:04:38.2414904Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:04:38.2415249Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:38.2415701Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:04:38.2416227Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:38.2416577Z ##[endgroup]
+2026-10-20T22:04:38.6113952Z Cache not found for input keys: rh-li-provider-v1-Linux-3000596d704f59b6df5e67c1632d260077e1b74e1b501dc4471251c10634bb8f-35df682f3b709ffe5fbcfdd452dfa964bd622b87-0df444a360eaa60ab8c11dca51a86af692955474-10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:38.6198669Z ##[group]Run python3 research/rh/m8_kernel_v1/replay.py provider
+2026-10-20T22:04:38.6199168Z [36;1mpython3 research/rh/m8_kernel_v1/replay.py provider[0m
+2026-10-20T22:04:38.6264128Z shell: /usr/bin/bash -e {0}
+2026-10-20T22:04:38.6264379Z env:
+2026-10-20T22:04:38.6264631Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:04:38.6264981Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:04:38.6265344Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:04:38.6265817Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:04:38.6266311Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:04:38.6266683Z ##[endgroup]
+2026-10-20T22:09:01.2904514Z info: LiCriterion: no previous manifest, creating one from scratch
+2026-10-20T22:09:01.2905524Z info: mathlib: cloning https://github.com/leanprover-community/mathlib4.git
+2026-10-20T22:09:01.2906797Z info: mathlib: checking out revision '0df444a360eaa60ab8c11dca51a86af692955474'
+2026-10-20T22:09:01.2907710Z info: toolchain not updated; already up-to-date
+2026-10-20T22:09:01.2908832Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-10-20T22:09:01.2909872Z info: plausible: checking out revision 'b7eb3304aeae834b12dda98993a37f6a41f6f0bb'
+2026-10-20T22:09:01.2910974Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-10-20T22:09:01.2912128Z info: LeanSearchClient: checking out revision '5f4d51b81cbd3f6b32b156bfad9056621a040404'
+2026-10-20T22:09:01.2913230Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-10-20T22:09:01.2914273Z info: importGraph: checking out revision '16f02aa7642864af59f1ff0e384a015994db9118'
+2026-10-20T22:09:01.2915373Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-10-20T22:09:01.2916607Z info: proofwidgets: checking out revision '4be2e3d5087eeb272cf5a8853b8f9dd025ef5957'
+2026-10-20T22:09:01.2917741Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-10-20T22:09:01.2919017Z info: aesop: checking out revision '3448c0bcc5ce01b2d1546e483ec3620e32df3d0e'
+2026-10-20T22:09:01.2920144Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-10-20T22:09:01.2921136Z info: Qq: checking out revision '92c15be17b7caf78c2ad767ec40f89052d908d81'
+2026-10-20T22:09:01.2922115Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-10-20T22:09:01.2923281Z info: batteries: checking out revision '4488d40d070b9700d4d5a6aa342f0d40c31b2a2d'
+2026-10-20T22:09:01.2924299Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-10-20T22:09:01.2925303Z info: Cli: checking out revision '6130a47896ce867c6a4a55373441e59e565bad0f'
+2026-10-20T22:09:01.2929136Z info: mathlib: running post-update hooks
+2026-10-20T22:09:01.2930069Z ✔ [1/5] Built Cache.Cli (339ms)
+2026-10-20T22:09:01.2930550Z ✔ [2/5] Built Cache.Lean (440ms)
+2026-10-20T22:09:01.2931040Z ✔ [6/26] Built Cache.Cli:c.o (209ms)
+2026-10-20T22:09:01.2931571Z ✔ [7/26] Built Cache.Lean:c.o (280ms)
+2026-10-20T22:09:01.2931997Z ✔ [8/26] Built Cache.Infra (486ms)
+2026-10-20T22:09:01.2932300Z ✔ [9/26] Built Cache.Infra:c.o (227ms)
+2026-10-20T22:09:01.2932669Z ✔ [10/26] Built Batteries.Tactic.OpenPrivate (1.0s)
+2026-10-20T22:09:01.2933023Z ✔ [11/26] Built Cache.IO (1.4s)
+2026-10-20T22:09:01.2933365Z ✔ [12/26] Built Batteries.Tactic.OpenPrivate:c.o (1.4s)
+2026-10-20T22:09:01.2933737Z ✔ [13/26] Built Cache.Hashing (790ms)
+2026-10-20T22:09:01.2934058Z ✔ [14/26] Built Cache.Hashing:c.o (482ms)
+2026-10-20T22:09:01.2934362Z ✔ [15/26] Built Cache.IO:c.o (1.9s)
+2026-10-20T22:09:01.2934653Z ✔ [16/26] Built Cache.Requests (2.1s)
+2026-10-20T22:09:01.2934960Z ✔ [17/26] Built Cache.Marker (555ms)
+2026-10-20T22:09:01.2935250Z ✔ [18/26] Built Cache.Marker:c.o (185ms)
+2026-10-20T22:09:01.2935547Z ✔ [19/26] Built Cache.Query (753ms)
+2026-10-20T22:09:01.2935834Z ✔ [20/26] Built Cache.Query:c.o (473ms)
+2026-10-20T22:09:01.2936368Z ✔ [21/26] Built Cache.Warning (832ms)
+2026-10-20T22:09:01.2936702Z ✔ [22/26] Built Cache.Warning:c.o (423ms)
+2026-10-20T22:09:01.2937020Z ✔ [23/26] Built Cache.Requests:c.o (3.2s)
+2026-10-20T22:09:01.2937316Z ✔ [24/26] Built Cache.Main (1.2s)
+2026-10-20T22:09:01.2937601Z ✔ [25/26] Built Cache.Main:c.o (969ms)
+2026-10-20T22:09:01.2937882Z ✔ [26/26] Built cache:exe (730ms)
+2026-10-20T22:09:01.2938408Z Current branch: HEAD
+2026-10-20T22:09:01.2938708Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T22:09:01.2939139Z Decompressing 8689 already-cached file(s) (1 already decompressed)
+2026-10-20T22:09:01.2939494Z No files to download
+2026-10-20T22:09:01.2939722Z Decompressed 8689 already-cached file(s)
+2026-10-20T22:09:01.2944850Z Completed successfully in 25720 ms!
+2026-10-20T22:09:01.2945146Z Current branch: HEAD
+2026-10-20T22:09:01.2945436Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-10-20T22:09:01.2945766Z No files to download
+2026-10-20T22:09:01.2945996Z Already decompressed 8690 file(s)
+2026-10-20T22:09:01.2946400Z ✔ [3651/3669] Built Hadamard.OrderOne.CofiniteControl (5.8s)
+2026-10-20T22:09:01.2946884Z ✔ [3654/3671] Built FunctionsOfOneComplexVariable.EntireLog (5.0s)
+2026-10-20T22:09:01.2947315Z ✔ [3658/3671] Built Lc.LiCriterion.MobiusMap (5.6s)
+2026-10-20T22:09:01.2947684Z ✔ [3659/3709] Built Lc.LiCriterion.GenusOne (4.6s)
+2026-10-20T22:09:01.2948592Z ✔ [3691/3713] Built FunctionsOfOneComplexVariable.BorelCaratheodory (10s)
+2026-10-20T22:09:01.2949053Z ✔ [3692/3713] Built Lc.XiZeros (4.5s)
+2026-10-20T22:09:01.2949405Z ✔ [3693/3713] Built Lc.LiCriterion.Pringsheim (4.0s)
+2026-10-20T22:09:01.2949857Z ✔ [3694/3713] Built Hadamard.OrderOne.QuotientCancellation (2.1s)
+2026-10-20T22:09:01.2950268Z ✔ [3695/3713] Built Hadamard.Basic (10s)
+2026-10-20T22:09:01.2950581Z ✔ [3696/3713] Built Hadamard.ZeroSet (3.5s)
+2026-10-20T22:09:01.2950900Z ✔ [3697/3713] Built Hadamard.Theorem (3.6s)
+2026-10-20T22:09:01.2951302Z ✔ [3698/3713] Built Hadamard.OrderOne.OrderFromMaxModulus (4.9s)
+2026-10-20T22:09:01.2951739Z ✔ [3699/3713] Built Hadamard.ZeroSetMultiplicity (4.6s)
+2026-10-20T22:09:01.2952164Z ✔ [3700/3713] Built Hadamard.OrderOne.MultipliableFactors (8.1s)
+2026-10-20T22:09:01.2952727Z ✔ [3701/3713] Built Hadamard.OrderOne.LocallyUniformProduct (9.3s)
+2026-10-20T22:09:01.2953148Z ✔ [3702/3713] Built Hadamard.ZeroCounting (12s)
+2026-10-20T22:09:01.2953519Z ✔ [3703/3713] Built Hadamard.OrderOne.LogDeriv (8.4s)
+2026-10-20T22:09:01.2953939Z ✔ [3704/3713] Built Hadamard.OrderOne.ZeroCountingBounds (16s)
+2026-10-20T22:09:01.2954368Z ✔ [3705/3713] Built Hadamard.OrderOne.TailEstimates (19s)
+2026-10-20T22:09:01.2954837Z ✔ [3706/3713] Built Hadamard.OrderOne.LogDerivMultiplicity (37s)
+2026-10-20T22:09:01.2955456Z ✔ [3707/3713] Built Lc.LiCriterion.Basic (47s)
+2026-10-20T22:09:01.2955899Z ✔ [3708/3713] Built Hadamard.OrderOne.SummabilityMultiplicity (14s)
+2026-10-20T22:09:01.2956417Z ✔ [3709/3713] Built Lc.LiCriterion.HadamardSummabilityBridge (4.8s)
+2026-10-20T22:09:01.2956853Z ✔ [3710/3713] Built Lc.LiCriterion.XiGrowth (18s)
+2026-10-20T22:09:01.2957245Z ✔ [3711/3713] Built Hadamard.General.Factorization (85s)
+2026-10-20T22:09:01.2957606Z ✔ [3712/3713] Built Hadamard.General (1.8s)
+2026-10-20T22:09:01.2958355Z ✔ [3713/3713] Built Lc.LiCriterion.HadamardBridge (2.4s)
+2026-10-20T22:09:01.2958742Z Build completed successfully (3713 jobs).
+2026-10-20T22:09:01.2958930Z 
+2026-10-20T22:09:01.3013104Z ##[group]Run set -euo pipefail
+2026-10-20T22:09:01.3013526Z [36;1mset -euo pipefail[0m
+2026-10-20T22:09:01.3013804Z [36;1mRING="$GITHUB_WORKSPACE/.lake/ringout"[0m
+2026-10-20T22:09:01.3014183Z [36;1mexport LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"[0m
+2026-10-20T22:09:01.3014775Z [36;1mif python3 research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py "$RING"; then[0m
+2026-10-20T22:09:01.3015519Z [36;1m  lean -DwarningAsError=true SOURCE_CHECKPOINT_REAUDIT.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3015993Z [36;1melse[0m
+2026-10-20T22:09:01.3016305Z [36;1m  python3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \[0m
+2026-10-20T22:09:01.3016832Z [36;1m    research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log[0m
+2026-10-20T22:09:01.3017475Z [36;1m  for m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \[0m
+2026-10-20T22:09:01.3018409Z [36;1m           CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do[0m
+2026-10-20T22:09:01.3018978Z [36;1m    lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3019398Z [36;1m  done[0m
+2026-10-20T22:09:01.3019862Z [36;1m  lean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3020619Z [36;1m  lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3021351Z [36;1m  lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3022170Z [36;1m  lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3022949Z [36;1m  lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3023717Z [36;1m  lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3024540Z [36;1m  lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3025336Z [36;1m  lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3026137Z [36;1m  lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3026955Z [36;1m  lean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3027801Z [36;1m  lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3029144Z [36;1m  lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3029972Z [36;1m  lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3030780Z [36;1m  lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3031871Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3032818Z [36;1m  lean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3033577Z [36;1m  lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3034341Z [36;1m  lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3035218Z [36;1m  lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3035997Z [36;1m  lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3036783Z [36;1m  lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3037681Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3039079Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3039936Z [36;1m  lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3040714Z [36;1m  lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3041514Z [36;1m  lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3042262Z [36;1m  lean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3043189Z [36;1m  lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3044218Z [36;1m  lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3045164Z [36;1m  lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3046187Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3047217Z [36;1m  lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3048557Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log[0m
+2026-10-20T22:09:01.3049791Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSActualCrossRowL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean 2>&1 | tee actual-row-bridge.log[0m
+2026-10-20T22:09:01.3051062Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSMidpointRadiusV1.olean" research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3052352Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSOddSignedEnclosureV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSOddSignedEnclosureV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3053693Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSRationalIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRationalIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3055046Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3056554Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3057847Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3059476Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3060773Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3062210Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3063591Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3064685Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3065856Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3067207Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSListIntervalDotV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3068848Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSListIntervalMixedV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalMixedV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3070226Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetStagedDotPilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/RowBudgetStagedDotPilot.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3071622Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetListCell0Pilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/RowBudgetListCell0Pilot.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3073056Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSColumnEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3074524Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSFirstColumnCheckerV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnCheckerV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3076000Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSRelativeRowCertificateL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3077482Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch0.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch0.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3079227Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3080906Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch2.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch2.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3082437Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch3.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch3.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3084070Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch4.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch4.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3085608Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch5.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch5.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3087153Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch6.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch6.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3088920Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch7.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch7.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3090460Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch8.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch8.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3091988Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch9.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch9.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3093528Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch10.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch10.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3095111Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch11.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch11.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3096669Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch12.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch12.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3098441Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch13.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch13.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3099964Z [36;1m  lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3101433Z [36;1m  lean -DwarningAsError=true -o "$RING/CvSFirstColumnRejectV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnRejectV1.lean 2>&1 | tee -a actual-row-bridge.log[0m
+2026-10-20T22:09:01.3102300Z [36;1mfi[0m
+2026-10-20T22:09:01.3102655Z [36;1mpython3 research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py[0m
+2026-10-20T22:09:01.3990890Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:09:01.3991335Z env:
+2026-10-20T22:09:01.3991644Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:09:01.3992088Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:09:01.3992539Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:09:01.3995090Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:09:01.3995745Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:09:01.4002368Z   GH_TOKEN: ***
+2026-10-20T22:09:01.4002625Z ##[endgroup]
+2026-10-20T22:09:20.1947272Z SOURCE_IDENTICAL_CHECKPOINT_REUSE f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1 166 binaries; 105 standard-axiom roots
+2026-10-20T22:09:50.5169348Z AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag : ∀ (M : ℕ) (n : ℤ),
+2026-10-20T22:09:50.5256364Z   AEGIS.CvSActualCrossRowL12V1.sourceKernel M n n = 2 * Real.pi * AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n
+2026-10-20T22:09:50.5273184Z 'AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5289118Z AEGIS.CvSActualCrossRowL12V1.sourceKernel_off : ∀ (M : ℕ) (m n : ℤ),
+2026-10-20T22:09:50.5289599Z   n ≠ m →
+2026-10-20T22:09:50.5289860Z     AEGIS.CvSActualCrossRowL12V1.sourceKernel M m n =
+2026-10-20T22:09:50.5290501Z       6 / 5 / Real.pi * ((AEGIS.CvSRowTailV1.tau M (6 / 5) n - AEGIS.CvSRowTailV1.tau M (6 / 5) m) / (↑n - ↑m))
+2026-10-20T22:09:50.5291221Z 'AEGIS.CvSActualCrossRowL12V1.sourceKernel_off' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5291989Z AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow : ∀ (M : ℕ) (m : ℤ) (v : Fin 139 → ℂ),
+2026-10-20T22:09:50.5292571Z   ∑ i, ↑(AEGIS.CvSActualCrossRowL12V1.sourceY M m i) * v i =
+2026-10-20T22:09:50.5292940Z     AEGIS.CvSCrossCertV1.crossRow M (6 / 5)
+2026-10-20T22:09:50.5293267Z       (AEGIS.CvSLowBlockMatrixV1.lowFreq fun i =>
+2026-10-20T22:09:50.5293804Z         AEGIS.CvSMomentBasisV1.sinSqSupport (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))
+2026-10-20T22:09:50.5294326Z       (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5)
+2026-10-20T22:09:50.5294858Z         (fun i => AEGIS.CvSMomentBasisV1.sinSqSupport (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))
+2026-10-20T22:09:50.5295611Z         (fun i => AEGIS.CvSMomentBasisV1.sinSqWeight (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))
+2026-10-20T22:09:50.5296162Z         (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v))
+2026-10-20T22:09:50.5296458Z       m
+2026-10-20T22:09:50.5296911Z 'AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5301114Z @AEGIS.CvSMidpointRadiusV1.product_error : ∀ {x y x₀ y₀ rx ry : ℝ},
+2026-10-20T22:09:50.5302124Z   |x - x₀| ≤ rx → |y - y₀| ≤ ry → |x * y - x₀ * y₀| ≤ |x₀| * ry + rx * |y₀| + rx * ry
+2026-10-20T22:09:50.5303098Z 'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5304419Z @AEGIS.CvSMidpointRadiusV1.sum_product_error : ∀ {ι : Type u_1} [inst : Fintype ι] (x y x₀ y₀ rx ry : ι → ℝ),
+2026-10-20T22:09:50.5305303Z   (∀ (k : ι), |x k - x₀ k| ≤ rx k) →
+2026-10-20T22:09:50.5305808Z     (∀ (k : ι), |y k - y₀ k| ≤ ry k) →
+2026-10-20T22:09:50.5306631Z       |∑ k, x k * y k - ∑ k, x₀ k * y₀ k| ≤ ∑ k, (|x₀ k| * ry k + rx k * |y₀ k| + rx k * ry k)
+2026-10-20T22:09:50.5307701Z 'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5309466Z AEGIS.CvSOddSignedEnclosureV1.signed_enclosure : ∀ (t : ℤ → ℝ) (lo hi : ℕ → ℝ) (N : ℕ),
+2026-10-20T22:09:50.5310349Z   t 0 = 0 →
+2026-10-20T22:09:50.5310778Z     (∀ (k : ℤ), t (-k) = -t k) →
+2026-10-20T22:09:50.5311388Z       (∀ (n : ℕ), 1 ≤ n → n ≤ N → lo n ≤ t ↑n ∧ t ↑n ≤ hi n) →
+2026-10-20T22:09:50.5311970Z         ∀ (k : ℤ),
+2026-10-20T22:09:50.5312361Z           k.natAbs ≤ N →
+2026-10-20T22:09:50.5313352Z             AEGIS.CvSOddSignedEnclosureV1.lower lo hi k ≤ t k ∧ t k ≤ AEGIS.CvSOddSignedEnclosureV1.upper lo hi k
+2026-10-20T22:09:50.5314694Z 'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5315687Z AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds : ∀ (t : ℤ → ℝ) (lo hi : ℕ → ℚ) (N : ℕ),
+2026-10-20T22:09:50.5316415Z   t 0 = 0 →
+2026-10-20T22:09:50.5316642Z     (∀ (k : ℤ), t (-k) = -t k) →
+2026-10-20T22:09:50.5316982Z       (∀ (n : ℕ), 1 ≤ n → n ≤ N → ↑(lo n) ≤ t ↑n ∧ t ↑n ≤ ↑(hi n)) →
+2026-10-20T22:09:50.5317309Z         ∀ (k : ℤ),
+2026-10-20T22:09:50.5317531Z           k.natAbs ≤ N →
+2026-10-20T22:09:50.5317918Z             ↑(if k < 0 then -hi k.natAbs else if k = 0 then 0 else lo k.natAbs) ≤ t k ∧
+2026-10-20T22:09:50.5319097Z               t k ≤ ↑(if k < 0 then -lo k.natAbs else if k = 0 then 0 else hi k.natAbs)
+2026-10-20T22:09:50.5320116Z 'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5320889Z AEGIS.CvSRationalIntervalV1.rationalRange_mem : ∀ (p : ℕ) (lo hi : ℚ) {x : ℝ},
+2026-10-20T22:09:50.5321611Z   ↑lo ≤ x → x ≤ ↑hi → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRationalIntervalV1.rationalRange p lo hi) x
+2026-10-20T22:09:50.5322328Z 'AEGIS.CvSRationalIntervalV1.rationalRange_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5323126Z AEGIS.CvSIntervalMatrixProductV1.midpoint_error : ∀ (p : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5323649Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+2026-10-20T22:09:50.5324233Z     |x - ↑(AEGIS.CvSIntervalMatrixProductV1.mid I) / 2 ^ p| ≤ ↑(AEGIS.CvSIntervalMatrixProductV1.rad I) / 2 ^ p
+2026-10-20T22:09:50.5324990Z 'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5421367Z @AEGIS.CvSIntervalMatrixProductV1.dot_mem : ∀ {ι : Type u_1} [inst : Fintype ι] (p : ℕ)
+2026-10-20T22:09:50.5422544Z   (A B : ι → AEGIS.RHFixIntervalV1.Iv) (a b : ι → ℝ),
+2026-10-20T22:09:50.5423088Z   (∀ (k : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (A k) (a k)) →
+2026-10-20T22:09:50.5423626Z     (∀ (k : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (B k) (b k)) →
+2026-10-20T22:09:50.5424340Z       AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.dot p A B) (∑ k, a k * b k)
+2026-10-20T22:09:50.5425209Z 'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5426242Z @AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem : ∀ {ι : Type u_1} {κ : Type u_2} {ν : Type u_3} [inst : Fintype κ]
+2026-10-20T22:09:50.5427243Z   (p : ℕ) (A : ι → κ → AEGIS.RHFixIntervalV1.Iv) (B : κ → ν → AEGIS.RHFixIntervalV1.Iv) (a : ι → κ → ℝ) (b : κ → ν → ℝ),
+2026-10-20T22:09:50.5428315Z   (∀ (i : ι) (k : κ), AEGIS.RHFixIntervalV1.Iv.Mem p (A i k) (a i k)) →
+2026-10-20T22:09:50.5428803Z     (∀ (k : κ) (j : ν), AEGIS.RHFixIntervalV1.Iv.Mem p (B k j) (b k j)) →
+2026-10-20T22:09:50.5429182Z       ∀ (i : ι) (j : ν),
+2026-10-20T22:09:50.5429750Z         AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.matrixMul p A B i j) (∑ k, a i k * b k j)
+2026-10-20T22:09:50.5430518Z 'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5431352Z @AEGIS.CvSIntervalMatrixProductV1.congruence_mem : ∀ {ι : Type u_1} {κ : Type u_2} [inst : Fintype κ] (p : ℕ)
+2026-10-20T22:09:50.5432108Z   (X : κ → ι → AEGIS.RHFixIntervalV1.Iv) (G : κ → κ → AEGIS.RHFixIntervalV1.Iv) (x : κ → ι → ℝ) (g : κ → κ → ℝ),
+2026-10-20T22:09:50.5432678Z   (∀ (k : κ) (i : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) →
+2026-10-20T22:09:50.5433121Z     (∀ (k l : κ), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) →
+2026-10-20T22:09:50.5433461Z       ∀ (i j : ι),
+2026-10-20T22:09:50.5433843Z         AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.congruence p X G i j)
+2026-10-20T22:09:50.5434349Z           (∑ k, ∑ l, x k i * x l j * g k l)
+2026-10-20T22:09:50.5434859Z 'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5435648Z AEGIS.CvSIntervalMatrixProductV1.hull_mem_left : ∀ (p : ℕ) {I J : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5436457Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.hull I J) x
+2026-10-20T22:09:50.5437402Z 'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5438453Z AEGIS.CvSIntervalMatrixProductV1.downscale_mem : ∀ (p d : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5439026Z   AEGIS.RHFixIntervalV1.Iv.Mem (p + d) I x →
+2026-10-20T22:09:50.5439470Z     AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.downscale d I) x
+2026-10-20T22:09:50.5440134Z 'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5441183Z AEGIS.CvSIntervalMatrixProductV1.upscale_mem : ∀ (p d : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5442224Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+2026-10-20T22:09:50.5443075Z     AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (AEGIS.CvSIntervalMatrixProductV1.upscale d I) x
+2026-10-20T22:09:50.5444402Z 'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5445509Z AEGIS.CvSIntervalMatrixProductV1.mem_of_contains : ∀ (p : ℕ) {target evaluated : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5446174Z   AEGIS.CvSIntervalMatrixProductV1.contains target evaluated = true →
+2026-10-20T22:09:50.5446772Z     AEGIS.RHFixIntervalV1.Iv.Mem p evaluated x → AEGIS.RHFixIntervalV1.Iv.Mem p target x
+2026-10-20T22:09:50.5447467Z 'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5448505Z @AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound : ∀ {n : ℕ} (p : ℕ)
+2026-10-20T22:09:50.5449111Z   (target evaluated : Fin n → Fin n → AEGIS.RHFixIntervalV1.Iv) (a : Fin n → Fin n → ℝ),
+2026-10-20T22:09:50.5449669Z   AEGIS.CvSIntervalMatrixProductV1.tableCheck n target evaluated = true →
+2026-10-20T22:09:50.5450219Z     (∀ (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (evaluated i j) (a i j)) →
+2026-10-20T22:09:50.5450725Z       ∀ (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (target i j) (a i j)
+2026-10-20T22:09:50.5451331Z 'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5451978Z AEGIS.CvSRowBudgetEnvelopeV1.point_mem : ∀ (p : ℕ) (z : ℤ),
+2026-10-20T22:09:50.5452503Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.point p z) ↑z
+2026-10-20T22:09:50.5453101Z 'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5453873Z @AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem : ∀ {ι : Type u_1} {κ : Type u_2} {ν : Type u_3} [inst : Fintype κ]
+2026-10-20T22:09:50.5596176Z   [inst_1 : Fintype ν] (p : ℕ) (Q : ι → ι → AEGIS.RHFixIntervalV1.Iv) (X : κ → ι → AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5597480Z   (G : κ → κ → AEGIS.RHFixIntervalV1.Iv) (T : κ → AEGIS.RHFixIntervalV1.Iv) (Z : ν → ι → AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5598753Z   (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : ι → ι → ℝ) (x : κ → ι → ℝ) (g : κ → κ → ℝ) (t : κ → ℝ) (z : ν → ι → ℝ)
+2026-10-20T22:09:50.5599222Z   (lp2 : ℝ),
+2026-10-20T22:09:50.5599544Z   (∀ (i j : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (Q i j) (q i j)) →
+2026-10-20T22:09:50.5599997Z     (∀ (k : κ) (i : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) →
+2026-10-20T22:09:50.5600444Z       (∀ (k l : κ), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) →
+2026-10-20T22:09:50.5600864Z         (∀ (k : κ), AEGIS.RHFixIntervalV1.Iv.Mem p (T k) (t k)) →
+2026-10-20T22:09:50.5601308Z           (∀ (r : ν) (i : ι), AEGIS.RHFixIntervalV1.Iv.Mem p (Z r i) (z r i)) →
+2026-10-20T22:09:50.5601733Z             AEGIS.RHFixIntervalV1.Iv.Mem p LP2 lp2 →
+2026-10-20T22:09:50.5602054Z               ∀ (i j : ι),
+2026-10-20T22:09:50.5602489Z                 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.envelope p Q X G T Z LP2 i j)
+2026-10-20T22:09:50.5603049Z                   (40 * q i j - ∑ r, z r i * z r j -
+2026-10-20T22:09:50.5603759Z                     lp2 * (2 * ∑ k, ∑ l, t k * x k i * (t l * x l j) * g k l + 338 * ∑ k, ∑ l, x k i * x l j * g k l))
+2026-10-20T22:09:50.5604383Z 'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5605218Z @AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check : ∀ {n : ℕ} {κ : Type u_1} {ν : Type u_2} [inst : Fintype κ]
+2026-10-20T22:09:50.5605918Z   [inst_1 : Fintype ν] (p d : ℕ) (target Q : Fin n → Fin n → AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5606722Z   (X : κ → Fin n → AEGIS.RHFixIntervalV1.Iv) (G : κ → κ → AEGIS.RHFixIntervalV1.Iv) (T : κ → AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5607452Z   (Z : ν → Fin n → AEGIS.RHFixIntervalV1.Iv) (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : Fin n → Fin n → ℝ)
+2026-10-20T22:09:50.5608187Z   (x : κ → Fin n → ℝ) (g : κ → κ → ℝ) (t : κ → ℝ) (z : ν → Fin n → ℝ) (lp2 : ℝ),
+2026-10-20T22:09:50.5608685Z   (∀ (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (Q i j) (q i j)) →
+2026-10-20T22:09:50.5609209Z     (∀ (k : κ) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (X k i) (x k i)) →
+2026-10-20T22:09:50.5609697Z       (∀ (k l : κ), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (G k l) (g k l)) →
+2026-10-20T22:09:50.5610154Z         (∀ (k : κ), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (T k) (t k)) →
+2026-10-20T22:09:50.5610648Z           (∀ (r : ν) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (Z r i) (z r i)) →
+2026-10-20T22:09:50.5611092Z             AEGIS.RHFixIntervalV1.Iv.Mem (p + d) LP2 lp2 →
+2026-10-20T22:09:50.5611510Z               (AEGIS.CvSIntervalMatrixProductV1.tableCheck n target fun i j =>
+2026-10-20T22:09:50.5611967Z                     AEGIS.CvSIntervalMatrixProductV1.downscale d
+2026-10-20T22:09:50.5612339Z                       (AEGIS.CvSIntervalMatrixProductV1.hull
+2026-10-20T22:09:50.5612768Z                         (AEGIS.CvSRowBudgetEnvelopeV1.envelope (p + d) Q X G T Z LP2 i j)
+2026-10-20T22:09:50.5613283Z                         (AEGIS.CvSRowBudgetEnvelopeV1.envelope (p + d) Q X G T Z LP2 j i))) =
+2026-10-20T22:09:50.5613701Z                   true →
+2026-10-20T22:09:50.5613950Z                 ∀ (i j : Fin n),
+2026-10-20T22:09:50.5614226Z                   AEGIS.RHFixIntervalV1.Iv.Mem p (target i j)
+2026-10-20T22:09:50.5614591Z                     (40 * q i j - ∑ r, z r i * z r j -
+2026-10-20T22:09:50.5615068Z                       lp2 * (2 * ∑ k, ∑ l, t k * x k i * (t l * x l j) * g k l + 338 * ∑ k, ∑ l, x k i * x l j * g k l))
+2026-10-20T22:09:50.5615733Z 'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5616386Z @AEGIS.CvSTauSigned150L12V1.positive_mem : ∀ {M : ℕ},
+2026-10-20T22:09:50.5616710Z   3 ≤ M →
+2026-10-20T22:09:50.5616907Z     ∀ {k : ℕ},
+2026-10-20T22:09:50.5617108Z       1 ≤ k →
+2026-10-20T22:09:50.5617313Z         k ≤ 150 →
+2026-10-20T22:09:50.5617743Z           ↑(AEGIS.CvSTauSigned150L12V1.positiveLo k) ≤ AEGIS.CvSRowTailV1.tau M (6 / 5) ↑k ∧
+2026-10-20T22:09:50.5618516Z             AEGIS.CvSRowTailV1.tau M (6 / 5) ↑k ≤ ↑(AEGIS.CvSTauSigned150L12V1.positiveHi k)
+2026-10-20T22:09:50.5619149Z 'AEGIS.CvSTauSigned150L12V1.positive_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5619743Z @AEGIS.CvSTauSigned150L12V1.signed_tau_bounds : ∀ {M : ℕ},
+2026-10-20T22:09:50.5620070Z   3 ≤ M →
+2026-10-20T22:09:50.5620293Z     ∀ (k : ℤ),
+2026-10-20T22:09:50.5620506Z       k.natAbs ≤ 150 →
+2026-10-20T22:09:50.5620925Z         ↑(AEGIS.CvSTauSigned150L12V1.signedLo k) ≤ AEGIS.CvSRowTailV1.tau M (6 / 5) k ∧
+2026-10-20T22:09:50.5621534Z           AEGIS.CvSRowTailV1.tau M (6 / 5) k ≤ ↑(AEGIS.CvSTauSigned150L12V1.signedHi k)
+2026-10-20T22:09:50.5622160Z 'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5622799Z AEGIS.CvSTauSigned150L12V1.signed_tau_interval : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T22:09:50.5623163Z   3 ≤ M →
+2026-10-20T22:09:50.5764932Z     ∀ (k : ℤ),
+2026-10-20T22:09:50.5765542Z       k.natAbs ≤ 150 →
+2026-10-20T22:09:50.5765899Z         AEGIS.RHFixIntervalV1.Iv.Mem p
+2026-10-20T22:09:50.5766380Z           (AEGIS.CvSRationalIntervalV1.rationalRange p (AEGIS.CvSTauSigned150L12V1.signedLo k)
+2026-10-20T22:09:50.5766876Z             (AEGIS.CvSTauSigned150L12V1.signedHi k))
+2026-10-20T22:09:50.5767198Z           (AEGIS.CvSRowTailV1.tau M (6 / 5) k)
+2026-10-20T22:09:50.5767734Z 'AEGIS.CvSTauSigned150L12V1.signed_tau_interval' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5768818Z AEGIS.CvSIntervalDivideV1.divPos_mem : ∀ (p : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5769500Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+2026-10-20T22:09:50.5770032Z     ∀ {d : ℤ}, 0 < d → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divPos I d) (x / ↑d)
+2026-10-20T22:09:50.5770673Z 'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5771354Z AEGIS.CvSIntervalDivideV1.divInt_mem : ∀ (p : ℕ) {I : AEGIS.RHFixIntervalV1.Iv} {x : ℝ},
+2026-10-20T22:09:50.5771822Z   AEGIS.RHFixIntervalV1.Iv.Mem p I x →
+2026-10-20T22:09:50.5772329Z     ∀ {d : ℤ}, d ≠ 0 → AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / ↑d)
+2026-10-20T22:09:50.5772953Z 'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5773662Z AEGIS.CvSFrequencyIntervalV1.pi_bounds : ↑AEGIS.CvSFrequencyIntervalV1.piLo ≤ Real.pi ∧
+2026-10-20T22:09:50.5774190Z   Real.pi ≤ ↑AEGIS.CvSFrequencyIntervalV1.piHi
+2026-10-20T22:09:50.5774702Z 'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5775305Z AEGIS.CvSFrequencyIntervalV1.frequency_bounds : ∀ (n : ℤ),
+2026-10-20T22:09:50.5775970Z   ↑(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) ≤ -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ∧
+2026-10-20T22:09:50.5776623Z     -(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4 ≤ ↑(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)
+2026-10-20T22:09:50.5777284Z 'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5777943Z AEGIS.CvSFrequencyIntervalV1.coefficient_mem : ∀ (p : ℕ) (n w : ℤ),
+2026-10-20T22:09:50.5778656Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)
+2026-10-20T22:09:50.5779217Z     ((-(2 * Real.pi * ↑n / (6 / 5)) ^ 2 - 1 / 4) * ↑w / 2 ^ 42)
+2026-10-20T22:09:50.5779759Z 'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5780344Z AEGIS.CvSFrequencyIntervalV1.lp_mem : ∀ (p : ℕ),
+2026-10-20T22:09:50.5780841Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)
+2026-10-20T22:09:50.5781490Z 'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5782054Z AEGIS.CvSFrequencyIntervalV1.lp_squared_mem : ∀ (p : ℕ),
+2026-10-20T22:09:50.5782619Z   AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)
+2026-10-20T22:09:50.5783345Z 'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5784065Z AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem : ∀ (p : ℕ) (k : Fin 141) (i : Fin 139),
+2026-10-20T22:09:50.5784528Z   AEGIS.RHFixIntervalV1.Iv.Mem p
+2026-10-20T22:09:50.5785078Z     (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)
+2026-10-20T22:09:50.5785931Z       (AEGIS.CvSProjectedEntryL12V1.wZ (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k) ↑i))
+2026-10-20T22:09:50.5786529Z     (AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff k i)
+2026-10-20T22:09:50.5787154Z 'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5787819Z AEGIS.CvSActualRowInputL12V1.gramRat_cast : ∀ (NP : ℕ) (n m : ℤ),
+2026-10-20T22:09:50.5788707Z   ↑(AEGIS.CvSActualRowInputL12V1.gramRat NP n m) = AEGIS.CvSGramTailV1.gramUp NP n m
+2026-10-20T22:09:50.5789364Z 'AEGIS.CvSActualRowInputL12V1.gramRat_cast' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5789991Z AEGIS.CvSActualRowInputL12V1.gramUp_mem : ∀ (p NP : ℕ) (n m : ℤ),
+2026-10-20T22:09:50.5790356Z   AEGIS.RHFixIntervalV1.Iv.Mem p
+2026-10-20T22:09:50.5790817Z     (AEGIS.CvSRationalIntervalV1.rationalRange p (AEGIS.CvSActualRowInputL12V1.gramRat NP n m)
+2026-10-20T22:09:50.5791332Z       (AEGIS.CvSActualRowInputL12V1.gramRat NP n m))
+2026-10-20T22:09:50.5791763Z     (AEGIS.CvSGramTailV1.gramUp NP n m)
+2026-10-20T22:09:50.5792249Z 'AEGIS.CvSActualRowInputL12V1.gramUp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5792866Z AEGIS.CvSActualRowInputL12V1.gramUp_symm : ∀ (NP : ℕ) (n m : ℤ),
+2026-10-20T22:09:50.5793321Z   AEGIS.CvSGramTailV1.gramUp NP n m = AEGIS.CvSGramTailV1.gramUp NP m n
+2026-10-20T22:09:50.5793905Z 'AEGIS.CvSActualRowInputL12V1.gramUp_symm' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5794514Z AEGIS.CvSActualRowInputL12V1.diagonal_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T22:09:50.5794869Z   3 ≤ M →
+2026-10-20T22:09:50.5795059Z     ∀ (n : ℤ),
+2026-10-20T22:09:50.5795272Z       n.natAbs ≤ 70 →
+2026-10-20T22:09:50.5955410Z         AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.diagonalBox p n)
+2026-10-20T22:09:50.5956487Z           (AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n)
+2026-10-20T22:09:50.5957218Z 'AEGIS.CvSActualRowInputL12V1.diagonal_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5958440Z AEGIS.CvSActualRowInputL12V1.sourceKernel_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T22:09:50.5958942Z   3 ≤ M →
+2026-10-20T22:09:50.5959168Z     ∀ (m : ℤ),
+2026-10-20T22:09:50.5959385Z       m.natAbs ≤ 150 →
+2026-10-20T22:09:50.5959623Z         ∀ (k : Fin 141),
+2026-10-20T22:09:50.5960007Z           AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.kernelBox p m k)
+2026-10-20T22:09:50.5960750Z             (AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k))
+2026-10-20T22:09:50.5961584Z 'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5962252Z AEGIS.CvSActualRowInputL12V1.sourceY_mem : ∀ (p : ℕ) {M : ℕ},
+2026-10-20T22:09:50.5962612Z   3 ≤ M →
+2026-10-20T22:09:50.5962810Z     ∀ (m : ℤ),
+2026-10-20T22:09:50.5963029Z       m.natAbs ≤ 150 →
+2026-10-20T22:09:50.5963262Z         ∀ (i : Fin 139),
+2026-10-20T22:09:50.5963654Z           AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.sourceYBox p m i)
+2026-10-20T22:09:50.5964142Z             (AEGIS.CvSActualCrossRowL12V1.sourceY M m i)
+2026-10-20T22:09:50.5964677Z 'AEGIS.CvSActualRowInputL12V1.sourceY_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5965280Z AEGIS.CvSActualRowInputL12V1.sourceZ_mem : ∀ (M : ℕ),
+2026-10-20T22:09:50.5965771Z   3 ≤ M →
+2026-10-20T22:09:50.5966142Z     ∀ (lam : Fin 139 → Fin 139 → ℝ) (Lam : Fin 139 → Fin 139 → AEGIS.RHFixIntervalV1.Iv),
+2026-10-20T22:09:50.5966695Z       (∀ (j i : Fin 139), AEGIS.RHFixIntervalV1.Iv.Mem 96 (Lam j i) (lam j i)) →
+2026-10-20T22:09:50.5967114Z         ∀ (r : Fin 301) (i : Fin 139),
+2026-10-20T22:09:50.5967512Z           AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSActualRowInputL12V1.zBox Lam r i)
+2026-10-20T22:09:50.5968130Z             (AEGIS.CvSActualRowInputL12V1.sourceZ M lam r i)
+2026-10-20T22:09:50.5968704Z 'AEGIS.CvSActualRowInputL12V1.sourceZ_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5969496Z AEGIS.CvSListIntervalDotV1.listDot_eq_dot : ∀ (p : ℕ) {n : ℕ} (A B : List AEGIS.RHFixIntervalV1.Iv),
+2026-10-20T22:09:50.5969983Z   A.length = n →
+2026-10-20T22:09:50.5970186Z     B.length = n →
+2026-10-20T22:09:50.5970422Z       AEGIS.CvSListIntervalDotV1.listDot p A B =
+2026-10-20T22:09:50.5970970Z         AEGIS.CvSIntervalMatrixProductV1.dot p (fun k => A.getD ↑k { lo := 0, hi := 0 }) fun k =>
+2026-10-20T22:09:50.5971482Z           B.getD ↑k { lo := 0, hi := 0 }
+2026-10-20T22:09:50.5971958Z 'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5972717Z AEGIS.CvSListIntervalDotV1.listCongruence_eq : ∀ (p : ℕ) {n : ℕ} (X : List AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5973215Z   (G : List (List AEGIS.RHFixIntervalV1.Iv)),
+2026-10-20T22:09:50.5973504Z   X.length = n →
+2026-10-20T22:09:50.5973707Z     G.length = n →
+2026-10-20T22:09:50.5974095Z       (∀ (k : Fin n), (G.getD ↑k []).length = n) →
+2026-10-20T22:09:50.5974640Z         AEGIS.CvSIntervalMatrixProductV1.congruence p (fun k x => X.getD ↑k { lo := 0, hi := 0 })
+2026-10-20T22:09:50.5975213Z             (fun k l => (G.getD ↑k []).getD ↑l { lo := 0, hi := 0 }) 0 0 =
+2026-10-20T22:09:50.5975812Z           AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row X) G)
+2026-10-20T22:09:50.5976583Z 'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5977397Z AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq : ∀ (p : ℕ) {n : ℕ} (X Y : List AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.5978106Z   (G : List (List AEGIS.RHFixIntervalV1.Iv)),
+2026-10-20T22:09:50.5978681Z   X.length = n →
+2026-10-20T22:09:50.5978990Z     Y.length = n →
+2026-10-20T22:09:50.5979284Z       G.length = n →
+2026-10-20T22:09:50.5979755Z         (∀ (k : Fin n), (G.getD ↑k []).length = n) →
+2026-10-20T22:09:50.5992010Z           AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun x k => X.getD ↑k { lo := 0, hi := 0 })
+2026-10-20T22:09:50.5993445Z               (AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun k l => (G.getD ↑k []).getD ↑l { lo := 0, hi := 0 })
+2026-10-20T22:09:50.5994150Z                 fun k x => Y.getD ↑k { lo := 0, hi := 0 })
+2026-10-20T22:09:50.5994566Z               0 0 =
+2026-10-20T22:09:50.5995065Z             AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row Y) G)
+2026-10-20T22:09:50.5995864Z 'AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.5996598Z AEGIS.RowBudgetStagedDotPilot.weighted_column_exact : ∀ (k : Fin 141),
+2026-10-20T22:09:50.5997509Z   AEGIS.RHFixIntervalV1.Iv.mul 96 (AEGIS.RowBudgetStagedDotPilot.T.getD ↑k { lo := 0, hi := 0 })
+2026-10-20T22:09:50.5998801Z       (AEGIS.RowBudgetStagedDotPilot.X0.getD ↑k { lo := 0, hi := 0 }) =
+2026-10-20T22:09:50.5999661Z     AEGIS.RowBudgetStagedDotPilot.DX0.getD ↑k { lo := 0, hi := 0 }
+2026-10-20T22:09:50.6000474Z 'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]
+2026-10-20T22:09:50.6001613Z AEGIS.RowBudgetStagedDotPilot.gram_source_dot : (AEGIS.CvSIntervalMatrixProductV1.dot 96
+2026-10-20T22:09:50.6091356Z     (fun k => AEGIS.RowBudgetStagedDotPilot.G0.getD ↑k { lo := 0, hi := 0 }) fun k =>
+2026-10-20T22:09:50.6092386Z     AEGIS.RowBudgetStagedDotPilot.X0.getD ↑k { lo := 0, hi := 0 }) =
+2026-10-20T22:09:50.6092845Z   { lo := -400159206593443821288191, hi := -400159206593443807376161 }
+2026-10-20T22:09:50.6093435Z 'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6094166Z AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot : (AEGIS.CvSIntervalMatrixProductV1.dot 96
+2026-10-20T22:09:50.6094845Z     (fun k => AEGIS.RowBudgetStagedDotPilot.G0.getD ↑k { lo := 0, hi := 0 }) fun k =>
+2026-10-20T22:09:50.6095537Z     AEGIS.RowBudgetStagedDotPilot.DX0.getD ↑k { lo := 0, hi := 0 }) =
+2026-10-20T22:09:50.6095989Z   { lo := 4394801782732671274923651402, hi := 4394802055012090975575075585 }
+2026-10-20T22:09:50.6096599Z 'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6097201Z AEGIS.RowBudgetListCell0Pilot.gram_source_exact : List.map
+2026-10-20T22:09:50.6097736Z     (fun row => AEGIS.CvSListIntervalDotV1.listDot 96 row AEGIS.RowBudgetStagedDotPilot.X0)
+2026-10-20T22:09:50.6098539Z     AEGIS.RowBudgetListCell0Pilot.G =
+2026-10-20T22:09:50.6098839Z   AEGIS.RowBudgetListCell0Pilot.GX0
+2026-10-20T22:09:50.6099250Z 'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]
+2026-10-20T22:09:50.6099746Z AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact : List.map
+2026-10-20T22:09:50.6100259Z     (fun row => AEGIS.CvSListIntervalDotV1.listDot 96 row AEGIS.RowBudgetStagedDotPilot.DX0)
+2026-10-20T22:09:50.6100737Z     AEGIS.RowBudgetListCell0Pilot.G =
+2026-10-20T22:09:50.6101032Z   AEGIS.RowBudgetListCell0Pilot.GDX0
+2026-10-20T22:09:50.6101452Z 'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]
+2026-10-20T22:09:50.6102082Z AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast : AEGIS.RowBudgetListCell0Pilot.fastEnvelope =
+2026-10-20T22:09:50.6102604Z   AEGIS.RowBudgetListCell0Pilot.target
+2026-10-20T22:09:50.6103035Z 'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]
+2026-10-20T22:09:50.6103679Z AEGIS.RowBudgetListCell0Pilot.original_eq_fast : AEGIS.RowBudgetListCell0Pilot.originalEnvelope =
+2026-10-20T22:09:50.6104222Z   AEGIS.RowBudgetListCell0Pilot.fastEnvelope
+2026-10-20T22:09:50.6104763Z 'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6105516Z AEGIS.RowBudgetListCell0Pilot.stored_cell0_original : AEGIS.RowBudgetListCell0Pilot.originalEnvelope =
+2026-10-20T22:09:50.6106058Z   AEGIS.RowBudgetListCell0Pilot.target
+2026-10-20T22:09:50.6106582Z 'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6107398Z AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq : ∀ (p : ℕ) {n r : ℕ} (q lp2 : AEGIS.RHFixIntervalV1.Iv)
+2026-10-20T22:09:50.6108241Z   (a b da db T u v : List AEGIS.RHFixIntervalV1.Iv) (G : List (List AEGIS.RHFixIntervalV1.Iv)),
+2026-10-20T22:09:50.6108696Z   a.length = n →
+2026-10-20T22:09:50.6108905Z     b.length = n →
+2026-10-20T22:09:50.6109113Z       da.length = n →
+2026-10-20T22:09:50.6109333Z         db.length = n →
+2026-10-20T22:09:50.6109568Z           u.length = r →
+2026-10-20T22:09:50.6109801Z             v.length = r →
+2026-10-20T22:09:50.6110034Z               G.length = n →
+2026-10-20T22:09:50.6110334Z                 (∀ (k : Fin n), (G.getD ↑k []).length = n) →
+2026-10-20T22:09:50.6110655Z                   (∀ (k : Fin n),
+2026-10-20T22:09:50.6111187Z                       AEGIS.RHFixIntervalV1.Iv.mul p (T.getD ↑k { lo := 0, hi := 0 }) (a.getD ↑k { lo := 0, hi := 0 }) =
+2026-10-20T22:09:50.6111725Z                         da.getD ↑k { lo := 0, hi := 0 }) →
+2026-10-20T22:09:50.6112038Z                     (∀ (k : Fin n),
+2026-10-20T22:09:50.6112448Z                         AEGIS.RHFixIntervalV1.Iv.mul p (T.getD ↑k { lo := 0, hi := 0 })
+2026-10-20T22:09:50.6112899Z                             (b.getD ↑k { lo := 0, hi := 0 }) =
+2026-10-20T22:09:50.6113395Z                           db.getD ↑k { lo := 0, hi := 0 }) →
+2026-10-20T22:09:50.6113768Z                       AEGIS.CvSRowBudgetEnvelopeV1.envelope p (fun x x_1 => q)
+2026-10-20T22:09:50.6114181Z                           (AEGIS.CvSColumnEnvelopeV1.twoColumns a b)
+2026-10-20T22:09:50.6114621Z                           (fun k l => (G.getD ↑k []).getD ↑l { lo := 0, hi := 0 })
+2026-10-20T22:09:50.6115184Z                           (fun k => T.getD ↑k { lo := 0, hi := 0 }) (AEGIS.CvSColumnEnvelopeV1.twoColumns u v) lp2 0 1 =
+2026-10-20T22:09:50.6115795Z                         AEGIS.CvSColumnEnvelopeV1.columnValue p q a da u v
+2026-10-20T22:09:50.6116256Z                           (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row b) G)
+2026-10-20T22:09:50.6116779Z                           (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row db) G) lp2
+2026-10-20T22:09:50.6117420Z 'AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6118436Z AEGIS.CvSFirstColumnCheckerV1.check_sound : ∀ (e : AEGIS.CvSFirstColumnCheckerV1.Entry),
+2026-10-20T22:09:50.6118964Z   AEGIS.CvSFirstColumnCheckerV1.check e = true →
+2026-10-20T22:09:50.6119534Z     AEGIS.CvSIntervalMatrixProductV1.contains e.target (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) = true
+2026-10-20T22:09:50.6223189Z 'AEGIS.CvSFirstColumnCheckerV1.check_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6224457Z AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true : AEGIS.CvSPackedGramV1.check
+2026-10-20T22:09:50.6225338Z     AEGIS.CvSRelativeRowCertificateL12V1.base AEGIS.CvSRelativeRowCertificateL12V1.B 139
+2026-10-20T22:09:50.6226151Z     AEGIS.CvSRelativeRowCertificateL12V1.eps AEGIS.CvSRelativeRowCertificateL12V1.eta
+2026-10-20T22:09:50.6226974Z     AEGIS.CvSRelativeRowCertificateL12V1.factor AEGIS.CvSRelativeRowCertificateL12V1.intervals =
+2026-10-20T22:09:50.6227575Z   true
+2026-10-20T22:09:50.6228364Z 'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]
+2026-10-20T22:09:50.6229085Z AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive : 0 <
+2026-10-20T22:09:50.6229770Z   AEGIS.CvSRelativeRowCertificateL12V1.eps - AEGIS.CvSRelativeRowCertificateL12V1.eta
+2026-10-20T22:09:50.6230420Z 'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms
+2026-10-20T22:09:50.6231079Z AEGIS.RowBudgetFirstColumnBatch0.checked : AEGIS.RowBudgetFirstColumnBatch0.entries.all
+2026-10-20T22:09:50.6231565Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6231834Z   true
+2026-10-20T22:09:50.6232142Z 'AEGIS.RowBudgetFirstColumnBatch0.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6232788Z AEGIS.RowBudgetFirstColumnBatch0.target_source : (AEGIS.RowBudgetFirstColumnBatch0.entries.all fun e =>
+2026-10-20T22:09:50.6233717Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6234225Z   true
+2026-10-20T22:09:50.6234560Z 'AEGIS.RowBudgetFirstColumnBatch0.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6235319Z AEGIS.RowBudgetFirstColumnBatch0.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch0.entries =
+2026-10-20T22:09:50.6235858Z   List.range' 0 10
+2026-10-20T22:09:50.6236195Z 'AEGIS.RowBudgetFirstColumnBatch0.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6236776Z AEGIS.RowBudgetFirstColumnBatch1.checked : AEGIS.RowBudgetFirstColumnBatch1.entries.all
+2026-10-20T22:09:50.6237263Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6237534Z   true
+2026-10-20T22:09:50.6237832Z 'AEGIS.RowBudgetFirstColumnBatch1.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6238582Z AEGIS.RowBudgetFirstColumnBatch1.target_source : (AEGIS.RowBudgetFirstColumnBatch1.entries.all fun e =>
+2026-10-20T22:09:50.6239427Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6240095Z   true
+2026-10-20T22:09:50.6240419Z 'AEGIS.RowBudgetFirstColumnBatch1.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6241169Z AEGIS.RowBudgetFirstColumnBatch1.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch1.entries =
+2026-10-20T22:09:50.6241696Z   List.range' 10 10
+2026-10-20T22:09:50.6242026Z 'AEGIS.RowBudgetFirstColumnBatch1.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6242604Z AEGIS.RowBudgetFirstColumnBatch2.checked : AEGIS.RowBudgetFirstColumnBatch2.entries.all
+2026-10-20T22:09:50.6243195Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6243468Z   true
+2026-10-20T22:09:50.6243765Z 'AEGIS.RowBudgetFirstColumnBatch2.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6244387Z AEGIS.RowBudgetFirstColumnBatch2.target_source : (AEGIS.RowBudgetFirstColumnBatch2.entries.all fun e =>
+2026-10-20T22:09:50.6245214Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6245709Z   true
+2026-10-20T22:09:50.6246022Z 'AEGIS.RowBudgetFirstColumnBatch2.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6246758Z AEGIS.RowBudgetFirstColumnBatch2.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch2.entries =
+2026-10-20T22:09:50.6247271Z   List.range' 20 10
+2026-10-20T22:09:50.6247600Z 'AEGIS.RowBudgetFirstColumnBatch2.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6248311Z AEGIS.RowBudgetFirstColumnBatch3.checked : AEGIS.RowBudgetFirstColumnBatch3.entries.all
+2026-10-20T22:09:50.6248802Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6249060Z   true
+2026-10-20T22:09:50.6249354Z 'AEGIS.RowBudgetFirstColumnBatch3.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6249972Z AEGIS.RowBudgetFirstColumnBatch3.target_source : (AEGIS.RowBudgetFirstColumnBatch3.entries.all fun e =>
+2026-10-20T22:09:50.6250793Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6251288Z   true
+2026-10-20T22:09:50.6251606Z 'AEGIS.RowBudgetFirstColumnBatch3.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6252341Z AEGIS.RowBudgetFirstColumnBatch3.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch3.entries =
+2026-10-20T22:09:50.6252864Z   List.range' 30 10
+2026-10-20T22:09:50.6253191Z 'AEGIS.RowBudgetFirstColumnBatch3.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6253760Z AEGIS.RowBudgetFirstColumnBatch4.checked : AEGIS.RowBudgetFirstColumnBatch4.entries.all
+2026-10-20T22:09:50.6254250Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6254511Z   true
+2026-10-20T22:09:50.6254805Z 'AEGIS.RowBudgetFirstColumnBatch4.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6255417Z AEGIS.RowBudgetFirstColumnBatch4.target_source : (AEGIS.RowBudgetFirstColumnBatch4.entries.all fun e =>
+2026-10-20T22:09:50.6256237Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6256741Z   true
+2026-10-20T22:09:50.6369153Z 'AEGIS.RowBudgetFirstColumnBatch4.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6370602Z AEGIS.RowBudgetFirstColumnBatch4.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch4.entries =
+2026-10-20T22:09:50.6371299Z   List.range' 40 10
+2026-10-20T22:09:50.6371721Z 'AEGIS.RowBudgetFirstColumnBatch4.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6372453Z AEGIS.RowBudgetFirstColumnBatch5.checked : AEGIS.RowBudgetFirstColumnBatch5.entries.all
+2026-10-20T22:09:50.6373074Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6373399Z   true
+2026-10-20T22:09:50.6373782Z 'AEGIS.RowBudgetFirstColumnBatch5.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6374551Z AEGIS.RowBudgetFirstColumnBatch5.target_source : (AEGIS.RowBudgetFirstColumnBatch5.entries.all fun e =>
+2026-10-20T22:09:50.6375819Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6376452Z   true
+2026-10-20T22:09:50.6376849Z 'AEGIS.RowBudgetFirstColumnBatch5.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6377770Z AEGIS.RowBudgetFirstColumnBatch5.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch5.entries =
+2026-10-20T22:09:50.6378805Z   List.range' 50 10
+2026-10-20T22:09:50.6379226Z 'AEGIS.RowBudgetFirstColumnBatch5.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6379941Z AEGIS.RowBudgetFirstColumnBatch6.checked : AEGIS.RowBudgetFirstColumnBatch6.entries.all
+2026-10-20T22:09:50.6380559Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6380827Z   true
+2026-10-20T22:09:50.6381128Z 'AEGIS.RowBudgetFirstColumnBatch6.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6381751Z AEGIS.RowBudgetFirstColumnBatch6.target_source : (AEGIS.RowBudgetFirstColumnBatch6.entries.all fun e =>
+2026-10-20T22:09:50.6382619Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6383118Z   true
+2026-10-20T22:09:50.6383439Z 'AEGIS.RowBudgetFirstColumnBatch6.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6384182Z AEGIS.RowBudgetFirstColumnBatch6.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch6.entries =
+2026-10-20T22:09:50.6384720Z   List.range' 60 10
+2026-10-20T22:09:50.6385042Z 'AEGIS.RowBudgetFirstColumnBatch6.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6385629Z AEGIS.RowBudgetFirstColumnBatch7.checked : AEGIS.RowBudgetFirstColumnBatch7.entries.all
+2026-10-20T22:09:50.6386123Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6386381Z   true
+2026-10-20T22:09:50.6386674Z 'AEGIS.RowBudgetFirstColumnBatch7.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6387298Z AEGIS.RowBudgetFirstColumnBatch7.target_source : (AEGIS.RowBudgetFirstColumnBatch7.entries.all fun e =>
+2026-10-20T22:09:50.6388264Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6388760Z   true
+2026-10-20T22:09:50.6389072Z 'AEGIS.RowBudgetFirstColumnBatch7.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6389811Z AEGIS.RowBudgetFirstColumnBatch7.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch7.entries =
+2026-10-20T22:09:50.6390336Z   List.range' 70 10
+2026-10-20T22:09:50.6390657Z 'AEGIS.RowBudgetFirstColumnBatch7.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6391234Z AEGIS.RowBudgetFirstColumnBatch8.checked : AEGIS.RowBudgetFirstColumnBatch8.entries.all
+2026-10-20T22:09:50.6391721Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6391978Z   true
+2026-10-20T22:09:50.6392272Z 'AEGIS.RowBudgetFirstColumnBatch8.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6392882Z AEGIS.RowBudgetFirstColumnBatch8.target_source : (AEGIS.RowBudgetFirstColumnBatch8.entries.all fun e =>
+2026-10-20T22:09:50.6393702Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6394190Z   true
+2026-10-20T22:09:50.6394498Z 'AEGIS.RowBudgetFirstColumnBatch8.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6395224Z AEGIS.RowBudgetFirstColumnBatch8.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch8.entries =
+2026-10-20T22:09:50.6395738Z   List.range' 80 10
+2026-10-20T22:09:50.6396057Z 'AEGIS.RowBudgetFirstColumnBatch8.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6396669Z AEGIS.RowBudgetFirstColumnBatch9.checked : AEGIS.RowBudgetFirstColumnBatch9.entries.all
+2026-10-20T22:09:50.6397145Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6397402Z   true
+2026-10-20T22:09:50.6397693Z 'AEGIS.RowBudgetFirstColumnBatch9.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6398417Z AEGIS.RowBudgetFirstColumnBatch9.target_source : (AEGIS.RowBudgetFirstColumnBatch9.entries.all fun e =>
+2026-10-20T22:09:50.6399368Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6399853Z   true
+2026-10-20T22:09:50.6400169Z 'AEGIS.RowBudgetFirstColumnBatch9.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6400897Z AEGIS.RowBudgetFirstColumnBatch9.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch9.entries =
+2026-10-20T22:09:50.6401407Z   List.range' 90 10
+2026-10-20T22:09:50.6401719Z 'AEGIS.RowBudgetFirstColumnBatch9.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6402454Z AEGIS.RowBudgetFirstColumnBatch10.checked : AEGIS.RowBudgetFirstColumnBatch10.entries.all
+2026-10-20T22:09:50.6402956Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6403211Z   true
+2026-10-20T22:09:50.6403507Z 'AEGIS.RowBudgetFirstColumnBatch10.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6516685Z AEGIS.RowBudgetFirstColumnBatch10.target_source : (AEGIS.RowBudgetFirstColumnBatch10.entries.all fun e =>
+2026-10-20T22:09:50.6518559Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6519209Z   true
+2026-10-20T22:09:50.6519628Z 'AEGIS.RowBudgetFirstColumnBatch10.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6520546Z AEGIS.RowBudgetFirstColumnBatch10.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch10.entries =
+2026-10-20T22:09:50.6521092Z   List.range' 100 10
+2026-10-20T22:09:50.6521437Z 'AEGIS.RowBudgetFirstColumnBatch10.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6522045Z AEGIS.RowBudgetFirstColumnBatch11.checked : AEGIS.RowBudgetFirstColumnBatch11.entries.all
+2026-10-20T22:09:50.6522547Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6522807Z   true
+2026-10-20T22:09:50.6523109Z 'AEGIS.RowBudgetFirstColumnBatch11.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6523753Z AEGIS.RowBudgetFirstColumnBatch11.target_source : (AEGIS.RowBudgetFirstColumnBatch11.entries.all fun e =>
+2026-10-20T22:09:50.6524608Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6525103Z   true
+2026-10-20T22:09:50.6525420Z 'AEGIS.RowBudgetFirstColumnBatch11.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6526171Z AEGIS.RowBudgetFirstColumnBatch11.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch11.entries =
+2026-10-20T22:09:50.6526698Z   List.range' 110 10
+2026-10-20T22:09:50.6527031Z 'AEGIS.RowBudgetFirstColumnBatch11.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6527627Z AEGIS.RowBudgetFirstColumnBatch12.checked : AEGIS.RowBudgetFirstColumnBatch12.entries.all
+2026-10-20T22:09:50.6528249Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6528516Z   true
+2026-10-20T22:09:50.6528823Z 'AEGIS.RowBudgetFirstColumnBatch12.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6529473Z AEGIS.RowBudgetFirstColumnBatch12.target_source : (AEGIS.RowBudgetFirstColumnBatch12.entries.all fun e =>
+2026-10-20T22:09:50.6530339Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6530851Z   true
+2026-10-20T22:09:50.6531183Z 'AEGIS.RowBudgetFirstColumnBatch12.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6531944Z AEGIS.RowBudgetFirstColumnBatch12.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch12.entries =
+2026-10-20T22:09:50.6532490Z   List.range' 120 10
+2026-10-20T22:09:50.6532822Z 'AEGIS.RowBudgetFirstColumnBatch12.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6533424Z AEGIS.RowBudgetFirstColumnBatch13.checked : AEGIS.RowBudgetFirstColumnBatch13.entries.all
+2026-10-20T22:09:50.6533933Z     AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6534193Z   true
+2026-10-20T22:09:50.6534494Z 'AEGIS.RowBudgetFirstColumnBatch13.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6535296Z AEGIS.RowBudgetFirstColumnBatch13.target_source : (AEGIS.RowBudgetFirstColumnBatch13.entries.all fun e =>
+2026-10-20T22:09:50.6536142Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6536631Z   true
+2026-10-20T22:09:50.6536949Z 'AEGIS.RowBudgetFirstColumnBatch13.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6537701Z AEGIS.RowBudgetFirstColumnBatch13.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnBatch13.entries =
+2026-10-20T22:09:50.6538364Z   List.range' 130 9
+2026-10-20T22:09:50.6538814Z 'AEGIS.RowBudgetFirstColumnBatch13.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6539513Z AEGIS.RowBudgetFirstColumnV1.checked : AEGIS.RowBudgetFirstColumnV1.entries.all AEGIS.CvSFirstColumnCheckerV1.check =
+2026-10-20T22:09:50.6540067Z   true
+2026-10-20T22:09:50.6540356Z 'AEGIS.RowBudgetFirstColumnV1.checked' depends on axioms: [propext]
+2026-10-20T22:09:50.6540925Z AEGIS.RowBudgetFirstColumnV1.target_source : (AEGIS.RowBudgetFirstColumnV1.entries.all fun e =>
+2026-10-20T22:09:50.6541730Z     decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+2026-10-20T22:09:50.6542241Z   true
+2026-10-20T22:09:50.6542537Z 'AEGIS.RowBudgetFirstColumnV1.target_source' depends on axioms: [propext]
+2026-10-20T22:09:50.6543228Z AEGIS.RowBudgetFirstColumnV1.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnV1.entries =
+2026-10-20T22:09:50.6543711Z   List.range 139
+2026-10-20T22:09:50.6544022Z 'AEGIS.RowBudgetFirstColumnV1.row_order' does not depend on any axioms
+2026-10-20T22:09:50.6544679Z AEGIS.RowBudgetFirstColumnV1.first_column_contains : ∀ e ∈ AEGIS.RowBudgetFirstColumnV1.entries,
+2026-10-20T22:09:50.6545190Z   AEGIS.CvSIntervalMatrixProductV1.contains
+2026-10-20T22:09:50.6545715Z       (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)
+2026-10-20T22:09:50.6546217Z       (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) =
+2026-10-20T22:09:50.6546527Z     true
+2026-10-20T22:09:50.6546967Z 'AEGIS.RowBudgetFirstColumnV1.first_column_contains' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6547830Z AEGIS.RowBudgetFirstColumnV1.all_rows_covered : ∀ (i : Fin 139), ∃ e ∈ AEGIS.RowBudgetFirstColumnV1.entries, e.row = i
+2026-10-20T22:09:50.6548625Z 'AEGIS.RowBudgetFirstColumnV1.all_rows_covered' depends on axioms: [propext, Quot.sound]
+2026-10-20T22:09:50.6549310Z AEGIS.RowBudgetFirstColumnV1.first_column_mem : ∀ e ∈ AEGIS.RowBudgetFirstColumnV1.entries,
+2026-10-20T22:09:50.6549774Z   ∀ {x : ℝ},
+2026-10-20T22:09:50.6669084Z     AEGIS.RHFixIntervalV1.Iv.Mem 80 (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) x →
+2026-10-20T22:09:50.6670270Z       AEGIS.RHFixIntervalV1.Iv.Mem 80
+2026-10-20T22:09:50.6671386Z         (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0) x
+2026-10-20T22:09:50.6672142Z 'AEGIS.RowBudgetFirstColumnV1.first_column_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6672876Z AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted : AEGIS.CvSFirstColumnCheckerV1.check
+2026-10-20T22:09:50.6673431Z     (have __src := AEGIS.RowBudgetFirstColumnBatch0.entry0;
+2026-10-20T22:09:50.6673903Z     { row := __src.row, q := __src.q, a := __src.a, da := [], u := __src.u, target := __src.target }) =
+2026-10-20T22:09:50.6674290Z   false
+2026-10-20T22:09:50.6674643Z 'AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted' depends on axioms: [propext]
+2026-10-20T22:09:50.6675258Z AEGIS.CvSFirstColumnRejectV1.reject_zero_target : AEGIS.CvSFirstColumnCheckerV1.check
+2026-10-20T22:09:50.6675776Z     (have __src := AEGIS.RowBudgetFirstColumnBatch0.entry0;
+2026-10-20T22:09:50.6676270Z     { row := __src.row, q := __src.q, a := __src.a, da := __src.da, u := __src.u, target := { lo := 0, hi := 0 } }) =
+2026-10-20T22:09:50.6676703Z   false
+2026-10-20T22:09:50.6677035Z 'AEGIS.CvSFirstColumnRejectV1.reject_zero_target' depends on axioms: [propext]
+2026-10-20T22:09:50.6677882Z @AEGIS.CvSPackedGramV1.quad_lower : ∀ {n : ℕ} (q b B : ℕ) (eps eta : ℤ) (L : List (List ℤ))
+2026-10-20T22:09:50.6678646Z   (I : List (List AEGIS.RHFixIntervalV1.Iv)),
+2026-10-20T22:09:50.6679079Z   AEGIS.CvSPackedGramV1.check b B n eps eta L I = true →
+2026-10-20T22:09:50.6679443Z     ∀ (A : Fin n → Fin n → ℝ),
+2026-10-20T22:09:50.6679718Z       (∀ (i j : Fin n), A i j = A j i) →
+2026-10-20T22:09:50.6680228Z         (∀ (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I ↑i ↑j) (A i j)) →
+2026-10-20T22:09:50.6680841Z           ∀ (x : Fin n → ℝ), ↑(eps - eta) * ∑ i, x i ^ 2 ≤ 2 ^ q * ∑ i, ∑ j, A i j * x i * x j
+2026-10-20T22:09:50.6681529Z 'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:50.6682233Z @AEGIS.CvSPackedGramV1.quad_lower_complex : ∀ {n : ℕ} (q b B : ℕ) (eps eta : ℤ) (L : List (List ℤ))
+2026-10-20T22:09:50.6682699Z   (I : List (List AEGIS.RHFixIntervalV1.Iv)),
+2026-10-20T22:09:50.6683071Z   AEGIS.CvSPackedGramV1.check b B n eps eta L I = true →
+2026-10-20T22:09:50.6683411Z     ∀ (A : Fin n → Fin n → ℝ),
+2026-10-20T22:09:50.6683677Z       (∀ (i j : Fin n), A i j = A j i) →
+2026-10-20T22:09:50.6684164Z         (∀ (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I ↑i ↑j) (A i j)) →
+2026-10-20T22:09:50.6684625Z           ∀ (c : Fin n → ℂ),
+2026-10-20T22:09:50.6685069Z             ↑(eps - eta) * ∑ i, ‖c i‖ ^ 2 ≤ 2 ^ q * (∑ i, ∑ j, c i * (starRingEnd ℂ) (c j) * ↑(A i j)).re
+2026-10-20T22:09:50.6685704Z 'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-10-20T22:09:51.0431452Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0432606Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceKernel_off ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0433581Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0434533Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.product_error ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0435397Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSMidpointRadiusV1.sum_product_error ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0436311Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_enclosure ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0437253Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0438491Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRationalIntervalV1.rationalRange_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0439511Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.midpoint_error ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0440502Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.dot_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0441466Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0442454Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.congruence_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0443428Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.hull_mem_left ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0444391Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.downscale_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0445353Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.upscale_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0446331Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.mem_of_contains ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0447585Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0448647Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.point_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0449448Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0450298Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0451257Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.positive_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0452041Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_bounds ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0452857Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSTauSigned150L12V1.signed_tau_interval ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0453630Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalDivideV1.divPos_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0454367Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSIntervalDivideV1.divInt_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0455104Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFrequencyIntervalV1.pi_bounds ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0455881Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFrequencyIntervalV1.frequency_bounds ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0456693Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFrequencyIntervalV1.coefficient_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0457464Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFrequencyIntervalV1.lp_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0458356Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFrequencyIntervalV1.lp_squared_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0459174Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0459987Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.gramRat_cast ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0460742Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.gramUp_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0461500Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.gramUp_symm ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0462263Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.diagonal_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0463054Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.sourceKernel_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0463836Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.sourceY_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0464598Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSActualRowInputL12V1.sourceZ_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0465355Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSListIntervalDotV1.listDot_eq_dot ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0466138Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSListIntervalDotV1.listCongruence_eq ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0466966Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0467715Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetStagedDotPilot.weighted_column_exact ['propext']
+2026-10-20T22:09:51.0468543Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetStagedDotPilot.gram_source_dot ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0469717Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0471219Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetListCell0Pilot.gram_source_exact ['propext']
+2026-10-20T22:09:51.0472285Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact ['propext']
+2026-10-20T22:09:51.0473235Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast ['propext']
+2026-10-20T22:09:51.0474283Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetListCell0Pilot.original_eq_fast ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0475135Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetListCell0Pilot.stored_cell0_original ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0476110Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0476897Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFirstColumnCheckerV1.check_sound ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0477633Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true ['propext']
+2026-10-20T22:09:51.0478568Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive []
+2026-10-20T22:09:51.0479172Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch0.checked ['propext']
+2026-10-20T22:09:51.0479740Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch0.target_source ['propext']
+2026-10-20T22:09:51.0480291Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch0.row_order []
+2026-10-20T22:09:51.0480810Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch1.checked ['propext']
+2026-10-20T22:09:51.0481366Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch1.target_source ['propext']
+2026-10-20T22:09:51.0481899Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch1.row_order []
+2026-10-20T22:09:51.0482410Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch2.checked ['propext']
+2026-10-20T22:09:51.0482964Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch2.target_source ['propext']
+2026-10-20T22:09:51.0483494Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch2.row_order []
+2026-10-20T22:09:51.0483999Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch3.checked ['propext']
+2026-10-20T22:09:51.0484552Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch3.target_source ['propext']
+2026-10-20T22:09:51.0485080Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch3.row_order []
+2026-10-20T22:09:51.0485585Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch4.checked ['propext']
+2026-10-20T22:09:51.0486129Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch4.target_source ['propext']
+2026-10-20T22:09:51.0486656Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch4.row_order []
+2026-10-20T22:09:51.0487161Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch5.checked ['propext']
+2026-10-20T22:09:51.0487708Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch5.target_source ['propext']
+2026-10-20T22:09:51.0488516Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch5.row_order []
+2026-10-20T22:09:51.0489032Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch6.checked ['propext']
+2026-10-20T22:09:51.0489579Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch6.target_source ['propext']
+2026-10-20T22:09:51.0490103Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch6.row_order []
+2026-10-20T22:09:51.0490609Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch7.checked ['propext']
+2026-10-20T22:09:51.0491155Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch7.target_source ['propext']
+2026-10-20T22:09:51.0491680Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch7.row_order []
+2026-10-20T22:09:51.0492188Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch8.checked ['propext']
+2026-10-20T22:09:51.0492732Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch8.target_source ['propext']
+2026-10-20T22:09:51.0493259Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch8.row_order []
+2026-10-20T22:09:51.0493899Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch9.checked ['propext']
+2026-10-20T22:09:51.0494449Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch9.target_source ['propext']
+2026-10-20T22:09:51.0494971Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch9.row_order []
+2026-10-20T22:09:51.0495486Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch10.checked ['propext']
+2026-10-20T22:09:51.0496049Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch10.target_source ['propext']
+2026-10-20T22:09:51.0496690Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch10.row_order []
+2026-10-20T22:09:51.0497214Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch11.checked ['propext']
+2026-10-20T22:09:51.0497788Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch11.target_source ['propext']
+2026-10-20T22:09:51.0498545Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch11.row_order []
+2026-10-20T22:09:51.0499064Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch12.checked ['propext']
+2026-10-20T22:09:51.0499623Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch12.target_source ['propext']
+2026-10-20T22:09:51.0500152Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch12.row_order []
+2026-10-20T22:09:51.0500661Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch13.checked ['propext']
+2026-10-20T22:09:51.0501211Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch13.target_source ['propext']
+2026-10-20T22:09:51.0501744Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnBatch13.row_order []
+2026-10-20T22:09:51.0502249Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.checked ['propext']
+2026-10-20T22:09:51.0502774Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.target_source ['propext']
+2026-10-20T22:09:51.0503277Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.row_order []
+2026-10-20T22:09:51.0503926Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.first_column_contains ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0504692Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.all_rows_covered ['Quot.sound', 'propext']
+2026-10-20T22:09:51.0505426Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.RowBudgetFirstColumnV1.first_column_mem ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0506141Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted ['propext']
+2026-10-20T22:09:51.0506745Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSFirstColumnRejectV1.reject_zero_target ['propext']
+2026-10-20T22:09:51.0507383Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSPackedGramV1.quad_lower ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0508306Z SOURCE_ROW_AXIOM_AUDIT_PASS AEGIS.CvSPackedGramV1.quad_lower_complex ['Classical.choice', 'Quot.sound', 'propext']
+2026-10-20T22:09:51.0509044Z ACTUAL_CVS_ROW_SOURCE_REPLAY_PASS; FIRST_COLUMN_OUTPUT_ENTRIES=139; FULL_Q80_ACTUAL_MEMBERSHIP=NOT_YET_PROVED
+2026-10-20T22:09:51.0542979Z ##[group]Run set -euo pipefail
+2026-10-20T22:09:51.0543314Z [36;1mset -euo pipefail[0m
+2026-10-20T22:09:51.0543723Z [36;1mexport LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"[0m
+2026-10-20T22:09:51.0544401Z [36;1mpython3 research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/run_ci_full_table.py[0m
+2026-10-20T22:09:51.0615090Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T22:09:51.0615430Z env:
+2026-10-20T22:09:51.0615677Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T22:09:51.0616011Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T22:09:51.0616373Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T22:09:51.0616833Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T22:09:51.0617335Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T22:09:51.0617689Z ##[endgroup]
+2026-10-20T22:09:57.7541452Z FULL_TABLE_KERNEL_MODULE CvSPackedIntervalDotV1 PASS 4.773
+2026-10-20T22:10:02.2226837Z FULL_TABLE_KERNEL_MODULE CvSCachedColumnV1 PASS 4.468
+2026-10-20T22:10:06.7349603Z FULL_TABLE_KERNEL_MODULE CvSCachedEnvelopeJoinV1 PASS 4.512
+2026-10-20T22:10:17.1305227Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows0 PASS 10.395
+2026-10-20T22:10:27.4886599Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows1 PASS 10.354
+2026-10-20T22:10:37.8531113Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows2 PASS 10.367
+2026-10-20T22:10:48.3834084Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows3 PASS 10.53
+2026-10-20T22:10:58.9325358Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows4 PASS 10.548
+2026-10-20T22:11:09.5018690Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows5 PASS 10.564
+2026-10-20T22:11:20.1251910Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows6 PASS 10.623
+2026-10-20T22:11:30.5754347Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows7 PASS 10.454
+2026-10-20T22:11:41.1269734Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows8 PASS 10.547
+2026-10-20T22:11:51.5875809Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows9 PASS 10.464
+2026-10-20T22:12:02.1359195Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows10 PASS 10.545
+2026-10-20T22:12:12.6449275Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows11 PASS 10.509
+2026-10-20T22:12:23.1767266Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows12 PASS 10.532
+2026-10-20T22:12:33.7005132Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows13 PASS 10.523
+2026-10-20T22:12:38.4809701Z FULL_TABLE_KERNEL_MODULE CvSCachedGramRows14 PASS 4.78
+2026-10-20T22:12:47.1157753Z FULL_TABLE_KERNEL_MODULE CvSCachedGramV1 PASS 8.634
+2026-10-20T22:12:56.1780167Z FULL_TABLE_KERNEL_MODULE CvSCachedInput0 PASS 9.061
+2026-10-20T22:13:05.4629830Z FULL_TABLE_KERNEL_MODULE CvSCachedInput1 PASS 9.279
+2026-10-20T22:13:14.5282412Z FULL_TABLE_KERNEL_MODULE CvSCachedInput2 PASS 9.069
+2026-10-20T22:13:23.4057343Z FULL_TABLE_KERNEL_MODULE CvSCachedInput3 PASS 8.877
+2026-10-20T22:13:32.2555002Z FULL_TABLE_KERNEL_MODULE CvSCachedInput4 PASS 8.849
+2026-10-20T22:13:41.4268878Z FULL_TABLE_KERNEL_MODULE CvSCachedInput5 PASS 9.171
+2026-10-20T22:13:50.3509228Z FULL_TABLE_KERNEL_MODULE CvSCachedInput6 PASS 8.919
+2026-10-20T22:13:59.4835220Z FULL_TABLE_KERNEL_MODULE CvSCachedInput7 PASS 9.135
+2026-10-20T22:14:08.6702907Z FULL_TABLE_KERNEL_MODULE CvSCachedInput8 PASS 9.183
+2026-10-20T22:14:17.9611044Z FULL_TABLE_KERNEL_MODULE CvSCachedInput9 PASS 9.293
+2026-10-20T22:14:27.1641366Z FULL_TABLE_KERNEL_MODULE CvSCachedInput10 PASS 9.202
+2026-10-20T22:14:36.3091162Z FULL_TABLE_KERNEL_MODULE CvSCachedInput11 PASS 9.139
+2026-10-20T22:14:45.4346837Z FULL_TABLE_KERNEL_MODULE CvSCachedInput12 PASS 9.125
+2026-10-20T22:14:54.3310495Z FULL_TABLE_KERNEL_MODULE CvSCachedInput13 PASS 8.895
+2026-10-20T22:15:03.4489915Z FULL_TABLE_KERNEL_MODULE CvSCachedInput14 PASS 9.117
+2026-10-20T22:15:12.3488387Z FULL_TABLE_KERNEL_MODULE CvSCachedInput15 PASS 8.89
+2026-10-20T22:15:21.2205913Z FULL_TABLE_KERNEL_MODULE CvSCachedInput16 PASS 8.871
+2026-10-20T22:15:30.0862730Z FULL_TABLE_KERNEL_MODULE CvSCachedInput17 PASS 8.865
+2026-10-20T22:15:39.0249688Z FULL_TABLE_KERNEL_MODULE CvSCachedInput18 PASS 8.938
+2026-10-20T22:15:48.1333335Z FULL_TABLE_KERNEL_MODULE CvSCachedInput19 PASS 9.107
+2026-10-20T22:15:57.0627183Z FULL_TABLE_KERNEL_MODULE CvSCachedInput20 PASS 8.928
+2026-10-20T22:16:06.2611548Z FULL_TABLE_KERNEL_MODULE CvSCachedInput21 PASS 9.197
+2026-10-20T22:16:15.4297042Z FULL_TABLE_KERNEL_MODULE CvSCachedInput22 PASS 9.168
+2026-10-20T22:16:24.5499831Z FULL_TABLE_KERNEL_MODULE CvSCachedInput23 PASS 9.115
+2026-10-20T22:16:33.7855105Z FULL_TABLE_KERNEL_MODULE CvSCachedInput24 PASS 9.239
+2026-10-20T22:16:42.7963983Z FULL_TABLE_KERNEL_MODULE CvSCachedInput25 PASS 9.008
+2026-10-20T22:16:51.9469529Z FULL_TABLE_KERNEL_MODULE CvSCachedInput26 PASS 9.148
+2026-10-20T22:17:00.8496801Z FULL_TABLE_KERNEL_MODULE CvSCachedInput27 PASS 8.903
+2026-10-20T22:17:09.8328138Z FULL_TABLE_KERNEL_MODULE CvSCachedInput28 PASS 8.973
+2026-10-20T22:17:18.7354072Z FULL_TABLE_KERNEL_MODULE CvSCachedInput29 PASS 8.902
+2026-10-20T22:17:27.6469458Z FULL_TABLE_KERNEL_MODULE CvSCachedInput30 PASS 8.907
+2026-10-20T22:17:36.7451104Z FULL_TABLE_KERNEL_MODULE CvSCachedInput31 PASS 9.101
+2026-10-20T22:17:45.6717414Z FULL_TABLE_KERNEL_MODULE CvSCachedInput32 PASS 8.926
+2026-10-20T22:17:54.8627275Z FULL_TABLE_KERNEL_MODULE CvSCachedInput33 PASS 9.19
+2026-10-20T22:18:04.0823744Z FULL_TABLE_KERNEL_MODULE CvSCachedInput34 PASS 9.218
+2026-10-20T22:18:13.3368979Z FULL_TABLE_KERNEL_MODULE CvSCachedInput35 PASS 9.253
+2026-10-20T22:18:22.5362253Z FULL_TABLE_KERNEL_MODULE CvSCachedInput36 PASS 9.198
+2026-10-20T22:18:31.7189135Z FULL_TABLE_KERNEL_MODULE CvSCachedInput37 PASS 9.18
+2026-10-20T22:18:40.9897480Z FULL_TABLE_KERNEL_MODULE CvSCachedInput38 PASS 9.271
+2026-10-20T22:18:50.0419563Z FULL_TABLE_KERNEL_MODULE CvSCachedInput39 PASS 9.048
+2026-10-20T22:18:59.2832496Z FULL_TABLE_KERNEL_MODULE CvSCachedInput40 PASS 9.238
+2026-10-20T22:19:08.3116529Z FULL_TABLE_KERNEL_MODULE CvSCachedInput41 PASS 9.027
+2026-10-20T22:19:17.3537331Z FULL_TABLE_KERNEL_MODULE CvSCachedInput42 PASS 9.039
+2026-10-20T22:19:26.6346852Z FULL_TABLE_KERNEL_MODULE CvSCachedInput43 PASS 9.264
+2026-10-20T22:19:35.9634952Z FULL_TABLE_KERNEL_MODULE CvSCachedInput44 PASS 9.341
+2026-10-20T22:19:45.1340472Z FULL_TABLE_KERNEL_MODULE CvSCachedInput45 PASS 9.17
+2026-10-20T22:19:54.3749240Z FULL_TABLE_KERNEL_MODULE CvSCachedInput46 PASS 9.237
+2026-10-20T22:20:03.6202546Z FULL_TABLE_KERNEL_MODULE CvSCachedInput47 PASS 9.238
+2026-10-20T22:20:12.9266594Z FULL_TABLE_KERNEL_MODULE CvSCachedInput48 PASS 9.305
+2026-10-20T22:20:22.3396255Z FULL_TABLE_KERNEL_MODULE CvSCachedInput49 PASS 9.412
+2026-10-20T22:20:31.8887050Z FULL_TABLE_KERNEL_MODULE CvSCachedInput50 PASS 9.548
+2026-10-20T22:20:41.1787337Z FULL_TABLE_KERNEL_MODULE CvSCachedInput51 PASS 9.289
+2026-10-20T22:20:50.7080296Z FULL_TABLE_KERNEL_MODULE CvSCachedInput52 PASS 9.528
+2026-10-20T22:21:00.0258752Z FULL_TABLE_KERNEL_MODULE CvSCachedInput53 PASS 9.317
+2026-10-20T22:21:09.5944710Z FULL_TABLE_KERNEL_MODULE CvSCachedInput54 PASS 9.567
+2026-10-20T22:21:19.1198581Z FULL_TABLE_KERNEL_MODULE CvSCachedInput55 PASS 9.524
+2026-10-20T22:21:28.6340436Z FULL_TABLE_KERNEL_MODULE CvSCachedInput56 PASS 9.513
+2026-10-20T22:21:38.0776364Z FULL_TABLE_KERNEL_MODULE CvSCachedInput57 PASS 9.441
+2026-10-20T22:21:47.5161331Z FULL_TABLE_KERNEL_MODULE CvSCachedInput58 PASS 9.437
+2026-10-20T22:21:57.0068372Z FULL_TABLE_KERNEL_MODULE CvSCachedInput59 PASS 9.484
+2026-10-20T22:22:06.4909800Z FULL_TABLE_KERNEL_MODULE CvSCachedInput60 PASS 9.483
+2026-10-20T22:22:15.8314049Z FULL_TABLE_KERNEL_MODULE CvSCachedInput61 PASS 9.339
+2026-10-20T22:22:25.2212398Z FULL_TABLE_KERNEL_MODULE CvSCachedInput62 PASS 9.388
+2026-10-20T22:22:34.5557375Z FULL_TABLE_KERNEL_MODULE CvSCachedInput63 PASS 9.333
+2026-10-20T22:22:43.7418173Z FULL_TABLE_KERNEL_MODULE CvSCachedInput64 PASS 9.185
+2026-10-20T22:22:53.0601008Z FULL_TABLE_KERNEL_MODULE CvSCachedInput65 PASS 9.317
+2026-10-20T22:23:02.3162391Z FULL_TABLE_KERNEL_MODULE CvSCachedInput66 PASS 9.255
+2026-10-20T22:23:11.5619886Z FULL_TABLE_KERNEL_MODULE CvSCachedInput67 PASS 9.24
+2026-10-20T22:23:20.7858656Z FULL_TABLE_KERNEL_MODULE CvSCachedInput68 PASS 9.224
+2026-10-20T22:23:30.1263183Z FULL_TABLE_KERNEL_MODULE CvSCachedInput69 PASS 9.337
+2026-10-20T22:23:39.1459056Z FULL_TABLE_KERNEL_MODULE CvSCachedInput70 PASS 9.018
+2026-10-20T22:23:48.5160900Z FULL_TABLE_KERNEL_MODULE CvSCachedInput71 PASS 9.369
+2026-10-20T22:23:57.6939387Z FULL_TABLE_KERNEL_MODULE CvSCachedInput72 PASS 9.173
+2026-10-20T22:24:06.9540171Z FULL_TABLE_KERNEL_MODULE CvSCachedInput73 PASS 9.262
+2026-10-20T22:24:16.0469187Z FULL_TABLE_KERNEL_MODULE CvSCachedInput74 PASS 9.089
+2026-10-20T22:24:25.0693711Z FULL_TABLE_KERNEL_MODULE CvSCachedInput75 PASS 9.024
+2026-10-20T22:24:34.1161070Z FULL_TABLE_KERNEL_MODULE CvSCachedInput76 PASS 9.045
+2026-10-20T22:24:43.1429388Z FULL_TABLE_KERNEL_MODULE CvSCachedInput77 PASS 9.02
+2026-10-20T22:24:52.1539416Z FULL_TABLE_KERNEL_MODULE CvSCachedInput78 PASS 9.012
+2026-10-20T22:25:01.2010718Z FULL_TABLE_KERNEL_MODULE CvSCachedInput79 PASS 9.043
+2026-10-20T22:25:10.2195191Z FULL_TABLE_KERNEL_MODULE CvSCachedInput80 PASS 9.023
+2026-10-20T22:25:19.2030089Z FULL_TABLE_KERNEL_MODULE CvSCachedInput81 PASS 8.982
+2026-10-20T22:25:28.2033513Z FULL_TABLE_KERNEL_MODULE CvSCachedInput82 PASS 8.991
+2026-10-20T22:25:37.6803310Z FULL_TABLE_KERNEL_MODULE CvSCachedInput83 PASS 9.468
+2026-10-20T22:25:46.9622040Z FULL_TABLE_KERNEL_MODULE CvSCachedInput84 PASS 9.28
+2026-10-20T22:25:56.1809602Z FULL_TABLE_KERNEL_MODULE CvSCachedInput85 PASS 9.212
+2026-10-20T22:26:05.3885290Z FULL_TABLE_KERNEL_MODULE CvSCachedInput86 PASS 9.206
+2026-10-20T22:26:14.6674610Z FULL_TABLE_KERNEL_MODULE CvSCachedInput87 PASS 9.277
+2026-10-20T22:26:24.2238378Z FULL_TABLE_KERNEL_MODULE CvSCachedInput88 PASS 9.555
+2026-10-20T22:26:33.6340622Z FULL_TABLE_KERNEL_MODULE CvSCachedInput89 PASS 9.397
+2026-10-20T22:26:42.7881749Z FULL_TABLE_KERNEL_MODULE CvSCachedInput90 PASS 9.153
+2026-10-20T22:26:51.9169742Z FULL_TABLE_KERNEL_MODULE CvSCachedInput91 PASS 9.125
+2026-10-20T22:27:01.0383996Z FULL_TABLE_KERNEL_MODULE CvSCachedInput92 PASS 9.122
+2026-10-20T22:27:10.1854923Z FULL_TABLE_KERNEL_MODULE CvSCachedInput93 PASS 9.146
+2026-10-20T22:27:19.3621941Z FULL_TABLE_KERNEL_MODULE CvSCachedInput94 PASS 9.167
+2026-10-20T22:27:28.6489243Z FULL_TABLE_KERNEL_MODULE CvSCachedInput95 PASS 9.28
+2026-10-20T22:27:37.7169236Z FULL_TABLE_KERNEL_MODULE CvSCachedInput96 PASS 9.069
+2026-10-20T22:27:47.0011642Z FULL_TABLE_KERNEL_MODULE CvSCachedInput97 PASS 9.284
+2026-10-20T22:27:56.1878970Z FULL_TABLE_KERNEL_MODULE CvSCachedInput98 PASS 9.183
+2026-10-20T22:28:05.3946751Z FULL_TABLE_KERNEL_MODULE CvSCachedInput99 PASS 9.205
+2026-10-20T22:28:14.6321289Z FULL_TABLE_KERNEL_MODULE CvSCachedInput100 PASS 9.236
+2026-10-20T22:28:23.8509436Z FULL_TABLE_KERNEL_MODULE CvSCachedInput101 PASS 9.213
+2026-10-20T22:28:33.1870874Z FULL_TABLE_KERNEL_MODULE CvSCachedInput102 PASS 9.339
+2026-10-20T22:28:42.5197399Z FULL_TABLE_KERNEL_MODULE CvSCachedInput103 PASS 9.33
+2026-10-20T22:28:52.1469920Z FULL_TABLE_KERNEL_MODULE CvSCachedInput104 PASS 9.625
+2026-10-20T22:29:01.9051017Z FULL_TABLE_KERNEL_MODULE CvSCachedInput105 PASS 9.758
+2026-10-20T22:29:11.9569301Z FULL_TABLE_KERNEL_MODULE CvSCachedInput106 PASS 10.048
+2026-10-20T22:29:21.7652351Z FULL_TABLE_KERNEL_MODULE CvSCachedInput107 PASS 9.809
+2026-10-20T22:29:31.6402698Z FULL_TABLE_KERNEL_MODULE CvSCachedInput108 PASS 9.873
+2026-10-20T22:29:41.5440699Z FULL_TABLE_KERNEL_MODULE CvSCachedInput109 PASS 9.898
+2026-10-20T22:29:51.4704286Z FULL_TABLE_KERNEL_MODULE CvSCachedInput110 PASS 9.925
+2026-10-20T22:30:01.1919385Z FULL_TABLE_KERNEL_MODULE CvSCachedInput111 PASS 9.72
+2026-10-20T22:30:11.0425812Z FULL_TABLE_KERNEL_MODULE CvSCachedInput112 PASS 9.845
+2026-10-20T22:30:20.8579232Z FULL_TABLE_KERNEL_MODULE CvSCachedInput113 PASS 9.811
+2026-10-20T22:30:30.7239306Z FULL_TABLE_KERNEL_MODULE CvSCachedInput114 PASS 9.864
+2026-10-20T22:30:40.6899419Z FULL_TABLE_KERNEL_MODULE CvSCachedInput115 PASS 9.961
+2026-10-20T22:30:50.6754502Z FULL_TABLE_KERNEL_MODULE CvSCachedInput116 PASS 9.986
+2026-10-20T22:31:00.4994175Z FULL_TABLE_KERNEL_MODULE CvSCachedInput117 PASS 9.822
+2026-10-20T22:31:10.5402822Z FULL_TABLE_KERNEL_MODULE CvSCachedInput118 PASS 10.039
+2026-10-20T22:31:20.4269179Z FULL_TABLE_KERNEL_MODULE CvSCachedInput119 PASS 9.885
+2026-10-20T22:31:30.3101663Z FULL_TABLE_KERNEL_MODULE CvSCachedInput120 PASS 9.877
+2026-10-20T22:31:40.2133699Z FULL_TABLE_KERNEL_MODULE CvSCachedInput121 PASS 9.905
+2026-10-20T22:31:50.0407142Z FULL_TABLE_KERNEL_MODULE CvSCachedInput122 PASS 9.826
+2026-10-20T22:31:59.9106560Z FULL_TABLE_KERNEL_MODULE CvSCachedInput123 PASS 9.864
+2026-10-20T22:32:09.7720560Z FULL_TABLE_KERNEL_MODULE CvSCachedInput124 PASS 9.86
+2026-10-20T22:32:19.6997581Z FULL_TABLE_KERNEL_MODULE CvSCachedInput125 PASS 9.926
+2026-10-20T22:32:29.6259251Z FULL_TABLE_KERNEL_MODULE CvSCachedInput126 PASS 9.923
+2026-10-20T22:32:39.5136040Z FULL_TABLE_KERNEL_MODULE CvSCachedInput127 PASS 9.887
+2026-10-20T22:32:49.4929070Z FULL_TABLE_KERNEL_MODULE CvSCachedInput128 PASS 9.977
+2026-10-20T22:32:59.3346957Z FULL_TABLE_KERNEL_MODULE CvSCachedInput129 PASS 9.84
+2026-10-20T22:33:09.3649731Z FULL_TABLE_KERNEL_MODULE CvSCachedInput130 PASS 10.026
+2026-10-20T22:33:19.2448417Z FULL_TABLE_KERNEL_MODULE CvSCachedInput131 PASS 9.88
+2026-10-20T22:33:29.0890660Z FULL_TABLE_KERNEL_MODULE CvSCachedInput132 PASS 9.84
+2026-10-20T22:33:38.9602684Z FULL_TABLE_KERNEL_MODULE CvSCachedInput133 PASS 9.856
+2026-10-20T22:33:48.8777606Z FULL_TABLE_KERNEL_MODULE CvSCachedInput134 PASS 9.916
+2026-10-20T22:33:58.7847281Z FULL_TABLE_KERNEL_MODULE CvSCachedInput135 PASS 9.905
+2026-10-20T22:34:08.5472725Z FULL_TABLE_KERNEL_MODULE CvSCachedInput136 PASS 9.758
+2026-10-20T22:34:18.2765308Z FULL_TABLE_KERNEL_MODULE CvSCachedInput137 PASS 9.727
+2026-10-20T22:34:27.5405358Z FULL_TABLE_KERNEL_MODULE CvSCachedInput138 PASS 9.262
+2026-10-20T22:34:32.3968354Z FULL_TABLE_KERNEL_MODULE CvSCachedInputsV1 PASS 4.854
+2026-10-20T22:34:37.1741460Z FULL_TABLE_KERNEL_MODULE CvSFullCachedTableV1 PASS 4.764
+2026-10-20T22:34:42.3223189Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct0 PASS 5.135
+2026-10-20T22:34:47.4611007Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct1 PASS 5.135
+2026-10-20T22:34:52.7095729Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct2 PASS 5.249
+2026-10-20T22:34:57.8642765Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct3 PASS 5.153
+2026-10-20T22:35:03.0407803Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct4 PASS 5.175
+2026-10-20T22:35:08.1809606Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct5 PASS 5.135
+2026-10-20T22:35:13.3199552Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct6 PASS 5.14
+2026-10-20T22:35:18.4529227Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct7 PASS 5.13
+2026-10-20T22:35:23.5799189Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct8 PASS 5.123
+2026-10-20T22:35:28.7028635Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct9 PASS 5.116
+2026-10-20T22:35:33.8909083Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct10 PASS 5.186
+2026-10-20T22:35:39.0106771Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct11 PASS 5.117
+2026-10-20T22:35:44.1815156Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct12 PASS 5.169
+2026-10-20T22:35:49.4208423Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct13 PASS 5.237
+2026-10-20T22:35:54.7847318Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct14 PASS 5.362
+2026-10-20T22:36:00.1710274Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct15 PASS 5.377
+2026-10-20T22:36:05.5429052Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct16 PASS 5.37
+2026-10-20T22:36:10.9360261Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct17 PASS 5.39
+2026-10-20T22:36:16.3374101Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct18 PASS 5.399
+2026-10-20T22:36:21.7602368Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct19 PASS 5.416
+2026-10-20T22:36:27.1989363Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct20 PASS 5.434
+2026-10-20T22:36:32.6106021Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct21 PASS 5.412
+2026-10-20T22:36:38.0381365Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct22 PASS 5.425
+2026-10-20T22:36:43.4709983Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct23 PASS 5.429
+2026-10-20T22:36:48.8740394Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct24 PASS 5.402
+2026-10-20T22:36:54.0490510Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct25 PASS 5.173
+2026-10-20T22:36:59.2440264Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct26 PASS 5.191
+2026-10-20T22:37:04.3742446Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct27 PASS 5.129
+2026-10-20T22:37:09.5242293Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct28 PASS 5.143
+2026-10-20T22:37:14.6681361Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct29 PASS 5.139
+2026-10-20T22:37:19.7991199Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct30 PASS 5.121
+2026-10-20T22:37:24.9125165Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct31 PASS 5.111
+2026-10-20T22:37:30.0109866Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct32 PASS 5.094
+2026-10-20T22:37:35.1035675Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct33 PASS 5.092
+2026-10-20T22:37:40.4818394Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct34 PASS 5.371
+2026-10-20T22:37:45.9229744Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct35 PASS 5.438
+2026-10-20T22:37:51.1024622Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct36 PASS 5.166
+2026-10-20T22:37:56.2709837Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct37 PASS 5.164
+2026-10-20T22:38:01.4639596Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct38 PASS 5.19
+2026-10-20T22:38:06.6334174Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct39 PASS 5.169
+2026-10-20T22:38:11.8159590Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct40 PASS 5.177
+2026-10-20T22:38:17.0160845Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct41 PASS 5.2
+2026-10-20T22:38:22.2119320Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct42 PASS 5.192
+2026-10-20T22:38:27.4949343Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct43 PASS 5.281
+2026-10-20T22:38:32.6570452Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct44 PASS 5.157
+2026-10-20T22:38:37.8852662Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct45 PASS 5.226
+2026-10-20T22:38:43.0969672Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct46 PASS 5.208
+2026-10-20T22:38:48.2819599Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct47 PASS 5.183
+2026-10-20T22:38:53.4481487Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct48 PASS 5.164
+2026-10-20T22:38:58.6036960Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct49 PASS 5.145
+2026-10-20T22:39:03.8602329Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct50 PASS 5.254
+2026-10-20T22:39:09.0468293Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct51 PASS 5.184
+2026-10-20T22:39:14.2763935Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct52 PASS 5.221
+2026-10-20T22:39:19.4577435Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct53 PASS 5.184
+2026-10-20T22:39:24.6655187Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct54 PASS 5.201
+2026-10-20T22:39:30.3159428Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct55 PASS 5.65
+2026-10-20T22:39:35.5587579Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct56 PASS 5.242
+2026-10-20T22:39:40.7659598Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct57 PASS 5.204
+2026-10-20T22:39:45.9943460Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct58 PASS 5.225
+2026-10-20T22:39:51.2088249Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct59 PASS 5.212
+2026-10-20T22:39:56.4656797Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct60 PASS 5.254
+2026-10-20T22:40:01.6179992Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct61 PASS 5.15
+2026-10-20T22:40:06.8137138Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct62 PASS 5.191
+2026-10-20T22:40:12.0085770Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct63 PASS 5.181
+2026-10-20T22:40:17.2548741Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct64 PASS 5.244
+2026-10-20T22:40:22.6835200Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct65 PASS 5.424
+2026-10-20T22:40:28.0629313Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct66 PASS 5.376
+2026-10-20T22:40:33.3792886Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct67 PASS 5.314
+2026-10-20T22:40:38.5676440Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct68 PASS 5.186
+2026-10-20T22:40:43.7799292Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct69 PASS 5.208
+2026-10-20T22:40:49.0172538Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct70 PASS 5.236
+2026-10-20T22:40:54.1983478Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct71 PASS 5.166
+2026-10-20T22:40:59.4233969Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct72 PASS 5.222
+2026-10-20T22:41:04.5851607Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct73 PASS 5.146
+2026-10-20T22:41:09.7711031Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct74 PASS 5.176
+2026-10-20T22:41:14.9165317Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct75 PASS 5.14
+2026-10-20T22:41:20.0977313Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct76 PASS 5.179
+2026-10-20T22:41:25.3209470Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct77 PASS 5.218
+2026-10-20T22:41:30.4853815Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct78 PASS 5.16
+2026-10-20T22:41:35.6670722Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct79 PASS 5.183
+2026-10-20T22:41:40.8729834Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct80 PASS 5.202
+2026-10-20T22:41:46.0838672Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct81 PASS 5.209
+2026-10-20T22:41:51.3230077Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct82 PASS 5.234
+2026-10-20T22:41:56.5524261Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct83 PASS 5.229
+2026-10-20T22:42:01.7179964Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct84 PASS 5.16
+2026-10-20T22:42:06.8848653Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct85 PASS 5.166
+2026-10-20T22:42:12.0525909Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct86 PASS 5.165
+2026-10-20T22:42:17.3010385Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct87 PASS 5.234
+2026-10-20T22:42:22.4235461Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct88 PASS 5.12
+2026-10-20T22:42:27.5611553Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct89 PASS 5.135
+2026-10-20T22:42:32.7365118Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct90 PASS 5.171
+2026-10-20T22:42:37.8529655Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct91 PASS 5.111
+2026-10-20T22:42:43.0167678Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct92 PASS 5.162
+2026-10-20T22:42:48.1406829Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct93 PASS 5.121
+2026-10-20T22:42:53.2316765Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct94 PASS 5.088
+2026-10-20T22:42:58.4081490Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct95 PASS 5.163
+2026-10-20T22:43:03.5903854Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct96 PASS 5.18
+2026-10-20T22:43:08.6921087Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct97 PASS 5.099
+2026-10-20T22:43:13.8558712Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct98 PASS 5.155
+2026-10-20T22:43:19.0101496Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct99 PASS 5.151
+2026-10-20T22:43:24.2204136Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct100 PASS 5.206
+2026-10-20T22:43:29.3621759Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct101 PASS 5.129
+2026-10-20T22:43:34.4568605Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct102 PASS 5.092
+2026-10-20T22:43:39.5686319Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct103 PASS 5.109
+2026-10-20T22:43:44.6520763Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct104 PASS 5.074
+2026-10-20T22:43:49.7899608Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct105 PASS 5.13
+2026-10-20T22:43:54.8545135Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct106 PASS 5.066
+2026-10-20T22:44:00.0255968Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct107 PASS 5.163
+2026-10-20T22:44:05.1339892Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct108 PASS 5.106
+2026-10-20T22:44:10.3932471Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct109 PASS 5.261
+2026-10-20T22:44:15.5249260Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct110 PASS 5.128
+2026-10-20T22:44:20.6709838Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct111 PASS 5.14
+2026-10-20T22:44:25.7549274Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct112 PASS 5.079
+2026-10-20T22:44:30.8029110Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct113 PASS 5.048
+2026-10-20T22:44:35.9074059Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct114 PASS 5.102
+2026-10-20T22:44:40.9749298Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct115 PASS 5.059
+2026-10-20T22:44:46.0868032Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct116 PASS 5.11
+2026-10-20T22:44:51.1769324Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct117 PASS 5.085
+2026-10-20T22:44:56.2664483Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct118 PASS 5.077
+2026-10-20T22:45:01.3615747Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct119 PASS 5.085
+2026-10-20T22:45:06.4557537Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct120 PASS 5.091
+2026-10-20T22:45:11.5422384Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct121 PASS 5.083
+2026-10-20T22:45:16.6257217Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct122 PASS 5.079
+2026-10-20T22:45:21.7029538Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct123 PASS 5.073
+2026-10-20T22:45:26.7749162Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct124 PASS 5.069
+2026-10-20T22:45:31.8548846Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct125 PASS 5.075
+2026-10-20T22:45:36.9464189Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct126 PASS 5.088
+2026-10-20T22:45:42.0474780Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct127 PASS 5.098
+2026-10-20T22:45:47.1359347Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct128 PASS 5.084
+2026-10-20T22:45:52.1760044Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct129 PASS 5.037
+2026-10-20T22:45:57.2570319Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct130 PASS 5.078
+2026-10-20T22:46:02.4024831Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct131 PASS 5.132
+2026-10-20T22:46:07.4899162Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct132 PASS 5.084
+2026-10-20T22:46:12.6049803Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct133 PASS 5.106
+2026-10-20T22:46:17.7784671Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct134 PASS 5.166
+2026-10-20T22:46:22.9129366Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct135 PASS 5.135
+2026-10-20T22:46:28.0364246Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct136 PASS 5.121
+2026-10-20T22:46:33.1415733Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct137 PASS 5.102
+2026-10-20T22:46:38.2814306Z FULL_TABLE_KERNEL_MODULE CvSCachedProduct138 PASS 5.137
+2026-10-20T22:46:50.9170132Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput0 PASS 12.632
+2026-10-20T22:47:02.7550397Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput1 PASS 11.834
+2026-10-20T22:47:13.0893960Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput2 PASS 10.331
+2026-10-20T22:47:23.2587080Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput3 PASS 10.165
+2026-10-20T22:47:33.8158374Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput4 PASS 10.551
+2026-10-20T22:47:43.9139313Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput5 PASS 10.093
+2026-10-20T22:47:54.4249869Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput6 PASS 10.507
+2026-10-20T22:48:05.1169126Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput7 PASS 10.689
+2026-10-20T22:48:15.3739872Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput8 PASS 10.251
+2026-10-20T22:48:25.8199287Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput9 PASS 10.443
+2026-10-20T22:48:36.1202421Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput10 PASS 10.296
+2026-10-20T22:48:46.5481025Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput11 PASS 10.424
+2026-10-20T22:48:57.0149269Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput12 PASS 10.459
+2026-10-20T22:49:07.5935934Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput13 PASS 10.579
+2026-10-20T22:49:18.0101701Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput14 PASS 10.41
+2026-10-20T22:49:28.5211274Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput15 PASS 10.507
+2026-10-20T22:49:39.1519791Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput16 PASS 10.625
+2026-10-20T22:49:49.7841432Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput17 PASS 10.629
+2026-10-20T22:50:00.4922868Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput18 PASS 10.705
+2026-10-20T22:50:10.7654895Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput19 PASS 10.27
+2026-10-20T22:50:21.2485217Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput20 PASS 10.479
+2026-10-20T22:50:31.6477038Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput21 PASS 10.396
+2026-10-20T22:50:41.8913429Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput22 PASS 10.24
+2026-10-20T22:50:52.2669218Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput23 PASS 10.372
+2026-10-20T22:51:02.5745901Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput24 PASS 10.305
+2026-10-20T22:51:13.3840002Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput25 PASS 10.806
+2026-10-20T22:51:23.9693730Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput26 PASS 10.582
+2026-10-20T22:51:34.6555540Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput27 PASS 10.681
+2026-10-20T22:51:45.3209600Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput28 PASS 10.655
+2026-10-20T22:51:56.1466389Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput29 PASS 10.829
+2026-10-20T22:52:06.8545337Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput30 PASS 10.704
+2026-10-20T22:52:17.2711296Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput31 PASS 10.413
+2026-10-20T22:52:27.7887832Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput32 PASS 10.514
+2026-10-20T22:52:38.3021237Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput33 PASS 10.5
+2026-10-20T22:52:48.6016651Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput34 PASS 10.295
+2026-10-20T22:52:59.0540177Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput35 PASS 10.449
+2026-10-20T22:53:09.4439236Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput36 PASS 10.386
+2026-10-20T22:53:19.7742557Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput37 PASS 10.325
+2026-10-20T22:53:30.2029682Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput38 PASS 10.423
+2026-10-20T22:53:40.8301124Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput39 PASS 10.625
+2026-10-20T22:53:51.6476446Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput40 PASS 10.814
+2026-10-20T22:54:02.2959832Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput41 PASS 10.642
+2026-10-20T22:54:12.9653954Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput42 PASS 10.667
+2026-10-20T22:54:23.4156331Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput43 PASS 10.434
+2026-10-20T22:54:34.3751821Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput44 PASS 10.945
+2026-10-20T22:54:44.9730722Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput45 PASS 10.594
+2026-10-20T22:54:55.3871534Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput46 PASS 10.411
+2026-10-20T22:55:05.9217055Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput47 PASS 10.519
+2026-10-20T22:55:16.6503574Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput48 PASS 10.731
+2026-10-20T22:55:27.2191600Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput49 PASS 10.565
+2026-10-20T22:55:37.8275912Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput50 PASS 10.605
+2026-10-20T22:55:48.8165329Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput51 PASS 10.974
+2026-10-20T22:55:59.4969957Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput52 PASS 10.677
+2026-10-20T22:56:10.7759272Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput53 PASS 11.275
+2026-10-20T22:56:21.5703830Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput54 PASS 10.791
+2026-10-20T22:56:32.1642668Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput55 PASS 10.59
+2026-10-20T22:56:42.6879768Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput56 PASS 10.52
+2026-10-20T22:56:53.2309141Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput57 PASS 10.539
+2026-10-20T22:57:03.9556054Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput58 PASS 10.718
+2026-10-20T22:57:14.6330928Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput59 PASS 10.676
+2026-10-20T22:57:25.3766486Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput60 PASS 10.729
+2026-10-20T22:57:36.3222433Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput61 PASS 10.942
+2026-10-20T22:57:48.1499920Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput62 PASS 11.82
+2026-10-20T22:58:00.3839331Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput63 PASS 12.223
+2026-10-20T22:58:12.8253993Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput64 PASS 12.448
+2026-10-20T22:58:24.9189712Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput65 PASS 12.09
+2026-10-20T22:58:39.7807172Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput66 PASS 14.853
+2026-10-20T22:58:54.7369135Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput67 PASS 14.952
+2026-10-20T22:59:09.9291618Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput68 PASS 15.188
+2026-10-20T22:59:25.1994691Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput69 PASS 15.266
+2026-10-20T22:59:36.9129953Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput70 PASS 11.71
+2026-10-20T22:59:48.7053370Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput71 PASS 11.788
+2026-10-20T23:00:01.0209384Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput72 PASS 12.312
+2026-10-20T23:00:13.1339654Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput73 PASS 12.106
+2026-10-20T23:00:25.4059336Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput74 PASS 12.269
+2026-10-20T23:00:37.7127853Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput75 PASS 12.303
+2026-10-20T23:00:50.0010870Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput76 PASS 12.284
+2026-10-20T23:01:02.4407419Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput77 PASS 12.436
+2026-10-20T23:01:14.5989117Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput78 PASS 12.154
+2026-10-20T23:01:26.9960004Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput79 PASS 12.392
+2026-10-20T23:01:39.0018649Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput80 PASS 11.992
+2026-10-20T23:01:51.0487779Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput81 PASS 12.035
+2026-10-20T23:02:02.6058204Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput82 PASS 11.553
+2026-10-20T23:02:14.7188673Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput83 PASS 12.109
+2026-10-20T23:02:26.6820426Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput84 PASS 11.959
+2026-10-20T23:02:38.3962893Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput85 PASS 11.698
+2026-10-20T23:02:50.2344821Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput86 PASS 11.834
+2026-10-20T23:03:02.0377414Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput87 PASS 11.799
+2026-10-20T23:03:14.1186949Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput88 PASS 12.076
+2026-10-20T23:03:26.1742458Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput89 PASS 12.05
+2026-10-20T23:03:38.3492767Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput90 PASS 12.171
+2026-10-20T23:03:50.3699428Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput91 PASS 12.014
+2026-10-20T23:04:02.1603213Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput92 PASS 11.788
+2026-10-20T23:04:14.3889050Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput93 PASS 12.224
+2026-10-20T23:04:26.6878509Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput94 PASS 12.293
+2026-10-20T23:04:39.0275831Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput95 PASS 12.336
+2026-10-20T23:04:50.7982907Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput96 PASS 11.767
+2026-10-20T23:05:02.9629797Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput97 PASS 12.16
+2026-10-20T23:05:14.9131310Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput98 PASS 11.946
+2026-10-20T23:05:27.1029051Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput99 PASS 12.186
+2026-10-20T23:05:39.3736998Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput100 PASS 12.267
+2026-10-20T23:05:51.6661206Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput101 PASS 12.288
+2026-10-20T23:06:03.7406464Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput102 PASS 12.06
+2026-10-20T23:06:15.9319290Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput103 PASS 12.173
+2026-10-20T23:06:28.0562943Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput104 PASS 12.134
+2026-10-20T23:06:40.1370167Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput105 PASS 12.074
+2026-10-20T23:06:52.8999550Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput106 PASS 12.754
+2026-10-20T23:07:05.0100631Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput107 PASS 12.111
+2026-10-20T23:07:17.1654045Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput108 PASS 12.137
+2026-10-20T23:07:29.6400122Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput109 PASS 12.47
+2026-10-20T23:07:41.9486563Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput110 PASS 12.304
+2026-10-20T23:07:54.3394538Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput111 PASS 12.387
+2026-10-20T23:08:06.5171344Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput112 PASS 12.159
+2026-10-20T23:08:17.6103638Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput113 PASS 11.089
+2026-10-20T23:08:28.7091587Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput114 PASS 11.095
+2026-10-20T23:08:39.8824359Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput115 PASS 11.168
+2026-10-20T23:08:51.2494020Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput116 PASS 11.362
+2026-10-20T23:09:02.3896350Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput117 PASS 11.136
+2026-10-20T23:09:13.8570571Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput118 PASS 11.463
+2026-10-20T23:09:25.0428549Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput119 PASS 11.18
+2026-10-20T23:09:36.3587543Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput120 PASS 11.311
+2026-10-20T23:09:47.5602706Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput121 PASS 11.188
+2026-10-20T23:09:58.6635187Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput122 PASS 11.096
+2026-10-20T23:10:09.6222780Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput123 PASS 10.955
+2026-10-20T23:10:20.6690064Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput124 PASS 11.032
+2026-10-20T23:10:31.8011130Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput125 PASS 11.138
+2026-10-20T23:10:43.0615531Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput126 PASS 11.256
+2026-10-20T23:10:54.3179618Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput127 PASS 11.249
+2026-10-20T23:11:05.5459010Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput128 PASS 11.215
+2026-10-20T23:11:16.6666608Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput129 PASS 11.116
+2026-10-20T23:11:28.1973830Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput130 PASS 11.526
+2026-10-20T23:11:39.2896420Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput131 PASS 11.088
+2026-10-20T23:11:50.5033850Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput132 PASS 11.209
+2026-10-20T23:12:01.6941488Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput133 PASS 11.186
+2026-10-20T23:12:12.8862682Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput134 PASS 11.188
+2026-10-20T23:12:24.1500850Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput135 PASS 11.249
+2026-10-20T23:12:35.3600137Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput136 PASS 11.197
+2026-10-20T23:12:46.5564376Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput137 PASS 11.201
+2026-10-20T23:12:57.9918415Z FULL_TABLE_KERNEL_MODULE CvSCachedOutput138 PASS 11.431
+2026-10-20T23:13:00.1488809Z FULL_TABLE_KERNEL_MODULE CvSRowBudgetAlgebraV1 PASS 2.153
+2026-10-20T23:13:04.8696803Z FULL_TABLE_KERNEL_MODULE CvSRowBudgetGramBridgeV1 PASS 4.714
+2026-10-20T23:13:09.4992647Z FULL_TABLE_KERNEL_MODULE CvSRealTailMatrixV1 PASS 4.625
+2026-10-20T23:13:14.8551680Z FULL_TABLE_KERNEL_MODULE CvSStrictRowBudgetV1 PASS 5.351
+2026-10-20T23:13:30.7014610Z FULL_TABLE_KERNEL_MODULE CvSFullTableClosureV1 PASS 15.842
+2026-10-20T23:13:35.4849119Z FULL_TABLE_KERNEL_MODULE CvSFullBudgetJoinV1 PASS 4.778
+2026-10-20T23:13:40.2107677Z FULL_TABLE_KERNEL_MODULE CvSFullTableRejectV1 PASS 4.721
+2026-10-20T23:13:40.2165591Z FULL_TABLE_KERNEL_PASS 445 modules 868 axiom audits; 19321 ordered cells; actual input identities and universal RH not asserted
+2026-10-20T23:13:40.2267796Z ##[group]Run python3 - <<'PY_SNAPSHOT'
+2026-10-20T23:13:40.2268548Z [36;1mpython3 - <<'PY_SNAPSHOT'[0m
+2026-10-20T23:13:40.2268883Z [36;1mimport hashlib, json, os, pathlib, subprocess[0m
+2026-10-20T23:13:40.2269208Z [36;1mroot = pathlib.Path.cwd()[0m
+2026-10-20T23:13:40.2269556Z [36;1mdigest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()[0m
+2026-10-20T23:13:40.2270105Z [36;1msources = subprocess.check_output(['git', 'ls-files', '--', '*.lean'], text=True).splitlines()[0m
+2026-10-20T23:13:40.2270678Z [36;1mobjects = sorted((root / '.lake/ringout').rglob('*.olean'))[0m
+2026-10-20T23:13:40.2271181Z [36;1mlogs = [root / n for n in ['ring.log', 'actual-row-bridge.log'] if (root / n).is_file()][0m
+2026-10-20T23:13:40.2271600Z [36;1mreceipt = {[0m
+2026-10-20T23:13:40.2272002Z [36;1m  'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),[0m
+2026-10-20T23:13:40.2272582Z [36;1m  'math_step_outcome': os.environ.get('REPLAY_OUTCOME'),[0m
+2026-10-20T23:13:40.2273008Z [36;1m  'lean_toolchain': (root / 'lean-toolchain').read_text().strip(),[0m
+2026-10-20T23:13:40.2273401Z [36;1m  'mathlib_sha': os.environ['MATHLIB_SHA'],[0m
+2026-10-20T23:13:40.2273749Z [36;1m  'li_criterion_sha': os.environ['LI_CRITERION_SHA'],[0m
+2026-10-20T23:13:40.2274130Z [36;1m  'source_sha256': {n: digest(root / n) for n in sources},[0m
+2026-10-20T23:13:40.2274568Z [36;1m  'binary_sha256': {str(p.relative_to(root)): digest(p) for p in objects},[0m
+2026-10-20T23:13:40.2274998Z [36;1m  'log_sha256': {p.name: digest(p) for p in logs},[0m
+2026-10-20T23:13:40.2275699Z [36;1m  'dependency_reuse': json.loads((root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').read_text()) if (root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').is_file() else None,[0m
+2026-10-20T23:13:40.2276844Z [36;1m  'scope': 'Source compilation or explicitly validated source-identical dependency reuse, as recorded above. Only named axiom roots are certified; failed state is evidence, not a PASS.'[0m
+2026-10-20T23:13:40.2277595Z [36;1m}[0m
+2026-10-20T23:13:40.2278102Z [36;1m(root / 'SOURCE_CROSS_ROW_CHECKPOINT.json').write_text(json.dumps(receipt, indent=2) + '\n')[0m
+2026-10-20T23:13:40.2278689Z [36;1mprint('REPLAY_STATE_PRESERVED', receipt['math_step_outcome'], len(objects))[0m
+2026-10-20T23:13:40.2279094Z [36;1mPY_SNAPSHOT[0m
+2026-10-20T23:13:40.2339692Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-20T23:13:40.2340039Z env:
+2026-10-20T23:13:40.2340284Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T23:13:40.2340624Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T23:13:40.2340960Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T23:13:40.2341403Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T23:13:40.2341877Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T23:13:40.2342235Z   REPLAY_OUTCOME: success
+2026-10-20T23:13:40.2342455Z ##[endgroup]
+2026-10-20T23:13:41.7885017Z REPLAY_STATE_PRESERVED success 611
+2026-10-20T23:13:41.8007138Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-20T23:13:41.8007552Z with:
+2026-10-20T23:13:41.8007843Z   name: source-cross-row-2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925
+2026-10-20T23:13:41.8008406Z   retention-days: 1
+2026-10-20T23:13:41.8008621Z   include-hidden-files: true
+2026-10-20T23:13:41.8008859Z   if-no-files-found: warn
+2026-10-20T23:13:41.8009563Z   path: SOURCE_CROSS_ROW_CHECKPOINT.json
+SOURCE_CROSS_ROW_REUSE_RECEIPT.json
+ring.log
+actual-row-bridge.log
+full-table-replay.log
+FULL_TABLE_CI_RECEIPT.json
+.lake/ringout/**/*.olean
+
+2026-10-20T23:13:41.8010490Z   compression-level: 6
+2026-10-20T23:13:41.8010698Z   overwrite: false
+2026-10-20T23:13:41.8010886Z env:
+2026-10-20T23:13:41.8011116Z   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+2026-10-20T23:13:41.8011440Z   LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+2026-10-20T23:13:41.8011769Z   LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+2026-10-20T23:13:41.8012242Z   LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+2026-10-20T23:13:41.8012713Z   FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+2026-10-20T23:13:41.8013057Z ##[endgroup]
+2026-10-20T23:13:42.1348397Z (node:8649) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-20T23:13:42.1349724Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-20T23:13:42.2752933Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2026-10-20T23:13:42.2756764Z The least common ancestor is /home/runner/work/formal-conjectures/formal-conjectures. This will be the root directory of the artifact
+2026-10-20T23:13:42.2758339Z With the provided path, there will be 617 files uploaded
+2026-10-20T23:13:42.2763987Z Artifact name is valid!
+2026-10-20T23:13:42.2764572Z Root directory input is valid!
+2026-10-20T23:13:42.6856599Z Beginning upload of artifact content to blob storage
+2026-10-20T23:13:43.6242301Z (node:8649) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-20T23:13:44.6092923Z Uploaded bytes 8388608
+2026-10-20T23:13:45.4272230Z Uploaded bytes 16777216
+2026-10-20T23:13:45.9335337Z Uploaded bytes 25165824
+2026-10-20T23:13:46.9505360Z Uploaded bytes 33554432
+2026-10-20T23:13:47.9495924Z Uploaded bytes 41943040
+2026-10-20T23:13:49.0012241Z Uploaded bytes 50331648
+2026-10-20T23:13:49.9074403Z Uploaded bytes 58720256
+2026-10-20T23:13:50.8897514Z Uploaded bytes 67108864
+2026-10-20T23:13:51.6903725Z Uploaded bytes 75497472
+2026-10-20T23:13:52.7179117Z Uploaded bytes 83886080
+2026-10-20T23:13:53.6151344Z Uploaded bytes 92274688
+2026-10-20T23:13:54.6676531Z Uploaded bytes 100663296
+2026-10-20T23:13:55.5367637Z Uploaded bytes 109051904
+2026-10-20T23:13:56.3596262Z Uploaded bytes 117440512
+2026-10-20T23:13:57.3944491Z Uploaded bytes 125829120
+2026-10-20T23:13:58.2837369Z Uploaded bytes 134217728
+2026-10-20T23:13:59.2564218Z Uploaded bytes 142606336
+2026-10-20T23:14:00.1502383Z Uploaded bytes 150994944
+2026-10-20T23:14:01.1871674Z Uploaded bytes 159383552
+2026-10-20T23:14:02.0317884Z Uploaded bytes 167772160
+2026-10-20T23:14:03.0030872Z Uploaded bytes 176160768
+2026-10-20T23:14:03.9523363Z Uploaded bytes 184549376
+2026-10-20T23:14:04.8614044Z Uploaded bytes 192937984
+2026-10-20T23:14:05.8875969Z Uploaded bytes 201326592
+2026-10-20T23:14:06.7896239Z Uploaded bytes 209715200
+2026-10-20T23:14:07.7664112Z Uploaded bytes 218103808
+2026-10-20T23:14:08.5917216Z Uploaded bytes 226492416
+2026-10-20T23:14:09.6051266Z Uploaded bytes 234881024
+2026-10-20T23:14:10.6064028Z Uploaded bytes 243269632
+2026-10-20T23:14:11.4481549Z Uploaded bytes 251658240
+2026-10-20T23:14:12.4900127Z Uploaded bytes 260046848
+2026-10-20T23:14:13.3743383Z Uploaded bytes 268435456
+2026-10-20T23:14:14.3548794Z Uploaded bytes 276824064
+2026-10-20T23:14:14.4753593Z Uploaded bytes 279638929
+2026-10-20T23:14:14.5507458Z Finished uploading artifact content to blob storage!
+2026-10-20T23:14:14.5511338Z SHA256 digest of uploaded artifact zip is 37bdab4ae6fa70baa96c01023650c7280e9e43940883e107d2c050e160045c13
+2026-10-20T23:14:14.5513894Z Finalizing artifact upload
+2026-10-20T23:14:14.9672368Z Artifact source-cross-row-2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925.zip successfully finalized. Artifact ID 12306423649
+2026-10-20T23:14:14.9675929Z Artifact source-cross-row-2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925 has been successfully uploaded! Final size is 279638929 bytes. Artifact ID is 12306423649
+2026-10-20T23:14:14.9681824Z Artifact download URL: https://github.com/tarikskalic33/formal-conjectures/actions/runs/39505154095/artifacts/12306423649
+2026-10-20T23:14:14.9901604Z Post job cleanup.
+2026-10-20T23:14:15.0779989Z [command]/usr/bin/git version
+2026-10-20T23:14:15.0824660Z git version 2.55.0
+2026-10-20T23:14:15.0870735Z Temporarily overriding HOME='/home/runner/work/_temp/0f997780-d41d-4a0b-bb87-cbfd08ab66bf' before making global git config changes
+2026-10-20T23:14:15.0872366Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:14:15.0877227Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.li-provider
+2026-10-20T23:14:15.0919649Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:14:15.0955731Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:14:15.1214035Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:14:15.1254784Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:14:15.1516811Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T23:14:15.1557260Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T23:14:15.2010032Z Post job cleanup.
+2026-10-20T23:14:15.2900849Z [command]/usr/bin/git version
+2026-10-20T23:14:15.2944483Z git version 2.55.0
+2026-10-20T23:14:15.2989422Z Temporarily overriding HOME='/home/runner/work/_temp/43e5a99a-72e0-43dd-8e44-6f437658e8bd' before making global git config changes
+2026-10-20T23:14:15.2990934Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:14:15.2997108Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures/.baseline
+2026-10-20T23:14:15.3044448Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:14:15.3081384Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:14:15.3344980Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:14:15.3385624Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:14:15.3686802Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T23:14:15.3724079Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T23:14:15.4133667Z Post job cleanup.
+2026-10-20T23:14:15.4990275Z [command]/usr/bin/git version
+2026-10-20T23:14:15.5033323Z git version 2.55.0
+2026-10-20T23:14:15.5076830Z Temporarily overriding HOME='/home/runner/work/_temp/ea5db9a9-f9ec-4789-aa3f-16880fd1ef97' before making global git config changes
+2026-10-20T23:14:15.5078624Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-20T23:14:15.5083039Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/formal-conjectures/formal-conjectures
+2026-10-20T23:14:15.5122160Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-20T23:14:15.5157141Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-20T23:14:15.5405658Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-20T23:14:15.5441694Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-20T23:14:15.5711462Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-20T23:14:15.5748887Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-20T23:14:15.6149875Z Cleaning up orphan processes
+2026-10-20T23:14:15.6657216Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
