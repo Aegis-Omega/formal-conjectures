@@ -6,6 +6,7 @@ on:
       - proof/rh-feshbach-schur-v1
     paths:
       - .github/workflows/rh-row-budget-native-replay.yml
+      - research/rh/checkpoints/20261020_row_budget/CvSRowBudgetGramBridgeV1.lean
   workflow_dispatch:
 
 permissions:
