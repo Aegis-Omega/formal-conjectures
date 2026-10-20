@@ -1,0 +1,4 @@
+'AEGIS.CvSCachedProduct0.gx_checked' depends on axioms: [propext]
+'AEGIS.CvSCachedProduct0.gx_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSCachedProduct0.gdx_checked' depends on axioms: [propext]
+'AEGIS.CvSCachedProduct0.gdx_exact' depends on axioms: [propext, Classical.choice, Quot.sound]

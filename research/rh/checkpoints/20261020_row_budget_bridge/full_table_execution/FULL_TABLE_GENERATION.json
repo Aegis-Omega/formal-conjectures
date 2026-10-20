@@ -1,0 +1,12 @@
+{
+  "input_sha256": "69014b7fbf4246f20f6bc0a8ee1245b4d401315899511308b8c226b0606ec63c",
+  "fixed_projection": "unchanged Q48 original ROW_BUDGET_DATA.json",
+  "dimension": 139,
+  "frequency_count": 141,
+  "residual_rows": 301,
+  "scale": 96,
+  "target_scale": 80,
+  "packing_base_bits": 280,
+  "packing_signed_bound_bits": 128,
+  "status": "GENERATED_NOT_YET_KERNEL_VERIFIED"
+}
