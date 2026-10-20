@@ -41,6 +41,8 @@ theorem sourceKernel_off (M : ℕ) (m n : ℤ) (hnm : n ≠ m) :
     (cvsEntry_symm M (by norm_num : (0 : ℝ) < 6 / 5) m n)]
   rw [cvsEntry_off M (by norm_num : (0 : ℝ) < 6 / 5) hnm]
   have hpi : Real.pi ≠ 0 := Real.pi_ne_zero
+  have hnmR : ((n : ℝ) - m) ≠ 0 := sub_ne_zero.mpr (by exact_mod_cast hnm)
+  field_simp
   ring
 
 /-- The source-locked real coefficient of the cross row Y_m.
