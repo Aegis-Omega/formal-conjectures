@@ -330,9 +330,9 @@ jobs:
           def source_body(raw):
               # A license-only wrapper is immaterial to the Lean declarations,
               # but any other source change is a hard stop.
-              license_prefix = b"/-\\nCopyright 2026 The Formal Conjectures Authors.\\n"
+              license_prefix = b"/-\nCopyright 2026 The Formal Conjectures Authors.\n"
               if raw.startswith(license_prefix):
-                  end = raw.find(b"-/\\n")
+                  end = raw.find(b"-/\n")
                   if end < 0:
                       raise RuntimeError("BAD_COPYRIGHT_WRAPPER")
                   return raw[end + 3:]
