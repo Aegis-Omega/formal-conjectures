@@ -39,6 +39,7 @@ env:
 
 jobs:
   source-cross-row:
+    if: ${{ !contains(github.event.head_commit.message, '[recover-actual-graph]') }}
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     steps:
@@ -281,3 +282,24 @@ jobs:
             ACTUAL_SOURCE_PROOF_GRAPH.zip
             actual-input-replay.log
             .lake/ringout/**/*.olean
+
+  recover-actual-graph:
+    if: ${{ contains(github.event.head_commit.message, '[recover-actual-graph]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact receipt tooling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Recover the successful source-bound graph without rebuilding Lean
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/recover_successful_graph.py
+      - name: Upload graph separately below the connector size limit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: actual-graph-only-9d98c4e9
+          retention-days: 1
+          if-no-files-found: error
+          path: recovered-actual-graph/
