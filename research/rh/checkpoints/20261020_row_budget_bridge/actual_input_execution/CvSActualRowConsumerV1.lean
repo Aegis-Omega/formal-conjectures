@@ -36,7 +36,7 @@ theorem sourceZ_apply (M : ℕ) (v : Fin 139 → ℂ) (r : Fin 301) :
   rw [sum_atomRow]
   by_cases hr : 80 ≤ r.val ∧ r.val < 221
   · have he : signedFreq (⟨r.val - 80, by omega⟩ : Fin 141) = rowIndex r := by
-      unfold signedFreq rowIndex
+      change ((r.val - 80 : ℕ) : ℤ) - 70 = (r.val : ℤ) - 150
       omega
     have hcoeff := transformed_coeff_eq_lowCoeff (lambdaApply v)
       (⟨r.val - 80, by omega⟩ : Fin 141)

@@ -1,6 +1,6 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "9569feb4b19f4ffed2de9ae3f159f5418a58cf87185e709738ce3a404cc3c312",
+  "archive_sha256": "5885eebc5d73ca82ea38443aab9c79f47bd006d424769853def0dbd1107cebbb",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
@@ -15,7 +15,7 @@
     },
     {
       "name": "CvSActualRowConsumerV1.lean",
-      "sha256": "efeb3755d3170f314d54e24705b19d525a82a2ac6195cab19671e401df7cb6a8",
+      "sha256": "5aac3f6a4b009c1c57623a7eed4df14084efe7eda19b33f6da8ef05d3173b2d7",
       "kernel_status": "NOT_RUN"
     },
     {
