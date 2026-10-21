@@ -332,13 +332,24 @@ jobs:
                   with receipt.open("a") as f:
                       f.write("REUSED_SOURCE_PINNED_PROVIDER " + module + chr(10))
                   continue
+              # Lean 4.33.1 requires input sources to be inside its workspace root.
+              # Stage an exact-byte archival copy in a dedicated ignored-by-build
+              # directory; never overwrite tracked or previously built sources.
+              stage = root / ".rh-pr89-import-stage" / rel.with_suffix(".lean")
+              stage.parent.mkdir(parents=True, exist_ok=True)
+              if stage.exists():
+                  raise RuntimeError("PR89_SOURCE_STAGE_COLLISION " + module)
+              data = src.read_bytes()
+              stage.write_bytes(data)
+              if stage.read_bytes() != data:
+                  raise RuntimeError("PR89_STAGED_SOURCE_DRIFT " + module)
               output = ring / rel.with_suffix(".olean")
               if output.exists():
                   raise RuntimeError("PR89_MODULE_IDENTITY_COLLISION " + module)
               output.parent.mkdir(parents=True, exist_ok=True)
               log = Path(os.environ["RUNNER_TEMP"]) / ("pr89-" + module.replace(".", "_") + ".log")
               with log.open("w") as f:
-                  proc = subprocess.run(["lean", "-o", str(output), str(src)], stdout=f, stderr=subprocess.STDOUT)
+                  proc = subprocess.run(["lean", "-o", str(output), str(stage)], stdout=f, stderr=subprocess.STDOUT)
               result = log.read_text()
               if proc.returncode != 0 or not output.is_file() or output.stat().st_size == 0:
                   print("PR89_IMPORT_FAILURE " + module + chr(10) + result[-8000:], flush=True)
