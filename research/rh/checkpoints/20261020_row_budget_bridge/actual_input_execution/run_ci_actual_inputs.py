@@ -37,6 +37,26 @@ for name,item in reuse.items():
  assert digest(ring/(name+'.olean'))==item['binary_sha256']
 r['dependency_prefix_reuse']={k:prefix[k] for k in ['source_run','source_commit','source_run_conclusion','old_terminal_status','validated_binary_count']}
 r['scope']='Validated source-identical dependency prefix reuse followed by fresh original-import compilation of repaired actual-source and consumer modules. Each entry records reuse separately. Not RH.'
+# RUNTIME_GRAM_CAST_PATCH: frozen archive/manifest and reused .olean hashes remain unchanged.
+# The source at the exact SHA was compiled in CI 39543410933; only the
+# Nat-to-Int cast normalization is missing before rewriting the empty filter.
+fix_name='CvSActualGramWindowV1.lean'
+assert 'CvSActualGramWindowV1' not in reuse, 'PATCH_TARGET_MUST_COMPILE_FRESH'
+fix_path=out/fix_name
+fix_before=fix_path.read_text()
+fix_old="  have h := gram_tail_le hF hRNP v 0\n  rw [hz, Finset.sum_empty] at h\n  exact h\n"
+fix_new="  have h := gram_tail_le hF hRNP v 0\n  simp only [Nat.cast_zero, neg_zero] at h\n  rw [hz, Finset.sum_empty] at h\n  exact h\n"
+assert fix_before.count(fix_old)==1, 'GRAM_REPAIR_EXACT_SOURCE_MISMATCH'
+fix_original_sha=digest(fix_path)
+fix_path.write_text(fix_before.replace(fix_old,fix_new,1))
+r['runtime_source_patches']=[{
+ 'file':fix_name,
+ 'reason':'Normalize Nat.cast_zero and neg_zero before the existing empty-filter rewrite',
+ 'original_sha256':fix_original_sha,
+ 'compiled_source_sha256':digest(fix_path),
+ 'original_archive_sha256':digest(arc),
+ 'fresh_kernel_replay_required':True
+}]
 logs=[];audits={};rp=repo/'ACTUAL_INPUT_CI_RECEIPT.json';lp=repo/'actual-input-replay.log'
 def compile_one(name):
  if name in reuse:
