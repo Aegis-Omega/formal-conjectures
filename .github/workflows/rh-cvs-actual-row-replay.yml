@@ -16,6 +16,7 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/*.lean
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/ACTUAL_INPUT_SOURCES.zip
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_graph.py
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/reuse_complete_table_checkpoint.py
       - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
       - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
@@ -203,7 +204,7 @@ jobs:
           set -euo pipefail
           ACTUAL="research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution"
           export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
-          python3 "$ACTUAL/reuse_actual_input_prefix.py" 39541303124 d6c13a475c295388bced065f34b2165e077806ed "$GITHUB_WORKSPACE/.lake/ringout"
+          python3 "$ACTUAL/reuse_actual_input_prefix.py" 39569164255 f118d06204bc50fe719810794af5bac4dfd14889 "$GITHUB_WORKSPACE/.lake/ringout"
           lean -DwarningAsError=true ACTUAL_INPUT_PREFIX_REAUDIT.lean 2>&1 | tee actual-input-prefix-reaudit.log
           python3 "$ACTUAL/reuse_actual_input_prefix.py" --check-reaudit actual-input-prefix-reaudit.log
           python3 "$ACTUAL/run_ci_actual_inputs.py"

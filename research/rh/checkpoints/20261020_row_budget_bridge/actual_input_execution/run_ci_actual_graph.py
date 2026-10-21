@@ -13,7 +13,11 @@ env=os.environ.copy();env['LEAN_PATH']=str(repo/'.lake/ringout')+':'+subprocess.
 cmd=['lean','-DwarningAsError=true',str(p)]
 with (repo/'actual-proof-graph.log').open('w') as log:r=subprocess.run(cmd,env=env,stdout=log,stderr=subprocess.STDOUT)
 assert r.returncode==0,(repo/'actual-proof-graph.log').read_text()[-5000:]
-rawpath=repo/'ACTUAL_SOURCE_PROOF_GRAPH_RAW.json';raw=json.loads(rawpath.read_text());nodes={n['identifier']:n for n in raw['declarations']};allow={'propext','Classical.choice','Quot.sound'}
+rawpath=repo/'ACTUAL_SOURCE_PROOF_GRAPH_RAW.json'
+# Preserve the successfully exported kernel data even if source provenance fails below.
+with zipfile.ZipFile(repo/'ACTUAL_SOURCE_PROOF_GRAPH.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+ for f in [rawpath,p,Path(__file__)]:z.write(f,f.name)
+raw=json.loads(rawpath.read_text());nodes={n['identifier']:n for n in raw['declarations']};allow={'propext','Classical.choice','Quot.sound'}
 assert raw['roots']==roots and len(nodes)==len(raw['declarations'])
 assert all(set(n['axioms'])<=allow for n in nodes.values())
 assert all(not n['is_axiom'] or n['identifier'] in allow for n in nodes.values())
@@ -50,9 +54,21 @@ with zipfile.ZipFile(d/'full_table_execution/FULL_TABLE_SOURCES.zip') as z:
 tracked=subprocess.check_output(['git','ls-files','--','*.lean'],text=True).splitlines();by_stem={}
 for name in tracked:by_stem.setdefault(Path(name).stem,[]).append(repo/name)
 leanprefix=Path(subprocess.check_output(['lean','--print-prefix'],text=True).strip());manifest=[]
+# Exact core compiler recipe, including .lean.src snapshots and their pinned blobs.
+closure=json.loads((repo/'research/rh/feshbach_lean_v1/tools/krein_ring_closure.json').read_text())
+recipe={r['module']:r for r in closure['modules']}
+# The workflow compiles these original flat modules from these directories.
+flat_sources={x.stem:x for x in (repo/'research/rh/feshbach_lean_v1').glob('*.lean')}
+flat_sources['RHFixIntervalV1']=repo/'research/rh/critical_line_v1/RHFixIntervalV1.lean'
 for module in sorted({n['origin_module'] for n in nodes.values()}):
  rel=Path(*module.split('.')).with_suffix('.lean')
- first=[repo/'.lake/actual-input-sources'/rel,full/rel,repo/rel,repo/'.li-provider'/rel,leanprefix/'src/lean'/rel]
+ first=[repo/'.lake/actual-input-sources'/rel,full/rel]
+ if module in recipe:
+  rec=recipe[module];candidate=repo/rec['path'];data=candidate.read_bytes()
+  assert hashlib.sha1(b'blob '+str(len(data)).encode()+b'\0'+data).hexdigest()==rec['blob'],'CORE_RECIPE_BLOB_CHANGED '+module
+  first.append(candidate)
+ if module in flat_sources:first.append(flat_sources[module])
+ first += [repo/rel,repo/'.li-provider'/rel,leanprefix/'src/lean'/rel]
  first += [a/rel for a in (repo/'.lake/packages').iterdir() if a.is_dir()]
  src=next((x for x in first if x.is_file()),None)
  if src is None:
