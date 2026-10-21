@@ -320,6 +320,23 @@ jobs:
           lines = (Path(os.environ["RUNNER_TEMP"]) / "pr89-needed-order.tsv").read_text().splitlines()
           assert len(lines) == 272, "PR89_IMPORT_CARDINALITY_DRIFT"
           receipt = root / "cvs-pr89-source-closure.log"
+          import json
+          import subprocess
+          pinned_ring = {
+              entry["module"]: entry for entry in json.loads(
+                  (root / "research/rh/feshbach_lean_v1/tools/krein_ring_closure.json").read_text()
+              )["modules"]
+          }
+          def source_body(raw):
+              # A license-only wrapper is immaterial to the Lean declarations,
+              # but any other source change is a hard stop.
+              license_prefix = b"/-\\nCopyright 2026 The Formal Conjectures Authors.\\n"
+              if raw.startswith(license_prefix):
+                  end = raw.find(b"-/\\n")
+                  if end < 0:
+                      raise RuntimeError("BAD_COPYRIGHT_WRAPPER")
+                  return raw[end + 3:]
+              return raw
           for line in lines:
               module, source_string = line.split(chr(9), 1)
               src = Path(source_string)
@@ -345,7 +362,26 @@ jobs:
                   raise RuntimeError("PR89_STAGED_SOURCE_DRIFT " + module)
               output = ring / rel.with_suffix(".olean")
               if output.exists():
-                  raise RuntimeError("PR89_MODULE_IDENTITY_COLLISION " + module)
+                  # PR90 has already kernel-compiled some PR89 dependency names.
+                  # Reuse ONLY when the precompiled source is pinned and the
+                  # archived source has the same Lean text (optional license).
+                  if module not in pinned_ring or not output.is_file() or output.stat().st_size == 0:
+                      raise RuntimeError("PR89_UNEXPLAINED_MODULE_COLLISION " + module)
+                  record = pinned_ring[module]
+                  previous = root / record["path"]
+                  if not previous.is_file():
+                      raise RuntimeError("PR90_RING_SOURCE_MISSING " + module)
+                  blob = subprocess.check_output(
+                      ["git", "hash-object", str(previous)], text=True
+                  ).strip()
+                  if blob != record["blob"]:
+                      raise RuntimeError("PR90_RING_SOURCE_BLOB_DRIFT " + module)
+                  if source_body(previous.read_bytes()) != source_body(data):
+                      raise RuntimeError("PR89_PR90_MODULE_SEMANTIC_DRIFT " + module)
+                  with receipt.open("a") as f:
+                      f.write("REUSED_VERIFIED_RING_MODULE " + module + " " + blob + chr(10))
+                  print("REUSED_VERIFIED_RING_MODULE", module, flush=True)
+                  continue
               output.parent.mkdir(parents=True, exist_ok=True)
               log = Path(os.environ["RUNNER_TEMP"]) / ("pr89-" + module.replace(".", "_") + ".log")
               with log.open("w") as f:
