@@ -5715,7 +5715,7 @@
     "artifact_zip_sha256": "37bdab4ae6fa70baa96c01023650c7280e9e43940883e107d2c050e160045c13"
   },
   "actual_input_extension_CI": {
-    "status": "IN_PROGRESS",
+    "status": "FAIL_IN_LITERAL_JOIN_AFTER_424_PASS_MODULES",
     "run_id": 39514026659,
     "job_id": 118941735861,
     "source_commit": "f9bff86e94698a80b2cce396420e2f35fa0d4cd9",
@@ -5725,6 +5725,8 @@
       "AEGIS.CvSActualRowConsumerV1.hfin",
       "AEGIS.CvSActualRowConsumerV1.hB"
     ],
-    "canonical_RH": "NOT_PROVED"
+    "canonical_RH": "NOT_PROVED",
+    "artifact_id": 12310942465,
+    "remaining_source_repairs": "Two explicit Fin141 binders and normalized Fin-to-Int expression; new replay pending."
   }
 }

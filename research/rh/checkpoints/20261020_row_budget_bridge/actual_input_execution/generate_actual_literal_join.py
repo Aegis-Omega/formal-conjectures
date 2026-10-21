@@ -33,8 +33,8 @@ for k in range(141):s+=f'  · exact AEGIS.CvSAnalyticGRows{k//10}.row{k} l\n'
 s+='''/-- Staged interval products coincide with the already-proved actual source box formulas. -/
 theorem Y_source (r : Fin 301) (i : Fin 139) : Y r i = sourceYBox 96 (rowIndex r) i := by
   rw [Y_entry, listDot_eq_dot 96 _ _ (eRow r).length_eq (inputColumn i).x.length_eq]
-  change dot 96 (fun k => (eRow r).values.getD k.val ⟨0, 0⟩)
-    (fun k => (inputColumn i).x.values.getD k.val ⟨0, 0⟩) =
+  change dot 96 (fun k : Fin 141 => (eRow r).values.getD k.val ⟨0, 0⟩)
+    (fun k : Fin 141 => (inputColumn i).x.values.getD k.val ⟨0, 0⟩) =
     dot 96 (kernelBox 96 (rowIndex r)) (fun k => xBox k i)
   congr 1
   · funext k; exact E_source r k
@@ -130,7 +130,7 @@ theorem Q_mem (M : ℕ) (hM : 3 ≤ M) (i j : Fin 139) :
   rw [AEGIS.CvSSourceQAllV1.vector_source]
   have h := Y_mem M hM (⟨k.val + 80, by omega⟩ : Fin 301) j
   have he : rowIndex (⟨k.val + 80, by omega⟩ : Fin 301) = signedFreq k := by
-    unfold rowIndex signedFreq
+    change ((k.val + 80 : ℕ) : ℤ) - 150 = (k.val : ℤ) - 70
     omega
   rw [he] at h
   exact h

@@ -53,7 +53,7 @@ margin = (eps-eta)/2^80.
 
 The base is `40564819207303340847894502572032` and factor bound is `15795288160149`. Full original numerical source `CvSRelativeRowCertificateL12V1` was recompiled: row_budget_check_true uses propext; row_budget_margin_positive uses no axioms. The complete packed soundness body, including its complex form, also compiles with standard axioms. Numerical matrix positivity remains conditional on correct enclosures of the actual entries.
 
-All fourteen first-column batches now check their concrete endpoints against the original target data. They preserve every input number, outward rescaling and containment direction. Their 139 checks do not imply the remaining 19,182 output entries. Missing weighted-column data and a false zero target are both rejected by kernel tests.
+The historical fourteen first-column batches checked 139 entries. The complete extension now checks all 19321 ordered entries, preserving every input number and outward direction, with original-import CI 39505154095 PASS. Missing weighted-column data and a false zero target are both rejected by kernel tests.
 
 ## Analytic input enclosures and packed reuse
 
@@ -68,3 +68,7 @@ The actual Z0 pilot has n=301, B=2^128 and base=2^280. Every component bound, th
 ```
 
 A modified packed coefficient is rejected. The pilot takes 3.440 seconds; this verifies correctness and is not a measured full-matrix scaling claim. None of these constants is an enclosure of an arbitrary zeta-zero ordinate.
+
+## Exact source normalization continuation
+
+The actual cross kernel is 2*pi times the signed low-block kernel. The new source Q route checks containment of inverseTwoPi * dot96(X-column,Y-inner-column) in the stored Q interval. inverseTwoPi is lpInterval96 times rationalRange96(5/12,5/12); lp_mem and exact rational algebra prove membership of 1/(2*pi). No float or inward rounding is introduced. All19321 normalized numerical comparisons and a rejection of the unnormalized 00 entry pass the native kernel. Their actual analytic membership producer awaits targeted replay after the aggregate join failure in CI 39514026659.

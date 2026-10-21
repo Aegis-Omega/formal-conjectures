@@ -1,3 +1,9 @@
+## Current original-import result and actual-source continuation
+
+CI 39505154095 passed at exact source 2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925: 445 fresh modules, 868 standard-axiom audits, all 19321 output entries. Its 611 compiled binaries and complete source/compiler receipts were independently validated against the downloaded artifact. Raw receipts are in full_table_execution/ORIGINAL_IMPORT_*.json. This PASS certifies the complete finite envelope with its six explicit input-membership families.
+
+New native CvSRealTailFormV1 proves weighted_apply, tail_form_eq, residual_apply and sum_centered_rows for every N including 0. The 430-module original-import CI 39514026659 at f9bff86e checks the actual input join and candidate hfin/hB for every original coefficient vector. Until it succeeds these actual-source terminals remain candidates. The cross-kernel factor 2*pi is rigorously divided out in the new Q route; raw X-transpose*Y is not substituted for projectedEntry.
+
 ## Exact next source joins
 
 The actual analytic enclosure lemmas already exist. The remaining input step is their finite integration with the literal data, not an assertion that those analytic estimates are absent. Sufficient exact identities are:
@@ -8,10 +14,11 @@ residual(columns)(r,i) = CvSActualRowInputL12V1.zBox(Lambda96)(r,i)
 T[k] = CvSActualRowInputL12V1.tauBox(96, signedFreq(k))
 G[k,l] = rationalRange(96, gramRat(150,signedFreq(k),signedFreq(l)), same)
 LP2 = CvSFrequencyIntervalV1.lpSquaredInterval(96)
-Q[i,j] = upscale(32, Im(CvSProjectedPackedCertificateL12V1.certI,i,j)).
+contains(Q[i,j], normalize(dot96(X[:,i],Y[inner141,j]))) = true
+normalize(I) = inverseTwoPi.mul(96,I), inverseTwoPi contains 1/(2*pi).
 ```
 
-Lambda96 must encode the unchanged stored Q48 projection exactly. SourceZ_mem already handles this arbitrary enclosed projection. The Y=E*X and inner X*Lambda interval products are distinct from the now-verified G*X/G*(tau*X) products. Their exact integer reconstruction is preserved for the next staged source join. An identity or rigorously outward containment is sufficient; no input may be silently tightened.
+Lambda96 must encode the unchanged stored Q48 projection exactly. SourceZ_mem already handles this arbitrary enclosed projection. The Y=E*X and inner X*Lambda interval products are distinct from the now-verified G*X/G*(tau*X) products. Their E/X/Lambda/Y/inner/Z computations are now native kernel verified in actual_input_execution. Their actual analytic source identities are candidates in the actual-source continuation (CI 39514026659 failed in the aggregate join after 424 successful modules; targeted repair is pending replay). The normalized Q check also passes all 19321 native comparisons. An identity or rigorously outward containment is sufficient; no input may be silently tightened.
 
 The fixed-window consumer still needs its all-real-t Krein certificate and scalar/trace conditions. Universal closure then requires a cofinal/all-window producer or the existing signed Weil producer for every admissible moment-zero packet. A finite congruence identity preserves the index domain. It does not supply these quantifiers. The time-slice unit-modulus condition remains RH-equivalent and cannot be introduced as an unconditional lemma. No failure of tooling is used as a mathematical nonexistence argument.
 
@@ -89,7 +96,7 @@ The new packed extension reuses `CvSPackedGramV1.gramEntry_eq`. `packedIntervalD
 
 ## Exact next interfaces
 
-The existing consumer is `CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv`. It requires symmetry and **every** stored entry to enclose `40*A(i,j)-budgetMatrix Z G(i,j)` at Q80. Our first-column result supplies a checked computation for one column; it does not discharge this universal-over-entries premise. The literal Q96 inputs must be identified with the actual source formulas, all output entries must be covered, and the actual complex residual/tail must match the consumer.
+The existing consumer is `CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv`. It requires symmetry and **every** stored entry to enclose `40*A(i,j)-budgetMatrix Z G(i,j)` at Q80. The full-table extension now supplies all 19321 output comparisons. The actual analytic input and residual/tail identifications are implemented as candidates in the separate source continuation, with kernel status still pending.
 
 The existing `CvSGramTailV1.rows_gram_le` already bounds every outer cutoff N by a right side independent of N, under its explicit finite support, far-tau and positive Young-parameter hypotheses. That uniform tail theorem is preserved; it is not a missing all-frequency estimate. It controls frequency exhaustion for a fixed window, rather than supplying positivity at every window width.
 
@@ -118,8 +125,8 @@ A spanning or dense collection of individually positive vectors is insufficient 
 
 PR90's existing `radius_row_real` bounds projected-entry approximation radii by 1/230000. That is a different matrix quantity from the cross-residual-plus-tail hB. It cannot be substituted for the missing hI/hB producer. Cached exact arithmetic changes execution cost, not these analytic Schur budgets.
 
-## Verification boundary
+## Historical verification boundary (earlier 102-root checkpoint)
 
 The native selected graph now contains 102 roots, 28,139 declarations and 1,058 located source modules. It has zero missing dependencies and zero theorem/definition cycles; 684 inductive/constructor metadata groups are separately condensed. All axioms are among propext, Classical.choice and Quot.sound. Native RHFixInterval and PackedGram copies change only imports; their complete mathematical bodies are byte-identical after import-line removal. Original-import analytic CI is a separate receipt. The new packed closure was also freshly compiled from the published archive in an isolated custom-module directory: 11 modules, same host, no pre-existing custom module cache. No independent human mathematical sign-off or unconditional RH theorem is claimed.
 
-Final verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.
+Historical 105-root verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.
