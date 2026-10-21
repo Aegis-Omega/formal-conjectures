@@ -164,6 +164,25 @@ theorem actual_quantitative_signed_budget_of_zero_margin
           WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re := hidentity
     _ ≤ -margin := neg_le_neg hmargin
 
+
+/-- The already checked adaptive Krein/trigram certificate yields the exact
+energy/16 margin for any moment-zero packet in its width-2/5 domain. Transfer
+that genuine source bound through the finite actual-Weil Gram identity. No
+historical batch files, cofinal convergence, or RH premise are introduced. -/
+theorem actual_quantitative_signed_budget_of_trigram_margin
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (r a : ℝ) (hr0 : 0 ≤ r) (hr : r ≤ 2 / 5)
+    (hw : AEGIS.RHDyadicDiagonalV13.HalfWidthAt g r a) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      g = AEGIS.RHGramExpansionV13.packetSum (fun _ => (1 : ℂ)) gs ∧
+      (AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs +
+        ∑ i, (AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) ≤
+          -((1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1) := by
+  exact actual_quantitative_signed_budget_of_zero_margin g hm
+    ((1 / 16 : ℝ) * AEGIS.WeilDisjointEnergyV2.energy g.1)
+    (AEGIS.RHKreinTrigramAdaptiveV1.zero_quadratic_margin_trigram_v1
+      g r a hr0 hr hw hm)
+
 end AEGIS.RHCvSCofinalActualWeilJoinV1
 
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.certified_source_projectedQ_nonneg
@@ -171,3 +190,4 @@ end AEGIS.RHCvSCofinalActualWeilJoinV1
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.zero_quadratic_nonneg_of_projected_cofinal
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_zero_margin
+#print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_trigram_margin
