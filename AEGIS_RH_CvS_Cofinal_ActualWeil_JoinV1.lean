@@ -139,9 +139,35 @@ theorem riemannHypothesis_of_universal_actual_cvs_cofinal
     g hm (zero_quadratic_nonneg_of_projected_cofinal
       g M v hM hcofinal hreproduce)
 
+
+/-- Any genuine lower bound on the zero quadratic of this SAME moment-zero
+packet gives a quantitative upper bound on its exact reconstructed finite
+Weil Gram diagonal plus mixed defect. A historical Krein energy margin may
+be supplied as `hmargin` once its separate source theorem has been replayed;
+no historical import or global approximation is assumed here. -/
+theorem actual_quantitative_signed_budget_of_zero_margin
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (margin : ℝ)
+    (hmargin : margin ≤
+      (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      g = AEGIS.RHGramExpansionV13.packetSum (fun _ => (1 : ℂ)) gs ∧
+      (AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs +
+        ∑ i, (AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) ≤ -margin := by
+  obtain ⟨n, gs, hpacket, hidentity⟩ :=
+    AEGIS.RHCvSActualWeilInteropV1.actual_fine_mixed_defect_eq_neg_zero_side
+      g hm
+  refine ⟨n, gs, hpacket, ?_⟩
+  calc
+    _ = -(∑' rho : RiemannNontrivialZeroIndexV2,
+          WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re := hidentity
+    _ ≤ -margin := neg_le_neg hmargin
+
 end AEGIS.RHCvSCofinalActualWeilJoinV1
 
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.certified_source_projectedQ_nonneg
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.actual_signed_budget_of_exact_projectedQ
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.zero_quadratic_nonneg_of_projected_cofinal
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal
+#print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_zero_margin
