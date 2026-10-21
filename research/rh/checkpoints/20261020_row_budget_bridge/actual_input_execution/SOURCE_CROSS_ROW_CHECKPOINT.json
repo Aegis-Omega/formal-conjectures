@@ -1,5 +1,5 @@
 {
-  "source_commit": "f118d06204bc50fe719810794af5bac4dfd14889",
+  "source_commit": "9d98c4e99e3ab3d271215192f100964a5fdaac0c",
   "math_step_outcome": "success",
   "full_table_step_outcome": "success",
   "actual_input_step_outcome": "success",
@@ -3322,7 +3322,7 @@
     "ring.log": "ddd5602295f355920f18a92c5118be5b6ce7c2625ed74a2cb64f676522b2cddd",
     "actual-row-bridge.log": "bf875d5dcd89bfebb3fcd7fa9496e96ee79e5aaad99d7886d2c9e3da8e078284",
     "full-table-reaudit.log": "4946d2b8f6d3bf536187200203272883334808913bfef9fdaaf2349c0ebece0a",
-    "actual-input-replay.log": "a70a239c4125381a500793ebb77e641cbcd6a9cbe87800471b26524ad4176c19"
+    "actual-input-replay.log": "3a9d4cf8193bdd04c4c0cc77b1e8f624f964947b3c945484adbbdc71f93ccde7"
   },
   "source_archive_sha256": {
     "research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/FULL_TABLE_SOURCES.zip": "d8e569b6c9fd48969ec5693df823a97b3b44c644970a5aa71e8670326677003c",
@@ -4083,6 +4083,7 @@
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSSourceQAllV1.lean",
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSSourceQNormalizeV1.lean",
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSSourceQRejectV1.lean",
+      "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/GRAM_ZERO_CUTOFF_REGRESSION.json",
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/HFIN_HB_KERNEL_PASS.json",
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/ORIGINAL_IMPORT_CI_39514026659.log",
       "A\tresearch/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/ORIGINAL_IMPORT_PARTIAL_RECEIPT.json",

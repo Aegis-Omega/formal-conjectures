@@ -1,18 +1,41 @@
-> Current verified result: CI39569164255 at f118d062 accepted all433 mathematical modules (431 source-verified reuse, two fresh source compilations), with2055 axiom roots. The actual hfin/hB-to-window composition and uniform scalar theorem are PASS with standard axioms. All1044 artifact binary hashes and exact sources were independently validated. The run failed only in subsequent graph source resolution; this is not a whole-run SUCCESS. CI39571212916 at9d98c4e9 checks the repaired graph provenance using the same433 verified modules. ACTUAL_WINDOW_KERNEL_PASS.json contains the complete new terminal types and audits. Earlier pending replay wording below is historical and superseded by this receipt.
+Original-import CI[39571212916](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39571212916) is **SUCCESS** at `9d98c4e99e3ab3d271215192f100964a5fdaac0c`. The full current graph has 82601 declarations, 14 selected roots and 3113 source modules, no missing dependencies or proof cycles, and only standard axioms. Independent artifact validation checked all 1044 binaries. The current run reuses 433 exact-source mathematical modules and freshly compiles 0; earlier fresh compilation is preserved at f118d062. The graph and receipts describe actual finite CvS bounds and a conditional fixed-window result, not unconditional RH.
 
 # STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION
 
-The actual finite CvS source budget and both original-coordinate consumer contracts are kernel verified. No unconditional canonical RiemannHypothesis theorem was constructed.
+The actual finite CvS budget, both original-coefficient consumer contracts and their fixed-window composition are kernel verified. The canonical unconditional RiemannHypothesis theorem remains unproved.
 
-- Complete finite table: original-import CI39505154095 at `2d2ea90d`, all 19,321 comparisons, 445 fresh modules and 868 axiom audits.
-- Actual analytic input join and basis transport: five complete modules PASS at `96e25af7` in CI39538781739. `actual_budgetEnergy_margin` has no assumed analytic input-membership families left.
-- Original-vector `hfin` and `hB`: complete module PASS at `d6c13a47` in CI39541303124; `hB` proves `Brow M c <= 40 * Q_CvS M (6/5) atomCenter c` for every M>=3 and original complex c. These two later runs failed only after the named successful modules; neither is relabelled whole-run SUCCESS.
-- Exact scalar improvement: the new native kernel theorem proves that m>=31/16 and trace budget T<=6 suffice for Schur budget 40 with reserve 1/2. It does not prove a trace estimate.
+## New verified results
 
-The new window wrapper and scalar module are undergoing original-import replay at `7cc836ab5f6dff66b5643c9838d9c79d330ab68e`, CI39543410933. Its result must be read before claiming those new original-import roots or their graph passed.
+The complete 139-dimensional certificate checks every one of 19,321 ordered output entries. Its actual analytic input join preserves the essential 2*pi normalization and the original interval/projection data. The exact positive margin is 167597168023440173239/604462909807314587353088.
 
-The next mathematical obligation is concrete: construct the regular Krein/trace witnesses in `window_of_trace_le_six`, prove its pointwise inequality for every real t and its actual integral <=6 with m>=31/16. The stored LP data are numerical candidates, not that proof. Finite matrix memberships, basis transport and the hfin/hB contracts are already discharged and must not be listed as missing again.
+`CvSActualRowConsumerV1.hfin` includes all 301 finite residual rows and the actual Gram-tail majorant. `hB` proves `Brow M c <= 40 * Q_CvS M (6/5) atomCenter c` for every M>=3 and original complex coefficient vector c.
 
-Even an instantiated window at L=6/5 remains a bounded-support result. Canonical RH still requires a genuine cofinal-window exhaustion argument with certificates for every member, or the existing universal signed Weil producer for every admissible moment-zero packet. No finite certificate or RH equivalence alone supplies this quantifier.
+`CvSActualGramWindowV1` proves uniform positivity of the Gram majorant, actual low-form nonnegativity and the exact Schur composition. Its `window_of_trace_le_six` gives nonnegativity of the original indexed zero sum for every admissible moment-zero packet with 2*r<=6/5, under explicit Krein/trace and regularity hypotheses. No hfin/hB or scalar-budget premise remains in that corollary: the new parameterized scalar theorem proves that m>=31/16 and trace budget<=6 suffice, with exact reserve 1/2.
 
-Machine evidence is in AEGIS_RH_KERNEL_RECEIPT.json, the proof graph, ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json and HFIN_HB_KERNEL_PASS.json. Only propext, Classical.choice and Quot.sound occur in the accepted theorem audits. The existing development branch preserves the work; no main merge, new branch, production or billing change was made.
+CI 39569164255 at f118d062 accepted all 433 mathematical modules (431 source-identical reuse and two fresh compilations), with 2055 axiom audits. Independent artifact verification checked all 1044 binary hashes and the exact source/pin bindings. Only propext, Classical.choice and Quot.sound occur in accepted audits. The overall run failed later in graph source-path resolution; it is not relabelled SUCCESS. The corrected provenance exporter passed CI 39571212916 at 9d98c4e9 without changing the mathematical sources.
+
+## Exact remaining mathematics
+
+The general verified window theorem retains concrete regular H,d,j,s,cf witnesses, its pointwise Krein inequality for every real t, an actual trace upper bound T, and the compatibility inequality
+
+```
+40 <= (2*pi)^2*(6/5)*(m-T/(2*pi)).
+```
+
+That is the remaining interface on this fixed-window route. The new specialization m>=31/16 and T<=6 is a proved sufficient range, not a necessary or optimal condition. Its LP candidate is not a proof of the pointwise inequality or trace integral. Finite matrix memberships, basis transport and hfin/hB are already discharged.
+
+For canonical RH a universal obligation remains. The exact existing signed route is:
+
+```lean
+∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+  ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+    g = packetSum (fun _ => (1 : ℂ)) gs ∧
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      -(∑ i, (B (gs i) (gs i)).re)
+```
+
+`RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget` identifies that universal target; the equivalence is not a proof of its right-hand side. A genuine cofinal-window family and the required exhaustion limit would be another route. One fixed window and a finite congruence identity supply neither universal quantifier.
+
+The work and source-bound receipts are preserved on the existing development branch. No main merge, new branch, changed RH definition, added mathematical axiom, production or billing change was made. No independent human review or unconditional RH success is asserted.
+
+PR90 changed to b0d8b2661132b3ae109c03c16f8b51597251d2e4 on the final API reread. Its new `riemannHypothesis_of_universal_actual_cvs_cofinal` explicitly requires `UniversalActualCvSCofinalApproximation`. This assumes convergence to the actual zero quadratic for every moment-zero packet. Its cofinal parameter is a prime cutoff, not an exhausting window width. The latest dedicated join CI 39568506309 is FAIL; the source is inspected separately, not imported or relabelled as part of our successful graph. No strict-strength claim is inferred from its comments. See actual_input_execution/PR90_B0D8_SOURCE_AUDIT.json.

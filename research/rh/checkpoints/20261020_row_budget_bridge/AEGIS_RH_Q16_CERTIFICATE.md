@@ -1,4 +1,4 @@
-> Current verified result: CI39569164255 at f118d062 accepted all433 mathematical modules (431 source-verified reuse, two fresh source compilations), with2055 axiom roots. The actual hfin/hB-to-window composition and uniform scalar theorem are PASS with standard axioms. All1044 artifact binary hashes and exact sources were independently validated. The run failed only in subsequent graph source resolution; this is not a whole-run SUCCESS. CI39571212916 at9d98c4e9 checks the repaired graph provenance using the same433 verified modules. ACTUAL_WINDOW_KERNEL_PASS.json contains the complete new terminal types and audits. Earlier pending replay wording below is historical and superseded by this receipt.
+Original-import CI[39571212916](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39571212916) is **SUCCESS** at `9d98c4e99e3ab3d271215192f100964a5fdaac0c`. The full current graph has 82601 declarations, 14 selected roots and 3113 source modules, no missing dependencies or proof cycles, and only standard axioms. Independent artifact validation checked all 1044 binaries. The current run reuses 433 exact-source mathematical modules and freshly compiles 0; earlier fresh compilation is preserved at f118d062. The graph and receipts describe actual finite CvS bounds and a conditional fixed-window result, not unconditional RH.
 
 # Exact integer and interval certificates
 
@@ -54,16 +54,16 @@ A modified packed coefficient is rejected. The pilot takes 3.440 seconds; this v
 
 ## Exact source normalization continuation
 
-The actual cross kernel is 2*pi times the signed low-block kernel. The new source Q route checks containment of inverseTwoPi * dot96(X-column,Y-inner-column) in the stored Q interval. inverseTwoPi is lpInterval96 times rationalRange96(5/12,5/12); lp_mem and exact rational algebra prove membership of 1/(2*pi). No float or inward rounding is introduced. All19321 normalized numerical comparisons and a rejection of the unnormalized 00 entry pass the native kernel. Their actual analytic membership producer passed as a complete original-import source module at96e25af7 in CI39538781739. The named module receipt is ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json; that run later failed in another consumer. The final original-vector hfin/hB contracts subsequently passed atd6c13a47 in CI39541303124.
+The actual cross kernel is 2*pi times the signed low-block kernel. The new source Q route checks containment of inverseTwoPi * dot96(X-column,Y-inner-column) in the stored Q interval. inverseTwoPi is lpInterval96 times rationalRange96(5/12,5/12); lp_mem and exact rational algebra prove membership of 1/(2*pi). No float or inward rounding is introduced. All19321 normalized numerical comparisons and a rejection of the unnormalized 00 entry pass the native kernel. Their actual analytic membership producer passed as a complete original-import source module at96e25af7 in CI 39538781739. The named module receipt is ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json; that run later failed in another consumer. The final original-vector hfin/hB contracts subsequently passed atd6c13a47 in CI 39541303124.
 
 ## Actual relative budget and exact scalar reserve
 
 The source-bound hB theorem gives Brow M c <= 40*Q_CvS M (6/5) atomCenter c for every M>=3 and original complex coefficient vector c. All 301 finite residual rows and the actual Gram-tail majorant are included in hfin. The 139-dimensional basis change preserves this relative form bound; it is not replaced by a norm estimate.
 
-The new parameterized scalar theorem, natively kernel verified, uses only pi>=3 to prove that m>=31/16 and T<=6 imply gap>=15/16 and
+The new parameterized scalar theorem, original-import kernel verified, uses only pi>=3 to prove that m>=31/16 and T<=6 imply gap>=15/16 and
 
 ```
 40+1/2 <= (2*pi)^2*(6/5)*(m-T/(2*pi)).
 ```
 
-Its exact conservative arithmetic is 36*(6/5)*(15/16)=81/2. This half-unit reserve is conditional on the stated scalar bounds. The theorem does not prove that any proposed slack witness has trace<=6. Original-import replay of the new scalar and window wrapper is tracked in CI39543410933 at7cc836ab; read its receipt before promoting that additional scope.
+Its exact conservative arithmetic is 36*(6/5)*(15/16)=81/2. This half-unit reserve is conditional on the stated scalar bounds. The theorem does not prove that any proposed slack witness has trace<=6. Both the scalar and window wrapper passed original-import kernel compilation at f118d062 in CI 39569164255. Its later graph provenance failure remains separate from this mathematical PASS.

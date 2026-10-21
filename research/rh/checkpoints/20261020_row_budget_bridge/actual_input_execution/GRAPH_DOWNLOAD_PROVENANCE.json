@@ -1,0 +1,11 @@
+{
+  "source_run": 39571212916,
+  "source_commit": "9d98c4e99e3ab3d271215192f100964a5fdaac0c",
+  "original_artifact_id": 12332549155,
+  "original_artifact_sha256": "405437564d10c5e8ea7df5db96be3efaa261a6ae2486c03de2913e8efe70b693",
+  "recovery_run": 39578861869,
+  "recovery_commit": "711b9abb8274f3a05b78856e22afc1732f367a76",
+  "repackaged_artifact_id": 12335312281,
+  "repackaged_artifact_sha256": "daf948d4b68d23f89a376f7e24c576ebf8305d30d4efac6b690d58688509c059",
+  "scope": "Exact-byte artifact recovery; not new Lean execution or new mathematics."
+}

@@ -1,6 +1,6 @@
 {
   "status": "PASS",
-  "prefix_receipt_sha256": "10dd27f667cd4c9505abdb4a2464aff17536f08809ec1f8b0a78f30e1eedbc9e",
+  "prefix_receipt_sha256": "2443cd3b6b87fc55a5394de4cece143d3e68b93054e0162a6545e5b796a19a5b",
   "source_archive_sha256": "8afe689463234e09eaa1511ce1decaa915f69070e959fb947e35a29592cb9b30",
   "audits": {
     "AEGIS.CvSSourceERows0.row0": [
