@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "source_commit": "f118d06204bc50fe719810794af5bac4dfd14889",
+  "run": 39569164255,
+  "artifact_id": 12332360343,
+  "artifact_sha256": "f01b801c61b1b77f539df1c959b9353c9e4e78e07811a4fcd8214843803f1adf",
+  "validated_binary_count": 1044,
+  "validated_actual_module_count": 433,
+  "fresh_actual_modules": [
+    "CvSKreinScalarUniformV1",
+    "CvSActualGramWindowV1"
+  ],
+  "reused_actual_modules": 431,
+  "axiom_audit_count": 2055,
+  "proof_graph_status": "FAILED_SOURCE_PROVENANCE",
+  "proof_graph_roots": null,
+  "proof_graph_declarations": null,
+  "source_manifest_modules": null,
+  "proof_graph_zip_sha256": null,
+  "scope": "Actual finite CvS hfin/hB and conditional fixed-window zero-sum reduction. Krein/trace/support premises remain. Canonical unconditional RH not proved."
+}

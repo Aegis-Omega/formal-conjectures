@@ -627,12 +627,11 @@
     }
   ],
   "remaining_obligations": [
-    "Identify the six literal Q/X/G/tau/Z/LP2 input families with their already-proved actual analytic input formulas and the fixed Q48 projection. All 19321 finite output comparisons are now discharged.",
-    "Produce the fixed-window all-real-t Krein certificate, regularity/integrability and compatible trace/Schur gap required by CvSWindowGramL12V1.window_L12_gram.",
-    "Construct a genuine cofinal/all-window or universal signed Weil producer. A fixed L=6/5 certificate does not discharge this quantifier."
+    "Construct explicit regular Krein/trace witnesses for window_of_trace_le_six; prove its pointwise inequality for every real t and its actual trace integral <=6 with m>=31/16. All finite input memberships, basis transport, hfin/hB and scalar budget are already discharged.",
+    "For canonical RH, prove the existing universal signed mixed-budget producer for every admissible moment-zero Weil packet, or a genuinely cofinal window family with the required limiting control. A single fixed window does not supply this quantifier."
   ],
   "canonical_unconditional_RH": "NOT_PROVED",
-  "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+  "mathematical_source_snapshot_commit": "f118d06204bc50fe719810794af5bac4dfd14889",
   "graph_sha256": "4b74461dca12bdda401df0207bda591122ae4e617808cd67762b70ade2058fab",
   "native_source_archive_sha256": "d8e569b6c9fd48969ec5693df823a97b3b44c644970a5aa71e8670326677003c",
   "push_succeeded": true,
@@ -3393,12 +3392,10 @@
     "kernel_status": "ALL_SOURCE_MODULES_AND_105_NAMED_AXIOMS_PASS"
   },
   "current_extended_CI": {
-    "status": "PASS",
-    "run": 39470677222,
-    "source_commit": "16d487f11ed122113c186c573b9268f5bfc4d1e7",
-    "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222",
-    "explicit_axiom_audits": 105,
-    "scope": "Import all relevant original-context modules, #check @ every named theorem, and #print axioms for all 105 roots. Reused theorem bodies are explicitly not described as freshly source-compiled."
+    "run": 39571212916,
+    "source_commit": "9d98c4e99e3ab3d271215192f100964a5fdaac0c",
+    "status": "IN_PROGRESS",
+    "scope": "All433 original-import mathematical modules source-identical to f118 and reused after strict validation; repaired proof-graph provenance export."
   },
   "active_pins_checked": {
     "lean_toolchain_file": "leanprover/lean4:v4.33.1",
@@ -5824,5 +5821,199 @@
     "receipt": "actual_input_execution/SCALAR_ORIGINAL_IMPORT_PASS.json",
     "window_status": "PENDING_REPLAY_AFTER_REPRODUCED_CAST_ZERO_FIX",
     "external_commit_preserved": "d40702a206dae553027722c6424a8c42c3f6746e"
+  },
+  "actual_source_window_kernel": {
+    "status": "PASS_FOR_ALL_433_MATHEMATICAL_MODULES",
+    "source_commit": "f118d06204bc50fe719810794af5bac4dfd14889",
+    "run": 39569164255,
+    "overall_run_result": "FAIL_IN_SUBSEQUENT_GRAPH_SOURCE_RESOLUTION",
+    "lean": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+    "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "artifact_validation": {
+      "status": "PASS",
+      "source_commit": "f118d06204bc50fe719810794af5bac4dfd14889",
+      "run": 39569164255,
+      "artifact_id": 12332360343,
+      "artifact_sha256": "f01b801c61b1b77f539df1c959b9353c9e4e78e07811a4fcd8214843803f1adf",
+      "validated_binary_count": 1044,
+      "validated_actual_module_count": 433,
+      "fresh_actual_modules": [
+        "CvSKreinScalarUniformV1",
+        "CvSActualGramWindowV1"
+      ],
+      "reused_actual_modules": 431,
+      "axiom_audit_count": 2055,
+      "proof_graph_status": "FAILED_SOURCE_PROVENANCE",
+      "proof_graph_roots": null,
+      "proof_graph_declarations": null,
+      "source_manifest_modules": null,
+      "proof_graph_zip_sha256": null,
+      "scope": "Actual finite CvS hfin/hB and conditional fixed-window zero-sum reduction. Krein/trace/support premises remain. Canonical unconditional RH not proved."
+    },
+    "terminals": [
+      {
+        "module": "CvSActualRowConsumerV1",
+        "source_sha256": "c93422fa28c3b34bc77d736f74b286545faa6649250443271c55c0dec1eb4131",
+        "command": [
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+          "-o",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSActualRowConsumerV1.olean",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSActualRowConsumerV1.lean"
+        ],
+        "seconds": 0,
+        "exit_code": 0,
+        "compiler_output": "'AEGIS.CvSActualRowConsumerV1.sum_atomRow' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.sourceZ_apply' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.residual_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.signed_gform' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.actual_tail_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.budget_eq_rows' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.coordinates_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualRowConsumerV1.hfin : \u2200 (M : \u2115) (c : Fin 139 \u2192 \u2102),\n  \u2211 m \u2208 Finset.Icc (-150) 150,\n        \u2016AEGIS.CvSCrossCertV1.crossRow M (6 / 5)\n                (AEGIS.CvSLowBlockMatrixV1.lowFreq AEGIS.CvSActualRowConsumerV1.supports)\n                (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n                  AEGIS.CvSActualRowConsumerV1.weights c)\n                m -\n              \u2211 j,\n                AEGIS.CvSActualRowConsumerV1.lam c j *\n                  AEGIS.CvSCrossCertV1.atomRow (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n                    AEGIS.CvSActualRowConsumerV1.weights j m\u2016 ^\n          2 +\n      AEGIS.CvSGramTailV1.gramTail M (6 / 5) (AEGIS.CvSLowBlockMatrixV1.lowFreq AEGIS.CvSActualRowConsumerV1.supports)\n        (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n          AEGIS.CvSActualRowConsumerV1.weights c)\n        13 1 150 \u2264\n    AEGIS.CvSActualRowConsumerV1.Brow M c\n'AEGIS.CvSActualRowConsumerV1.hfin' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualRowConsumerV1.hB : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (c : Fin 139 \u2192 \u2102),\n      AEGIS.CvSActualRowConsumerV1.Brow M c \u2264\n        40 * AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS M (6 / 5) AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter c\n'AEGIS.CvSActualRowConsumerV1.hB' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+        "bad_axioms": [],
+        "status": "PASS",
+        "prior_compile_seconds": 7.856583983999997,
+        "dependency_reuse": {
+          "source_run": 39541303124,
+          "source_commit": "d6c13a475c295388bced065f34b2165e077806ed",
+          "binary_sha256": "e0dbe1bd335b03cccd7ad69f7861012548bd3c6bf76038506e203029db1d0e9b"
+        }
+      },
+      {
+        "module": "CvSKreinScalarUniformV1",
+        "source_sha256": "d9db7d6b9828d7e1b262a9e0ba7e6c53908a907907183b4df3c9ea4d657572ef",
+        "command": [
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+          "-o",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSKreinScalarUniformV1.olean",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSKreinScalarUniformV1.lean"
+        ],
+        "seconds": 4.971305346999998,
+        "exit_code": 0,
+        "compiler_output": "@AEGIS.CvSKreinScalarUniformV1.gap_lower : \u2200 {m T : \u211d}, 31 / 16 \u2264 m \u2192 T \u2264 6 \u2192 15 / 16 \u2264 m - T / (2 * Real.pi)\n'AEGIS.CvSKreinScalarUniformV1.gap_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n@AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve : \u2200 {m T : \u211d},\n  31 / 16 \u2264 m \u2192 T \u2264 6 \u2192 40 + 1 / 2 \u2264 (2 * Real.pi) ^ 2 * (6 / 5) * (m - T / (2 * Real.pi))\n'AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSKreinScalarUniformV1.schur_budget' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSKreinScalarUniformV1.chosen_budget' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+        "bad_axioms": [],
+        "status": "PASS"
+      },
+      {
+        "module": "CvSActualGramWindowV1",
+        "source_sha256": "61ba51757d429224b7da15720ef8c916acb8969546d544d54ed2beef175499f8",
+        "command": [
+          "lean",
+          "-DwarningAsError=true",
+          "-R",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+          "-o",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSActualGramWindowV1.olean",
+          "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSActualGramWindowV1.lean"
+        ],
+        "seconds": 8.364158253000028,
+        "exit_code": 0,
+        "compiler_output": "'AEGIS.CvSActualGramWindowV1.gramUp_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualGramWindowV1.gramTail_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualGramWindowV1.Brow_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualGramWindowV1.actual_Q_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualGramWindowV1.actual_hlow' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualGramWindowV1.window_of_actual_rows : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (L m : \u211d),\n      6 / 5 < L \u2192\n        \u2200 (s : \u211d \u2192 \u211d),\n          Measurable s \u2192\n            \u2200 (B : \u211d),\n              (\u2200 (t : \u211d), |s t| \u2264 B) \u2192\n                (\u2200 (t : \u211d), 0 \u2264 s t) \u2192\n                  \u2200 {n : \u2115} (H : Fin n \u2192 \u211d \u2192 \u2102),\n                    (\u2200 (i : Fin n), Continuous (H i)) \u2192\n                      (\u2200 (i : Fin n), Integrable (H i) volume) \u2192\n                        (\u2200 (i : Fin n), Integrable (FourierTransform.fourier (H i)) volume) \u2192\n                          (\u2200 (i : Fin n) (u : \u211d), |u| < L \u2192 H i u = 0) \u2192\n                            \u2200 {k : \u2115} (d : Fin k \u2192 \u2102) (j : Fin k \u2192 \u2115),\n                              (\u2200 (t : \u211d),\n                                  0 \u2264\n                                    AEGIS.RHKreinZetaBridgeV1.Wt t * (AEGIS.RHKreinZetaBridgeV3.ScertM M t - m) +\n                                          (\u2211 i, FourierTransform.fourier (H i) (t / (2 * Real.pi))).re +\n                                        \u2211 l, 2 * (d l * ((I * \u2191t) ^ j l * cexp (\u2191(t * L) * I))).re +\n                                      AEGIS.RHKreinZetaBridgeV1.Wt t * s t) \u2192\n                                \u2200 (cf : \u211d \u2192 Fin 139 \u2192 \u2102),\n                                  Integrable\n                                      (fun t =>\n                                        s t *\n                                          AEGIS.CvSTraceV1.trialDist 0 (6 / 5)\n                                            (fun i =>\n                                              AEGIS.CvSMomentBasisV1.momentAtom (6 / 5)\n                                                (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n                                            cf t)\n                                      volume \u2192\n                                    \u2200 {T : \u211d},\n                                      \u222b (t : \u211d),\n                                            s t *\n                                              AEGIS.CvSTraceV1.trialDist 0 (6 / 5)\n                                                (fun i =>\n                                                  AEGIS.CvSMomentBasisV1.momentAtom (6 / 5)\n                                                    (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n                                                cf t \u2264\n                                          T \u2192\n                                        40 \u2264 (2 * Real.pi) ^ 2 * (6 / 5) * (m - T / (2 * Real.pi)) \u2192\n                                          \u2200 (g : WeilCompactSmoothGV1),\n                                            WeilMomentConditionsV1 g \u2192\n                                              \u2200 (r a : \u211d),\n                                                AEGIS.RHDyadicDiagonalV13.HalfWidthAt g r a \u2192\n                                                  2 * r \u2264 6 / 5 \u2192\n                                                    0 \u2264\n                                                      (\u2211' (rho : RiemannNontrivialZeroIndexV2),\n                                                          WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re\n'AEGIS.CvSActualGramWindowV1.window_of_actual_rows' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualGramWindowV1.window_of_trace_le_six : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (L m : \u211d),\n      6 / 5 < L \u2192\n        \u2200 (s : \u211d \u2192 \u211d),\n          Measurable s \u2192\n            \u2200 (B : \u211d),\n              (\u2200 (t : \u211d), |s t| \u2264 B) \u2192\n                (\u2200 (t : \u211d), 0 \u2264 s t) \u2192\n                  \u2200 {n : \u2115} (H : Fin n \u2192 \u211d \u2192 \u2102),\n                    (\u2200 (i : Fin n), Continuous (H i)) \u2192\n                      (\u2200 (i : Fin n), Integrable (H i) volume) \u2192\n                        (\u2200 (i : Fin n), Integrable (FourierTransform.fourier (H i)) volume) \u2192\n                          (\u2200 (i : Fin n) (u : \u211d), |u| < L \u2192 H i u = 0) \u2192\n                            \u2200 {k : \u2115} (d : Fin k \u2192 \u2102) (j : Fin k \u2192 \u2115),\n                              (\u2200 (t : \u211d),\n                                  0 \u2264\n                                    AEGIS.RHKreinZetaBridgeV1.Wt t * (AEGIS.RHKreinZetaBridgeV3.ScertM M t - m) +\n                                          (\u2211 i, FourierTransform.fourier (H i) (t / (2 * Real.pi))).re +\n                                        \u2211 l, 2 * (d l * ((I * \u2191t) ^ j l * cexp (\u2191(t * L) * I))).re +\n                                      AEGIS.RHKreinZetaBridgeV1.Wt t * s t) \u2192\n                                \u2200 (cf : \u211d \u2192 Fin 139 \u2192 \u2102),\n                                  Integrable\n                                      (fun t =>\n                                        s t *\n                                          AEGIS.CvSTraceV1.trialDist 0 (6 / 5)\n                                            (fun i =>\n                                              AEGIS.CvSMomentBasisV1.momentAtom (6 / 5)\n                                                (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n                                            cf t)\n                                      volume \u2192\n                                    \u222b (t : \u211d),\n                                          s t *\n                                            AEGIS.CvSTraceV1.trialDist 0 (6 / 5)\n                                              (fun i =>\n                                                AEGIS.CvSMomentBasisV1.momentAtom (6 / 5)\n                                                  (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n                                              cf t \u2264\n                                        6 \u2192\n                                      31 / 16 \u2264 m \u2192\n                                        \u2200 (g : WeilCompactSmoothGV1),\n                                          WeilMomentConditionsV1 g \u2192\n                                            \u2200 (r a : \u211d),\n                                              AEGIS.RHDyadicDiagonalV13.HalfWidthAt g r a \u2192\n                                                2 * r \u2264 6 / 5 \u2192\n                                                  0 \u2264\n                                                    (\u2211' (rho : RiemannNontrivialZeroIndexV2),\n                                                        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re\n'AEGIS.CvSActualGramWindowV1.window_of_trace_le_six' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+        "bad_axioms": [],
+        "status": "PASS"
+      }
+    ],
+    "axiom_audits": {
+      "AEGIS.CvSActualRowConsumerV1.sum_atomRow": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.sourceZ_apply": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.residual_energy_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.signed_gform": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.actual_tail_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.budget_eq_rows": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.coordinates_spec": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.hfin": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.hB": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSKreinScalarUniformV1.gap_lower": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSKreinScalarUniformV1.schur_budget": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSKreinScalarUniformV1.chosen_budget": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.gramUp_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.gramTail_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.Brow_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.actual_Q_nonneg": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.actual_hlow": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.window_of_actual_rows": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualGramWindowV1.window_of_trace_le_six": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "scope": "Actual finite source budget, original-vector hfin/hB, and conditional fixed-window zero-side reduction. Krein/trace and support premises remain. Not unconditional RH."
   }
 }
