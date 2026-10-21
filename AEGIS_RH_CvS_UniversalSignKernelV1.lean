@@ -15,7 +15,6 @@ limitations under the License.
 -/
 
 import AEGIS_RH_CvS_Finite_KernelProbeV1
-import FormalConjecturesUtil.FixedWindowLimitBridge
 
 open Filter Topology
 open AEGIS.CvSProjectedSchurBridgeL12V1
@@ -36,11 +35,9 @@ theorem universal_nonnegative_of_projected_sequence
     ∀ g : G, 0 ≤ zeroSide g := by
   intro g
   obtain ⟨M, v, hM, hconv⟩ := hrepresentation g
-  exact FormalConjecturesUtil.FixedWindowLimitBridge.nonneg_of_tendsto_lower_bound
-    (a := fun j => projectedQ (M j) (v j))
-    (lower := fun _ => (0 : ℝ))
-    (A := zeroSide g)
-    hconv tendsto_const_nhds
+  have hzero : Tendsto (fun _ : ℕ => (0 : ℝ)) atTop (𝓝 0) :=
+    tendsto_const_nhds
+  exact le_of_tendsto_of_tendsto' hzero hconv
     (fun j => AEGIS.RHCvSKernelFiniteV1.certified_source_projectedQ_nonneg
       (M j) (hM j) (v j))
 
