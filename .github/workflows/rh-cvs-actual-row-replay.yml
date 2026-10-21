@@ -18,6 +18,7 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_graph.py
       - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/reuse_complete_table_checkpoint.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/run_ci_actual_moment_window_join.py
       - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
       - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
   workflow_dispatch:
