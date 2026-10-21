@@ -2,9 +2,13 @@
 Not a kernel result until replayed. The Krein/trace/scalar hypotheses remain explicit. -/
 import CvSActualRowConsumerV1
 import CvSTauFarL12V1
+import CvSKreinScalarUniformV1
 open MeasureTheory Complex
 open scoped BigOperators ComplexConjugate
 namespace AEGIS.CvSActualGramWindowV1
+set_option maxHeartbeats 0
+set_option maxRecDepth 100000
+set_option Elab.async false
 open AEGIS.CvSGramTailV1 AEGIS.CvSRowTailV1 AEGIS.CvSCrossCertV1
 open AEGIS.CvSLowBlockMatrixV1 AEGIS.CvSMomentBasisV1 AEGIS.CvSTraceV1
 open AEGIS.CvSWindowCertV1 AEGIS.CvSFeshbachWindowV1
@@ -17,7 +21,18 @@ open AEGIS.RHKreinZetaBridgeV1 AEGIS.RHKreinZetaBridgeV3
 theorem gramUp_nonneg {F : Finset ℤ} {R NP : ℕ}
     (hF : ∀ n ∈ F, |(n : ℝ)| ≤ R) (hRNP : R < NP) (v : ℤ → ℂ) :
     0 ≤ gform F v (gramUp NP) := by
-  simpa using gram_tail_le hF hRNP v 0
+  have hz : (Finset.Icc (-(0 : ℤ)) 0).filter (fun x => NP < x.natAbs) = ∅ := by
+    apply Finset.eq_empty_iff_forall_notMem.mpr
+    intro x hx
+    rcases Finset.mem_filter.mp hx with ⟨hx, habs⟩
+    have hx0 : x = 0 := by
+      have hi := Finset.mem_Icc.mp hx
+      omega
+    subst x
+    norm_num at habs
+  have h := gram_tail_le hF hRNP v 0
+  rw [hz, Finset.sum_empty] at h
+  exact h
 
 /-- Positivity of the actual Gram-tail majorant at every admissible cutoff. -/
 theorem gramTail_nonneg (M : ℕ) (L : ℝ) {F : Finset ℤ} {R NP : ℕ}
@@ -115,6 +130,29 @@ theorem window_of_actual_rows (M : ℕ) (hM : 3 ≤ M) (L m : ℝ) (hLTL : (6/5 
     (fun x hx => AEGIS.CvSTauFarL12V1.tau_abs_le_far hM
       (by rw [← Int.natCast_natAbs]; omega)) (by norm_num : (0 : ℝ) < 1)
     lam (Brow M) (hfin M) (actual_hlow M hM m T hk) g hm r a hw h2r
+/-- A coarser trace bound suffices, with an exact positive scalar reserve. -/
+theorem window_of_trace_le_six (M : ℕ) (hM : 3 ≤ M) (L m : ℝ) (hLTL : (6/5 : ℝ) < L)
+    (s : ℝ → ℝ) (hsm : Measurable s) (B : ℝ) (hsB : ∀ t, |s t| ≤ B) (hs0 : ∀ t, 0 ≤ s t)
+    {n : ℕ} (H : Fin n → ℝ → ℂ) (hHc : ∀ i, Continuous (H i)) (hHi : ∀ i, Integrable (H i))
+    (hFH : ∀ i, Integrable (FourierTransform.fourier (H i)))
+    (hHs : ∀ i u, |u| < L → H i u = 0)
+    {k : ℕ} (d : Fin k → ℂ) (j : Fin k → ℕ)
+    (hcert : ∀ t : ℝ, 0 ≤ Wt t * (ScertM M t - m) +
+      (∑ i, FourierTransform.fourier (H i) (t/(2*Real.pi))).re +
+      ∑ l, 2*(d l*((I*(t : ℂ))^j l*Complex.exp (↑(t*L)*I))).re + Wt t*s t)
+    (cf : ℝ → Fin 139 → ℂ)
+    (hR : Integrable fun t =>
+      s t * trialDist 0 (6/5) (fun i => momentAtom (6/5) (atomCenter i)) cf t)
+    (hT : ∫ t, s t * trialDist 0 (6/5) (fun i => momentAtom (6/5) (atomCenter i)) cf t ≤ 6)
+    (hm0 : (31/16 : ℝ) ≤ m)
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) (r a : ℝ)
+    (hw : HalfWidthAt g r a) (h2r : 2*r ≤ 6/5) :
+    0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re := by
+  exact window_of_actual_rows M hM L m hLTL s hsm B hsB hs0 H hHc hHi hFH hHs
+    d j hcert cf hR hT (AEGIS.CvSKreinScalarUniformV1.schur_budget hm0 (le_refl 6))
+    g hm r a hw h2r
+
 end AEGIS.CvSActualGramWindowV1
 #print axioms AEGIS.CvSActualGramWindowV1.gramUp_nonneg
 #print axioms AEGIS.CvSActualGramWindowV1.gramTail_nonneg
@@ -123,3 +161,6 @@ end AEGIS.CvSActualGramWindowV1
 #print axioms AEGIS.CvSActualGramWindowV1.actual_hlow
 #check @AEGIS.CvSActualGramWindowV1.window_of_actual_rows
 #print axioms AEGIS.CvSActualGramWindowV1.window_of_actual_rows
+
+#check @AEGIS.CvSActualGramWindowV1.window_of_trace_le_six
+#print axioms AEGIS.CvSActualGramWindowV1.window_of_trace_le_six

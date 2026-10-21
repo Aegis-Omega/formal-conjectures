@@ -15,8 +15,8 @@ for a in m['sources']:assert digest(out/a['name'])==a['sha256']
 for name,origin in m.get('unchanged_existing_source_copies',{}).items():
  assert digest(out/name)==origin['sha256']==digest(repo/origin['original_path']),'EXISTING_BASIS_SOURCE_CHANGED '+name
 expected_source=json.loads((repo/'research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/SOURCE_BINDING_NEXT_INPUTS.json').read_text())['sha256'];assert source_json_sha==expected_source
-phases=[['CvSCachedSourceProductV1'],[f'CvSSourceERows{i}' for i in range(31)],['CvSSourceECacheV1'],[f'CvSSourceXRows{i}' for i in range(15)],['CvSSourceXCacheV1'],[f'CvSSourceLambdaRows{i}' for i in range(14)],['CvSSourceLambdaCacheV1'],[f'CvSSourceProduct{i}' for i in range(139)],['CvSCachedPointV1','CvSCachedSliceV1','CvSSourceQNormalizeV1','CvSRealTailFormV1'],['CvSSourceProductAllV1'],[f'CvSSourceQCache{i}' for i in range(14)],[f'CvSSourceQCheck{i}' for i in range(139)],['CvSSourceQAllV1'],['CvSSourceQRejectV1'],[f'CvSAnalyticERows{i}' for i in range(31)],[f'CvSAnalyticXColumns{i}' for i in range(14)],[f'CvSAnalyticGRows{i}' for i in range(15)],['CvSAnalyticScalarInputsV1'],['CvSActualLiteralInputsV1'],['CvSActualBasisBudgetV1'],['CvSTriangularTransportV1','CvSRealBasisBoundV1'],['CvSProjectedBasisL12V1'],['CvSActualRowConsumerV1'],['CvSTauFarL12V1'],['CvSActualGramWindowV1']]
-names=[name for phase in phases for name in phase];assert len(names)==len(set(names))==432
+phases=[['CvSCachedSourceProductV1'],[f'CvSSourceERows{i}' for i in range(31)],['CvSSourceECacheV1'],[f'CvSSourceXRows{i}' for i in range(15)],['CvSSourceXCacheV1'],[f'CvSSourceLambdaRows{i}' for i in range(14)],['CvSSourceLambdaCacheV1'],[f'CvSSourceProduct{i}' for i in range(139)],['CvSCachedPointV1','CvSCachedSliceV1','CvSSourceQNormalizeV1','CvSRealTailFormV1'],['CvSSourceProductAllV1'],[f'CvSSourceQCache{i}' for i in range(14)],[f'CvSSourceQCheck{i}' for i in range(139)],['CvSSourceQAllV1'],['CvSSourceQRejectV1'],[f'CvSAnalyticERows{i}' for i in range(31)],[f'CvSAnalyticXColumns{i}' for i in range(14)],[f'CvSAnalyticGRows{i}' for i in range(15)],['CvSAnalyticScalarInputsV1'],['CvSActualLiteralInputsV1'],['CvSActualBasisBudgetV1'],['CvSTriangularTransportV1','CvSRealBasisBoundV1'],['CvSProjectedBasisL12V1'],['CvSActualRowConsumerV1'],['CvSTauFarL12V1','CvSKreinScalarUniformV1'],['CvSActualGramWindowV1']]
+names=[name for phase in phases for name in phase];assert len(names)==len(set(names))==433
 memory=os.sysconf('SC_PHYS_PAGES')*os.sysconf('SC_PAGE_SIZE')
 p=Path('/sys/fs/cgroup/memory.max')
 if p.exists() and p.read_text().strip()!='max':memory=min(memory,int(p.read_text()))
@@ -66,7 +66,7 @@ with ThreadPoolExecutor(max_workers=workers) as pool:
 terminal='AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin';assert terminal in audits,'MISSING_ACTUAL_TERMINAL_AUDIT'
 assert 'AEGIS.CvSActualBasisBudgetV1.actualBudget_le_original' in audits,'MISSING_ACTUAL_TRANSPORT_AUDIT'
 assert all('AEGIS.CvSActualRowConsumerV1.'+n in audits for n in ['hfin','hB']),'MISSING_CONSUMER_HFIN_OR_HB_AUDIT'
-assert 'AEGIS.CvSActualGramWindowV1.window_of_actual_rows' in audits,'MISSING_ACTUAL_WINDOW_AUDIT'
+assert all('AEGIS.CvSActualGramWindowV1.'+n in audits for n in ['window_of_actual_rows','window_of_trace_le_six']),'MISSING_ACTUAL_WINDOW_AUDIT'
 r.update(fresh_module_count=sum('dependency_reuse' not in x for x in r['runs']),reused_module_count=sum('dependency_reuse' in x for x in r['runs']),status='PASS',actual_terminal=terminal,actual_scope='For every M >= 3 and every complex vector, the actual sourceZ residual and proved Gram-tail majorant satisfy the quantitative 40*projectedEntry budget. Fixed window only; no RH conclusion.')
 rp.write_text(json.dumps(r,indent=2)+'\n')
 print('ACTUAL_INPUT_KERNEL_PASS',len(names),'modules',len(audits),'axiom roots; actual finite source budget and fixed-window reduction; NOT_RH',flush=True)

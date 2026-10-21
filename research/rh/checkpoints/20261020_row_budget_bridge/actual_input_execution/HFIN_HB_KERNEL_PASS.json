@@ -1,0 +1,110 @@
+{
+  "status": "PASS_FOR_TWO_NAMED_MODULES",
+  "source_commit": "d6c13a475c295388bced065f34b2165e077806ed",
+  "source_run": 39541303124,
+  "job": 119029423350,
+  "overall_run_result": "FAIL_IN_LATER_WINDOW_WRAPPER",
+  "artifact_id": 12320450063,
+  "artifact_sha256": "689044300d3a3d359f9ba43c824e937e7bb013c4d59787c733a157481ee1b1b4",
+  "runs": [
+    {
+      "module": "CvSActualRowConsumerV1",
+      "source_sha256": "c93422fa28c3b34bc77d736f74b286545faa6649250443271c55c0dec1eb4131",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSActualRowConsumerV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSActualRowConsumerV1.lean"
+      ],
+      "seconds": 7.856583983999997,
+      "exit_code": 0,
+      "compiler_output": "'AEGIS.CvSActualRowConsumerV1.sum_atomRow' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.sourceZ_apply' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.residual_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.signed_gform' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.actual_tail_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.budget_eq_rows' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSActualRowConsumerV1.coordinates_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualRowConsumerV1.hfin : \u2200 (M : \u2115) (c : Fin 139 \u2192 \u2102),\n  \u2211 m \u2208 Finset.Icc (-150) 150,\n        \u2016AEGIS.CvSCrossCertV1.crossRow M (6 / 5)\n                (AEGIS.CvSLowBlockMatrixV1.lowFreq AEGIS.CvSActualRowConsumerV1.supports)\n                (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n                  AEGIS.CvSActualRowConsumerV1.weights c)\n                m -\n              \u2211 j,\n                AEGIS.CvSActualRowConsumerV1.lam c j *\n                  AEGIS.CvSCrossCertV1.atomRow (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n                    AEGIS.CvSActualRowConsumerV1.weights j m\u2016 ^\n          2 +\n      AEGIS.CvSGramTailV1.gramTail M (6 / 5) (AEGIS.CvSLowBlockMatrixV1.lowFreq AEGIS.CvSActualRowConsumerV1.supports)\n        (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5) AEGIS.CvSActualRowConsumerV1.supports\n          AEGIS.CvSActualRowConsumerV1.weights c)\n        13 1 150 \u2264\n    AEGIS.CvSActualRowConsumerV1.Brow M c\n'AEGIS.CvSActualRowConsumerV1.hfin' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualRowConsumerV1.hB : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (c : Fin 139 \u2192 \u2102),\n      AEGIS.CvSActualRowConsumerV1.Brow M c \u2264\n        40 * AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS M (6 / 5) AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter c\n'AEGIS.CvSActualRowConsumerV1.hB' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    },
+    {
+      "module": "CvSTauFarL12V1",
+      "source_sha256": "b92ae26fd11f0765283cf5b429219dc4d7caa10cc8cda254bb2cb49f39463076",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSTauFarL12V1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSTauFarL12V1.lean"
+      ],
+      "seconds": 7.745172083,
+      "exit_code": 0,
+      "compiler_output": "'AEGIS.CvSTauFarL12V1.sum_width_le_inv' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSTauFarL12V1.source_integral_abs_le_inv' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSTauFarL12V1.tau_abs_le_far' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    }
+  ],
+  "axiom_audits": {
+    "AEGIS.CvSActualRowConsumerV1.sum_atomRow": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.sourceZ_apply": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.residual_energy_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.signed_gform": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.actual_tail_eq": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.budget_eq_rows": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.coordinates_spec": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.hfin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualRowConsumerV1.hB": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSTauFarL12V1.sum_width_le_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSTauFarL12V1.source_integral_abs_le_inv": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSTauFarL12V1.tau_abs_le_far": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "scope": "hfin and hB are discharged for all original coefficient vectors; actual finite source bound retained. No new all-real-t Krein/trace certificate or unconditional RH is claimed."
+}

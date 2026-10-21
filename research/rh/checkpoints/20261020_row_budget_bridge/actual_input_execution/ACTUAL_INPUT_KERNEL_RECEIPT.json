@@ -1,9 +1,9 @@
 {
-  "utc": "2026-10-21T03:44:56.845940+00:00",
+  "utc": "2026-10-21T04:10:50.428542+00:00",
   "lean": "4.33.1",
   "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
   "status": "PARTIAL_NATIVE_REPLAY",
-  "archive_sha256": "a4f84cd200f467204041fc2d520fb5ee89e49e275838659dafb26baca087ee8a",
+  "archive_sha256": "0216d078dba4876bb754a4d76f20db870f147a09dc29b9db48b2602f4c6b53a0",
   "runs": [
     {
       "module": "CvSCachedPointV1",
@@ -113,6 +113,62 @@
       ],
       "bad_axioms": [],
       "max_child_rss_kib": 2123316
+    },
+    {
+      "module": "CvSKreinScalarUniformV1",
+      "source_sha256": "d9db7d6b9828d7e1b262a9e0ba7e6c53908a907907183b4df3c9ea4d657572ef",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-actual-input-bridge",
+        "-o",
+        "/workspace/aegis-actual-input-bridge/CvSKreinScalarUniformV1.olean",
+        "/workspace/aegis-actual-input-bridge/CvSKreinScalarUniformV1.lean"
+      ],
+      "seconds": 2.4540877060062485,
+      "exit_code": 0,
+      "status": "PASS",
+      "log": "CvSKreinScalarUniformV1.log",
+      "log_sha256": "cc0f18beae163f80c8341715130b0997dc3c2b4e089e810bd8cec796f8bea785",
+      "audits": [
+        {
+          "theorem": "AEGIS.CvSKreinScalarUniformV1.gap_lower",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSKreinScalarUniformV1.schur_budget",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        },
+        {
+          "theorem": "AEGIS.CvSKreinScalarUniformV1.chosen_budget",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ]
+        }
+      ],
+      "bad_axioms": [],
+      "max_child_rss_kib": 2747012
     },
     {
       "module": "CvSRealBasisBoundV1",

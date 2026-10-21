@@ -9,7 +9,7 @@ for p in sorted(w.glob('*.RECEIPT.json')):
  if r['status']=='PASS' and r['source_sha256']==digest(src) and r['log_sha256']==digest(log):records.append(r)
 passed={r['module'] for r in records}
 for p in w.glob('*.py'):shutil.copyfile(p,d/p.name)
-for n in ['CvSCachedSourceProductV1','CvSCachedPointV1','CvSCachedSliceV1','CvSSourceQNormalizeV1','CvSSourceProductAllV1','CvSSourceQAllV1','CvSSourceQRejectV1','CvSActualLiteralInputsV1','CvSActualBasisBudgetV1','CvSRealTailFormV1','CvSActualRowConsumerV1','CvSActualGramWindowV1']:shutil.copyfile(w/(n+'.lean'),d/(n+'.lean'))
+for n in ['CvSCachedSourceProductV1','CvSCachedPointV1','CvSCachedSliceV1','CvSSourceQNormalizeV1','CvSSourceProductAllV1','CvSSourceQAllV1','CvSSourceQRejectV1','CvSActualLiteralInputsV1','CvSActualBasisBudgetV1','CvSRealTailFormV1','CvSActualRowConsumerV1','CvSActualGramWindowV1','CvSKreinScalarUniformV1']:shutil.copyfile(w/(n+'.lean'),d/(n+'.lean'))
 with zipfile.ZipFile(d/'ACTUAL_INPUT_SOURCES.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
  for p in sorted(w.glob('*.lean')):z.write(p,p.name)
  z.write(w/'EXACT_SOURCE_BRIDGE_INPUTS.json','EXACT_SOURCE_BRIDGE_INPUTS.json')

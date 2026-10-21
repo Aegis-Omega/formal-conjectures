@@ -1,6 +1,6 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "a4f84cd200f467204041fc2d520fb5ee89e49e275838659dafb26baca087ee8a",
+  "archive_sha256": "0216d078dba4876bb754a4d76f20db870f147a09dc29b9db48b2602f4c6b53a0",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
@@ -10,7 +10,7 @@
     },
     {
       "name": "CvSActualGramWindowV1.lean",
-      "sha256": "3f7437c4fa77cb8d52967533a4d86fe3afc4f45db06f3cf89cfee559a35b9712",
+      "sha256": "b00daefdc779783c565ab480b077a17f3496db2bfa52d74772575a69d95d1391",
       "kernel_status": "NOT_RUN"
     },
     {
@@ -411,6 +411,11 @@
     {
       "name": "CvSCachedSourceProductV1.lean",
       "sha256": "ca1df809219ddbcfab77a70366665b1c8ca4e0c0d0cd29bb586b3779ea7079ad",
+      "kernel_status": "PASS"
+    },
+    {
+      "name": "CvSKreinScalarUniformV1.lean",
+      "sha256": "d9db7d6b9828d7e1b262a9e0ba7e6c53908a907907183b4df3c9ea4d657572ef",
       "kernel_status": "PASS"
     },
     {

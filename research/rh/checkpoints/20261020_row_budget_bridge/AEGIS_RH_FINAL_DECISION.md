@@ -2,6 +2,8 @@
 
 No unconditional canonical RH theorem was constructed.
 
+The next exact source integration is also kernel verified: CvSActualRowConsumerV1.hfin and hB passed as a complete module atd6c13a47 in CI39541303124. These supply the original fixed-window consumer's finite rows and kappa=40 budget for every original coefficient vector; HFIN_HB_KERNEL_PASS.json contains their full compiler types and standard-axiom audits. The run later failed in the window wrapper; no whole-run success is inferred. That wrapper's two source issues are repaired for the next replay. A new native parameterized scalar theorem reduces its sufficient analytic target to m>=31/16 and trace<=6 with an exact reserve1/2; it does not supply those analytic witnesses.
+
 The actual-source producer now passed original-import kernel compilation at96e25af7 in CI39538781739: CvSActualLiteralInputsV1.actual_budgetEnergy_margin has only M>=3 and the complex vector as parameters, with the exact positive margin and actual CvS input definitions. CvSActualBasisBudgetV1.actualBudget_le_original and the three unchanged basis modules also passed. The overall run failed in the later hfin consumer; it is not reported as a successful whole run. ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json preserves all five successful module outputs, exact source hashes and standard-axiom audits.
 
 Original-import CI 39505154095 passed at exact source 2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925: 445 fresh modules, 868 standard-axiom audits and all 19321 output comparisons. The downloaded artifact 12306423649 was independently validated against source, compiler, pins, logs and all 611 binary hashes. Full raw receipts are in full_table_execution/ORIGINAL_IMPORT_*.json.

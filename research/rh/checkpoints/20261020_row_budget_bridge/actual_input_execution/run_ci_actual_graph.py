@@ -2,7 +2,7 @@
 from pathlib import Path
 import zipfile,subprocess,os,json,hashlib,sys
 repo=Path.cwd();d=repo/'research/rh/checkpoints/20261020_row_budget_bridge'
-roots=['AEGIS.CvSActualLiteralInputsV1.sourceKernel_signed','AEGIS.CvSActualLiteralInputsV1.projectedEntry_as_Y','AEGIS.CvSActualLiteralInputsV1.Q_mem','AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin','AEGIS.CvSActualBasisBudgetV1.actualBudget_le_original','AEGIS.CvSActualRowConsumerV1.hfin','AEGIS.CvSActualRowConsumerV1.hB','AEGIS.CvSActualGramWindowV1.gramUp_nonneg','AEGIS.CvSActualGramWindowV1.gramTail_nonneg','AEGIS.CvSActualGramWindowV1.actual_hlow','AEGIS.CvSActualGramWindowV1.window_of_actual_rows']
+roots=['AEGIS.CvSActualLiteralInputsV1.sourceKernel_signed','AEGIS.CvSActualLiteralInputsV1.projectedEntry_as_Y','AEGIS.CvSActualLiteralInputsV1.Q_mem','AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin','AEGIS.CvSActualBasisBudgetV1.actualBudget_le_original','AEGIS.CvSActualRowConsumerV1.hfin','AEGIS.CvSActualRowConsumerV1.hB','AEGIS.CvSActualGramWindowV1.gramUp_nonneg','AEGIS.CvSActualGramWindowV1.gramTail_nonneg','AEGIS.CvSActualGramWindowV1.actual_hlow','AEGIS.CvSActualGramWindowV1.window_of_actual_rows','AEGIS.CvSActualGramWindowV1.window_of_trace_le_six','AEGIS.CvSKreinScalarUniformV1.gap_lower','AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve']
 with zipfile.ZipFile(d/'full_table_execution/FULL_TABLE_PROOF_GRAPH.zip') as z:s=z.read('FullTableProofGraph.lean').decode()
 s=s.replace('import CvSFullBudgetJoinV1\nimport CvSFullTableRejectV1','import CvSActualGramWindowV1')
 a=s.index('  let roots : List Name := [');b=s.index('  let mut pending',a)

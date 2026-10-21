@@ -5744,5 +5744,77 @@
     "canonical_RH": "NOT_PROVED",
     "artifact_id": 12310942465,
     "remaining_source_repairs": "Two explicit Fin141 binders and normalized Fin-to-Int expression; new replay pending."
+  },
+  "actual_finite_row_contracts": {
+    "status": "PASS_FOR_TWO_NAMED_MODULES",
+    "source_commit": "d6c13a475c295388bced065f34b2165e077806ed",
+    "source_run": 39541303124,
+    "job": 119029423350,
+    "overall_run_result": "FAIL_IN_LATER_WINDOW_WRAPPER",
+    "artifact_id": 12320450063,
+    "artifact_sha256": "689044300d3a3d359f9ba43c824e937e7bb013c4d59787c733a157481ee1b1b4",
+    "axiom_audits": {
+      "AEGIS.CvSActualRowConsumerV1.sum_atomRow": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.sourceZ_apply": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.residual_energy_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.signed_gform": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.actual_tail_eq": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.budget_eq_rows": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.coordinates_spec": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.hfin": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSActualRowConsumerV1.hB": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSTauFarL12V1.sum_width_le_inv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSTauFarL12V1.source_integral_abs_le_inv": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "AEGIS.CvSTauFarL12V1.tau_abs_le_far": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    "scope": "hfin and hB are discharged for all original coefficient vectors; actual finite source bound retained. No new all-real-t Krein/trace certificate or unconditional RH is claimed."
   }
 }
