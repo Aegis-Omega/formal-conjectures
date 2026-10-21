@@ -12,6 +12,19 @@ with zipfile.ZipFile(arc) as z:
   if name.endswith('.lean'):(out/name).write_bytes(z.read(name))
  source_json_sha=hashlib.sha256(z.read('EXACT_SOURCE_BRIDGE_INPUTS.json')).hexdigest()
 for a in m['sources']:assert digest(out/a['name'])==a['sha256']
+# Exact source-bound repair of CI 39514026659, CvSActualLiteralInputsV1.lean:772:4.
+# Validate the archived original first, then explicitly normalize Fin.val_mk.
+# Keep the source ZIP and its frozen archive manifest unchanged.
+fix_name='CvSActualLiteralInputsV1.lean'
+fix_path=out/fix_name
+fix_before=fix_path.read_text()
+fix_old="  have he : rowIndex (⟨k.val + 80, by omega⟩ : Fin 301) = signedFreq k := by\n    unfold rowIndex signedFreq\n    omega\n"
+fix_new=fix_old.replace("    omega\n","    simp only [Fin.val_mk]\n    omega\n")
+assert fix_before.count(fix_old)==1, 'EXACT_SOURCE_PATCH_TARGET_CHANGED'
+fix_before_sha=digest(fix_path)
+fix_path.write_text(fix_before.replace(fix_old,fix_new,1))
+source_patches=[{'file':fix_name,'reason':'normalize Fin.val_mk before omega in Q_mem',
+                 'original_sha256':fix_before_sha,'compiled_source_sha256':digest(fix_path)}]
 for name,origin in m.get('unchanged_existing_source_copies',{}).items():
  assert digest(out/name)==origin['sha256']==digest(repo/origin['original_path']),'EXISTING_BASIS_SOURCE_CHANGED '+name
 expected_source=json.loads((repo/'research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/SOURCE_BINDING_NEXT_INPUTS.json').read_text())['sha256'];assert source_json_sha==expected_source
@@ -23,7 +36,7 @@ if p.exists() and p.read_text().strip()!='max':memory=min(memory,int(p.read_text
 workers=2 if memory>=12*1024**3 else 1
 # The existing public runner has 16 GiB. Smaller runners remain sequential.
 env=os.environ.copy();env['LEAN_PATH']=str(ring)+':'+subprocess.check_output(['lake','env','printenv','LEAN_PATH'],text=True).strip()
-r={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'lean':subprocess.check_output(['lean','--version'],text=True).strip(),'mathlib':subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip(),'status':'RUNNING','source_archive_sha256':digest(arc),'source_json_sha256':source_json_sha,'worker_count':workers,'memory_limit_bytes':memory,'planned_modules':names,'scope':'Fresh original-import source compilation of staged source products, 2*pi-normalized Q enclosures, literal analytic box identities and the actual finite relative-budget producer. Not RH.','runs':[]}
+r={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'lean':subprocess.check_output(['lean','--version'],text=True).strip(),'mathlib':subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip(),'status':'RUNNING','source_archive_sha256':digest(arc),'source_json_sha256':source_json_sha,'worker_count':workers,'memory_limit_bytes':memory,'planned_modules':names,'scope':'Fresh original-import source compilation of staged source products, 2*pi-normalized Q enclosures, literal analytic box identities and the actual finite relative-budget producer. Not RH.' ,'source_patches':source_patches,'runs':[]}
 assert r['mathlib']=='0df444a360eaa60ab8c11dca51a86af692955474'
 logs=[];audits={};rp=repo/'ACTUAL_INPUT_CI_RECEIPT.json';lp=repo/'actual-input-replay.log'
 def compile_one(name):
