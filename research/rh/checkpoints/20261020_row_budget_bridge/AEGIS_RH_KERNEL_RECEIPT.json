@@ -633,7 +633,7 @@
   ],
   "canonical_unconditional_RH": "NOT_PROVED",
   "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
-  "graph_sha256": "3ebcb33ac4f1bb44f58847d07ed0e193ec38290cbd7c2a58674616217bdd6066",
+  "graph_sha256": "76f083a66421501f5ea35066fbfc3d510d85377b10249031c1757adf97adeed6",
   "native_source_archive_sha256": "d8e569b6c9fd48969ec5693df823a97b3b44c644970a5aa71e8670326677003c",
   "push_succeeded": true,
   "immutable_source_readback": "FINAL_SOURCE_BINDING.json",
@@ -5715,6 +5715,22 @@
     "artifact_zip_sha256": "37bdab4ae6fa70baa96c01023650c7280e9e43940883e107d2c050e160045c13"
   },
   "actual_input_extension_CI": {
+    "status": "IN_PROGRESS",
+    "run_id": 39538781739,
+    "job_id": 119021770385,
+    "source_commit": "96e25af74c58a99ac2c1be19efeac5126bcf9c3d",
+    "planned_modules": 430,
+    "validated_prefix_modules": 424,
+    "fresh_remaining_modules": 6,
+    "fresh_data_axiom_audits_required": 440,
+    "terminals": [
+      "AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin",
+      "AEGIS.CvSActualRowConsumerV1.hfin",
+      "AEGIS.CvSActualRowConsumerV1.hB"
+    ],
+    "canonical_RH": "NOT_PROVED"
+  },
+  "actual_input_failed_prefix_CI": {
     "status": "FAIL_IN_LITERAL_JOIN_AFTER_424_PASS_MODULES",
     "run_id": 39514026659,
     "job_id": 118941735861,

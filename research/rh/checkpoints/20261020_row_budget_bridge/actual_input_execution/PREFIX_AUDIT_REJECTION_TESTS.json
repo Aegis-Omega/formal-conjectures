@@ -1,0 +1,23 @@
+[
+  {
+    "case": "missing_roots",
+    "expected": "REJECT",
+    "exit_code": 1,
+    "output": "ACTUAL_INPUT_PREFIX_REJECTED AssertionError MISSING_DATA_AXIOM_ROOT",
+    "source_context": "deliberately invalid log; not compiler evidence"
+  },
+  {
+    "case": "forbidden_sorry",
+    "expected": "REJECT",
+    "exit_code": 1,
+    "output": "ACTUAL_INPUT_PREFIX_REJECTED AssertionError BAD_PREFIX_REAUDIT_LOG",
+    "source_context": "deliberately invalid log; not compiler evidence"
+  },
+  {
+    "case": "native_axiom",
+    "expected": "REJECT",
+    "exit_code": 1,
+    "output": "ACTUAL_INPUT_PREFIX_REJECTED AssertionError BAD_PREFIX_REAUDIT_LOG",
+    "source_context": "deliberately invalid log; not compiler evidence"
+  }
+]
