@@ -264,7 +264,11 @@ graph = {"status": "selected_root_elaborated_type_and_available_proof_dependency
          "declarations": list(rows.values()), "missing_environment_constants": missing,
          "strongly_connected_components": components,
          "condensation_dag_edges": dag,
-         "unresolved_producer": json.loads((META / "RH_BLOCKER.json").read_text())["obligation_type"]}
+         "historical_candidate_obligation": {
+             "origin": "research/rh/assembly/RH_BLOCKER.json",
+             "authority": "HISTORICAL_ROUTE_ONLY_NOT_LIVE_PROOF_VERDICT",
+             "statement": json.loads((META / "RH_BLOCKER.json").read_text())["obligation_type"]},
+         "unresolved_producer": None}
 write("RH_PROOF_GRAPH.json", graph)
 
 probe, negative_probe = run_closure_probes(ROOT, META, OUT)

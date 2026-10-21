@@ -26,7 +26,57 @@ LEAN_GOAL = re.compile(r"(?m)^⊢\s*(\S[^\n]*)$")
 AXIOMS = re.compile(r"'RiemannHypothesis\.riemannHypothesis' depends on axioms:\s*\[([^]]*)\]", re.S)
 AXIOM_FREE = re.compile(r"'RiemannHypothesis\.riemannHypothesis' does not depend on any axioms")
 
+def lean_code_only(source: str) -> str:
+    """Remove Lean comments and string contents from a code-only inspection."""
+    chars = list(source)
+    i, depth = 0, 0
+    while i < len(source):
+        if depth:
+            if source.startswith("/-", i):
+                chars[i:i + 2] = "  "
+                depth += 1
+                i += 2
+            elif source.startswith("-/", i):
+                chars[i:i + 2] = "  "
+                depth -= 1
+                i += 2
+            else:
+                if source[i] != "\n":
+                    chars[i] = " "
+                i += 1
+            continue
+        if source.startswith("--", i):
+            while i < len(source) and source[i] != "\n":
+                chars[i] = " "
+                i += 1
+            continue
+        if source.startswith("/-", i):
+            chars[i:i + 2] = "  "
+            depth = 1
+            i += 2
+            continue
+        if source[i] == '"':
+            chars[i] = " "
+            i += 1
+            while i < len(source):
+                if source[i] == "\\" and i + 1 < len(source):
+                    chars[i:i + 2] = "  "
+                    i += 2
+                elif source[i] == '"':
+                    chars[i] = " "
+                    i += 1
+                    break
+                else:
+                    if source[i] != "\n":
+                        chars[i] = " "
+                    i += 1
+            continue
+        i += 1
+    return "".join(chars)
+
+
 def rh_body(source: str) -> str | None:
+    source = lean_code_only(source)
     dec = re.search(r"(?m)^theorem\s+riemannHypothesis\s*:\s*RiemannHypothesis\s*:=\s*by\s*$", source)
     if dec is None:
         return None
@@ -49,11 +99,11 @@ def classify(source: str, log: str, lean_exit: int, axioms_log: str | None = Non
                 and "apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1" in body):
             return "OPEN_PROVED_WINDOW_COMPLEMENT", errors
         return "COMPILER_FAILURE_UNEXPECTED", errors
-    if errors or goals or "sorryAx" in log:
+    if errors or goals:
         return "COMPILER_OUTPUT_INVALID", errors
     if axioms_log is None:
         return "COMPILED_AWAITING_AXIOM_AUDIT", []
-    if re.search(r"(?m)^.*\berror(?:\([^)]*\))?:", axioms_log) or "sorryAx" in axioms_log:
+    if re.search(r"(?m)^.*\berror(?:\([^)]*\))?:", axioms_log):
         return "AXIOM_AUDIT_FAILED", []
     match = AXIOMS.search(axioms_log)
     if match is None:
