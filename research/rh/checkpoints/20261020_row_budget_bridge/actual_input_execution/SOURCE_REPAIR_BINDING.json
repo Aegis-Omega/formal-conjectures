@@ -1,0 +1,11 @@
+{
+  "compiled_candidate_commit": "96e25af74c58a99ac2c1be19efeac5126bcf9c3d",
+  "original_archive_commit": "f9bff86e94698a80b2cce396420e2f35fa0d4cd9",
+  "changed_archive_members": [
+    "CvSActualLiteralInputsV1.lean",
+    "CvSActualRowConsumerV1.lean"
+  ],
+  "all_other_members_byte_identical": true,
+  "source_json_sha256": "b483249a42ede68a7236692f77de201762010a485228b1f104d4bc562cd5f8e9",
+  "kernel_status": "PENDING_ORIGINAL_IMPORT_REPLAY"
+}

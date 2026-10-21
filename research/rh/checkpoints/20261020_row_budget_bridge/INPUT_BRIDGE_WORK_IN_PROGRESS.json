@@ -1,0 +1,18 @@
+{
+  "status": "WORK_IN_PROGRESS_NOT_KERNEL_VERIFIED",
+  "source_base_commit": "0702fb58e2a7e35269fbc4d02382ec30be835337",
+  "utc": "2026-10-20T12:33:51.459041+00:00",
+  "purpose": "Preserve the next concrete source-input bridge while the pinned native dependency builds. This archive asserts no new theorem PASS.",
+  "files": [
+    {
+      "path": "CvSFrequencyIntervalV1.lean",
+      "sha256": "518d09f9831daa059931b49a33a93454ef5cda103eea44b12e58cbc3c944d1e3"
+    },
+    {
+      "path": "CvSActualRowInputL12V1.lean",
+      "sha256": "5f1d24ccf828eef78e006e9a77497a4598230393788f615c757779356fd9d2df"
+    }
+  ],
+  "ongoing_actual_source_ci": 39419296326,
+  "remaining": "Native compile and original-import replay of the new candidates; source residual/input identification and full output-table comparison remain separate."
+}

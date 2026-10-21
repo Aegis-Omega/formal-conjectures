@@ -1,0 +1,11 @@
+'AEGIS.CvSPackedIntervalDotV1.packedDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq' depends on axioms: [propext]
+'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq : ∀ (p base bound : ℕ) (a b : List AEGIS.RHFixIntervalV1.Iv),
+  0 < a.length →
+    b.length = a.length →
+      AEGIS.CvSPackedIntervalDotV1.bounded bound a →
+        AEGIS.CvSPackedIntervalDotV1.bounded bound b →
+          a.length * a.length * (2 * bound * (2 * bound)) < base →
+            AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b = AEGIS.CvSListIntervalDotV1.listDot p a b

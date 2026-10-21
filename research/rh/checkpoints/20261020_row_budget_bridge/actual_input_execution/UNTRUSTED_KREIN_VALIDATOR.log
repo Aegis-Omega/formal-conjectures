@@ -1,0 +1,10 @@
+tail t >= 500: psi_lo - m - envelope = 0.0500 (must be >= 0)
+T upper bound = 4.5874 ; gap m - T/(2 pi) >= 1.2199
+level 1: 24008 cells verified so far, 992 to bisect
+level 2: 25545 cells verified so far, 447 to bisect
+level 3: 25963 cells verified so far, 476 to bisect
+level 4: 26745 cells verified so far, 170 to bisect
+level 5: 27013 cells verified so far, 72 to bisect
+level 6: 27157 cells verified so far, 0 to bisect
+hcert verified on [0, 500]: 27157 cells, min lower bound / Wt = 1.046e-04
+RESULT: PASS gap >= 1.2199

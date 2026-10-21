@@ -372,6 +372,8 @@ jobs:
           lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log
           lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log
@@ -387,6 +389,15 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSTriangularTransportV1.olean" research/rh/feshbach_lean_v1/CvSTriangularTransportV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSRealBasisBoundV1.olean" research/rh/feshbach_lean_v1/CvSRealBasisBoundV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSProjectedBasisL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/FastKronV1.olean" research/rh/feshbach_lean_v1/FastKronV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryFastL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryFastL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSProjectedEntryReplayL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSLowCoercivityL12V1.olean" research/rh/feshbach_lean_v1/CvSLowCoercivityL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSRelativeBudgetL12V1.olean" research/rh/feshbach_lean_v1/CvSRelativeBudgetL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSWindowL12V1.olean" research/rh/feshbach_lean_v1/CvSWindowL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSTauFarL12V1.olean" research/rh/feshbach_lean_v1/CvSTauFarL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSWindowGramL12V1.olean" research/rh/feshbach_lean_v1/CvSWindowGramL12V1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -461,6 +472,7 @@ jobs:
               'log2_bounds', 'log3_bounds', 'sinQ_bounds', 'sinPi_bounds', 'primeSum_eq',
               'prime_bounds', 'tauFullCheck_sound', 'tauFullAll_true', 'tau_mem', 'tau_neg',
               'tau_zero']]
+          names += ['CvSTauR1SourceL12V1.source_integral_mem_R1', 'CvSTauR1PrimeL12V1.tau_mem_R1']
           names += ['CvSDiagTelV1.' + n for n in [
               'log_step_bound', 'cube_tel', 'sq_tel', 'tail_limit', 'hplus_limit', 'logG_limit',
               'step_bound', 'hplus_tel', 'stepD_bound', 'diagSeries_tel']]
@@ -493,6 +505,24 @@ jobs:
           names += ['CvSTriangularTransportV1.upper_triangular_surjective']
           names += ['CvSRealBasisBoundV1.' + n for n in ['real_row_normSq_le', 'real_matrix_normSq_le', 'frobenius_pos_of_entry']]
           names += ['CvSProjectedBasisL12V1.' + n for n in ['certR_upper', 'certR_diag_ne_zero', 'rCoeff_diag_ne_zero', 'R_basis_surjective', 'basisFrobenius_pos', 'R_basis_normSq_bound', 'R_basis_frobenius_bound', 'original_atom_coercivity_of_basis', 'original_atom_coercivity_of_checked_source', 'hlow_of_checked_source']]
+          names += ['FastKronV1.' + n for n in [
+              'packS_eq', 'ldotS_eq', 'unpackZ_getD', 'unpackR_getD', 'transC_eq', 'transP_getD']]
+          names += ['CvSProjectedEntryFastL12V1.' + n for n in [
+              'xsF_getD', 'xpF_getD', 'hpF_getD', 'row_value_of', 'ivF_ivOk', 'rowOk_of_chunk',
+              'bigCheck_of_rows', 'rows_ok_of_chunks']]
+          names += ['CvSProjectedEntryReplayL12V1.' + n for n in [
+              'bigCheck_true', 'projectedEntry_mem_certI', 'projected_lower_L12']]
+          names += ['CvSLowCoercivityL12V1.' + n for n in [
+              'coercivity_const_pos', 'original_atom_coercivity_L12', 'hlow_L12']]
+          names += ['CvSRelativeBudgetL12V1.' + n for n in [
+              'hlow_of_relative_budget', 'Q_nonneg_L12', 'hlow_L12_relative']]
+          names += ['CvSWindowL12V1.' + n for n in [
+              'lt_log_of_three_le', 'atomCenter_range', 'window_L12']]
+          names += ['CvSTauFarL12V1.' + n for n in [
+              'sum_width_le_inv', 'source_integral_abs_le_inv', 'tau_abs_le_far']]
+          names += ['CvSGramTailV1.' + n for n in [
+              'gram_tail_le', 'rows_gram_le', 'window_of_certificate_gram']]
+          names += ['CvSWindowGramL12V1.' + n for n in ['tau_far_rows', 'window_L12_gram']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)

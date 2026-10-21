@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /-! ## Strict evaluation and list lemmas
 
 The kernel reduces lazily; `fN`, `fI`, `fL`, `fP` force a value to a literal once (continuation

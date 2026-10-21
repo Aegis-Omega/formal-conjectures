@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-recovery",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-research-execution/integration/CvSMidpointRadiusV1.olean",
+    "/workspace/aegis-row-budget-recovery/CvSMidpointRadiusV1.lean"
+  ],
+  "seconds": 1.4251440130001356,
+  "source_sha256": "cf41e386ca1b9b003dda97ce8c2d49b031f26c46c6a0edf8c96d4471317f47e6",
+  "status": "PASS",
+  "returncode": 0,
+  "compiler_output": "'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Uniform finite algebra/enclosure lemmas, not actual CvS source-to-output-interval bridge"
+}

@@ -1,0 +1,18 @@
+{
+  "status": "EXACT_REPACKAGING_ONLY",
+  "source_run": 39571212916,
+  "source_commit": "9d98c4e99e3ab3d271215192f100964a5fdaac0c",
+  "original_artifact_id": 12332549155,
+  "original_artifact_sha256": "405437564d10c5e8ea7df5db96be3efaa261a6ae2486c03de2913e8efe70b693",
+  "files": {
+    "ACTUAL_SOURCE_PROOF_GRAPH.json": "0dd13888a2056a8416d03629cb1a783e248109e9b9aa0707bbaec1601f1224d1",
+    "ACTUAL_SOURCE_PROOF_GRAPH.zip": "95967d454d1dabfb77c77448205dfea62c3c90702761ce1ec61204cd62c63c9c",
+    "actual-proof-graph.log": "1e4593884deae6ef3e0d1f713005fc39d8b059edb84186d4ae8ebdeaef279c77",
+    "ACTUAL_INPUT_CI_RECEIPT.json": "a21ae4764853451376cd61b293fa96e6912e1b3bdbacb81e5b6d0698e7860f49",
+    "SOURCE_CROSS_ROW_CHECKPOINT.json": "cb047f4e5b197f2e96de7bde53642e72c4656a67e65093caa6de29752f90f4e4",
+    "ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json": "9c18fcecc56626f07163cd03d4c3c2cc5cb2ef53a9c0a88fa24ded0a26d5e5c4",
+    "ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json": "2443cd3b6b87fc55a5394de4cece143d3e68b93054e0162a6545e5b796a19a5b",
+    "actual-input-replay.log": "3a9d4cf8193bdd04c4c0cc77b1e8f624f964947b3c945484adbbdc71f93ccde7"
+  },
+  "scope": "Unchanged original graph and source/kernel receipts. No new Lean execution is claimed."
+}

@@ -1,0 +1,31 @@
+{
+  "primary_universal_route": null,
+  "universal_gate": "NOT_PASSED",
+  "active_verified_component": "B: actual finite Feshbach input enclosures and exact interval certificate execution",
+  "routes": {
+    "A": {
+      "status": "Hold",
+      "reason": "Existing cofinal bridge retained; no producer valid for every member of a cofinal family."
+    },
+    "B": {
+      "status": "Continue",
+      "progress": "Actual sourceZ input enclosure passed CI; all 139 first-column entries and new packed interval identity/pilot pass native kernel.",
+      "remaining": "Full actual hI, trace/Krein source certificate and uniform window construction."
+    },
+    "C": {
+      "status": "Continue",
+      "relation": "Sharp signed producer exactly RH-equivalent; hselect proved sufficient, converse not established here.",
+      "remaining": "RH-independent universal signed cancellation estimate or actual selected reconstruction/Schur witnesses."
+    },
+    "D": {
+      "status": "Hold",
+      "reason": "No new independent alternative is promoted in this continuation."
+    }
+  },
+  "failure_tests": [
+    "Generic positive-on-spanning-vectors does not imply PSD: [[1,2],[2,1]] on (1,-1).",
+    "First-column checks do not imply a full matrix certificate.",
+    "Missing weighted column, zero replacement target and corrupted packed witness are rejected by new kernel tests."
+  ],
+  "scope": "Continuation of earlier route review; no numerical feasibility result is promoted to universal proof."
+}

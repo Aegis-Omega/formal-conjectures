@@ -1,0 +1,78 @@
+{
+  "ci_run": 39425665414,
+  "commit": "a1862b9bba25dc45d74eb6a685aa80f4f09ae03d",
+  "overall_ci_status": "FAIL_LATER_IN_CvSActualRowInputL12V1",
+  "scoped_status": "PASS: the two preceding modules compiled and printed standard-only axioms before the later leaf failure",
+  "scoped_exit_evidence": "The shell runs set -euo pipefail. It reached subsequent CvSDividedDifferenceCollectionV1, CvSProjectedEntryL12V1, CvSGramTailV1 and finally the failing CvSActualRowInputL12V1, so the preceding lean|tee commands returned zero.",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "roots": [
+    {
+      "name": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "emitted_line": "'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]"
+    }
+  ],
+  "current_source_unchanged_from_a1862b9b": {
+    "research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+    "research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94"
+  }
+}

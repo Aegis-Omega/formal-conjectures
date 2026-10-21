@@ -1,0 +1,20 @@
+{
+  "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSRationalIntervalV1.lean"
+  ],
+  "seconds": 1.6541782510012126,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "93842354f31033bae21ddb3be528be8a896ae489f605b0534145da51f0754d78",
+  "compiler_output": "'AEGIS.CvSRationalIntervalV1.rationalRange_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+}

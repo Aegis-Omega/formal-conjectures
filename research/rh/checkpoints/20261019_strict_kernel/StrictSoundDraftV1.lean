@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
-
 /-! ## Soundness of the strict check (no hypotheses) -/
 
 theorem certR_length : certR.length = 139 := by decide +kernel

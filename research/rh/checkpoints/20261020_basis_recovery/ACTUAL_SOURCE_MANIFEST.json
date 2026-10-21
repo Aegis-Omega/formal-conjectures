@@ -1,0 +1,541 @@
+{
+  "head": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+  "scope": "Selected actual-source terminals; native complete graph is a separate scoped artifact",
+  "declarations": [
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "theorem": "AEGIS.CvSProjectedBasisL12V1.R_basis_surjective",
+      "source_statement": "theorem R_basis_surjective : Function.Surjective R_basis",
+      "imports": [
+        "CvSTriangularTransportV1",
+        "CvSRealBasisBoundV1",
+        "CvSProjectedTransportL12V1",
+        "CvSProjectedEntryL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+          "run": 39333722640,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "theorem": "AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound",
+      "source_statement": "theorem R_basis_frobenius_bound (v : Fin 139 \u2192 \u2102) :\n    AEGIS.CvSSchurClosureFromBoundsV1.normSqCoeffs (R_basis v) \u2264\n      basisFrobenius * AEGIS.CvSSchurClosureFromBoundsV1.normSqCoeffs v",
+      "imports": [
+        "CvSTriangularTransportV1",
+        "CvSRealBasisBoundV1",
+        "CvSProjectedTransportL12V1",
+        "CvSProjectedEntryL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+          "run": 39333722640,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "theorem": "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis",
+      "source_statement": "theorem original_atom_coercivity_of_basis (M : \u2115)\n    (hIv : \u2200 i j : Fin 139,\n      (Im certI i.val j.val).Mem certQ (projectedEntry M i j)) :\n    \u2200 c, (certifiedMu / basisFrobenius) * normSqCoeffs c \u2264\n      Q_CvS M (6 / 5) atomCenter c",
+      "imports": [
+        "CvSTriangularTransportV1",
+        "CvSRealBasisBoundV1",
+        "CvSProjectedTransportL12V1",
+        "CvSProjectedEntryL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+          "run": 39333722640,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "theorem": "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source",
+      "source_statement": "theorem original_atom_coercivity_of_checked_source\n    [Fact (AEGIS.CvSProjectedEntryL12V1.bigCheck = true)] (M : \u2115) (hM : 3 \u2264 M) :\n    \u2200 c, (certifiedMu / basisFrobenius) * normSqCoeffs c \u2264\n      Q_CvS M (6 / 5) atomCenter c",
+      "imports": [
+        "CvSTriangularTransportV1",
+        "CvSRealBasisBoundV1",
+        "CvSProjectedTransportL12V1",
+        "CvSProjectedEntryL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+          "run": 39333722640,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
+      "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "theorem": "AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source",
+      "source_statement": "theorem hlow_of_checked_source\n    [Fact (AEGIS.CvSProjectedEntryL12V1.bigCheck = true)] (M : \u2115) (hM : 3 \u2264 M)\n    (m T_trace beta : \u211d) (Brow : (Fin 139 \u2192 \u2102) \u2192 \u211d)\n    (hgap : 0 < m - T_trace / (2 * Real.pi))\n    (hBrow : \u2200 c, Brow c \u2264 beta * normSqCoeffs c)\n    (hbeta : beta \u2264 (2 * Real.pi) ^ 2 * (6 / 5 : \u211d) *\n      (m - T_trace / (2 * Real.pi)) * (certifiedMu / basisFrobenius)) :\n    \u2200 c, Brow c / (2 * Real.pi * (6 / 5 : \u211d)) /\n      (m - T_trace / (2 * Real.pi)) \u2264\n      2 * Real.pi * Q_CvS M (6 / 5) atomCenter c",
+      "imports": [
+        "CvSTriangularTransportV1",
+        "CvSRealBasisBoundV1",
+        "CvSProjectedTransportL12V1",
+        "CvSProjectedEntryL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+          "run": 39333722640,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean",
+      "blob_sha": "0a1a925b5d5475a854cc732ea488189e15a535bd",
+      "source_sha256": "011860fbf2ca104e2f454ee2a74b3e8b78bbb54cde10734c0f8426209a742571",
+      "theorem": "AEGIS.CvSProjectedEntryReplayL12V1.bigCheck_true",
+      "source_statement": "theorem bigCheck_true : bigCheck = true",
+      "imports": [
+        "CvSProjectedEntryFastL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean",
+      "blob_sha": "0a1a925b5d5475a854cc732ea488189e15a535bd",
+      "source_sha256": "011860fbf2ca104e2f454ee2a74b3e8b78bbb54cde10734c0f8426209a742571",
+      "theorem": "AEGIS.CvSProjectedEntryReplayL12V1.projectedEntry_mem_certI",
+      "source_statement": "theorem projectedEntry_mem_certI {M : \u2115} (hM : 3 \u2264 M) :\n    \u2200 i j : Fin 139, (AEGIS.CvSPackedGramV1.Im certI i.val j.val).Mem certQ\n      (projectedEntry M i j)",
+      "imports": [
+        "CvSProjectedEntryFastL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSProjectedEntryReplayL12V1.lean",
+      "blob_sha": "0a1a925b5d5475a854cc732ea488189e15a535bd",
+      "source_sha256": "011860fbf2ca104e2f454ee2a74b3e8b78bbb54cde10734c0f8426209a742571",
+      "theorem": "AEGIS.CvSProjectedEntryReplayL12V1.projected_lower_L12",
+      "source_statement": "theorem projected_lower_L12 {M : \u2115} (hM : 3 \u2264 M) (c : Fin 139 \u2192 \u2102) :\n    ((certEps - certEta : \u2124) : \u211d) * \u2211 i, \u2016c i\u2016 ^ 2 \u2264\n      2 ^ certQ * (\u2211 i, \u2211 j,\n        c i * (starRingEnd \u2102) (c j) * (projectedEntry M i j : \u2102)).re",
+      "imports": [
+        "CvSProjectedEntryFastL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+          "run": 39352088072,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        },
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSLowCoercivityL12V1.lean",
+      "blob_sha": "0a1f0971414319c1e1bf13e50d5dc1b508b280a0",
+      "source_sha256": "98c6377b31c283ad53b23e3441db96cc84b02863983150192734075894cf62a5",
+      "theorem": "AEGIS.CvSLowCoercivityL12V1.coercivity_const_pos",
+      "source_statement": "theorem coercivity_const_pos : 0 < certifiedMu / basisFrobenius",
+      "imports": [
+        "CvSProjectedEntryReplayL12V1",
+        "CvSProjectedBasisL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSLowCoercivityL12V1.lean",
+      "blob_sha": "0a1f0971414319c1e1bf13e50d5dc1b508b280a0",
+      "source_sha256": "98c6377b31c283ad53b23e3441db96cc84b02863983150192734075894cf62a5",
+      "theorem": "AEGIS.CvSLowCoercivityL12V1.original_atom_coercivity_L12",
+      "source_statement": "theorem original_atom_coercivity_L12 (M : \u2115) (hM : 3 \u2264 M) :\n    \u2200 c, (certifiedMu / basisFrobenius) * normSqCoeffs c \u2264\n      Q_CvS M (6 / 5) atomCenter c",
+      "imports": [
+        "CvSProjectedEntryReplayL12V1",
+        "CvSProjectedBasisL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSLowCoercivityL12V1.lean",
+      "blob_sha": "0a1f0971414319c1e1bf13e50d5dc1b508b280a0",
+      "source_sha256": "98c6377b31c283ad53b23e3441db96cc84b02863983150192734075894cf62a5",
+      "theorem": "AEGIS.CvSLowCoercivityL12V1.hlow_L12",
+      "source_statement": "theorem hlow_L12 (M : \u2115) (hM : 3 \u2264 M) (m T_trace beta : \u211d) (Brow : (Fin 139 \u2192 \u2102) \u2192 \u211d)\n    (hgap : 0 < m - T_trace / (2 * Real.pi))\n    (hBrow : \u2200 c, Brow c \u2264 beta * normSqCoeffs c)\n    (hbeta : beta \u2264 (2 * Real.pi) ^ 2 * (6 / 5 : \u211d) *\n      (m - T_trace / (2 * Real.pi)) * (certifiedMu / basisFrobenius)) :\n    \u2200 c, Brow c / (2 * Real.pi * (6 / 5 : \u211d)) /\n      (m - T_trace / (2 * Real.pi)) \u2264\n      2 * Real.pi * Q_CvS M (6 / 5) atomCenter c",
+      "imports": [
+        "CvSProjectedEntryReplayL12V1",
+        "CvSProjectedBasisL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSTauFarL12V1.lean",
+      "blob_sha": "d57066f718e07afbd589cb1cab0ce1e47735bc0b",
+      "source_sha256": "b92ae26fd11f0765283cf5b429219dc4d7caa10cc8cda254bb2cb49f39463076",
+      "theorem": "AEGIS.CvSTauFarL12V1.tau_abs_le_far",
+      "source_statement": "theorem tau_abs_le_far {M : \u2115} (hM : 3 \u2264 M) {n : \u2124} (hn : 71 \u2264 |n|) :\n    |tau M (6 / 5) n| \u2264 13",
+      "imports": [
+        "CvSTauPrimeL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSGramTailV1.lean",
+      "blob_sha": "0d26f7ea3f523d2c9df10e7e8dbf3b3251d028b6",
+      "source_sha256": "41c0ca0e457f7ef9c54b7226c29b4a09e24d9f88ea2dbebd0063bc0423e9f1da",
+      "theorem": "AEGIS.CvSGramTailV1.gram_tail_le",
+      "source_statement": "theorem gram_tail_le {F : Finset \u2124} {R NP : \u2115} (hF : \u2200 n \u2208 F, |(n : \u211d)| \u2264 R) (hRNP : R < NP)\n    (v : \u2124 \u2192 \u2102) (N : \u2115) :\n    \u2211 m \u2208 (Finset.Icc (-(N : \u2124)) N).filter (fun m => NP < m.natAbs),\n        \u2016\u2211 n \u2208 F, v n * (wt n m : \u2102)\u2016 ^ 2 \u2264 gform F v (gramUp NP)",
+      "imports": [
+        "CvSRowTailV1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSGramTailV1.lean",
+      "blob_sha": "0d26f7ea3f523d2c9df10e7e8dbf3b3251d028b6",
+      "source_sha256": "41c0ca0e457f7ef9c54b7226c29b4a09e24d9f88ea2dbebd0063bc0423e9f1da",
+      "theorem": "AEGIS.CvSGramTailV1.rows_gram_le",
+      "source_statement": "theorem rows_gram_le (M : \u2115) {L : \u211d} (hL : 0 < L) {F : Finset \u2124} {R NP : \u2115}\n    (hF : \u2200 n \u2208 F, |(n : \u211d)| \u2264 R) (hRNP : R < NP) (a : \u2124 \u2192 \u2102) {T : \u211d}\n    (hT : \u2200 m : \u2124, NP < m.natAbs \u2192 |tau M L m| \u2264 T) {\u03b5 : \u211d} (h\u03b5 : 0 < \u03b5) (N : \u2115) :\n    \u2211 m \u2208 (Finset.Icc (-(N : \u2124)) N).filter (fun m => NP < m.natAbs),\n        \u2016crossRow M L F a m\u2016 ^ 2 \u2264 gramTail M L F a T \u03b5 NP",
+      "imports": [
+        "CvSRowTailV1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSGramTailV1.lean",
+      "blob_sha": "0d26f7ea3f523d2c9df10e7e8dbf3b3251d028b6",
+      "source_sha256": "41c0ca0e457f7ef9c54b7226c29b4a09e24d9f88ea2dbebd0063bc0423e9f1da",
+      "theorem": "AEGIS.CvSGramTailV1.window_of_certificate_gram",
+      "source_statement": "theorem window_of_certificate_gram (M : \u2115) (L LT m : \u211d) (hLT0 : 0 < LT) (hLTL : LT < L)\n    (hLTM : LT < Real.log ((M + 1 : \u2115) : \u211d))\n    (s : \u211d \u2192 \u211d) (hsm : Measurable s) (B : \u211d) (hsB : \u2200 t, |s t| \u2264 B) (hs0 : \u2200 t, 0 \u2264 s t)\n    {n : \u2115} (H : Fin n \u2192 \u211d \u2192 \u2102) (hHc : \u2200 i, Continuous (H i)) (hHi : \u2200 i, Integrable (H i))\n    (hFH : \u2200 i, Integrable (FourierTransform.fourier (H i)))\n    (hHs : \u2200 i u, |u| < L \u2192 H i u = 0)\n    {k : \u2115} (d : Fin k \u2192 \u2102) (j : Fin k \u2192 \u2115)\n    (hcert : \u2200 t : \u211d, 0 \u2264 Wt t * (ScertM M t - m) +\n      (\u2211 i, FourierTransform.fourier (H i) (t / (2 * Real.pi))).re +\n      \u2211 l, 2 * (d l * ((I * (t : \u2102)) ^ j l * Complex.exp (\u2191(t * L) * I))).re + Wt t * s t)\n    {p : \u2115} (\u03b9 : Fin p \u2192 \u2124)\n    (cf : \u211d \u2192 Fin p \u2192 \u2102)\n    (hR : Integrable fun t => s t * trialDist 0 LT (fun i => momentAtom LT (\u03b9 i)) cf t)\n    {T : \u211d} (hT : \u222b t, s t * trialDist 0 LT (fun i => momentAtom LT (\u03b9 i)) cf t \u2264 T)\n    (hcpos : 0 < m - T / (2 * Real.pi))\n    (R NP : \u2115) (hR\u03b9 : \u2200 i, |\u03b9 i| + 1 \u2264 (R : \u2124)) (hRNP : R < NP)\n    {T\u03c4 : \u211d} (hT\u03c4 : \u2200 x : \u2124, NP < x.natAbs \u2192 |tau M LT x| \u2264 T\u03c4) {\u03b5 : \u211d} (h\u03b5 : 0 < \u03b5)\n    (lam : (Fin p \u2192 \u2102) \u2192 Fin p \u2192 \u2102) (Brow : (Fin p \u2192 \u2102) \u2192 \u211d)\n    (hfin : \u2200 c, (\u2211 a \u2208 Finset.Icc (-(NP : \u2124)) NP,\n      \u2016crossRow M LT (lowFreq fun i => sinSqSupport (\u03b9 i))\n          (lowCoeff LT (fun i => sinSqSupport (\u03b9 i)) (fun i => sinSqWeight (\u03b9 i)) c) a -\n        \u2211 i, lam c i *\n          atomRow LT (fun i => sinSqSupport (\u03b9 i)) (fun i => sinSqWeight (\u03b9 i)) i a\u2016 ^ 2) +\n      gramTail M LT (lowFreq fun i => sinSqSupport (\u03b9 i))\n        (lowCoeff LT (fun i => sinSqSupport (\u03b9 i)) (fun i => sinSqWeight (\u03b9 i)) c) T\u03c4 \u03b5 NP \u2264\n        Brow c)\n    (hlow : \u2200 c, Brow c / (2 * Real.pi * LT) / (m - T / (2 * Real.pi)) \u2264 2 * Real.pi *\n      (\u2211 a \u2208 lowFreq (fun i => sinSqSupport (\u03b9 i)), \u2211 b \u2208 lowFreq (fun i => sinSqSupport (\u03b9 i)),\n        lowCoeff LT (fun i => sinSqSupport (\u03b9 i)) (fun i => sinSqWeight (\u03b9 i)) c a *\n          conj (lowCoeff LT (fun i => sinSqSupport (\u03b9 i)) (fun i => sinSqWeight (\u03b9 i)) c b) *\n            (cvsEntry M LT a b : \u2102)).re)\n    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) (r a : \u211d)\n    (hw : HalfWidthAt g r a) (h2r : 2 * r \u2264 LT) :\n    0 \u2264 (\u2211' rho : RiemannNontrivialZeroIndexV2,\n        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re",
+      "imports": [
+        "CvSRowTailV1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSWindowGramL12V1.lean",
+      "blob_sha": "dc0dbd24207c78c201e70443606eaad918732a41",
+      "source_sha256": "441618674f4ad090026f67ea2f9f940b47b95f4475bfc4231f41855c3a23b2d3",
+      "theorem": "AEGIS.CvSWindowGramL12V1.window_L12_gram",
+      "source_statement": "theorem window_L12_gram (M : \u2115) (hM : 3 \u2264 M) (L m : \u211d) (hLTL : (6 / 5 : \u211d) < L)\n    (s : \u211d \u2192 \u211d) (hsm : Measurable s) (B : \u211d) (hsB : \u2200 t, |s t| \u2264 B) (hs0 : \u2200 t, 0 \u2264 s t)\n    {n : \u2115} (H : Fin n \u2192 \u211d \u2192 \u2102) (hHc : \u2200 i, Continuous (H i)) (hHi : \u2200 i, Integrable (H i))\n    (hFH : \u2200 i, Integrable (FourierTransform.fourier (H i)))\n    (hHs : \u2200 i u, |u| < L \u2192 H i u = 0)\n    {k : \u2115} (d : Fin k \u2192 \u2102) (j : Fin k \u2192 \u2115)\n    (hcert : \u2200 t : \u211d, 0 \u2264 Wt t * (ScertM M t - m) +\n      (\u2211 i, FourierTransform.fourier (H i) (t / (2 * Real.pi))).re +\n      \u2211 l, 2 * (d l * ((I * (t : \u2102)) ^ j l * Complex.exp (\u2191(t * L) * I))).re + Wt t * s t)\n    (cf : \u211d \u2192 Fin 139 \u2192 \u2102)\n    (hR : Integrable fun t =>\n      s t * trialDist 0 (6 / 5) (fun i => momentAtom (6 / 5) (atomCenter i)) cf t)\n    {T : \u211d}\n    (hT : \u222b t, s t * trialDist 0 (6 / 5) (fun i => momentAtom (6 / 5) (atomCenter i)) cf t \u2264 T)\n    (hcpos : 0 < m - T / (2 * Real.pi))\n    (NP : \u2115) (hRNP : 70 < NP) {\u03b5 : \u211d} (h\u03b5 : 0 < \u03b5)\n    (lam : (Fin 139 \u2192 \u2102) \u2192 Fin 139 \u2192 \u2102) (Brow : (Fin 139 \u2192 \u2102) \u2192 \u211d)\n    (hfin : \u2200 c, (\u2211 a \u2208 Finset.Icc (-(NP : \u2124)) NP,\n      \u2016crossRow M (6 / 5) (lowFreq fun i => sinSqSupport (atomCenter i))\n          (lowCoeff (6 / 5) (fun i => sinSqSupport (atomCenter i))\n            (fun i => sinSqWeight (atomCenter i)) c) a -\n        \u2211 i, lam c i * atomRow (6 / 5) (fun i => sinSqSupport (atomCenter i))\n          (fun i => sinSqWeight (atomCenter i)) i a\u2016 ^ 2) +\n      gramTail M (6 / 5) (lowFreq fun i => sinSqSupport (atomCenter i))\n        (lowCoeff (6 / 5) (fun i => sinSqSupport (atomCenter i))\n          (fun i => sinSqWeight (atomCenter i)) c) 13 \u03b5 NP \u2264 Brow c)\n    (kappa : \u211d) (hB : \u2200 c, Brow c \u2264 kappa * Q_CvS M (6 / 5) atomCenter c)\n    (hk : kappa \u2264 (2 * Real.pi) ^ 2 * (6 / 5 : \u211d) * (m - T / (2 * Real.pi)))\n    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) (r a : \u211d)\n    (hw : HalfWidthAt g r a) (h2r : 2 * r \u2264 6 / 5) :\n    0 \u2264 (\u2211' rho : RiemannNontrivialZeroIndexV2,\n        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re",
+      "imports": [
+        "CvSGramTailV1",
+        "CvSWindowL12V1",
+        "CvSTauFarL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean",
+      "blob_sha": "71424221bc7991281d6c1be628b8a5bc4a238e60",
+      "source_sha256": "6f01550efdccf4fa2c8b7832bba8f72c9c8881acd8c7ab0d9ee01f0088b32cbe",
+      "theorem": "AEGIS.CvSTauR1SourceL12V1.source_integral_mem_R1",
+      "source_statement": "theorem source_integral_mem_R1 {k : \u2115} (hk1 : 71 \u2264 k) (hk : k \u2264 150) :\n    ((tauSrcLoExtra.getD (k - 71) 0 : \u211a) : \u211d) \u2264\n      \u222b r, hplus r * sourceS (6 / 5) r (k : \u2124) \u2227\n      \u222b r, hplus r * sourceS (6 / 5) r (k : \u2124) \u2264\n        ((tauSrcHiExtra.getD (k - 71) 0 : \u211a) : \u211d)",
+      "imports": [
+        "CvSTauL12V1",
+        "CvSTauL12DataV1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean",
+      "blob_sha": "9aae571df636c5fa974ddd1f86c18279e836e4cf",
+      "source_sha256": "2fed2fe110649d5a7821efa1703ed7cb980a64a19135d3e6e85181a3e3a96278",
+      "theorem": "AEGIS.CvSTauR1PrimeL12V1.tau_mem_R1",
+      "source_statement": "theorem tau_mem_R1 {M : \u2115} (hM : 3 \u2264 M) {k : \u2115}\n    (hk1 : 71 \u2264 k) (hk : k \u2264 150) :\n    ((tauFLoExtra.getD (k - 71) 0 : \u211a) : \u211d) \u2264 tau M (6 / 5) k \u2227\n      tau M (6 / 5) k \u2264 ((tauFHiExtra.getD (k - 71) 0 : \u211a) : \u211d)",
+      "imports": [
+        "CvSTauR1SourceL12V1",
+        "CvSTauPrimeL12V1"
+      ],
+      "kernel_status": "PASS",
+      "kernel_receipts": [
+        {
+          "commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+          "run": 39379596732,
+          "axioms": [
+            "Classical.choice",
+            "Quot.sound",
+            "propext"
+          ]
+        }
+      ]
+    }
+  ]
+}

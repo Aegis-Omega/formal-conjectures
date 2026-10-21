@@ -1,0 +1,1040 @@
+{
+  "status": "PASS",
+  "repository": "tarikskalic33/formal-conjectures",
+  "branch": "proof/rh-feshbach-schur-v1",
+  "source_commit": "16d487f11ed122113c186c573b9268f5bfc4d1e7",
+  "run": 39470677222,
+  "job": 118793612914,
+  "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "fresh_command": "lean -DwarningAsError=true SOURCE_CHECKPOINT_REAUDIT.lean",
+  "fresh_scope": "Import all relevant original-context modules, #check @ every named theorem, and #print axioms for all 105 roots. Reused theorem bodies are explicitly not described as freshly source-compiled.",
+  "source_compilation_checkpoint": {
+    "commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+    "run": 39463716271,
+    "overall_status": "FAIL_AUDIT_LOG_ROUTING",
+    "kernel_compilation_and_corrected_105_axiom_audit": "PASS",
+    "validated_reused_binaries": 166
+  },
+  "log_sha256": "0b3b0bdc1e03c9966d78d3bde8dd2bd7131fa049ea2fa85774c0730144a422fa",
+  "theorems": [
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+      "type_display": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag : \u2200 (M : \u2115) (n : \u2124),\n  AEGIS.CvSActualCrossRowL12V1.sourceKernel M n n = 2 * Real.pi * AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+      "type_display": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off : \u2200 (M : \u2115) (m n : \u2124),\n  n \u2260 m \u2192\n    AEGIS.CvSActualCrossRowL12V1.sourceKernel M m n =\n      6 / 5 / Real.pi * ((AEGIS.CvSRowTailV1.tau M (6 / 5) n - AEGIS.CvSRowTailV1.tau M (6 / 5) m) / (\u2191n - \u2191m))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualCrossRowL12V1.sourceKernel_off' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+      "type_display": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow : \u2200 (M : \u2115) (m : \u2124) (v : Fin 139 \u2192 \u2102),\n  \u2211 i, \u2191(AEGIS.CvSActualCrossRowL12V1.sourceY M m i) * v i =\n    AEGIS.CvSCrossCertV1.crossRow M (6 / 5)\n      (AEGIS.CvSLowBlockMatrixV1.lowFreq fun i =>\n        AEGIS.CvSMomentBasisV1.sinSqSupport (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n      (AEGIS.CvSLowBlockMatrixV1.lowCoeff (6 / 5)\n        (fun i => AEGIS.CvSMomentBasisV1.sinSqSupport (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n        (fun i => AEGIS.CvSMomentBasisV1.sinSqWeight (AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter i))\n        (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v))\n      m",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+      "type_display": "@AEGIS.CvSMidpointRadiusV1.product_error : \u2200 {x y x\u2080 y\u2080 rx ry : \u211d},\n  |x - x\u2080| \u2264 rx \u2192 |y - y\u2080| \u2264 ry \u2192 |x * y - x\u2080 * y\u2080| \u2264 |x\u2080| * ry + rx * |y\u2080| + rx * ry",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+      "type_display": "@AEGIS.CvSMidpointRadiusV1.sum_product_error : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (x y x\u2080 y\u2080 rx ry : \u03b9 \u2192 \u211d),\n  (\u2200 (k : \u03b9), |x k - x\u2080 k| \u2264 rx k) \u2192\n    (\u2200 (k : \u03b9), |y k - y\u2080 k| \u2264 ry k) \u2192\n      |\u2211 k, x k * y k - \u2211 k, x\u2080 k * y\u2080 k| \u2264 \u2211 k, (|x\u2080 k| * ry k + rx k * |y\u2080 k| + rx k * ry k)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+      "type_display": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure : \u2200 (t : \u2124 \u2192 \u211d) (lo hi : \u2115 \u2192 \u211d) (N : \u2115),\n  t 0 = 0 \u2192\n    (\u2200 (k : \u2124), t (-k) = -t k) \u2192\n      (\u2200 (n : \u2115), 1 \u2264 n \u2192 n \u2264 N \u2192 lo n \u2264 t \u2191n \u2227 t \u2191n \u2264 hi n) \u2192\n        \u2200 (k : \u2124),\n          k.natAbs \u2264 N \u2192\n            AEGIS.CvSOddSignedEnclosureV1.lower lo hi k \u2264 t k \u2227 t k \u2264 AEGIS.CvSOddSignedEnclosureV1.upper lo hi k",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+      "type_display": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds : \u2200 (t : \u2124 \u2192 \u211d) (lo hi : \u2115 \u2192 \u211a) (N : \u2115),\n  t 0 = 0 \u2192\n    (\u2200 (k : \u2124), t (-k) = -t k) \u2192\n      (\u2200 (n : \u2115), 1 \u2264 n \u2192 n \u2264 N \u2192 \u2191(lo n) \u2264 t \u2191n \u2227 t \u2191n \u2264 \u2191(hi n)) \u2192\n        \u2200 (k : \u2124),\n          k.natAbs \u2264 N \u2192\n            \u2191(if k < 0 then -hi k.natAbs else if k = 0 then 0 else lo k.natAbs) \u2264 t k \u2227\n              t k \u2264 \u2191(if k < 0 then -lo k.natAbs else if k = 0 then 0 else hi k.natAbs)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+      "type_display": "AEGIS.CvSRationalIntervalV1.rationalRange_mem : \u2200 (p : \u2115) (lo hi : \u211a) {x : \u211d},\n  \u2191lo \u2264 x \u2192 x \u2264 \u2191hi \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRationalIntervalV1.rationalRange p lo hi) x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSRationalIntervalV1.rationalRange_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+      "type_display": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error : \u2200 (p : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    |x - \u2191(AEGIS.CvSIntervalMatrixProductV1.mid I) / 2 ^ p| \u2264 \u2191(AEGIS.CvSIntervalMatrixProductV1.rad I) / 2 ^ p",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+      "type_display": "@AEGIS.CvSIntervalMatrixProductV1.dot_mem : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (p : \u2115)\n  (A B : \u03b9 \u2192 AEGIS.RHFixIntervalV1.Iv) (a b : \u03b9 \u2192 \u211d),\n  (\u2200 (k : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (A k) (a k)) \u2192\n    (\u2200 (k : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (B k) (b k)) \u2192\n      AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.dot p A B) (\u2211 k, a k * b k)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+      "type_display": "@AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem : \u2200 {\u03b9 : Type u_1} {\u03ba : Type u_2} {\u03bd : Type u_3} [inst : Fintype \u03ba]\n  (p : \u2115) (A : \u03b9 \u2192 \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv) (B : \u03ba \u2192 \u03bd \u2192 AEGIS.RHFixIntervalV1.Iv) (a : \u03b9 \u2192 \u03ba \u2192 \u211d) (b : \u03ba \u2192 \u03bd \u2192 \u211d),\n  (\u2200 (i : \u03b9) (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (A i k) (a i k)) \u2192\n    (\u2200 (k : \u03ba) (j : \u03bd), AEGIS.RHFixIntervalV1.Iv.Mem p (B k j) (b k j)) \u2192\n      \u2200 (i : \u03b9) (j : \u03bd),\n        AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.matrixMul p A B i j) (\u2211 k, a i k * b k j)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+      "type_display": "@AEGIS.CvSIntervalMatrixProductV1.congruence_mem : \u2200 {\u03b9 : Type u_1} {\u03ba : Type u_2} [inst : Fintype \u03ba] (p : \u2115)\n  (X : \u03ba \u2192 \u03b9 \u2192 AEGIS.RHFixIntervalV1.Iv) (G : \u03ba \u2192 \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv) (x : \u03ba \u2192 \u03b9 \u2192 \u211d) (g : \u03ba \u2192 \u03ba \u2192 \u211d),\n  (\u2200 (k : \u03ba) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) \u2192\n    (\u2200 (k l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) \u2192\n      \u2200 (i j : \u03b9),\n        AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.congruence p X G i j)\n          (\u2211 k, \u2211 l, x k i * x l j * g k l)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+      "type_display": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left : \u2200 (p : \u2115) {I J : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.hull I J) x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+      "type_display": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem : \u2200 (p d : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem (p + d) I x \u2192\n    AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalMatrixProductV1.downscale d I) x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+      "type_display": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem : \u2200 (p d : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (AEGIS.CvSIntervalMatrixProductV1.upscale d I) x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+      "type_display": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains : \u2200 (p : \u2115) {target evaluated : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.CvSIntervalMatrixProductV1.contains target evaluated = true \u2192\n    AEGIS.RHFixIntervalV1.Iv.Mem p evaluated x \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p target x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+      "type_display": "@AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound : \u2200 {n : \u2115} (p : \u2115)\n  (target evaluated : Fin n \u2192 Fin n \u2192 AEGIS.RHFixIntervalV1.Iv) (a : Fin n \u2192 Fin n \u2192 \u211d),\n  AEGIS.CvSIntervalMatrixProductV1.tableCheck n target evaluated = true \u2192\n    (\u2200 (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (evaluated i j) (a i j)) \u2192\n      \u2200 (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem p (target i j) (a i j)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+      "type_display": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem : \u2200 (p : \u2115) (z : \u2124),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.point p z) \u2191z",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+      "type_display": "@AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem : \u2200 {\u03b9 : Type u_1} {\u03ba : Type u_2} {\u03bd : Type u_3} [inst : Fintype \u03ba]\n  [inst_1 : Fintype \u03bd] (p : \u2115) (Q : \u03b9 \u2192 \u03b9 \u2192 AEGIS.RHFixIntervalV1.Iv) (X : \u03ba \u2192 \u03b9 \u2192 AEGIS.RHFixIntervalV1.Iv)\n  (G : \u03ba \u2192 \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv) (T : \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv) (Z : \u03bd \u2192 \u03b9 \u2192 AEGIS.RHFixIntervalV1.Iv)\n  (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : \u03b9 \u2192 \u03b9 \u2192 \u211d) (x : \u03ba \u2192 \u03b9 \u2192 \u211d) (g : \u03ba \u2192 \u03ba \u2192 \u211d) (t : \u03ba \u2192 \u211d) (z : \u03bd \u2192 \u03b9 \u2192 \u211d)\n  (lp2 : \u211d),\n  (\u2200 (i j : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (Q i j) (q i j)) \u2192\n    (\u2200 (k : \u03ba) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (X k i) (x k i)) \u2192\n      (\u2200 (k l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (G k l) (g k l)) \u2192\n        (\u2200 (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem p (T k) (t k)) \u2192\n          (\u2200 (r : \u03bd) (i : \u03b9), AEGIS.RHFixIntervalV1.Iv.Mem p (Z r i) (z r i)) \u2192\n            AEGIS.RHFixIntervalV1.Iv.Mem p LP2 lp2 \u2192\n              \u2200 (i j : \u03b9),\n                AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSRowBudgetEnvelopeV1.envelope p Q X G T Z LP2 i j)\n                  (40 * q i j - \u2211 r, z r i * z r j -\n                    lp2 * (2 * \u2211 k, \u2211 l, t k * x k i * (t l * x l j) * g k l + 338 * \u2211 k, \u2211 l, x k i * x l j * g k l))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+      "type_display": "@AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check : \u2200 {n : \u2115} {\u03ba : Type u_1} {\u03bd : Type u_2} [inst : Fintype \u03ba]\n  [inst_1 : Fintype \u03bd] (p d : \u2115) (target Q : Fin n \u2192 Fin n \u2192 AEGIS.RHFixIntervalV1.Iv)\n  (X : \u03ba \u2192 Fin n \u2192 AEGIS.RHFixIntervalV1.Iv) (G : \u03ba \u2192 \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv) (T : \u03ba \u2192 AEGIS.RHFixIntervalV1.Iv)\n  (Z : \u03bd \u2192 Fin n \u2192 AEGIS.RHFixIntervalV1.Iv) (LP2 : AEGIS.RHFixIntervalV1.Iv) (q : Fin n \u2192 Fin n \u2192 \u211d)\n  (x : \u03ba \u2192 Fin n \u2192 \u211d) (g : \u03ba \u2192 \u03ba \u2192 \u211d) (t : \u03ba \u2192 \u211d) (z : \u03bd \u2192 Fin n \u2192 \u211d) (lp2 : \u211d),\n  (\u2200 (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (Q i j) (q i j)) \u2192\n    (\u2200 (k : \u03ba) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (X k i) (x k i)) \u2192\n      (\u2200 (k l : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (G k l) (g k l)) \u2192\n        (\u2200 (k : \u03ba), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (T k) (t k)) \u2192\n          (\u2200 (r : \u03bd) (i : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem (p + d) (Z r i) (z r i)) \u2192\n            AEGIS.RHFixIntervalV1.Iv.Mem (p + d) LP2 lp2 \u2192\n              (AEGIS.CvSIntervalMatrixProductV1.tableCheck n target fun i j =>\n                    AEGIS.CvSIntervalMatrixProductV1.downscale d\n                      (AEGIS.CvSIntervalMatrixProductV1.hull\n                        (AEGIS.CvSRowBudgetEnvelopeV1.envelope (p + d) Q X G T Z LP2 i j)\n                        (AEGIS.CvSRowBudgetEnvelopeV1.envelope (p + d) Q X G T Z LP2 j i))) =\n                  true \u2192\n                \u2200 (i j : Fin n),\n                  AEGIS.RHFixIntervalV1.Iv.Mem p (target i j)\n                    (40 * q i j - \u2211 r, z r i * z r j -\n                      lp2 * (2 * \u2211 k, \u2211 l, t k * x k i * (t l * x l j) * g k l + 338 * \u2211 k, \u2211 l, x k i * x l j * g k l))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+      "type_display": "@AEGIS.CvSTauSigned150L12V1.positive_mem : \u2200 {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 {k : \u2115},\n      1 \u2264 k \u2192\n        k \u2264 150 \u2192\n          \u2191(AEGIS.CvSTauSigned150L12V1.positiveLo k) \u2264 AEGIS.CvSRowTailV1.tau M (6 / 5) \u2191k \u2227\n            AEGIS.CvSRowTailV1.tau M (6 / 5) \u2191k \u2264 \u2191(AEGIS.CvSTauSigned150L12V1.positiveHi k)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSTauSigned150L12V1.positive_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+      "type_display": "@AEGIS.CvSTauSigned150L12V1.signed_tau_bounds : \u2200 {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 (k : \u2124),\n      k.natAbs \u2264 150 \u2192\n        \u2191(AEGIS.CvSTauSigned150L12V1.signedLo k) \u2264 AEGIS.CvSRowTailV1.tau M (6 / 5) k \u2227\n          AEGIS.CvSRowTailV1.tau M (6 / 5) k \u2264 \u2191(AEGIS.CvSTauSigned150L12V1.signedHi k)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSTauSigned150L12V1.signed_tau_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+      "type_display": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval : \u2200 (p : \u2115) {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 (k : \u2124),\n      k.natAbs \u2264 150 \u2192\n        AEGIS.RHFixIntervalV1.Iv.Mem p\n          (AEGIS.CvSRationalIntervalV1.rationalRange p (AEGIS.CvSTauSigned150L12V1.signedLo k)\n            (AEGIS.CvSTauSigned150L12V1.signedHi k))\n          (AEGIS.CvSRowTailV1.tau M (6 / 5) k)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSTauSigned150L12V1.signed_tau_interval' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+      "type_display": "AEGIS.CvSIntervalDivideV1.divPos_mem : \u2200 (p : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    \u2200 {d : \u2124}, 0 < d \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divPos I d) (x / \u2191d)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+      "type_display": "AEGIS.CvSIntervalDivideV1.divInt_mem : \u2200 (p : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    \u2200 {d : \u2124}, d \u2260 0 \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / \u2191d)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+      "type_display": "AEGIS.CvSFrequencyIntervalV1.pi_bounds : \u2191AEGIS.CvSFrequencyIntervalV1.piLo \u2264 Real.pi \u2227\n  Real.pi \u2264 \u2191AEGIS.CvSFrequencyIntervalV1.piHi",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+      "type_display": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds : \u2200 (n : \u2124),\n  \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) \u2264 -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2227\n    -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2264 \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+      "type_display": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem : \u2200 (p : \u2115) (n w : \u2124),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)\n    ((-(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4) * \u2191w / 2 ^ 42)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+      "type_display": "AEGIS.CvSFrequencyIntervalV1.lp_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+      "type_display": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem : \u2200 (p : \u2115) (k : Fin 141) (i : Fin 139),\n  AEGIS.RHFixIntervalV1.Iv.Mem p\n    (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n      (AEGIS.CvSProjectedEntryL12V1.wZ (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k) \u2191i))\n    (AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff k i)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.gramRat_cast : \u2200 (NP : \u2115) (n m : \u2124),\n  \u2191(AEGIS.CvSActualRowInputL12V1.gramRat NP n m) = AEGIS.CvSGramTailV1.gramUp NP n m",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.gramRat_cast' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.gramUp_mem : \u2200 (p NP : \u2115) (n m : \u2124),\n  AEGIS.RHFixIntervalV1.Iv.Mem p\n    (AEGIS.CvSRationalIntervalV1.rationalRange p (AEGIS.CvSActualRowInputL12V1.gramRat NP n m)\n      (AEGIS.CvSActualRowInputL12V1.gramRat NP n m))\n    (AEGIS.CvSGramTailV1.gramUp NP n m)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.gramUp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.gramUp_symm : \u2200 (NP : \u2115) (n m : \u2124),\n  AEGIS.CvSGramTailV1.gramUp NP n m = AEGIS.CvSGramTailV1.gramUp NP m n",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.gramUp_symm' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.diagonal_mem : \u2200 (p : \u2115) {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 (n : \u2124),\n      n.natAbs \u2264 70 \u2192\n        AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.diagonalBox p n)\n          (AEGIS.CvSLowBlockMatrixV1.cvsEntry M (6 / 5) n n)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.diagonal_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem : \u2200 (p : \u2115) {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 (m : \u2124),\n      m.natAbs \u2264 150 \u2192\n        \u2200 (k : Fin 141),\n          AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.kernelBox p m k)\n            (AEGIS.CvSActualCrossRowL12V1.sourceKernel M m (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k))",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.sourceKernel_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.sourceY_mem : \u2200 (p : \u2115) {M : \u2115},\n  3 \u2264 M \u2192\n    \u2200 (m : \u2124),\n      m.natAbs \u2264 150 \u2192\n        \u2200 (i : Fin 139),\n          AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSActualRowInputL12V1.sourceYBox p m i)\n            (AEGIS.CvSActualCrossRowL12V1.sourceY M m i)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.sourceY_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+      "type_display": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (lam : Fin 139 \u2192 Fin 139 \u2192 \u211d) (Lam : Fin 139 \u2192 Fin 139 \u2192 AEGIS.RHFixIntervalV1.Iv),\n      (\u2200 (j i : Fin 139), AEGIS.RHFixIntervalV1.Iv.Mem 96 (Lam j i) (lam j i)) \u2192\n        \u2200 (r : Fin 301) (i : Fin 139),\n          AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSActualRowInputL12V1.zBox Lam r i)\n            (AEGIS.CvSActualRowInputL12V1.sourceZ M lam r i)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSActualRowInputL12V1.sourceZ_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot",
+      "type_display": "AEGIS.CvSListIntervalDotV1.listDot_eq_dot : \u2200 (p : \u2115) {n : \u2115} (A B : List AEGIS.RHFixIntervalV1.Iv),\n  A.length = n \u2192\n    B.length = n \u2192\n      AEGIS.CvSListIntervalDotV1.listDot p A B =\n        AEGIS.CvSIntervalMatrixProductV1.dot p (fun k => A.getD \u2191k { lo := 0, hi := 0 }) fun k =>\n          B.getD \u2191k { lo := 0, hi := 0 }",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalDotV1.listCongruence_eq",
+      "type_display": "AEGIS.CvSListIntervalDotV1.listCongruence_eq : \u2200 (p : \u2115) {n : \u2115} (X : List AEGIS.RHFixIntervalV1.Iv)\n  (G : List (List AEGIS.RHFixIntervalV1.Iv)),\n  X.length = n \u2192\n    G.length = n \u2192\n      (\u2200 (k : Fin n), (G.getD \u2191k []).length = n) \u2192\n        AEGIS.CvSIntervalMatrixProductV1.congruence p (fun k x => X.getD \u2191k { lo := 0, hi := 0 })\n            (fun k l => (G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 }) 0 0 =\n          AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row X) G)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq",
+      "type_display": "AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq : \u2200 (p : \u2115) {n : \u2115} (X Y : List AEGIS.RHFixIntervalV1.Iv)\n  (G : List (List AEGIS.RHFixIntervalV1.Iv)),\n  X.length = n \u2192\n    Y.length = n \u2192\n      G.length = n \u2192\n        (\u2200 (k : Fin n), (G.getD \u2191k []).length = n) \u2192\n          AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun x k => X.getD \u2191k { lo := 0, hi := 0 })\n              (AEGIS.CvSIntervalMatrixProductV1.matrixMul p (fun k l => (G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 })\n                fun k x => Y.getD \u2191k { lo := 0, hi := 0 })\n              0 0 =\n            AEGIS.CvSListIntervalDotV1.listDot p X (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row Y) G)",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSListIntervalMixedV1.mixed_listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact",
+      "type_display": "AEGIS.RowBudgetStagedDotPilot.weighted_column_exact : \u2200 (k : Fin 141),\n  AEGIS.RHFixIntervalV1.Iv.mul 96 (AEGIS.RowBudgetStagedDotPilot.T.getD \u2191k { lo := 0, hi := 0 })\n      (AEGIS.RowBudgetStagedDotPilot.X0.getD \u2191k { lo := 0, hi := 0 }) =\n    AEGIS.RowBudgetStagedDotPilot.DX0.getD \u2191k { lo := 0, hi := 0 }",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot",
+      "type_display": "AEGIS.RowBudgetStagedDotPilot.gram_source_dot : (AEGIS.CvSIntervalMatrixProductV1.dot 96\n    (fun k => AEGIS.RowBudgetStagedDotPilot.G0.getD \u2191k { lo := 0, hi := 0 }) fun k =>\n    AEGIS.RowBudgetStagedDotPilot.X0.getD \u2191k { lo := 0, hi := 0 }) =\n  { lo := -400159206593443821288191, hi := -400159206593443807376161 }",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot",
+      "type_display": "AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot : (AEGIS.CvSIntervalMatrixProductV1.dot 96\n    (fun k => AEGIS.RowBudgetStagedDotPilot.G0.getD \u2191k { lo := 0, hi := 0 }) fun k =>\n    AEGIS.RowBudgetStagedDotPilot.DX0.getD \u2191k { lo := 0, hi := 0 }) =\n  { lo := 4394801782732671274923651402, hi := 4394802055012090975575075585 }",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact",
+      "type_display": "AEGIS.RowBudgetListCell0Pilot.gram_source_exact : List.map\n    (fun row => AEGIS.CvSListIntervalDotV1.listDot 96 row AEGIS.RowBudgetStagedDotPilot.X0)\n    AEGIS.RowBudgetListCell0Pilot.G =\n  AEGIS.RowBudgetListCell0Pilot.GX0",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact",
+      "type_display": "AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact : List.map\n    (fun row => AEGIS.CvSListIntervalDotV1.listDot 96 row AEGIS.RowBudgetStagedDotPilot.DX0)\n    AEGIS.RowBudgetListCell0Pilot.G =\n  AEGIS.RowBudgetListCell0Pilot.GDX0",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast",
+      "type_display": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast : AEGIS.RowBudgetListCell0Pilot.fastEnvelope =\n  AEGIS.RowBudgetListCell0Pilot.target",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast",
+      "type_display": "AEGIS.RowBudgetListCell0Pilot.original_eq_fast : AEGIS.RowBudgetListCell0Pilot.originalEnvelope =\n  AEGIS.RowBudgetListCell0Pilot.fastEnvelope",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original",
+      "type_display": "AEGIS.RowBudgetListCell0Pilot.stored_cell0_original : AEGIS.RowBudgetListCell0Pilot.originalEnvelope =\n  AEGIS.RowBudgetListCell0Pilot.target",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq",
+      "type_display": "AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq : \u2200 (p : \u2115) {n r : \u2115} (q lp2 : AEGIS.RHFixIntervalV1.Iv)\n  (a b da db T u v : List AEGIS.RHFixIntervalV1.Iv) (G : List (List AEGIS.RHFixIntervalV1.Iv)),\n  a.length = n \u2192\n    b.length = n \u2192\n      da.length = n \u2192\n        db.length = n \u2192\n          u.length = r \u2192\n            v.length = r \u2192\n              G.length = n \u2192\n                (\u2200 (k : Fin n), (G.getD \u2191k []).length = n) \u2192\n                  (\u2200 (k : Fin n),\n                      AEGIS.RHFixIntervalV1.Iv.mul p (T.getD \u2191k { lo := 0, hi := 0 }) (a.getD \u2191k { lo := 0, hi := 0 }) =\n                        da.getD \u2191k { lo := 0, hi := 0 }) \u2192\n                    (\u2200 (k : Fin n),\n                        AEGIS.RHFixIntervalV1.Iv.mul p (T.getD \u2191k { lo := 0, hi := 0 })\n                            (b.getD \u2191k { lo := 0, hi := 0 }) =\n                          db.getD \u2191k { lo := 0, hi := 0 }) \u2192\n                      AEGIS.CvSRowBudgetEnvelopeV1.envelope p (fun x x_1 => q)\n                          (AEGIS.CvSColumnEnvelopeV1.twoColumns a b)\n                          (fun k l => (G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 })\n                          (fun k => T.getD \u2191k { lo := 0, hi := 0 }) (AEGIS.CvSColumnEnvelopeV1.twoColumns u v) lp2 0 1 =\n                        AEGIS.CvSColumnEnvelopeV1.columnValue p q a da u v\n                          (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row b) G)\n                          (List.map (fun row => AEGIS.CvSListIntervalDotV1.listDot p row db) G) lp2",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSColumnEnvelopeV1.envelope_pair_eq' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnCheckerV1.check_sound",
+      "type_display": "AEGIS.CvSFirstColumnCheckerV1.check_sound : \u2200 (e : AEGIS.CvSFirstColumnCheckerV1.Entry),\n  AEGIS.CvSFirstColumnCheckerV1.check e = true \u2192\n    AEGIS.CvSIntervalMatrixProductV1.contains e.target (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) = true",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFirstColumnCheckerV1.check_sound' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true",
+      "type_display": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true : AEGIS.CvSPackedGramV1.check\n    AEGIS.CvSRelativeRowCertificateL12V1.base AEGIS.CvSRelativeRowCertificateL12V1.B 139\n    AEGIS.CvSRelativeRowCertificateL12V1.eps AEGIS.CvSRelativeRowCertificateL12V1.eta\n    AEGIS.CvSRelativeRowCertificateL12V1.factor AEGIS.CvSRelativeRowCertificateL12V1.intervals =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive",
+      "type_display": "AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive : 0 <\n  AEGIS.CvSRelativeRowCertificateL12V1.eps - AEGIS.CvSRelativeRowCertificateL12V1.eta",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch0.checked : AEGIS.RowBudgetFirstColumnBatch0.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch0.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch0.target_source : (AEGIS.RowBudgetFirstColumnBatch0.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch0.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch0.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch0.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch0.entries =\n  List.range' 0 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch0.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch1.checked : AEGIS.RowBudgetFirstColumnBatch1.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch1.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch1.target_source : (AEGIS.RowBudgetFirstColumnBatch1.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch1.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch1.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch1.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch1.entries =\n  List.range' 10 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch1.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch2.checked : AEGIS.RowBudgetFirstColumnBatch2.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch2.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch2.target_source : (AEGIS.RowBudgetFirstColumnBatch2.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch2.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch2.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch2.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch2.entries =\n  List.range' 20 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch2.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch3.checked : AEGIS.RowBudgetFirstColumnBatch3.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch3.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch3.target_source : (AEGIS.RowBudgetFirstColumnBatch3.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch3.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch3.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch3.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch3.entries =\n  List.range' 30 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch3.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch4.checked : AEGIS.RowBudgetFirstColumnBatch4.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch4.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch4.target_source : (AEGIS.RowBudgetFirstColumnBatch4.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch4.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch4.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch4.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch4.entries =\n  List.range' 40 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch4.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch5.checked : AEGIS.RowBudgetFirstColumnBatch5.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch5.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch5.target_source : (AEGIS.RowBudgetFirstColumnBatch5.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch5.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch5.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch5.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch5.entries =\n  List.range' 50 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch5.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch6.checked : AEGIS.RowBudgetFirstColumnBatch6.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch6.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch6.target_source : (AEGIS.RowBudgetFirstColumnBatch6.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch6.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch6.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch6.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch6.entries =\n  List.range' 60 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch6.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch7.checked : AEGIS.RowBudgetFirstColumnBatch7.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch7.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch7.target_source : (AEGIS.RowBudgetFirstColumnBatch7.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch7.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch7.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch7.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch7.entries =\n  List.range' 70 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch7.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch8.checked : AEGIS.RowBudgetFirstColumnBatch8.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch8.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch8.target_source : (AEGIS.RowBudgetFirstColumnBatch8.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch8.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch8.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch8.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch8.entries =\n  List.range' 80 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch8.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch9.checked : AEGIS.RowBudgetFirstColumnBatch9.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch9.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch9.target_source : (AEGIS.RowBudgetFirstColumnBatch9.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch9.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch9.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch9.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch9.entries =\n  List.range' 90 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch9.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch10.checked : AEGIS.RowBudgetFirstColumnBatch10.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch10.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch10.target_source : (AEGIS.RowBudgetFirstColumnBatch10.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch10.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch10.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch10.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch10.entries =\n  List.range' 100 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch10.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch11.checked : AEGIS.RowBudgetFirstColumnBatch11.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch11.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch11.target_source : (AEGIS.RowBudgetFirstColumnBatch11.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch11.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch11.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch11.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch11.entries =\n  List.range' 110 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch11.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch12.checked : AEGIS.RowBudgetFirstColumnBatch12.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch12.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch12.target_source : (AEGIS.RowBudgetFirstColumnBatch12.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch12.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch12.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch12.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch12.entries =\n  List.range' 120 10",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch12.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch13.checked : AEGIS.RowBudgetFirstColumnBatch13.entries.all\n    AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch13.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch13.target_source : (AEGIS.RowBudgetFirstColumnBatch13.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch13.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnBatch13.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnBatch13.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnBatch13.entries =\n  List.range' 130 9",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnBatch13.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.checked",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.checked : AEGIS.RowBudgetFirstColumnV1.entries.all AEGIS.CvSFirstColumnCheckerV1.check =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.checked' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.target_source",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.target_source : (AEGIS.RowBudgetFirstColumnV1.entries.all fun e =>\n    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)) =\n  true",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.target_source' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.row_order",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.row_order : List.map (fun e => \u2191e.row) AEGIS.RowBudgetFirstColumnV1.entries =\n  List.range 139",
+      "axioms": [],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.row_order' does not depend on any axioms",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_contains",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.first_column_contains : \u2200 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries,\n  AEGIS.CvSIntervalMatrixProductV1.contains\n      (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0)\n      (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) =\n    true",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.first_column_contains' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.all_rows_covered : \u2200 (i : Fin 139), \u2203 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries, e.row = i",
+      "axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.all_rows_covered' depends on axioms: [propext, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.RowBudgetFirstColumnV1.first_column_mem",
+      "type_display": "AEGIS.RowBudgetFirstColumnV1.first_column_mem : \u2200 e \u2208 AEGIS.RowBudgetFirstColumnV1.entries,\n  \u2200 {x : \u211d},\n    AEGIS.RHFixIntervalV1.Iv.Mem 80 (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) x \u2192\n      AEGIS.RHFixIntervalV1.Iv.Mem 80\n        (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (\u2191e.row) 0) x",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.RowBudgetFirstColumnV1.first_column_mem' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted",
+      "type_display": "AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted : AEGIS.CvSFirstColumnCheckerV1.check\n    (have __src := AEGIS.RowBudgetFirstColumnBatch0.entry0;\n    { row := __src.row, q := __src.q, a := __src.a, da := [], u := __src.u, target := __src.target }) =\n  false",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFirstColumnRejectV1.reject_missing_weighted' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target",
+      "type_display": "AEGIS.CvSFirstColumnRejectV1.reject_zero_target : AEGIS.CvSFirstColumnCheckerV1.check\n    (have __src := AEGIS.RowBudgetFirstColumnBatch0.entry0;\n    { row := __src.row, q := __src.q, a := __src.a, da := __src.da, u := __src.u, target := { lo := 0, hi := 0 } }) =\n  false",
+      "axioms": [
+        "propext"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSFirstColumnRejectV1.reject_zero_target' depends on axioms: [propext]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedGramV1.quad_lower",
+      "type_display": "@AEGIS.CvSPackedGramV1.quad_lower : \u2200 {n : \u2115} (q b B : \u2115) (eps eta : \u2124) (L : List (List \u2124))\n  (I : List (List AEGIS.RHFixIntervalV1.Iv)),\n  AEGIS.CvSPackedGramV1.check b B n eps eta L I = true \u2192\n    \u2200 (A : Fin n \u2192 Fin n \u2192 \u211d),\n      (\u2200 (i j : Fin n), A i j = A j i) \u2192\n        (\u2200 (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I \u2191i \u2191j) (A i j)) \u2192\n          \u2200 (x : Fin n \u2192 \u211d), \u2191(eps - eta) * \u2211 i, x i ^ 2 \u2264 2 ^ q * \u2211 i, \u2211 j, A i j * x i * x j",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    },
+    {
+      "theorem": "AEGIS.CvSPackedGramV1.quad_lower_complex",
+      "type_display": "@AEGIS.CvSPackedGramV1.quad_lower_complex : \u2200 {n : \u2115} (q b B : \u2115) (eps eta : \u2124) (L : List (List \u2124))\n  (I : List (List AEGIS.RHFixIntervalV1.Iv)),\n  AEGIS.CvSPackedGramV1.check b B n eps eta L I = true \u2192\n    \u2200 (A : Fin n \u2192 Fin n \u2192 \u211d),\n      (\u2200 (i j : Fin n), A i j = A j i) \u2192\n        (\u2200 (i j : Fin n), AEGIS.RHFixIntervalV1.Iv.Mem q (AEGIS.CvSPackedGramV1.Im I \u2191i \u2191j) (A i j)) \u2192\n          \u2200 (c : Fin n \u2192 \u2102),\n            \u2191(eps - eta) * \u2211 i, \u2016c i\u2016 ^ 2 \u2264 2 ^ q * (\u2211 i, \u2211 j, c i * (starRingEnd \u2102) (c j) * \u2191(A i j)).re",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "compiler_axiom_output": "'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]",
+      "status": "PASS"
+    }
+  ],
+  "actual_scope": "Complete first numeric output column; generic interval soundness and actual input/residual enclosures under their explicit hypotheses. Not the full output matrix, actual hI/hB, a premise-free window result or RH."
+}

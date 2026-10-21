@@ -1,0 +1,20 @@
+{
+  "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSOddSignedEnclosureV1.lean"
+  ],
+  "seconds": 1.7447239220000483,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "3c9b1b60613a7c24b89af10f5ba57ff7d7e6d623be23f45513c959bd120fd2ed",
+  "compiler_output": "'AEGIS.CvSOddSignedEnclosureV1.signed_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+}

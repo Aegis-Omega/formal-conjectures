@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "source_commit": "9d98c4e99e3ab3d271215192f100964a5fdaac0c",
+  "run": 39571212916,
+  "artifact_id": 12332549155,
+  "artifact_sha256": "405437564d10c5e8ea7df5db96be3efaa261a6ae2486c03de2913e8efe70b693",
+  "graph_recovery_run": 39578861869,
+  "downloaded_graph_artifact_id": 12335312281,
+  "downloaded_graph_artifact_sha256": "daf948d4b68d23f89a376f7e24c576ebf8305d30d4efac6b690d58688509c059",
+  "validated_binary_count": 1044,
+  "binary_validation_method": "All1044 exact binary bytes rehashed from the independently downloaded f118 ZIP; their entire map is identical to the successful9d98 source snapshot. The recovery runner separately checked the original583535823-byte ZIP SHA before extracting unchanged graph/receipts.",
+  "validated_actual_module_count": 433,
+  "fresh_actual_modules": [],
+  "reused_actual_modules": 433,
+  "axiom_audit_count": 2055,
+  "proof_graph_status": "PASS",
+  "proof_graph_roots": 14,
+  "proof_graph_declarations": 82601,
+  "source_manifest_modules": 3113,
+  "proof_graph_zip_sha256": "95967d454d1dabfb77c77448205dfea62c3c90702761ce1ec61204cd62c63c9c",
+  "scope": "Actual CvS finite source budget, original-vector hfin/hB and conditional fixed-window zero-side theorem. No unconditional RH or analytic Krein/trace witness claimed."
+}

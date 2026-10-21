@@ -1,0 +1,2 @@
+'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /- Exact source declaration slice for the basis map only.
 All certR data and coefficient definitions have their actual source values.
 This is not a replay of unrelated analytic imports of the original modules. -/

@@ -1,0 +1,62 @@
+{
+  "status": "ARB_REPRODUCED_NOT_LEAN",
+  "upstream_repository": "Aegis-Omega/AEGIS-OMEGA",
+  "upstream_commit": "0c1477fb032bb979a1bc61efd23caa4cacfe376c",
+  "formal_base_commit": "b4fbdf89959ce0f6c7f4c11e3adf08039600184f",
+  "lean_bridge_status": "PENDING_ORIGINAL_IMPORT_CI",
+  "N": 70,
+  "low_dimension": 139,
+  "augmented_dimension": 141,
+  "precision_bits": 192,
+  "gauss_legendre_order": 24,
+  "ellipse_rho": 4,
+  "input_sources": [
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.2/RECEIPT.json",
+      "sha256": "86fc51277e2821633f48bf6ecb305a41b56aa0f056d63c7d0e9aa5eb7d11900e",
+      "blob_sha": "eb83760a6549e51122748d56d83285fb08b6fd1f"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.2/complement_lp.json",
+      "sha256": "881a40ca60881116d9abe5bd362a5f7b4526ce1b3055c73e3dcb1e43756d594b",
+      "blob_sha": "9438b418a8d62389f4d3d532b2b055847024c93c"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.2/sbar.json",
+      "sha256": "d33d02b53ec2f8f1fbbaa3af5767b361e49a42f3a5d52654b0ae09c1e17823cf",
+      "blob_sha": "9d639cc83d92d50f475578129195800421b16111"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.2/trace_arb.json",
+      "sha256": "160021d1ed89d298e8e71a2ee88463b6ace560c7ca556970e8a6dd2a63e3003c",
+      "blob_sha": "e66017b206dd6a0b0b8d33a5dd3ccdb28007a751"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.3/RECEIPT.json",
+      "sha256": "e57c4a23f4e4fcdd0356ce99e9e4c696eca9ef512d71b896033572676c0234f2",
+      "blob_sha": "f15de7f1d64aca50838e32f91fe2dd93cfb946c2"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.3/complement_lp.json",
+      "sha256": "e77ec9c38071941858b9fb081ac9b594caefdf8a5eb80883c803d92843498395",
+      "blob_sha": "2997fc2445ab6126b5e5fc6e3a4cf9f434e6df4a"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.3/sbar.json",
+      "sha256": "c0b9a0fcdd80aa2f0e1265adf72e931238fea72a74d2f478271637fd95624ee3",
+      "blob_sha": "a9a1fa6bca8cba02f8a730b972331bc8c3c37511"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/L1.3/trace_arb.json",
+      "sha256": "05944dcc6a691c2514b0b3b307fe403983b284c9cb811a3a1d4004565cc27c4d",
+      "blob_sha": "bc05caa2127071529a59263f5aefba84a99362a1"
+    },
+    {
+      "path": "research/rh/aegis_source_0c1477f/research/feshbach_arb_v2/complement_trace_arb.py",
+      "sha256": "dd9f9bdd452fa7fb5ad2454d8f58f55fea4b5d78ac9d638cfa9ca5065417f272",
+      "blob_sha": "b33151b4dd4e8bf7e85711312bd45d253f4997a0"
+    }
+  ],
+  "reconstruction": "Original trace script with an additional moment-zero-only submatrix trace. Original inputs unchanged. New runs use LT=1.2 and N=70.",
+  "scope": "Arb interval computations are independent supporting evidence, not Lean proofs of the integral or of RH."
+}

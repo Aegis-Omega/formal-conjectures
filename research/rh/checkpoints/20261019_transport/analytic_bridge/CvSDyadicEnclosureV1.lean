@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /- Exact scale transport for the Q96 to Q64 source enclosure check. -/
 import Mathlib.Data.Real.Basic
 import Mathlib.Tactic.FieldSimp

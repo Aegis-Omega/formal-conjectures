@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /-
 AEGIS Omega — source-bound symmetry composition for the existing CvS projected Gram.
 Additive, read-only Lean candidate for formal-conjectures@cf9372f1.

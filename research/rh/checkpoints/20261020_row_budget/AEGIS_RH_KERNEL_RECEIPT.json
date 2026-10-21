@@ -1,0 +1,115 @@
+{
+  "decision": "STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION",
+  "repository": "tarikskalic33/formal-conjectures",
+  "branch": "proof/rh-feshbach-schur-v1",
+  "mathematical_source_sha": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+  "new_certificate_source_commit": "b38fe947",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "local_replays": [
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-recovery",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-research-execution/integration/CvSMidpointRadiusV1.olean",
+        "/workspace/aegis-row-budget-recovery/CvSMidpointRadiusV1.lean"
+      ],
+      "seconds": 1.4251440130001356,
+      "source_sha256": "cf41e386ca1b9b003dda97ce8c2d49b031f26c46c6a0edf8c96d4471317f47e6",
+      "status": "PASS",
+      "returncode": 0,
+      "compiler_output": "'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "scope": "Uniform finite algebra/enclosure lemmas, not actual CvS source-to-output-interval bridge",
+      "source_path": "research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean",
+      "source_blob_sha": "37d6bb87580a2ae7ffde7a92dcaeda31b5546d98"
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-R",
+        "/workspace/aegis-row-budget-recovery",
+        "-DwarningAsError=true",
+        "-o",
+        "/workspace/aegis-research-execution/integration/CvSRowBudgetAlgebraV1.olean",
+        "/workspace/aegis-row-budget-recovery/CvSRowBudgetAlgebraV1.lean"
+      ],
+      "seconds": 2.138643471000023,
+      "source_sha256": "8800f62d0a3e1d49e991829db81b6c773c504f20400b0867f034eac8b3d44ece",
+      "status": "PASS",
+      "returncode": 0,
+      "compiler_output": "'AEGIS.CvSRowBudgetAlgebraV1.row_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+      "scope": "Uniform finite algebra/enclosure lemmas, not actual CvS source-to-output-interval bridge",
+      "source_path": "research/rh/checkpoints/20261020_row_budget/CvSRowBudgetAlgebraV1.lean",
+      "source_blob_sha": "4f80c4392fe797593241b4168b269c31a340aa19"
+    },
+    {
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "/workspace/aegis-row-budget-recovery/CvSRelativeRowCertificateL12V1.lean"
+      ],
+      "LEAN_PATH_prefix": "/workspace/aegis-h140-recovery/recovered_4fabfb66/native_slice",
+      "seconds": 96.35074805099998,
+      "returncode": 0,
+      "source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+      "checker_source_sha256": "7daca83a2fa4ba1c33ab93c0e591f6e49859e387939b8fe9450eb64359569fe7",
+      "lean": "4.33.1",
+      "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "status": "PASS",
+      "compiler_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]\n'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms\n",
+      "scope": "Exact finite Boolean and positive integer margin only, with byte-identical original computational definitions; actual analytic entry enclosure NOT proved in this replay.",
+      "source_path": "research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean",
+      "source_blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
+    }
+  ],
+  "full_actual_source_ci": {
+    "run": 39379596732,
+    "status": "PASS",
+    "receipt": "../20261020_basis_recovery/CI_READBACK.json",
+    "actual_theorem_manifest": "../20261020_basis_recovery/ACTUAL_SOURCE_MANIFEST.json"
+  },
+  "actual_hB_enclosure": "NOT_KERNEL_VERIFIED",
+  "canonical_unconditional_RH": "NOT_PROVED",
+  "new_native_graph": {
+    "status": "PASS",
+    "roots": 25,
+    "declarations": 13263,
+    "modules": 503,
+    "missing_dependencies": 0,
+    "proof_cycles": 0,
+    "metadata_groups": 442,
+    "axioms": [
+      "Classical.choice",
+      "Quot.sound",
+      "propext"
+    ],
+    "raw_proof_graph": "NATIVE_ROW_BUDGET_GRAPH.zip",
+    "replay": "RowBudgetProofGraph.RECEIPT.json",
+    "missing_source_modules": 0,
+    "graph_sha256": "5b758b686d55af155c87b918792b696ccfe3ce67d1a9e057313be0995f0a8b79",
+    "_stdin_origin": "Lean main-module declaration origin; bound to archived RowBudgetProofGraph.lean"
+  },
+  "new_source_bindings": {
+    "CvSMidpointRadiusV1.lean": {
+      "sha256": "cf41e386ca1b9b003dda97ce8c2d49b031f26c46c6a0edf8c96d4471317f47e6",
+      "blob_sha": "37d6bb87580a2ae7ffde7a92dcaeda31b5546d98"
+    },
+    "CvSRowBudgetAlgebraV1.lean": {
+      "sha256": "8800f62d0a3e1d49e991829db81b6c773c504f20400b0867f034eac8b3d44ece",
+      "blob_sha": "4f80c4392fe797593241b4168b269c31a340aa19"
+    },
+    "CvSRelativeRowCertificateL12V1.lean": {
+      "sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+      "blob_sha": "cb77b25c7474751460a248fe87a5e6f34dd1c7e0"
+    }
+  }
+}

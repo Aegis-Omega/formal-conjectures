@@ -1,0 +1,8 @@
+diff --git a/research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSActualGramWindowV1.lean b/research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSActualGramWindowV1.lean
+index aaf9bf3b..8863e386 100644
+--- a/research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSActualGramWindowV1.lean
++++ b/research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/CvSActualGramWindowV1.lean
+@@ -34,2 +34 @@ theorem gramUp_nonneg {F : Finset ℤ} {R NP : ℕ}
+-  rw [hz, Finset.sum_empty] at h
+-  exact h
++  simpa only [Nat.cast_zero, hz, Finset.sum_empty] using h

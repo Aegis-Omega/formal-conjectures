@@ -1,0 +1,24 @@
+'AEGIS.RowBudgetFirstColumnV1.checked' depends on axioms: [propext]
+AEGIS.RowBudgetFirstColumnV1.checked : AEGIS.RowBudgetFirstColumnV1.entries.all AEGIS.CvSFirstColumnCheckerV1.check =
+  true
+'AEGIS.RowBudgetFirstColumnV1.target_source' depends on axioms: [propext]
+AEGIS.RowBudgetFirstColumnV1.target_source : (AEGIS.RowBudgetFirstColumnV1.entries.all fun e =>
+    decide (e.target = AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)) =
+  true
+'AEGIS.RowBudgetFirstColumnV1.row_order' does not depend on any axioms
+AEGIS.RowBudgetFirstColumnV1.row_order : List.map (fun e => ↑e.row) AEGIS.RowBudgetFirstColumnV1.entries =
+  List.range 139
+'AEGIS.RowBudgetFirstColumnV1.first_column_contains' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.RowBudgetFirstColumnV1.first_column_contains : ∀ e ∈ AEGIS.RowBudgetFirstColumnV1.entries,
+  AEGIS.CvSIntervalMatrixProductV1.contains
+      (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0)
+      (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) =
+    true
+'AEGIS.RowBudgetFirstColumnV1.all_rows_covered' depends on axioms: [propext, Quot.sound]
+AEGIS.RowBudgetFirstColumnV1.all_rows_covered : ∀ (i : Fin 139), ∃ e ∈ AEGIS.RowBudgetFirstColumnV1.entries, e.row = i
+'AEGIS.RowBudgetFirstColumnV1.first_column_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+AEGIS.RowBudgetFirstColumnV1.first_column_mem : ∀ e ∈ AEGIS.RowBudgetFirstColumnV1.entries,
+  ∀ {x : ℝ},
+    AEGIS.RHFixIntervalV1.Iv.Mem 80 (AEGIS.CvSFirstColumnCheckerV1.originalEntry e) x →
+      AEGIS.RHFixIntervalV1.Iv.Mem 80
+        (AEGIS.CvSPackedGramV1.Im AEGIS.CvSRelativeRowCertificateL12V1.intervals (↑e.row) 0) x

@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-recovery",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-research-execution/integration/CvSRowBudgetAlgebraV1.olean",
+    "/workspace/aegis-row-budget-recovery/CvSRowBudgetAlgebraV1.lean"
+  ],
+  "seconds": 2.138643471000023,
+  "source_sha256": "8800f62d0a3e1d49e991829db81b6c773c504f20400b0867f034eac8b3d44ece",
+  "status": "PASS",
+  "returncode": 0,
+  "compiler_output": "'AEGIS.CvSRowBudgetAlgebraV1.row_energy_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetAlgebraV1.relative_budget_of_matrix_nonneg' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n",
+  "scope": "Uniform finite algebra/enclosure lemmas, not actual CvS source-to-output-interval bridge"
+}

@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /-
 AEGIS Omega - proposed source-level bridge, read-only.
 Pinned source: tarikskalic33/formal-conjectures cf9372f13370596d51eb36134f141f199ba60b5c.

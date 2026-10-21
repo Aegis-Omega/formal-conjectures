@@ -1,0 +1,21 @@
+{
+  "source_commit": "8b00b0b73e6164cbac52dfecd096287d81bfeca6",
+  "readback": "Exact immutable GitHub raw bytes match local files",
+  "files": [
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean",
+      "sha256": "2c0c8fa448fa006b2523f6a0a635321981521db41553e56cadf196bf2f99fe51",
+      "blob_sha": "28523e24451e4e69d7ac738011296ba36e2222f2"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean",
+      "sha256": "7fb26fba57266552fe95417d516488c035861990797e90ca51149c292ccecfbc",
+      "blob_sha": "137eb1bd72ae818a2cb9c24688517222c9c81301"
+    },
+    {
+      "path": "research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnCheckerV1.lean",
+      "sha256": "93a0e14a81c56731c80d26b1de607f983c798d511558f0559ae0ccaf96857cd1",
+      "blob_sha": "a49825baabf3d576624cdc39433913af46d2c339"
+    }
+  ]
+}

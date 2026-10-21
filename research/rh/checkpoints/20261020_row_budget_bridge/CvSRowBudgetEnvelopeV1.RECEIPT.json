@@ -1,0 +1,20 @@
+{
+  "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSRowBudgetEnvelopeV1.lean"
+  ],
+  "seconds": 1.6402147949993378,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+  "compiler_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+}

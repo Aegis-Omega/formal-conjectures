@@ -1,0 +1,170 @@
+{
+  "status": "PASS",
+  "repository": "tarikskalic33/formal-conjectures",
+  "branch": "proof/rh-feshbach-schur-v1",
+  "commit": "177dcd648c5497d923586f1d94eb701880389c04",
+  "run_id": 39455515829,
+  "job_id": 118741227813,
+  "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39455515829",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "source_path": "research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean",
+  "source_sha256": "2c0c8fa448fa006b2523f6a0a635321981521db41553e56cadf196bf2f99fe51",
+  "source_blob_sha": "28523e24451e4e69d7ac738011296ba36e2222f2",
+  "explicit_workflow_audits": [
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_diag",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceKernel_off",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualCrossRowL12V1.sourceY_eq_actual_crossRow",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSMidpointRadiusV1.product_error",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSMidpointRadiusV1.sum_product_error",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_enclosure",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSOddSignedEnclosureV1.signed_rational_bounds",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSRationalIntervalV1.rationalRange_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.midpoint_error",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.dot_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.congruence_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.hull_mem_left",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.downscale_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.upscale_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.mem_of_contains",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.point_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.positive_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_bounds",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSTauSigned150L12V1.signed_tau_interval",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.transformedCoeff_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramRat_cast",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.gramUp_symm",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.diagonal_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceKernel_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    },
+    {
+      "theorem": "AEGIS.CvSActualRowInputL12V1.sourceY_mem",
+      "axioms_output": "['Classical.choice', 'Quot.sound', 'propext']"
+    }
+  ],
+  "additional_source_audit": {
+    "theorem": "AEGIS.CvSActualRowInputL12V1.sourceZ_mem",
+    "axioms_output": "[propext, Classical.choice, Quot.sound]",
+    "status": "Source compiled and #print axioms inspected; not yet included in workflow explicit 37-name list"
+  },
+  "scope": "Original-import actual CvS input enclosures including signed source kernels, all 301 residual rows for arbitrary enclosed real projection and M>=3. Does not prove literal table identities, full Q80 output enclosure, hB, one-window Krein producer or universal RH."
+}

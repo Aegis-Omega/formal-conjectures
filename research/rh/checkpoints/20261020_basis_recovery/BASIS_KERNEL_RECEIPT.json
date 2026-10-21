@@ -14,8 +14,8 @@
     ]
   },
   "basis_native_context": "Source-extracted certR, rCoeff, R_basis, normSqCoeffs; full analytic imports not locally replayed",
-  "full_production_module": "NOT_RUN; queued via existing source workflow after push",
-  "new_consumers": "3 source candidates; full-context kernel compilation pending",
+  "full_production_module": "PASS on exact c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+  "new_consumers": "3/3 full-context kernel PASS; standard axioms only",
   "still_explicit": [
     "actual entry enclosure hIv or Fact(bigCheck=true)",
     "Schur row budget and positive gap for hlow",
@@ -36,5 +36,5097 @@
       "blob_sha": "106b8ecf2627ce1c1bc0c14945388b3c4b345366"
     }
   },
-  "unconditional_RH": "NOT_PROVED"
+  "unconditional_RH": "NOT_PROVED",
+  "ci_evidence": [
+    {
+      "source_commit": "c9fc5dfe42f5ddab6a621b088f16cd82603e4b98",
+      "ci_run": 39333722640,
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39333722640",
+      "status": "PASS",
+      "log": "CI_c9fc5dfe_RING.log",
+      "log_sha256": "7fb623cb6abccb92fe21ba0468cfa1e39aff479a310f49ae80b0891cb81e152f",
+      "audited_declarations": {
+        "AEGIS.CvSArchLorentzV1.expAbs_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_cos_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_node": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source_value": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.source_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sq_mul_sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.lorentz_total": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.inv_lorentz_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.eq_zero_of_abs_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integral_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.arch_series_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.cosT_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_profile": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.integrable_of_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_generic": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.sq_mul_diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.exp_trig_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.eq_of_abs_sub_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.summable_diag_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.integrable_tsum_of_summable_integral_norm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.atom_exp_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_hermitian_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_prime_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conjRefl_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.fourier_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conv_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.normSq_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_eq_cos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.trigPoly_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_trigPoly_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.cos_autocorr_fold": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_eq_indicator": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cosT_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cos_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.quarter_re_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_re": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_im": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_eq_tsum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.half_im_digamma": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.summable_inv_width": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_at_L": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cos_cosB": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.psi_sub_log_eq_hplus": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_eq_qsym": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_contDiff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_tsupport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_le_one": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.rough_of_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.energy_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_slack_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_self_adjoint": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_ae_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.plancherel_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.energy_eq_two_pi_L2": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.cauchy_schwarz": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.fourier_eq_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.energy_le_dist": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.slack_le_trace": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.complement_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.energy_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.quad_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.scertM_measurable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.feshbach_combine": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.zero_quadratic_eq_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg_of_krein": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.exists_orth_coeffs": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.momentZero_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.lowBlock_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_sub_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.window_of_certificate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.fourier_indicator_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.window_of_certificate_C1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.ibp_twice": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentZero_of_ode": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.basisFun_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentAtom_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.window_of_certificate_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.scertM_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.quad_eq_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_eq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.window_of_certificate_matrix": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_eq_lowBlock": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.cross_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.archTerm_abs_le_interp": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.hplus_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_sq_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.lowBlock_scertM_sq_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.cross_sq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.coef_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.hasSum_coef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_normSq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_mul_conj_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.norm_sub_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.tendsto_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sub": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.tendsto_cross_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_trigPoly_row": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.atom_orth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sq_le_of_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.window_of_certificate_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_entry_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_quadratic_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tsum_abs_width_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.source_integral_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tau_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.inv_sub_expand": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_inv_pow_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_shift_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_int_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.window_of_certificate_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rowTail_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_hasSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_le_partial": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.partial_le_arctan": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_step": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.tail_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_integral_series": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.pi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.e35_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.head_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauBatch0_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.source_integral_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log2_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log3_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinQ_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinPi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.primeSum_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.prime_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.log_step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.cube_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.sq_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.tail_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.logG_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.stepD_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.diagSeries_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_mul": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.pack_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_core": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.gramEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowErr_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowsOk_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.check_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower_complex": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbIv_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilb8_check": [
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbert8_posDef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.log_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.idiv_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.lpi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.hplus_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.D_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.Pd_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diag_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.packed_check_true": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_nonnegative": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.signedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projectedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_lower_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_nonnegative_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.cvs_hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.rotate_four_sums": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_finite_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.transformed_coeff_linear": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_real_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.original_atom_coercivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.hlow_of_projected_packed": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.signedFreq_injective": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.lowFreq_mem_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.sum_signedFreq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.frequency_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.atomWeight_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.transformed_coeff_eq_lowCoeff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.projectedQ_eq_signed_form": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hTransport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.original_atom_coercivity_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hlow_of_projected_packed_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.cs_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_error": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.gram_range": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tabOk_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.transformedCoeff_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.signedEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_collect": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.diag_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tau_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.pi_sq_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.X_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Rpi_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.ivOk_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.C_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.hI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.neI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.kp_real": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.H_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Ehat_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_mem_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_mem_certI_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projected_lower_L12_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTriangularTransportV1.upper_triangular_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_row_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_upper": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_diag_ne_zero": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.rCoeff_diag_ne_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.basisFrobenius_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_normSq_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    {
+      "source_commit": "90768e558477b33550361b5415d16106d4ccf0e8",
+      "ci_run": 39352088072,
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39352088072",
+      "status": "PASS",
+      "log": "CI_90768e55_RING.log",
+      "log_sha256": "303e619ab554782e264adb47bac519261ccd41c6c924c4a9437bf3bd5f8e59e9",
+      "audited_declarations": {
+        "AEGIS.CvSArchLorentzV1.expAbs_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_cos_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_node": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source_value": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.source_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sq_mul_sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.lorentz_total": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.inv_lorentz_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.eq_zero_of_abs_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integral_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.arch_series_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.cosT_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_profile": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.integrable_of_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_generic": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.sq_mul_diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.exp_trig_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.eq_of_abs_sub_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.summable_diag_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.integrable_tsum_of_summable_integral_norm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.atom_exp_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_hermitian_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_prime_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conjRefl_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.fourier_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conv_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.normSq_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_eq_cos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.trigPoly_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_trigPoly_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.cos_autocorr_fold": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_eq_indicator": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cosT_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cos_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.quarter_re_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_re": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_im": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_eq_tsum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.half_im_digamma": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.summable_inv_width": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_at_L": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cos_cosB": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.psi_sub_log_eq_hplus": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_eq_qsym": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_contDiff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_tsupport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_le_one": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.rough_of_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.energy_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_slack_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_self_adjoint": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_ae_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.plancherel_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.energy_eq_two_pi_L2": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.cauchy_schwarz": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.fourier_eq_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.energy_le_dist": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.slack_le_trace": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.complement_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.energy_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.quad_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.scertM_measurable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.feshbach_combine": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.zero_quadratic_eq_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg_of_krein": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.exists_orth_coeffs": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.momentZero_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.lowBlock_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_sub_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.window_of_certificate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.fourier_indicator_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.window_of_certificate_C1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.ibp_twice": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentZero_of_ode": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.basisFun_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentAtom_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.window_of_certificate_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.scertM_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.quad_eq_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_eq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.window_of_certificate_matrix": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_eq_lowBlock": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.cross_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.archTerm_abs_le_interp": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.hplus_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_sq_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.lowBlock_scertM_sq_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.cross_sq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.coef_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.hasSum_coef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_normSq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_mul_conj_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.norm_sub_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.tendsto_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sub": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.tendsto_cross_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_trigPoly_row": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.atom_orth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sq_le_of_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.window_of_certificate_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_entry_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_quadratic_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tsum_abs_width_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.source_integral_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tau_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.inv_sub_expand": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_inv_pow_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_shift_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_int_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.window_of_certificate_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rowTail_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_hasSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_le_partial": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.partial_le_arctan": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_step": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.tail_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_integral_series": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.pi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.e35_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.head_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauBatch0_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.source_integral_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log2_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log3_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinQ_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinPi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.primeSum_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.prime_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.log_step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.cube_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.sq_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.tail_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.logG_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.stepD_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.diagSeries_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_mul": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.pack_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_core": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.gramEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowErr_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowsOk_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.check_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower_complex": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbIv_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilb8_check": [
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbert8_posDef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.log_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.idiv_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.lpi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.hplus_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.D_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.Pd_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diag_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.packed_check_true": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_nonnegative": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.signedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projectedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_lower_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_nonnegative_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.cvs_hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.rotate_four_sums": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_finite_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.transformed_coeff_linear": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_real_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.original_atom_coercivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.hlow_of_projected_packed": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.signedFreq_injective": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.lowFreq_mem_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.sum_signedFreq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.frequency_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.atomWeight_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.transformed_coeff_eq_lowCoeff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.projectedQ_eq_signed_form": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hTransport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.original_atom_coercivity_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hlow_of_projected_packed_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.cs_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_error": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.gram_range": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tabOk_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.transformedCoeff_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.signedEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_collect": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.diag_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tau_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.pi_sq_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.X_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Rpi_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.ivOk_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.C_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.hI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.neI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.kp_real": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.H_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Ehat_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_mem_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_mem_certI_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projected_lower_L12_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTriangularTransportV1.upper_triangular_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_row_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_upper": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_diag_ne_zero": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.rCoeff_diag_ne_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.basisFrobenius_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_normSq_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.packS_eq": [
+          "propext"
+        ],
+        "AEGIS.FastKronV1.ldotS_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.unpackZ_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.unpackR_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.transC_eq": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.transP_getD": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.xsF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.xpF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.hpF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.row_value_of": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.ivF_ivOk": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.rowOk_of_chunk": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.bigCheck_of_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.rows_ok_of_chunks": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.bigCheck_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.projectedEntry_mem_certI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.projected_lower_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    },
+    {
+      "source_commit": "6230b75bdd9b6fb487a7fb10e2739755f663acc0",
+      "ci_run": 39379596732,
+      "url": "https://github.com/tarikskalic33/formal-conjectures/actions/runs/39379596732",
+      "status": "PASS",
+      "log": "CI_6230b75b_RING.log",
+      "log_sha256": "e1ed15413ba4da32f0de8f4e98b2583290983f1207d6a77d96be1f60d6ce8f68",
+      "audited_declarations": {
+        "AEGIS.CvSArchLorentzV1.expAbs_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.expAbs_fourier_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_cos_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_node": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.sin_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchLorentzV1.lorentz_source_value": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.source_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sq_mul_sourceS_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.lorentz_total": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.inv_lorentz_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.eq_zero_of_abs_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.sourceS_integral_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.archTerm_source_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchSourceV1.arch_series_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.cosT_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_profile": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.integrable_of_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_norm_integral_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_mul_summable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_generic": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_identity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.sq_mul_diagD_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.exp_trig_hasDerivAt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diag_exp_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.lorentz_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.eq_of_abs_sub_le_div": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.diagD_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.archTerm_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.summable_diag_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchDiagV1.arch_series_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.integrable_tsum_of_summable_integral_norm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArchIntegrableV1.arch_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.atom_exp_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_hermitian_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigAtom_mul_conj_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_autocorrelation_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimeBlockV1.trigPoly_prime_block": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conjRefl_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.fourier_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.conv_conjRefl": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.normSq_fourier": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_eq_cos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.trigPoly_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.autocorr_trigPoly_eq_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.cos_autocorr_fold": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMassV1.mass_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_continuous": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_eq_indicator": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cosT_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.fourier_evenExt_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPrimePairV1.cos_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.quarter_re_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_re": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.seriesTerm_im": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_eq_tsum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.half_im_digamma": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.summable_inv_width": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_source_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_diag_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_sourceS_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDigammaSeriesV1.hplus_mul_diagD_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.blockFn_at_L": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.cos_cosB": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_diag": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.hplus_cosB_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.qsym_cosB_integral": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSQuadV1.quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.psi_sub_log_eq_hplus": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_eq_qsym": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRingBridgeV1.scertM_quad_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_contDiff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_tsupport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mollify_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.fourier_moll_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_le_one": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.mfac_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRoughV1.rough_of_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.energy_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_smooth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSKreinRoughV1.krein_slack_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_self_adjoint": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.fourier_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_ae_tendsto": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.mollify_norm_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.plancherel_rough": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPlancherelRoughV1.energy_eq_two_pi_L2": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.cauchy_schwarz": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.fourier_eq_pairing": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.energy_le_dist": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.slack_le_trace": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTraceV1.complement_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.energy_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.quad_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.scertM_measurable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.feshbach_combine": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.zero_quadratic_eq_energy": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFeshbachWindowV1.window_nonneg_of_krein": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.exists_orth_coeffs": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.momentZero_translate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.lowBlock_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.energy_sub_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowCertV1.window_of_certificate": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.fourier_indicator_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_energy_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.lowBlock_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockDecayV1.window_of_certificate_C1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.ibp_twice": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentZero_of_ode": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.basisFun_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.momentAtom_momentZero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSMomentBasisV1.window_of_certificate_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.scertM_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.quad_eq_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_eq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.lowBlock_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowBlockMatrixV1.window_of_certificate_matrix": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_eq_lowBlock": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_scertM_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.trigPoly_quad_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossMatrixV1.cross_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.archTerm_abs_le_interp": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.hplus_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.scertM_sq_mul_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.lowBlock_scertM_sq_integrable": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossBoundV1.cross_sq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.coef_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.hasSum_coef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_normSq_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.integral_mul_conj_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.norm_sub_trigPoly": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFourierIntervalV1.tendsto_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sub": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.tendsto_cross_partialSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_trigPoly_row": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.atom_orth": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.cross_sq_le_of_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSCrossCertV1.window_of_certificate_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_entry_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.residual_quadratic_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.cvsEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tsum_abs_width_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.source_integral_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.tau_abs_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_off": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.inv_sub_expand": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.crossRow_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_inv_pow_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_Ioc_shift_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.sum_int_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rows_split": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.window_of_certificate_tail": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.rowTail_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRowTailV1.exists_uniform_rows_tail_cutoff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_hasSum": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_le_partial": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.partial_le_arctan": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.arctan_step": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSArctanTailV1.tail_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_integral_series": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauSourceV1.source_bracket": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.pi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.e35_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.head_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.tauBatch0_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauL12V1.source_integral_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log2_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.log3_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinQ_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.sinPi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.primeSum_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.prime_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tauFullAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauPrimeL12V1.tau_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauR1SourceL12V1.source_integral_mem_R1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauR1PrimeL12V1.tau_mem_R1": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.log_step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.cube_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.sq_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.tail_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.logG_limit": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.step_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.hplus_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.stepD_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagTelV1.diagSeries_tel": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_mul": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.RHFixIntervalV1.Iv.mem_add": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.pack_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_core": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.packDot_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.gramEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowErr_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.rowsOk_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.check_spec": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.quad_lower_complex": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbIv_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilb8_check": [
+          "propext"
+        ],
+        "AEGIS.CvSPackedGramV1.hilbert8_posDef": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.log_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.idiv_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.lpi_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.hplus_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.D_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.Pd_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagCheck_sound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diagAll_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.diag_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDiagL12V1.cvsEntry_diag_neg": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.packed_check_true": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_lower": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedPackedCertificateL12V1.projected_nonnegative": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.signedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projectedEntry_symm": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_lower_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSymmetryV1.projected_nonnegative_of_Iv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSSchurClosureFromBoundsV1.cvs_hlow_of_coercivity_and_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.rotate_four_sums": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_finite_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.transformed_coeff_linear": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSFiniteCongruenceV1.quadratic_form_real_congruence": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.original_atom_coercivity": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedSchurBridgeL12V1.hlow_of_projected_packed": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.signedFreq_injective": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.lowFreq_mem_iff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.sum_signedFreq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.frequency_factor": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.atomWeight_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.transformed_coeff_eq_lowCoeff": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.projectedQ_eq_signed_form": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hTransport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.original_atom_coercivity_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedTransportL12V1.hlow_of_projected_packed_of_transport": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSDividedDifferenceCollectionV1.diagonal_divided_difference_collection": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.cs_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_error": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.gram_range": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tabOk_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.transformedCoeff_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.signedEntry_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_collect": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.diag_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.tau_box": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.pi_sq_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.X_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Rpi_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.ivOk_mem": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.C_bounds": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.hI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.neI_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.kp_real": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.H_err": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.Ehat_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.entry_mem_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projectedEntry_mem_certI_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryL12V1.projected_lower_L12_of_check": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTriangularTransportV1.upper_triangular_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_row_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_upper": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.certR_diag_ne_zero": [
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.rCoeff_diag_ne_zero": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_surjective": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.basisFrobenius_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_normSq_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.packS_eq": [
+          "propext"
+        ],
+        "AEGIS.FastKronV1.ldotS_eq": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.unpackZ_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.unpackR_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.transC_eq": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.FastKronV1.transP_getD": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.xsF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.xpF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.hpF_getD": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.row_value_of": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.ivF_ivOk": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.rowOk_of_chunk": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.bigCheck_of_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryFastL12V1.rows_ok_of_chunks": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.bigCheck_true": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.projectedEntry_mem_certI": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSProjectedEntryReplayL12V1.projected_lower_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowCoercivityL12V1.coercivity_const_pos": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowCoercivityL12V1.original_atom_coercivity_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSLowCoercivityL12V1.hlow_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRelativeBudgetL12V1.hlow_of_relative_budget": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRelativeBudgetL12V1.Q_nonneg_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSRelativeBudgetL12V1.hlow_L12_relative": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowL12V1.lt_log_of_three_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowL12V1.atomCenter_range": [
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowL12V1.window_L12": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauFarL12V1.sum_width_le_inv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauFarL12V1.source_integral_abs_le_inv": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSTauFarL12V1.tau_abs_le_far": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSGramTailV1.gram_tail_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSGramTailV1.rows_gram_le": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSGramTailV1.window_of_certificate_gram": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowGramL12V1.tau_far_rows": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ],
+        "AEGIS.CvSWindowGramL12V1.window_L12_gram": [
+          "Classical.choice",
+          "Quot.sound",
+          "propext"
+        ]
+      }
+    }
+  ],
+  "superseding_source": "6230b75bdd9b6fb487a7fb10e2739755f663acc0 additionally proves bigCheck_true, unconditional low coercivity, Gram tail and tau R1"
 }

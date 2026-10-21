@@ -1,0 +1,9 @@
+# Exact row-budget continuation
+
+The native layer has 16 checked roots: nine matrix/interval contracts, three complete-envelope contracts, two oddness/sign transports, rational box encoding and the regression for the exact source-row distribution error. All use only standard axioms. Three additional staged arithmetic roots pass in 7.48 seconds: the exact tau-weighted source column and two Gram row0 products. The complete 19-root proof graph and all source module hashes are archived. The original RHFixInterval mathematical body is unchanged; the native replay narrows only its Mathlib umbrella import.
+
+The direct output-cell replay was killed (SIGKILL) after 120.78 seconds with observed Lean RSS about 7.3 GiB plus lake about 0.8 GiB, at an 8 GiB memory limit. It is NOT a kernel PASS and is not a mathematical counterexample. The smaller staged replay succeeds without changing numeric data. Its three roots are not a full cell or full-table certificate.
+
+The actual source-row CI failed at the missing Finset.sum_mul step; the one-line repair and a failure-shape regression are preserved. The signed tau source module composes the original 1..70 and R1 71..150 boxes, oddness and exact zero into signed rational and arbitrary-precision fixed-point bounds. Its actual-import compilation is audited in the separate CI receipt; it must not be inferred solely from the generic native proofs.
+
+The actual hB enclosure is still not proved. The uniform envelope theorem needs source input membership and a true executable tableCheck against the stored Q80 intervals. Then the existing green finite Gram bridge consumes that enclosure. The all-real-t Krein certificate, trace bound, positive scalar gap and ultimately a universal window/Weil producer remain separate obligations. No unconditional RH proof is asserted.

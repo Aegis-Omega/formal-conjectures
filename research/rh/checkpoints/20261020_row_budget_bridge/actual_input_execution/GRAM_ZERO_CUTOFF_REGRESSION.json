@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "lean": "4.33.1",
+  "scope": "Native exact-expression reproduction only; full original-import window checked separately by CI39569164255.",
+  "runs": [
+    {
+      "case": "original_rewrite_rejected",
+      "source": "import CvSRealTailFormV1\nopen scoped BigOperators\ntheorem zero_cutoff_rewrite_regression (NP : \u2115) (f : \u2124 \u2192 \u211d) (C : \u211d)\n    (h : \u2211 m \u2208 (Finset.Icc (-((0 : \u2115) : \u2124)) ((0 : \u2115) : \u2124)).filter\n      (fun m => NP < m.natAbs), f m \u2264 C) : 0 \u2264 C := by\n  have hz : (Finset.Icc (-(0 : \u2124)) 0).filter (fun x => NP < x.natAbs) = \u2205 := by\n    apply Finset.eq_empty_iff_forall_notMem.mpr\n    intro x hx\n    rcases Finset.mem_filter.mp hx with \u27e8hx, habs\u27e9\n    have hx0 : x = 0 := by\n      have hi := Finset.mem_Icc.mp hx\n      omega\n    subst x\n    norm_num at habs\n  rw [hz, Finset.sum_empty] at h\n  exact h\n\n#print axioms zero_cutoff_rewrite_regression\n",
+      "source_sha256": "feaabf5598c0008b85d6af6580d35ed4d22520d3fb54e184815a15a0c1f68a79",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "/workspace/original_rewrite_rejected.lean"
+      ],
+      "exit_code": 1,
+      "compiler_output": "/workspace/original_rewrite_rejected.lean:15:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern\n  {x \u2208 Finset.Icc (-0) 0 | NP < x.natAbs}\nin the target expression\n  \u2211 m \u2208 Finset.Icc (-\u21910) \u21910 with NP < m.natAbs, f m \u2264 C\n\nNP : \u2115\nf : \u2124 \u2192 \u211d\nC : \u211d\nh : \u2211 m \u2208 Finset.Icc (-\u21910) \u21910 with NP < m.natAbs, f m \u2264 C\nhz : {x \u2208 Finset.Icc (-0) 0 | NP < x.natAbs} = \u2205\n\u22a2 0 \u2264 C\n'zero_cutoff_rewrite_regression' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "case": "repaired_rewrite_accepted",
+      "source": "import CvSRealTailFormV1\nopen scoped BigOperators\ntheorem zero_cutoff_rewrite_regression (NP : \u2115) (f : \u2124 \u2192 \u211d) (C : \u211d)\n    (h : \u2211 m \u2208 (Finset.Icc (-((0 : \u2115) : \u2124)) ((0 : \u2115) : \u2124)).filter\n      (fun m => NP < m.natAbs), f m \u2264 C) : 0 \u2264 C := by\n  have hz : (Finset.Icc (-(0 : \u2124)) 0).filter (fun x => NP < x.natAbs) = \u2205 := by\n    apply Finset.eq_empty_iff_forall_notMem.mpr\n    intro x hx\n    rcases Finset.mem_filter.mp hx with \u27e8hx, habs\u27e9\n    have hx0 : x = 0 := by\n      have hi := Finset.mem_Icc.mp hx\n      omega\n    subst x\n    norm_num at habs\n  simpa only [Nat.cast_zero, hz, Finset.sum_empty] using h\n\n#print axioms zero_cutoff_rewrite_regression\n",
+      "source_sha256": "15d585bc726efb3b392ea7bfcb22ea44471dbe9b8accfd016d2089eb69a16e2d",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "/workspace/repaired_rewrite_accepted.lean"
+      ],
+      "exit_code": 0,
+      "compiler_output": "'zero_cutoff_rewrite_regression' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    }
+  ]
+}

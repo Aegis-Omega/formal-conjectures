@@ -1,0 +1,20 @@
+{
+  "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.olean",
+    "/workspace/aegis-row-budget-bridge/SourceRowDistributionV1.lean"
+  ],
+  "seconds": 1.3818969550011388,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "c576e71a7b54af911daa329b2a420d9fbc7c9980d265e5e6bd343b26b2c4a303",
+  "compiler_output": "'AEGIS.SourceRowDistributionV1.distribute_source_row' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+}

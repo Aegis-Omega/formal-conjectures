@@ -1,0 +1,31 @@
+AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : ∀ (C : ℝ),
+  0 ≤ C → ∀ (R : ℕ) (ε : ℝ), 0 < ε → ∃ NP, R < NP ∧ ∀ (N : ℕ), NP ≤ N → C / (↑N - ↑R) < ε
+'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+AEGIS.CvSResidualCertificateV1.residual_entry_le : ∀ (x y e r : ℝ), |e| ≤ r → x * y * e ≤ r * (x ^ 2 + y ^ 2) / 2
+AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : ∀ (a c lo hi : ℝ),
+  lo ≤ a → a ≤ hi → |a - c| ≤ max (c - lo) (hi - c)
+@AEGIS.CvSResidualCertificateV1.residual_quadratic_le : ∀ {ι : Type u_1} [inst : Fintype ι] (E R : ι → ι → ℝ) (ε : ℝ),
+  (∀ (i j : ι), |E i j| ≤ R i j) →
+    (∀ (i j : ι), R i j = R j i) →
+      (∀ (i : ι), ∑ j, R i j ≤ ε) → ∀ (x : ι → ℝ), ∑ i, ∑ j, x i * x j * E i j ≤ ε * ∑ i, x i ^ 2
+@AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : ∀ {ι : Type u_1} [inst : Fintype ι] (A A₀ R : ι → ι → ℝ)
+  (ε : ℝ),
+  (∀ (i j : ι), |A i j - A₀ i j| ≤ R i j) →
+    (∀ (i j : ι), R i j = R j i) →
+      (∀ (i : ι), ∑ j, R i j ≤ ε) →
+        (∀ (x : ι → ℝ), ε * ∑ i, x i ^ 2 ≤ ∑ i, ∑ j, x i * x j * A₀ i j) →
+          ∀ (x : ι → ℝ), 0 ≤ ∑ i, ∑ j, x i * x j * A i j
+@AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : ∀ {ι : Type u_1} [inst : Fintype ι] (A A₀ R : ι → ι → ℝ)
+  (ε : ℝ),
+  (∀ (i j : ι), |A i j - A₀ i j| ≤ R i j) →
+    (∀ (i j : ι), R i j = R j i) →
+      (∀ (i : ι), ∑ j, R i j ≤ ε) →
+        (∀ (x : ι → ℝ), ε * ∑ i, x i ^ 2 ≤ ∑ i, ∑ j, x i * x j * A₀ i j) →
+          ∀ (z : ι → ℂ), 0 ≤ (∑ i, ∑ j, (starRingEnd ℂ) (z i) * z j * ↑(A i j)).re
+'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]

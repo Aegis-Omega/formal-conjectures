@@ -1,0 +1,14 @@
+{
+  "status": "SOURCE_AND_BINARY_PREFIX_VALIDATED_FRESH_DATA_AXIOM_REAUDIT_PENDING",
+  "source_run": 39514026659,
+  "source_commit": "f9bff86e94698a80b2cce396420e2f35fa0d4cd9",
+  "artifact_id": 12310942465,
+  "artifact_sha256": "4ba365ef3744a13464fbe5d4860f8a0c149a629107d5138567fc98b7a72e9f98",
+  "successful_modules": 424,
+  "fresh_data_axiom_roots_required": 440,
+  "failed_module": "CvSActualLiteralInputsV1",
+  "repair": "Explicit Fin141 types in Y_source; normalized Fin-to-Int expression in Q_mem. No numeric data changed.",
+  "remote_patch_preserved_as_ancestor": "7020f3761f48bd9aad8a46f8dbddc4c1b223adfb",
+  "remaining_fresh_modules": 6,
+  "canonical_RH": "NOT_PROVED"
+}

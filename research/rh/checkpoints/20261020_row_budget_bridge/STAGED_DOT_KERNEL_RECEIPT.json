@@ -1,0 +1,15 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/aegis-row-budget-bridge/RowBudgetStagedDotPilot.lean"
+  ],
+  "seconds": 7.475530436000554,
+  "returncode": 0,
+  "status": "PASS",
+  "compiler_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "source_sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+  "scope": "Three closed arithmetic pilot roots: actual X tau-weighted column and two row0 Gram products. Not full output cell, output table, actual hB or RH."
+}

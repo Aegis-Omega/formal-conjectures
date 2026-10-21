@@ -1,0 +1,3 @@
+'AEGIS.CvSCachedColumnV1.evalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSCachedColumnV1.value_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSCachedColumnV1.gram_product_eq' depends on axioms: [propext, Classical.choice, Quot.sound]

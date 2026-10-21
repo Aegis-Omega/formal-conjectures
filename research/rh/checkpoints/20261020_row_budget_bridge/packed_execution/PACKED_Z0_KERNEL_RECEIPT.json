@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.olean",
+    "/workspace/aegis-row-budget-bridge/RowBudgetPackedZ0Pilot.lean"
+  ],
+  "seconds": 3.439614303999406,
+  "max_child_rss_kib": 2227376,
+  "returncode": 0,
+  "source_sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+  "source_base_commit": "f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1",
+  "compiler_output": "'AEGIS.RowBudgetPackedZ0Pilot.packing_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.components_bounded' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.carry_bound' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing' depends on axioms: [propext]\n",
+  "scope": "Packed exact evaluation of existing 301-element residual Z0 self-dot; exact cache, component and carry bounds, original-list equality and bad-packing rejection. Not full table, actual input identity or RH."
+}

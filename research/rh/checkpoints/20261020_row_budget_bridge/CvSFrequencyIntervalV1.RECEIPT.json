@@ -1,0 +1,71 @@
+{
+  "status": "PASS",
+  "source_base_commit": "8d7280a99f4608a015ac63813d95681474582d62",
+  "source_sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean"
+  ],
+  "cwd": "/workspace/formal-conjectures",
+  "seconds": 2.800927745000081,
+  "returncode": 0,
+  "compiler_output": "'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSFrequencyIntervalV1.pi_bounds : \u2191AEGIS.CvSFrequencyIntervalV1.piLo \u2264 Real.pi \u2227\n  Real.pi \u2264 \u2191AEGIS.CvSFrequencyIntervalV1.piHi\nAEGIS.CvSFrequencyIntervalV1.frequency_bounds : \u2200 (n : \u2124),\n  \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) \u2264 -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2227\n    -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2264 \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)\nAEGIS.CvSFrequencyIntervalV1.coefficient_mem : \u2200 (p : \u2115) (n w : \u2124),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)\n    ((-(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4) * \u2191w / 2 ^ 42)\nAEGIS.CvSFrequencyIntervalV1.lp_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)\nAEGIS.CvSFrequencyIntervalV1.lp_squared_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)\n",
+  "roots": [
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    },
+    {
+      "name": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "audit_pass": true
+    }
+  ],
+  "mathlib_sha": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "lean_version": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "native_import_scope": "Existing RHFixInterval mathematical body unchanged, import Mathlib narrowed as archived earlier. Full actual-source imports require separate CI.",
+  "utc": "2026-10-20T12:51:13.543195+00:00"
+}

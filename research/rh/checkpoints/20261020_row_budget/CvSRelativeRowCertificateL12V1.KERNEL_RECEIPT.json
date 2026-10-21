@@ -1,0 +1,19 @@
+{
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-DwarningAsError=true",
+    "/workspace/aegis-row-budget-recovery/CvSRelativeRowCertificateL12V1.lean"
+  ],
+  "LEAN_PATH_prefix": "/workspace/aegis-h140-recovery/recovered_4fabfb66/native_slice",
+  "seconds": 96.35074805099998,
+  "returncode": 0,
+  "source_sha256": "ca6791ba1108f3f98eb3aa5c708e5c59133953f55e508cb829e79513d07a9fba",
+  "checker_source_sha256": "7daca83a2fa4ba1c33ab93c0e591f6e49859e387939b8fe9450eb64359569fe7",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "status": "PASS",
+  "compiler_output": "'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_check_true' depends on axioms: [propext]\n'AEGIS.CvSRelativeRowCertificateL12V1.row_budget_margin_positive' does not depend on any axioms\n",
+  "scope": "Exact finite Boolean and positive integer margin only, with byte-identical original computational definitions; actual analytic entry enclosure NOT proved in this replay."
+}

@@ -13,7 +13,6 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
-
 /-
 AEGIS Ω — Schur low-block closure from coercivity and a Brow budget.
 READ-ONLY source candidate. Exact source anchor cf9372f13370596d51eb36134f141f199ba60b5c.

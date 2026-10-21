@@ -1,0 +1,222 @@
+{
+  "status": "PASS",
+  "machine": "Same workspace host; isolated native custom-module directory, not independent human review",
+  "archive_sha256": "082b96c8a35d3bf1b396eaba9a4deca4e38f3945cbcf777261e0aa4ec2ed97df",
+  "mathematical_source_snapshot_commit": "08938284963992cd231315e9d9b6c8fe77815ecb",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "scope": "New packed interval correctness and unchanged 301-element Z0 pilot, with their complete native custom import closure. Narrowed original-body import context; original-import first-column CI is separate.",
+  "modules": [
+    {
+      "module": "RHFixIntervalV1",
+      "source_sha256": "fe2fb10a263876f1451c7a46c4e5762fc0f23bcff33d061e13d71e4d7b698979",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/RHFixIntervalV1.olean",
+        "/workspace/aegis-packed-independent-replay/RHFixIntervalV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 2.294016613999702,
+      "compiler_output": "'AEGIS.RHFixIntervalV1.Iv.mem_mul' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RHFixIntervalV1.Iv.mem_add' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSResidualCertificateV1",
+      "source_sha256": "e0c71c003837508cdcd317fc9a72361de0acef99b4b17cb3da2f91cacc376301",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSResidualCertificateV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSResidualCertificateV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 1.9654661069980648,
+      "compiler_output": "AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff : \u2200 (C : \u211d),\n  0 \u2264 C \u2192 \u2200 (R : \u2115) (\u03b5 : \u211d), 0 < \u03b5 \u2192 \u2203 NP, R < NP \u2227 \u2200 (N : \u2115), NP \u2264 N \u2192 C / (\u2191N - \u2191R) < \u03b5\n'AEGIS.CvSResidualCertificateV1.exists_uniform_shifted_cutoff' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\nAEGIS.CvSResidualCertificateV1.residual_entry_le : \u2200 (x y e r : \u211d), |e| \u2264 r \u2192 x * y * e \u2264 r * (x ^ 2 + y ^ 2) / 2\nAEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure : \u2200 (a c lo hi : \u211d),\n  lo \u2264 a \u2192 a \u2264 hi \u2192 |a - c| \u2264 max (c - lo) (hi - c)\n@AEGIS.CvSResidualCertificateV1.residual_quadratic_le : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (E R : \u03b9 \u2192 \u03b9 \u2192 \u211d) (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |E i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192 \u2200 (x : \u03b9 \u2192 \u211d), \u2211 i, \u2211 j, x i * x j * E i j \u2264 \u03b5 * \u2211 i, x i ^ 2\n@AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (x : \u03b9 \u2192 \u211d), 0 \u2264 \u2211 i, \u2211 j, x i * x j * A i j\n@AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg : \u2200 {\u03b9 : Type u_1} [inst : Fintype \u03b9] (A A\u2080 R : \u03b9 \u2192 \u03b9 \u2192 \u211d)\n  (\u03b5 : \u211d),\n  (\u2200 (i j : \u03b9), |A i j - A\u2080 i j| \u2264 R i j) \u2192\n    (\u2200 (i j : \u03b9), R i j = R j i) \u2192\n      (\u2200 (i : \u03b9), \u2211 j, R i j \u2264 \u03b5) \u2192\n        (\u2200 (x : \u03b9 \u2192 \u211d), \u03b5 * \u2211 i, x i ^ 2 \u2264 \u2211 i, \u2211 j, x i * x j * A\u2080 i j) \u2192\n          \u2200 (z : \u03b9 \u2192 \u2102), 0 \u2264 (\u2211 i, \u2211 j, (starRingEnd \u2102) (z i) * z j * \u2191(A i j)).re\n'AEGIS.CvSResidualCertificateV1.residual_entry_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.abs_sub_le_of_enclosure' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.residual_quadratic_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_quadratic_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSResidualCertificateV1.actual_hermitian_nonneg' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSPackedGramV1",
+      "source_sha256": "f419d93301130ef71142bdb1616cff35cae131b1c7fae690a371c9e6289a914e",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSPackedGramV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSPackedGramV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 3.2849209339983645,
+      "compiler_output": "'AEGIS.CvSPackedGramV1.pack_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_core' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.packDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.gramEntry_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowErr_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.rowsOk_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.check_spec' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.quad_lower_complex' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilbIv_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedGramV1.hilb8_check' depends on axioms: [propext]\n'AEGIS.CvSPackedGramV1.hilbert8_posDef' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSMidpointRadiusV1",
+      "source_sha256": "cf41e386ca1b9b003dda97ce8c2d49b031f26c46c6a0edf8c96d4471317f47e6",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSMidpointRadiusV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSMidpointRadiusV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 1.5804310409985192,
+      "compiler_output": "'AEGIS.CvSMidpointRadiusV1.product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSMidpointRadiusV1.sum_product_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSIntervalMatrixProductV1",
+      "source_sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSIntervalMatrixProductV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSIntervalMatrixProductV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 2.311559486999613,
+      "compiler_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSListIntervalDotV1",
+      "source_sha256": "2abc4013a7bfa894c90f4cd3dfcacc7843c395c1b93d368e1f7b2ee65306e85b",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSListIntervalDotV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSListIntervalDotV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 1.8235874229976616,
+      "compiler_output": "'AEGIS.CvSListIntervalDotV1.listDot_eq_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSListIntervalDotV1.listCongruence_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "CvSPackedIntervalDotV1",
+      "source_sha256": "7b90fa6891af65bf3276b75874f756aee0dfa565c8c819f6ae346a407c41e3ec",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSPackedIntervalDotV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSPackedIntervalDotV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 1.8994858129990462,
+      "compiler_output": "'AEGIS.CvSPackedIntervalDotV1.packedDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_prepare_eq' depends on axioms: [propext]\n'AEGIS.CvSPackedIntervalDotV1.cachedIntervalDot_eq' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSPackedIntervalDotV1.packedIntervalDot_eq : \u2200 (p base bound : \u2115) (a b : List AEGIS.RHFixIntervalV1.Iv),\n  0 < a.length \u2192\n    b.length = a.length \u2192\n      AEGIS.CvSPackedIntervalDotV1.bounded bound a \u2192\n        AEGIS.CvSPackedIntervalDotV1.bounded bound b \u2192\n          a.length * a.length * (2 * bound * (2 * bound)) < base \u2192\n            AEGIS.CvSPackedIntervalDotV1.packedIntervalDot p base bound a b = AEGIS.CvSListIntervalDotV1.listDot p a b\n"
+    },
+    {
+      "module": "CvSRowBudgetEnvelopeV1",
+      "source_sha256": "01f611f36f83d3a5b3133c9388dffc6cdbe76d38547c963d23bbd9456d4b971f",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/CvSRowBudgetEnvelopeV1.olean",
+        "/workspace/aegis-packed-independent-replay/CvSRowBudgetEnvelopeV1.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 1.671700900002179,
+      "compiler_output": "'AEGIS.CvSRowBudgetEnvelopeV1.point_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.envelope_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRowBudgetEnvelopeV1.stored_envelope_mem_of_check' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "RowBudgetStagedDotPilot",
+      "source_sha256": "447ece1502ff6caaf33f7a91a6a466cfd7852783dc124dfe40a197c1b372eebf",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/RowBudgetStagedDotPilot.olean",
+        "/workspace/aegis-packed-independent-replay/RowBudgetStagedDotPilot.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 4.782004921999032,
+      "compiler_output": "'AEGIS.RowBudgetStagedDotPilot.weighted_column_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetStagedDotPilot.gram_source_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetStagedDotPilot.gram_tau_weighted_dot' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "RowBudgetListCell0Pilot",
+      "source_sha256": "b2f70f03b6f0e6c3725a065b0dc197b2c04c96dfdb42eed7376e0ab8f136af03",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/RowBudgetListCell0Pilot.olean",
+        "/workspace/aegis-packed-independent-replay/RowBudgetListCell0Pilot.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 50.131913351997355,
+      "compiler_output": "'AEGIS.RowBudgetListCell0Pilot.gram_source_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.gram_weighted_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_fast' depends on axioms: [propext]\n'AEGIS.RowBudgetListCell0Pilot.original_eq_fast' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetListCell0Pilot.stored_cell0_original' depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+    },
+    {
+      "module": "RowBudgetPackedZ0Pilot",
+      "source_sha256": "61a3b46873d4e22caf02096414768e4136f18789a5c4468f73492b390c232cfa",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-packed-independent-replay",
+        "-o",
+        "/workspace/aegis-packed-independent-replay/RowBudgetPackedZ0Pilot.olean",
+        "/workspace/aegis-packed-independent-replay/RowBudgetPackedZ0Pilot.lean"
+      ],
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 3.608661114001734,
+      "compiler_output": "'AEGIS.RowBudgetPackedZ0Pilot.packing_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.components_bounded' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.carry_bound' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.cached_dot_exact' depends on axioms: [propext]\n'AEGIS.RowBudgetPackedZ0Pilot.original_eq_cached' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.RowBudgetPackedZ0Pilot.reject_bad_packing' depends on axioms: [propext]\n"
+    }
+  ],
+  "timestamp_utc": "2026-10-20T17:37:23.068548+00:00",
+  "max_child_rss_kib": 4543188
+}

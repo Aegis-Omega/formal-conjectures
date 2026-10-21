@@ -1,0 +1,143 @@
+{
+  "source_base_commit": "8d7280a99f4608a015ac63813d95681474582d62",
+  "lean": "4.33.1",
+  "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "native_results": [
+    {
+      "status": "PASS",
+      "source_base_commit": "8d7280a99f4608a015ac63813d95681474582d62",
+      "source_sha256": "ed6ac2c9bfe0006c49326d882c1ea3971b725f3db0b6b15474377a1f9dd09722",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSIntervalDivideV1.lean"
+      ],
+      "cwd": "/workspace/formal-conjectures",
+      "seconds": 1.7445644680010446,
+      "returncode": 0,
+      "compiler_output": "'AEGIS.CvSIntervalDivideV1.divPos_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalDivideV1.divInt_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSIntervalDivideV1.divInt_mem : \u2200 (p : \u2115) {I : AEGIS.RHFixIntervalV1.Iv} {x : \u211d},\n  AEGIS.RHFixIntervalV1.Iv.Mem p I x \u2192\n    \u2200 {d : \u2124}, d \u2260 0 \u2192 AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSIntervalDivideV1.divInt I d) (x / \u2191d)\n",
+      "roots": [
+        {
+          "name": "AEGIS.CvSIntervalDivideV1.divPos_mem",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        },
+        {
+          "name": "AEGIS.CvSIntervalDivideV1.divInt_mem",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        }
+      ],
+      "mathlib_sha": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "lean_version": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+      "native_import_scope": "Existing RHFixInterval mathematical body unchanged, import Mathlib narrowed as archived earlier. Full actual-source imports require separate CI.",
+      "utc": "2026-10-20T12:51:10.240264+00:00"
+    },
+    {
+      "status": "PASS",
+      "source_base_commit": "8d7280a99f4608a015ac63813d95681474582d62",
+      "source_sha256": "4bd82527b059e5e4b17eae40c496366e6ada5cba8bd1ece88ff237baa7d60b94",
+      "command": [
+        "lake",
+        "env",
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/workspace/aegis-row-budget-bridge",
+        "-o",
+        "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.olean",
+        "/workspace/aegis-row-budget-bridge/CvSFrequencyIntervalV1.lean"
+      ],
+      "cwd": "/workspace/formal-conjectures",
+      "seconds": 2.800927745000081,
+      "returncode": 0,
+      "compiler_output": "'AEGIS.CvSFrequencyIntervalV1.pi_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.frequency_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.coefficient_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.lp_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSFrequencyIntervalV1.lp_squared_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSFrequencyIntervalV1.pi_bounds : \u2191AEGIS.CvSFrequencyIntervalV1.piLo \u2264 Real.pi \u2227\n  Real.pi \u2264 \u2191AEGIS.CvSFrequencyIntervalV1.piHi\nAEGIS.CvSFrequencyIntervalV1.frequency_bounds : \u2200 (n : \u2124),\n  \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyLo n) \u2264 -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2227\n    -(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4 \u2264 \u2191(AEGIS.CvSFrequencyIntervalV1.frequencyHi n)\nAEGIS.CvSFrequencyIntervalV1.coefficient_mem : \u2200 (p : \u2115) (n w : \u2124),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.coefficientInterval p n w)\n    ((-(2 * Real.pi * \u2191n / (6 / 5)) ^ 2 - 1 / 4) * \u2191w / 2 ^ 42)\nAEGIS.CvSFrequencyIntervalV1.lp_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpInterval p) (6 / 5 / Real.pi)\nAEGIS.CvSFrequencyIntervalV1.lp_squared_mem : \u2200 (p : \u2115),\n  AEGIS.RHFixIntervalV1.Iv.Mem p (AEGIS.CvSFrequencyIntervalV1.lpSquaredInterval p) ((6 / 5 / Real.pi) ^ 2)\n",
+      "roots": [
+        {
+          "name": "AEGIS.CvSFrequencyIntervalV1.pi_bounds",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        },
+        {
+          "name": "AEGIS.CvSFrequencyIntervalV1.frequency_bounds",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        },
+        {
+          "name": "AEGIS.CvSFrequencyIntervalV1.coefficient_mem",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        },
+        {
+          "name": "AEGIS.CvSFrequencyIntervalV1.lp_mem",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        },
+        {
+          "name": "AEGIS.CvSFrequencyIntervalV1.lp_squared_mem",
+          "axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "audit_pass": true
+        }
+      ],
+      "mathlib_sha": "0df444a360eaa60ab8c11dca51a86af692955474",
+      "lean_version": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+      "native_import_scope": "Existing RHFixInterval mathematical body unchanged, import Mathlib narrowed as archived earlier. Full actual-source imports require separate CI.",
+      "utc": "2026-10-20T12:51:13.543195+00:00"
+    }
+  ],
+  "actual_source_input_module": {
+    "path": "CvSActualRowInputL12V1.lean",
+    "sha256": "1af5117865deaca3765aa2532726850f89ad75874a5e45e917630ba03f1493c7",
+    "roots": [
+      "transformedCoeff_mem",
+      "gramRat_cast",
+      "gramUp_mem",
+      "gramUp_symm",
+      "diagonal_mem",
+      "sourceKernel_mem",
+      "sourceY_mem"
+    ],
+    "status": "FAILED_at_a1862b9b; three Ne.symm proof expressions repaired; new original-import replay pending",
+    "source_sha256": "6bcd563ddde97f214e9e8eb0271d1d01d43e96a5d7a1a5b1b0c5566940774356"
+  },
+  "ci_scope": "Existing isolated source-cross-row job extended from 23 to 37 explicit axiom audits. No new job or workflow.",
+  "unchanged_data": "Original certR, certI, packed factor and stored Q80 output, projection and all source tau/diag tables unchanged.",
+  "source_physical_scope": "L=6/5; M>=3; every signed row |m|<=150 and existing signed low frequencies -70..70, at arbitrary precision p.",
+  "remaining": "Close actual residual projection/input identification and the complete closed output-table comparison; Krein trace/scalar hypotheses and universal Weil quantifier remain separate.",
+  "RH": "NOT_PROVED",
+  "utc": "2026-10-20T12:52:12.632926+00:00"
+}

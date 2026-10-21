@@ -1,0 +1,260 @@
+{
+  "status": "PASS_FOR_THE_FIVE_NAMED_MODULES_ONLY",
+  "source_commit": "96e25af74c58a99ac2c1be19efeac5126bcf9c3d",
+  "source_run": 39538781739,
+  "job": 119021770385,
+  "overall_run_result": "FAIL_IN_LATER_CONSUMER_MODULE",
+  "artifact_id": 12319150903,
+  "artifact_sha256": "0761629fe5d1aee5d2ab63c6142e89745b71b142e1bd2a6b93e803e647b4eaae",
+  "axiom_audits": {
+    "AEGIS.CvSActualLiteralInputsV1.E_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.X_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.G_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.Y_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.inner_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.Z_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.X_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.Y_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.Z_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.G_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.T_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.LP_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.sourceKernel_signed": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.projectedEntry_as_Y": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.Q_mem": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualBasisBudgetV1.actualBudget_le_projected": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSActualBasisBudgetV1.actualBudget_le_original": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSTriangularTransportV1.upper_triangular_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRealBasisBoundV1.real_row_normSq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.certR_upper": [
+      "propext"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.certR_diag_ne_zero": [
+      "propext"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.rCoeff_diag_ne_zero": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.R_basis_surjective": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.basisFrobenius_pos": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.R_basis_normSq_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  "runs": [
+    {
+      "module": "CvSActualLiteralInputsV1",
+      "source_sha256": "6a3fe7139685985aca49408f4221afb95a5ec781c5fe85e8e90a31007bc2a386",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSActualLiteralInputsV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSActualLiteralInputsV1.lean"
+      ],
+      "seconds": 16.898888513999964,
+      "exit_code": 0,
+      "compiler_output": "AEGIS.CvSActualLiteralInputsV1.E_source : \u2200 (r : Fin 301) (k : Fin 141),\n  (AEGIS.CvSSourceProductAllV1.eRow r).values.getD \u2191k { lo := 0, hi := 0 } =\n    AEGIS.CvSActualRowInputL12V1.kernelBox 96 (AEGIS.CvSActualRowInputL12V1.rowIndex r) k\n'AEGIS.CvSActualLiteralInputsV1.E_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.X_source : \u2200 (k : Fin 141) (i : Fin 139),\n  (AEGIS.CvSSourceProductAllV1.inputColumn i).x.values.getD \u2191k { lo := 0, hi := 0 } =\n    AEGIS.CvSActualRowInputL12V1.xBox k i\n'AEGIS.CvSActualLiteralInputsV1.X_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.G_source : \u2200 (k l : Fin 141),\n  (AEGIS.RowBudgetListCell0Pilot.G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 } =\n    AEGIS.CvSRationalIntervalV1.rationalRange 96\n      (AEGIS.CvSActualRowInputL12V1.gramRat 150 (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n        (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq l))\n      (AEGIS.CvSActualRowInputL12V1.gramRat 150 (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n        (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq l))\n'AEGIS.CvSActualLiteralInputsV1.G_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.Y_source : \u2200 (r : Fin 301) (i : Fin 139),\n  AEGIS.CvSSourceProductAllV1.Y r i =\n    AEGIS.CvSActualRowInputL12V1.sourceYBox 96 (AEGIS.CvSActualRowInputL12V1.rowIndex r) i\n'AEGIS.CvSActualLiteralInputsV1.Y_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.inner_source : \u2200 (k : Fin 141) (i : Fin 139),\n  AEGIS.CvSSourceProductAllV1.inner (\u2191k) i =\n    AEGIS.CvSIntervalMatrixProductV1.dot 96 (AEGIS.CvSActualRowInputL12V1.xBox k) fun j =>\n      AEGIS.CvSSourceProductAllV1.lambdaBox j i\n'AEGIS.CvSActualLiteralInputsV1.inner_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.Z_source : \u2200 (r : Fin 301) (i : Fin 139),\n  (AEGIS.CvSSourceProductAllV1.inputColumn i).z.values.getD \u2191r { lo := 0, hi := 0 } =\n    AEGIS.CvSActualRowInputL12V1.zBox AEGIS.CvSSourceProductAllV1.lambdaBox r i\n'AEGIS.CvSActualLiteralInputsV1.Z_source' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.X_mem : \u2200 (k : Fin 141) (i : Fin 139),\n  AEGIS.RHFixIntervalV1.Iv.Mem 96 ((AEGIS.CvSSourceProductAllV1.inputColumn i).x.values.getD \u2191k { lo := 0, hi := 0 })\n    (AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff k i)\n'AEGIS.CvSActualLiteralInputsV1.X_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.Y_mem : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (r : Fin 301) (i : Fin 139),\n      AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSSourceProductAllV1.Y r i)\n        (AEGIS.CvSActualCrossRowL12V1.sourceY M (AEGIS.CvSActualRowInputL12V1.rowIndex r) i)\n'AEGIS.CvSActualLiteralInputsV1.Y_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.Z_mem : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (r : Fin 301) (i : Fin 139),\n      AEGIS.RHFixIntervalV1.Iv.Mem 96\n        ((AEGIS.CvSSourceProductAllV1.inputColumn i).z.values.getD \u2191r { lo := 0, hi := 0 })\n        (AEGIS.CvSActualRowInputL12V1.sourceZ M AEGIS.CvSSourceProductAllV1.lambdaReal r i)\n'AEGIS.CvSActualLiteralInputsV1.Z_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.G_mem : \u2200 (k l : Fin 141),\n  AEGIS.RHFixIntervalV1.Iv.Mem 96 ((AEGIS.RowBudgetListCell0Pilot.G.getD \u2191k []).getD \u2191l { lo := 0, hi := 0 })\n    (AEGIS.CvSGramTailV1.gramUp 150 (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n      (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq l))\n'AEGIS.CvSActualLiteralInputsV1.G_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.T_mem : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (k : Fin 141),\n      AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.RowBudgetStagedDotPilot.T.getD \u2191k { lo := 0, hi := 0 })\n        (AEGIS.CvSRowTailV1.tau M (6 / 5) (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k))\n'AEGIS.CvSActualLiteralInputsV1.T_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.LP_mem : AEGIS.RHFixIntervalV1.Iv.Mem 96 AEGIS.RowBudgetListCell0Pilot.LP2\n  ((6 / 5 / Real.pi) ^ 2)\n'AEGIS.CvSActualLiteralInputsV1.LP_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.sourceKernel_signed : \u2200 (M : \u2115) (k l : Fin 141),\n  AEGIS.CvSActualCrossRowL12V1.sourceKernel M (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n      (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq l) =\n    2 * Real.pi * AEGIS.CvSProjectedPackedCertificateL12V1.signedEntry M k l\n'AEGIS.CvSActualLiteralInputsV1.sourceKernel_signed' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.projectedEntry_as_Y : \u2200 (M : \u2115) (i j : Fin 139),\n  \u2211 k,\n      AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff k i *\n        AEGIS.CvSActualCrossRowL12V1.sourceY M (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k) j =\n    2 * Real.pi * AEGIS.CvSProjectedPackedCertificateL12V1.projectedEntry M i j\n'AEGIS.CvSActualLiteralInputsV1.projectedEntry_as_Y' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.Q_mem : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (i j : Fin 139),\n      AEGIS.RHFixIntervalV1.Iv.Mem 96 (AEGIS.CvSFullTableClosureV1.Q i j)\n        (AEGIS.CvSProjectedPackedCertificateL12V1.projectedEntry M i j)\n'AEGIS.CvSActualLiteralInputsV1.Q_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (v : Fin 139 \u2192 \u2102),\n      AEGIS.CvSStrictRowBudgetV1.margin * \u2211 i, \u2016v i\u2016 ^ 2 +\n          AEGIS.CvSRowBudgetGramBridgeV1.budgetEnergy\n            (AEGIS.CvSActualRowInputL12V1.sourceZ M AEGIS.CvSSourceProductAllV1.lambdaReal)\n            (AEGIS.CvSRealTailMatrixV1.tailMatrix AEGIS.CvSProjectedPackedCertificateL12V1.transformedCoeff\n              (fun k l =>\n                AEGIS.CvSGramTailV1.gramUp 150 (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k)\n                  (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq l))\n              (fun k => AEGIS.CvSRowTailV1.tau M (6 / 5) (AEGIS.CvSProjectedPackedCertificateL12V1.signedFreq k))\n              ((6 / 5 / Real.pi) ^ 2))\n            v \u2264\n        40 *\n          (\u2211 i, \u2211 j, v i * (starRingEnd \u2102) (v j) * \u2191(AEGIS.CvSProjectedPackedCertificateL12V1.projectedEntry M i j)).re\n'AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    },
+    {
+      "module": "CvSActualBasisBudgetV1",
+      "source_sha256": "06c8344199e74d74e0753e2a58704ec7dee958d878054ad3abdb082fe7f20c21",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSActualBasisBudgetV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSActualBasisBudgetV1.lean"
+      ],
+      "seconds": 5.121935459999918,
+      "exit_code": 0,
+      "compiler_output": "AEGIS.CvSActualBasisBudgetV1.actualBudget_le_projected : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (v : Fin 139 \u2192 \u2102),\n      AEGIS.CvSActualBasisBudgetV1.actualBudget M v \u2264 40 * AEGIS.CvSProjectedSchurBridgeL12V1.projectedQ M v\n'AEGIS.CvSActualBasisBudgetV1.actualBudget_le_projected' depends on axioms: [propext, Classical.choice, Quot.sound]\nAEGIS.CvSActualBasisBudgetV1.actualBudget_le_original : \u2200 (M : \u2115),\n  3 \u2264 M \u2192\n    \u2200 (v : Fin 139 \u2192 \u2102),\n      AEGIS.CvSActualBasisBudgetV1.actualBudget M v \u2264\n        40 *\n          AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS M (6 / 5) AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter\n            (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v)\n'AEGIS.CvSActualBasisBudgetV1.actualBudget_le_original' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    },
+    {
+      "module": "CvSTriangularTransportV1",
+      "source_sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSTriangularTransportV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSTriangularTransportV1.lean"
+      ],
+      "seconds": 1.388286983999933,
+      "exit_code": 0,
+      "compiler_output": "@AEGIS.CvSTriangularTransportV1.upper_triangular_surjective : \u2200 {K : Type u_1} [inst : Field K] (n : \u2115)\n  (A : Fin n \u2192 Fin n \u2192 K),\n  (\u2200 (i j : Fin n), j < i \u2192 A i j = 0) \u2192 (\u2200 (i : Fin n), A i i \u2260 0) \u2192 Function.Surjective fun v i => \u2211 j, A i j * v j\n'AEGIS.CvSTriangularTransportV1.upper_triangular_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    },
+    {
+      "module": "CvSRealBasisBoundV1",
+      "source_sha256": "7e5aba10dbe4cd114f41e5cd7049d493ffc221c0d4fcc87656770d01e3f27b77",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSRealBasisBoundV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSRealBasisBoundV1.lean"
+      ],
+      "seconds": 1.420070757000076,
+      "exit_code": 0,
+      "compiler_output": "'AEGIS.CvSRealBasisBoundV1.real_row_normSq_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRealBasisBoundV1.real_matrix_normSq_le' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSRealBasisBoundV1.frobenius_pos_of_entry' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    },
+    {
+      "module": "CvSProjectedBasisL12V1",
+      "source_sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSProjectedBasisL12V1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSProjectedBasisL12V1.lean"
+      ],
+      "seconds": 44.42826835699998,
+      "exit_code": 0,
+      "compiler_output": "'AEGIS.CvSProjectedBasisL12V1.certR_upper' depends on axioms: [propext]\n'AEGIS.CvSProjectedBasisL12V1.certR_diag_ne_zero' depends on axioms: [propext]\n'AEGIS.CvSProjectedBasisL12V1.rCoeff_diag_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.R_basis_surjective' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.basisFrobenius_pos' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.R_basis_normSq_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.R_basis_frobenius_bound' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_basis' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.original_atom_coercivity_of_checked_source' depends on axioms: [propext,\n Classical.choice,\n Quot.sound]\n'AEGIS.CvSProjectedBasisL12V1.hlow_of_checked_source' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    }
+  ],
+  "scope": "The actual finite CvS residual/Gram-tail matrix budget for every M>=3 and complex vector, plus exact original-coordinate transport and existing basis surjectivity. hfin/Gram-window composition is a later candidate; no RH conclusion."
+}

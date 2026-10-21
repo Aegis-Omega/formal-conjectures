@@ -1,0 +1,333 @@
+name: RH CvS Actual Source Row Kernel Replay (isolated)
+
+on:
+  push:
+    branches:
+      - proof/rh-feshbach-schur-v1
+    paths:
+      - .github/workflows/rh-cvs-actual-row-replay.yml
+      - research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/list_execution/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/FULL_TABLE_SOURCES.zip
+      - research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/run_ci_full_table.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/*.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/ACTUAL_INPUT_SOURCES.zip
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_graph.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/reuse_complete_table_checkpoint.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/run_ci_actual_moment_window_join.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
+  workflow_dispatch:
+
+concurrency:
+  group: rh-cvs-actual-source-row-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+
+jobs:
+  source-cross-row:
+    if: ${{ !contains(github.event.head_commit.message, '[recover-actual-graph]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Bind pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      # Same provider recipe as rh-trigram-exact-head-v1.yml.
+      - name: Checkout immutable PR51 source for the pinned provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+      - name: Checkout exact external provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+      - name: Restore pinned provider build
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .li-provider/.lake/build
+          key: rh-li-provider-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.LI_CRITERION_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
+        run: python3 research/rh/m8_kernel_v1/replay.py provider
+      - name: Replay unchanged source DAG and actual row bridge
+        id: replay
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          if python3 research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py "$RING"; then
+            lean -DwarningAsError=true SOURCE_CHECKPOINT_REAUDIT.lean 2>&1 | tee -a actual-row-bridge.log
+          else
+            python3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \
+              research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log
+            for m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \
+                     CvSMassV1 CvSPrimePairV1 CvSDigammaSeriesV1 CvSQuadV1; do
+              lean -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
+            done
+            lean -o "$RING/CvSRingBridgeV1.olean" research/rh/feshbach_lean_v1/CvSRingBridgeV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSRoughV1.olean" research/rh/feshbach_lean_v1/CvSRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSKreinRoughV1.olean" research/rh/feshbach_lean_v1/CvSKreinRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSPlancherelRoughV1.olean" research/rh/feshbach_lean_v1/CvSPlancherelRoughV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTraceV1.olean" research/rh/feshbach_lean_v1/CvSTraceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSFeshbachWindowV1.olean" research/rh/feshbach_lean_v1/CvSFeshbachWindowV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSWindowCertV1.olean" research/rh/feshbach_lean_v1/CvSWindowCertV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSLowBlockDecayV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockDecayV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSMomentBasisV1.olean" research/rh/feshbach_lean_v1/CvSMomentBasisV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSLowBlockMatrixV1.olean" research/rh/feshbach_lean_v1/CvSLowBlockMatrixV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossMatrixV1.olean" research/rh/feshbach_lean_v1/CvSCrossMatrixV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossBoundV1.olean" research/rh/feshbach_lean_v1/CvSCrossBoundV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSFourierIntervalV1.olean" research/rh/feshbach_lean_v1/CvSFourierIntervalV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSCrossCertV1.olean" research/rh/feshbach_lean_v1/CvSCrossCertV1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSResidualCertificateV1.olean" research/rh/feshbach_lean_v1/CvSResidualCertificateV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSArctanTailV1.olean" research/rh/feshbach_lean_v1/CvSArctanTailV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauSourceV1.olean" research/rh/feshbach_lean_v1/CvSTauSourceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauL12V1.olean" research/rh/feshbach_lean_v1/CvSTauL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauL12DataV1.olean" research/rh/feshbach_lean_v1/CvSTauL12DataV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSTauPrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauPrimeL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSTauR1SourceL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1SourceL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSTauR1PrimeL12V1.olean" research/rh/feshbach_lean_v1/CvSTauR1PrimeL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSDiagTelV1.olean" research/rh/feshbach_lean_v1/CvSDiagTelV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/RHFixIntervalV1.olean" research/rh/critical_line_v1/RHFixIntervalV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSPackedGramV1.olean" research/rh/feshbach_lean_v1/CvSPackedGramV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSDiagL12V1.olean" research/rh/feshbach_lean_v1/CvSDiagL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedPackedCertificateL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedPackedCertificateL12V1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedSymmetryV1.olean" research/rh/feshbach_lean_v1/CvSProjectedSymmetryV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSSchurClosureFromBoundsV1.olean" research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSFiniteCongruenceV1.olean" research/rh/feshbach_lean_v1/CvSFiniteCongruenceV1.lean 2>&1 | tee -a ring.log
+            lean -o "$RING/CvSProjectedSchurBridgeL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedSchurBridgeL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean 2>&1 | tee -a ring.log
+            lean -DwarningAsError=true -o "$RING/CvSActualCrossRowL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSActualCrossRowL12V1.lean 2>&1 | tee actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSMidpointRadiusV1.olean" research/rh/checkpoints/20261020_row_budget/CvSMidpointRadiusV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSOddSignedEnclosureV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSOddSignedEnclosureV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRationalIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRationalIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSIntervalMatrixProductV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalMatrixProductV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRowBudgetEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSRowBudgetEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSTauSigned150L12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSTauSigned150L12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSIntervalDivideV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSIntervalDivideV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFrequencyIntervalV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSFrequencyIntervalV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSDividedDifferenceCollectionV1.olean" research/rh/checkpoints/20261019_transport/analytic_bridge/CvSDividedDifferenceCollectionV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSProjectedEntryL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSActualRowInputL12V1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSActualRowInputL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSListIntervalDotV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalDotV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSListIntervalMixedV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/CvSListIntervalMixedV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetStagedDotPilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/RowBudgetStagedDotPilot.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetListCell0Pilot.olean" research/rh/checkpoints/20261020_row_budget_bridge/list_execution/RowBudgetListCell0Pilot.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSColumnEnvelopeV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSColumnEnvelopeV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFirstColumnCheckerV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnCheckerV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSRelativeRowCertificateL12V1.olean" research/rh/checkpoints/20261020_row_budget/CvSRelativeRowCertificateL12V1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch0.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch0.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch2.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch2.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch3.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch3.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch4.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch4.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch5.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch5.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch6.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch6.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch7.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch7.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch8.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch8.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch9.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch9.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch10.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch10.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch11.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch11.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch12.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch12.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnBatch13.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnBatch13.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/RowBudgetFirstColumnV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/RowBudgetFirstColumnV1.lean 2>&1 | tee -a actual-row-bridge.log
+            lean -DwarningAsError=true -o "$RING/CvSFirstColumnRejectV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/first_column_execution/CvSFirstColumnRejectV1.lean 2>&1 | tee -a actual-row-bridge.log
+          fi
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
+
+      - name: Replay moment-augmented trace bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/run_ci_moment_trace.py
+
+      - name: Replay new moment-window Feshbach bridge (4 axiom roots)
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/run_ci_moment_window.py
+
+      - name: Replay complete finite row table and quantitative budget
+        id: full_table
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          ACTUAL="research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution"
+          if test -f "$ACTUAL/run_ci_actual_inputs.py"; then
+            python3 "$ACTUAL/reuse_complete_table_checkpoint.py" "$GITHUB_WORKSPACE/.lake/ringout"
+            lean -DwarningAsError=true COMPLETE_TABLE_CHECKPOINT_REAUDIT.lean 2>&1 | tee full-table-reaudit.log
+          else
+            python3 research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/run_ci_full_table.py
+          fi
+
+      - name: Replay actual source input identities and relative-budget producer
+        id: actual_inputs
+        if: ${{ hashFiles('research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py') != '' }}
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          ACTUAL="research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution"
+          export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          python3 "$ACTUAL/reuse_actual_input_prefix.py" 39569164255 f118d06204bc50fe719810794af5bac4dfd14889 "$GITHUB_WORKSPACE/.lake/ringout"
+          lean -DwarningAsError=true ACTUAL_INPUT_PREFIX_REAUDIT.lean 2>&1 | tee actual-input-prefix-reaudit.log
+          python3 "$ACTUAL/reuse_actual_input_prefix.py" --check-reaudit actual-input-prefix-reaudit.log
+          python3 "$ACTUAL/run_ci_actual_inputs.py"
+
+      - name: Replay actual 139-row to 141-moment window (7 axiom roots)
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/run_ci_actual_moment_window_join.py
+
+      - name: Export and audit the actual source proof graph
+        id: actual_graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_graph.py
+
+      - name: Preserve exact replay state
+        if: always()
+        continue-on-error: true
+        env:
+          REPLAY_OUTCOME: ${{ steps.replay.outcome }}
+          FULL_TABLE_OUTCOME: ${{ steps.full_table.outcome }}
+          ACTUAL_INPUT_OUTCOME: ${{ steps.actual_inputs.outcome }}
+        shell: bash
+        run: |
+          python3 - <<'PY_SNAPSHOT'
+          import hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path.cwd()
+          digest = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+          sources = subprocess.check_output(['git', 'ls-files', '--', '*.lean'], text=True).splitlines()
+          objects = sorted((root / '.lake/ringout').rglob('*.olean'))
+          logs = [root / n for n in ['ring.log', 'actual-row-bridge.log', 'full-table-replay.log', 'full-table-reaudit.log', 'actual-input-replay.log'] if (root / n).is_file()]
+          receipt = {
+            'source_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+            'math_step_outcome': os.environ.get('REPLAY_OUTCOME'),
+            'full_table_step_outcome': os.environ.get('FULL_TABLE_OUTCOME'),
+            'actual_input_step_outcome': os.environ.get('ACTUAL_INPUT_OUTCOME'),
+            'lean_toolchain': (root / 'lean-toolchain').read_text().strip(),
+            'mathlib_sha': os.environ['MATHLIB_SHA'],
+            'li_criterion_sha': os.environ['LI_CRITERION_SHA'],
+            'source_sha256': {n: digest(root / n) for n in sources},
+            'binary_sha256': {str(p.relative_to(root)): digest(p) for p in objects},
+            'log_sha256': {p.name: digest(p) for p in logs},
+            'source_archive_sha256': {n: digest(root / n) for n in [
+              'research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/FULL_TABLE_SOURCES.zip',
+              'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/ACTUAL_INPUT_SOURCES.zip'
+            ] if (root / n).is_file()},
+            'dependency_reuse': json.loads((root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').read_text()) if (root / 'SOURCE_CROSS_ROW_REUSE_RECEIPT.json').is_file() else None,
+            'scope': 'Source compilation or explicitly validated source-identical dependency reuse, as recorded above. Only named axiom roots are certified; failed state is evidence, not a PASS.'
+          }
+          (root / 'SOURCE_CROSS_ROW_CHECKPOINT.json').write_text(json.dumps(receipt, indent=2) + '\n')
+          print('REPLAY_STATE_PRESERVED', receipt['math_step_outcome'], len(objects))
+          PY_SNAPSHOT
+
+      - name: Upload source-bound replay checkpoint
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: source-cross-row-${{ github.sha }}
+          retention-days: 1
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: |
+            SOURCE_CROSS_ROW_CHECKPOINT.json
+            SOURCE_CROSS_ROW_REUSE_RECEIPT.json
+            ring.log
+            actual-row-bridge.log
+            full-table-replay.log
+            FULL_TABLE_CI_RECEIPT.json
+            COMPLETE_TABLE_REUSE_RECEIPT.json
+            full-table-reaudit.log
+            ACTUAL_INPUT_CI_RECEIPT.json
+            ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json
+            ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json
+            actual-input-prefix-reaudit.log
+            actual-proof-graph.log
+            ACTUAL_SOURCE_PROOF_GRAPH.json
+            ACTUAL_SOURCE_PROOF_GRAPH.zip
+            actual-input-replay.log
+            moment-trace-replay.log
+            MOMENT_TRACE_KERNEL_RECEIPT.json
+            moment-window-replay.log
+            MOMENT_WINDOW_KERNEL_RECEIPT.json
+            actual-moment-window-replay.log
+            ACTUAL_MOMENT_WINDOW_KERNEL_RECEIPT.json
+            .lake/ringout/**/*.olean
+
+  recover-actual-graph:
+    if: ${{ contains(github.event.head_commit.message, '[recover-actual-graph]') }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact receipt tooling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Recover the successful source-bound graph without rebuilding Lean
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/recover_successful_graph.py
+      - name: Upload graph separately below the connector size limit
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: actual-graph-only-9d98c4e9
+          retention-days: 1
+          if-no-files-found: error
+          path: recovered-actual-graph/

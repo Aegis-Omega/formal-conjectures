@@ -1,0 +1,20 @@
+{
+  "base_commit": "3a9d36ff8784f14e1fbe395a7a8a8fb5511d6ec6",
+  "command": [
+    "lake",
+    "env",
+    "lean",
+    "-R",
+    "/workspace/aegis-row-budget-bridge",
+    "-DwarningAsError=true",
+    "-o",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.olean",
+    "/workspace/aegis-row-budget-bridge/CvSIntervalMatrixProductV1.lean"
+  ],
+  "seconds": 1.9747472890012432,
+  "returncode": 0,
+  "status": "PASS",
+  "source_sha256": "1b760b7b84bbe1f991d44f767585cab6fd73fa8f9da1fc8c0363af2b962b60d7",
+  "compiler_output": "'AEGIS.CvSIntervalMatrixProductV1.midpoint_error' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.dot_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.matrixMul_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.congruence_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.hull_mem_left' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.downscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.upscale_mem' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.mem_of_contains' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSIntervalMatrixProductV1.tableCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+  "scope": "Native generic theorem; actual CvS input instantiation has separate CI status"
+}
