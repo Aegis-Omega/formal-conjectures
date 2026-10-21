@@ -31,7 +31,11 @@ def augment {p : ℕ} (U : Fin p → ℝ → ℂ) : Fin (p + 2) → ℝ → ℂ 
   Fin.append U momentFunction
 
 theorem momentFunction_continuous (i : Fin 2) : Continuous (momentFunction i) := by
-  fin_cases i <;> simp only [momentFunction, Fin.isValue, ↓reduceIte] <;> fun_prop
+  fin_cases i
+  · change Continuous (fun x : ℝ => (Real.exp (-x / 2) : ℂ))
+    fun_prop
+  · change Continuous (fun x : ℝ => (Real.exp (x / 2) : ℂ))
+    fun_prop
 
 theorem augment_continuous {p : ℕ} {U : Fin p → ℝ → ℂ}
     (hU : ∀ i, Continuous (U i)) : ∀ i, Continuous (augment U i) := by
@@ -52,10 +56,10 @@ theorem moment_orthogonal {w : ℝ → ℂ} {lo hi : ℝ}
     rw [hw, zero_mul]
   rw [setIntegral_eq_integral_of_forall_compl_eq_zero hzero]
   fin_cases i
-  · simpa only [momentFunction, Fin.isValue, ↓reduceIte, Complex.conj_ofReal,
-      mul_comm] using hmom.1
-  · simpa only [momentFunction, Fin.isValue, ↓reduceIte, Complex.conj_ofReal,
-      mul_comm] using hmom.2
+  · change (∫ x : ℝ, w x * conj ((Real.exp (-x / 2) : ℂ))) = 0
+    simpa only [Complex.conj_ofReal, mul_comm] using hmom.1
+  · change (∫ x : ℝ, w x * conj ((Real.exp (x / 2) : ℂ))) = 0
+    simpa only [Complex.conj_ofReal, mul_comm] using hmom.2
 
 theorem augment_orthogonal {w : ℝ → ℂ} {lo hi : ℝ}
     (hsupp : Function.support w ⊆ Icc lo hi) (hmom : MomentZero w)
