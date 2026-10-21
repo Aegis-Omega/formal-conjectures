@@ -5816,5 +5816,13 @@
       ]
     },
     "scope": "hfin and hB are discharged for all original coefficient vectors; actual finite source bound retained. No new all-real-t Krein/trace certificate or unconditional RH is claimed."
+  },
+  "uniform_scalar_original_import": {
+    "status": "PASS_FOR_NAMED_MODULE_ONLY",
+    "source_commit": "7cc836ab5f6dff66b5643c9838d9c79d330ab68e",
+    "run": 39543410933,
+    "receipt": "actual_input_execution/SCALAR_ORIGINAL_IMPORT_PASS.json",
+    "window_status": "PENDING_REPLAY_AFTER_REPRODUCED_CAST_ZERO_FIX",
+    "external_commit_preserved": "d40702a206dae553027722c6424a8c42c3f6746e"
   }
 }

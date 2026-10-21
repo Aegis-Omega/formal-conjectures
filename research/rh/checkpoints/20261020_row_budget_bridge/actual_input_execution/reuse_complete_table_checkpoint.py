@@ -19,7 +19,7 @@ def main():
  assert run['head_sha']==SHA and run['conclusion']=='success' and run['status']=='completed','FULL_TABLE_RUN_NOT_SUCCESSFUL'
  if subprocess.run(['git','cat-file','-e',SHA+'^{commit}'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode:
   subprocess.run(['git','fetch','--no-tags','--depth=1','origin',SHA],check=True,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True,timeout=120)
- metadata={PREFIX+n for n in ['AEGIS_RH_EXACT_HEAD_PROOF_GRAPH.json','AEGIS_RH_KERNEL_RECEIPT.json','AEGIS_RH_LEAN_PATCH.diff','AEGIS_RH_MATHEMATICAL_ALIGNMENT.md','AEGIS_RH_Q16_CERTIFICATE.md','AEGIS_RH_ZERO_COORDINATE_AUDIT.md','AEGIS_RH_FINAL_DECISION.md','NEXT_STEPS.md','full_table_execution/FULL_TABLE_KERNEL_RECEIPT.json','full_table_execution/FULL_TABLE_PROOF_GRAPH.json']}
+ metadata={PREFIX+n for n in ['AEGIS_RH_EXACT_HEAD_PROOF_GRAPH.json','AEGIS_RH_KERNEL_RECEIPT.json','AEGIS_RH_LEAN_PATCH.diff','AEGIS_RH_MATHEMATICAL_ALIGNMENT.md','AEGIS_RH_Q16_CERTIFICATE.md','AEGIS_RH_ZERO_COORDINATE_AUDIT.md','AEGIS_RH_FINAL_DECISION.md','BASELINE.md','NEXT_STEPS.md','reuse_source_checkpoint.py','full_table_execution/FULL_TABLE_KERNEL_RECEIPT.json','full_table_execution/FULL_TABLE_PROOF_GRAPH.json']}
  metadata.add('.github/workflows/rh-cvs-actual-row-replay.yml')
  changes=subprocess.check_output(['git','diff','--no-renames','--name-status',SHA,'--'],text=True).splitlines()
  for line in changes:

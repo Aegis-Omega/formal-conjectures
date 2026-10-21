@@ -31,8 +31,7 @@ theorem gramUp_nonneg {F : Finset ℤ} {R NP : ℕ}
     subst x
     norm_num at habs
   have h := gram_tail_le hF hRNP v 0
-  rw [hz, Finset.sum_empty] at h
-  exact h
+  simpa only [Nat.cast_zero, hz, Finset.sum_empty] using h
 
 /-- Positivity of the actual Gram-tail majorant at every admissible cutoff. -/
 theorem gramTail_nonneg (M : ℕ) (L : ℝ) {F : Finset ℤ} {R NP : ℕ}

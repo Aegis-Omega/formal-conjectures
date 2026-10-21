@@ -29,7 +29,7 @@ def main():
       'AEGIS_RH_KERNEL_RECEIPT.json','AEGIS_RH_LEAN_PATCH.diff','FINAL_SOURCE_BINDING.json',
       'AEGIS_RH_MATHEMATICAL_ALIGNMENT.md','AEGIS_RH_Q16_CERTIFICATE.md',
       'AEGIS_RH_ZERO_COORDINATE_AUDIT.md','AEGIS_RH_FINAL_DECISION.md',
-      'first_column_execution/README.md']}
+      'first_column_execution/README.md','BASELINE.md','NEXT_STEPS.md']}
     metadata.add('.github/workflows/rh-cvs-actual-row-replay.yml')
     changes=subprocess.check_output(['git','diff','--no-renames','--name-status',COMMIT,'--'],text=True).splitlines()
     for line in changes:

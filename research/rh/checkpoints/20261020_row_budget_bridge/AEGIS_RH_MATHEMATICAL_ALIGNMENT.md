@@ -1,132 +1,74 @@
-## Current original-import result and actual-source continuation
+> Latest execution: CI39543410933 freshly accepted CvSKreinScalarUniformV1 (standard axioms), then failed at the window's Nat-zero rewrite. CI39556612118 at external commit d40702a2 also failed at that rewrite. That commit is preserved as an ancestor. The exact failing expression was reproduced locally; the archived source now uses a passing `simpa only [Nat.cast_zero, hz, Finset.sum_empty] using h` repair. A new original-import window replay is required. Historical "being checked" statements below refer to those completed runs.
 
-CI 39505154095 passed at exact source 2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925: 445 fresh modules, 868 standard-axiom audits, all 19321 output entries. Its 611 compiled binaries and complete source/compiler receipts were independently validated against the downloaded artifact. Raw receipts are in full_table_execution/ORIGINAL_IMPORT_*.json. This PASS certifies the complete finite envelope with its six explicit input-membership families.
+# Mathematical alignment
 
-New native CvSRealTailFormV1 proves weighted_apply, tail_form_eq, residual_apply and sum_centered_rows for every N including 0. The 430-module original-import CI 39514026659 at f9bff86e checks the actual input join and candidate hfin/hB for every original coefficient vector. Until it succeeds these actual-source terminals remain candidates. The cross-kernel factor 2*pi is rigorously divided out in the new Q route; raw X-transpose*Y is not substituted for projectedEntry.
+Status: **STRONGEST_VERIFIED_RESULT_WITH_EXACT_REMAINING_OBLIGATION**. No unconditional RH theorem is asserted.
 
-## Exact next source joins
+## Source and canonical target
 
-The actual analytic enclosure lemmas already exist. The remaining input step is their finite integration with the literal data, not an assertion that those analytic estimates are absent. Sufficient exact identities are:
+Repository: `tarikskalic33/formal-conjectures`; existing branch: `proof/rh-feshbach-schur-v1`. The current mathematical source snapshot is `7cc836ab5f6dff66b5643c9838d9c79d330ab68e`. On the 2026-10-21 API reread, PR89 is `5d7425dcc6f4137b2cf3f57bc953504135a388e6` and PR90 is `7fc73ce1ae0eb2afbaac778ae8ca8e7fbac07fcc`. Neither PR was merged or overwritten.
 
-```
-coeff(columns)(k,i) = CvSActualRowInputL12V1.xBox(k,i)
-residual(columns)(r,i) = CvSActualRowInputL12V1.zBox(Lambda96)(r,i)
-T[k] = CvSActualRowInputL12V1.tauBox(96, signedFreq(k))
-G[k,l] = rationalRange(96, gramRat(150,signedFreq(k),signedFreq(l)), same)
-LP2 = CvSFrequencyIntervalV1.lpSquaredInterval(96)
-contains(Q[i,j], normalize(dot96(X[:,i],Y[inner141,j]))) = true
-normalize(I) = inverseTwoPi.mul(96,I), inverseTwoPi contains 1/(2*pi).
-```
-
-Lambda96 must encode the unchanged stored Q48 projection exactly. SourceZ_mem already handles this arbitrary enclosed projection. The Y=E*X and inner X*Lambda interval products are distinct from the now-verified G*X/G*(tau*X) products. Their E/X/Lambda/Y/inner/Z computations are now native kernel verified in actual_input_execution. Their actual analytic source identities are candidates in the actual-source continuation (CI 39514026659 failed in the aggregate join after 424 successful modules; targeted repair is pending replay). The normalized Q check also passes all 19321 native comparisons. An identity or rigorously outward containment is sufficient; no input may be silently tightened.
-
-The fixed-window consumer still needs its all-real-t Krein certificate and scalar/trace conditions. Universal closure then requires a cofinal/all-window producer or the existing signed Weil producer for every admissible moment-zero packet. A finite congruence identity preserves the index domain. It does not supply these quantifiers. The time-slice unit-modulus condition remains RH-equivalent and cannot be introduced as an unconditional lemma. No failure of tooling is used as a mathematical nonexistence argument.
-
-## Full-table continuation
-
-The complete ordered 139 by 139 output comparison now passes the native kernel, replacing the earlier first-column-only scope. `CvSFullTableClosureV1.full_table_contains` relates every checked entry to the original Q96 interval envelope, with no unproved output check. `real_envelope_mem` transfers all entries to Q80, retaining exactly six real input-membership families.
-
-`CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs` composes the complete finite table with the original complex interval-box positivity theorem. For every complex vector v it gives
-
-```
-delta * sum_i ||v_i||^2 + budgetEnergy(z, tailMatrix(x,g,t,lp2), v)
-  <= 40 * Re sum_ij v_i * conjugate(v_j) * q_ij
-
-delta = 167597168023440173239 / 604462909807314587353088 > 0.
-```
-
-Its premises are symmetry of q and g and the explicit Q96 memberships of q, x, g, t, z and lp2 in the unchanged literal inputs. It has no output-table, matrix-positivity or RH premise. These memberships still need to be connected to the original CvS definitions; the theorem must not be described as an unconditional actual-CvS bound before that connection is proved.
-
-All 139 input-column caches, 278 original Gram-column products and 19321 ordered output entries compiled. Signed packing includes bounds, lengths and carry control. The source JSON reconstructs byte-for-byte from the original stored Q48 projection and source tables without executing a floating fit. Existing first-column proofs now supply the weighted identities directly, avoiding an unnecessary global re-evaluation. Only proof composition changed; no interval endpoint changed.
-
-The selected new graph has 12 roots, 19752 declarations and 984 located source modules. It has no missing dependency or proof cycle and only the standard three axioms. The 451 inductive/constructor metadata groups are separately condensed. The earlier 102-root graph and original-import CI receipts remain historical evidence in Git and the archived native graph; their scopes are not relabelled.
-
-# Mathematical alignment at the continued source checkpoint
-
-This is a scoped research result, not an unconditional RH proof. Lean is 4.33.1 and Mathlib is pinned to `0df444a360eaa60ab8c11dca51a86af692955474`. The canonical definition in `Mathlib/NumberTheory/LSeries/RiemannZeta.lean:185` is unchanged:
+Lean is 4.33.1; Mathlib is `0df444a360eaa60ab8c11dca51a86af692955474`. The existing Li provider is `35df682f3b709ffe5fbcfdd452dfa964bd622b87`, built with the recorded PR53 recipe. The canonical Mathlib definition is unchanged:
 
 ```lean
 ∀ (s : ℂ) (_ : riemannZeta s = 0)
   (_ : ¬∃ n : ℕ, s = -2 * (n + 1)) (_ : s ≠ 1), s.re = 1 / 2
 ```
 
-## Source identities and verified scopes
+## Existing local Krein chain
 
-PR #89 is still `5d7425dcc6f4137b2cf3f57bc953504135a388e6`; PR #90 is still `7fc73ce1ae0eb2afbaac778ae8ca8e7fbac07fcc` on the API reread. Work continues on the existing Feshbach branch. No branch, definition, factor or stored interval was replaced. Final published source hashes are recorded in `FINAL_SOURCE_BINDING.json`.
+`RHKreinFirstCellV1.firstCell_sound_of_jet_enclosures` concludes `CellAnalyticSoundV1 firstCell`, where `firstCell = ⟨0,75/4096,114511397055347687⟩`. The original analytic jet enclosures, first-fifteen proof and reflective remainder feed `RHKreinAllCellsV1.allCellsAnalyticSound`.
 
-The original-import actual source continuation passed CI 39455515829 at `177dcd648c5497d923586f1d94eb701880389c04`. Its 37 explicit workflow audits pass; the additional emitted `sourceZ_mem` audit also contains only standard axioms. The subsequent first-column continuation is at `f8ff0e2006b6393055dcc97597c79ef3f0dcfcf1`, with all original-import source modules compiled in CI 39463716271. That run failed only because its final Python audit searched the wrong log for two packed soundness declarations. All 105 relevant compiler axiom outputs pass the corrected audit. The overall run remains FAIL; the repaired workflow records validated dependency reuse separately from fresh compilation.
+`RHKreinAllCellsV1.zero_quadratic_margin_two_fifths` retains `0 ≤ r`, `r ≤ 2/5`, `HalfWidthAt g r a` and `WeilMomentConditionsV1 g`. It controls the actual indexed nontrivial-zero sum by `(1/16) energy(g)`. Its bounded support domain is not the universal Weil domain. This session does not claim a fresh replay of all 2,199 cells.
 
-## Local Krein certificate and the universal target
+## Complete finite certificate and actual analytic inputs
 
-`RHKreinFirstCellV1.firstCell_sound_of_jet_enclosures` has the closed local type `CellAnalyticSoundV1 firstCell`. The literal first cell is `⟨0, 75/4096, 114511397055347687⟩`. Its existing proof supplies the analytic jet enclosures, rather than assuming decimal estimates as axioms. The existing first-fifteen proof and reflective remainder form `RHKreinAllCellsV1.allCellsAnalyticSound`; the literal split uses the first 15 cells and the remaining serialized cells.
+The actual finite certificate has 139 atom coefficients, 141 Fourier frequencies `-70..70`, and 301 residual rows `-150..150`. It differs from the recovered Hilbert H140 stress test. All 19,321 ordered output comparisons, all 278 Gram-column products and all 139 packing witnesses passed original-import CI39505154095 at `2d2ea90d`: 445 freshly compiled modules, 868 standard-axiom audits, and 611 independently hash-validated compiled binaries.
 
-The existing terminal `RHKreinAllCellsV1.zero_quadratic_margin_two_fifths` quantifies over `g,r,a` and explicitly requires `0 ≤ r`, `r ≤ 2/5`, `HalfWidthAt g r a` and `WeilMomentConditionsV1 g`. Its conclusion is `(1/16) energy(g) ≤ Re(∑' rho, WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho)`, using the actual indexed nontrivial-zero sum. This continuation does not erase the support condition or claim a fresh replay of the whole 2,199-cell DAG. That earlier analytic source chain is distinct from the new native interval graph.
-
-## Actual CvS coordinates and residual
-
-The fixed window is `L=6/5`. There are 139 atom coefficients, 141 Fourier rows indexed by `signedFreq k=k.val-70`, and 301 finite residual rows indexed by `rowIndex r=r.val-150`. Fourier indices are not zeta-zero ordinates.
-
-`sourceY_eq_actual_crossRow` already proves the exact complex cross-row transport in the original context. There is no missing new positivity principle for the finite congruence identity. The source kernel normalization is
+`CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs` first proves a complex row budget with six explicit real input-membership families and symmetry. Its exact positive margin is
 
 ```
-K_M(m,n) = π (cvsEntry M (6/5) n m + cvsEntry M (6/5) m n),
-K_M(n,n) = 2π cvsEntry M (6/5) n n,
-K_M(m,n) = ((6/5)/π) (tau(n)-tau(m))/(n-m),   m≠n.
+delta = 167597168023440173239 / 604462909807314587353088.
 ```
 
-`CvSActualRowInputL12V1` encloses the actual transformed coefficients, exact rational harmonic Gram upper kernel, signed diagonal, actual cross kernel and sourceY. These statements retain `M≥3` and the stated frequency ranges. `sourceZ_mem` now encloses all 301 residual rows for every real projection whose entries have the supplied Q96 enclosures. On rows `80≤r.val<221` it is exactly `sourceY−X*Lambda`; on the outer rows it is sourceY. Its `hLam` hypothesis is explicit and does not assert arbitrary projection data are valid.
+The analytic-to-literal join is now proved, rather than left as an input premise. At source `96e25af7`, CI39538781739 freshly accepted `CvSActualLiteralInputsV1` and `CvSActualBasisBudgetV1`, plus the three unchanged basis modules. `actual_budgetEnergy_margin` quantifies over every M>=3 and every complex coefficient vector; the six actual memberships and symmetries are discharged using the original analytic enclosure lemmas. `actualBudget_le_original` transports the resulting inequality to the actual `Q_CvS` form. That CI later failed in a different consumer module; the five named module results remain PASS, not a whole-run success.
 
-## Exact interval envelope and the new proofs
+The cross kernel is **2*pi times** the signed low-block kernel. Accordingly `X^T Y = 2*pi*projectedEntry`; the Q enclosure uses the rigorously enclosed inverse `2*pi`. The unnormalized substitution is explicitly rejected. Original Q48 projection entries and every interval endpoint remain unchanged.
 
-For the proposed exact Q48 projection, the unchanged interval computation is
+## Original coefficient contracts
+
+At source `d6c13a47`, CI39541303124 accepted the complete `CvSActualRowConsumerV1` module and the unchanged `CvSTauFarL12V1`. Its `hfin` bounds the actual finite residual rows plus the actual Gram-tail majorant by `Brow M c`, for every original coefficient vector c. Its `hB` gives
 
 ```
-C = 40 Q - ZᵀZ - (L/π)² [2 (diag(tau)X)ᵀ G (diag(tau)X) + 338 Xᵀ G X].
+Brow M c <= 40 * Q_CvS M (6/5) atomCenter c,    M >= 3.
 ```
 
-Here `338=2*13²`, corresponding to the existing Gram-tail estimate with Young parameter 1 and far tau bound 13. The remaining tail/residual identification must preserve this normalization. G is the matrix representation of the proved Gram-tail majorant; equality of its diagonal upper bound with the exact infinite tail is not required.
+Surjectivity of the existing basis transformation discharges the original-coordinate quantifier. No Frobenius estimate or norm loss replaces the relative budget. The residual identity subtracts X*Lambda exactly on Fourier rows -70..70; all 301 residual rows are retained. Complex conjugation is preserved. `HFIN_HB_KERNEL_PASS.json` records full compiler types and standard-axiom audits. The overall run later failed only in the new window wrapper.
 
-`CvSIntervalMatrixProductV1` proves the outward midpoint-radius dot and matrix product. `CvSRowBudgetEnvelopeV1.envelope_mem` composes those input memberships, and `stored_envelope_mem_of_check` transports the result into the stored Q80 box only after its concrete output comparison is proved.
+## Window composition and scalar improvement
 
-New `CvSColumnEnvelopeV1.envelope_pair_eq` identifies a mixed entry of the original finite envelope with a list computation that reuses a right Gram column. All lengths and weighted-column identities are explicit. It holds at every finite size, without a symmetry or positivity premise. It is an equality of computations, not a positivity theorem at every size.
+Source `7cc836ab` repairs that wrapper and adds `CvSKreinScalarUniformV1`. The scalar module passed native kernel execution; its original-import replay and the window wrapper are being checked in CI39543410933. Until its receipts say PASS, those new original-import roots are candidates.
 
-Fourteen kernel-checked batches now cover all 139 entries of the first stored column. They check the weighted columns, numerical envelope containment, exact identity with the original stored target boxes, and row order. `RowBudgetFirstColumnV1.first_column_contains`, `first_column_mem` and `all_rows_covered` compose these checks. The batch kernel time totals 357.111 seconds. This is 139 of 19,321 output entries; it does not identify every literal analytic input or supply the full hI premise.
+The uniform scalar theorem proves, for real m,T,
 
-The new packed extension reuses `CvSPackedGramV1.gramEntry_eq`. `packedIntervalDot_eq` expresses the original center and radius as four exact signed dot products; its length, component and carry bounds are explicit. `cachedIntervalDot_eq` permits reuse only after exact cache-preparation identities. All rounding remains identical. A 301-element unchanged Z0 pilot checks the complete cache, signed component and carry bounds, exact output, equality to the old dot, and rejection of one corrupted packed coefficient. No full-matrix speedup or full-matrix proof is inferred from this pilot.
-
-## Exact next interfaces
-
-The existing consumer is `CvSRowBudgetGramBridgeV1.budgetEnergy_le_of_Iv`. It requires symmetry and **every** stored entry to enclose `40*A(i,j)-budgetMatrix Z G(i,j)` at Q80. The full-table extension now supplies all 19321 output comparisons. The actual analytic input and residual/tail identifications are implemented as candidates in the separate source continuation, with kernel status still pending.
-
-The existing `CvSGramTailV1.rows_gram_le` already bounds every outer cutoff N by a right side independent of N, under its explicit finite support, far-tau and positive Young-parameter hypotheses. That uniform tail theorem is preserved; it is not a missing all-frequency estimate. It controls frequency exhaustion for a fixed window, rather than supplying positivity at every window width.
-
-The next window consumer is `CvSWindowGramL12V1.window_L12_gram`. Even after the row budget it retains an all-real-t Krein certificate, integrability/trace hypotheses and the scalar Schur-gap inequality. Its conclusion covers packets with `2r≤6/5`, not every packet.
-
-The existing universal sharp target is exactly:
-
-```text
-∀ g : WeilCompactSmoothGV1, WeilMomentConditionsV1 g →
-  ∃ n (gs : Fin (n+1) → WeilCompactSmoothGV1),
-    g = packetSum (fun _ => (1 : ℂ)) gs ∧
-    actualMixedDefect n gs ≤ -(∑ i, (B (gs i) (gs i)).re).
+```
+m >= 31/16, T <= 6
+  ==> m-T/(2*pi) >= 15/16
+  ==> 40+1/2 <= (2*pi)^2*(6/5)*(m-T/(2*pi)).
 ```
 
-`RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget` proves equivalence with RH. This is an explicit remaining mathematical obligation, not a premise-free RH proof. Its hselect alternative chooses one certified reconstruction for each admitted source/decomposition; it does not bound every arbitrary decomposition. Absolute Schur bounds can lose cancellation; no uniform mixed-cost bound is inferred from the eleven-shift or any fixed matrix certificate.
+`CvSActualGramWindowV1.window_of_actual_rows` composes hfin/hB with the existing `window_of_certificate_gram`. `window_of_trace_le_six` uses the new scalar theorem. Both retain the actual all-real-t Krein inequality, the integrable trace witness, regularity and support hypotheses. Their conclusion concerns the original indexed zero sum for moment-zero g with `HalfWidthAt g r a` and `2*r <= 6/5`.
 
-## Closing-route comparison
+The newly reconstructed `UNTRUSTED_KREIN_*` LP data are numerical witness candidates only. Their validator text does not prove the all-real-t inequality or trace integral in Lean.
 
-| Route | Proved logical relation | Current decisive obligation |
-| --- | --- | --- |
-| Adaptive actual Schur selector hselect | Sufficient for RH; no converse or strict-strength claim is established here | For each admitted source packet, construct one exact reconstruction and its actual diagonal/mixed weights within 46688/65536. |
-| Sharp signed mixed budget | Exactly RH-equivalent by the existing source theorem | Prove the universal signed inequality from independent analytic information; the equivalence supplies no sign. |
-| Local Krein positivity plus transfer | The existing bounded-support theorem is a scoped local result | Supply a cofinal/all-window producer, or a valid density/continuity argument controlling the form on every finite combination. |
+## Exact remaining obligations
 
-A spanning or dense collection of individually positive vectors is insufficient by itself: the real symmetric matrix [[1,2],[2,1]] is positive on each coordinate vector, but its quadratic form at (1,-1) is -2. This is a countertest to the proposed inference, not a counterexample about the actual Weil form. Likewise, a successful finite certificate gives no all-dimension or all-window quantifier.
+To instantiate the fixed-window result, construct concrete H,d,j,s,cf satisfying its regularity/support hypotheses, prove the stated pointwise Krein inequality for **every real t**, and prove the actual trace integral is at most 6 with m>=31/16. The numerical feasibility evidence is not such a proof.
 
-PR90's existing `radius_row_real` bounds projected-entry approximation radii by 1/230000. That is a different matrix quantity from the cross-residual-plus-tail hB. It cannot be substituted for the missing hI/hB producer. Cached exact arithmetic changes execution cost, not these analytic Schur budgets.
+After that, universal closure still needs a cofinal/all-window producer with a proved exhaustion limit, or the actual signed mixed-budget producer for every admissible moment-zero Weil packet. `RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget` states an equivalent obligation; it does not supply its proof. Its optimized row producer selects one certified reconstruction per packet, not every arbitrary decomposition.
 
-## Historical verification boundary (earlier 102-root checkpoint)
+Time-slice unit modulus at nonzero log shift is equivalent to the critical real coordinate. No unconditional unitary-transport premise, new axiom, changed RH definition, or finite-to-universal inference is introduced.
 
-The native selected graph now contains 102 roots, 28,139 declarations and 1,058 located source modules. It has zero missing dependencies and zero theorem/definition cycles; 684 inductive/constructor metadata groups are separately condensed. All axioms are among propext, Classical.choice and Quot.sound. Native RHFixInterval and PackedGram copies change only imports; their complete mathematical bodies are byte-identical after import-line removal. Original-import analytic CI is a separate receipt. The new packed closure was also freshly compiled from the published archive in an isolated custom-module directory: 11 modules, same host, no pre-existing custom module cache. No independent human mathematical sign-off or unconditional RH theorem is claimed.
+## Verification boundaries
 
-Historical 105-root verification: exact-source CI [39470677222](https://github.com/tarikskalic33/formal-conjectures/actions/runs/39470677222) passed at `16d487f11ed122113c186c573b9268f5bfc4d1e7`. All 105 explicit type/axiom re-audits pass after validating the 166 reused f8ff0e20 dependencies against source, pin, log and binary hashes. The earlier f8ff0e20 source compilation and its audit-routing CI failure remain distinct evidence. The new packed extension additionally passes the isolated 11-module native reproduction. No unconditional RH claim follows.
+Successful named modules in a later failed run are distinguished from whole-run PASS. Native narrowed-import replay, original-import CI, validated binary reuse and fresh compilation have separate receipts. The historical graphs and source snapshots remain in Git; the active machine graph and kernel receipt specify their own scope. Missing tooling is not used to infer mathematical impossibility.

@@ -1,0 +1,29 @@
+{
+  "status": "PASS_FOR_NAMED_MODULE_ONLY",
+  "source_commit": "7cc836ab5f6dff66b5643c9838d9c79d330ab68e",
+  "run": 39543410933,
+  "overall_run_result": "FAIL_IN_LATER_WINDOW_CAST_REWRITE",
+  "artifact_id": 12320344381,
+  "artifact_sha256": "a3398fa288cb5abe4726ce06bffa03e6a6a4403f237cea5aea9c419f91b0fa47",
+  "runs": [
+    {
+      "module": "CvSKreinScalarUniformV1",
+      "source_sha256": "d9db7d6b9828d7e1b262a9e0ba7e6c53908a907907183b4df3c9ea4d657572ef",
+      "command": [
+        "lean",
+        "-DwarningAsError=true",
+        "-R",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources",
+        "-o",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/ringout/CvSKreinScalarUniformV1.olean",
+        "/home/runner/work/formal-conjectures/formal-conjectures/.lake/actual-input-sources/CvSKreinScalarUniformV1.lean"
+      ],
+      "seconds": 5.365881753999929,
+      "exit_code": 0,
+      "compiler_output": "@AEGIS.CvSKreinScalarUniformV1.gap_lower : \u2200 {m T : \u211d}, 31 / 16 \u2264 m \u2192 T \u2264 6 \u2192 15 / 16 \u2264 m - T / (2 * Real.pi)\n'AEGIS.CvSKreinScalarUniformV1.gap_lower' depends on axioms: [propext, Classical.choice, Quot.sound]\n@AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve : \u2200 {m T : \u211d},\n  31 / 16 \u2264 m \u2192 T \u2264 6 \u2192 40 + 1 / 2 \u2264 (2 * Real.pi) ^ 2 * (6 / 5) * (m - T / (2 * Real.pi))\n'AEGIS.CvSKreinScalarUniformV1.schur_budget_with_reserve' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSKreinScalarUniformV1.schur_budget' depends on axioms: [propext, Classical.choice, Quot.sound]\n'AEGIS.CvSKreinScalarUniformV1.chosen_budget' depends on axioms: [propext, Classical.choice, Quot.sound]\n",
+      "bad_axioms": [],
+      "status": "PASS"
+    }
+  ],
+  "scope": "Parameterized scalar implication only. No analytic trace bound or unconditional RH."
+}

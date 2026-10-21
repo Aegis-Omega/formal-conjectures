@@ -1,6 +1,6 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "0216d078dba4876bb754a4d76f20db870f147a09dc29b9db48b2602f4c6b53a0",
+  "archive_sha256": "8afe689463234e09eaa1511ce1decaa915f69070e959fb947e35a29592cb9b30",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
@@ -10,8 +10,8 @@
     },
     {
       "name": "CvSActualGramWindowV1.lean",
-      "sha256": "b00daefdc779783c565ab480b077a17f3496db2bfa52d74772575a69d95d1391",
-      "kernel_status": "NOT_RUN"
+      "sha256": "61ba51757d429224b7da15720ef8c916acb8969546d544d54ed2beef175499f8",
+      "kernel_status": "PENDING_ORIGINAL_IMPORT_REPLAY"
     },
     {
       "name": "CvSActualLiteralInputsV1.lean",

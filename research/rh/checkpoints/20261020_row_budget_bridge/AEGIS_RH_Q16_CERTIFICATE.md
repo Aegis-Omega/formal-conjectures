@@ -1,21 +1,4 @@
-## Full-table continuation
-
-The complete ordered 139 by 139 output comparison now passes the native kernel, replacing the earlier first-column-only scope. `CvSFullTableClosureV1.full_table_contains` relates every checked entry to the original Q96 interval envelope, with no unproved output check. `real_envelope_mem` transfers all entries to Q80, retaining exactly six real input-membership families.
-
-`CvSFullBudgetJoinV1.budgetEnergy_margin_le_of_inputs` composes the complete finite table with the original complex interval-box positivity theorem. For every complex vector v it gives
-
-```
-delta * sum_i ||v_i||^2 + budgetEnergy(z, tailMatrix(x,g,t,lp2), v)
-  <= 40 * Re sum_ij v_i * conjugate(v_j) * q_ij
-
-delta = 167597168023440173239 / 604462909807314587353088 > 0.
-```
-
-Its premises are symmetry of q and g and the explicit Q96 memberships of q, x, g, t, z and lp2 in the unchanged literal inputs. It has no output-table, matrix-positivity or RH premise. These memberships still need to be connected to the original CvS definitions; the theorem must not be described as an unconditional actual-CvS bound before that connection is proved.
-
-All 139 input-column caches, 278 original Gram-column products and 19321 ordered output entries compiled. Signed packing includes bounds, lengths and carry control. The source JSON reconstructs byte-for-byte from the original stored Q48 projection and source tables without executing a floating fit. Existing first-column proofs now supply the weighted identities directly, avoiding an unnecessary global re-evaluation. Only proof composition changed; no interval endpoint changed.
-
-The selected new graph has 12 roots, 19752 declarations and 984 located source modules. It has no missing dependency or proof cycle and only the standard three axioms. The 451 inductive/constructor metadata groups are separately condensed. The earlier 102-root graph and original-import CI receipts remain historical evidence in Git and the archived native graph; their scopes are not relabelled.
+> Latest execution: CI39543410933 freshly accepted CvSKreinScalarUniformV1 (standard axioms), then failed at the window's Nat-zero rewrite. CI39556612118 at external commit d40702a2 also failed at that rewrite. That commit is preserved as an ancestor. The exact failing expression was reproduced locally; the archived source now uses a passing `simpa only [Nat.cast_zero, hz, Finset.sum_empty] using h` repair. A new original-import window replay is required. Historical "being checked" statements below refer to those completed runs.
 
 # Exact integer and interval certificates
 
@@ -51,7 +34,7 @@ eps - eta = 335194336046880346478 > 0
 margin = (eps-eta)/2^80.
 ```
 
-The base is `40564819207303340847894502572032` and factor bound is `15795288160149`. Full original numerical source `CvSRelativeRowCertificateL12V1` was recompiled: row_budget_check_true uses propext; row_budget_margin_positive uses no axioms. The complete packed soundness body, including its complex form, also compiles with standard axioms. Numerical matrix positivity remains conditional on correct enclosures of the actual entries.
+The base is `40564819207303340847894502572032` and factor bound is `15795288160149`. Full original numerical source `CvSRelativeRowCertificateL12V1` was recompiled: row_budget_check_true uses propext; row_budget_margin_positive uses no axioms. The complete packed soundness body, including its complex form, also compiles with standard axioms. The later actual-source join discharges the corresponding entry enclosures, as recorded below; this does not instantiate the separate Krein/trace witness.
 
 The historical fourteen first-column batches checked 139 entries. The complete extension now checks all 19321 ordered entries, preserving every input number and outward direction, with original-import CI 39505154095 PASS. Missing weighted-column data and a false zero target are both rejected by kernel tests.
 
@@ -71,4 +54,16 @@ A modified packed coefficient is rejected. The pilot takes 3.440 seconds; this v
 
 ## Exact source normalization continuation
 
-The actual cross kernel is 2*pi times the signed low-block kernel. The new source Q route checks containment of inverseTwoPi * dot96(X-column,Y-inner-column) in the stored Q interval. inverseTwoPi is lpInterval96 times rationalRange96(5/12,5/12); lp_mem and exact rational algebra prove membership of 1/(2*pi). No float or inward rounding is introduced. All19321 normalized numerical comparisons and a rejection of the unnormalized 00 entry pass the native kernel. Their actual analytic membership producer awaits targeted replay after the aggregate join failure in CI 39514026659.
+The actual cross kernel is 2*pi times the signed low-block kernel. The new source Q route checks containment of inverseTwoPi * dot96(X-column,Y-inner-column) in the stored Q interval. inverseTwoPi is lpInterval96 times rationalRange96(5/12,5/12); lp_mem and exact rational algebra prove membership of 1/(2*pi). No float or inward rounding is introduced. All19321 normalized numerical comparisons and a rejection of the unnormalized 00 entry pass the native kernel. Their actual analytic membership producer passed as a complete original-import source module at96e25af7 in CI39538781739. The named module receipt is ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json; that run later failed in another consumer. The final original-vector hfin/hB contracts subsequently passed atd6c13a47 in CI39541303124.
+
+## Actual relative budget and exact scalar reserve
+
+The source-bound hB theorem gives Brow M c <= 40*Q_CvS M (6/5) atomCenter c for every M>=3 and original complex coefficient vector c. All 301 finite residual rows and the actual Gram-tail majorant are included in hfin. The 139-dimensional basis change preserves this relative form bound; it is not replaced by a norm estimate.
+
+The new parameterized scalar theorem, natively kernel verified, uses only pi>=3 to prove that m>=31/16 and T<=6 imply gap>=15/16 and
+
+```
+40+1/2 <= (2*pi)^2*(6/5)*(m-T/(2*pi)).
+```
+
+Its exact conservative arithmetic is 36*(6/5)*(15/16)=81/2. This half-unit reserve is conditional on the stated scalar bounds. The theorem does not prove that any proposed slack witness has trace<=6. Original-import replay of the new scalar and window wrapper is tracked in CI39543410933 at7cc836ab; read its receipt before promoting that additional scope.
