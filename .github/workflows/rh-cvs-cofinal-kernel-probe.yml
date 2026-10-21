@@ -7,6 +7,7 @@ on:
     paths:
       - 'AEGIS_RH_CvS_Finite_KernelProbeV1.lean'
       - 'AEGIS_RH_CvS_UniversalSignKernelV1.lean'
+      - 'scripts/rh_cvs_import_pr89_receipt.py'
       - 'AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean'
       - '.github/workflows/rh-cvs-cofinal-kernel-probe.yml'
 
@@ -16,6 +17,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
@@ -295,6 +297,97 @@ jobs:
           ! grep -E "sorryAx|declaration uses 'sorry'|error:" cvs-universal-sign-kernel.log
           grep -F "AEGIS.RHCvSUniversalSignKernelV1.universal_nonnegative_of_projected_sequence" cvs-universal-sign-kernel.log
           echo CVS_UNIVERSAL_SIGN_TRANSFER_KERNEL_PASS
+
+      - name: Restore exact PR89 Weil proof imports (source-verified; no proof writes)
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          RECEIPT="$RUNNER_TEMP/aegis-pr89-source-receipt"
+          mkdir -p "$RECEIPT"
+          # Fixed original run and artifact: no latest/synthetic success is accepted.
+          test "$(gh api repos/tarikskalic33/formal-conjectures/actions/artifacts/12211213700 --jq '.digest')" = "sha256:b01b58376172b14cc1e14e02268b73a767802d498926d83cca03c750bd87fbf9"
+          gh run download 39301555778 --repo "$GITHUB_REPOSITORY" \
+            --name rh-cofinal-actual-schur-351de3d60ec4456ba1a100ed8c54250f71beaa9f-39301555778 \
+            --dir "$RECEIPT"
+          python3 scripts/rh_cvs_import_pr89_receipt.py \
+            --receipt "$RECEIPT" --checkout "$GITHUB_WORKSPACE" \
+            --order "$RUNNER_TEMP/pr89-needed-order.tsv" | tee cvs-pr89-source-closure.log
+          # Preserve PR90's checked low-block provider and add only the Weil imports.
+          # The PR89 archive is evidence/sources only: no .olean is trusted from ZIP.
+          while IFS=
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.olean" AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean 2>&1 | tee cvs-full-join-kernel.log
+          ! grep -E 'sorryAx|declaration uses .sorry.' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal' cvs-full-join-kernel.log
+          echo CVS_FULL_CONDITIONAL_JOIN_KERNEL_PASS
+
+      - name: Save exact-head additive proof logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cvs-cofinal-probe-${{ github.sha }}
+          retention-days: 1
+          if-no-files-found: warn
+          path: |
+            cvs-finite-kernel.log
+            cvs-universal-sign-kernel.log
+            cvs-pr89-source-closure.log
+            cvs-row-tail-interop.log
+            cvs-actual-weil-interop.log
+            cvs-full-join-kernel.log
+\t' read -r module source_file; do
+            rel="$(printf '%s' "$module" | tr '.' '/')"
+            case "$module" in
+              Lc.*|Hadamard.*|FunctionsOfOneComplexVariable.*)
+                existing_src="$GITHUB_WORKSPACE/$rel.lean"
+                existing_olean="$GITHUB_WORKSPACE/.lake/build/lib/lean/$rel.olean"
+                test -s "$existing_olean"
+                test -f "$existing_src"
+                cmp -s "$source_file" "$existing_src" || {
+                  echo "PR89_PROVIDER_SOURCE_MISMATCH $module"; exit 1;
+                }
+                echo "REUSED_EXACT_SOURCE_PINNED_PROVIDER $module" >> cvs-pr89-source-closure.log
+                continue
+                ;;
+            esac
+            out="$RING/$rel.olean"
+            test ! -e "$out" || {
+              echo "PR89_MODULE_COLLISION $module"; exit 1;
+            }
+            mkdir -p "$(dirname "$out")"
+            log="$RUNNER_TEMP/pr89-$(printf '%s' "$module" | tr '.' '_').log"
+            if ! lean -o "$out" "$source_file" >"$log" 2>&1; then
+              echo "PR89_IMPORT_COMPILER_FAILURE $module"
+              tail -n 80 "$log"
+              exit 1
+            fi
+            if grep -E "sorryAx|declaration uses 'sorry'|(^|[[:space:]])error:" "$log"; then
+              echo "PR89_IMPORT_UNTRUSTED_AXIOM_OR_ERROR $module"
+              exit 1
+            fi
+            test -s "$out"
+            echo "PR89_EXACT_SOURCE_IMPORT_PASS $module" >> cvs-pr89-source-closure.log
+          done < "$RUNNER_TEMP/pr89-needed-order.tsv"
+          # Genuine actual Weil alignment imports CvSRowTailV1 as well.
+          if ! test -s "$RING/CvSRowTailV1.olean"; then
+            lean -DwarningAsError=true -o "$RING/CvSRowTailV1.olean" \
+              research/rh/feshbach_lean_v1/CvSRowTailV1.lean \
+              2>&1 | tee cvs-row-tail-interop.log
+          fi
+          lean -DwarningAsError=true -o "$RING/CvSActualWeilInteropV1.olean" \
+            research/rh/feshbach_lean_v1/CvSActualWeilInteropV1.lean \
+            2>&1 | tee cvs-actual-weil-interop.log
+          test -s "$RING/CvSActualWeilInteropV1.olean"
+          ! grep -E "sorryAx|declaration uses 'sorry'|error:" cvs-actual-weil-interop.log
+          echo CVS_ACTUAL_WEIL_INTEROP_KERNEL_PASS
 
       - name: Attempt full CvS to genuine Weil cofinal module (strict kernel gate)
         shell: bash
