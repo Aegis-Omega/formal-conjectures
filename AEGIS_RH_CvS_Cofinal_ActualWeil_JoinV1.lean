@@ -24,7 +24,7 @@ by the finite CvS certificate. No sorry/admit/axioms or RH assumption.
 import CvSProjectedEntryReplayL12V1
 import CvSProjectedSchurBridgeL12V1
 import CvSActualWeilInteropV1
-import AEGISOverlay.RHMomentDecayCofinalJoinV1
+import RHMomentDecayCofinalJoinV1
 
 open Finset Filter Topology
 open scoped BigOperators ComplexConjugate
