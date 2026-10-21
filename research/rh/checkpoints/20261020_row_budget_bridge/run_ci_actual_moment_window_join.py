@@ -80,7 +80,7 @@ except Exception as error:
     receipt["failure"] = type(error).__name__ + ":" + str(error)
 finally:
     receipt["seconds"] = time.monotonic() - started
-    (root / "ACTUAL_ACTUAL_MOMENT_WINDOW_KERNEL_RECEIPT.json").write_text(
+    (root / "ACTUAL_MOMENT_WINDOW_KERNEL_RECEIPT.json").write_text(
         json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     )
     print(receipt.get("compiler_output", ""))
