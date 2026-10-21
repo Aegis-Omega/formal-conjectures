@@ -335,7 +335,7 @@ jobs:
                   end = raw.find(b"-/\n")
                   if end < 0:
                       raise RuntimeError("BAD_COPYRIGHT_WRAPPER")
-                  return raw[end + 3:].lstrip(b"\\r\\n")
+                  return raw[end + 3:].lstrip(b"\r\n")
               return raw
           for line in lines:
               module, source_string = line.split(chr(9), 1)
