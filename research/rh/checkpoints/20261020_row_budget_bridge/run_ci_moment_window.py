@@ -44,7 +44,7 @@ try:
         raise RuntimeError("MATHLIB_PIN_MISMATCH")
     if "4.33.1" not in receipt["lean"]:
         raise RuntimeError("LEAN_PIN_MISMATCH")
-    if re.search(r"\\b(?:sorry|sorryAx|admit)\\b", source.read_text()):
+    if re.search(r"\b(?:sorry|sorryAx|admit)\b", source.read_text()):
         raise RuntimeError("FORBIDDEN_SOURCE_PLACEHOLDER")
     target.parent.mkdir(parents=True, exist_ok=True)
     target.unlink(missing_ok=True)  # Invalidate this new candidate only; never touch green binaries.
@@ -54,7 +54,7 @@ try:
     receipt["exit_code"] = run.returncode
     receipt["compiler_output"] = compiler_output
     audits = {}
-    for name, axioms in re.findall(r"'([^']+)' depends on axioms:\\s*\\[([^\\]]*)\\]", compiler_output):
+    for name, axioms in re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", compiler_output):
         if name in audits:
             raise RuntimeError("DUPLICATE_AXIOM_ROOT:" + name)
         audits[name] = [item.strip() for item in axioms.split(",") if item.strip()]
@@ -78,7 +78,7 @@ except Exception as error:
 finally:
     receipt["seconds"] = time.monotonic() - started
     (root / "MOMENT_WINDOW_KERNEL_RECEIPT.json").write_text(
-        json.dumps(receipt, indent=2, sort_keys=True) + "\\n"
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n"
     )
     print(receipt.get("compiler_output", ""))
     print("MOMENT_WINDOW_KERNEL_" + receipt["status"],
