@@ -284,8 +284,7 @@ jobs:
           grep -F 'AEGIS.RHCvSKernelFiniteV1.certified_source_projectedQ_nonneg' cvs-finite-kernel.log
           echo CVS_FINITE_SOURCE_KERNEL_PASS
 
-      - name: Attempt full CvS to genuine Weil cofinal module (fail-closed)
-        continue-on-error: true
+      - name: Attempt full CvS to genuine Weil cofinal module (strict kernel gate)
         shell: bash
         run: |
           set -euo pipefail
