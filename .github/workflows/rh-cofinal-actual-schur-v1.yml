@@ -750,6 +750,13 @@ jobs:
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
 
+      - name: Prepare official RH submission from existing kernel checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/test_rh_submission_from_checkpoint.py
+          python3 scripts/rh_submission_from_checkpoint.py
+
       - name: Preserve completed source-bound cofinal modules
         id: cofinal-checkpoint
         if: always()
