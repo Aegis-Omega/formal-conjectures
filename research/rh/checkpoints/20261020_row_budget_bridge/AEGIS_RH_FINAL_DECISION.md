@@ -2,6 +2,8 @@
 
 No unconditional canonical RH theorem was constructed.
 
+The actual-source producer now passed original-import kernel compilation at96e25af7 in CI39538781739: CvSActualLiteralInputsV1.actual_budgetEnergy_margin has only M>=3 and the complex vector as parameters, with the exact positive margin and actual CvS input definitions. CvSActualBasisBudgetV1.actualBudget_le_original and the three unchanged basis modules also passed. The overall run failed in the later hfin consumer; it is not reported as a successful whole run. ACTUAL_SOURCE_BUDGET_KERNEL_PASS.json preserves all five successful module outputs, exact source hashes and standard-axiom audits.
+
 Original-import CI 39505154095 passed at exact source 2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925: 445 fresh modules, 868 standard-axiom audits and all 19321 output comparisons. The downloaded artifact 12306423649 was independently validated against source, compiler, pins, logs and all 611 binary hashes. Full raw receipts are in full_table_execution/ORIGINAL_IMPORT_*.json.
 
 The new verified result is the complete 139 by 139 finite output enclosure and its quantitative complex row-budget composition. All 19321 ordered entries, all 278 source Gram-column products, every input-column packing witness, and three rejection controls pass Lean 4.33.1. The original numerical certificate and projection are unchanged. The exact positive margin is 167597168023440173239 / 604462909807314587353088.

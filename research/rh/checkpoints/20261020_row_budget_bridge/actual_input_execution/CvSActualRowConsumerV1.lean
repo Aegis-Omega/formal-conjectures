@@ -16,7 +16,7 @@ set_option maxRecDepth 100000
 set_option Elab.async false
 
 abbrev supports := fun i : Fin 139 => sinSqSupport (atomCenter i)
-abbrev weights := fun i : Fin 139 => sinSqWeight (atomCenter i)
+noncomputable abbrev weights := fun i : Fin 139 => sinSqWeight (atomCenter i)
 noncomputable def a (v : Fin 139 → ℂ) := lowCoeff (6/5) supports weights (R_basis v)
 noncomputable def lambdaApply (v : Fin 139 → ℂ) (j : Fin 139) : ℂ :=
   ∑ i, (lambdaReal j i : ℂ) * v i
@@ -60,22 +60,25 @@ theorem residual_energy_eq (M : ℕ) (v : Fin 139 → ℂ) :
         ‖crossRow M (6/5) (lowFreq supports) (a v) m -
           ∑ j, R_basis (lambdaApply v) j * atomRow (6/5) supports weights j m‖^2 := by
   simp_rw [sourceZ_apply]
-  exact sum_centered_rows 150 _
+  exact sum_centered_rows (V := ℝ) 150 (fun m =>
+    ‖crossRow M (6/5) (lowFreq supports) (a v) m -
+      ∑ j, R_basis (lambdaApply v) j * atomRow (6/5) supports weights j m‖^2)
 
 /-- Existing signed-frequency bijection, applied in both slots of a Hermitian form. -/
 theorem signed_gform (v : ℤ → ℂ) (g : ℤ → ℤ → ℝ) :
     (∑ k : Fin 141, ∑ l : Fin 141,
       v (signedFreq k) * conj (v (signedFreq l)) * (g (signedFreq k) (signedFreq l) : ℂ)).re =
       gform (lowFreq supports) v g := by
-  unfold gform
-  congr 1
-  calc
-    _ = ∑ k : Fin 141, ∑ l ∈ lowFreq supports,
-        v (signedFreq k) * conj (v l) * (g (signedFreq k) l : ℂ) := by
-      apply Finset.sum_congr rfl
-      intro k _
-      exact sum_signedFreq _
-    _ = _ := sum_signedFreq _
+  have h : (∑ k : Fin 141, ∑ l : Fin 141,
+      v (signedFreq k) * conj (v (signedFreq l)) * (g (signedFreq k) (signedFreq l) : ℂ)) =
+      ∑ k ∈ lowFreq supports, ∑ l ∈ lowFreq supports, v k * conj (v l) * (g k l : ℂ) := by
+    calc
+      _ = ∑ k : Fin 141, ∑ l ∈ lowFreq supports,
+          v (signedFreq k) * conj (v l) * (g (signedFreq k) l : ℂ) :=
+        Finset.sum_congr rfl (fun k _ => sum_signedFreq
+          (fun l => v (signedFreq k) * conj (v l) * (g (signedFreq k) l : ℂ)))
+      _ = _ := sum_signedFreq (fun k => ∑ l ∈ lowFreq supports, v k * conj (v l) * (g k l : ℂ))
+  exact congrArg Complex.re h
 
 /-- The real tail table is exactly the existing epsilon=1, T=13 Gram-tail expression. -/
 theorem actual_tail_eq (M : ℕ) (v : Fin 139 → ℂ) :
@@ -87,7 +90,10 @@ theorem actual_tail_eq (M : ℕ) (v : Fin 139 → ℂ) :
       gramTail M (6/5) (lowFreq supports) (a v) 13 1 150 := by
   rw [tail_form_eq]
   simp_rw [transformed_coeff_eq_lowCoeff]
-  rw [signed_gform (fun n => a v n * (AEGIS.CvSRowTailV1.tau M (6/5) n : ℂ)), signed_gform]
+  have h1 := signed_gform (fun n => a v n * (AEGIS.CvSRowTailV1.tau M (6/5) n : ℂ)) (gramUp 150)
+  have h2 := signed_gform (a v) (gramUp 150)
+  simp only [a] at h1 h2
+  rw [h1, h2]
   norm_num [gramTail, a]
 
 /-- Exact hfin identity; no positivity or numerical bound is assumed. -/

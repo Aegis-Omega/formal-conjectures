@@ -1,11 +1,16 @@
 {
   "base_mathematical_source_commit": "2d2ea90dd2db6d57a8d5cf4bbf7ac734566d3925",
-  "archive_sha256": "5885eebc5d73ca82ea38443aab9c79f47bd006d424769853def0dbd1107cebbb",
+  "archive_sha256": "a4f84cd200f467204041fc2d520fb5ee89e49e275838659dafb26baca087ee8a",
   "classification": "New exact-integer reconstruction and staged source-product continuation; generated roots are candidates until kernel receipts say PASS. Not recovered Claude artifacts.",
   "sources": [
     {
       "name": "CvSActualBasisBudgetV1.lean",
       "sha256": "06c8344199e74d74e0753e2a58704ec7dee958d878054ad3abdb082fe7f20c21",
+      "kernel_status": "NOT_RUN"
+    },
+    {
+      "name": "CvSActualGramWindowV1.lean",
+      "sha256": "3f7437c4fa77cb8d52967533a4d86fe3afc4f45db06f3cf89cfee559a35b9712",
       "kernel_status": "NOT_RUN"
     },
     {
@@ -15,7 +20,7 @@
     },
     {
       "name": "CvSActualRowConsumerV1.lean",
-      "sha256": "5aac3f6a4b009c1c57623a7eed4df14084efe7eda19b33f6da8ef05d3173b2d7",
+      "sha256": "c93422fa28c3b34bc77d736f74b286545faa6649250443271c55c0dec1eb4131",
       "kernel_status": "NOT_RUN"
     },
     {
@@ -2219,6 +2224,11 @@
       "kernel_status": "PASS"
     },
     {
+      "name": "CvSTauFarL12V1.lean",
+      "sha256": "b92ae26fd11f0765283cf5b429219dc4d7caa10cc8cda254bb2cb49f39463076",
+      "kernel_status": "NOT_RUN"
+    },
+    {
       "name": "CvSTriangularTransportV1.lean",
       "sha256": "9e31d82b6f5d945c6077e898b59bee0302c2e2741c0ec8916d49f3efc442b3a7",
       "kernel_status": "PASS"
@@ -2236,6 +2246,10 @@
     "CvSProjectedBasisL12V1.lean": {
       "original_path": "research/rh/feshbach_lean_v1/CvSProjectedBasisL12V1.lean",
       "sha256": "57915883361cad0502d9a451e4af1afe6c1db32707ec9b1623fbcc6c09bfc2ba"
+    },
+    "CvSTauFarL12V1.lean": {
+      "original_path": "research/rh/feshbach_lean_v1/CvSTauFarL12V1.lean",
+      "sha256": "b92ae26fd11f0765283cf5b429219dc4d7caa10cc8cda254bb2cb49f39463076"
     }
   }
 }
