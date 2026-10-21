@@ -6,6 +6,7 @@ on:
       - 'proof/rh-cvs-checked-low-bridge-v1'
     paths:
       - 'AEGIS_RH_CvS_Finite_KernelProbeV1.lean'
+      - 'AEGIS_RH_CvS_UniversalSignKernelV1.lean'
       - 'AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean'
       - '.github/workflows/rh-cvs-cofinal-kernel-probe.yml'
 
@@ -284,6 +285,17 @@ jobs:
           grep -F 'AEGIS.RHCvSKernelFiniteV1.certified_source_projectedQ_nonneg' cvs-finite-kernel.log
           echo CVS_FINITE_SOURCE_KERNEL_PASS
 
+      - name: Kernel-check universal sign transfer (independent CvS consumer)
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_UniversalSignKernelV1.olean" AEGIS_RH_CvS_UniversalSignKernelV1.lean 2>&1 | tee cvs-universal-sign-kernel.log
+          ! grep -E "sorryAx|declaration uses 'sorry'|error:" cvs-universal-sign-kernel.log
+          grep -F "AEGIS.RHCvSUniversalSignKernelV1.universal_nonnegative_of_projected_sequence" cvs-universal-sign-kernel.log
+          echo CVS_UNIVERSAL_SIGN_TRANSFER_KERNEL_PASS
+
       - name: Attempt full CvS to genuine Weil cofinal module (strict kernel gate)
         shell: bash
         run: |
@@ -304,4 +316,5 @@ jobs:
           if-no-files-found: warn
           path: |
             cvs-finite-kernel.log
+            cvs-universal-sign-kernel.log
             cvs-full-join-kernel.log
