@@ -758,6 +758,11 @@ jobs:
             2>&1 | tee evidence-cofinal/official-rh-compile.log
           cat > RHOfficialImportedAxiomAudit.lean <<'LEAN'
           import FormalConjectures.Millennium.RiemannHypothesis
+
+          /-! # Canonical RH axiom audit
+          Inspect the exact imported official theorem; no proof admission is asserted here.
+          -/
+
           #check RiemannHypothesis.riemannHypothesis
           #print axioms RiemannHypothesis.riemannHypothesis
           LEAN
