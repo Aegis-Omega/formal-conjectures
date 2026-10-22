@@ -83,7 +83,7 @@ class TargetGateTests(unittest.TestCase):
         self.assertEqual(classify(SOURCE, "", 0, "")[0], "AXIOM_AUDIT_MISSING")
     def test_direct_proof_term_accepted_with_kernel_axiom_audit(self):
         source = SOURCE.replace(
-            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
             "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
             "theorem riemannHypothesis : RiemannHypothesis := AEGIS.certifiedRH",
         )
@@ -96,9 +96,9 @@ class TargetGateTests(unittest.TestCase):
 
     def test_multiline_proof_term_accepted_after_audit(self):
         source = SOURCE.replace(
-            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
             "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
-            "theorem riemannHypothesis\\n    : _root_.RiemannHypothesis :=\\n"
+            "theorem riemannHypothesis\n    : _root_.RiemannHypothesis :=\n"
             "    AEGIS.certifiedRH",
         )
         audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
@@ -106,7 +106,7 @@ class TargetGateTests(unittest.TestCase):
 
     def test_direct_sorry_term_rejected(self):
         source = SOURCE.replace(
-            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
             "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
             "theorem riemannHypothesis : RiemannHypothesis := sorry",
         )
