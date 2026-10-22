@@ -323,12 +323,12 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + r
                 certificate_hashes={"abel_archive": digest(ROOT / "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz")})
 write("RH_EVIDENCE_PASSPORT.json", passport)
 shutil.copyfile(ROOT / "AEGISOverlay/AEGIS_RH_Unconditional.lean", OUT / "AEGIS_RH_Unconditional.lean")
-book = "# RH exact-head evidence\\n\\n"
-book += "Commit: \`" + head + "\`\\n"
-book += "Imported constants: " + str(env_rh_census["inspected_count"]) + "\\n"
-book += "Exact RH-type matches: " + str(len(env_rh_candidates)) + "\\n"
-book += "Kernel-checked selected roots: " + str(len(terms["roots"])) + "\\n"
-book += "\\n## Audited declarations\\n\\n"
+book = "# RH exact-head evidence\n\n"
+book += "Commit: `" + head + "`\n"
+book += "Imported constants: " + str(env_rh_census["inspected_count"]) + "\n"
+book += "Exact RH-type matches: " + str(len(env_rh_candidates)) + "\n"
+book += "Kernel-checked selected roots: " + str(len(terms["roots"])) + "\n"
+book += "\n## Audited declarations\n\n"
 for root, axioms in root_axioms.items():
     module = rows[root]["module"]
     record = modules.get(module)
@@ -339,9 +339,9 @@ for root, axioms in root_axioms.items():
         path = prov.get("source_file", record["source"])
         if path.startswith(".aegis/"): path = path[len(".aegis/"):]
         url = "https://github.com/" + repo + "/blob/" + sha + "/" + path
-        book += "- [\`" + root + "\`](" + url + "): \`" + ", ".join(axioms) + "\`\\n"
+        book += "- [`" + root + "`](" + url + "): `" + ", ".join(axioms) + "`\n"
     else:
-        book += "- \`" + root + "\`: \`" + ", ".join(axioms) + "\`\\n"
+        book += "- `" + root + "`: `" + ", ".join(axioms) + "`\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
