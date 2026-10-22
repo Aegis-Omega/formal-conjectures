@@ -626,6 +626,36 @@ jobs:
           lake env lean -o .lake/build/lib/lean/RHSignedPrimeIntervalExtensionV8.olean RHSignedPrimeIntervalExtensionV8.lean 2>&1 | tee evidence-krein/RHSignedPrimeIntervalExtensionV8.log
           python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHSignedPrimeIntervalExtensionV8.lean evidence-krein/RHSignedPrimeIntervalExtensionV8.log
 
+      - name: Compile and audit exact-source RH proof fusion
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-fusion .lake/build/lib/lean/FormalConjecturesUtil
+          # Rebound without editing the exact PR7 mathematical source.
+          test "$(git hash-object FormalConjecturesUtil/FixedWindowLimitBridge.lean)" = d0e7cf92dabcfa8e1a7559284d66df79617551f4
+          test "$(git hash-object research/rh/krein_ring_v1/RHFeshbachCoreV1.lean)" = 621f2b2815843663da7c73dcbfcc7b69cf8e2ddb
+          lake env lean -o .lake/build/lib/lean/FormalConjecturesUtil/FixedWindowLimitBridge.olean FormalConjecturesUtil/FixedWindowLimitBridge.lean 2>&1 | tee evidence-fusion/FixedWindowLimitBridge.log
+          cp research/rh/krein_ring_v1/RHFeshbachCoreV1.lean RHFeshbachCoreV1.lean
+          lake env lean -o .lake/build/lib/lean/RHFeshbachCoreV1.olean RHFeshbachCoreV1.lean 2>&1 | tee evidence-fusion/RHFeshbachCoreV1.log
+          cp AEGISOverlay/RHExistingProofFusionV1.lean RHExistingProofFusionV1.lean
+          lake env lean -o .lake/build/lib/lean/RHExistingProofFusionV1.olean RHExistingProofFusionV1.lean 2>&1 | tee evidence-fusion/RHExistingProofFusionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py AEGISOverlay/RHExistingProofFusionV1.lean evidence-fusion/RHExistingProofFusionV1.log
+          git rev-parse HEAD > evidence-fusion/HEAD.txt
+          git -C .aegis rev-parse HEAD > evidence-fusion/AEGIS_HEAD.txt
+          git hash-object AEGISOverlay/RHExistingProofFusionV1.lean > evidence-fusion/FUSION_BLOB.txt
+          git hash-object FormalConjecturesUtil/FixedWindowLimitBridge.lean > evidence-fusion/PR7_BLOB.txt
+          lean --version > evidence-fusion/LEAN_VERSION.txt
+          echo "EXACT_SOURCE_PROOF_FUSION=PASS"
+
+      - name: Upload proof-fusion receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-existing-proof-fusion-${{ github.event.pull_request.head.sha || github.sha }}-${{ github.run_id }}
+          path: evidence-fusion/
+          if-no-files-found: warn
+          retention-days: 30
+
       - name: Upload Krein bridge replay logs
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
