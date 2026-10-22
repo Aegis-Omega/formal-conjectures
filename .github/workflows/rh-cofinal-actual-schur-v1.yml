@@ -759,8 +759,8 @@ jobs:
           cat > RHOfficialImportedAxiomAudit.lean <<'LEAN'
           import FormalConjectures.Millennium.RiemannHypothesis
 
-          /-! # Canonical RH axiom audit
-          Inspect the exact imported official theorem; no proof admission is asserted here.
+          /-!
+          # Official RH axiom audit
           -/
 
           #check RiemannHypothesis.riemannHypothesis
@@ -768,8 +768,6 @@ jobs:
           LEAN
           lake env lean RHOfficialImportedAxiomAudit.lean \
             2>&1 | tee evidence-cofinal/official-rh-axioms.log
-          # This is a source audit, not a proof claim: the catalog's sorryAx
-          # is recorded, never promoted to a clean imported proof.
           grep -F "'RiemannHypothesis.riemannHypothesis'" \
             evidence-cofinal/official-rh-axioms.log
 
