@@ -201,9 +201,9 @@ jobs:
           mods=set(base_mods)|set(src_mods)|set(compat_mods)|set(local_mods)
 
           def selected(m):
-              if m in local_mods: return ("LOCAL", local_mods[m])
               if m in compat_mods: return ("COMPAT", compat_mods[m])
               if m in src_mods: return ("SRC", src_mods[m])
+              if m in local_mods: return ("LOCAL", local_mods[m])
               if m in base_mods: return ("BASE", base_mods[m])
               raise SystemExit("missing:"+m)
 
