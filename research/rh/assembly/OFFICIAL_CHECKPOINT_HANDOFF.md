@@ -16,6 +16,28 @@
 
 These historical artifacts prove their recorded source-bound scope. No statement of unconditional RH follows from a green workflow alone.
 
+## DeepMind submission contract pinned on 2026-10-22
+
+The current upstream reference checked for this handoff is
+`google-deepmind/formal-conjectures@a7b87c8d0bb60e73782045d614d4a24907b87b8a`.
+
+- Official RH source Git blob: `5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542`.
+- Upstream `PROOFS.md` Git blob: `edf4eb1afdbf0182fd9ac603d0f23adf97003d4c`.
+- The RH theorem remains `RiemannHypothesis.riemannHypothesis : RiemannHypothesis := by sorry` in the statement repository.
+- DeepMind's current contribution rules require a solved problem to change
+  `category research open` to `category research solved` and attach a stable
+  `formal_proof using lean4 at "..."` link.
+- Their proof policy requires opening the exact linked declaration, checking that
+  it implies the repository statement, checking for `sorry` and custom axioms,
+  and running `#print axioms`. A green build alone is explicitly insufficient.
+
+The generated upstream patch therefore remains unavailable unless the exact-head
+kernel census finds a body-bearing declaration definitionally equal to
+`_root_.RiemannHypothesis`, the independent probe compiles it at that exact type,
+and its axioms are a subset of `propext`, `Classical.choice`, and `Quot.sound`.
+When those checks pass, the generated patch marks the theorem `research solved`
+and links the exact immutable fork commit, source path, and declaration line.
+
 ## Submission packaging from the existing replay
 
 The cofinal workflow now runs `scripts/rh_submission_from_checkpoint.py` **after** its original proof-graph exporter, reusing its already compiled `.olean` environment. It adds `RH_OFFICIAL_SUBMISSION.json` and `RH_OFFICIAL_SUBMISSION.md` to the existing evidence artifact.
