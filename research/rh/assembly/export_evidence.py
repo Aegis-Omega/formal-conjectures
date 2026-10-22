@@ -193,12 +193,11 @@ for root, axioms in root_axioms.items():
 # This scan still does NOT claim to cover *unreachable* declarations, branches,
 # other repositories or historical archives.
 def is_admissible_closed_rh(row):
-    # The Lean kernel's definitional-equality result is authoritative.
-    # Legacy root text matching is retained only for selected proof DAG rows.
+    # The imported Lean environment supplies the exact type witness.
+    name = row.get("identifier")
     is_canonical = (
-        row.get("type_defeq_riemann_hypothesis") is True
-        or row["type_expr"].strip() in
-        ("RiemannHypothesis", "_root_.RiemannHypothesis")
+        name in env_rh_by_name
+        and env_rh_by_name[name].get("type_defeq_riemann_hypothesis") is True
     )
     return (is_canonical and row["has_body"] and not row["is_axiom"]
             and set(row["axioms"]) <= allowed_axioms)
