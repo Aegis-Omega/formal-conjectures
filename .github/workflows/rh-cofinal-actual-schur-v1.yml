@@ -362,7 +362,6 @@ jobs:
               if m == "RHFeshbachCoreV1":
                   return pathlib.Path("research/rh/krein_ring_v1/RHFeshbachCoreV1.lean")
               # Reuse existing kernel-correct PR606 proof of translatePacket g 0 = g.
-              # The earlier AEGIS exact source ends in sorryAx on diagonal equality.
               if m == "WeilTranslationGapInvariantV10":
                   return pathlib.Path("AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean")
               # Reuse the existing corrected PR606 Mellin filter, preserving the
@@ -703,11 +702,7 @@ jobs:
             grep -F "AEGIS.RHActualElevenSpectralV1.$spectral_theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualElevenSpectralV1.log
           done
-          # Keep unchanged SHA-locked originals and their complete compiler
-          # logs. Audit their compiled declarations in a fresh import-only
-          # Lean invocation; historical source linter warnings remain in the
-          # raw logs. The strict axiom checker and new-source warning gate
-          # are unchanged.
+          # Audit SHA-locked originals in a separate Lean import.
           for original in RHFineMomentPacketV3 RHRationalNinePacketPrimeWindowV1 RHFineDiagonalUpgradeV3 RHRationalGapNinePrimeBoundV1 RHRationalGapTenPrimeBoundV1; do
             python3 - "$original" <<'PY'
           import pathlib, re, sys
