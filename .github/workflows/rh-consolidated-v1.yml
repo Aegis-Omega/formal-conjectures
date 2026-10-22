@@ -1,0 +1,385 @@
+name: RH consolidated v1
+
+on:
+  pull_request:
+    # Manifest-exact dependency impact filter (external .li code is pinned).
+    # Do not schedule a multi-hour 317-module build for unrelated research files.
+    # Workflow-only changes can be checked explicitly via workflow_dispatch.
+    paths:
+      - 'research/rh/consolidated_v1/**'
+      - 'AEGISOverlay/RHBoxFourierComplementarityV1.lean'
+      - 'AEGISOverlay/RHKreinCriticalLineBridgeV1.lean'
+      - 'AEGISOverlay/RHKreinDigammaLowerBoundV1.lean'
+      - 'AEGISOverlay/RHKreinDigammaMonotonicityV1.lean'
+      - 'AEGISOverlay/RHKreinFiniteIntervalKernelV1.lean'
+      - 'AEGISOverlay/RHKreinPrimeSymbolV1.lean'
+      - 'AEGISOverlay/RHKreinSplineContinuityV1.lean'
+      - 'AEGISOverlay/RHKreinSplineFourierIntegrableV1.lean'
+      - 'AEGISOverlay/RHKreinSplineSupportV1.lean'
+      - 'AEGISOverlay/RHKreinSymbolIntegrationV1.lean'
+      - 'AEGISOverlay/RHMultiGeneratorComplementarityV1.lean'
+      - 'AegisRH/PR606/MellinDecayEstimateV1.lean'
+      - 'AegisRH/PR606/RHFinalClosureSpineV1.lean'
+      - 'AegisRH/PR606/RHMillenniumGateV10.lean'
+      - 'AegisRH/PR606/RHTranslatedKernelDominanceV1.lean'
+      - 'AegisRH/PR606/RHZeroKernelBoundV11.lean'
+      - 'AegisRH/PR606/RestrictedWeilCriterionKernelBridgeV10.lean'
+      - 'AegisRH/PR606/RestrictedWeilCriterionLaplaceV10.lean'
+      - 'AegisRH/PR606/RestrictedWeilCriterionResidueCoefficientV11.lean'
+      - 'AegisRH/PR606/RestrictedWeilCriterionZeroKernelV10.lean'
+      - 'AegisRH/PR606/WeilAbjadFourPhaseBridgeV1.lean'
+      - 'AegisRH/PR606/WeilArchimedeanConvergenceV1.lean'
+      - 'AegisRH/PR606/WeilArchimedeanCothTailV1.lean'
+      - 'AegisRH/PR606/WeilAutocorrelationClosureV1.lean'
+      - 'AegisRH/PR606/WeilAutocorrelationExplicitFormulaV10.lean'
+      - 'AegisRH/PR606/WeilAutocorrelationMellinV11.lean'
+      - 'AegisRH/PR606/WeilAutocorrelationPoleAggregationV1.lean'
+      - 'AegisRH/PR606/WeilAutocorrelationRealityV1.lean'
+      - 'AegisRH/PR606/WeilCriterionCompactSmoothV1.lean'
+      - 'AegisRH/PR606/WeilDiagonalKernelReductionV21.lean'
+      - 'AegisRH/PR606/WeilDigammaIntegralReductionV1.lean'
+      - 'AegisRH/PR606/WeilDigammaSeriesHalfPlaneV1.lean'
+      - 'AegisRH/PR606/WeilDigammaSeriesRealV1.lean'
+      - 'AegisRH/PR606/WeilDisjointEnergyV2.lean'
+      - 'AegisRH/PR606/WeilExplicitFormulaV10.lean'
+      - 'AegisRH/PR606/WeilFixedLineArithmeticV10.lean'
+      - 'AegisRH/PR606/WeilFixedLineExplicitFormulaContractV2.lean'
+      - 'AegisRH/PR606/WeilFixedLineFubiniCoreV3.lean'
+      - 'AegisRH/PR606/WeilFixedLineFubiniSwapV4.lean'
+      - 'AegisRH/PR606/WeilFixedLineGammaCoreV10.lean'
+      - 'AegisRH/PR606/WeilFixedLineKernelIntegralV6.lean'
+      - 'AegisRH/PR606/WeilFixedLineXSpaceTailV7.lean'
+      - 'AegisRH/PR606/WeilFixedLineZeroSideV10.lean'
+      - 'AegisRH/PR606/WeilLogCoordinateIsometryV21.lean'
+      - 'AegisRH/PR606/WeilMellinInversionV1.lean'
+      - 'AegisRH/PR606/WeilMellinWeightedFixedLineV2.lean'
+      - 'AegisRH/PR606/WeilMixedAlgebraV2.lean'
+      - 'AegisRH/PR606/WeilMixedClosureV2.lean'
+      - 'AegisRH/PR606/WeilMomentKillerConstructionV1.lean'
+      - 'AegisRH/PR606/WeilPairedHadamardFixedLineV1.lean'
+      - 'AegisRH/PR606/WeilPairedHadamardKernelTsumV2.lean'
+      - 'AegisRH/PR606/WeilPairedHadamardTsumFusionV1.lean'
+      - 'AegisRH/PR606/WeilPairedMellinProfileV5.lean'
+      - 'AegisRH/PR606/WeilPairedZeroEvaluationV9.lean'
+      - 'AegisRH/PR606/WeilPoleTermV1.lean'
+      - 'AegisRH/PR606/WeilPrimeLineIdentityV1.lean'
+      - 'AegisRH/PR606/WeilPrimeSummabilityV1.lean'
+      - 'AegisRH/PR606/WeilReciprocalPairedTestV8.lean'
+      - 'AegisRH/PR606/WeilSeparatedArchBridgeV31.lean'
+      - 'AegisRH/PR606/WeilThreeBlockAnalyticConstantsV21.lean'
+      - 'AegisRH/PR606/WeilThreeBlockComplexV2.lean'
+      - 'AegisRH/PR606/WeilThreeBlockCrossAssemblyV30.lean'
+      - 'AegisRH/PR606/WeilThreeBlockCrossPrimeV28.lean'
+      - 'AegisRH/PR606/WeilThreeBlockCrossPrimeWindowV29.lean'
+      - 'AegisRH/PR606/WeilTwoPointPositivityV1.lean'
+      - 'AegisRH/PR606/WeilWidthArchBudgetV26.lean'
+      - 'AegisRH/PR606/WeilWidthArchCorrelationV25.lean'
+      - 'AegisRH/PR606/WeilWidthArchIntegralV27.lean'
+      - 'AegisRH/PR606/WeilWidthDiagonalArchFrontierV24.lean'
+      - 'AegisRH/PR606/WeilWidthPrimeVanishingV23.lean'
+      - 'AegisRH/PR606/WeilXiLogDerivDecompositionV10.lean'
+      - 'AegisRH/PR606/WeilZeroCarrierBridgeV10.lean'
+      - 'AegisRH/PR606/WeilZeroSideIdentificationV1.lean'
+      - 'AegisRH/PR606/ZeroCountingBoundV1.lean'
+      - 'AegisRH/PR606/ZeroCountingMellinSummabilityV1.lean'
+      - 'AegisRH/PR606/ZeroCriticalStripV1.lean'
+      - 'AegisRH/PR606/ZeroHeightFiniteSumV1.lean'
+      - 'AegisRH/PR606/ZeroHeightLimitContractV1.lean'
+      - 'AegisRH/PR606/ZeroHeightShellMassV1.lean'
+      - 'AegisRH/PR606/ZeroHeightSummabilityBridgeV1.lean'
+      - 'AegisRH/PR606/ZeroMajorantSummabilityV1.lean'
+      - 'AegisRH/PR606/ZeroShellAnalyticSynthesisV1.lean'
+      - 'AegisRH/PR606/ZeroShellQuadraticBoundV1.lean'
+      - 'AegisRH/SmallWindow/WeilWindowExhaustionV1.lean'
+      - 'FormalConjectures/Millennium/RHSnowflakeLog23.lean'
+      - 'research/rh/critical_line_v1/RHCellBinomialV1.lean'
+      - 'research/rh/critical_line_v1/RHCellMomentsV1.lean'
+      - 'research/rh/critical_line_v1/RHCellSplitV1.lean'
+      - 'research/rh/critical_line_v1/RHCheckLoopV1.lean'
+      - 'research/rh/critical_line_v1/RHCheckSoundV1.lean'
+      - 'research/rh/critical_line_v1/RHCriticalLineSignV1.lean'
+      - 'research/rh/critical_line_v1/RHExpEnclosureV1.lean'
+      - 'research/rh/critical_line_v1/RHFirstZeroV1.lean'
+      - 'research/rh/critical_line_v1/RHFixIntervalV1.lean'
+      - 'research/rh/critical_line_v1/RHLambdaCheckV1.lean'
+      - 'research/rh/critical_line_v1/RHLambdaLineV1.lean'
+      - 'research/rh/critical_line_v1/RHMellinThreeTermsV1.lean'
+      - 'research/rh/critical_line_v1/RHNineZerosV1.lean'
+      - 'research/rh/critical_line_v1/RHPi40V1.lean'
+      - 'research/rh/critical_line_v1/RHPi80V1.lean'
+      - 'research/rh/critical_line_v1/RHRiemannThetaFormulaV1.lean'
+      - 'research/rh/critical_line_v1/RHSecondZeroV1.lean'
+      - 'research/rh/critical_line_v1/RHThetaTailV1.lean'
+      - 'research/rh/critical_line_v1/RHThirdZeroV1.lean'
+      - 'research/rh/critical_line_v1/RHXiSignV1.lean'
+      - 'research/rh/critical_line_v1/RHZeroChecksAV1.lean'
+      - 'research/rh/critical_line_v1/RHZeroChecksBV1.lean'
+      - 'research/rh/critical_line_v1/RHZeroChecksCV1.lean'
+      - 'research/rh/krein_L105_v1/RHEulerGammaSharpBaseV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinDigammaSharpTailV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinHatAtV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105AllV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105BatchV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105BridgeV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105CheckerV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105DataV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105TMV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinL105TailV1.lean'
+      - 'research/rh/krein_L105_v1/RHKreinSymbolConstQV1.lean'
+      - 'research/rh/krein_L105_v1/RHWindowConnectedL105V1.lean'
+      - 'research/rh/krein_L105_v1/RHWindowL105FinalV1.lean'
+      - 'research/rh/krein_reflective_v1/RHKreinHatFastV1.lean'
+      - 'research/rh/krein_reflective_v1/RHKreinRotTMV1.lean'
+      - 'research/rh/krein_reflective_v1/RHKreinTaylorModelV1.lean'
+      - 'research/rh/krein_reflective_v1/RHKreinTrigTMV1.lean'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_PROVIDER_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+
+jobs:
+  # One runner cannot do it all: each of the 133 batch certificates peaks at about 9 GiB
+  # while the kernel checks it, so three at once exhausted the 16 GB runner (exit 143,
+  # "runner has received a shutdown signal"). The build is split into stages that pass
+  # their .olean files on as artifacts: base, then the batches one at a time on each of
+  # 12 runners, then the modules that import them and the headline audit.
+  base:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      # The only source outside this repository: the Li criterion / Hadamard library
+      # (Apache-2.0) at a fixed commit, with the three-line Mathlib API patch below.
+      - name: Checkout Li criterion provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_PROVIDER_SHA }}
+          path: .li
+          persist-credentials: false
+
+      - name: Apply the Mathlib API patch to the provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
+          (cd .li && patch -p0 < ../research/rh/consolidated_v1/li-provider.patch)
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -Fq "$MATHLIB_SHA" lake-manifest.json
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+
+      # 177 source files are committed as one xz archive split into ten base64 parts;
+      # build.py checks every unpacked file against its SHA-256 in manifest.json.
+      - name: Unpack the archived sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat research/rh/consolidated_v1/sources.b64.[0-9] \
+            | base64 -d | xz -d | tar -x
+          test "$(ls research/rh/consolidated_v1/src/RHKreinL105Batch[0-9]*.lean | wc -l)" = 133
+
+      - name: Compile every module that does not import a batch certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env python3 research/rh/consolidated_v1/build.py "$RUNNER_TEMP/rhc" consolidated-base.log 3 base
+
+      - name: Upload base .olean files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhc-base
+          path: ${{ runner.temp }}/rhc
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-consolidated-base-log
+          path: consolidated-base.log
+
+  batches:
+    needs: base
+    runs-on: ubuntu-24.04
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      # The only source outside this repository: the Li criterion / Hadamard library
+      # (Apache-2.0) at a fixed commit, with the three-line Mathlib API patch below.
+      - name: Checkout Li criterion provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_PROVIDER_SHA }}
+          path: .li
+          persist-credentials: false
+
+      - name: Apply the Mathlib API patch to the provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
+          (cd .li && patch -p0 < ../research/rh/consolidated_v1/li-provider.patch)
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -Fq "$MATHLIB_SHA" lake-manifest.json
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+
+      # 177 source files are committed as one xz archive split into ten base64 parts;
+      # build.py checks every unpacked file against its SHA-256 in manifest.json.
+      - name: Unpack the archived sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat research/rh/consolidated_v1/sources.b64.[0-9] \
+            | base64 -d | xz -d | tar -x
+          test "$(ls research/rh/consolidated_v1/src/RHKreinL105Batch[0-9]*.lean | wc -l)" = 133
+
+      - name: Download base .olean files
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: rhc-base
+          path: ${{ runner.temp }}/rhc
+
+      - name: Compile batch certificate shard ${{ matrix.shard }} of 12, one at a time
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env python3 research/rh/consolidated_v1/build.py "$RUNNER_TEMP/rhc" consolidated-shard.log 1 "shard:${{ matrix.shard }}/12"
+
+      - name: Upload batch .olean files
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhc-shard-${{ matrix.shard }}
+          path: |
+            ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean
+            ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean
+          if-no-files-found: error
+          retention-days: 3
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-consolidated-shard-${{ matrix.shard }}-log
+          path: consolidated-shard.log
+
+  final:
+    needs: batches
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      # The only source outside this repository: the Li criterion / Hadamard library
+      # (Apache-2.0) at a fixed commit, with the three-line Mathlib API patch below.
+      - name: Checkout Li criterion provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_PROVIDER_SHA }}
+          path: .li
+          persist-credentials: false
+
+      - name: Apply the Mathlib API patch to the provider
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
+          (cd .li && patch -p0 < ../research/rh/consolidated_v1/li-provider.patch)
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -Fq "$MATHLIB_SHA" lake-manifest.json
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+
+      # 177 source files are committed as one xz archive split into ten base64 parts;
+      # build.py checks every unpacked file against its SHA-256 in manifest.json.
+      - name: Unpack the archived sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat research/rh/consolidated_v1/sources.b64.[0-9] \
+            | base64 -d | xz -d | tar -x
+          test "$(ls research/rh/consolidated_v1/src/RHKreinL105Batch[0-9]*.lean | wc -l)" = 133
+
+      - name: Download base .olean files
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: rhc-base
+          path: ${{ runner.temp }}/rhc
+
+      - name: Download batch .olean files
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          pattern: rhc-shard-*
+          merge-multiple: true
+          path: ${{ runner.temp }}/rhc
+
+      # build.py refuses to start unless every .olean this stage imports is present.
+      - name: Compile the modules importing the batches and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env python3 research/rh/consolidated_v1/build.py "$RUNNER_TEMP/rhc" consolidated-final.log 3 final
+
+      - name: Upload log
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-consolidated-final-log
+          path: consolidated-final.log
