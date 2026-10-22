@@ -29,6 +29,7 @@ noncomputable section
 
 namespace AEGIS.RHActualLogFourV1
 
+open AEGIS.RHRationalNinePacketPrimeWindowV1
 open AEGIS.RHActualMixedDefectV1
 open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilMixedClosureV2
