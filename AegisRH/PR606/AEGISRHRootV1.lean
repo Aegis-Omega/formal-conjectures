@@ -14,6 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
+import RHRestrictedWeilCriterionV13
+
 /-!
 AEGIS Ω — location-independent RH proof entrypoint.
 
@@ -24,8 +26,6 @@ search path (LEAN_PATH) containing the compiled dependency closure.
 This intentionally exposes the exact remaining premise instead of claiming
 that the Riemann Hypothesis follows without it.
 -/
-
-import RHRestrictedWeilCriterionV13
 
 set_option autoImplicit false
 
