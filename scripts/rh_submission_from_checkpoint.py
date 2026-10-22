@@ -1,11 +1,6 @@
 # Copyright 2026 The Formal Conjectures Authors.
 # SPDX-License-Identifier: Apache-2.0
-"""Build an exact-head upstream handoff from an ALREADY kernel-exported RH graph.
-
-This script never upgrades an unrelated successful workflow or historical status
-to an RH proof. It verifies the exact Mathlib target, exported axiom dependencies,
-tracked source identity, and an independent Lean proof application.
-"""
+"""Verify exact-head RH proof evidence and prepare an upstream submission patch."""
 from __future__ import annotations
 
 import hashlib
@@ -141,8 +136,7 @@ def main() -> int:
         "formal_proof_kind": "lean4",
         "upstream_category_if_ready": "research solved",
         "scan_scope": census.get("inspected_count"),
-        "verified_ancestor_commit_ids": CHECKPOINTS,
-        "ancestor_note": "Git lineage is separately checked; an ancestor receipt is not a current proof verdict",
+        "referenced_checkpoint_commits": CHECKPOINTS,
         "proof_graph_sha256": sha256(out / "proof-terms.json"),
         "imported_environment_sha256": sha256(graph_path),
         "source_manifest_sha256": sha256(manifest_path),
@@ -200,8 +194,7 @@ def main() -> int:
         + f"- Ready: {receipt['ready_for_official_submission']}\n"
         + f"- Canonical type candidates in the imported environment: {len(candidates)}\n"
         + (f"- Verified declaration: {declaration}\n" if declaration else "")
-        + "\nThe candidate census covers this imported kernel environment, not other branches "
-          "or external archives. Historical metadata is not evidence of an unresolved theorem.\n")
+        + "\nScope: imported Lean environment at the exact recorded head.\n")
     print("RH_OFFICIAL_SUBMISSION_STATUS=" + receipt["status"])
     print("RH_OFFICIAL_SUBMISSION_READY=" + str(receipt["ready_for_official_submission"]).lower())
     return 0
