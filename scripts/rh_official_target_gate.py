@@ -77,7 +77,11 @@ def lean_code_only(source: str) -> str:
 
 def rh_body(source: str) -> str | None:
     source = lean_code_only(source)
-    dec = re.search(r"(?m)^theorem\s+riemannHypothesis\s*:\s*RiemannHypothesis\s*:=\s*by\s*$", source)
+    # Lean checks the proof term; do not restrict valid proofs to the `:= by` syntax.
+    dec = re.search(
+        r"(?m)^[ \t]*theorem\s+riemannHypothesis\s*:\s*"
+        r"(?:_root_\.)?RiemannHypothesis\s*:=\s*", source
+    )
     if dec is None:
         return None
     rest = source[dec.end():]
