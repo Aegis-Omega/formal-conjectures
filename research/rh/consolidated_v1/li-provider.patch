@@ -1,0 +1,31 @@
+diff --git Hadamard/General/Factorization.lean Hadamard/General/Factorization.lean
+index 10d38a5..203d3bf 100644
+--- Hadamard/General/Factorization.lean
++++ Hadamard/General/Factorization.lean
+@@ -1696,7 +1696,7 @@ theorem exists_quotient_entire
+     have hg_cont : ContinuousAt g z := (hQ_an z).continuousAt
+     -- g = f/P on 𝓝[≠] z
+     have hg_fP : g =ᶠ[𝓝[≠] z] fun w => f w / P w :=
+-      eventually_nhdsWithin_of_forall fun w hw => ite_eq_right hw
++      eventually_nhdsWithin_of_forall fun w hw => if_neg hw
+     -- f/P is continuous at z
+     have hfP_cont : ContinuousAt (fun w => f w / P w) z :=
+       hf_entire.continuous.continuousAt.div hP_diff.continuous.continuousAt hPz
+@@ -1707,7 +1707,7 @@ theorem exists_quotient_entire
+     have h2 : Filter.Tendsto g (𝓝[≠] z) (𝓝 (f z / P z)) :=
+       (tendsto_congr' hg_fP).mpr (hfP_cont.tendsto.mono_left nhdsWithin_le_nhds)
+     -- By uniqueness of limits: g(z) = f(z)/P(z), i.e., Q z = f z / P z
+-    have hgz : g z = Q z := ite_eq_left rfl
++    have hgz : g z = Q z := by simp [g]
+     exact hgz ▸ tendsto_nhds_unique h1 h2
+   -- Step 4: Zeros of P are isolated
+   have hP_isolated : ∀ ρ : Z.Zero, ∀ᶠ z in 𝓝[≠] (Z.z ρ), P z ≠ 0 := by
+@@ -1727,7 +1727,7 @@ theorem exists_quotient_entire
+         filter_upwards [h_imp] with z hz
+         by_cases heq : z = Z.z ρ
+         · subst heq; simp
+-        · rw [ite_eq_right heq, hQ_eq_div z (hz heq)]
++        · rw [if_neg heq, hQ_eq_div z (hz heq)]
+       exact (hQ_an (Z.z ρ)).differentiableAt.congr_of_eventuallyEq hQ_near
+     · -- Away from zeros: Q = f/P in a neighborhood
+       have hPne := hP_diff.continuous.continuousAt.eventually_ne hPz₀
