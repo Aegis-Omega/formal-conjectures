@@ -81,6 +81,37 @@ class TargetGateTests(unittest.TestCase):
         self.assertEqual(classify(SOURCE, "", 0, "'RiemannHypothesis.riemannHypothesis' depends on axioms: [sorryAx]")[0], "AXIOM_AUDIT_FAILED")
     def test_missing_axiom_probe_rejected(self):
         self.assertEqual(classify(SOURCE, "", 0, "")[0], "AXIOM_AUDIT_MISSING")
+    def test_direct_proof_term_accepted_with_kernel_axiom_audit(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis : RiemannHypothesis := AEGIS.certifiedRH",
+        )
+        audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
+        self.assertEqual(classify(source, "", 0, audit)[0], "FORMAL_RH_CLOSED")
+        self.assertEqual(classify(source, "", 0)[0], "COMPILED_AWAITING_AXIOM_AUDIT")
+        self.assertEqual(classify(source, "", 0,
+            "'RiemannHypothesis.riemannHypothesis' depends on axioms: [sorryAx]")[0],
+            "AXIOM_AUDIT_FAILED")
+
+    def test_multiline_proof_term_accepted_after_audit(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis\\n    : _root_.RiemannHypothesis :=\\n"
+            "    AEGIS.certifiedRH",
+        )
+        audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
+        self.assertEqual(classify(source, "", 0, audit)[0], "FORMAL_RH_CLOSED")
+
+    def test_direct_sorry_term_rejected(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis : RiemannHypothesis := sorry",
+        )
+        self.assertEqual(classify(source, "", 0)[0], "TARGET_SOURCE_INVALID")
+
     def test_placeholder_in_rh_rejected(self):
         source = SOURCE.replace("  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13", "  sorry")
         self.assertEqual(classify(source, "", 0)[0], "TARGET_SOURCE_INVALID")
