@@ -38,6 +38,8 @@ on:
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
+      - 'scripts/rh_submission_from_checkpoint.py'
+      - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
 
@@ -743,6 +745,28 @@ jobs:
             grep -F "AEGIS.RHFeshbachScaledWeilV1.$thm" evidence-cofinal/compile-RHFeshbachScaledWeilV1.log
           done
           echo "SCALED_WEIL_JOIN=KERNEL_PASS; CANONICAL_RH_ADMISSION=EVALUATED_BY_EXACT_HEAD_PROOF_GRAPH_EXPORT"
+
+      - name: Compile exact official RH target into the same proof environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FormalConjecturesUtil
+          mkdir -p .lake/build/lib/lean/FormalConjectures/Millennium
+          lake env lean \
+            -o .lake/build/lib/lean/FormalConjectures/Millennium/RiemannHypothesis.olean \
+            FormalConjectures/Millennium/RiemannHypothesis.lean \
+            2>&1 | tee evidence-cofinal/official-rh-compile.log
+          cat > RHOfficialImportedAxiomAudit.lean <<'LEAN'
+          import FormalConjectures.Millennium.RiemannHypothesis
+          #check RiemannHypothesis.riemannHypothesis
+          #print axioms RiemannHypothesis.riemannHypothesis
+          LEAN
+          lake env lean RHOfficialImportedAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/official-rh-axioms.log
+          # This is a source audit, not a proof claim: the catalog's sorryAx
+          # is recorded, never promoted to a clean imported proof.
+          grep -F "'RiemannHypothesis.riemannHypothesis'" \
+            evidence-cofinal/official-rh-axioms.log
 
       - name: Export actual proof dependencies and observed closure test
         shell: bash
