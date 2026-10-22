@@ -413,6 +413,8 @@ jobs:
           lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.olean" AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean 2>&1 | tee cvs-full-join-kernel.log
           ! grep -E 'sorryAx|declaration uses .sorry.' cvs-full-join-kernel.log
           grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_zero_margin' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_trigram_margin' cvs-full-join-kernel.log
           echo CVS_FULL_CONDITIONAL_JOIN_KERNEL_PASS
 
       - name: Save exact-head additive proof logs
