@@ -3,7 +3,7 @@ diff --git a/FormalConjectures/Millennium/RiemannHypothesis.lean b/FormalConject
 +++ b/FormalConjectures/Millennium/RiemannHypothesis.lean
 @@ -60,4 +60,5 @@
 -@[category research open, AMS 11]
-+@[category research open, AMS 11,
++@[category research solved, AMS 11,
 +  formal_proof using lean4 at "https://github.com/tarikskalic33/formal-conjectures/blob/FINAL_VERIFIED_SHA/FINAL_PROOF_PATH#LFINAL_DECLARATION_LINE"]
  theorem riemannHypothesis : RiemannHypothesis := by
    sorry
