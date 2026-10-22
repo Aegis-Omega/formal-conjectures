@@ -19,6 +19,10 @@ import sys
 ALLOWED_AXIOMS = {"propext", "Classical.choice", "Quot.sound"}
 OFFICIAL_MODULE = "FormalConjectures.Millennium.RiemannHypothesis"
 OFFICIAL_SOURCE = "FormalConjectures/Millennium/RiemannHypothesis.lean"
+DEEP_MIND_REPOSITORY = "google-deepmind/formal-conjectures"
+DEEP_MIND_BASELINE_COMMIT = "a7b87c8d0bb60e73782045d614d4a24907b87b8a"
+DEEP_MIND_TARGET_BLOB = "5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542"
+DEEP_MIND_PROOFS_POLICY_BLOB = "edf4eb1afdbf0182fd9ac603d0f23adf97003d4c"
 CHECKPOINTS = {
     "pr91_headers_ancestor": "d6dc5256a0a73773438cad49da222ff239b3aaf6",
     "pr89_proof_ancestor": "5d7425dcc6f4137b2cf3f57bc953504135a388e6",
@@ -104,6 +108,13 @@ def main() -> int:
     passport = json.loads((out / "RH_EVIDENCE_PASSPORT.json").read_text())
     if passport.get("exact_replay_sha") != head:
         raise RuntimeError("REPLAY_HEAD_DRIFT")
+    official_source = root / OFFICIAL_SOURCE
+    if not official_source.is_file():
+        raise RuntimeError("OFFICIAL_RH_TARGET_SOURCE_MISSING")
+    official_blob = subprocess.check_output(
+        ["git", "hash-object", OFFICIAL_SOURCE], cwd=root, text=True).strip()
+    if official_blob != DEEP_MIND_TARGET_BLOB:
+        raise RuntimeError("OFFICIAL_RH_TARGET_SOURCE_DRIFT")
     by_module = {row["module"]: row for row in manifest}
     # The canonical theorem is itself an admissible proof if the Lean kernel
     # verifies its body and axioms. Do not reject it merely by declaration name.
@@ -122,6 +133,13 @@ def main() -> int:
         "repository": "tarikskalic33/formal-conjectures",
         "exact_head": head,
         "target": "_root_.RiemannHypothesis",
+        "upstream_repository": DEEP_MIND_REPOSITORY,
+        "upstream_baseline_commit": DEEP_MIND_BASELINE_COMMIT,
+        "upstream_target_source_blob": DEEP_MIND_TARGET_BLOB,
+        "upstream_proofs_policy_blob": DEEP_MIND_PROOFS_POLICY_BLOB,
+        "upstream_target_source_verified": True,
+        "formal_proof_kind": "lean4",
+        "upstream_category_if_ready": "research solved",
         "scan_scope": census.get("inspected_count"),
         "verified_ancestor_commit_ids": CHECKPOINTS,
         "ancestor_note": "Git lineage is separately checked; an ancestor receipt is not a current proof verdict",
@@ -167,6 +185,10 @@ def main() -> int:
         template = (root / "research/rh/assembly/upstream-formal-proof.patch.in").read_text()
         patch = template.replace("FINAL_VERIFIED_SHA", head).replace(
             "FINAL_PROOF_PATH", source_path).replace("FINAL_DECLARATION_LINE", str(line))
+        if ("FINAL_" in patch
+                or "category research solved" not in patch
+                or "formal_proof using lean4 at" not in patch):
+            raise RuntimeError("UPSTREAM_FORMAL_PROOF_PATCH_CONTRACT_FAILED")
         (out / "upstream-formal-proof.patch").write_text(patch)
         break
 
