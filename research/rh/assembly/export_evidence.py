@@ -323,11 +323,12 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + r
                 certificate_hashes={"abel_archive": digest(ROOT / "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz")})
 write("RH_EVIDENCE_PASSPORT.json", passport)
 shutil.copyfile(ROOT / "AEGISOverlay/AEGIS_RH_Unconditional.lean", OUT / "AEGIS_RH_Unconditional.lean")
-book = (META / "RH_PROOFBOOK.md").read_text()
-book += "\n\n## Observed exact-head kernel receipt\n\n"
-book += "Exact replay head: `" + head + "`. The following selected roots compiled "
-book += "and have only permitted foundational axioms. Earlier candidate labels describe "
-book += "the committed source snapshot; this observed receipt records the replay result.\n\n"
+book = "# RH exact-head evidence\\n\\n"
+book += "Commit: \`" + head + "\`\\n"
+book += "Imported constants: " + str(env_rh_census["inspected_count"]) + "\\n"
+book += "Exact RH-type matches: " + str(len(env_rh_candidates)) + "\\n"
+book += "Kernel-checked selected roots: " + str(len(terms["roots"])) + "\\n"
+book += "\\n## Audited declarations\\n\\n"
 for root, axioms in root_axioms.items():
     module = rows[root]["module"]
     record = modules.get(module)
@@ -338,22 +339,9 @@ for root, axioms in root_axioms.items():
         path = prov.get("source_file", record["source"])
         if path.startswith(".aegis/"): path = path[len(".aegis/"):]
         url = "https://github.com/" + repo + "/blob/" + sha + "/" + path
-        book += "- [`" + root + "`](" + url + "): `" + ", ".join(axioms) + "`.\n"
+        book += "- [\`" + root + "\`](" + url + "): \`" + ", ".join(axioms) + "\`\\n"
     else:
-        book += "- `" + root + "`: `" + ", ".join(axioms) + "`.\n"
-book += "\n## Canonical RH proof admission (observed, not pre-set)\n"
-book += "Selected-root status: `" + rh_assessment + "`.\n"
-book += "Closed canonical RH roots in the selected set: `" + repr(closed_rh_roots) + "`.\n"
-book += "Closed canonical RH declarations in the full 66-root dependency DAG: `" + repr(closed_rh_from_dependencies) + "`.\n"
-book += "Closed canonical RH declarations anywhere in the imported Lean environment: `" + repr(closed_rh_from_environment) + "`.\n"
-book += "Imported Lean constant census: `" + str(env_rh_census["inspected_count"]) + "`, candidates with exact RH type: `" + str(len(env_rh_candidates)) + "`.\n"
-book += "The RH_PROVEN_UNCONDITIONALLY field is true only if a compiled "
-book += "axiom-clean, non-axiom declaration in this reachable DAG has EXACT type "
-book += "RiemannHypothesis. Otherwise it is null (unknown outside this DAG), "
-book += "never a hard-coded false assertion.\n"
-book += "\nStronger producer coverage: `" + str(root_coverage["root_count"]) + "` roots, " + str(len(mandatory_producers)) + " mandatory lanes retained; NOT an all-branch census.\n"
-book += "The previously described producer obligation is retained in RH_BLOCKER.json "
-book += "as a candidate route, NOT as a global impossibility or closure verdict.\n"
+        book += "- \`" + root + "\`: \`" + ", ".join(axioms) + "\`\\n"
 (OUT / "RH_PROOFBOOK.md").write_text(book)
 shutil.copyfile(META / "RH_EXACT_HEAD_REPLAY.sh", OUT / "RH_EXACT_HEAD_REPLAY.sh")
 shutil.copyfile(probe_file, OUT / "RH_CLOSURE_PROBE.lean")
