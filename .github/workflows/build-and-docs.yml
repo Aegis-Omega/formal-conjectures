@@ -243,8 +243,7 @@ jobs:
       - name: Audit RH conditional theorem and transitive axioms
         if: steps.mode.outputs.website_only != 'true' && hashFiles('AegisRH/PR606/RHRestrictedWeilCriterionV13.lean') != ''
         run: |
-          # CheckRH is a theorem-audit module, not an executable with `main`.
-          lake build CheckRH
+          # PR63 pinned imports were prebuilt; elaborate this audit source directly.
           lake env lean CheckRH.lean > "$RUNNER_TEMP/check-rh-axioms.log" 2>&1
           cat "$RUNNER_TEMP/check-rh-axioms.log"
           python3 scripts/verify_rh_overlay_axioms.py CheckRH.lean "$RUNNER_TEMP/check-rh-axioms.log"
