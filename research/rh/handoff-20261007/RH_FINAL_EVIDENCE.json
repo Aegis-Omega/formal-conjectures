@@ -1,0 +1,143 @@
+{
+  "RH_EXACT_TARGET_PROVED": false,
+  "auxiliary_limits": [
+    "Hardy Z60 numeric lower bound remains an explicit Lean premise despite exact phase identity closure",
+    "Ideal GGG100ms model extrapolation is not original fullsix/hardware validation",
+    "Arb current point intervals have no Lean soundness port in these new units",
+    "Historical bound Python cache is transport-only, not executed proof evidence"
+  ],
+  "axiom_scope": "No final RH term exists to audit",
+  "axioms": null,
+  "background_work_promised": false,
+  "branch": "research/rh-proof-history-20261007",
+  "canonical_target": "RiemannHypothesis.riemannHypothesis : _root_.RiemannHypothesis",
+  "causal_dag": {
+    "bytes": 125912,
+    "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/HardyPointAuditOct7/HARDY_CAUSAL_DAG_ADDENDUM.json",
+    "scope": "92nodes/80edges, prior88/79 preserved; new Hardy edge auxiliary only",
+    "sha256": "65810f25edb2201fa6979362271390151646c3261cc1f26c19baca8daba9bc2d"
+  },
+  "certificate_hashes": [],
+  "created_utc": "2026-10-07T10:01:25.342999+00:00",
+  "earlier_immutable22_evidence": {
+    "bytes": 18750,
+    "path": "/workspace/aegis-research/evidence/v7-v12-transfer-oct7/Export22/FinalMetadataV2/RH_FINAL_EVIDENCE.json",
+    "scope": "Earlier22 status and source history, not a current24 head record",
+    "sha256": "f16186755f5b9a44e516e497e076fb7606d148e2ffbc6176ceeefbd058696ab0"
+  },
+  "equivalence_dag": {
+    "bytes": 7276,
+    "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/DenseTowerOct7/RH_EQUIVALENCE_DAG.json",
+    "sha256": "2642a3fa45996b05adcc0c7f6baa6cc227c873db3c185cafb45eb134902765af"
+  },
+  "exact_head": "3afaa344b3838ca4e70bd0320f37cdb9136691c7",
+  "external_sorry_body_used": false,
+  "final_RH_axiom_audit": "NOT_RUN_NO_FINAL_PROOF_TERM",
+  "final_RH_proof_uses_no_numeric_certificate_because_final_term_absent": true,
+  "final_clean_RH_build": "NOT_RUN_NO_FINAL_PROOF_TERM",
+  "final_theorem": null,
+  "formal_conjectures_target_pin": "02da1ad1288b4881ea1f8e575fbe84af7db04364",
+  "full_transitive_Mathlib_source_rebuild": false,
+  "hosted_checks_changed": false,
+  "immediate_immutable_pre_review_evidence": {
+    "bytes": 6657,
+    "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/RH_FINAL_EVIDENCE.json",
+    "scope": "Current24 pre-review record preserved exactly",
+    "sha256": "488158981bd8c50b2dd6229a4ad23ba5aabd3282c36be504237a33f3b82ccef7"
+  },
+  "independent_export_review": {
+    "bytes": 5382,
+    "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24Review/REVIEW_RECEIPT.json",
+    "scope": "PASS_SCOPED source/archive/Git transport only; no analytic/kernel/Arb proof rerun",
+    "sha256": "c915871760fe802622cbaf0e7f3fd4442a806a00f198432c07ec28b40784e665"
+  },
+  "independent_replays": [
+    {
+      "bytes": 5221,
+      "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/HardyPointAuditOct7/PhaseIndependentReview/REVIEW_RECEIPT.json",
+      "scope": "Actual separate-agent scoped trust0/kernel replay of all-real Hardy phase identities",
+      "sha256": "cc985e5b72cf35d0251ade9281d1c024917a52acb4232bef34135f801288a617"
+    },
+    {
+      "bytes": 3057,
+      "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/RESULT.json",
+      "scope": "Numeric and ordinary mathematical review, same installed Arb library; no Lean replay",
+      "sha256": "9612368d618c0dddc42bdc28664609a4ae46d253568a7e86463d335b41ab90ee"
+    },
+    {
+      "bytes": 14953,
+      "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_PORTABLE_RECEIPT.json",
+      "scope": "Separate cosine/modulo interval assembly; same host/Arb, no Lean replay",
+      "sha256": "ddb41d04a06b6e1b1cb1f1a4acec56f903f691bd22479fe8223c6ecd77fd0e1a"
+    }
+  ],
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "lean_version": "4.33.1",
+  "logical_history": {
+    "actual_commits_above_base": 24,
+    "all_prior23_commits_preserved": true,
+    "base": "c721361f7c5ac2b9d1a05abece40c87315a4a81b",
+    "ordered_log": {
+      "bytes": 2754,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/LOGICAL_COMMITS_24.txt",
+      "sha256": "e5215bf54cb89397a26b80c5ebc113d687592dfa6bd86e298aadfbac178ebc66"
+    },
+    "tail_bundle": {
+      "bytes": 6917396,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/AEGIS_OCT7_COMMITS23_24.bundle",
+      "sha256": "839c5cfc3d8a39abc6bb1ced8da727cbdbb33df7a7a2a80be10e51ff3eed862b"
+    },
+    "tail_bundle_prerequisite": "ebafc2dbc69669d3884a6adc7b57a4154c66d675",
+    "tree": "0d299bb6bec0bd41d32f8764442ed8a05008fe56"
+  },
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "metadata_update_scope": "Only bind completed separate transport review; mathematical/kernel/numeric/RH statuses unchanged.",
+  "new_source_units": [
+    {
+      "bytes": 1780,
+      "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/HardyPointAuditOct7/RESULT.json",
+      "sha256": "1dc4884f1481ef76c89b549a23944f6de69ec42303161edbc26967ba64d06cd1"
+    },
+    {
+      "bytes": 1802,
+      "path": "/workspace/aegis-research/worktrees/rh-proof-history-20261007/QuantumDNAPhaseAuditOct7/RESULT.json",
+      "sha256": "1b3899e523170fbb23ef982c764f9e08598fdee30c87915c6177bef2236930b2"
+    }
+  ],
+  "new_units_manifest": {
+    "bytes": 146351,
+    "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/NEW_UNITS_MANIFEST_23_24.json",
+    "sha256": "af1b0edfb892df80cc80b301ca44570a4650c154b8e0b6f343a7c1abf37cd802"
+  },
+  "open_obligations": [
+    {
+      "id": "AEGIS.RHFixedPacketDenseShiftV1.DenseFixedPacketSign",
+      "immediate_attack": "Unscaled SIGNED different-prime budget for a FIXED packet, retaining complete Archimedean/pole/tail terms; current paid variance leaves exp(T)*Delta^2 and moving-n bands do not globalize one detector",
+      "statement": "For the same detectingPacket, every signed-integer log2/log3 shift d and every WeilFourPhaseV1 c, Re(WeilExplicitRightSideV1(WeilAutocorrelationV1(WeilTwoPointTranslateV11 detectingPacket d c))) <= 0",
+      "status": "NO_UNCONDITIONAL_PRODUCER_OBTAINED_IN_INSPECTED_SCOPE",
+      "unsearched_sources": "UNKNOWN"
+    }
+  ],
+  "original_checkpoint_changed": false,
+  "push_performed": false,
+  "quantum_unit_adds_no_RH_causal_edge": true,
+  "remote_written": false,
+  "rh_proven": false,
+  "schema": "AEGIS_CURRENT24_RH_UNFINISHED_WITH_SCOPED_EXPORT_REVIEW_V2",
+  "scoped_helper_allowed_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "source_archive": {
+    "bytes": 7392296,
+    "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip",
+    "scope": "Only459 new23/24 source files plus one manifest",
+    "sha256": "156ac4fcfb1dd03aa1561a3bcb33a2ed8d75362f477614383b7c7f3eed2a3090"
+  },
+  "source_manifest": {
+    "bytes": 588548,
+    "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/SOURCE_MANIFEST_24.json",
+    "sha256": "84d8f806e22d7b04cfd3a275f9dd352835ebe408722312bbcb12a1457d7af9d0"
+  }
+}

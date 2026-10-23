@@ -1,0 +1,160 @@
+{
+  "commit_skip_ci_requested": true,
+  "existing_branch": "proof/rh-krein-m8-analytic-v1",
+  "existing_source_result_bytes_modified": false,
+  "file_count": 13,
+  "files": [
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 10407688,
+      "content_type": "application/zip",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_OCT7_VERIFIED_SOURCES_V2.zip",
+      "matches_existing_local_bytes": true,
+      "path": "AEGIS_OCT7_VERIFIED_SOURCES_V2.zip",
+      "sha256": "19dbfaffb4f27deccf6ebc69702b20e530defcab4d4f50d582f803f25ffab2ae",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_OCT7_VERIFIED_SOURCES_V2.zip"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 983610,
+      "content_type": "application/zip",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_V7_V12_CURRENT_AUDIT_2026-10-07.zip",
+      "matches_existing_local_bytes": true,
+      "path": "AEGIS_V7_V12_CURRENT_AUDIT_2026-10-07.zip",
+      "sha256": "36d4f9c8970309abdf181c58d198dbf6718305d59f807d06f37715196c033a11",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_V7_V12_CURRENT_AUDIT_2026-10-07.zip"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 7392296,
+      "content_type": "application/zip",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip",
+      "matches_existing_local_bytes": true,
+      "path": "AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip",
+      "sha256": "156ac4fcfb1dd03aa1561a3bcb33a2ed8d75362f477614383b7c7f3eed2a3090",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 6917396,
+      "content_type": "application/octet-stream",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_OCT7_COMMITS23_24.bundle",
+      "matches_existing_local_bytes": true,
+      "path": "AEGIS_OCT7_COMMITS23_24.bundle",
+      "sha256": "839c5cfc3d8a39abc6bb1ced8da727cbdbb33df7a7a2a80be10e51ff3eed862b",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/AEGIS_OCT7_COMMITS23_24.bundle"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 588548,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/SOURCE_MANIFEST_24.json",
+      "matches_existing_local_bytes": true,
+      "path": "SOURCE_MANIFEST_24.json",
+      "sha256": "84d8f806e22d7b04cfd3a275f9dd352835ebe408722312bbcb12a1457d7af9d0",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/SOURCE_MANIFEST_24.json"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 146351,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/NEW_UNITS_MANIFEST_23_24.json",
+      "matches_existing_local_bytes": true,
+      "path": "NEW_UNITS_MANIFEST_23_24.json",
+      "sha256": "af1b0edfb892df80cc80b301ca44570a4650c154b8e0b6f343a7c1abf37cd802",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/NEW_UNITS_MANIFEST_23_24.json"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 7162,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/CURRENT24_CHECKPOINT.md",
+      "matches_existing_local_bytes": true,
+      "path": "CURRENT24_CHECKPOINT.md",
+      "sha256": "1e53bea389c4b023f3b81ab65d458f01b320f998ac9fde2a6e02ffc6c0ef39f2",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/CURRENT24_CHECKPOINT.md"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 7376,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/RH_FINAL_EVIDENCE.json",
+      "matches_existing_local_bytes": true,
+      "path": "RH_FINAL_EVIDENCE.json",
+      "sha256": "487fe2cb19b4ba347c6510adcfc9396ccdce0a29fc3d24627a4d98fb1c460c88",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/RH_FINAL_EVIDENCE.json"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 3210,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/DELIVERY_RECEIPT.json",
+      "matches_existing_local_bytes": true,
+      "path": "DELIVERY_RECEIPT.json",
+      "sha256": "be458ba0deef56362f7d88f5b49606a422313fc97dd0bbf8ec1ae1134520f712",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/DELIVERY_RECEIPT.json"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 2126,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/README.md",
+      "matches_existing_local_bytes": true,
+      "path": "README.md",
+      "sha256": "43dfeaef95afaa0a4656f3d8a27cc29ddde545e7e45c21c5851a4f6f1dc386ba",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/README.md"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 2754,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/LOGICAL_COMMITS_24.txt",
+      "matches_existing_local_bytes": true,
+      "path": "LOGICAL_COMMITS_24.txt",
+      "sha256": "e5215bf54cb89397a26b80c5ebc113d687592dfa6bd86e298aadfbac178ebc66",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/LOGICAL_COMMITS_24.txt"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 5361,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/Lean/RHHardyPhaseTransportV1.lean",
+      "matches_existing_local_bytes": true,
+      "path": "Lean/RHHardyPhaseTransportV1.lean",
+      "sha256": "1c0a0dda1499dec1701e49d0ef7cca585b17f8a7eb2a356e65e23bdba90c0d38",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/Lean/RHHardyPhaseTransportV1.lean"
+    },
+    {
+      "HTTP_status": 200,
+      "anonymous_request": true,
+      "bytes": 3873,
+      "content_type": "text/plain; charset=utf-8",
+      "final_url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/DOWNLOAD_MANIFEST.json",
+      "matches_existing_local_bytes": true,
+      "path": "DOWNLOAD_MANIFEST.json",
+      "sha256": "449f5567ba8a2b4ea29e5d62a6aa93bb3d0f3911d47274a016d0f704f0fbc6f1",
+      "url": "https://raw.githubusercontent.com/tarikskalic33/formal-conjectures/50d2ce62c99620c5504571e9444bb2a792fc3200/research/rh/handoff-20261007/DOWNLOAD_MANIFEST.json"
+    }
+  ],
+  "historical_oct7_rh_proven": false,
+  "new_branch_or_repo_created": false,
+  "parent": "08d9589aa3cfc892d9c08702694adad4db22e94a",
+  "proof_or_numeric_tests_run": false,
+  "publication_commit": "50d2ce62c99620c5504571e9444bb2a792fc3200",
+  "repository": "tarikskalic33/formal-conjectures",
+  "schema": "AEGIS_ANONYMOUS_PUBLIC_EXISTING_FILE_DOWNLOAD_RECEIPT_V1",
+  "status": "ALL_PUBLIC_DOWNLOADS_BYTE_IDENTICAL",
+  "verified_utc": "2026-10-23T00:24:00.152065+00:00"
+}

@@ -1,0 +1,3223 @@
+{
+  "bindings": [
+    {
+      "bytes": 5733,
+      "git_blob": "1579e5cf3200cf4cd203996ebb37ef1abc030e51",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/ARCHIVE_SOURCE_MANIFEST.json",
+      "sha256": "e2773ae6431c7d1ce65bcc3e7c7befec610270d4502d450fbb7248cc17078565"
+    },
+    {
+      "bytes": 3894,
+      "git_blob": "0603dc31b29826a869bafdfc066a47e84fcfd267",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/CURRENT_NUMERIC_REPLAY_RECEIPT.json",
+      "sha256": "e78aaeb8fdc9efbc82536e4ab502c284a3c23843102f317190762612a4d2ae63"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/CURRENT_RECEIPT_T60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 3520,
+      "git_blob": "08ae81860e373ef5fcb3ee422b6209a6a77e7aa1",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FINAL_REVIEW_POINTERS.json",
+      "sha256": "a57a8056a5d4e495d6b4973defb935e524b2ce5492f726936ff5c93557a59cef"
+    },
+    {
+      "bytes": 3407,
+      "git_blob": "3b8253a07b462df907e04e228ab21dd36156ac57",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/BASELINE_SOURCE_CHECK.json",
+      "sha256": "5535fffbeb167cae168b101e98b072b434526bfe5b6fbb490f728c414dfbd274"
+    },
+    {
+      "bytes": 230,
+      "git_blob": "90b2ae745ba651f5646e5998abb9d6c07e575149",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/CHECKER_NO_ARGUMENTS_STOP.json",
+      "sha256": "dfd751b2e3897bc3051f76db7a7ba223f60bd55b349e5e22ab0d2a8fa5b6a326"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/DEPENDENCY_DISCOVERY.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 897,
+      "git_blob": "1d82f3ba910a759c2536bec0de4c204247986525",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/DEPENDENCY_DISCOVERY.stdout.txt",
+      "sha256": "5e1e9e5eb27e0d295ec9f8e391e57be42c740225348949dcc41fa4e91451a71d"
+    },
+    {
+      "bytes": 8683335,
+      "git_blob": "9841c7afe63c91c1e19bbadcc14ef1e48a268b44",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/DEPENDENCY_IDENTITIES.json",
+      "sha256": "d28d147a3a8c51c2dad8663c247b412b9f5565a46c879d613427f76e77745242"
+    },
+    {
+      "bytes": 8689138,
+      "git_blob": "7c687affdaa5d98a7613c976810d00b3437bef34",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/DEPENDENCY_IDENTITIES_INITIAL_PARSER_FAILED.json",
+      "sha256": "a88feb6f78f010a042f2d51000f7aee14ea86f27369e608cd3a14bfe7dacb004"
+    },
+    {
+      "bytes": 4586,
+      "git_blob": "f436bac498e4a638c2b09b0001ca4bd599c068ac",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/IndependentMathReview/HARDY_NORMALIZATION_REVIEW.md",
+      "sha256": "4eb819ad5fce0450b9a1c60d38034193107c9c996de71ae196d6c27a76c7d0b7"
+    },
+    {
+      "bytes": 120,
+      "git_blob": "ae4072c96d3531058dc840692b6811a7196da9ab",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/LATEST_RUN.json",
+      "sha256": "3a914d13d893b23a16ad0393fee4bec1e45834d3edd8ad10548689528d3c0ddf"
+    },
+    {
+      "bytes": 6655,
+      "git_blob": "293baacf53153938f64b5d445a45ed130a16ccc7",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/NORMALIZATION_FORMAL_AUDIT.md",
+      "sha256": "e20b066a6d717ab4c63c1f9353f09c4a26a61dbbd6d1c04d2a0be1bd6d1e39f1"
+    },
+    {
+      "bytes": 4607,
+      "git_blob": "a47f2581b5394cd48ad78ac587b1d7ddcc36a4bb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHCriticalLineSignV1.lean",
+      "sha256": "a8b0181eac7a0bc05592bb330c4808291e8bdabc88a801e9108f71e17875759c"
+    },
+    {
+      "bytes": 6590,
+      "git_blob": "0ee94b9be264c170986500bc95598eb5a7e365f6",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHFixIntervalV1.lean",
+      "sha256": "9aa8cbde778f4be6464305e05ae0310e3786f04a3ff4b149a7469c90d2b41390"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5003,
+      "git_blob": "5f169195dda7f2ab4428fad6f07492fe91efde5e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "f9b344d1d097070fffb4fde4e1724acab9f80b75429b5620a675b8a19b3d4d94"
+    },
+    {
+      "bytes": 3670,
+      "git_blob": "a8a9d69fae2e5ddbd9afe8b5d27db7e5ba07437c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/OriginalSources/RHThetaTailV1.lean",
+      "sha256": "c6af66b8dece4b02f926d1531bd49ba41d6fb41310dcf1049f43bad6f9acf702"
+    },
+    {
+      "bytes": 2539,
+      "git_blob": "de7f754e909412f71ee3f5ce37f117144622baa1",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/PROOF_BODY_IDENTITY.json",
+      "sha256": "a7cf69f182bbf589ff51e761918aa9efcb0f800c01099580df7d34799b684cb2"
+    },
+    {
+      "bytes": 3758,
+      "git_blob": "97c98499c12c4407f558afb26ef7e9faedd9f606",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/RESULT.json",
+      "sha256": "6d3c3a0b376f92335277fd6954673dfae6da7be3e90e3e9f0751017e67aa149b"
+    },
+    {
+      "bytes": 4769,
+      "git_blob": "28c45969a4a996e2a5172fc0110b19efb3a78108",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHCriticalLineSignV1.lean",
+      "sha256": "d1f715f54865f0588061e1c1eb2c50b96776e3dbb9bf70362b1cdf7ead4ef345"
+    },
+    {
+      "bytes": 6752,
+      "git_blob": "f867d0c1fb30860c508512b4682faa4583bf467e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHFixIntervalV1.lean",
+      "sha256": "dd2791317888753b168314c5bf545864d38bc115f64cf960b32c5a12c72eb05d"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5165,
+      "git_blob": "9600d13006d2b5100ebd23e8383e9a8d9545507a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "2bd736b56ed0a29ba59e86f534d31305802f2f1213eff1b862f8881286be519c"
+    },
+    {
+      "bytes": 3832,
+      "git_blob": "5926b4c04f9ee03d46683b5614b1b010c84179db",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/EffectiveSources/RHThetaTailV1.lean",
+      "sha256": "8ad01888f6e09d7ab3d6d42bfeb9cef69761d0d9d3ee8a308d972c786433000c"
+    },
+    {
+      "bytes": 1623,
+      "git_blob": "41c4efddba4d80724f9765780cf4bd6a17990e05",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/IMPORT_COMPATIBILITY.patch",
+      "sha256": "cfd8b62afe6fa7993d2251fe79276ca2f15636c4a08f6f007d828bbbeaf32431"
+    },
+    {
+      "bytes": 9358,
+      "git_blob": "5891c7c83ff97ea00150d29158883f0e9734c805",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/RECEIPT.json",
+      "sha256": "063699ce68f67019ff6b874aed57e8677c4a51837f52f5be6314a1f66dfdb610"
+    },
+    {
+      "bytes": 98,
+      "git_blob": "8eaf1390bbc9cb106f6d3c7d0e227bd15ebb7616",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/checker_help.log",
+      "sha256": "32a60967270365f092cad81a408cf0e68f13aceab4359f32700f140a54129b9b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compile_RHCriticalLineSignV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compile_RHFixIntervalV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compile_RHRiemannThetaFormulaV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compile_RHThetaTailV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compiler_help.log",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 273,
+      "git_blob": "367d9000bf997ba618e9134e30c425594a50962f",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T084856.051064Z/logs/original_RHCriticalLineSignV1.log",
+      "sha256": "026a518ccfd6eb920dc4ed5a83ca715d7297d368be23135356ca5c6aeb097601"
+    },
+    {
+      "bytes": 4769,
+      "git_blob": "28c45969a4a996e2a5172fc0110b19efb3a78108",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHCriticalLineSignV1.lean",
+      "sha256": "d1f715f54865f0588061e1c1eb2c50b96776e3dbb9bf70362b1cdf7ead4ef345"
+    },
+    {
+      "bytes": 6752,
+      "git_blob": "f867d0c1fb30860c508512b4682faa4583bf467e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHFixIntervalV1.lean",
+      "sha256": "dd2791317888753b168314c5bf545864d38bc115f64cf960b32c5a12c72eb05d"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5165,
+      "git_blob": "9600d13006d2b5100ebd23e8383e9a8d9545507a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "2bd736b56ed0a29ba59e86f534d31305802f2f1213eff1b862f8881286be519c"
+    },
+    {
+      "bytes": 3832,
+      "git_blob": "5926b4c04f9ee03d46683b5614b1b010c84179db",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/EffectiveSources/RHThetaTailV1.lean",
+      "sha256": "8ad01888f6e09d7ab3d6d42bfeb9cef69761d0d9d3ee8a308d972c786433000c"
+    },
+    {
+      "bytes": 1623,
+      "git_blob": "41c4efddba4d80724f9765780cf4bd6a17990e05",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/IMPORT_COMPATIBILITY.patch",
+      "sha256": "cfd8b62afe6fa7993d2251fe79276ca2f15636c4a08f6f007d828bbbeaf32431"
+    },
+    {
+      "bytes": 9569,
+      "git_blob": "842ba25c4ebe1a30d484b96172487cc7524bc157",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/RECEIPT.json",
+      "sha256": "9f8eaa0ef92b907b6feaf11520bf8fcd591c81276826f0968bea996ccc4514d4"
+    },
+    {
+      "bytes": 98,
+      "git_blob": "8eaf1390bbc9cb106f6d3c7d0e227bd15ebb7616",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/checker_usage.log",
+      "sha256": "32a60967270365f092cad81a408cf0e68f13aceab4359f32700f140a54129b9b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compile_RHCriticalLineSignV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compile_RHFixIntervalV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compile_RHRiemannThetaFormulaV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compile_RHThetaTailV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compiler_help.log",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "bc9edfa9f86ebf3169b4cb818886008c2d6606d4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085159.662378Z/logs/original_RHCriticalLineSignV1.log",
+      "sha256": "49bde1c1e0120362695937d03a4de3644ad331a42e9c670f6b47338e358dc39b"
+    },
+    {
+      "bytes": 4769,
+      "git_blob": "28c45969a4a996e2a5172fc0110b19efb3a78108",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHCriticalLineSignV1.lean",
+      "sha256": "d1f715f54865f0588061e1c1eb2c50b96776e3dbb9bf70362b1cdf7ead4ef345"
+    },
+    {
+      "bytes": 6752,
+      "git_blob": "f867d0c1fb30860c508512b4682faa4583bf467e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHFixIntervalV1.lean",
+      "sha256": "dd2791317888753b168314c5bf545864d38bc115f64cf960b32c5a12c72eb05d"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5165,
+      "git_blob": "9600d13006d2b5100ebd23e8383e9a8d9545507a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "2bd736b56ed0a29ba59e86f534d31305802f2f1213eff1b862f8881286be519c"
+    },
+    {
+      "bytes": 3832,
+      "git_blob": "5926b4c04f9ee03d46683b5614b1b010c84179db",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/EffectiveSources/RHThetaTailV1.lean",
+      "sha256": "8ad01888f6e09d7ab3d6d42bfeb9cef69761d0d9d3ee8a308d972c786433000c"
+    },
+    {
+      "bytes": 1623,
+      "git_blob": "41c4efddba4d80724f9765780cf4bd6a17990e05",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/IMPORT_COMPATIBILITY.patch",
+      "sha256": "cfd8b62afe6fa7993d2251fe79276ca2f15636c4a08f6f007d828bbbeaf32431"
+    },
+    {
+      "bytes": 10172,
+      "git_blob": "d7abce55581458bb450168e1163e3b2bb6a7316d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/RECEIPT.json",
+      "sha256": "6e5b08d96aa31e627b77040f4905f7f04c6db4fed8f01e951dc761b6734497e3"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/checker_usage.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 323,
+      "git_blob": "7987b7d4dc70d8a981f6938f69f9e7743d56145b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compile_RHCriticalLineSignV1.log",
+      "sha256": "aa4fb05e9ba106d94495daa36d47e5e08287ae7ee3709ddce0c7dcd7f3295ba9"
+    },
+    {
+      "bytes": 318,
+      "git_blob": "176c1fb49eb5b3e4d3bf34075cbce03de22c28d2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compile_RHFixIntervalV1.log",
+      "sha256": "788665457fa290e8ed86a6866e534fd90378f9238810f70fce0fbcd2c42e61eb"
+    },
+    {
+      "bytes": 326,
+      "git_blob": "cdcbe641316683f9f41789e4a335f03b2ffbc6f4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compile_RHRiemannThetaFormulaV1.log",
+      "sha256": "1bd42c3efc63c45387435c14ea7808bfaefee85f886d6b3b3794c68f898e255c"
+    },
+    {
+      "bytes": 316,
+      "git_blob": "1ac1783e8b1d5a1821375c5d9e71b69f2f6fac28",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compile_RHThetaTailV1.log",
+      "sha256": "7770aa093b1b4d5aedb7471cdc41be0d33b1747d87e5bec454f99841f046c583"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compiler_help.log",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 306,
+      "git_blob": "742308918e8e49f0f50f28593a24b2ad36ed48ee",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085239.375073Z/logs/original_RHCriticalLineSignV1.log",
+      "sha256": "0618ca6c6c7f7ca29937d5d9113e2ea6c4c95e3fc6c9f1408fd67fc3d3c86917"
+    },
+    {
+      "bytes": 4769,
+      "git_blob": "28c45969a4a996e2a5172fc0110b19efb3a78108",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHCriticalLineSignV1.lean",
+      "sha256": "d1f715f54865f0588061e1c1eb2c50b96776e3dbb9bf70362b1cdf7ead4ef345"
+    },
+    {
+      "bytes": 6752,
+      "git_blob": "f867d0c1fb30860c508512b4682faa4583bf467e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHFixIntervalV1.lean",
+      "sha256": "dd2791317888753b168314c5bf545864d38bc115f64cf960b32c5a12c72eb05d"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5165,
+      "git_blob": "9600d13006d2b5100ebd23e8383e9a8d9545507a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "2bd736b56ed0a29ba59e86f534d31305802f2f1213eff1b862f8881286be519c"
+    },
+    {
+      "bytes": 3832,
+      "git_blob": "5926b4c04f9ee03d46683b5614b1b010c84179db",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/EffectiveSources/RHThetaTailV1.lean",
+      "sha256": "8ad01888f6e09d7ab3d6d42bfeb9cef69761d0d9d3ee8a308d972c786433000c"
+    },
+    {
+      "bytes": 1623,
+      "git_blob": "41c4efddba4d80724f9765780cf4bd6a17990e05",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/IMPORT_COMPATIBILITY.patch",
+      "sha256": "cfd8b62afe6fa7993d2251fe79276ca2f15636c4a08f6f007d828bbbeaf32431"
+    },
+    {
+      "bytes": 9815,
+      "git_blob": "7e67a10da89257d67ce2473d6dda2ac37b328aee",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/RECEIPT.json",
+      "sha256": "bf45c97009bcfca269c036e008bcf79d590864c40c423499b04f17f7db395420"
+    },
+    {
+      "bytes": 444,
+      "git_blob": "f4bff70a011304883bda1e9dbfd6303b4c18ad23",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compile_RHCriticalLineSignV1.log",
+      "sha256": "d13b7563728c77457f89d7821b362843fab0575318c34fd0194c2af4ad5bf683"
+    },
+    {
+      "bytes": 188,
+      "git_blob": "7d4a46ef88d9500c5c1297c907c268769aba9c21",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compile_RHFixIntervalV1.log",
+      "sha256": "a89a846e9383eb11c2334ab0cc44cf766d4cc01099a26e563f9697c40e73e8e1"
+    },
+    {
+      "bytes": 115,
+      "git_blob": "5a6dd9918ffaf91fad7258cdcda297865d8fdbc3",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compile_RHRiemannThetaFormulaV1.log",
+      "sha256": "50e46996e11c3af9ffbf2ccfc989b1157b8f79bf8b9a4a950354b56f90222aa6"
+    },
+    {
+      "bytes": 312,
+      "git_blob": "d3887a58100d20df91f0245370d4e9328a4dd8cc",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compile_RHThetaTailV1.log",
+      "sha256": "e04c9b574b081643fe81fee9c4b33d71a8dcb9cfb7217a363e0a9fe4dda2d651"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compiler_help.log",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 306,
+      "git_blob": "742308918e8e49f0f50f28593a24b2ad36ed48ee",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085423.941355Z/logs/original_RHCriticalLineSignV1.log",
+      "sha256": "0618ca6c6c7f7ca29937d5d9113e2ea6c4c95e3fc6c9f1408fd67fc3d3c86917"
+    },
+    {
+      "bytes": 1904,
+      "git_blob": "cdbce1c21821d2d04ee0157ea9a37876ccbc45ec",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/EndpointAudit.lean",
+      "sha256": "5ace5bbf2cc5bb9a2604a98fd06cd4466e7b18df96a372c95e11037454894b1e"
+    },
+    {
+      "bytes": 4962,
+      "git_blob": "ea359bcfe3beabb8f4fa229a095b69fba418dfa3",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHCriticalLineSignV1.lean",
+      "sha256": "a27be19e11ef6f87faee25cb9526b1a115fb565987d785b7067b83591000c6a0"
+    },
+    {
+      "bytes": 6945,
+      "git_blob": "0844bec5ec15e07389716175246610432a7f6971",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHFixIntervalV1.lean",
+      "sha256": "65cff93028e967b66efe01071065fe596f6cd57b7df88f6ff12f9be193eeeba8"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5358,
+      "git_blob": "9ba7854f610e3606959cc86c8e8e60be67c9af64",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "6782b73a849983e827cd391625e41091d2084f49cb7a481c112d6c2de8db9aa0"
+    },
+    {
+      "bytes": 4025,
+      "git_blob": "95bb53da4d2ec16c1aae1b59c496eee70357e679",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/EffectiveSources/RHThetaTailV1.lean",
+      "sha256": "8373a214eb871b73a19583bcfaf49e9cfa6965996845d8fd3e04821a1d219d0d"
+    },
+    {
+      "bytes": 2423,
+      "git_blob": "cf461f8c73b9e546c25e0ca3a7aef3559f39821f",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/IMPORT_COMPATIBILITY.patch",
+      "sha256": "01c41ed784743f5ff01abc780dcb330002489c4e8efbe12939c6436df06ec702"
+    },
+    {
+      "bytes": 17225,
+      "git_blob": "9a07d275568b7f924961e2a615cdaf44e3aa683b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/RECEIPT.json",
+      "sha256": "85b55472c436f2c601eaaa767b324695b394ca0deffa23df93513b2bdb6ebecd"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "ebaadab57402172c93bdca1f6d129c8264dd97a0",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_EndpointAudit.log",
+      "sha256": "6afbdd0b3f3e99c0e8e2c83fbca9921804079d78c0a9bfadf1dbf3fe2a236fbd"
+    },
+    {
+      "bytes": 31,
+      "git_blob": "46488adfbc2069abf90ccfaef4033eb958c35b4d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHCriticalLineSignV1.log",
+      "sha256": "b1f5deb8fbda8b3f0df1343cd851218f0a0b8ec4e94ce3ef1f0cd831135a429c"
+    },
+    {
+      "bytes": 26,
+      "git_blob": "bd8a7f8f32f18006d529d303c5f91caa81adb288",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHFixIntervalV1.log",
+      "sha256": "168420b55da5b41455123a2416e15b6a9a81025c587ddd69ff1d0731bf1976af"
+    },
+    {
+      "bytes": 33,
+      "git_blob": "d9cb67210b7d1a242adeaec4929f53e0e24e3205",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHHardyNormalizationV1.log",
+      "sha256": "455e8cdcb2ccf8db0596dc9032201d771f2a7035223a4fe64e3411ca6f34f81c"
+    },
+    {
+      "bytes": 25,
+      "git_blob": "f25d978269e50751cf2418b42104ac0ce43618bb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHLambdaLineV1.log",
+      "sha256": "bae38c328a43ee2bc9e68502471a96070e27fad84ce21463aceb3e899e4e0a18"
+    },
+    {
+      "bytes": 34,
+      "git_blob": "8abfd7e2749aa47d7e5dbdbd5ab6f96c378abeba",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHRiemannThetaFormulaV1.log",
+      "sha256": "8a767937033c1f7f531f903362c92636ff5d865ddd7baf64097af6c4037a7162"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "63da49b1d93d2cf22b1166bd8873679ee5859308",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/checker_RHThetaTailV1.log",
+      "sha256": "e26c1a243c16281c9aff9dc22bf7bf4b62d84988964e995501a9a0f60ec4201f"
+    },
+    {
+      "bytes": 209,
+      "git_blob": "f5f90581668d51fe0cf453144d05a34f97caf71a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHCriticalLineSignV1.log",
+      "sha256": "66758047e39bd12aa7620deb6800b9c8418364822fec156394238d0afe0fb0ad"
+    },
+    {
+      "bytes": 188,
+      "git_blob": "7d4a46ef88d9500c5c1297c907c268769aba9c21",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHFixIntervalV1.log",
+      "sha256": "a89a846e9383eb11c2334ab0cc44cf766d4cc01099a26e563f9697c40e73e8e1"
+    },
+    {
+      "bytes": 452,
+      "git_blob": "c71b0513c46e59864fa4fdb9289e39af4400f7b5",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHHardyNormalizationV1.log",
+      "sha256": "074262a63debd2790be56240243b91ad2e73d907d3d20d526c2ea4e08c097ba6"
+    },
+    {
+      "bytes": 91,
+      "git_blob": "beb1d9bc3ed1c878883832df01cf4bc21f3be04a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHLambdaLineV1.log",
+      "sha256": "df137664082774e7026096a022ba8c4ed51fe92290d1549e50b17dd718badc71"
+    },
+    {
+      "bytes": 115,
+      "git_blob": "5a6dd9918ffaf91fad7258cdcda297865d8fdbc3",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHRiemannThetaFormulaV1.log",
+      "sha256": "50e46996e11c3af9ffbf2ccfc989b1157b8f79bf8b9a4a950354b56f90222aa6"
+    },
+    {
+      "bytes": 98,
+      "git_blob": "4fbe7617c597a7c7b4ac34192078dd5c9e78aa79",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compile_RHThetaTailV1.log",
+      "sha256": "a8fde60e79b8ae7c48ccd67fd4a0d1eeaf4f17a51f7c8e2fd0a272108e63d036"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compiler_help.log",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 124052,
+      "git_blob": "91e5e84c93065a8312f81673f930f72bb6482fcc",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/Run-20261007T085543.394114Z/logs/endpoint_type_axiom_audit.log",
+      "sha256": "b63a7d559e55239f5b99217723e1ad5168843488f77bc766e643e12b3c67b09e"
+    },
+    {
+      "bytes": 23242,
+      "git_blob": "24770b43c3b67a915a41973c8f83f04e55f24951",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/SOURCE_MANIFEST.json",
+      "sha256": "31badbdda050b6122a6a199cceef52ed41a321c5a7cd0a66d3cb59ecd0b47cab"
+    },
+    {
+      "bytes": 6507,
+      "git_blob": "188067bc3440cc7ab65a21f080ae5b5b834045bf",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/dependency_identity_audit.py",
+      "sha256": "fa287359cfd71f26316a7c7fb1a4e70ff9f47f9e3983cc231c9c230019675254"
+    },
+    {
+      "bytes": 6023,
+      "git_blob": "1dabe6958091617112fe8db2ef6d22ce6cffc3d7",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/dependency_identity_audit_initial_parser_failed.py",
+      "sha256": "93429b11002db2e1d123cccddcb39b38d00673ef3645cd59331cb6a52e60dbad"
+    },
+    {
+      "bytes": 9321,
+      "git_blob": "72f8effe82ca65df5a4c8c5ec6c6b6f38f6db16c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/scoped_kernel_replay.py",
+      "sha256": "44a7aa6edf87fbc389cd492f8b3e353bef76ba21d181d6de33b6d0c4d58d273b"
+    },
+    {
+      "bytes": 8387,
+      "git_blob": "c1034eef33bfe6b978e25de3e20c2e48ed2ffd73",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/scoped_kernel_replay_address_cap_failed.py",
+      "sha256": "5573f7a9474e7c55385427bd8d497459bfd1e122e4486c7702e3cba0d288cf47"
+    },
+    {
+      "bytes": 8239,
+      "git_blob": "47873e0f106880f6f23a49617050b1392673522c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/scoped_kernel_replay_initial_failed.py",
+      "sha256": "ed8040dba97acd77498cbc10713f4724dd9b77a275c545d0ea71e060c2e0226c"
+    },
+    {
+      "bytes": 9261,
+      "git_blob": "c77732f73498d0eb31c7f14f44cc98c54b7c7610",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/scoped_kernel_replay_missing_imports_failed.py",
+      "sha256": "5ab9449ed531a83be1f81a06c5d57f2aa105cbd405252414c53321f84fde1453"
+    },
+    {
+      "bytes": 9178,
+      "git_blob": "15c41611884552320fb7b9c10de0c501be448287",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/FormalReview/scoped_kernel_replay_package_path_failed.py",
+      "sha256": "f82e45b813a83f01d9d490467e542462e645702fffa16448f3666e4747010e1a"
+    },
+    {
+      "bytes": 125912,
+      "git_blob": "79e497671e3dd602ae19249a048f82d55f9014cb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/HARDY_CAUSAL_DAG_ADDENDUM.json",
+      "sha256": "65810f25edb2201fa6979362271390151646c3261cc1f26c19baca8daba9bc2d"
+    },
+    {
+      "bytes": 4295,
+      "git_blob": "958cf0d8fcc6a62774fee618748e1b2372c2e7e5",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/HARDY_MATHEMATICAL_REVIEW.md",
+      "sha256": "a894d8b5b6bbf93defd8c0347606da59c6c289c613d5933f059ada97471e5906"
+    },
+    {
+      "bytes": 4266,
+      "git_blob": "f374cfb48d411e27eab57785e77bd5294c9fd68f",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/HARDWARE_AUDIT.md",
+      "sha256": "525498ced26a71f347df15b43d7484958ecc3e18caa6f8e7bd11ab23ff522d20"
+    },
+    {
+      "bytes": 5118,
+      "git_blob": "89cdf69549f9d7f851eed81bca3d04a2c2cc149a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/README_BHS.md",
+      "sha256": "d349415a68747e34a78d6ce312a32e533965c3d4295b4f707c4f41b4e26b769a"
+    },
+    {
+      "bytes": 3146,
+      "git_blob": "31061a0819c6269a924c31b03af61fba09b05ae0",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/changes.patch",
+      "sha256": "4f9f35a9e0aa83965ba5eeddc917929f3761ecac5c3492d19ed98ecaf13aeca6"
+    },
+    {
+      "bytes": 1164,
+      "git_blob": "ea9b134b5dff967e160cc7e093b4195da6142031",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/delivery.json",
+      "sha256": "92c1f0c93992027585f74b78b7bcbc8bca1263dcd8a8133a1d2c3e7b421b6108"
+    },
+    {
+      "bytes": 2029,
+      "git_blob": "2bf01d8fb511f8a0ba6ebccfe162d51faf67dcbb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/independent_check.py",
+      "sha256": "6b798535d6f1c8dc8563f622c1340accd031584f633721c6240cc222ea634606"
+    },
+    {
+      "bytes": 332,
+      "git_blob": "6dc8e775b3f7fcd4125773d258f6ca02332063e7",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/kernel_receipt.json",
+      "sha256": "8648ad2bc141d59508b1c0e9806abf2c5950aed025215bb210bb8546e7b7c8f6"
+    },
+    {
+      "bytes": 2975,
+      "git_blob": "3a5a2420a71696b7712c89d0b4e0ee3015375cb1",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/package_manifest.json",
+      "sha256": "e9a49d2eea6e5536c8937fd3e09ceb5dc0a4f24d519bcad4749bead6622b3703"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/receipt_t60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 6006,
+      "git_blob": "205f79b24c9aee77ce4b62920798982e109b5452",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/replay_kernel.py",
+      "sha256": "7ab7ca8e9cd182c0119044c1db970be9ca065d95bfd553567370040e36292d50"
+    },
+    {
+      "bytes": 20,
+      "git_blob": "388b3abf3e5e746b922e1bd1ed888165685786b0",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/requirements.txt",
+      "sha256": "4cef508304e84c21f73cf412712165dc26e40978cb784bc08a876948b559d90d"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/research/rh/critical_line_v1/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 8182,
+      "git_blob": "342ef7dcf5c62083cde4307dcb062859e487416c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/research/rh/critical_line_v1/hardy_interval_v1.py",
+      "sha256": "c173c3d0bbeb2974a7628ed7bbc6392ab58d50b11aafdf4146ceef69d17fe587"
+    },
+    {
+      "bytes": 12758,
+      "git_blob": "2a269fc640ce93341480c2a8d764003a381eff7e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/AEGIS-OMEGA/sovereign-omega-v2/python/hardware_config.py",
+      "sha256": "98a9f5799d726d5bb2e661335a3df3d3358664bf9b1ef97b86d4eda42610fa83"
+    },
+    {
+      "bytes": 4515,
+      "git_blob": "7b2593ef0e0d8944c6e32f72c2468079cc04aa3b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/AGENTS.md",
+      "sha256": "989b66d8625d4ddd08f319e3c1369bbef4862008c300428fcd7b375041dc8233"
+    },
+    {
+      "bytes": 15271,
+      "git_blob": "d3c5a666ba21fb389bd2027f7d2c3e4efe6e8f4b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/CONTRIBUTING.md",
+      "sha256": "ab1f35d301ac427cd1cbcbdb1c4c387baba73b48d102de0907d777860d0ec085"
+    },
+    {
+      "bytes": 1762,
+      "git_blob": "edf4eb1afdbf0182fd9ac603d0f23adf97003d4c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/PROOFS.md",
+      "sha256": "1c61237105db2e4654c0684fac2d8e9ed339b18f2e53596d407b2bb2845d60ba"
+    },
+    {
+      "bytes": 3152,
+      "git_blob": "fae5d498d3f9dc3f6d1efd7c2adc03dd5bb6c8d6",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/lake-manifest.json",
+      "sha256": "c8ffc0d59f492007162fe54c68396e4b9f2f305fcf69210a7fbaf0b18fcd8cd9"
+    },
+    {
+      "bytes": 2851,
+      "git_blob": "727e2af20b34ab9be839aea3014ea3e1142ae8f9",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/lakefile.toml",
+      "sha256": "ebe6baca2edfacd491b91474438282fe6b711998f5e86798277e1850515bbb5f"
+    },
+    {
+      "bytes": 25,
+      "git_blob": "a8afa7d1b02d96f0671eba854a8dc4b416beb473",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/lean-toolchain",
+      "sha256": "3aac669c7a910ec2389f4e4f921b605adf6ebf2d1e0c9b9cd0be4d33f3f5db71"
+    },
+    {
+      "bytes": 4607,
+      "git_blob": "a47f2581b5394cd48ad78ac587b1d7ddcc36a4bb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/RHCriticalLineSignV1.lean",
+      "sha256": "a8b0181eac7a0bc05592bb330c4808291e8bdabc88a801e9108f71e17875759c"
+    },
+    {
+      "bytes": 6590,
+      "git_blob": "0ee94b9be264c170986500bc95598eb5a7e365f6",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/RHFixIntervalV1.lean",
+      "sha256": "9aa8cbde778f4be6464305e05ae0310e3786f04a3ff4b149a7469c90d2b41390"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5003,
+      "git_blob": "5f169195dda7f2ab4428fad6f07492fe91efde5e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/RHRiemannThetaFormulaV1.lean",
+      "sha256": "f9b344d1d097070fffb4fde4e1724acab9f80b75429b5620a675b8a19b3d4d94"
+    },
+    {
+      "bytes": 3670,
+      "git_blob": "a8a9d69fae2e5ddbd9afe8b5d27db7e5ba07437c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/RHThetaTailV1.lean",
+      "sha256": "c6af66b8dece4b02f926d1531bd49ba41d6fb41310dcf1049f43bad6f9acf702"
+    },
+    {
+      "bytes": 6936,
+      "git_blob": "f557a641fbd67ee948c8d0c3ea134f79cc62a9b9",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source/formal-conjectures/research/rh/critical_line_v1/fixmirror.py",
+      "sha256": "04dda91d20d5b2b283ecce5ad2111a0aa5c6992a0b913a78bf87c5a16e376bfe"
+    },
+    {
+      "bytes": 5310,
+      "git_blob": "50319d25cb00c9f3faf078b460a8e6045f433eaa",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/source_bindings.json",
+      "sha256": "8e46a8800e980d1593ef6c8efbef394b210dce1d89e0ecd55a1f27b2e288bc48"
+    },
+    {
+      "bytes": 5892,
+      "git_blob": "94679e6f8b846d49ea10cbf421605778ef84c32d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/Incoming/AEGIS_Hardy_Q16_T60_V1/tests/test_hardy_interval_v1.py",
+      "sha256": "272eeaac18c539d6ba0bfcc7cb3afac744c374325d4b2eaebf6adb403c1d3efc"
+    },
+    {
+      "bytes": 138,
+      "git_blob": "c10b3a43bf9ade6f428da6f28714a76eefcbb639",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/LATEST_RUN.json",
+      "sha256": "4e0056ba8af71e935d438da49281672c16a84b1acf11e8e1bfa539895d266339"
+    },
+    {
+      "bytes": 2367,
+      "git_blob": "29a0046771e08b2b3eaa4a52f3b0725ab39475f8",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/IMPORT_ONLY.patch",
+      "sha256": "cabf7055bfbaf7aa66ec4dd9a0dc6d880fdf46a3da8164fe7b65d0743ad4e021"
+    },
+    {
+      "bytes": 30974,
+      "git_blob": "efab8edcf7a3d247d7cccdd2bcb7a7852f3d2ca0",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/RECEIPT.json",
+      "sha256": "afc3c3d234f92c9ad00d521a40d32b62068105f086f40c1184655f121d073e2b"
+    },
+    {
+      "bytes": 1904,
+      "git_blob": "cdbce1c21821d2d04ee0157ea9a37876ccbc45ec",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/HardyIndependentEndpoints.lean",
+      "sha256": "5ace5bbf2cc5bb9a2604a98fd06cd4466e7b18df96a372c95e11037454894b1e"
+    },
+    {
+      "bytes": 4962,
+      "git_blob": "ea359bcfe3beabb8f4fa229a095b69fba418dfa3",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHCriticalLineSignV1.lean",
+      "sha256": "a27be19e11ef6f87faee25cb9526b1a115fb565987d785b7067b83591000c6a0"
+    },
+    {
+      "bytes": 6945,
+      "git_blob": "0844bec5ec15e07389716175246610432a7f6971",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHFixIntervalV1.lean",
+      "sha256": "65cff93028e967b66efe01071065fe596f6cd57b7df88f6ff12f9be193eeeba8"
+    },
+    {
+      "bytes": 2825,
+      "git_blob": "3d68c660e64214d8cb76344c20e6f67b3ad460e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHHardyNormalizationV1.lean",
+      "sha256": "372b576a9b65471ecbfdee4445177c94f9939e04393833d63653cc36d991ed19"
+    },
+    {
+      "bytes": 2960,
+      "git_blob": "dfa167c1a3cb0f84d9e6abeee6b735e8546c9956",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHLambdaLineV1.lean",
+      "sha256": "eca32ff8803e7d9b07a60c703ba0f3efad5bd61df0cf1ff9e0a0cbfee79929e6"
+    },
+    {
+      "bytes": 5358,
+      "git_blob": "9ba7854f610e3606959cc86c8e8e60be67c9af64",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHRiemannThetaFormulaV1.lean",
+      "sha256": "6782b73a849983e827cd391625e41091d2084f49cb7a481c112d6c2de8db9aa0"
+    },
+    {
+      "bytes": 4025,
+      "git_blob": "95bb53da4d2ec16c1aae1b59c496eee70357e679",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/Sources/RHThetaTailV1.lean",
+      "sha256": "8373a214eb871b73a19583bcfaf49e9cfa6965996845d8fd3e04821a1d219d0d"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_HardyIndependentEndpoints.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 36,
+      "git_blob": "58c2a71fe1aecd33ef1da347dc7935987debac89",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_HardyIndependentEndpoints.stdout",
+      "sha256": "b63249c2b44ab47cdf2bdc9dca0c4c42b993dd20f1ea7fe66631f33718c72c7b"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHCriticalLineSignV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 31,
+      "git_blob": "46488adfbc2069abf90ccfaef4033eb958c35b4d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHCriticalLineSignV1.stdout",
+      "sha256": "b1f5deb8fbda8b3f0df1343cd851218f0a0b8ec4e94ce3ef1f0cd831135a429c"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHFixIntervalV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 26,
+      "git_blob": "bd8a7f8f32f18006d529d303c5f91caa81adb288",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHFixIntervalV1.stdout",
+      "sha256": "168420b55da5b41455123a2416e15b6a9a81025c587ddd69ff1d0731bf1976af"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHHardyNormalizationV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 33,
+      "git_blob": "d9cb67210b7d1a242adeaec4929f53e0e24e3205",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHHardyNormalizationV1.stdout",
+      "sha256": "455e8cdcb2ccf8db0596dc9032201d771f2a7035223a4fe64e3411ca6f34f81c"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHLambdaLineV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 25,
+      "git_blob": "f25d978269e50751cf2418b42104ac0ce43618bb",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHLambdaLineV1.stdout",
+      "sha256": "bae38c328a43ee2bc9e68502471a96070e27fad84ce21463aceb3e899e4e0a18"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHRiemannThetaFormulaV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 34,
+      "git_blob": "8abfd7e2749aa47d7e5dbdbd5ab6f96c378abeba",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHRiemannThetaFormulaV1.stdout",
+      "sha256": "8a767937033c1f7f531f903362c92636ff5d865ddd7baf64097af6c4037a7162"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHThetaTailV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 24,
+      "git_blob": "63da49b1d93d2cf22b1166bd8873679ee5859308",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/checker_RHThetaTailV1.stdout",
+      "sha256": "e26c1a243c16281c9aff9dc22bf7bf4b62d84988964e995501a9a0f60ec4201f"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHCriticalLineSignV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 209,
+      "git_blob": "f5f90581668d51fe0cf453144d05a34f97caf71a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHCriticalLineSignV1.stdout",
+      "sha256": "66758047e39bd12aa7620deb6800b9c8418364822fec156394238d0afe0fb0ad"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHFixIntervalV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 188,
+      "git_blob": "7d4a46ef88d9500c5c1297c907c268769aba9c21",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHFixIntervalV1.stdout",
+      "sha256": "a89a846e9383eb11c2334ab0cc44cf766d4cc01099a26e563f9697c40e73e8e1"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHHardyNormalizationV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 452,
+      "git_blob": "c71b0513c46e59864fa4fdb9289e39af4400f7b5",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHHardyNormalizationV1.stdout",
+      "sha256": "074262a63debd2790be56240243b91ad2e73d907d3d20d526c2ea4e08c097ba6"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHLambdaLineV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 91,
+      "git_blob": "beb1d9bc3ed1c878883832df01cf4bc21f3be04a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHLambdaLineV1.stdout",
+      "sha256": "df137664082774e7026096a022ba8c4ed51fe92290d1549e50b17dd718badc71"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHRiemannThetaFormulaV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 115,
+      "git_blob": "5a6dd9918ffaf91fad7258cdcda297865d8fdbc3",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHRiemannThetaFormulaV1.stdout",
+      "sha256": "50e46996e11c3af9ffbf2ccfc989b1157b8f79bf8b9a4a950354b56f90222aa6"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHThetaTailV1.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 98,
+      "git_blob": "4fbe7617c597a7c7b4ac34192078dd5c9e78aa79",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compile_RHThetaTailV1.stdout",
+      "sha256": "a8fde60e79b8ae7c48ccd67fd4a0d1eeaf4f17a51f7c8e2fd0a272108e63d036"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compiler_help.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2994,
+      "git_blob": "6b6ec4e3fc5cf0319d50ea108c1cabe7eba30215",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compiler_help.stdout",
+      "sha256": "ad1ad8fd08b8c01ac9d3a9c7246a57b0fa63bd33989f309414b92e0c8ed4576c"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compiler_version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/compiler_version.stdout",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/endpoint_type_axiom_audit.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 124052,
+      "git_blob": "91e5e84c93065a8312f81673f930f72bb6482fcc",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/Run-20261007T085834.405997Z/logs/endpoint_type_axiom_audit.stdout",
+      "sha256": "b63a7d559e55239f5b99217723e1ad5168843488f77bc766e643e12b3c67b09e"
+    },
+    {
+      "bytes": 8068,
+      "git_blob": "b60efed2b2360ac0414bfcd4cb9d316fff562ab9",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/KernelReplay/replay_sources.py",
+      "sha256": "fa30b164bf41b34a69d4ad05aaeefdda909650c74222b01fc60fca9bd622f086"
+    },
+    {
+      "bytes": 1843,
+      "git_blob": "99d15d262ed2b1e0f58e471bf0e81962a271ff60",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/LIBRARY_IDENTITY.json",
+      "sha256": "c57e9244e03434f253689090d26957d1e42cc5cd18c5bc29ede17573aac9f561"
+    },
+    {
+      "bytes": 6145,
+      "git_blob": "5e179ec4272206c7675941f1178ca147edda2298",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/NormalizationReview/NORMALIZATION_REVIEW.md",
+      "sha256": "f04f3ff32acecb8cc30c90f60a1cf3c38a3f43ec2c4911d34147696b56f79c78"
+    },
+    {
+      "bytes": 34917,
+      "git_blob": "b37db60c2b7102e46348fa09dd4449fd8aa6c214",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/NormalizationReview/REVIEW_RECEIPT.json",
+      "sha256": "acded9c8ad9da28ca8a4cf155b3aa853d98ff007f87459c4a925faba99a9a3d3"
+    },
+    {
+      "bytes": 404,
+      "git_blob": "cf7e7ae050e033d9b4043c370d1607129ef3d0be",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/NormalizationReview/SUMMARY_RECEIPT.json",
+      "sha256": "064e63fad03b98c5ee9c357f719ac155e8eefd92cb8ad4222c0dafa947cbdeb8"
+    },
+    {
+      "bytes": 9696,
+      "git_blob": "bb85d009774e9117e6443eeda6ffc8a10fa77e51",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/NormalizationReview/audit_normalization_metadata.py",
+      "sha256": "b203df68368632c856f0878902f9659838ef8598beaf8a56de705ecea9947540"
+    },
+    {
+      "bytes": 33046,
+      "git_blob": "b942c54fb20662710e1169eaa32f4c99f4e97680",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/Numeric/RESULT.json",
+      "sha256": "859383af03d0b679913f39bfecd8ba020bceab14faab1b37adfb1bd6de3f2686"
+    },
+    {
+      "bytes": 5720,
+      "git_blob": "994897dd965b65e345d76d7d92994eb72e94bf7e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/Numeric/recompute.py",
+      "sha256": "0938b3e1fa7de5e2339815bd739ecfb0c3339100dcf0c37a8e40d5e8c2560261"
+    },
+    {
+      "bytes": 4732,
+      "git_blob": "c374045432fbd05daa2afa52d71ca04cc20ae03e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/REVIEW.md",
+      "sha256": "7df9fd040724ef201ad8b9f2684122cf00234f3138d0eca8c46e26ae94baa0c1"
+    },
+    {
+      "bytes": 6141,
+      "git_blob": "1ce25a26cf0a7751c1d9864089c5614fca9e2a16",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/REVIEW_RECEIPT.json",
+      "sha256": "c2d3bf7252508f3de83fae7d573f678e674bb1a271d2debb05aed8be61a5b168"
+    },
+    {
+      "bytes": 26750,
+      "git_blob": "c284ee27772596ef6bb3e2bebccaa0c5f3b167a2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/SOURCE_MANIFEST.json",
+      "sha256": "d01b4c5848796db09bdf811a7963de68f0c36f20b02cbb87ab52016fa5c12976"
+    },
+    {
+      "bytes": 6039,
+      "git_blob": "ca63e1f8ce749b2fe10be919d396be8abdef68a2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/IndependentReview/freeze_review.py",
+      "sha256": "0de0243231800891550b31bb871bdb3eb816793d4cc742307a6c25e3050eab0b"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/generate.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/generate.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/independent.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1572,
+      "git_blob": "5432576cac0e418dd4b785388400e17c6368fe66",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/independent.stdout",
+      "sha256": "eb185e06e7a2dad5cf5c6176d241b8f55dcc20b4bfa1ae124716de8ff8750899"
+    },
+    {
+      "bytes": 2359,
+      "git_blob": "02d70f98edc3ba9c90ff522cf9992c380e70f937",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/tests_normal.stderr",
+      "sha256": "3ca040138ac3beb138d1baec64840b450cf5abbacf623725047bc3a397d5738b"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/tests_normal.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 2359,
+      "git_blob": "c874f75b64d87fa5488a3dfbf11755adf9119199",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/tests_optimized.stderr",
+      "sha256": "385af1fcd6b7bdecd562def1ab0fec5db9f63d8972253d0981216093c93bc68e"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/tests_optimized.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/verify.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 233,
+      "git_blob": "d5388844041d543589e1f791446ed053e7c22e43",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/NumericLogs/verify.stdout",
+      "sha256": "6a58b4e3ec53417ece841bbc1d5814ef569e40ebdb2d98b002318a6e3e15f06c"
+    },
+    {
+      "bytes": 53692,
+      "git_blob": "6c00e741c327bd8a83c9a7b10fd8288150cf221e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PACKET.zip",
+      "sha256": "3710a3a7e6bffa12f544c7630f1412cb4d79e1fa84630b2be9ed042940bafead"
+    },
+    {
+      "bytes": 4517,
+      "git_blob": "5e093e284804015f7d4715e65681250c9b1f2efa",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/IdentityReview/IDENTITY_REVIEW.md",
+      "sha256": "81af2594c64cbaea8f0223c384cee71bd78d60d050d2a5e1c4b501214e144f93"
+    },
+    {
+      "bytes": 4253,
+      "git_blob": "742e98998f44b66b383f4792d4cc958acda57529",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/IdentityReview/REVIEW_RECEIPT.json",
+      "sha256": "2087a5a906e384e92e82546cd750b9e5d63fd3af5b11455e028f0eac52395d38"
+    },
+    {
+      "bytes": 2301,
+      "git_blob": "2aeb86f996c0d76abd2c1cce011fa5b3566dc98b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/IdentityReview/SOURCE_MANIFEST.json",
+      "sha256": "1b42ac81c6b31ee19ebba922057d5845a63935d7b63cf6a87432f26618f771be"
+    },
+    {
+      "bytes": 427,
+      "git_blob": "04cc1045c2927decff61db088f1679065e423e1b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/IdentityReview/SUMMARY_RECEIPT.json",
+      "sha256": "021794a23173e60438b32132dfc7d2cb6aa65cf93a6111d41498f87fa01d8f74"
+    },
+    {
+      "bytes": 130,
+      "git_blob": "bfee45e8e018f8574b258fb0af95f6f8345feaab",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/LATEST_RUN.json",
+      "sha256": "fb794a757d809300716495b042c6428bf0ceb2751cbd37c3f60905af9da3276d"
+    },
+    {
+      "bytes": 3081,
+      "git_blob": "7eb3fec8038d1556fead4e913cc468517d222612",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/REVIEW.md",
+      "sha256": "085b9d33852dd4747cee080ed534884c61243f913d7379424d3a010927dd2598"
+    },
+    {
+      "bytes": 5221,
+      "git_blob": "0dd59397d90a162622d50c93f8a52e019abff8f5",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/REVIEW_RECEIPT.json",
+      "sha256": "cc985e5b72cf35d0251ade9281d1c024917a52acb4232bef34135f801288a617"
+    },
+    {
+      "bytes": 1696,
+      "git_blob": "e394b52d745b9fb84ebef92ab1c932930dc203c2",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/PhaseIndependentEndpoints.lean",
+      "sha256": "96cb5ac1fb69aea17a2c2eb269b768c835b24fbc7c19e2e134db259a5d746335"
+    },
+    {
+      "bytes": 13492,
+      "git_blob": "83f4f5318aff0871052769785ef7277a39d8b46a",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/RECEIPT.json",
+      "sha256": "d7c472bf61c95c0c06a381dc79c3f0482d3688ef1cb4683cc3bcac2aae0dcef9"
+    },
+    {
+      "bytes": 5361,
+      "git_blob": "ab57ed01f736108c22ad2e6708d9b29fb59ab95d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/RHHardyPhaseTransportV1.lean",
+      "sha256": "1c0a0dda1499dec1701e49d0ef7cca585b17f8a7eb2a356e65e23bdba90c0d38"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/checker_endpoints.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 36,
+      "git_blob": "f7d10d04d60008c264cb2956782bb1d378012922",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/checker_endpoints.stdout",
+      "sha256": "854a578fff039109f737a84c9680cbed725d343d56707cba875dfcc072970d8d"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/checker_phase.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 34,
+      "git_blob": "9d671a4b05690044f80a5d7298adb476b966e3bd",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/checker_phase.stdout",
+      "sha256": "f7d304843aea65a5c7fa772cfdc158d9af33230a7e0cd256383d07bdf48b7b03"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/compile_phase.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8736,
+      "git_blob": "a1b637a0df3441f24fbf09df714f2b059cb40d66",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/compile_phase.stdout",
+      "sha256": "9b4aaf4758ac314aa335b366855a04843b39fa76df340b3277b4d2d6c05a0e35"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/compiler_version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/compiler_version.stdout",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/endpoint_full_type_axiom.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 61711,
+      "git_blob": "61fb048a0bee3a2ef9b6680ac15752f446aef037",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/Run-20261007T090732.304581Z/logs/endpoint_full_type_axiom.stdout",
+      "sha256": "6b4b1613804bf55fef59bf3eba7cd92470e959371c3f0bc60016f58fd0be0a76"
+    },
+    {
+      "bytes": 10074,
+      "git_blob": "d4eb8ceefbe7199ad0aee27cde7c10cb2f3ffeb7",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/SOURCE_MANIFEST.json",
+      "sha256": "b81930ce4da6bb09330a1ceccf9da2d23b2f121e15dfb43cafde0240ed0e416c"
+    },
+    {
+      "bytes": 5282,
+      "git_blob": "ea350eef5abba22ef9db2a8bccf6b1b3248b625d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/freeze_review.py",
+      "sha256": "3e2ff8258a52c735f8aea52c905fb806452a58fb98a6186fdd5a725fabc8e0ed"
+    },
+    {
+      "bytes": 7601,
+      "git_blob": "6f6cee7787dbba3d7279a0938cb780e54a73107f",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseIndependentReview/replay_phase.py",
+      "sha256": "1e0da8af1130b3da10c19ecd42451d162fdeb91f402ba2d5c35331dd3e654152"
+    },
+    {
+      "bytes": 122,
+      "git_blob": "ae03961ab9c8d431126385d9ac96622a7ef722e4",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/LATEST_RUN.json",
+      "sha256": "6ddafb903e82ecfebcb646c32e7d66265be25f169545e548e2cec88f3cb3d469"
+    },
+    {
+      "bytes": 1636,
+      "git_blob": "4d27e262de704b054b7d02f24266fd9cfcf86ae0",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/MATHEMATICAL_REVIEW.md",
+      "sha256": "1488b1211f41f2f38c894765d8abfb09e725d3e16ed0b893d59559cf7ba45377"
+    },
+    {
+      "bytes": 4852,
+      "git_blob": "2403c288db395eb5e9e30f1a2dc9a40c4b8b3b07",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/RESULT.json",
+      "sha256": "ae62a135d9f9b4f08d4deaa047e51bb82204802e85651160c2d5483a7975d6e1"
+    },
+    {
+      "bytes": 5361,
+      "git_blob": "ab57ed01f736108c22ad2e6708d9b29fb59ab95d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/RHHardyPhaseTransportV1.lean",
+      "sha256": "1c0a0dda1499dec1701e49d0ef7cca585b17f8a7eb2a356e65e23bdba90c0d38"
+    },
+    {
+      "bytes": 5950,
+      "git_blob": "d05386b1679aea7652824cd03066c0b32cf5a1d8",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/RECEIPT.json",
+      "sha256": "38f03082271359e0992e7dba9b0d6841c8a2013c1f18fa577d030579c3970bc2"
+    },
+    {
+      "bytes": 4963,
+      "git_blob": "035c10c3cd6dd04ff4d23841b15269fe428a4f7e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/RHHardyPhaseTransportV1.lean",
+      "sha256": "bf31e985240153836969bfba90ac96c233ec558c87eae0570e2b95d501fbf93f"
+    },
+    {
+      "bytes": 3377,
+      "git_blob": "ff3f18150b48c31e89574c47a398a1be5986933d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compile_phase_transport.log",
+      "sha256": "9c56f5b6e244992b40da4ca1e5cda74611860c35f622cc416bd0a4e5ff6b429d"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compile_phase_transport.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3377,
+      "git_blob": "ff3f18150b48c31e89574c47a398a1be5986933d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compile_phase_transport.stdout",
+      "sha256": "9c56f5b6e244992b40da4ca1e5cda74611860c35f622cc416bd0a4e5ff6b429d"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compiler_version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090215.698123Z/logs/compiler_version.stdout",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 5950,
+      "git_blob": "9fb1276d18be260017a1559bccb3050443f4bcd6",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/RECEIPT.json",
+      "sha256": "742fc7fba8297ec54cc147417ef4c425bb1a69334c8da2572e536869582707ed"
+    },
+    {
+      "bytes": 4979,
+      "git_blob": "454b3176913f47bc92800c7b25ede15133da3bce",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/RHHardyPhaseTransportV1.lean",
+      "sha256": "5118d246ec49806360efc7cd18bf3d0daa811857318513a7d0a556d2d6954830"
+    },
+    {
+      "bytes": 3346,
+      "git_blob": "17e32b17b15c30181fdd9a58058d4dc955625135",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compile_phase_transport.log",
+      "sha256": "07ed8bafc41f2ca8e4cf9b32967d980bd172f9a31b13fc1af3799da61d7f0a9c"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compile_phase_transport.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 3346,
+      "git_blob": "17e32b17b15c30181fdd9a58058d4dc955625135",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compile_phase_transport.stdout",
+      "sha256": "07ed8bafc41f2ca8e4cf9b32967d980bd172f9a31b13fc1af3799da61d7f0a9c"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compiler_version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090311.122325Z/logs/compiler_version.stdout",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 20416,
+      "git_blob": "0ff52885e0a795ee43fc9cfbf047b22a78c3f80d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/RECEIPT.json",
+      "sha256": "b84d7b926dc76b71b686822db06531f93933c41bd8071920df7fae28fba0cea7"
+    },
+    {
+      "bytes": 5361,
+      "git_blob": "ab57ed01f736108c22ad2e6708d9b29fb59ab95d",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/RHHardyPhaseTransportV1.lean",
+      "sha256": "1c0a0dda1499dec1701e49d0ef7cca585b17f8a7eb2a356e65e23bdba90c0d38"
+    },
+    {
+      "bytes": 34,
+      "git_blob": "9d671a4b05690044f80a5d7298adb476b966e3bd",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/checker_phase_transport.log",
+      "sha256": "f7d304843aea65a5c7fa772cfdc158d9af33230a7e0cd256383d07bdf48b7b03"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/checker_phase_transport.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 34,
+      "git_blob": "9d671a4b05690044f80a5d7298adb476b966e3bd",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/checker_phase_transport.stdout",
+      "sha256": "f7d304843aea65a5c7fa772cfdc158d9af33230a7e0cd256383d07bdf48b7b03"
+    },
+    {
+      "bytes": 8736,
+      "git_blob": "a1b637a0df3441f24fbf09df714f2b059cb40d66",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compile_phase_transport.log",
+      "sha256": "9b4aaf4758ac314aa335b366855a04843b39fa76df340b3277b4d2d6c05a0e35"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compile_phase_transport.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8736,
+      "git_blob": "a1b637a0df3441f24fbf09df714f2b059cb40d66",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compile_phase_transport.stdout",
+      "sha256": "9b4aaf4758ac314aa335b366855a04843b39fa76df340b3277b4d2d6c05a0e35"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compiler_version.log",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compiler_version.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 106,
+      "git_blob": "ea79e261ed3063846d89875f31c1b81a5cb9de71",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/Run-20261007T090421.735667Z/logs/compiler_version.stdout",
+      "sha256": "63f3e16bf0258e2cc0ab3010eb1830723df9bb85097b7b72b0137b9be25a78e9"
+    },
+    {
+      "bytes": 5305,
+      "git_blob": "7d481a9e277402e9acdae8b22ed7b09948f2cd1b",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/PhaseTransport/replay_phase_transport.py",
+      "sha256": "832b2b3a78b3de7d9bf83db9e63c03d14a18c4d5f5e96079cde43abf98c089ca"
+    },
+    {
+      "bytes": 4876,
+      "git_blob": "d8c5be655daa8a357bb39358e39f47c29fcefb63",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/README.md",
+      "sha256": "1ef7c035b6e91efa7c1db370d813b2eee0ee3f659666dc41b903bf6024911d72"
+    },
+    {
+      "bytes": 1780,
+      "git_blob": "126d67459cbb01595e17a7e9c175c78f21dd576e",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/RESULT.json",
+      "sha256": "1dc4884f1481ef76c89b549a23944f6de69ec42303161edbc26967ba64d06cd1"
+    },
+    {
+      "bytes": 60694,
+      "git_blob": "c0d431989f51f9fac0db8de188b4cbae5d8fc027",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/SOURCE_MANIFEST.json",
+      "sha256": "085f41508c5c1bfb67147fda1ce9948e7a777fec8211a2fd8acab761cd5fd11f"
+    },
+    {
+      "bytes": 7149,
+      "git_blob": "91b6c62bc60c827837088018a98151ec301fee8c",
+      "git_mode": "100644",
+      "path": "HardyPointAuditOct7/assemble_hardy_unit.py",
+      "sha256": "02eef9238c4e9286e8880d2399d53f56030e79d9d60302f65efbefcc3dd783a0"
+    },
+    {
+      "bytes": 3556,
+      "git_blob": "e897451489c9d8d87e9b22ded7ae0799d8eebc54",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ARCHIVE_SOURCE_MANIFEST.json",
+      "sha256": "5cd34a150f34f7b05629130a67a53e3cf0604ebfa67518e3acb3979ab61286de"
+    },
+    {
+      "bytes": 2600,
+      "git_blob": "afd007eee2aa5f7ad8aadf99b84bb75a9b368f36",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CHECKER_NORMAL.json",
+      "sha256": "dd5dbd72595f13513799b0a35b55cdf6f91cac568468d2c0437165263cfc14c1"
+    },
+    {
+      "bytes": 2600,
+      "git_blob": "afd007eee2aa5f7ad8aadf99b84bb75a9b368f36",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CHECKER_OPTIMIZED.json",
+      "sha256": "dd5dbd72595f13513799b0a35b55cdf6f91cac568468d2c0437165263cfc14c1"
+    },
+    {
+      "bytes": 1201,
+      "git_blob": "f3054aa580ded6ea5a2e37e309bd0ebff1d5e13a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CheckerExecution/EXECUTION.json",
+      "sha256": "fc3dc281cd2831aee11c3343a250e55c81b114861d7a558e4e8247b546c97e07"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CheckerExecution/Normal.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 96,
+      "git_blob": "2f7ca49bc4db9a3445056d7f7185966d5a85a681",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CheckerExecution/Normal.stdout.txt",
+      "sha256": "7961497277485042e3260dc5a30ad33ddc6c0144fb0cb0fe567a95a03c5be370"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CheckerExecution/Optimized.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 96,
+      "git_blob": "2f7ca49bc4db9a3445056d7f7185966d5a85a681",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/CheckerExecution/Optimized.stdout.txt",
+      "sha256": "7961497277485042e3260dc5a30ad33ddc6c0144fb0cb0fe567a95a03c5be370"
+    },
+    {
+      "bytes": 1793,
+      "git_blob": "cd56c501e740c2a41371db0efeae0cdf01de62d2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/ENVIRONMENT.json",
+      "sha256": "d333aa6d078e4fc21fda227f5fea359bc87d97036c256eb33b6f09332a777703"
+    },
+    {
+      "bytes": 2867,
+      "git_blob": "32c68be1754017f332e3c2b587cd7b995b46ab87",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/EVALUATOR_REPLAY_RECEIPT.json",
+      "sha256": "6b89ae19e55e5f5e8dd6c2ff7464a7eaaba0dc7231d645a0230189b6a082f268"
+    },
+    {
+      "bytes": 8753,
+      "git_blob": "ff797020570ee667b8b5a23d419138db5f8d87cf",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/IndependentMathReview/REVIEW.md",
+      "sha256": "1c4eed185e034b21c268a0560861748371762bbaf8983a4b9ba8d1df6e07084c"
+    },
+    {
+      "bytes": 3458,
+      "git_blob": "43665cb3ff5377f20c50f3223369bd4f964bb8ea",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/IndependentMathReview/REVIEW_RECEIPT.json",
+      "sha256": "483acd9427f05847b246abeb10006fed203c848a2601f556d468d5e21edf46bd"
+    },
+    {
+      "bytes": 2599,
+      "git_blob": "f4baf2409cff14bab9cfea4d37fc83ee40a445b4",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/InitialCheckerReplay/CHECKER_NORMAL.json",
+      "sha256": "d57010183ff5b674735d576ec031412741f1fd8683103c64293efc537d60e732"
+    },
+    {
+      "bytes": 2599,
+      "git_blob": "f4baf2409cff14bab9cfea4d37fc83ee40a445b4",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/InitialCheckerReplay/CHECKER_OPTIMIZED.json",
+      "sha256": "d57010183ff5b674735d576ec031412741f1fd8683103c64293efc537d60e732"
+    },
+    {
+      "bytes": 337,
+      "git_blob": "111072cbe1dc188c66f6ee264aa53d1f939fff58",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/InitialCheckerReplay/SOURCE_RECONSTRUCTION.json",
+      "sha256": "2183665cfc7050f333ab05ec3060af1b45a72c6c26c02e86486edb22938fa5e1"
+    },
+    {
+      "bytes": 13543,
+      "git_blob": "9cd08461e20a587f295f672a6e0c542094aa788c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/InitialCheckerReplay/verify_configured_comparison_initial.py",
+      "sha256": "f51113c06a896494594b4d3328bcc53e736234f42271e9155a416f3b3d656e54"
+    },
+    {
+      "bytes": 5892,
+      "git_blob": "a2b570b8dfa38b3843f65a011fd3407b38960d2c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare.py",
+      "sha256": "dd06e5cb25a12916f97e2025fbbbcdb65bf35ca8ac055223e6c8428d2a446696"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare.py.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 317,
+      "git_blob": "df44870b70e0a36f0912b644a79b1589893be94f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare.py.stdout.txt",
+      "sha256": "a86e019422ceee0869cc7397ebef7d63fdf47bb727117b9e7670103b948907d4"
+    },
+    {
+      "bytes": 13106,
+      "git_blob": "33765c310b8f4e4b9ea22ea8b8e2efa84b40bb3d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare_100ms.py",
+      "sha256": "767bb3cd0d378bafd207ee9eae30d52090cf0eef4bb6130bed306d3f8aa91140"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare_100ms.py.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 283,
+      "git_blob": "1815bea859976336b848c02664fd353b5c6d3a24",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/compare_100ms.py.stdout.txt",
+      "sha256": "17d97485aa191310d47324ee593ca834c5e4cbb4f62bca5db49dea4993efe80f"
+    },
+    {
+      "bytes": 8266,
+      "git_blob": "3a5c13604e44e74c356456f0e9e485e21d5331f0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/comparison.json",
+      "sha256": "fdc0a55037106e8bb201898dbfce29ce153199eb5fd9d1e45fcf9e440008c471"
+    },
+    {
+      "bytes": 28137,
+      "git_blob": "219e0e86f67cfdedee9f0dcc23bf42f95759ba99",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/comparison_100ms.json",
+      "sha256": "69d062acb15361eb799e905e3b51168c391d1948302beb361473836e493455c0"
+    },
+    {
+      "bytes": 21886,
+      "git_blob": "173c872bb49c5421984c0882271bbcd8c2654dd7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/QER_actual_replay_comparison.json",
+      "sha256": "f0bdad98b39c3141e5cd919e2512c55a35a1ffef658fe19afc8eb078dc9372db"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "b71055421aa41dc24316deae99e9d21f5cfc5a63",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/qgi_phase_winding_tower_v1.md",
+      "sha256": "67f6f7684ae1baddb9c2d8745193a7c3968f9808365c0e07c6a701cd44e9880a"
+    },
+    {
+      "bytes": 5877,
+      "git_blob": "df764a08e643d6e76999c2d1b898e4a734597855",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/quantumdna_pst_enaqt_probe_v1.json",
+      "sha256": "24b7d6aef26173b6d78b3ae1586b5f3d73aa55a287908b92846bf60b35817b8d"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/receipt_t60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 3377,
+      "git_blob": "9441650c3269e1a0eea61cfb05df02f1d620a8b2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/same_operator_vortex_markov_heat_quantum_v1.json",
+      "sha256": "73d86c95d69c1f2db64412c170f4a50df97a1a87a81f7a90c4cb7d855d927451"
+    },
+    {
+      "bytes": 1221,
+      "git_blob": "cc27f74154a760207184389b3cea269f058f8385",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Normal/input/same_operator_vortex_markov_heat_quantum_v1.md",
+      "sha256": "600819144efdce6908ef444b0c944fb6fe5acdf356f6fb9c11dc2f5f5139b347"
+    },
+    {
+      "bytes": 5892,
+      "git_blob": "a2b570b8dfa38b3843f65a011fd3407b38960d2c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare.py",
+      "sha256": "dd06e5cb25a12916f97e2025fbbbcdb65bf35ca8ac055223e6c8428d2a446696"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare.py.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 317,
+      "git_blob": "df44870b70e0a36f0912b644a79b1589893be94f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare.py.stdout.txt",
+      "sha256": "a86e019422ceee0869cc7397ebef7d63fdf47bb727117b9e7670103b948907d4"
+    },
+    {
+      "bytes": 13106,
+      "git_blob": "33765c310b8f4e4b9ea22ea8b8e2efa84b40bb3d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare_100ms.py",
+      "sha256": "767bb3cd0d378bafd207ee9eae30d52090cf0eef4bb6130bed306d3f8aa91140"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare_100ms.py.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 283,
+      "git_blob": "1815bea859976336b848c02664fd353b5c6d3a24",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/compare_100ms.py.stdout.txt",
+      "sha256": "17d97485aa191310d47324ee593ca834c5e4cbb4f62bca5db49dea4993efe80f"
+    },
+    {
+      "bytes": 8266,
+      "git_blob": "3a5c13604e44e74c356456f0e9e485e21d5331f0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/comparison.json",
+      "sha256": "fdc0a55037106e8bb201898dbfce29ce153199eb5fd9d1e45fcf9e440008c471"
+    },
+    {
+      "bytes": 28137,
+      "git_blob": "219e0e86f67cfdedee9f0dcc23bf42f95759ba99",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/comparison_100ms.json",
+      "sha256": "69d062acb15361eb799e905e3b51168c391d1948302beb361473836e493455c0"
+    },
+    {
+      "bytes": 21886,
+      "git_blob": "173c872bb49c5421984c0882271bbcd8c2654dd7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/QER_actual_replay_comparison.json",
+      "sha256": "f0bdad98b39c3141e5cd919e2512c55a35a1ffef658fe19afc8eb078dc9372db"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "b71055421aa41dc24316deae99e9d21f5cfc5a63",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/qgi_phase_winding_tower_v1.md",
+      "sha256": "67f6f7684ae1baddb9c2d8745193a7c3968f9808365c0e07c6a701cd44e9880a"
+    },
+    {
+      "bytes": 5877,
+      "git_blob": "df764a08e643d6e76999c2d1b898e4a734597855",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/quantumdna_pst_enaqt_probe_v1.json",
+      "sha256": "24b7d6aef26173b6d78b3ae1586b5f3d73aa55a287908b92846bf60b35817b8d"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/receipt_t60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 3377,
+      "git_blob": "9441650c3269e1a0eea61cfb05df02f1d620a8b2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/same_operator_vortex_markov_heat_quantum_v1.json",
+      "sha256": "73d86c95d69c1f2db64412c170f4a50df97a1a87a81f7a90c4cb7d855d927451"
+    },
+    {
+      "bytes": 1221,
+      "git_blob": "cc27f74154a760207184389b3cea269f058f8385",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/NumericReplay/Optimized/input/same_operator_vortex_markov_heat_quantum_v1.md",
+      "sha256": "600819144efdce6908ef444b0c944fb6fe5acdf356f6fb9c11dc2f5f5139b347"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/Normal.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 317,
+      "git_blob": "df44870b70e0a36f0912b644a79b1589893be94f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/Normal.stdout.txt",
+      "sha256": "a86e019422ceee0869cc7397ebef7d63fdf47bb727117b9e7670103b948907d4"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/Optimized.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 317,
+      "git_blob": "df44870b70e0a36f0912b644a79b1589893be94f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/Optimized.stdout.txt",
+      "sha256": "a86e019422ceee0869cc7397ebef7d63fdf47bb727117b9e7670103b948907d4"
+    },
+    {
+      "bytes": 1181,
+      "git_blob": "f949c1e2c9f79e38c6f98a3d1b5b3377f8be7b4c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/RECEIPT.json",
+      "sha256": "abb27a89978aed66e7a955ef116350bbf2d4be0e0ef843ece9325ca18396c6da"
+    },
+    {
+      "bytes": 5892,
+      "git_blob": "a2b570b8dfa38b3843f65a011fd3407b38960d2c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/compare.py",
+      "sha256": "dd06e5cb25a12916f97e2025fbbbcdb65bf35ca8ac055223e6c8428d2a446696"
+    },
+    {
+      "bytes": 8266,
+      "git_blob": "3af21310b1123cac3525ef07a1ac58cf6fe2196c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/comparison.json",
+      "sha256": "63ced240d4d056361f8eb7c42c815ef3507052d14020fc85440b971294aad12a"
+    },
+    {
+      "bytes": 21886,
+      "git_blob": "173c872bb49c5421984c0882271bbcd8c2654dd7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/QER_actual_replay_comparison.json",
+      "sha256": "f0bdad98b39c3141e5cd919e2512c55a35a1ffef658fe19afc8eb078dc9372db"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "b71055421aa41dc24316deae99e9d21f5cfc5a63",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/qgi_phase_winding_tower_v1.md",
+      "sha256": "67f6f7684ae1baddb9c2d8745193a7c3968f9808365c0e07c6a701cd44e9880a"
+    },
+    {
+      "bytes": 5877,
+      "git_blob": "df764a08e643d6e76999c2d1b898e4a734597855",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/quantumdna_pst_enaqt_probe_v1.json",
+      "sha256": "24b7d6aef26173b6d78b3ae1586b5f3d73aa55a287908b92846bf60b35817b8d"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/receipt_t60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 1370,
+      "git_blob": "f3ca22835702de3699c4232e78263aa715111ec5",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/same_operator_vortex_markov_heat_quantum_v1.json",
+      "sha256": "6a0e0fcb0d40d7fd76e9f83f61cd9b7a9ea725a30803a2525116c66c23796f74"
+    },
+    {
+      "bytes": 1221,
+      "git_blob": "cc27f74154a760207184389b3cea269f058f8385",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/OriginalC6GuardFalsifier/input/same_operator_vortex_markov_heat_quantum_v1.md",
+      "sha256": "600819144efdce6908ef444b0c944fb6fe5acdf356f6fb9c11dc2f5f5139b347"
+    },
+    {
+      "bytes": 3057,
+      "git_blob": "8f0439ceb78dd24efd1afb6ca7e4170e9cbcdd1e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/RESULT.json",
+      "sha256": "9612368d618c0dddc42bdc28664609a4ae46d253568a7e86463d335b41ab90ee"
+    },
+    {
+      "bytes": 9796,
+      "git_blob": "3c40af7c3f4cceb205cb4dc43699d7404a958a66",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/SCOPED_COMPARISON_AUDIT.md",
+      "sha256": "8f0b534c0e49670327e38fb0733496256f5d9055a4559178932e331b03c088a9"
+    },
+    {
+      "bytes": 17266,
+      "git_blob": "91c5e26a61b2e8513c30a49a82116512deac5bec",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/SOURCE_MANIFEST.json",
+      "sha256": "87d7ae17c55ee72f248a4a35afa7c604d3fdf0dab4daa27d6da55ce83535e8ce"
+    },
+    {
+      "bytes": 3639,
+      "git_blob": "39e5ebf5a8bc4628191de3be1be6964bc720af8b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/run_reviewed_evaluators.py",
+      "sha256": "b2ae920ae25055549d2123357fcc7b3e5bd1e7a1386403104c941b09185a2ba2"
+    },
+    {
+      "bytes": 15127,
+      "git_blob": "b5f478063405cae04e7103201ac7a991cea01b8b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ComparisonReview/verify_configured_comparison.py",
+      "sha256": "6461831bb3f178ecc1fbe57138fa7a3f4c6457f94dcbcb9478ebb603cb2df7a0"
+    },
+    {
+      "bytes": 3634,
+      "git_blob": "93b3a22a3e56849ab6e6d7d065e1586f77e352c5",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/ARTIFACT_HASHES.json",
+      "sha256": "1d5bceaf85ebaef2af05c3d47dbc77fc2c7cc0d7d3ccc1bda262e0659656642e"
+    },
+    {
+      "bytes": 132,
+      "git_blob": "f9157880cc02854ba012a0408395744a221c3f5d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/LATEST_RUN.json",
+      "sha256": "96bc9c1a1a18b25a2d4b70fde348b604a390cd2ec63e620c5c96cb25e5ff9fcf"
+    },
+    {
+      "bytes": 16039,
+      "git_blob": "dea30ce31b20bcf3b3bdb995b32f4d0d62ceca4d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/RECEIPT.json",
+      "sha256": "51d05f9fa511fbbe12e9ca21d674833d7cd59b623fe77148be8e36336964cdc4"
+    },
+    {
+      "bytes": 47,
+      "git_blob": "a5e019628422520bc18478a88111d3deb7c4ab9f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_comparison_zip_oid_local_lookup.stderr",
+      "sha256": "93051ef5e7bf1424b70ed514d3f012953c936894eec9c3018251c6cfb674dd83"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_comparison_zip_oid_local_lookup.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_head_pin.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 41,
+      "git_blob": "f63a7dcd60d684ec2dab46627b6e5da126545f54",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_head_pin.stdout",
+      "sha256": "36722684ac42dd1ee10e1b49ee56ae45997d511b94ef56b8210d61730094a2e8"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_head_tree.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 181650,
+      "git_blob": "a1e5dcebbf5c2e4e72d938ef8dcd272846ed42b1",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_head_tree.stdout",
+      "sha256": "f33700c131c1181f6f9d8dd51bd99666dafd48c6f1917391cb4e32a34ecbf2c1"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_recover_pin.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 41,
+      "git_blob": "1d3a3c5f657641cba303d3986d34fe91290b10ea",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_recover_pin.stdout",
+      "sha256": "131070f80214ebea4ac9059ddbd28371bcc3ad64d9a064d2e2361d16a688d0fd"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_recover_tree.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 183407,
+      "git_blob": "fb04fc82cee241d66801cc01baf6fb4583945964",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/aegis_recover_tree.stdout",
+      "sha256": "0436650de1c90a3c4a8be04f4f097f935a50d9cc68525f12b385fd3a3e33c6c9"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_blob_retrieval.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8247,
+      "git_blob": "00c415940df653c5787d3cdaec6176f2d70c465a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_blob_retrieval.stdout",
+      "sha256": "074dd2c4afdafb1991a0917ca3b02e881002e72e92d648681839f7abc887fdf8"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_hash_object_no_write.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 41,
+      "git_blob": "74c0cbb3e335905e590dfd4678636895f7ebb00a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_hash_object_no_write.stdout",
+      "sha256": "bd680a9c34aaa377ca18c7d739050245c2ae8b91096fa043fb5bf849c3455e93"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_type.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5,
+      "git_blob": "63499e4ea8e096b831515ceb1d5a7593e4d87ae5",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/audit_type.stdout",
+      "sha256": "bc103b4a84971ef6459b294a2b98568a2bfb72cded09d4acd1e16366a401f95b"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_audit_blob_retrieval.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 8247,
+      "git_blob": "00c415940df653c5787d3cdaec6176f2d70c465a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_audit_blob_retrieval.stdout",
+      "sha256": "074dd2c4afdafb1991a0917ca3b02e881002e72e92d648681839f7abc887fdf8"
+    },
+    {
+      "bytes": 47,
+      "git_blob": "a5e019628422520bc18478a88111d3deb7c4ab9f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_comparison_zip_oid_local_lookup.stderr",
+      "sha256": "93051ef5e7bf1424b70ed514d3f012953c936894eec9c3018251c6cfb674dd83"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_comparison_zip_oid_local_lookup.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_head_pin.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 41,
+      "git_blob": "800a79c135fac3acd372682d7cf007a578423a0c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_head_pin.stdout",
+      "sha256": "6377791a1ec84a5f643602751ed72d0c6e7018b4e514e34995a05677b98df0f6"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_head_tree.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 176759,
+      "git_blob": "5848691c0aea2c516e180846388afc5e90eb8dce",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/fork_head_tree.stdout",
+      "sha256": "dc05ef5d3f20054d9c2e1fe5a559a7688290157b39995fd460db9ca9d49119b0"
+    },
+    {
+      "bytes": 8247,
+      "git_blob": "00c415940df653c5787d3cdaec6176f2d70c465a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/Run-20261007T094106.583681Z/source_audit_FROM_GIT_BLOB.json",
+      "sha256": "074dd2c4afdafb1991a0917ca3b02e881002e72e92d648681839f7abc887fdf8"
+    },
+    {
+      "bytes": 2023,
+      "git_blob": "0bec9034112ec890608efd7525fbd669f95bc64f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/SOURCE_STATUS.md",
+      "sha256": "58eda08f915f9a6075f867407b208f94af5e9e6ca623a9f778c6aaa187017b0a"
+    },
+    {
+      "bytes": 7395,
+      "git_blob": "64dc89fb5a85361e098a5a7816d4160e170afd6b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/GitBlobReview/scoped_git_blob_review.py",
+      "sha256": "c3a7e3fd859b093f614c111f5eee3b6fe790e313e7d9fe90e07158fc7095bd30"
+    },
+    {
+      "bytes": 3914,
+      "git_blob": "b406b542402bde8f0d9618c5fd0041bc325c977e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/POREDJENJE_100ms_BHS.md",
+      "sha256": "b5a51956f0b53bc9536876dc3c8a5d64839d64f68adc9ff5cc76d5fb59e639ae"
+    },
+    {
+      "bytes": 6205,
+      "git_blob": "3f051fd08e8695d86757578c57c7c1b80991ef8c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/POREDJENJE_BHS.md",
+      "sha256": "f17db4fa86324ee61cb5296007fb9e7cd34543888c8cde3cb7fca8f8efa62c00"
+    },
+    {
+      "bytes": 5892,
+      "git_blob": "a2b570b8dfa38b3843f65a011fd3407b38960d2c",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/compare.py",
+      "sha256": "dd06e5cb25a12916f97e2025fbbbcdb65bf35ca8ac055223e6c8428d2a446696"
+    },
+    {
+      "bytes": 13106,
+      "git_blob": "33765c310b8f4e4b9ea22ea8b8e2efa84b40bb3d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/compare_100ms.py",
+      "sha256": "767bb3cd0d378bafd207ee9eae30d52090cf0eef4bb6130bed306d3f8aa91140"
+    },
+    {
+      "bytes": 8266,
+      "git_blob": "3a5c13604e44e74c356456f0e9e485e21d5331f0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/comparison.json",
+      "sha256": "fdc0a55037106e8bb201898dbfce29ce153199eb5fd9d1e45fcf9e440008c471"
+    },
+    {
+      "bytes": 28137,
+      "git_blob": "219e0e86f67cfdedee9f0dcc23bf42f95759ba99",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/comparison_100ms.json",
+      "sha256": "69d062acb15361eb799e905e3b51168c391d1948302beb361473836e493455c0"
+    },
+    {
+      "bytes": 21886,
+      "git_blob": "173c872bb49c5421984c0882271bbcd8c2654dd7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/QER_actual_replay_comparison.json",
+      "sha256": "f0bdad98b39c3141e5cd919e2512c55a35a1ffef658fe19afc8eb078dc9372db"
+    },
+    {
+      "bytes": 880,
+      "git_blob": "b71055421aa41dc24316deae99e9d21f5cfc5a63",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/qgi_phase_winding_tower_v1.md",
+      "sha256": "67f6f7684ae1baddb9c2d8745193a7c3968f9808365c0e07c6a701cd44e9880a"
+    },
+    {
+      "bytes": 5877,
+      "git_blob": "df764a08e643d6e76999c2d1b898e4a734597855",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/quantumdna_pst_enaqt_probe_v1.json",
+      "sha256": "24b7d6aef26173b6d78b3ae1586b5f3d73aa55a287908b92846bf60b35817b8d"
+    },
+    {
+      "bytes": 7010,
+      "git_blob": "4e15a6d3f7233b9846d8fd092188feda72a2efa2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/receipt_t60.json",
+      "sha256": "12fb3132cdff191c9bd3fedea7e77387c889ae9aea7714dccdb9c2b7db298fc1"
+    },
+    {
+      "bytes": 3377,
+      "git_blob": "9441650c3269e1a0eea61cfb05df02f1d620a8b2",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/same_operator_vortex_markov_heat_quantum_v1.json",
+      "sha256": "73d86c95d69c1f2db64412c170f4a50df97a1a87a81f7a90c4cb7d855d927451"
+    },
+    {
+      "bytes": 1221,
+      "git_blob": "cc27f74154a760207184389b3cea269f058f8385",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/input/same_operator_vortex_markov_heat_quantum_v1.md",
+      "sha256": "600819144efdce6908ef444b0c944fb6fe5acdf356f6fb9c11dc2f5f5139b347"
+    },
+    {
+      "bytes": 1505,
+      "git_blob": "ca2179fac008f8f808198f6b7fd3e68c525d59b4",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/manifest.json",
+      "sha256": "bf1a9e2df9cfcf2d5146456526f9a6e64ec08110e66bfcaf3012b560fde59a2d"
+    },
+    {
+      "bytes": 585,
+      "git_blob": "60a35c8d5f63f1175cc15da205a1f970552ef419",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/qer_context.json",
+      "sha256": "b1e07d4affa59287b312e2b6bdc27d895c40e832d5ed2ad52cfe272272d188aa"
+    },
+    {
+      "bytes": 20,
+      "git_blob": "388b3abf3e5e746b922e1bd1ed888165685786b0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/requirements.txt",
+      "sha256": "4cef508304e84c21f73cf412712165dc26e40978cb784bc08a876948b559d90d"
+    },
+    {
+      "bytes": 1837,
+      "git_blob": "cc6fdc52bfe6fcc9700e145fc72e025587b869b4",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/Incoming/AEGIS_Quantum_100ms_Comparison_V1/source_refs.json",
+      "sha256": "2e8689e6ae70017664205cc281d6a4ae72c1e2322e2bbd7cbb3e550e2c56d231"
+    },
+    {
+      "bytes": 683,
+      "git_blob": "522f952a809f5efa2f86355e5802a833946c8889",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/LibrarySource/RETRIEVAL_RECEIPT.json",
+      "sha256": "a9b086f0a7ff03391015650b98e93655918e2bebe948bafdb080846e527853c6"
+    },
+    {
+      "bytes": 5876,
+      "git_blob": "99dfca824d41769fdf30428b10045b52b6ff287e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/LibrarySource/quantumdna_pst_enaqt_probe_v1.json",
+      "sha256": "547b11bf041572bb0cfb2d4d58272abf84f46369551762e67b6bb42f98d42c94"
+    },
+    {
+      "bytes": 7605,
+      "git_blob": "6be01918dad85521b65ffa1796b800a0a06836f3",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/MATHEMATICAL_AND_SOURCE_REVIEW.md",
+      "sha256": "5b85e4fc03c21d62dbb6da0e422684bd5eb47afeb24cc903bf8fc056395d2c76"
+    },
+    {
+      "bytes": 242,
+      "git_blob": "8ef20f12dd4630735bde6f400e4f02855f858d10",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/NISTReference/FETCH_RECEIPT.json",
+      "sha256": "b6af8e92eefbd2f87e432a7711235c5d7f61bf0f7f92ef27321d0c44c85fd749"
+    },
+    {
+      "bytes": 1095,
+      "git_blob": "d3ae1aeeae1b6e11523a1059d1704af33fea273e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/NISTReference/PAGE1_REVIEW_RECEIPT.json",
+      "sha256": "438412eb876c6c0deae77bcccddd2af502e1d71ca118bc45248a8a18fc809c31"
+    },
+    {
+      "bytes": 193554,
+      "git_blob": "57f3653dbb7acc0652ca4988e908e6fdda7e6ad7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/NISTReference/all.pdf",
+      "sha256": "5c4a2c8127a80698d05f4d682bd4cac200dabcd9c2e9dd783661a0aa60f4bb1c"
+    },
+    {
+      "bytes": 37562,
+      "git_blob": "e270c910ee6465307752cccc22f8efda53f4404b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/NISTReference/all.txt",
+      "sha256": "cec981201501f8905451dcff3fd8a1203388e930181429aa2e5653fd7e374a08"
+    },
+    {
+      "bytes": 6830,
+      "git_blob": "a648e0274f081a7bf2035223ed75e1bee0d7500b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW.py",
+      "sha256": "06da3e17bedeaccdec075a34fd49cb0cf46876d46773571310d12e77d89ee0da"
+    },
+    {
+      "bytes": 14952,
+      "git_blob": "df5d935d7482ec7a098973c6f08db83eff45d34d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_OPTIMIZED_RECEIPT.json",
+      "sha256": "dc552afa321372c82a851f6c2ad8c3ec4ea0def79440034564412c2e4e294b13"
+    },
+    {
+      "bytes": 6803,
+      "git_blob": "162a5d18cbac24b9ef4849825c319012a6c7996f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_PORTABLE.py",
+      "sha256": "bd226c341b777ed330ee1a66585da6d382c1f8823e887f5e324d3d9f3345bad1"
+    },
+    {
+      "bytes": 14952,
+      "git_blob": "c32ec68e7894a6cc0a4aa29a9c06de4ac3e9a9fb",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_PORTABLE_OPTIMIZED_RECEIPT.json",
+      "sha256": "b89edcf453411901850ab91c3d42ac371cba63ce36229fe8cec88817d37c06c4"
+    },
+    {
+      "bytes": 14953,
+      "git_blob": "66eaa784baf0dc88e0721181452a556ffb4a9875",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_PORTABLE_RECEIPT.json",
+      "sha256": "ddb41d04a06b6e1b1cb1f1a4acec56f903f691bd22479fe8223c6ecd77fd0e1a"
+    },
+    {
+      "bytes": 14953,
+      "git_blob": "113da27ef3a9219b05141a37d70e565674f8c32a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/ROOT_PERIOD_REVIEW_RECEIPT.json",
+      "sha256": "abe336672e02e65d177aaaf4c9079d499c7067ec91f0a83ac11195cdc890d75b"
+    },
+    {
+      "bytes": 9247,
+      "git_blob": "1494b60bdda00bb62603e2d2026c409633aa1d66",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/CurrentComparison/assemble_quantumdna_unit.py",
+      "sha256": "53112346211da3adaf4e981abcce9765308ed71cdd9c1f049382c71c9472c44f"
+    },
+    {
+      "bytes": 16296,
+      "git_blob": "267da95e613d4ed8dfcb2a595e1620bebf207401",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/PYPI_QDNA_1_0_1.json",
+      "sha256": "bb0614227647898208e22df46807d2cb2b778730d8a3c6836e74b2fe727f80d9"
+    },
+    {
+      "bytes": 561,
+      "git_blob": "b64e8fc41c7d9465ecae6347116995870e08eb67",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/RETRIEVAL_RECEIPT.json",
+      "sha256": "857cb60ac1a5f558b0bbe2e3b37b0047c121168130ac48aaab150d306fa5eaab"
+    },
+    {
+      "bytes": 850,
+      "git_blob": "14c02acd3087a0fb116cd5154fdef53c0ccecc7a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/options.json",
+      "sha256": "30ed0b94adefbc1497d80b260b4b35d1b11737d8ee3226e842cadfe0b56ab5db"
+    },
+    {
+      "bytes": 1005,
+      "git_blob": "d96f24601656073a24294f10d19e00c000104fc7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_models_props.json",
+      "sha256": "51e618110f1c63cbe0fa71862d9850e525dfd0dd2e86b5dc441121c5ad49e932"
+    },
+    {
+      "bytes": 6470,
+      "git_blob": "d20966fe1592a54a351367ce66d9fc62418162be",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/1BNA_ELM.json",
+      "sha256": "9194a969c0021c5ab9b256201c215de638b64c7475d8a91a546f1e71e1845f8b"
+    },
+    {
+      "bytes": 908,
+      "git_blob": "cebcdf3e1c5807306257bb817da4ff1d0d385e1d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Bittner2007_ELM.json",
+      "sha256": "177530a30d0042e6670ef7361b1b9b762944ecc3a31053b2c25afb669eb31361"
+    },
+    {
+      "bytes": 643,
+      "git_blob": "6b422658df141b7cc99b77a2997d3f18fe3ba297",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Endres2002_WM.json",
+      "sha256": "53c478de4ab669f5f4ed7ae45c3b1466c7391bcac95ae07fe8473da88653925a"
+    },
+    {
+      "bytes": 2794,
+      "git_blob": "7a033f45cade956e04888bb61917bab5a8f0eb45",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Hawke2010_ELM.json",
+      "sha256": "bb32b01dcaf87a122bcce4ac0daa1bd6f2a14f0efd24f216e237b943fbf81bcc"
+    },
+    {
+      "bytes": 1292,
+      "git_blob": "dee062234e3a360daad48457d19eefc48155dead",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Hawke2010_LM.json",
+      "sha256": "574d8683dfe3f8fc02da65999779259ecfa6757b6702338bfe27ec7c36300b80"
+    },
+    {
+      "bytes": 1112,
+      "git_blob": "9eeb9b014b9fc95da447c0b08ecca4d91efb1d83",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Hawke2010_WM.json",
+      "sha256": "817a1df800761cc09d27e540db2b3ff9d6ec9b9bf32e8a8b2481afefb0eae8ba"
+    },
+    {
+      "bytes": 1218,
+      "git_blob": "24dc4dc956d6d2688a2f2f66c44df336ef6f5eb3",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Kordas2025_FC.json",
+      "sha256": "2001cbff17c5eff8657c5b00f46756324cc898f6d232d8fff662fb762ad6f498"
+    },
+    {
+      "bytes": 1102,
+      "git_blob": "c46138db2a505f98e44cf2b7bfa5c77d07d8339b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Mantela2021_WM.json",
+      "sha256": "13650f821cdc4f3f79e45d36617496297452207058335a26eb6ceb2a71b9b8ae"
+    },
+    {
+      "bytes": 1107,
+      "git_blob": "8e725fdac714e297b32a7a102c2282f3cfb5d15d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Simserides2014_WM.json",
+      "sha256": "a6c72e33d194a9a0992df88ef8dc61e5a37316cab42b5be97df2fb92885579ea"
+    },
+    {
+      "bytes": 4163,
+      "git_blob": "de266de183edf671ea04f0a031e3fdde3c9fe2e3",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Simserides2024_ELM.json",
+      "sha256": "e458aa97a4d888a59db2c32b7784d47613e3af3950cd9334cf5d4404626dca65"
+    },
+    {
+      "bytes": 4477,
+      "git_blob": "61f3c78315c6b0dea0be66c5893d9d6eb3623fc4",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/Simserides2024_FELM.json",
+      "sha256": "a2f9587ffdd7a941985edfa49de640b2a3a8dd478ced4d446a50849066b8ab6d"
+    },
+    {
+      "bytes": 5088,
+      "git_blob": "d13971ed5d3624f657924a3221ba09e02754a8f7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/meth_ELM.json",
+      "sha256": "7ab311ad055286f1498ad402d98ef2bf8108cd3246ca70500d3ccced81188f9c"
+    },
+    {
+      "bytes": 5099,
+      "git_blob": "c2a6f265d47f9443c1f9468e5f8631e5e2dc7e30",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/data/tb_params/unmeth_ELM.json",
+      "sha256": "3efd5a070d1bded218d5a66a01f54b44b810a11486c0444fe74e486dc662796b"
+    },
+    {
+      "bytes": 12795,
+      "git_blob": "79ee80ab48d8106c5044ef2c880e0e4067b23f89",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/dynamics/me_solver.py",
+      "sha256": "6c9c613700ef0ef5bd152a5fd1a38f6d3ab992d3a5970c3fa9d6bcc2b0414c38"
+    },
+    {
+      "bytes": 3887,
+      "git_blob": "c7510de3448312f0030d2d8d668a636c4539cba3",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/gui/me_solver_frame.py",
+      "sha256": "d41232e6d1a5bc85e3889cbe3c19a82b7eb46bc7b4270e49997d5107ed4b5b5a"
+    },
+    {
+      "bytes": 104,
+      "git_blob": "961962032609788a602d1be3f674dcc469ad910f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/hamiltonian/__init__.py",
+      "sha256": "7f914d7c8b7dc5b59be79584fd6a925bd86d98a55fb3be64dfbedb2346d8f7e1"
+    },
+    {
+      "bytes": 2660,
+      "git_blob": "4a2f6cf78378c2fd96a8193e3a59de310ad52c83",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/hamiltonian/dna_seq.py",
+      "sha256": "64ee807b1bdb6c9083c4962a4347f9dda20b1dabbf33284368b1f80eb7ab08a4"
+    },
+    {
+      "bytes": 3849,
+      "git_blob": "17e4e403fa02a2e83c9908a0d163600e6fbfb37e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/hamiltonian/ham_analysis.py",
+      "sha256": "26315c998d11e21de739a196d7ca7c1854655cf5e62aada0f3d09d3cddd6576b"
+    },
+    {
+      "bytes": 16637,
+      "git_blob": "eded8d124155bd654267bf9143629c7882063aa9",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/hamiltonian/tb_ham.py",
+      "sha256": "481d34882128c65d18cd19ac24e6dee6bf19db8d8c67521521836394fe152096"
+    },
+    {
+      "bytes": 8866,
+      "git_blob": "ed3be8a48c3e03f1aad490ab3d493a7c7742beb0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/hamiltonian/tb_matrices.py",
+      "sha256": "af5560f7fa452e4f9f13f02c137fe59fe85e668d4b9280cbc3781891641b6750"
+    },
+    {
+      "bytes": 199,
+      "git_blob": "c0b8dc64bd057510e8d7bae18dc6be9b2de51042",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/io/__init__.py",
+      "sha256": "0951646ee40020d6a77f96e3650a5e943234718f820fdbb6915bf08523cb13cf"
+    },
+    {
+      "bytes": 1170,
+      "git_blob": "17eaa23c9baf2a4d1a0257ecfc4d3560b79711f0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/io/io_json.py",
+      "sha256": "84b2b1295117b7910e6688a2a1e973fff3b37c36a655e1b6cda053a7a2b8d7f6"
+    },
+    {
+      "bytes": 3862,
+      "git_blob": "f511c756c0f00b8de67def28a4fb845a05b88ea6",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/io/io_tb_params.py",
+      "sha256": "c61a190cfe38781bf3a57165913cddba57964ec9e15f765b2cdcf0135205d3fd"
+    },
+    {
+      "bytes": 9184,
+      "git_blob": "7582f57c53eeb0b3da26f47671a8f130c07b8b22",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/model/tb_basis.py",
+      "sha256": "dda3e4eada8a6cef3eae3630f483a71073d63158805ad11487e20858923cbe0e"
+    },
+    {
+      "bytes": 5577,
+      "git_blob": "9dc0d30b9ddce695a8580511d214755b2beee1e7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/model/tb_config.py",
+      "sha256": "6910c464591c94a87cf12424190c8e5d77a7d66150eb21d044e13744ef49b73a"
+    },
+    {
+      "bytes": 3066,
+      "git_blob": "5ae6c392153212e474fce8500279061d2339fa3d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/model/tb_model.py",
+      "sha256": "2edae165be320dc7d2b86c322bdf37ed1dbd10b04ade8bc535b538d0718fd585"
+    },
+    {
+      "bytes": 7308,
+      "git_blob": "cb1135d4a6e040af1955cbd142c441144e185ebf",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/utils/check_input.py",
+      "sha256": "39ebd9d9b007ff22c06ed75942b168d80d956a5ec027aa7eb298da9dcaabf8e8"
+    },
+    {
+      "bytes": 2878,
+      "git_blob": "d0aa29b587f1c8c1950ed3a94737b5b9562cc450",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/StaticExtract/qDNA/utils/unit_converter.py",
+      "sha256": "ee4463cc43ae7ac6f63520721391459e50535e47e7a61ac602f6090e64070cc5"
+    },
+    {
+      "bytes": 4649,
+      "git_blob": "bfcc8e323ed8f201425caaa387405969eaedd538",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/WHEEL_NAMES.json",
+      "sha256": "d8a6b82d1caa01e3a9fb2e2f4a40753c76459e543dffd2bbf5c061bc8fdc0df1"
+    },
+    {
+      "bytes": 3485086,
+      "git_blob": "387c879cdb31e49cb1b587d590f4d8d63a0ded7a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ExternalSources/qdna-1.0.1-py3-none-any.whl",
+      "sha256": "3d35c337c5569af508b691b7a0ce37bfe23ffaf8b62f8172f4948dfa1767ff9e"
+    },
+    {
+      "bytes": 362,
+      "git_blob": "1a412ba444c753b59e0c1da970b44b53e909028f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/INITIAL_EXECUTION_FAILURE.json",
+      "sha256": "ba4db50b70ea504b1f1c4f1d629ee9e82a1cd41bf3ff2eedaf4543844d163f3b"
+    },
+    {
+      "bytes": 10237,
+      "git_blob": "f204c6f40000f9fc371f3d5b3937d6fa12ee6be7",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/IndependentPhaseReview/GGG_100MS_UNIT_AND_PHASE_REVIEW.md",
+      "sha256": "c8fd89b99a824da168ece04e8b4636fbab4734685d524797cc855eb1bb75e716"
+    },
+    {
+      "bytes": 11596,
+      "git_blob": "05f8cf590447ad6bd757fdef68f638aa0b84ebe9",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/MODEL_AND_100MS_PHASE_AUDIT.md",
+      "sha256": "3833f88151805ec758f15ca44142e0358887e81c3139be1a64c4f18fda170a77"
+    },
+    {
+      "bytes": 531,
+      "git_blob": "be6f8560bbf2c78300d765ff2d348bf413d1a019",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/NISTPrimary/FETCH_RECEIPT.json",
+      "sha256": "d8bbe0733473d9dcd6b303b2cff7d4a100bea74235a18c446ed4a8f7ca305b50"
+    },
+    {
+      "bytes": 4782,
+      "git_blob": "4e21f125c3a4d26a8b19fd7fe5f3c7d3834b55d1",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/NISTPrimary/NIST_MEET_CONSTANTS_MCP_EXTRACT.json",
+      "sha256": "459cfad29b8181ab850c23d46a2fceb4afbc91e2f6fd1a12e12e1842ce84f964"
+    },
+    {
+      "bytes": 217,
+      "git_blob": "88aa80075d1a9d591f3d8f8417b97488aff28269",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/NISTPrimary/TABLE_FETCH_RECEIPT.json",
+      "sha256": "071112dfd3ccf33211546013554497b72d6d502bd4016b80b589b7647e7bbb7c"
+    },
+    {
+      "bytes": 0,
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/OPTIMIZED_REPLAY.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1021,
+      "git_blob": "da111fef1de032d8cd1fbf9ae1a072f0d56ff427",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/OPTIMIZED_REPLAY.stdout.txt",
+      "sha256": "ab45a7a58951c236709f584e50474ca2a22553f45b01dfa47ba676b54dc3eec9"
+    },
+    {
+      "bytes": 9016,
+      "git_blob": "d724ec7d83886487f3451e3be0fec850204ad68a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RECONSTRUCTION_RECEIPT.json",
+      "sha256": "ef64ed7ff032da46b50c986c17a9cd4aec100d4e63a9b93e72ec56aad0920cf8"
+    },
+    {
+      "bytes": 9016,
+      "git_blob": "d724ec7d83886487f3451e3be0fec850204ad68a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RECONSTRUCTION_RECEIPT_OPTIMIZED.json",
+      "sha256": "ef64ed7ff032da46b50c986c17a9cd4aec100d4e63a9b93e72ec56aad0920cf8"
+    },
+    {
+      "bytes": 2382,
+      "git_blob": "62bf7c624229a2c7b2873c7b466be81739809bae",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RECOVERED_SOURCE_BINDINGS.json",
+      "sha256": "518236ed0f570cbfc8939b6602276712e2f329ade6f46e6139d070fd8f60b05f"
+    },
+    {
+      "bytes": 3327,
+      "git_blob": "978fe3ca9f601e3a48d6ab0f991c435e90ae5c89",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RESULT.json",
+      "sha256": "00b0a97f3563fa377b52b5e4511c3f2ed8f2626d430141dc193e09be7218b55e"
+    },
+    {
+      "bytes": 4867,
+      "git_blob": "fd29ad92faa52dc30d19e76d7702a96c4d05757f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ROOT_INDEPENDENT_ARB_REVIEW.py",
+      "sha256": "5e9a2523aae8c9494e8baea852014673a75341edce9d8f371775b81d27cad63e"
+    },
+    {
+      "bytes": 6881,
+      "git_blob": "aad7ce37127db8fe789463878a8ed1dafa1a4706",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ROOT_INDEPENDENT_ARB_REVIEW_RECEIPT.json",
+      "sha256": "fda48da02b86d1dd468a2f5a7147ae81af6cc090089d25a1679de6f6739d5f38"
+    },
+    {
+      "bytes": 3927,
+      "git_blob": "1212774b74660a6c02e6ce06dbf4a07490961b42",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/ROOT_MODEL_REVIEW.md",
+      "sha256": "a52c2b7dfd07f41d0a4d950d85c0aaa88e489e696a310bd5a42970d0479d9183"
+    },
+    {
+      "bytes": 3279,
+      "git_blob": "a65e2269ba4041d3d1f72d62a2086abd2403c5db",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RUNTIME_BINDINGS.json",
+      "sha256": "01020425beedd95dbacf40dd2f30032c4e379a19750df7d655dd279652fef952"
+    },
+    {
+      "bytes": 5692,
+      "git_blob": "27438e700d7c77c8f647171638d996a2a7ac64fc",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/README.md",
+      "sha256": "5a689fa4ef7591290ebafaa10d1150c0255a1f7ec03c93b5663fd09dfa476a4f"
+    },
+    {
+      "bytes": 2794,
+      "git_blob": "7a033f45cade956e04888bb61917bab5a8f0eb45",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/Hawke2010_ELM.json",
+      "sha256": "bb32b01dcaf87a122bcce4ac0daa1bd6f2a14f0efd24f216e237b943fbf81bcc"
+    },
+    {
+      "bytes": 1240,
+      "git_blob": "bf7e2397bf04eeaba8ae69124c3e4c9b790190dd",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/experiment_spec.json",
+      "sha256": "e2e703e208659eb468a92b336fa5f8a0c41fc2a2ff768ea649fbf84ba044ce61"
+    },
+    {
+      "bytes": 8247,
+      "git_blob": "00c415940df653c5787d3cdaec6176f2d70c465a",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/source_audit.json",
+      "sha256": "074dd2c4afdafb1991a0917ca3b02e881002e72e92d648681839f7abc887fdf8"
+    },
+    {
+      "bytes": 11498,
+      "git_blob": "9086a7cde6291f4110541f7fcc46c1f4e282ffbb",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/source_audit_generator.py",
+      "sha256": "2bf9a2675e47c946d57b2845d413e87233968392f587935c9fa7b8b9382bc0fc"
+    },
+    {
+      "bytes": 17910,
+      "git_blob": "1efe1f65f2ada0ff245ba7aeb9cd66e85c969891",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/source_receipt.json",
+      "sha256": "a04849923bfd9876b9a5aa7aeedd367af81b2ea1ff21d04b4fbd402ebc2f047d"
+    },
+    {
+      "bytes": 46554,
+      "git_blob": "8a6c2075480126aeaec2502d65705afebeb5a34b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/evidence/sweep_metrics.json",
+      "sha256": "7d647bc484302b11a28547cad392b213ca91bae4094021b2b26e47da98afca3e"
+    },
+    {
+      "bytes": 12208,
+      "git_blob": "37aa3c3fbcd994271931e1bbaf0a2a9198a84fdc",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/RecoveredSources/genomics/quantum_dna/run_contract.py",
+      "sha256": "1f6a5f0244c479cd720e8ffb68d440c06401e312a173900b90aa8c50cf1a35cd"
+    },
+    {
+      "bytes": 1155,
+      "git_blob": "04720bdb402fb80e1a2949eadbba974ec3c0ff5d",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/SEARCH_SCOPE.json",
+      "sha256": "09a196ebf3f7fe1bfc81bed8b5b86386eedd4056deded71c4258cd26b7ce9aed"
+    },
+    {
+      "bytes": 11659,
+      "git_blob": "a2c4ff33b31db54ea00cd102cfcb8afe389aeaf0",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/SOURCE_MANIFEST.json",
+      "sha256": "ad4cf85a536621d1d5baa12ebdb1153b15dd796eaf29cdc2f779815e17d3be9d"
+    },
+    {
+      "bytes": 20833,
+      "git_blob": "dd79d7277d2f9948847b1db69d684e3f6f56701e",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/__pycache__/reconstruct_and_check.cpython-312.pyc",
+      "sha256": "0c5857fc071f162ab3d727567f23fae54c0f893522b5ca487f5c62052ad8170c"
+    },
+    {
+      "bytes": 11538,
+      "git_blob": "d66bc8bd583600da2ebc43bf2b4a02c22e87f56b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/reconstruct_and_check.py",
+      "sha256": "dd2bd740051962143695205ea61069760c7d46092fc06f50dcda03a2a8650232"
+    },
+    {
+      "bytes": 11277,
+      "git_blob": "b8975e766a70efffa3b392614ae2e642708c9956",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/HistoricalAuditBeforeAttachment/reconstruct_and_check_mean_diagnostic_failed.py",
+      "sha256": "596483ceaaa98457823fc36719bdfaca1101521ab537c0ac89d8ea3b82d0648b"
+    },
+    {
+      "bytes": 32757,
+      "git_blob": "9c70dcf58127119e7053d6bebfc9c88c5f156db5",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/PACKET.zip",
+      "sha256": "cd31526cff375182486de992e160c9059de42022a483c55ffbddc58320c39424"
+    },
+    {
+      "bytes": 2249,
+      "git_blob": "a6381c1adabc7be79ff0e4436d35ef21cd5590bc",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/README.md",
+      "sha256": "9e15dae4980ef752b372d1d506a7e41f73c600aab7446ae91ceb66075ed961a2"
+    },
+    {
+      "bytes": 1802,
+      "git_blob": "2806fe4eb76fe67e92217c83a1730fe2873e216b",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/RESULT.json",
+      "sha256": "1b3899e523170fbb23ef982c764f9e08598fdee30c87915c6177bef2236930b2"
+    },
+    {
+      "bytes": 44558,
+      "git_blob": "4786d96160a8acf78b3100f3e15f8fcf7a234c8f",
+      "git_mode": "100644",
+      "path": "QuantumDNAPhaseAuditOct7/SOURCE_MANIFEST.json",
+      "sha256": "778bd43d1acb9fea52e62f4e080e0b2885429933c7d8a9966a01bb132632dd41"
+    }
+  ],
+  "exact_head": "3afaa344b3838ca4e70bd0320f37cdb9136691c7",
+  "file_count": 459,
+  "historical_python_cache_preserved_as_nonproof_nonexecuted_evidence": true,
+  "prerequisite_commit": "ebafc2dbc69669d3884a6adc7b57a4154c66d675",
+  "rh_proven": false,
+  "schema": "AEGIS_NEW23_AND24_SOURCE_ARCHIVE_BINDINGS_V1"
+}
