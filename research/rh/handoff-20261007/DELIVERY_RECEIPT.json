@@ -1,0 +1,72 @@
+{
+  "background_work_promised": false,
+  "bindings": [
+    {
+      "bytes": 7376,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Delivery24/RH_FINAL_EVIDENCE.json",
+      "sha256": "487fe2cb19b4ba347c6510adcfc9396ccdce0a29fc3d24627a4d98fb1c460c88"
+    },
+    {
+      "bytes": 7162,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/CURRENT24_CHECKPOINT.md",
+      "sha256": "1e53bea389c4b023f3b81ab65d458f01b320f998ac9fde2a6e02ffc6c0ef39f2"
+    },
+    {
+      "bytes": 1106,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/COMMIT_RECEIPT.json",
+      "sha256": "50474b177bae1cebb48c1b098775c5d405e2b6314ca5c9a2dd0c164f9b2e221f"
+    },
+    {
+      "bytes": 3447,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Commit24Review/REVIEW_RECEIPT.json",
+      "sha256": "f5b7989bb5f851e3e3882306b9b4e57d206e8a9461a523798b80f76463656017"
+    },
+    {
+      "bytes": 5382,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24Review/REVIEW_RECEIPT.json",
+      "sha256": "c915871760fe802622cbaf0e7f3fd4442a806a00f198432c07ec28b40784e665"
+    },
+    {
+      "bytes": 588548,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/SOURCE_MANIFEST_24.json",
+      "sha256": "84d8f806e22d7b04cfd3a275f9dd352835ebe408722312bbcb12a1457d7af9d0"
+    },
+    {
+      "bytes": 146351,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/NEW_UNITS_MANIFEST_23_24.json",
+      "sha256": "af1b0edfb892df80cc80b301ca44570a4650c154b8e0b6f343a7c1abf37cd802"
+    },
+    {
+      "bytes": 7392296,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip",
+      "sha256": "156ac4fcfb1dd03aa1561a3bcb33a2ed8d75362f477614383b7c7f3eed2a3090"
+    },
+    {
+      "bytes": 6917396,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/AEGIS_OCT7_COMMITS23_24.bundle",
+      "sha256": "839c5cfc3d8a39abc6bb1ced8da727cbdbb33df7a7a2a80be10e51ff3eed862b"
+    },
+    {
+      "bytes": 32757,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/AEGIS_Quantum_100ms_Comparison_V1_FROM_GIT.zip",
+      "sha256": "cd31526cff375182486de992e160c9059de42022a483c55ffbddc58320c39424"
+    },
+    {
+      "bytes": 787,
+      "path": "/workspace/aegis-research/evidence/quantum-100ms-comparison-oct7/Export24/POST_COMMIT_GIT_ZIP_RETRIEVAL.json",
+      "sha256": "fbf9cf61fddcd5b85e1765b643a9021bd6a39f2917e9f568b1effb6b05cffeda"
+    }
+  ],
+  "complete_source_patch_manifest_files": 1890,
+  "created_utc": "2026-10-07T10:01:25.343756+00:00",
+  "final_theorem": null,
+  "head": "3afaa344b3838ca4e70bd0320f37cdb9136691c7",
+  "logical_commits_above_base": 24,
+  "new_source_archive_files": 459,
+  "no_full_RH_replay_claim": true,
+  "remote_written": false,
+  "rh_proven": false,
+  "schema": "AEGIS_CURRENT24_FINAL_DELIVERY_POINTERS_V1",
+  "status": "SCOPED_SOURCES_AND_TRANSPORT_VERIFIED_RH_UNFINISHED",
+  "tail_bundle_prerequisite": "ebafc2dbc69669d3884a6adc7b57a4154c66d675"
+}

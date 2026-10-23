@@ -1,0 +1,96 @@
+{
+  "branch": "proof/rh-krein-m8-analytic-v1",
+  "bundle_is_standalone_clone": false,
+  "bundle_prerequisite_commit": "ebafc2dbc69669d3884a6adc7b57a4154c66d675",
+  "directory": "research/rh/handoff-20261007",
+  "download_instructions": "Download the three existing ZIPs for all1890 snapshot source-patch files. Read the source manifests and checkpoint for pinned build dependencies and limitations. The raw Lean file is also supplied directly. The optional Git bundle requires the stated pre-existing commit.",
+  "files": [
+    {
+      "bytes": 10407688,
+      "git_blob": "155ba745587918879ddda27d897ea78856899492",
+      "path": "AEGIS_OCT7_VERIFIED_SOURCES_V2.zip",
+      "sha256": "19dbfaffb4f27deccf6ebc69702b20e530defcab4d4f50d582f803f25ffab2ae"
+    },
+    {
+      "bytes": 983610,
+      "git_blob": "eb2dc74b42fc8d3505feeefab3bf81e72ff77368",
+      "path": "AEGIS_V7_V12_CURRENT_AUDIT_2026-10-07.zip",
+      "sha256": "36d4f9c8970309abdf181c58d198dbf6718305d59f807d06f37715196c033a11"
+    },
+    {
+      "bytes": 7392296,
+      "git_blob": "2643e57242a07fb1575445eb310ec3273995608f",
+      "path": "AEGIS_HARDY_AND_GGG_SOURCE_UNITS_2026-10-07.zip",
+      "sha256": "156ac4fcfb1dd03aa1561a3bcb33a2ed8d75362f477614383b7c7f3eed2a3090"
+    },
+    {
+      "bytes": 6917396,
+      "git_blob": "72c0602c755af9d9bb3997b68c1a28e4546d1914",
+      "path": "AEGIS_OCT7_COMMITS23_24.bundle",
+      "sha256": "839c5cfc3d8a39abc6bb1ced8da727cbdbb33df7a7a2a80be10e51ff3eed862b"
+    },
+    {
+      "bytes": 588548,
+      "git_blob": "944fcbec9e282da78a4eda426ffde759fb96402a",
+      "path": "SOURCE_MANIFEST_24.json",
+      "sha256": "84d8f806e22d7b04cfd3a275f9dd352835ebe408722312bbcb12a1457d7af9d0"
+    },
+    {
+      "bytes": 146351,
+      "git_blob": "7777085fb1ccada222349bc3991c756e0a14d99f",
+      "path": "NEW_UNITS_MANIFEST_23_24.json",
+      "sha256": "af1b0edfb892df80cc80b301ca44570a4650c154b8e0b6f343a7c1abf37cd802"
+    },
+    {
+      "bytes": 7162,
+      "git_blob": "5adb435c9dd377944ba2f8103d02295e05dee494",
+      "path": "CURRENT24_CHECKPOINT.md",
+      "sha256": "1e53bea389c4b023f3b81ab65d458f01b320f998ac9fde2a6e02ffc6c0ef39f2"
+    },
+    {
+      "bytes": 7376,
+      "git_blob": "a53d585a79aee071c6eb44730f89b1dd0731e216",
+      "path": "RH_FINAL_EVIDENCE.json",
+      "sha256": "487fe2cb19b4ba347c6510adcfc9396ccdce0a29fc3d24627a4d98fb1c460c88"
+    },
+    {
+      "bytes": 3210,
+      "git_blob": "6133dd8be8f573fda4cb8bae201c90e46faecc73",
+      "path": "DELIVERY_RECEIPT.json",
+      "sha256": "be458ba0deef56362f7d88f5b49606a422313fc97dd0bbf8ec1ae1134520f712"
+    },
+    {
+      "bytes": 2126,
+      "git_blob": "79034947e66aad841a93cf2ce8b60095154cf817",
+      "path": "README.md",
+      "sha256": "43dfeaef95afaa0a4656f3d8a27cc29ddde545e7e45c21c5851a4f6f1dc386ba"
+    },
+    {
+      "bytes": 2754,
+      "git_blob": "7c9dc11528c9bc96f28f2238dc160e1394abdb50",
+      "path": "LOGICAL_COMMITS_24.txt",
+      "sha256": "e5215bf54cb89397a26b80c5ebc113d687592dfa6bd86e298aadfbac178ebc66"
+    },
+    {
+      "bytes": 5361,
+      "git_blob": "ab57ed01f736108c22ad2e6708d9b29fb59ab95d",
+      "path": "Lean/RHHardyPhaseTransportV1.lean",
+      "sha256": "1c0a0dda1499dec1701e49d0ef7cca585b17f8a7eb2a356e65e23bdba90c0d38"
+    }
+  ],
+  "historical_oct7_rh_proven": false,
+  "proof_or_numeric_tests_run_for_publication": false,
+  "proof_status_record_unchanged": "RH_FINAL_EVIDENCE.json",
+  "repository": "tarikskalic33/formal-conjectures",
+  "schema": "AEGIS_EXISTING_FILE_DOWNLOAD_MANIFEST_V1",
+  "snapshot_date": "2026-10-07",
+  "source_archives_cover": {
+    "all_patch_files": 1890,
+    "first_archive_files": 1395,
+    "second_archive_files": 36,
+    "third_archive_files": 459
+  },
+  "source_bytes_recreated_or_modified": false,
+  "source_local_head": "3afaa344b3838ca4e70bd0320f37cdb9136691c7",
+  "source_zip_extraction_requires_no_git_prerequisite": true
+}

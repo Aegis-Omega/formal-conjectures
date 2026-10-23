@@ -1,0 +1,24 @@
+2c7936a770aaf888eeb3cbd7ddcb9ee92648d784 source(rh): recover pinned inputs and provider sources with provenance
+6d78aad860a9a349fbe383e206980d0d93e25f54 proof(rh): retain actual Weil butterfly identities and replay evidence
+71c17d52a7aa8082944d9b0eac9db7519a9d0be6 audit(rh): preserve tower counterexample and finite-recurrence obstruction
+dc1edd8352cbc0ba9d6c72d0694a8c25bf6c49f5 research(rh): retain actual narrow-moment and Krein arguments with their limits
+0695cc2abefbc8105084d342ccb0a2892b2e7e82 proof(rh): reuse exact first-cell interpolation with the public PR53 payload
+e298b7130bb405b0ec9c2c5bf7d7d96e97badc4e proof(rh): export generic trigonometric and sinc bounds with scoped replays
+58af746ddc135d14e179ff13b4726af4ee7427c7 proof(rh): identify actual cell15 phases and its complete first derivative
+341ed069732f34ecf9053432984ff872ffa2862e proof(rh): retain exact moment and scalar closure for cell15
+9a68340cbf614192ecabdb8d8abf1cc6cde2c736 proof(rh): close the complete cell15 analytic error and first-jet enclosure
+b07531c6a29c1c048b723499dd22d8d1bd3771f4 audit(rh): retain independent exact-rational fine coefficient enclosures
+78440e1599b0734272a17338fee40f53db7ad6ab port(rh): preserve genuine original-namespace compatibility attempts
+fed260b493e9147e0b3fa3a5459da43111fd9452 proof(rh): reuse existing k4 and k6 results within their actual domains
+82ccba49e632c76334cec1dac5b958dfc8d7cd6c artifact(rh): export the source-bound cell15 patch and its scoped receipts
+dcee759fa893a444abd20003e01d0eaa0ccf0036 checkpoint(rh): integrate frozen audits, scoped DAGs and unfinished evidence
+fbab29992cdbe48ae38c584ed16ebca5bebcc641 research(rh): prove paid compact inverse transport and audit signed filter
+cdc28f26f0b5575807ef38609d1a79b07ed9ca60 research(rh): prove weighted far sign and falsify amplitude bootstrap
+ea86ae854878479f127ac610a9c062faa3a9484c research(rh): reuse cofinal diagonal and prove unscaled phase band
+14f6c139b3e7e362a87f4cc0ef5db611e42e94a8 research(rh): prove dense signed phase band with full arithmetic budget
+077fc5ab6785debfeb5233bdf81fd232baa0fb18 audit(rh): reject expanding-band promotion with a fixed canonical spectrum
+d5426d209aed891933004fe65a514567327f4916 research(rh): pay actual covariance diagonal and audit full variance transport
+ea0aef1f90e5f9f569a628771ba3069c450f2032 checkpoint(rh): preserve scoped arithmetic advances and exact global sign frontier
+ebafc2dbc69669d3884a6adc7b57a4154c66d675 audit(quantum): replay V7-V12 packet and prove eight-probe channel blindness
+861de39f06dcff60e92ddffc488ae1ec8aebc120 proof(rh): bind Hardy evaluator phase and replay Q16 point evidence
+3afaa344b3838ca4e70bd0320f37cdb9136691c7 audit(quantum): recover GGG period and verify exact 100ms phase conventions
