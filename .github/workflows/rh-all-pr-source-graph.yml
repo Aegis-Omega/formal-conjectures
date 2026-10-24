@@ -58,6 +58,7 @@ jobs:
             --repo "$GITHUB_REPOSITORY" \
             --graph pr_branch_coherence.json \
             --output rh_import_coherence.json \
+            --recovery-dir rh_source_recovery \
             --workers 8
       - name: Attach exact SHA, digest, and non-proof boundary
         if: always()
@@ -81,6 +82,7 @@ jobs:
           path: |
             pr_branch_coherence.json
             rh_import_coherence.json
+            rh_source_recovery/
             pr_graph_receipt.txt
           if-no-files-found: warn
           retention-days: 14
