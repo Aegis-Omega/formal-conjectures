@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - 'research/rh/assembly/pr_branch_coherence_audit.py'
+      - 'research/rh/assembly/rh_import_coherence_audit.py'
       - '.github/workflows/rh-all-pr-source-graph.yml'
   workflow_dispatch:
     inputs:
@@ -46,6 +47,18 @@ jobs:
             --target-pr "$TARGET_PR" \
             --output pr_branch_coherence.json \
             --workers 5
+      - name: Self-test import-level source audit
+        run: python3 research/rh/assembly/rh_import_coherence_audit.py --self-test
+      - name: Resolve cross-PR Lean import paths from verified immutable source blobs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/rh_import_coherence_audit.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --graph pr_branch_coherence.json \
+            --output rh_import_coherence.json \
+            --workers 8
       - name: Attach exact SHA, digest, and non-proof boundary
         if: always()
         env:
@@ -56,6 +69,7 @@ jobs:
             printf 'actual_checkout_sha=%s\n' "$(git rev-parse HEAD)"
             test "$(git rev-parse HEAD)" = "$PR_HEAD"
             test -f pr_branch_coherence.json && sha256sum pr_branch_coherence.json || true
+            test -f rh_import_coherence.json && sha256sum rh_import_coherence.json || true
             printf 'source_graph_only=true\n'
             printf 'lean_kernel_closure_claim=false\n'
           } | tee pr_graph_receipt.txt
@@ -66,6 +80,7 @@ jobs:
           name: rh-all-pr-source-graph-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
             pr_branch_coherence.json
+            rh_import_coherence.json
             pr_graph_receipt.txt
           if-no-files-found: warn
           retention-days: 14
