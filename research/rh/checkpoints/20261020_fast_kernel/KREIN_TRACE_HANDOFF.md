@@ -138,9 +138,9 @@ coarse (geometric ratio about 1.03). The TD-cells must be fine.
 Put each step in a new file. Do not edit the existing proofs.
 
 **Progress.**
-- **Done:** K3a `CvSTraceCoefV1`, K3b `CvSTraceCramerV1` and K3c `CvSAtomInversionV1`. All three
-  are sorry-free with standard axioms only.
-- **Open:** K3d–K3f.
+- **Done:** K3a `CvSTraceCoefV1`, K3b `CvSTraceCramerV1`, K3c `CvSAtomInversionV1` and K3d
+  `CvSTraceDistV1`. All four are sorry-free with standard axioms only.
+- **Open:** K3e, K3f, and `detG ≠ 0` (a numeric check).
 - **CI list.** The krein-ring job reads the K3 modules and their audit names from
   `feshbach_lean_v1/tools/krein_trace_modules.json`. To add a module, edit that file, not the
   workflow.
@@ -156,9 +156,9 @@ Put each step in a new file. Do not edit the existing proofs.
    `basisFun = Σ_k β_k(iw_k² − 1/4) e^{iw_k x}`, padded to all of K with zero weights, and
    `Finset.sum_comm`.
 4. **K3d**: the pointwise `trialDist` bound, and continuity of `cf` in t. For continuity, `ĉ_k(t)`
-   is a parametric interval integral, so `continuous_parametric_intervalIntegral_of_continuous'`
-   applies. Continuity of `trialDist` then follows from
-   `continuous_parametric_integral_of_continuous` on `Icc`, which gives `hR` measurability.
+   is a parametric integral over `Icc 0 L`, and so is `trialDist`; both use
+   `continuous_parametric_integral_of_continuous` with `isCompact_Icc`. This gives the
+   measurability needed for `hR`.
 5. **K3e**: per-cell kernel checks (`decide +kernel`, no `native_decide`):
    - `|num|²` corner bounds over the `(cos, sin)` box;
    - the `sin²` sup;
@@ -177,6 +177,37 @@ Put each step in a new file. Do not edit the existing proofs.
 - `CvSAtomInversionV1.atom_sum`: if `Σ_K b = 0` and `Σ_K k b = 0`, then
   `Σ_{i<2N−1} alpha N b (i+1) · momentAtom L (i+1−N) x = Σ_K b_k · Ez L k x`, where
   `Ez L k x = (iw_k² − 1/4) e^{iw_k x}`. For N = 70, `i+1−70 = atomCenter i`.
+
+- `CvSTraceDistV1`:
+  - `cfC` is the explicit `ℝ → Fin 141 → ℂ`.
+  - `TraceFamily LT V` says that V is the 139 atoms, then `e^{σ₀x}` and `e^{σ₁x}`.
+    `CvSMomentTraceV1.augment` satisfies it.
+  - `trialDist_le`: for `ε > 0`,
+    `trialDist ≤ (1+ε)∫|f−P|² + (1+1/ε)(|γ₀|²+|γ₁|²)(∫|u₀−p₀|²+∫|u₁−p₁|²)`.
+  - `trialDist_continuous` gives the measurability needed for `hR`.
+
+## 3b. Existing work found after K3a–K3d
+
+- **A full window already exists for `2r < 21/20`, without sorryAx.**
+  - `krein_L105_v1/RHWindowL105FinalV1.window_lt_21_40` takes no hypotheses: every log window
+    `L < 21/40`.
+  - `RHKreinL105CheckerV1.checkWide` is a kernel-checked Taylor-model cell checker for
+    `Fcert ≥ 0`. It covers 1744 cells, with hats, δ terms, the prime cosine and the digamma head.
+  - `RHKreinDigammaSharpTailV1` already has the telescoping ψ tail.
+  - The L = 6/5 work extends this to `2r ≤ 6/5`. RH still needs `∀ L ≥ 21/40`
+    (`rh_of_windows_from_21_40`).
+- **Kernel-checked interval dot products and quadratic forms** exist in
+  `row_budget_bridge/list_execution/CvSListIntervalDotV1` and `CvSListIntervalMixedV1` (PR #90 branch).
+  Use them for K3e before writing new interval code.
+- **Coordination.** A Codex agent has local, unpushed slack-only files
+  (`CvSSlackOnlyFourierCost*`, `CvSSlackOnlyHatIntervalsV1`, `CvSSlackOnlyReducedCost*`). Push them
+  and reconcile them with K3a–K3d before you continue K3e, so the cell work is not done twice.
+- **Notation trap.** `∫ x, a + b` parses as `∫ x, (a + b)`, because the body binds at
+  precedence 60. Write `(∫ x, a) + b`.
+- **CI trap.** `rh-cvs-actual-row-replay.yml` reuses artifacts that are kept for 1 day. Run
+  40116354368 (`57bc5add`) failed at "complete finite row table" because
+  `gh run download 39505154095` found the artifact expired. The join step never ran. A final K3f
+  check needs a from-source build of that chain, or fresh artifacts.
 
 ## 4. Do not rebuild these
 
@@ -215,7 +246,8 @@ Put each step in a new file. Do not edit the existing proofs.
   - No `sorry`, `admit` or `axiom` in pushed files.
   - Every audited name must print `#print axioms` with only
     `propext`, `Classical.choice` and `Quot.sound`.
-  - Add the module and its names to the krein-ring job in `rh-feshbach-schur-v1.yml`.
+  - Add the module and its audit names to `feshbach_lean_v1/tools/krein_trace_modules.json`
+    (the krein-ring job reads that file).
 - **Search first.** Before you write any bound, grep `research/rh/feshbach_lean_v1` and
   `research/rh/checkpoints/*` for an existing lemma.
 

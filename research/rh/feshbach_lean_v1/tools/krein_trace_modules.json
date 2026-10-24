@@ -7,6 +7,8 @@
       "tail_sum_le", "norm_sub_trigPoly_le", "fT_tail", "uS_tail"]},
     {"name": "CvSTraceCramerV1", "audit": ["cramer", "conj_q", "cond_r", "moment_conds"]},
     {"name": "CvSAtomInversionV1", "audit": ["momentAtom_eq", "dsum_second", "shift_sum",
-      "sum_Icc_eq_range", "atom_sum"]}
+      "sum_Icc_eq_range", "atom_sum"]},
+    {"name": "CvSTraceDistV1", "audit": ["cf_sum_eq", "young_cs", "trialDist_le", "cfC_continuous",
+      "trialDist_continuous"]}
   ]
 }
