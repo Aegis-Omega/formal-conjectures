@@ -137,6 +137,14 @@ coarse (geometric ratio about 1.03). The TD-cells must be fine.
 
 Put each step in a new file. Do not edit the existing proofs.
 
+**Progress.**
+- **Done:** K3a `CvSTraceCoefV1`, K3b `CvSTraceCramerV1` and K3c `CvSAtomInversionV1`. All three
+  are sorry-free with standard axioms only.
+- **Open:** K3d–K3f.
+- **CI list.** The krein-ring job reads the K3 modules and their audit names from
+  `feshbach_lean_v1/tools/krein_trace_modules.json`. To add a module, edit that file, not the
+  workflow.
+
 1. **K3a**: closed forms and tails.
    - Compute `L ĉ_k(t)` with `coef_eq` and `integral_exp_mul_complex`. Do the same for
      `q_{σ,k}`, or take it from `CvSMomentV1.trigAtom_moment`.
@@ -159,6 +167,16 @@ Put each step in a new file. Do not edit the existing proofs.
    Then integrate. `integral_comp_abs` gives `∫ F(|t|) = 2∫_{t>0} F`. Every term
    `1_j(|t|)·trialDist(t)` is at most `1_j(|t|)·TDup_j`, so no disjointness argument is needed.
 6. **K3f**: assembly into `window_of_actual_rows_moment`.
+
+**K3a–K3c statements**, for reuse:
+
+- `CvSTraceCoefV1.fT_tail` and `uS_tail`: the two Parseval tails. Their bounds are exactly the
+  `A(t)` and `τ_σ` formulas in §2, with general `LT` and `N` and `h = 2π/LT`.
+- `CvSTraceCramerV1`: defines `gram`, `rhs`, `detG`, `gam` (Cramer), `vC` and `bC` on
+  `K N = Icc (−N) N`. Assuming `detG ≠ 0`, `moment_conds` gives `Σ bC = 0` and `Σ k·bC = 0`.
+- `CvSAtomInversionV1.atom_sum`: if `Σ_K b = 0` and `Σ_K k b = 0`, then
+  `Σ_{i<2N−1} alpha N b (i+1) · momentAtom L (i+1−N) x = Σ_K b_k · Ez L k x`, where
+  `Ez L k x = (iw_k² − 1/4) e^{iw_k x}`. For N = 70, `i+1−70 = atomCenter i`.
 
 ## 4. Do not rebuild these
 
