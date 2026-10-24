@@ -228,6 +228,7 @@ def main():
     ap.add_argument("--output")
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--recovery-dir", default=None)
     args = ap.parse_args()
     if args.self_test:
         self_test()
@@ -254,6 +255,44 @@ def main():
             sha = futures[f]
             source_by_blob[sha] = f.result()
     result = classify(graph, source_by_blob, {})
+    if args.recovery_dir:
+        target_paths = trees[graph["target_exact_sha"]]["sources"]
+        variants = defaultdict(lambda: defaultdict(set))
+        for node in graph["github_pr_base_graph"]["nodes"]:
+            for path, sha in trees.get(node["head_sha"], {}).get("sources", {}).items():
+                if path not in target_paths:
+                    variants[path][sha].add(node["number"])
+        root = Path(args.recovery_dir)
+        if root.exists() and any(root.iterdir()):
+            raise RuntimeError("RECOVERY_DIRECTORY_NOT_EMPTY")
+        root.mkdir(parents=True, exist_ok=True)
+        restored, withheld = [], []
+        for path, copies in sorted(variants.items()):
+            if not path.startswith(RH_ROOT) or ".." in Path(path).parts:
+                raise RuntimeError("UNSAFE_RECOVERY_PATH:" + path)
+            if len(copies) != 1:
+                withheld.append({"path": path, "sha_variants": sorted(copies)})
+                continue
+            sha, ids = next(iter(copies.items()))
+            raw = source_by_blob[sha].encode("utf-8")
+            if git_blob_sha(raw) != sha:
+                raise RuntimeError("RESTORE_BLOB_MISMATCH:" + path)
+            destination = root / path
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            with destination.open("xb") as f:
+                f.write(raw)
+            restored.append({"path": path, "blob_sha": sha, "prs": sorted(ids)})
+        receipt = {"schema": "aegis.rh.source-recovery.v1",
+                   "original_target_sha": graph["target_exact_sha"],
+                   "not_a_lean_proof": True, "restored": restored,
+                   "withheld_multiversion": withheld}
+        (root / "RECOVERY_MANIFEST.json").write_text(
+            json.dumps(receipt, indent=2, sort_keys=True) + "\n")
+        result["source_recovery"] = {
+            "restored": len(restored), "withheld": len(withheld),
+            "dir": args.recovery_dir,
+            "wrote_to_tracked_source": False,
+            "kernel_proof_claim": False}
     Path(args.output).write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
     print(json.dumps({k: result[k] for k in (
         "base_source_count", "absent_paths", "divergent_existing_paths",
