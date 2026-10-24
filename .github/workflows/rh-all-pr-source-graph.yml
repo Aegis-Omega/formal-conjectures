@@ -1,0 +1,71 @@
+name: RH all-PR source graph (exact-head audit)
+
+on:
+  pull_request:
+    paths:
+      - 'research/rh/assembly/pr_branch_coherence_audit.py'
+      - '.github/workflows/rh-all-pr-source-graph.yml'
+  workflow_dispatch:
+    inputs:
+      target_pr:
+        description: 'Existing integration PR number (no new PR is created)'
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+
+concurrency:
+  group: rh-all-pr-source-graph-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout the immutable candidate SHA
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Self-test the automatic source/PR DAG auditor
+        run: python3 research/rh/assembly/pr_branch_coherence_audit.py --self-test
+      - name: Scan ALL PRs and ALL branches plus exact source and check-run evidence
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TARGET_PR: ${{ github.event.pull_request.number || inputs.target_pr }}
+        run: |
+          set -euo pipefail
+          test -n "$TARGET_PR"
+          python3 research/rh/assembly/pr_branch_coherence_audit.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --target-pr "$TARGET_PR" \
+            --output pr_branch_coherence.json \
+            --workers 5
+      - name: Attach exact SHA, digest, and non-proof boundary
+        if: always()
+        env:
+          PR_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          {
+            printf 'exact_candidate_sha=%s\n' "$PR_HEAD"
+            printf 'actual_checkout_sha=%s\n' "$(git rev-parse HEAD)"
+            test "$(git rev-parse HEAD)" = "$PR_HEAD"
+            test -f pr_branch_coherence.json && sha256sum pr_branch_coherence.json || true
+            printf 'source_graph_only=true\n'
+            printf 'lean_kernel_closure_claim=false\n'
+          } | tee pr_graph_receipt.txt
+      - name: Preserve complete source graph and receipt, even on an audit failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-all-pr-source-graph-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            pr_branch_coherence.json
+            pr_graph_receipt.txt
+          if-no-files-found: warn
+          retention-days: 14
