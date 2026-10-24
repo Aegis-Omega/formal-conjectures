@@ -40,15 +40,15 @@ theorem augmented_trace_family (LT : ℝ) :
           AEGIS.CvSMomentBasisV1.momentAtom LT ((i : ℤ) - 69))) := by
   constructor
   · intro i x
-    rfl
+    simp only [AEGIS.CvSMomentTraceV1.augment, Fin.append_left]
   · intro s x
     fin_cases s
     · change (Real.exp (-x / 2) : ℂ) = (Real.exp ((-1 / 2 : ℝ) * x) : ℂ)
       congr 1
-      ring
+      ring_nf
     · change (Real.exp (x / 2) : ℂ) = (Real.exp ((1 / 2 : ℝ) * x) : ℂ)
       congr 1
-      ring
+      ring_nf
 
 #check AEGIS.CvSTraceDistV1.trialDist_le
 #check AEGIS.CvSCheckedLowBridgeV1.hlow_of_checked_projected_source
