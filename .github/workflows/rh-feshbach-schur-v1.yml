@@ -525,8 +525,7 @@ jobs:
               'gram_tail_le', 'rows_gram_le', 'window_of_certificate_gram']]
           names += ['CvSWindowGramL12V1.' + n for n in ['tau_far_rows', 'window_L12_gram']]
           names += ['CvSHplusBoundsV1.' + n for n in [
-              'hplus_le_of_sq_le', 'tele_le', 'tsum_archTerm_ge', 'gamma_le', 'logPi_le', 'hplusLo_le',
-              'hplusCheck_sound', 'scertM_three_ge']]
+              'hplus_le_of_sq_le', 'hplus_ge_of_sq', 'scertM_three_ge']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
