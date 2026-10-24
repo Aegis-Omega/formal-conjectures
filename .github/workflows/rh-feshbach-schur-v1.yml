@@ -424,6 +424,9 @@ jobs:
           while read -r m; do
             lean -DwarningAsError=true -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
           done < krein_trace_modules.txt
+          lean -DwarningAsError=true -o "$RING/CvSMomentTraceV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSMomentTraceV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSCheckedLowBridgeV1.olean" research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSK3PR90InteropV1.olean" research/rh/feshbach_lean_v1/CvSK3PR90InteropV1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -553,6 +556,8 @@ jobs:
               'hplus_le_of_sq_le', 'hplus_ge_of_sq', 'scertM_three_ge']]
           for mod in json.load(open('research/rh/feshbach_lean_v1/tools/krein_trace_modules.json'))['modules']:
               names += [mod['name'] + '.' + n for n in mod['audit']]
+          names += ['CvSK3PR90InteropV1.augmented_trace_family',
+                    'CvSCheckedLowBridgeV1.hlow_of_checked_projected_source']
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
