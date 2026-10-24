@@ -189,6 +189,54 @@ def classify(graph, source_by_blob, local_sources, blob_limit=1200):
     }
 
 
+def reconcile_archived_recovery(root, restored, manifest_file):
+    """Compare recovered originals with the already maintained consolidated source archive.
+
+    A manifest digest match means that source was already inventoried for replay,
+    not that the compiled theorem or RH has been validated here.
+    """
+    entries = json.loads(Path(manifest_file).read_text(encoding="utf-8"))
+    if not isinstance(entries, list):
+        raise RuntimeError("BAD_CONSOLIDATED_MANIFEST")
+    by_path = {}
+    for row in entries:
+        if not all(key in row for key in ("module", "path", "sha256")):
+            raise RuntimeError("INCOMPLETE_ARCHIVE_SOURCE_ROW")
+        if row["path"] in by_path:
+            raise RuntimeError("DUPLICATE_CONSOLIDATED_PATH:" + row["path"])
+        by_path[row["path"]] = row
+    matching, conflicting, not_in_archive = [], [], []
+    for row in restored:
+        path = row["path"]
+        actual = (root / path).read_bytes()
+        if git_blob_sha(actual) != row["blob_sha"]:
+            raise RuntimeError("BAD_RECOVERED_BLOB:" + path)
+        digest = hashlib.sha256(actual).hexdigest()
+        archived = by_path.get(path)
+        record = {"path": path, "git_blob_sha": row["blob_sha"],
+                  "sha256": digest, "source_prs": row["prs"]}
+        if archived is None:
+            not_in_archive.append(record)
+        elif digest == archived["sha256"]:
+            matching.append({**record, "archived_module": archived["module"]})
+        else:
+            conflicting.append({**record, "archived_module": archived["module"],
+                                "archived_sha256": archived["sha256"]})
+    return {
+        "schema": "aegis.rh.recovered-to-consolidated-source.v1",
+        "archive_manifest": str(manifest_file),
+        "archive_entries": len(entries),
+        "recovered_count": len(restored),
+        "source_exact_archive_matches": matching,
+        "different_version_from_archive": conflicting,
+        "not_present_in_archive": not_in_archive,
+        "summary": {"matched": len(matching), "different": len(conflicting),
+                    "not_archived": len(not_in_archive)},
+        "historical_compilation_not_replayed": True,
+        "kernel_closure_verified": None
+    }
+
+
 def self_test():
     assert parsed_imports("import A B\n-- import NO\nimport Mathlib.Data.Real.Basic\n") == ["A", "B", "Mathlib.Data.Real.Basic"]
     assert module_name("research/rh/other/A.lean") == "A"
@@ -218,6 +266,24 @@ def self_test():
     assert result["absent_paths"] == 1
     assert result["classification_counts"] == {"SOURCE_READY_FOR_LEAN_PROBE": 1}
     assert not result["auto_cherry_pick_authorized"]
+    from tempfile import TemporaryDirectory as _Temp
+    with _Temp() as folder:
+        home = Path(folder)
+        p = "research/rh/test/Example.lean"
+        raw = b"import Mathlib\n"
+        f = home / p
+        f.parent.mkdir(parents=True)
+        f.write_bytes(raw)
+        archive = home / "manifest.json"
+        archive.write_text(json.dumps([{"module": "Example", "path": p,
+                                        "sha256": hashlib.sha256(raw).hexdigest()}]))
+        expected = [{"path": p, "blob_sha": git_blob_sha(raw), "prs": [1]}]
+        reconciliation = reconcile_archived_recovery(home, expected, archive)
+        assert reconciliation["summary"] == {"matched": 1, "different": 0,
+                                                "not_archived": 0}
+        archive.write_text(json.dumps([{"module": "Example", "path": p,
+                                        "sha256": hashlib.sha256(b"wrong").hexdigest()}]))
+        assert reconcile_archived_recovery(home, expected, archive)["summary"]["different"] == 1
     print("IMPORT_SELF_TEST_PASS")
 
 
@@ -229,6 +295,7 @@ def main():
     ap.add_argument("--workers", type=int, default=8)
     ap.add_argument("--self-test", action="store_true")
     ap.add_argument("--recovery-dir", default=None)
+    ap.add_argument("--consolidated-manifest", default="research/rh/consolidated_v1/manifest.json")
     args = ap.parse_args()
     if args.self_test:
         self_test()
@@ -286,6 +353,10 @@ def main():
                    "original_target_sha": graph["target_exact_sha"],
                    "not_a_lean_proof": True, "restored": restored,
                    "withheld_multiversion": withheld}
+        result["archive_reconciliation"] = reconcile_archived_recovery(
+            root, restored, args.consolidated_manifest)
+        (root / "ARCHIVE_RECONCILIATION.json").write_text(
+            json.dumps(result["archive_reconciliation"], indent=2, sort_keys=True) + "\n")
         (root / "RECOVERY_MANIFEST.json").write_text(
             json.dumps(receipt, indent=2, sort_keys=True) + "\n")
         result["source_recovery"] = {
@@ -300,6 +371,8 @@ def main():
         "classification_counts", "import_cycles",
         "target_imports_absent_modules", "source_only_audit_pass",
         "kernel_type_audit_pass")}, indent=2))
+    if "archive_reconciliation" in result:
+        print("ARCHIVE_RECONCILIATION " + json.dumps(result["archive_reconciliation"]["summary"], sort_keys=True))
 
 
 if __name__ == "__main__":
