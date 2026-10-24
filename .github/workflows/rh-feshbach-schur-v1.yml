@@ -12,6 +12,10 @@ on:
       - 'research/rh/feshbach_lean_v1/**'
       - 'research/rh/feasibility_v1/**'
       - '.github/workflows/rh-feshbach-schur-v1.yml'
+  pull_request:
+    paths:
+      - 'research/rh/feshbach_lean_v1/**'
+      - '.github/workflows/rh-feshbach-schur-v1.yml'
   workflow_dispatch:
 
 permissions:
@@ -36,6 +40,7 @@ jobs:
       - name: Checkout exact head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -159,6 +164,7 @@ jobs:
       - name: Checkout exact head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -295,6 +301,7 @@ jobs:
       - name: Checkout exact head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -345,6 +352,20 @@ jobs:
           set -euo pipefail
           RING="$GITHUB_WORKSPACE/.lake/ringout"
           export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          python3 - <<'PY'
+          import json, pathlib, subprocess
+          root = pathlib.Path('research/rh/feshbach_lean_v1')
+          manifest = json.loads((root / 'tools/k3_source_graft.json').read_text())
+          for field in ('copied_blobs', 'reused_identical_blobs'):
+              for rel, expected in manifest[field].items():
+                  path = root / rel
+                  observed = subprocess.check_output(
+                      ['git', 'hash-object', str(path)], text=True
+                  ).strip()
+                  if observed != expected:
+                      raise SystemExit(f'K3_SOURCE_BINDING_FAILED {field} {rel} {observed} != {expected}')
+          print('K3_SOURCE_BINDING_PASS')
+          PY
           python3 research/rh/feshbach_lean_v1/tools/build_krein_ring.py \
             research/rh/feshbach_lean_v1/tools/krein_ring_closure.json "$RING" ring.log
           for m in CvSArchLorentzV1 CvSArchSourceV1 CvSArchDiagV1 CvSArchIntegrableV1 CvSPrimeBlockV1 \
@@ -398,6 +419,14 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSTauFarL12V1.olean" research/rh/feshbach_lean_v1/CvSTauFarL12V1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSWindowGramL12V1.olean" research/rh/feshbach_lean_v1/CvSWindowGramL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSHplusBoundsV1.olean" research/rh/feshbach_lean_v1/CvSHplusBoundsV1.lean 2>&1 | tee -a ring.log
+          python3 -c "import json; [print(m['name']) for m in json.load(open('research/rh/feshbach_lean_v1/tools/krein_trace_modules.json'))['modules']]" > krein_trace_modules.txt
+          while read -r m; do
+            lean -DwarningAsError=true -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
+          done < krein_trace_modules.txt
+          lean -DwarningAsError=true -o "$RING/CvSMomentTraceV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSMomentTraceV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSCheckedLowBridgeV1.olean" research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSK3PR90InteropV1.olean" research/rh/feshbach_lean_v1/CvSK3PR90InteropV1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -523,6 +552,12 @@ jobs:
           names += ['CvSGramTailV1.' + n for n in [
               'gram_tail_le', 'rows_gram_le', 'window_of_certificate_gram']]
           names += ['CvSWindowGramL12V1.' + n for n in ['tau_far_rows', 'window_L12_gram']]
+          names += ['CvSHplusBoundsV1.' + n for n in [
+              'hplus_le_of_sq_le', 'hplus_ge_of_sq', 'scertM_three_ge']]
+          for mod in json.load(open('research/rh/feshbach_lean_v1/tools/krein_trace_modules.json'))['modules']:
+              names += [mod['name'] + '.' + n for n in mod['audit']]
+          names += ['CvSK3PR90InteropV1.augmented_trace_family',
+                    'CvSCheckedLowBridgeV1.hlow_of_checked_projected_source']
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
