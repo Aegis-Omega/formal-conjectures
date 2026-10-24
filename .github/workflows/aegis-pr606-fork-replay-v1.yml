@@ -161,34 +161,51 @@ jobs:
           BASE="$GITHUB_WORKSPACE/.aegis-base/sovereign-omega-v2/formal/bridges/lean"
           SRC="$GITHUB_WORKSPACE/AegisRH/PR606/Source"
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           mkdir -p "$OUT"
 
-          python3 - "$BASE" "$SRC" "$COMPAT" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
+          python3 - "$BASE" "$SRC" "$COMPAT" "$LOCAL" \
+            "$GITHUB_WORKSPACE/.pr606-order.txt" "$GITHUB_WORKSPACE/.pr606-selected.tsv" <<'PY'
           import pathlib, sys
           base=pathlib.Path(sys.argv[1])
           src=pathlib.Path(sys.argv[2])
           compat=pathlib.Path(sys.argv[3])
-          out=pathlib.Path(sys.argv[4])
+          local=pathlib.Path(sys.argv[4])
+          order_out=pathlib.Path(sys.argv[5])
+          selected_out=pathlib.Path(sys.argv[6])
+
+          def substantive_local(p):
+            prefixes=(
+              'import ', 'theorem ', 'def ', 'abbrev ', 'namespace ', 'open ',
+              'set_option ', 'noncomputable ', 'private theorem ', 'public theorem '
+            )
+            return any(
+              any(line.strip().startswith(prefix) for prefix in prefixes)
+              for line in p.read_text(encoding='utf-8').splitlines()
+            )
 
           base_mods={p.stem:p for p in base.glob('*.lean')}
           src_mods={p.stem:p for p in src.glob('*.lean')}
           compat_mods={p.stem:p for p in compat.glob('*.lean')}
-          mods=set(base_mods)|set(src_mods)|set(compat_mods)
+          local_mods={p.stem:p for p in local.glob('*.lean') if substantive_local(p)}
+          mods=set(base_mods)|set(src_mods)|set(compat_mods)|set(local_mods)
 
           def selected(m):
-            if m in compat_mods: return compat_mods[m]
-            if m in src_mods: return src_mods[m]
-            if m in base_mods: return base_mods[m]
+            if m in local_mods: return ('LOCAL', local_mods[m])
+            if m in compat_mods: return ('COMPAT', compat_mods[m])
+            if m in src_mods: return ('PR606', src_mods[m])
+            if m in base_mods: return ('BASE580', base_mods[m])
             raise SystemExit('missing:'+m)
 
           deps={}
           for m in mods:
+            _, file=selected(m)
             ds=[]
-            for line in selected(m).read_text(encoding='utf-8').splitlines():
-              s=line.split('--',1)[0].strip()
-              if not s.startswith('import '): continue
-              for tok in s[7:].split():
+            for line in file.read_text(encoding='utf-8').splitlines():
+              text=line.split('--',1)[0].strip()
+              if not text.startswith('import '): continue
+              for tok in text[7:].split():
                 root=tok.split('.')[0]
                 if root in mods: ds.append(root)
             deps[m]=ds
@@ -201,16 +218,23 @@ jobs:
             for d in deps[m]: visit(d)
             temp.remove(m); seen.add(m); order.append(m)
 
-          for target in sorted(src_mods):
+          roots=set(src_mods)
+          for target in ('V13Scratch','RHRestrictedWeilCriterionV13','AEGISRHRootV1'):
+            if target in mods:
+              roots.add(target)
+          for target in sorted(roots):
             visit(target)
 
-          out.write_text('\n'.join(order)+'\n')
+          order_out.write_text('\n'.join(order)+'\n')
+          selected_out.write_text(
+            ''.join(f"{m}\t{selected(m)[0]}\t{selected(m)[1]}\n" for m in order)
+          )
           print('PR606_IMPORTED_MODULES',len(src_mods))
+          print('PR606_LOCAL_SUBSTANTIVE_MODULES',len(local_mods))
           print('PR606_FULL_CLOSURE_COUNT',len(order))
-          print('\n'.join(
-            ('COMPAT  ' if m in compat_mods else 'PR606   ' if m in src_mods else 'BASE580 ')+m
-            for m in order
-          ))
+          for m in order:
+            kind,_=selected(m)
+            print(f'{kind:<8} {m}')
           PY
 
       - name: Restore incremental PR606 fork closure cache
@@ -229,17 +253,15 @@ jobs:
           BASE="$GITHUB_WORKSPACE/.aegis-base/sovereign-omega-v2/formal/bridges/lean"
           SRC="$GITHUB_WORKSPACE/AegisRH/PR606/Source"
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           BASE_LEAN_PATH="$GITHUB_WORKSPACE/.li/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
-          export LEAN_PATH="$OUT:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
+          export LEAN_PATH="$OUT:$LOCAL:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
 
           dirty=0
-          while IFS= read -r MOD; do
+          while IFS=$'\t' read -r MOD KIND FILE; do
             [ -z "$MOD" ] && continue
-            FILE="$BASE/$MOD.lean"
-            KIND="BASE580"
-            if [ -f "$SRC/$MOD.lean" ]; then FILE="$SRC/$MOD.lean"; KIND="PR606"; fi
-            if [ -f "$COMPAT/$MOD.lean" ]; then FILE="$COMPAT/$MOD.lean"; KIND="COMPAT"; fi
+            test -f "$FILE"
             FILE_SHA="$(sha256sum "$FILE" | awk '{print $1}')"
             STAMP="$OUT/$MOD.source.sha256"
             if [ "$dirty" -eq 0 ] && [ -f "$OUT/$MOD.olean" ] && [ -f "$STAMP" ] && [ "$(cat "$STAMP")" = "$FILE_SHA" ]; then
@@ -254,8 +276,7 @@ jobs:
               rm -f "$OUT/$MOD.olean" "$STAMP"
               exit 1
             fi
-          done < "$GITHUB_WORKSPACE/.pr606-order.txt"
-
+          done < "$GITHUB_WORKSPACE/.pr606-selected.tsv"
       - name: Save incremental PR606 fork closure cache
         if: always()
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
@@ -317,6 +338,11 @@ jobs:
           lean -o "$OUT/RHRestrictedWeilCriterionV13.olean" \
             AegisRH/PR606/RHRestrictedWeilCriterionV13.lean 2>&1 | tee /tmp/pr606-rh-terminal.log
           ! grep -F 'sorryAx' /tmp/pr606-rh-terminal.log
+
+          # Compile the canonical entrypoint with the explicit module path above.
+          lean -o "$OUT/AEGISRHRootV1.olean" \
+            AegisRH/PR606/AEGISRHRootV1.lean 2>&1 | tee /tmp/aegis-rh-root.log
+          ! grep -F 'sorryAx' /tmp/aegis-rh-root.log
 
           # Compile the exact proved-window producer consumed by the official RH statement.
           bash scripts/rh_pr63_proved_window_prebuild.sh "$OUT"
