@@ -310,7 +310,12 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + r
                 unconditional_proof_scope="All compiled/imported kernel declarations; null means unverified outside this environment",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
                 active_repository=ACTIVE_REPO,
-                active_integration_target=f"{ACTIVE_REPO}@{head}",
+                active_integration_target={
+                    "repository": ACTIVE_REPO,
+                    "pull_request": (event.get("pull_request") or {}).get("number"),
+                    "branch": os.environ.get("GITHUB_HEAD_REF") or os.environ.get("GITHUB_REF_NAME"),
+                    "exact_sha": head,
+                },
                 active_pull_request=(event.get("pull_request") or {}).get("number"),
                 active_branch=os.environ.get("GITHUB_HEAD_REF") or None,
                 proof_graph_status=graph["status"],
