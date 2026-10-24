@@ -398,6 +398,7 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSTauFarL12V1.olean" research/rh/feshbach_lean_v1/CvSTauFarL12V1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSGramTailV1.olean" research/rh/feshbach_lean_v1/CvSGramTailV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSWindowGramL12V1.olean" research/rh/feshbach_lean_v1/CvSWindowGramL12V1.lean 2>&1 | tee -a ring.log
+          lean -DwarningAsError=true -o "$RING/CvSHplusBoundsV1.olean" research/rh/feshbach_lean_v1/CvSHplusBoundsV1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
           import re
@@ -523,6 +524,9 @@ jobs:
           names += ['CvSGramTailV1.' + n for n in [
               'gram_tail_le', 'rows_gram_le', 'window_of_certificate_gram']]
           names += ['CvSWindowGramL12V1.' + n for n in ['tau_far_rows', 'window_L12_gram']]
+          names += ['CvSHplusBoundsV1.' + n for n in [
+              'hplus_le_of_sq_le', 'tele_le', 'tsum_archTerm_ge', 'gamma_le', 'logPi_le', 'hplusLo_le',
+              'hplusCheck_sound', 'scertM_three_ge']]
           for name in names:
               m = re.search(r"'AEGIS\." + re.escape(name) +
                             r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
