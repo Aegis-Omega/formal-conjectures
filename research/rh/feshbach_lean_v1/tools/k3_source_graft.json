@@ -1,0 +1,34 @@
+{
+  "schema": "aegis.rh.k3-source-graft.v1",
+  "base_exact_sha": "b4170d0c1c39940948adcbd89ec4fcc1b4c2e061",
+  "origin_exact_sha": "fb0ac3923e11cb537635e133421a0b3c002191d6",
+  "intent": "carry only source-exact K3a–K3d and their compiler/audit manifest into PR90; preserve all original proof statements and dependencies; no RH closure claim",
+  "copied_blobs": {
+    "CvSHplusBoundsV1.lean": "b8828f06b6d91601003983140b24fa16bbb56a02",
+    "CvSTraceCoefV1.lean": "61f99eac1ac43d1a2145364cdd0622e8e61e7700",
+    "CvSTraceCramerV1.lean": "1f1d18a01e709a75b368b11b70100ae76831a49c",
+    "CvSAtomInversionV1.lean": "f04dddd8f983aad5052589ba15c725489a94da79",
+    "CvSTraceDistV1.lean": "96484b41ab9712fec4d4118848806e9b808a40ed",
+    "tools/krein_trace_modules.json": "33af195778cf724d9c4f81c7c8bd8e3440fbb22d"
+  },
+  "reused_identical_blobs": {
+    "CvSPrimeBlockV1.lean": "70e3769f79371727c543725b70600b3039af3de6",
+    "CvSFourierIntervalV1.lean": "08b809f6fd55fa1caef11f28d8d748814dd81449",
+    "CvSTraceV1.lean": "6c1ca43144c14c1cd49a2ffa92a30eb47751198e",
+    "CvSMomentBasisV1.lean": "0d37c5c5a262e46b5aa01fefed9422ebcdd95a2a",
+    "CvSMomentV1.lean": "2b133abe97ed0808f6f6f4c2f54d37c60256497f",
+    "CvSRingBridgeV1.lean": "919550fcfded2e4e1fb134b96ed7b4a931713e4b",
+    "CvSMassV1.lean": "65ba2943a7e4642a1eec4ef485bbed434d24c926",
+    "CvSWindowL12V1.lean": "128ffc71e1ba681a7c2263da4b01250115184d08"
+  },
+  "cross_branch_divergence": {
+    "CvSProjectedBasisL12V1.lean": "PR90 retains its improved differing blob; not overwritten"
+  },
+  "proof_obligations": {
+    "K3a_to_K3d": "must pass Lean compile and transitive axiom audit at new graft SHA",
+    "K3e": "open",
+    "K3f": "open",
+    "detG_nonzero": "open",
+    "canonical_RH": "not claimed"
+  }
+}
