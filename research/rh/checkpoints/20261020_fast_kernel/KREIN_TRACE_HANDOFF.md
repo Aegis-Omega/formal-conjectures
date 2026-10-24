@@ -5,6 +5,44 @@ Status: open. One window only. Not RH.
 Read this before you write any new Lean for the L = 6/5 window. It lists what already exists,
 the chosen route, the numbers, the Lean plan and the traps. Branch: `proof/rh-feshbach-schur-v1`.
 
+## 0. STATUS (read first, update last)
+
+- **One branch.** The L = 6/5 window lives on `proof/rh-feshbach-schur-v1` (fork
+  `tarikskalic33/formal-conjectures`). Push here only. Do not port these modules to other bases
+  and do not open new PRs for them: when PR #90 merges into this branch, everything is in one place.
+- **One owner per item.** K3e and K3f: the Claude Code session that wrote this file. Other agents
+  review or run CI, or take a free item below.
+- **Done, CI green** (workflow `rh-feshbach-schur-v1.yml`, job krein-ring):
+  - K2 and K3a–K3c: run 40121028393 on `e586dd2c`;
+  - K3d `CvSTraceDistV1`: run 40132750273 on `fb0ac392`.
+- **Done, CI pending** (krein-ring compiles and axiom-audits every module listed in
+  `tools/krein_trace_modules.json`):
+  - `CvSTraceGramPertV1`: `gram = Gs − Eg`, `rhs = Ys − ea`, Cauchy–Schwarz, closed forms.
+  - `CvSTraceGammaV1`: the perturbed Cramer bound and `det_pert_ge`. The determinant lower bound
+    also gives `detG ≠ 0`, so no separate determinant certificate is needed.
+  - `CvSTraceCellL65V1`: `cellOk` and `cell_sound`. For `|t|` in a cell,
+    `trialDist(t) ≤ TD` and `m − ScertM 3 t ≤ s`.
+  - `CvSTraceIntegralV1`: the step function `sFun`, the integral bound `∫ s·trialDist ≤ total`,
+    `slack_ge` (via chain coverage plus the tail `hpLo(267²)`), and `premises_of_cells`.
+  - `CvSTraceCertL65V1`: 687 cells in 16 chunks, all checked with `decide +kernel`
+    (no `native_decide`). It gives `trace_premises_L65`: for every trace family `V`, the premises
+    `hsm`, `hsB`, `hs0`, `hcert`, `hR`, `hT` (T = 3625/1000) and `hk` of
+    `window_of_actual_rows_moment`, with M = 3, m = 3/2 and no H or d.
+- **K3f `CvSWindowL65V1`** (in `checkpoints/20261020_row_budget_bridge/`): `window_L65`
+  plugs `trace_premises_L65` into `window_of_actual_rows_moment`. Its conclusion is Weil
+  positivity for every moment-zero test function with `2r ≤ 6/5`.
+  - It was typechecked locally against a stub of the actual-row chain. The stub is local only,
+    has the same statements, and was never pushed.
+  - The real check runs in `rh-cvs-actual-row-replay.yml`, in the new step after the join.
+  - **Blocked:** that job reuses artifacts that expire after one day (runs 39505154095 and
+    39569164255). Until the job has a from-source path or fresh artifacts, `window_L65` is not
+    CI-verified.
+- **Free items:**
+  - (a) A from-source path for the replay job's full table and actual inputs. This unblocks K3f.
+  - (b) Connect `2r ≤ 6/5` to the L105 framework (`WindowArithmeticNonpositiveV1`, proven so far
+    for L < 21/40).
+- Not RH.
+
 ## 1. Where the window stands
 
 The conclusion we want is the one in
@@ -138,9 +176,12 @@ coarse (geometric ratio about 1.03). The TD-cells must be fine.
 Put each step in a new file. Do not edit the existing proofs.
 
 **Progress.**
-- **Done:** K3a `CvSTraceCoefV1`, K3b `CvSTraceCramerV1`, K3c `CvSAtomInversionV1` and K3d
-  `CvSTraceDistV1`. All four are sorry-free with standard axioms only.
-- **Open:** K3e, K3f, and `detG ≠ 0` (a numeric check).
+- **Done:** K3a `CvSTraceCoefV1`, K3b `CvSTraceCramerV1`, K3c `CvSAtomInversionV1`, K3d
+  `CvSTraceDistV1`, and K3e parts 1–3 (`CvSTraceGramPertV1`, `CvSTraceGammaV1`,
+  `CvSTraceCellL65V1`). All are sorry-free with standard axioms only.
+- **Done:** K3e parts 4–5 (`CvSTraceIntegralV1`, `CvSTraceCertL65V1`) and the K3f source
+  (`CvSWindowL65V1`). The K3f CI check is blocked, see §0. `detG ≠ 0` follows from `det_pert_ge`
+  with `D_le` and `constOk`.
 - **CI list.** The krein-ring job reads the K3 modules and their audit names from
   `feshbach_lean_v1/tools/krein_trace_modules.json`. To add a module, edit that file, not the
   workflow.
