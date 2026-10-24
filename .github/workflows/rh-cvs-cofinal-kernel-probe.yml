@@ -1,0 +1,433 @@
+name: RH CvS to Weil additive kernel compiler
+
+on:
+  push:
+    branches:
+      - 'proof/rh-cvs-checked-low-bridge-v1'
+    paths:
+      - 'AEGIS_RH_CvS_Finite_KernelProbeV1.lean'
+      - 'AEGIS_RH_CvS_UniversalSignKernelV1.lean'
+      - 'scripts/rh_cvs_import_pr89_receipt.py'
+      - 'AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean'
+      - '.github/workflows/rh-cvs-cofinal-kernel-probe.yml'
+
+concurrency:
+  group: rh-cvs-cofinal-kernel-probe-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  actions: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+
+jobs:
+  residual-source-and-native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout PR90 exact head (read-only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify source pins and exact 139-row residual bound
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+          python3 - <<'PY'
+          import re
+          from pathlib import Path
+          src=Path('research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean').read_text()
+          def vec(name):
+              m=re.search(r'^def '+name+r' : List ℕ := \[([^\]]+)\]$',src,re.M)
+              if m is None: raise RuntimeError('missing '+name)
+              a=[int(v.strip()) for v in m.group(1).split(',')]
+              assert len(a)==139 and all(x>=0 for x in a)
+              return a
+          def scalar(name):
+              m=re.search(r'^def '+name+r' : ℤ := (\d+)$',src,re.M)
+              if m is None: raise RuntimeError('missing '+name)
+              return int(m.group(1))
+          m=re.search(r'^def radI \(i j : ℕ\) : ℤ :=\s*\n(.*?)\n\s*def ivOk',src,re.S|re.M)
+          assert m
+          formula='(AD.getD i 0 : ℤ) * AD.getD j 0 * T64 + CPI * ((AT.getD i 0 : ℤ) * BT.getD j 0 + (AT.getD j 0 : ℤ) * BT.getD i 0) + RPI'
+          assert ''.join(m.group(1).split())==''.join(formula.split()),'SOURCE_FORMULA_CHANGED'
+          AD,AT,BT=vec('AD'),vec('AT'),vec('BT')
+          CPI,RPI,T64,SR=[scalar(k) for k in ('CPI','RPI','T64','SR')]
+          sums=(sum(AD),sum(AT),sum(BT))
+          rows=[AD[i]*sums[0]*T64+CPI*(AT[i]*sums[2]+BT[i]*sums[1])+139*RPI for i in range(139)]
+          worst=max(range(139),key=lambda i:rows[i])
+          assert all(x>=0 and 230000*x<SR for x in rows),'ROW_BOUND_FAILED'
+          print('EXACT_SOURCE_ROW_BOUND_PASS', 'rows',len(rows),'worst',worst)
+          print('MAX_ROW_NUMERATOR',rows[worst])
+          print('SR',SR)
+          print('GAP',SR-230000*rows[worst])
+          PY
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      - name: Checkout immutable PR51 provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+
+      - name: Checkout immutable external LiCriterion provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+
+      - name: Build pinned provider with original CvS recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/m8_kernel_v1/replay.py provider
+
+      - name: Restore native CvS source checkpoint
+        id: pr90-ring-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: .lake/ringout
+          key: aegis-pr90-ring-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean', 'research/rh/feshbach_lean_v1/tools/**/*.py') }}-li35df682f
+      - name: Replay source-exact CvS closure and compile both PR90 modules
+        if: steps.pr90-ring-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          original=Path('.github/workflows/rh-feshbach-schur-v1.yml').read_text()
+          first='          RING="$GITHUB_WORKSPACE/.lake/ringout"'
+          last='          python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py'
+          start=original.index(first)
+          stop=original.index(last,start)
+          original_block='\n'.join(line[10:] for line in original[start:stop].splitlines())
+          old='lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
+          new='lean -DwarningAsError=true -o "$RING/CvSProjectedTransportL12V1.olean" research/rh/feshbach_lean_v1/CvSProjectedTransportL12V1.lean'
+          if original_block.count(old)==1:
+            original_block=original_block.replace(old,new)
+          elif original_block.count(new)!=1:
+            raise RuntimeError('SOURCE_BUILD_RECIPE_CHANGED')
+          appended='\n'.join([
+            'lean -DwarningAsError=true -o "$RING/CvSResidualRowBudgetV1.olean" research/rh/feshbach_lean_v1/CvSResidualRowBudgetV1.lean',
+            'lean -DwarningAsError=true research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean',
+            'echo PR90_LEAN_KERNEL_REPLAY_PASS'
+          ])
+          Path('/tmp/aegis-pr90-replay.sh').write_text('set -euo pipefail\n'+original_block+'\n'+appended+'\n')
+          PY
+          bash /tmp/aegis-pr90-replay.sh 2>&1 | tee pr90-replay.log
+          if grep -E "sorryAx|declaration uses 'sorry'" pr90-replay.log; then exit 1; fi
+          grep -F PR90_LEAN_KERNEL_REPLAY_PASS pr90-replay.log
+
+      - name: Save native CvS source checkpoint
+        if: steps.pr90-ring-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: .lake/ringout
+          key: aegis-pr90-ring-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean', 'research/rh/feshbach_lean_v1/tools/**/*.py') }}-li35df682f
+      - name: Checkout pinned CvS proof source (read-only)
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: tarikskalic33/formal-conjectures
+          ref: df6077dab393bc496d9e1205f1b325f4857d7b21
+          path: .claude-proof
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Restore kernel-proven bigCheck checkpoint
+        id: cvs-proof-cache
+        uses: actions/cache/restore@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: |
+            .lake/ringout/FastKronV1.olean
+            .lake/ringout/CvSProjectedEntryFastL12V1.olean
+            .lake/ringout/CvSProjectedEntryReplayL12V1.olean
+            .lake/ringout/CvSLowCoercivityL12V1.olean
+            .lake/ringout/CvSRelativeBudgetL12V1.olean
+          key: aegis-pr90-bigcheck-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean') }}-df6077dab393
+      - name: Compile or reuse exact-source CvS proof modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .claude-proof rev-parse HEAD)" = "df6077dab393bc496d9e1205f1b325f4857d7b21"
+          test "$(git hash-object research/rh/feshbach_lean_v1/CvSProjectedEntryL12V1.lean)" = "4a2ebb8a49bf8a523eed9f8601263f18018745a1"
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          test -d "$RING"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/CvSCheckedLowBridgeV1.olean" research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean
+          for name in FastKronV1 CvSProjectedEntryFastL12V1 CvSProjectedEntryReplayL12V1 CvSLowCoercivityL12V1 CvSRelativeBudgetL12V1; do
+            f=".claude-proof/research/rh/feshbach_lean_v1/$name.lean"
+            test -f "$f"
+            case "$name" in
+              FastKronV1) expected=a8e81d2bf1ce2832bcc946643ba248ab8154f2b3 ;;
+              CvSProjectedEntryFastL12V1) expected=dd51dd4de972d347524982147f0e69ff5f398856 ;;
+              CvSProjectedEntryReplayL12V1) expected=0a1a925b5d5475a854cc732ea488189e15a535bd ;;
+              CvSLowCoercivityL12V1) expected=0a1f0971414319c1e1bf13e50d5dc1b508b280a0 ;;
+              CvSRelativeBudgetL12V1) expected=e0a51e636296905746fecf9cd72ae36ad974129e ;;
+              *) exit 1 ;;
+            esac
+            test "$(git hash-object "$f")" = "$expected"
+            if [[ "${{ steps.cvs-proof-cache.outputs.cache-hit }}" != "true" ]]; then
+              lean -DwarningAsError=true -o "$RING/$name.olean" "$f" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+            else
+              test -s "$RING/$name.olean"
+            fi
+          done
+          echo CVS_KERNEL_MODULES_AVAILABLE
+      - name: Save kernel-proven bigCheck checkpoint
+        if: steps.cvs-proof-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@0400d5f644dc74513175e3cd8d07132dd4860809
+        with:
+          path: |
+            .lake/ringout/FastKronV1.olean
+            .lake/ringout/CvSProjectedEntryFastL12V1.olean
+            .lake/ringout/CvSProjectedEntryReplayL12V1.olean
+            .lake/ringout/CvSLowCoercivityL12V1.olean
+            .lake/ringout/CvSRelativeBudgetL12V1.olean
+          key: aegis-pr90-bigcheck-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'research/rh/**/*.lean') }}-df6077dab393
+      - name: Kernel-check PR90 plus CvS source-bound composition
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          cat > "$RUNNER_TEMP/CvSPR90ClaudeJoinProbeV1.lean" <<'LEAN'
+          import CvSCheckedLowBridgeV1
+          import CvSProjectedEntryReplayL12V1
+          import CvSProjectedBasisL12V1
+          import CvSRelativeBudgetL12V1
+          import CvSResidualRowBudgetV1
+          
+          open AEGIS.CvSProjectedEntryL12V1
+          open AEGIS.CvSProjectedEntryReplayL12V1
+          open AEGIS.CvSProjectedBasisL12V1
+          open AEGIS.CvSMomentBasisV1
+          open AEGIS.CvSSchurClosureFromBoundsV1
+          open AEGIS.CvSProjectedPackedCertificateL12V1
+          open AEGIS.CvSLowBlockMatrixV1
+          
+          namespace AEGIS.CvSPR90ClaudeJoinProbeV1
+          theorem identical_bigCheck_closed : bigCheck = true :=
+            AEGIS.CvSProjectedEntryReplayL12V1.bigCheck_true
+          
+          example : Fact (bigCheck = true) := ⟨identical_bigCheck_closed⟩
+          #synth Fact (bigCheck = true)
+          
+          theorem pr90_checked_hlow_replayed
+              (M : ℕ) (hM : 3 ≤ M)
+              (m T_trace beta kappa : ℝ) (Brow : (Fin 139 → ℂ) → ℝ)
+              (hkappa : 0 < kappa) (hgap : 0 < m - T_trace / (2 * Real.pi))
+              (hRsurj : Function.Surjective AEGIS.CvSProjectedSchurBridgeL12V1.R_basis)
+              (hRnorm : ∀ v, normSqCoeffs (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v) ≤ kappa * normSqCoeffs v)
+              (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
+              (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
+                 (m - T_trace / (2 * Real.pi)) * (AEGIS.CvSProjectedSchurBridgeL12V1.certifiedMu / kappa)) :
+              ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
+                (m - T_trace / (2 * Real.pi)) ≤
+                2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
+            exact AEGIS.CvSCheckedLowBridgeV1.hlow_of_checked_projected_source
+              M hM m T_trace beta kappa Brow hkappa hgap hRsurj hRnorm hBrow hbeta
+          
+          theorem pr90_checked_hlow_with_basis
+              (M : ℕ) (hM : 3 ≤ M)
+              (m T_trace beta : ℝ) (Brow : (Fin 139 → ℂ) → ℝ)
+              (hgap : 0 < m - T_trace / (2 * Real.pi))
+              (hBrow : ∀ c, Brow c ≤ beta * normSqCoeffs c)
+              (hbeta : beta ≤ (2 * Real.pi) ^ 2 * (6 / 5 : ℝ) *
+                 (m - T_trace / (2 * Real.pi)) * (AEGIS.CvSProjectedSchurBridgeL12V1.certifiedMu / basisFrobenius)) :
+              ∀ c, Brow c / (2 * Real.pi * (6 / 5 : ℝ)) /
+                (m - T_trace / (2 * Real.pi)) ≤
+                2 * Real.pi * Q_CvS M (6 / 5) atomCenter c := by
+            exact pr90_checked_hlow_replayed M hM m T_trace beta basisFrobenius Brow
+              basisFrobenius_pos hgap R_basis_surjective R_basis_frobenius_bound hBrow hbeta
+          
+          #check AEGIS.CvSRelativeBudgetL12V1.hlow_L12_relative
+          #check AEGIS.CvSResidualRowBudgetV1.radius_row_real
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.identical_bigCheck_closed
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_replayed
+          #print axioms AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_with_basis
+          end AEGIS.CvSPR90ClaudeJoinProbeV1
+          LEAN
+          lean -DwarningAsError=true "$RUNNER_TEMP/CvSPR90ClaudeJoinProbeV1.lean" 2>&1 | tee -a "$RUNNER_TEMP/pr90-cvs-join.log"
+          if grep -E "sorryAx|declaration uses 'sorry'" "$RUNNER_TEMP/pr90-cvs-join.log"; then exit 1; fi
+          grep -F 'AEGIS.CvSPR90ClaudeJoinProbeV1.pr90_checked_hlow_with_basis' "$RUNNER_TEMP/pr90-cvs-join.log"
+          echo PR90_CLAUDE_EXACT_HEAD_JOIN_KERNEL_PASS
+
+      - name: Compile additive certified CvS finite theorem (Lean kernel)
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_Finite_KernelProbeV1.olean" AEGIS_RH_CvS_Finite_KernelProbeV1.lean 2>&1 | tee cvs-finite-kernel.log
+          ! grep -E 'sorryAx|declaration uses .sorry.' cvs-finite-kernel.log
+          grep -F 'AEGIS.RHCvSKernelFiniteV1.certified_source_projectedQ_nonneg' cvs-finite-kernel.log
+          echo CVS_FINITE_SOURCE_KERNEL_PASS
+
+      - name: Kernel-check universal sign transfer (independent CvS consumer)
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_UniversalSignKernelV1.olean" AEGIS_RH_CvS_UniversalSignKernelV1.lean 2>&1 | tee cvs-universal-sign-kernel.log
+          ! grep -E "sorryAx|declaration uses 'sorry'|error:" cvs-universal-sign-kernel.log
+          grep -F "AEGIS.RHCvSUniversalSignKernelV1.universal_nonnegative_of_projected_sequence" cvs-universal-sign-kernel.log
+          echo CVS_UNIVERSAL_SIGN_TRANSFER_KERNEL_PASS
+
+      - name: Build PR89 source-verified Weil import closure for actual PR90 join
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          RECEIPT="$RUNNER_TEMP/aegis-pr89-source-receipt"
+          mkdir -p "$RECEIPT"
+          test "$(gh api repos/tarikskalic33/formal-conjectures/actions/artifacts/12211213700 --jq .digest)" = "sha256:b01b58376172b14cc1e14e02268b73a767802d498926d83cca03c750bd87fbf9"
+          gh run download 39301555778 --repo "$GITHUB_REPOSITORY" --name rh-cofinal-actual-schur-351de3d60ec4456ba1a100ed8c54250f71beaa9f-39301555778 --dir "$RECEIPT"
+          python3 scripts/rh_cvs_import_pr89_receipt.py --receipt "$RECEIPT" --checkout "$GITHUB_WORKSPACE" --order "$RUNNER_TEMP/pr89-needed-order.tsv" | tee cvs-pr89-source-closure.log
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          root = Path(os.environ["GITHUB_WORKSPACE"])
+          ring = root / ".lake/ringout"
+          lines = (Path(os.environ["RUNNER_TEMP"]) / "pr89-needed-order.tsv").read_text().splitlines()
+          assert len(lines) == 272, "PR89_IMPORT_CARDINALITY_DRIFT"
+          receipt = root / "cvs-pr89-source-closure.log"
+          import json
+          import subprocess
+          pinned_ring = {
+              entry["module"]: entry for entry in json.loads(
+                  (root / "research/rh/feshbach_lean_v1/tools/krein_ring_closure.json").read_text()
+              )["modules"]
+          }
+          def source_body(raw):
+              # A license-only wrapper is immaterial to the Lean declarations,
+              # but any other source change is a hard stop.
+              license_prefix = b"/-\nCopyright 2026 The Formal Conjectures Authors.\n"
+              if raw.startswith(license_prefix):
+                  end = raw.find(b"-/\n")
+                  if end < 0:
+                      raise RuntimeError("BAD_COPYRIGHT_WRAPPER")
+                  return raw[end + 3:].lstrip(b"\r\n")
+              return raw
+          for line in lines:
+              module, source_string = line.split(chr(9), 1)
+              src = Path(source_string)
+              rel = Path(*module.split("."))
+              if module.startswith(("Lc.", "Hadamard.", "FunctionsOfOneComplexVariable.")):
+                  original = root / rel.with_suffix(".lean")
+                  compiled = root / ".lake/build/lib/lean" / rel.with_suffix(".olean")
+                  if not compiled.is_file() or not original.is_file() or original.read_bytes() != src.read_bytes():
+                      raise RuntimeError("PR89_PROVIDER_SOURCE_MISMATCH " + module)
+                  with receipt.open("a") as f:
+                      f.write("REUSED_SOURCE_PINNED_PROVIDER " + module + chr(10))
+                  continue
+              # Lean 4.33.1 requires input sources to be inside its workspace root.
+              # Stage an exact-byte archival copy in a dedicated ignored-by-build
+              # directory; never overwrite tracked or previously built sources.
+              stage = root / ".rh-pr89-import-stage" / rel.with_suffix(".lean")
+              stage.parent.mkdir(parents=True, exist_ok=True)
+              if stage.exists():
+                  raise RuntimeError("PR89_SOURCE_STAGE_COLLISION " + module)
+              data = src.read_bytes()
+              stage.write_bytes(data)
+              if stage.read_bytes() != data:
+                  raise RuntimeError("PR89_STAGED_SOURCE_DRIFT " + module)
+              output = ring / rel.with_suffix(".olean")
+              if output.exists():
+                  # PR90 has already kernel-compiled some PR89 dependency names.
+                  # Reuse ONLY when the precompiled source is pinned and the
+                  # archived source has the same Lean text (optional license).
+                  if module not in pinned_ring or not output.is_file() or output.stat().st_size == 0:
+                      raise RuntimeError("PR89_UNEXPLAINED_MODULE_COLLISION " + module)
+                  record = pinned_ring[module]
+                  previous = root / record["path"]
+                  if not previous.is_file():
+                      raise RuntimeError("PR90_RING_SOURCE_MISSING " + module)
+                  blob = subprocess.check_output(
+                      ["git", "hash-object", str(previous)], text=True
+                  ).strip()
+                  if blob != record["blob"]:
+                      raise RuntimeError("PR90_RING_SOURCE_BLOB_DRIFT " + module)
+                  if source_body(previous.read_bytes()) != source_body(data):
+                      raise RuntimeError("PR89_PR90_MODULE_SEMANTIC_DRIFT " + module)
+                  with receipt.open("a") as f:
+                      f.write("REUSED_VERIFIED_RING_MODULE " + module + " " + blob + chr(10))
+                  print("REUSED_VERIFIED_RING_MODULE", module, flush=True)
+                  continue
+              output.parent.mkdir(parents=True, exist_ok=True)
+              log = Path(os.environ["RUNNER_TEMP"]) / ("pr89-" + module.replace(".", "_") + ".log")
+              with log.open("w") as f:
+                  proc = subprocess.run(["lean", "-o", str(output), str(stage)], stdout=f, stderr=subprocess.STDOUT)
+              result = log.read_text()
+              if proc.returncode != 0 or not output.is_file() or output.stat().st_size == 0:
+                  print("PR89_IMPORT_FAILURE " + module + chr(10) + result[-8000:], flush=True)
+                  raise RuntimeError("PR89_MODULE_COMPILATION_FAILED " + module)
+              if "sorryAx" in result or "declaration uses 'sorry'" in result:
+                  raise RuntimeError("PR89_UNTRUSTED_AXIOM " + module)
+              with receipt.open("a") as f:
+                  f.write("PR89_EXACT_SOURCE_IMPORT_PASS " + module + chr(10))
+          print("PR89_NECESSARY_IMPORTS_COMPILED", len(lines), flush=True)
+          PY
+          if ! test -s "$RING/CvSRowTailV1.olean"; then
+            lean -DwarningAsError=true -o "$RING/CvSRowTailV1.olean" research/rh/feshbach_lean_v1/CvSRowTailV1.lean 2>&1 | tee cvs-row-tail-interop.log
+          fi
+          lean -DwarningAsError=true -o "$RING/CvSActualWeilInteropV1.olean" research/rh/feshbach_lean_v1/CvSActualWeilInteropV1.lean 2>&1 | tee cvs-actual-weil-interop.log
+          test -s "$RING/CvSActualWeilInteropV1.olean"
+          ! grep -E "sorryAx|declaration uses 'sorry'|error:" cvs-actual-weil-interop.log
+          echo CVS_ACTUAL_WEIL_INTEROP_KERNEL_PASS
+
+      - name: Attempt full CvS to genuine Weil cofinal module (strict kernel gate)
+        shell: bash
+        run: |
+          set -euo pipefail
+          RING="$GITHUB_WORKSPACE/.lake/ringout"
+          export LEAN_PATH="$RING:$(lake env printenv LEAN_PATH)"
+          lean -DwarningAsError=true -o "$RING/AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.olean" AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean 2>&1 | tee cvs-full-join-kernel.log
+          ! grep -E 'sorryAx|declaration uses .sorry.' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_zero_margin' cvs-full-join-kernel.log
+          grep -F 'AEGIS.RHCvSCofinalActualWeilJoinV1.actual_quantitative_signed_budget_of_trigram_margin' cvs-full-join-kernel.log
+          echo CVS_FULL_CONDITIONAL_JOIN_KERNEL_PASS
+
+      - name: Save exact-head additive proof logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: cvs-cofinal-probe-${{ github.sha }}
+          retention-days: 1
+          if-no-files-found: warn
+          path: |
+            cvs-finite-kernel.log
+            cvs-universal-sign-kernel.log
+            cvs-pr89-source-closure.log
+            cvs-row-tail-interop.log
+            cvs-actual-weil-interop.log
+            cvs-full-join-kernel.log

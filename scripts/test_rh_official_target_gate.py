@@ -6,6 +6,7 @@ import unittest
 from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 from rh_official_target_gate import GOAL, classify, rh_admission_from_disposition
+from rh_static_verdict_gate import negative_defaults_in_content
 
 SOURCE = """import FormalConjecturesUtil
 namespace RiemannHypothesis
@@ -80,9 +81,101 @@ class TargetGateTests(unittest.TestCase):
         self.assertEqual(classify(SOURCE, "", 0, "'RiemannHypothesis.riemannHypothesis' depends on axioms: [sorryAx]")[0], "AXIOM_AUDIT_FAILED")
     def test_missing_axiom_probe_rejected(self):
         self.assertEqual(classify(SOURCE, "", 0, "")[0], "AXIOM_AUDIT_MISSING")
+    def test_direct_proof_term_accepted_with_kernel_axiom_audit(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis : RiemannHypothesis := AEGIS.certifiedRH",
+        )
+        audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
+        self.assertEqual(classify(source, "", 0, audit)[0], "FORMAL_RH_CLOSED")
+        self.assertEqual(classify(source, "", 0)[0], "COMPILED_AWAITING_AXIOM_AUDIT")
+        self.assertEqual(classify(source, "", 0,
+            "'RiemannHypothesis.riemannHypothesis' depends on axioms: [sorryAx]")[0],
+            "AXIOM_AUDIT_FAILED")
+
+    def test_multiline_proof_term_accepted_after_audit(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis\n    : _root_.RiemannHypothesis :=\n"
+            "    AEGIS.certifiedRH",
+        )
+        audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
+        self.assertEqual(classify(source, "", 0, audit)[0], "FORMAL_RH_CLOSED")
+
+    def test_direct_sorry_term_rejected(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13",
+            "theorem riemannHypothesis : RiemannHypothesis := sorry",
+        )
+        self.assertEqual(classify(source, "", 0)[0], "TARGET_SOURCE_INVALID")
+
     def test_placeholder_in_rh_rejected(self):
         source = SOURCE.replace("  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13", "  sorry")
         self.assertEqual(classify(source, "", 0)[0], "TARGET_SOURCE_INVALID")
+    def test_lean_comments_are_not_proof_holes(self):
+        source = SOURCE.replace(
+            "  apply AEGIS.RHRestrictedWeilCriterionV13",
+            "  -- sorryAx axiom are not proof steps\n"
+            "  /- nested /- sorry -/ admit -/\n"
+            "  apply AEGIS.RHRestrictedWeilCriterionV13",
+        )
+        audit = "'RiemannHypothesis.riemannHypothesis' depends on axioms: [propext]"
+        self.assertEqual(classify(source, "", 0, audit)[0], "FORMAL_RH_CLOSED")
+
+    def test_commented_out_target_cannot_fake_theorem(self):
+        source = SOURCE.replace(
+            "theorem riemannHypothesis : RiemannHypothesis := by",
+            "/- theorem riemannHypothesis : RiemannHypothesis := by",
+        ).replace("end RiemannHypothesis", "end RiemannHypothesis -/", 1)
+        self.assertEqual(classify(source, "", 0)[0], "TARGET_SOURCE_INVALID")
+
+    def test_axiom_report_is_scoped_to_official_declaration(self):
+        audit = (
+            "'RiemannHypothesis.riemannHypothesis' "
+            "depends on axioms: [propext, Classical.choice, Quot.sound]\n"
+            "'Unrelated.theorem' depends on axioms: [sorryAx]"
+        )
+        self.assertEqual(
+            classify(SOURCE, "GRH note mentioning sorryAx", 0, audit)[0],
+            "FORMAL_RH_CLOSED",
+        )
+
+    def test_negative_status_comments_do_not_reject_valid_sources(self):
+        self.assertEqual(
+            negative_defaults_in_content(
+                "scripts/probe.py",
+                "# rh_proven_unconditionally=false\n"
+                '"""RH_PROVEN_UNCONDITIONALLY = False"""\n',
+            ), [],
+        )
+        self.assertEqual(
+            negative_defaults_in_content(
+                "scripts/probe.sh", "# rh_proven_unconditionally=false\n"
+                "echo valid # rh_proven_unconditionally=false\n",
+            ), [],
+        )
+        self.assertEqual(
+            negative_defaults_in_content(
+                "research/rh/assembly/meta.json",
+                '{"description": "rh_proven_unconditionally=false", '
+                '"RH_PROVEN_UNCONDITIONALLY": null}',
+            ), [],
+        )
+        self.assertEqual(
+            negative_defaults_in_content(
+                "scripts/probe.py", "RH_PROVEN_UNCONDITIONALLY = False\n",
+            ), [(1, "RH_PROVEN_UNCONDITIONALLY")],
+        )
+        self.assertEqual(
+            negative_defaults_in_content(
+                "research/rh/assembly/meta.json",
+                '{"RH_PROVEN_UNCONDITIONALLY": false}',
+            ), [(0, "$.RH_PROVEN_UNCONDITIONALLY")],
+        )
+
     def test_grh_sorry_not_rh_placeholder(self):
         self.assertEqual(classify(SOURCE, EXPECTED, 1)[0], "OPEN_UNIVERSAL_ZERO_QUADRATIC")
     def test_success_with_compiler_error_rejected(self):

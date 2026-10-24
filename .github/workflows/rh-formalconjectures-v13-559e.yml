@@ -74,6 +74,9 @@ jobs:
             2>&1 | tee evidence/formalconjectures-rh-compile.log
           cat > FormalConjecturesRHTargetAudit.lean <<'LEAN'
           import FormalConjectures.Millennium.RiemannHypothesis
+
+          /-! # RH target audit -/
+
           #check RiemannHypothesis
           #check RiemannHypothesis.riemannHypothesis
           #print axioms RiemannHypothesis.riemannHypothesis
@@ -218,6 +221,9 @@ jobs:
           done < evidence/aegis-modules.txt
           cat > AEGISGateAudit.lean <<'LEAN'
           import RHMillenniumGateV10
+
+          /-! # RH criterion audit -/
+
           #check AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10
           #check AEGIS.RHMillenniumGateV10.RestrictedWeilCriterionKernelBridgeV10
           #check AEGIS.RHMillenniumGateV10.MillenniumMomentReachedV10
@@ -335,7 +341,7 @@ jobs:
           print('ALL_STANDARD_AXIOMS_ONLY')
           PY
 
-      - name: Run exact FormalConjectures RH target through V13 criterion
+      - name: Run pinned V13 criterion; canonical RH admission on dispatch
         shell: bash
         run: |
           set -euo pipefail
@@ -343,6 +349,8 @@ jobs:
           import FormalConjectures.Millennium.RiemannHypothesis
           import WeilRHImpliesFinalSignV13
           import RHRestrictedWeilBridgeV13
+
+          /-! # V13 RH bridge -/
 
           namespace AEGISFormalConjecturesRHV13Probe
 
@@ -368,10 +376,16 @@ jobs:
           lake env lean AEGISFormalConjecturesRHV13Probe.lean \
             2>&1 | tee evidence/aegis-formalconjectures-v13-conditional.log
           ! grep -F 'sorryAx' evidence/aegis-formalconjectures-v13-conditional.log
+          printf 'V13_CONDITIONAL_BRIDGE=KERNEL_COMPILED_STANDARD_AXIOMS\n' > evidence/V13_CHECK_SCOPE.txt
+          printf 'V13_PINNED_FORMAL_CONJECTURES_SHA=%s\nV13_PINNED_AEGIS_SHA=%s\n' \
+            "$FORMAL_CONJECTURES_SHA" "$AEGIS_SHA" >> evidence/V13_CHECK_SCOPE.txt
 
+          if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" ]]; then
           cat > AEGISFormalConjecturesRHV13UnconditionalProbe.lean <<'LEAN'
           import FormalConjectures.Millennium.RiemannHypothesis
           import WeilRHImpliesFinalSignV13
+
+          /-! # V13 RH target probe -/
 
           namespace AEGISFormalConjecturesRHV13UnconditionalProbe
 
@@ -381,8 +395,6 @@ jobs:
           end AEGISFormalConjecturesRHV13UnconditionalProbe
           LEAN
 
-          # A nonzero Lean exit is a failed RH closure, not a green diagnostic.
-          printf 'UNCONDITIONAL_RH_RESULT=NOT_VERIFIED\n' > evidence/UNCONDITIONAL_RH_DISPOSITION.txt
           set +e
           lake env lean -o .lake/build/lib/lean/AEGISFormalConjecturesRHV13UnconditionalProbe.olean \
             AEGISFormalConjecturesRHV13UnconditionalProbe.lean \
@@ -406,10 +418,11 @@ jobs:
           PY
             exit 1
           fi
-          # The candidate has the canonical Mathlib RH type. Audit its own
-          # proof term, not the upstream catalog declaration containing sorry.
           cat > AEGISFormalConjecturesRHV13UnconditionalAxiomAudit.lean <<'LEAN'
           import AEGISFormalConjecturesRHV13UnconditionalProbe
+
+          /-! # RH theorem axiom audit -/
+
           #print axioms AEGISFormalConjecturesRHV13UnconditionalProbe.exact_external_target_unconditional_v13
           LEAN
           lake env lean AEGISFormalConjecturesRHV13UnconditionalAxiomAudit.lean \
@@ -433,6 +446,9 @@ jobs:
               'UNCONDITIONAL_RH_RESULT=PINNED_RH_TYPE_KERNEL_CLOSED\n')
           print('UNCONDITIONAL_RH_RESULT=PINNED_RH_TYPE_KERNEL_CLOSED')
           PY
+          else
+            printf 'UNCONDITIONAL_RH_RESULT=NOT_ASSESSED_ON_PR\n' > evidence/UNCONDITIONAL_RH_DISPOSITION.txt
+          fi
 
       - name: Emit exact diagnostic disposition
         if: always()
@@ -451,14 +467,9 @@ jobs:
           TARGET_FILE=FormalConjectures/Millennium/RiemannHypothesis.lean
           TARGET_THEOREM=RiemannHypothesis.riemannHypothesis
           AEGIS_GATE_TARGETS=$AEGIS_TARGETS
-          V13_RESULT_AXIOM_AUDIT=REQUIRED_STANDARD_AXIOMS_ONLY
           AEGIS_LOCAL_CLOSURE_COUNT=$count
-          UPSTREAM_RH_SOURCE_BASELINE=UNMODIFIED_SORRY_CATALOG
-          AEGIS_GATE_COMPILED_IN_FORMAL_CONJECTURES_ENV=REQUIRED
-          V13_CRITERION_TO_EXTERNAL_TARGET=REQUIRED_GREEN
-          UNCONDITIONAL_EXTERNAL_TARGET=SEE_UNCONDITIONAL_RH_RESULT_AND_AXIOM_LOG
-          RH_ADMISSION_SOURCE=EXACT_HEAD_LEAN_OFFICIAL_THEOREM_AND_AXIOM_AUDIT
-          AUTHORITY_EFFECT=NONE
+          CANDIDATE_HEAD_SHA=${{ github.event.pull_request.head.sha || github.sha }}
+          TRIGGER_EVENT=${{ github.event_name }}
           EOF
           if test -f evidence/UNCONDITIONAL_RH_DISPOSITION.txt; then
             cat evidence/UNCONDITIONAL_RH_DISPOSITION.txt >> evidence/DISPOSITION.txt

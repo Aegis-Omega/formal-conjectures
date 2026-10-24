@@ -13,6 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -/
+import FormalConjectures.Millennium.RiemannHypothesis
 import AEGISOverlay.AEGIS_RH_Unconditional
 import AEGISOverlay.RHFiniteActualGramJoinV1
 import AEGISOverlay.RHActualLocalGramCoercivityV1
@@ -27,6 +28,8 @@ import AEGISOverlay.RHKreinMultiplicativeTransportV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import AEGISOverlay.RHFourLogThreeActualPrimeV1
+import AEGISOverlay.RHHexagram64MellinWeilFusionV1
+import AEGISOverlay.RHMellinDetectorCenteredV1
 import AEGISOverlay.RHBaguaRotatingTwoPairMellinV1
 import AEGISOverlay.RHNarrowDetectingTrigramDenseV1
 import AEGISOverlay.RHGlobalizationChainV13
@@ -46,6 +49,16 @@ set_option maxHeartbeats 0
 elab "#export_rh_proof_graph" : command => do
   let env ← getEnv
   let roots : List Name := [
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate",
+    "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate",
+    "AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_mellin_weil_zero_fusion",
+    "AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_prime_line_mellin_fusion",
+    "AEGIS.RHMellinDetectorCenteredV1.narrow_detector_strict_local_kernel_gap",
     "AEGIS.RHFiniteFinePartitionV1.exists_finite_smooth_local_partition",
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram",
     "AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support",
@@ -180,22 +193,24 @@ elab "#export_rh_proof_graph" : command => do
 
   /- Canonical proof search: check Lean definitional equality with the actual
      Mathlib RH target instead of comparing pretty-printed type strings.
-     Every theorem imported into the kernel environment is considered. -/
-  let (semanticRhNames, semanticTheoremsChecked) ← liftTermElabM do
+     Every imported declaration is considered, including def and opaque. -/
+  let (semanticRhNames, semanticTheoremsChecked, semanticDeclarationsChecked) ← liftTermElabM do
     let rhType : Expr := mkConst ``RiemannHypothesis
     let mut rhProofNames : Array Name := #[]
-    let mut checked : Nat := 0
+    let mut theoremsChecked : Nat := 0
+    let mut declarationsChecked : Nat := 0
     for (n, ci) in env.constants.toList do
+      declarationsChecked := declarationsChecked + 1
       if let .thmInfo _ := ci then
-        checked := checked + 1
-        if (← Lean.Meta.isDefEq ci.type rhType) then
-          rhProofNames := rhProofNames.push n
-    return (rhProofNames, checked)
+        theoremsChecked := theoremsChecked + 1
+      if (← Lean.Meta.isDefEq ci.type rhType) then
+        rhProofNames := rhProofNames.push n
+    return (rhProofNames, theoremsChecked, declarationsChecked)
   logInfo m!"RH_SEMANTIC_THEOREMS_CHECKED {semanticTheoremsChecked} DEFEQ_RH_TYPE_CANDIDATES {semanticRhNames.size}"
 
   /- Unlike root-dependency traversal, this independent inventory scans EVERY
      declaration already present in the imported kernel environment. A valid
-     theorem need not be referenced by one of our chosen 66 roots. The official
+     theorem need not be referenced by one of our selected roots. The official
      RH target with 'sorry' may also appear, so record full axiom dependencies
      instead of treating any matching theorem name as proof authority. -/
   let mut importedRh : Array Json := #[]
@@ -222,8 +237,20 @@ elab "#export_rh_proof_graph" : command => do
       ("scope", toJson "all constants in the compiled/imported Lean environment"),
       ("inspected_count", toJson inspected),
       ("semantic_theorems_checked", toJson semanticTheoremsChecked),
+      ("semantic_declarations_checked", toJson semanticDeclarationsChecked),
       ("defeq_target_type", toJson "RiemannHypothesis"),
       ("declarations", Json.arr importedRh)]).pretty
   logInfo m!"RH_IMPORTED_ENVIRONMENT_SCANNED {inspected} DEFEQ_TYPE_CANDIDATES {importedRh.size}"
 
 #export_rh_proof_graph
+
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate
+#print axioms AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_mellin_weil_zero_fusion
+#print axioms AEGIS.RHHexagram64MellinWeilFusionV1.every_moment_zero_packet_actual_prime_line_mellin_fusion
+#print axioms AEGIS.RHMellinDetectorCenteredV1.narrow_detector_strict_local_kernel_gap

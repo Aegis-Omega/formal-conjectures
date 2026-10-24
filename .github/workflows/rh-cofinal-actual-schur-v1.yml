@@ -21,6 +21,7 @@ on:
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
+      - 'AEGISOverlay/RHActualLogFourV1.lean'
       - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
       - 'AEGISOverlay/RHActualElevenSpectralV1.lean'
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
@@ -33,10 +34,14 @@ on:
       - 'AEGISOverlay/RHArchRow29V1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
+      - 'AEGISOverlay/RHCheckpointTrigramPacketSchurV1.lean'
+      - 'AEGISOverlay/RHActualCertificateCofinalJoinV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledErrorV1.lean'
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
+      - 'scripts/rh_submission_from_checkpoint.py'
+      - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
   workflow_dispatch:
 
@@ -332,7 +337,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -359,7 +364,6 @@ jobs:
               if m == "RHFeshbachCoreV1":
                   return pathlib.Path("research/rh/krein_ring_v1/RHFeshbachCoreV1.lean")
               # Reuse existing kernel-correct PR606 proof of translatePacket g 0 = g.
-              # The earlier AEGIS exact source ends in sorryAx on diagonal equality.
               if m == "WeilTranslationGapInvariantV10":
                   return pathlib.Path("AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean")
               # Reuse the existing corrected PR606 Mellin filter, preserving the
@@ -586,6 +590,12 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/AEGIS_RH_Unconditional.lean \
             evidence-cofinal/compile-AEGISOverlay_AEGIS_RH_Unconditional.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHCheckpointTrigramPacketSchurV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHCheckpointTrigramPacketSchurV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualCertificateCofinalJoinV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualCertificateCofinalJoinV1.log
           for thm in every_moment_zero_packet_two_actual_weil_packets \
             every_packet_actual_two_block_zero_quadratic; do
             grep -F "AEGIS.RHKreinMultiplicativeTransportV1.$thm" \
@@ -601,6 +611,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualMixedDefectV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualMixedDefectV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHActualLogFourV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualLogFourV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             research/rh/aegis_pr721_fb983fd/lean/RHMomentNumericsV14.lean.src \
             evidence-cofinal/compile-RHMomentNumericsV14.log
@@ -697,11 +710,7 @@ jobs:
             grep -F "AEGIS.RHActualElevenSpectralV1.$spectral_theorem" \
               evidence-cofinal/compile-AEGISOverlay_RHActualElevenSpectralV1.log
           done
-          # Keep unchanged SHA-locked originals and their complete compiler
-          # logs. Audit their compiled declarations in a fresh import-only
-          # Lean invocation; historical source linter warnings remain in the
-          # raw logs. The strict axiom checker and new-source warning gate
-          # are unchanged.
+          # Audit SHA-locked originals in a separate Lean import.
           for original in RHFineMomentPacketV3 RHRationalNinePacketPrimeWindowV1 RHFineDiagonalUpgradeV3 RHRationalGapNinePrimeBoundV1 RHRationalGapTenPrimeBoundV1; do
             python3 - "$original" <<'PY'
           import pathlib, re, sys
@@ -740,6 +749,31 @@ jobs:
           done
           echo "SCALED_WEIL_JOIN=KERNEL_PASS; CANONICAL_RH_ADMISSION=EVALUATED_BY_EXACT_HEAD_PROOF_GRAPH_EXPORT"
 
+      - name: Compile exact official RH target into the same proof environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FormalConjecturesUtil
+          mkdir -p .lake/build/lib/lean/FormalConjectures/Millennium
+          lake env lean \
+            -o .lake/build/lib/lean/FormalConjectures/Millennium/RiemannHypothesis.olean \
+            FormalConjectures/Millennium/RiemannHypothesis.lean \
+            2>&1 | tee evidence-cofinal/official-rh-compile.log
+          cat > RHOfficialImportedAxiomAudit.lean <<'LEAN'
+          import FormalConjectures.Millennium.RiemannHypothesis
+
+          /-!
+          # Official RH axiom audit
+          -/
+
+          #check RiemannHypothesis.riemannHypothesis
+          #print axioms RiemannHypothesis.riemannHypothesis
+          LEAN
+          lake env lean RHOfficialImportedAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/official-rh-axioms.log
+          grep -F "'RiemannHypothesis.riemannHypothesis'" \
+            evidence-cofinal/official-rh-axioms.log
+
       - name: Export actual proof dependencies and observed closure test
         shell: bash
         run: |
@@ -749,6 +783,13 @@ jobs:
             2>&1 | tee evidence-cofinal/assembly/graph-export.log
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
+
+      - name: Prepare official RH submission from existing kernel checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/test_rh_submission_from_checkpoint.py
+          python3 scripts/rh_submission_from_checkpoint.py
 
       - name: Preserve completed source-bound cofinal modules
         id: cofinal-checkpoint
