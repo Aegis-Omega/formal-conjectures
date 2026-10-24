@@ -1,0 +1,12 @@
+{
+  "schema": "aegis.rh.krein_trace_modules.v1",
+  "note": "The krein-ring job compiles these in order after CvSHplusBoundsV1, each with -DwarningAsError=true. Every audit name must depend only on propext, Classical.choice and Quot.sound. Add new K3 modules here instead of editing the workflow.",
+  "modules": [
+    {"name": "CvSMomentV1", "audit": ["trigAtom_moment", "trigPoly_moment", "half_add_ne_zero"]},
+    {"name": "CvSTraceCoefV1", "audit": ["coef_fT", "coef_uS", "normSq_coef_fT", "normSq_coef_uS_le",
+      "tail_sum_le", "norm_sub_trigPoly_le", "fT_tail", "uS_tail"]},
+    {"name": "CvSTraceCramerV1", "audit": ["cramer", "conj_q", "cond_r", "moment_conds"]},
+    {"name": "CvSAtomInversionV1", "audit": ["momentAtom_eq", "dsum_second", "shift_sum",
+      "sum_Icc_eq_range", "atom_sum"]}
+  ]
+}
