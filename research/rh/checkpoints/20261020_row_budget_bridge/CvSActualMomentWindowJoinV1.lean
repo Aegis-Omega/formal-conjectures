@@ -33,9 +33,10 @@ noncomputable section
 namespace AEGIS.CvSActualMomentWindowJoinV1
 open AEGIS.CvSMomentWindowBridgeV1 AEGIS.CvSMomentTraceV1
 open AEGIS.CvSActualGramWindowV1 AEGIS.CvSKreinScalarUniformV1
+open AEGIS.CvSActualRowConsumerV1 AEGIS.CvSProjectedPackedCertificateL12V1
 open AEGIS.CvSWindowCertV1 AEGIS.CvSLowBlockDecayV1 AEGIS.CvSMomentBasisV1
 open AEGIS.CvSLowBlockMatrixV1 AEGIS.CvSCrossCertV1 AEGIS.CvSGramTailV1
-open AEGIS.CvSFeshbachWindowV1 AEGIS.CvSRowTailV1 AEGIS.CvSWindowL12V1
+open AEGIS.CvSFeshbachWindowV1 AEGIS.CvSRowTailV1
 open AEGIS.CvSRoughV1 AEGIS.CvSKreinRoughV1 AEGIS.CvSPlancherelRoughV1
 open AEGIS.CvSTraceV1 AEGIS.CvSCrossBoundV1 AEGIS.CvSRingBridgeV1
 open AEGIS.CvSFeshbachWindowV1 AEGIS.CvSDigammaSeriesV1
