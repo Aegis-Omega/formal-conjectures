@@ -43,19 +43,18 @@ def split_license(data: bytes) -> bytes:
     if closing < 0:
         raise ValueError("UNTERMINATED_LICENSE")
     header = data[:closing + 3]
-    if any(s not in header for s in (
+    mandatory = (
         b'Licensed under the Apache License, Version 2.0 (the "License");',
         b"https://www.apache.org/licenses/LICENSE-2.0",
-        b"WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.",
-    )):
-        # The compact historical header does not include the full disclaimer.
-        if b"WITHOUT WARRANTIES" not in header and (
-            b'Licensed under the Apache License, Version 2.0 (the "License");' in header
-            and b"https://www.apache.org/licenses/LICENSE-2.0" in header
-            and header.endswith(b"the License."):
-            pass
-        else:
-            raise ValueError("UNRECOGNIZED_APACHE_HEADER")
+        b"You may not use this file except in compliance with the License.",
+    )
+    if any(part not in header for part in mandatory):
+        raise ValueError("UNRECOGNIZED_APACHE_HEADER")
+    if b"WITHOUT WARRANTIES" in header:
+        if b"WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied." not in header:
+            raise ValueError("INVALID_EXPANDED_APACHE_HEADER")
+    elif b"You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0" not in header:
+        raise ValueError("INVALID_COMPACT_APACHE_HEADER")
     tail = data[closing + 3:]
     # Exactly one or two newlines after the header, never arbitrary whitespace.
     if not tail.startswith(b"\n") or tail.startswith(b"\n\n\n"):
@@ -136,6 +135,7 @@ def preflight(repo: Path):
 def self_test():
     compact = (b'/-\nCopyright 2026 The Formal Conjectures Authors.\n'
                b'Licensed under the Apache License, Version 2.0 (the "License");\n'
+               b'You may not use this file except in compliance with the License.\n'
                b'You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0\n-/\n'
                b'import MathematicalSource\n')
     normalized = (b'/-\nCopyright 2026 The Formal Conjectures Authors.\n\n'
