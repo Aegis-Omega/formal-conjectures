@@ -5,6 +5,8 @@ on:
     paths:
       - 'research/rh/assembly/pr_branch_coherence_audit.py'
       - 'research/rh/assembly/rh_import_coherence_audit.py'
+      - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py'
+      - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py'
       - '.github/workflows/rh-all-pr-source-graph.yml'
   workflow_dispatch:
     inputs:
@@ -33,6 +35,15 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
+      - name: Regression test exact-source Apache header gate
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py --self-test
+      - name: Verify complete actual-input archive and historical/current source binding
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py \
+            --preflight --receipt actual_input_license_binding_receipt.json
       - name: Self-test the automatic source/PR DAG auditor
         run: python3 research/rh/assembly/pr_branch_coherence_audit.py --self-test
       - name: Scan ALL PRs and ALL branches plus exact source and check-run evidence
@@ -82,6 +93,7 @@ jobs:
           path: |
             pr_branch_coherence.json
             rh_import_coherence.json
+            actual_input_license_binding_receipt.json
             rh_source_recovery/
             pr_graph_receipt.txt
           if-no-files-found: warn
