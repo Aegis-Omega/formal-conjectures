@@ -34,18 +34,25 @@ env=os.environ.copy();env['LEAN_PATH']=str(ring)+':'+subprocess.check_output(['l
 r={'commit':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),'lean':subprocess.check_output(['lean','--version'],text=True).strip(),'mathlib':subprocess.check_output(['git','-C','.lake/packages/mathlib','rev-parse','HEAD'],text=True).strip(),'status':'RUNNING','source_archive_sha256':digest(arc),'source_json_sha256':source_json_sha,'worker_count':workers,'memory_limit_bytes':memory,'planned_modules':names,'scope':'Fresh original-import source compilation of staged source products, 2*pi-normalized Q enclosures, literal analytic box identities and the actual finite relative-budget producer. Not RH.' ,'source_patch_provenance':{'earlier_runtime_patch_commit':'7020f3761f48bd9aad8a46f8dbddc4c1b223adfb','current_source':'directly bound to repaired ACTUAL_INPUT_SOURCES.zip; explicit Fin141 binders and normalized integer coercion'},'runs':[]}
 r['original_source_license_bindings']=original_source_license_bindings
 assert r['mathlib']=='0df444a360eaa60ab8c11dca51a86af692955474'
-prefix=json.loads((repo/'ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json').read_text())
-assert prefix['status']=='VALIDATED_SUCCESSFUL_SOURCE_IDENTICAL_PREFIX'
-assert prefix['source_archive_sha256']==digest(arc)
-axiom_receipt=json.loads((repo/'ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json').read_text())
-assert axiom_receipt['status']=='PASS' and axiom_receipt['prefix_receipt_sha256']==digest(repo/'ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json')
-assert axiom_receipt['source_archive_sha256']==digest(arc)
-reuse=prefix['reused_modules']
-for name,item in reuse.items():
- assert digest(out/(name+'.lean'))==item['run']['source_sha256']
- assert digest(ring/(name+'.olean'))==item['binary_sha256']
-r['dependency_prefix_reuse']={k:prefix[k] for k in ['source_run','source_commit','source_run_conclusion','old_terminal_status','validated_binary_count']}
-r['scope']='Validated source-identical dependency prefix reuse followed by fresh original-import compilation of repaired actual-source and consumer modules. Each entry records reuse separately. Not RH.'
+# ACTUAL_INPUT_FRESH=1: the prefix checkpoint was rejected or has expired, so every
+# module is compiled from the archived sources and nothing is reused.
+if os.environ.get('ACTUAL_INPUT_FRESH')=='1':
+ reuse={}
+ r['dependency_prefix_reuse']=None
+ r['scope']='Fresh original-import compilation of every staged actual-source and consumer module; no dependency reuse. Not RH.'
+else:
+ prefix=json.loads((repo/'ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json').read_text())
+ assert prefix['status']=='VALIDATED_SUCCESSFUL_SOURCE_IDENTICAL_PREFIX'
+ assert prefix['source_archive_sha256']==digest(arc)
+ axiom_receipt=json.loads((repo/'ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json').read_text())
+ assert axiom_receipt['status']=='PASS' and axiom_receipt['prefix_receipt_sha256']==digest(repo/'ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json')
+ assert axiom_receipt['source_archive_sha256']==digest(arc)
+ reuse=prefix['reused_modules']
+ for name,item in reuse.items():
+  assert digest(out/(name+'.lean'))==item['run']['source_sha256']
+  assert digest(ring/(name+'.olean'))==item['binary_sha256']
+ r['dependency_prefix_reuse']={k:prefix[k] for k in ['source_run','source_commit','source_run_conclusion','old_terminal_status','validated_binary_count']}
+ r['scope']='Validated source-identical dependency prefix reuse followed by fresh original-import compilation of repaired actual-source and consumer modules. Each entry records reuse separately. Not RH.'
 # The cast-zero repair is now part of the archived, hash-bound Lean source.
 logs=[];audits={};rp=repo/'ACTUAL_INPUT_CI_RECEIPT.json';lp=repo/'actual-input-replay.log'
 def compile_one(name):
