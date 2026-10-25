@@ -2,14 +2,20 @@
   "schema": "aegis.rh.k3-source-graft.v1",
   "base_exact_sha": "b4170d0c1c39940948adcbd89ec4fcc1b4c2e061",
   "origin_exact_sha": "fb0ac3923e11cb537635e133421a0b3c002191d6",
-  "intent": "carry only source-exact K3a–K3d and their compiler/audit manifest into PR90; preserve all original proof statements and dependencies; no RH closure claim",
+  "k3e_origin_exact_sha": "659709e5de84210100e5195309bcd056d955902a",
+  "intent": "carry only source-exact K3a–K3d (from origin_exact_sha), K3e (from k3e_origin_exact_sha) and their compiler/audit manifest into PR90; preserve all original proof statements and dependencies; no RH closure claim",
   "copied_blobs": {
     "CvSHplusBoundsV1.lean": "b8828f06b6d91601003983140b24fa16bbb56a02",
     "CvSTraceCoefV1.lean": "61f99eac1ac43d1a2145364cdd0622e8e61e7700",
     "CvSTraceCramerV1.lean": "1f1d18a01e709a75b368b11b70100ae76831a49c",
     "CvSAtomInversionV1.lean": "f04dddd8f983aad5052589ba15c725489a94da79",
     "CvSTraceDistV1.lean": "96484b41ab9712fec4d4118848806e9b808a40ed",
-    "tools/krein_trace_modules.json": "33af195778cf724d9c4f81c7c8bd8e3440fbb22d"
+    "CvSTraceGramPertV1.lean": "ef378536812113ba123d42d34500384a6731384c",
+    "CvSTraceGammaV1.lean": "544c519db47d03ca43186896e410469581d46682",
+    "CvSTraceCellL65V1.lean": "053a56a20a03923810fe63b60a91cdadee1a0438",
+    "CvSTraceIntegralV1.lean": "aad3861c38967d3e7a2921c4e737e5279834ff60",
+    "CvSTraceCertL65V1.lean": "159a4726cf95e279c9d68f91adbe194a42b3ccb0",
+    "tools/krein_trace_modules.json": "99a4dff34ca6a16a75e98214405c2c14397c4809"
   },
   "reused_identical_blobs": {
     "CvSPrimeBlockV1.lean": "70e3769f79371727c543725b70600b3039af3de6",
@@ -26,9 +32,9 @@
   },
   "proof_obligations": {
     "K3a_to_K3d": "must pass Lean compile and transitive axiom audit at new graft SHA",
-    "K3e": "open",
-    "K3f": "open",
-    "detG_nonzero": "open",
+    "K3e": "proved: CvSTraceCertL65V1.trace_premises_L65, compiled and axiom-audited by this workflow via krein_trace_modules.json",
+    "K3f": "proved: CvSWindowL65V1.window_L65 (research/rh/checkpoints/20261020_row_budget_bridge), from-source build in rh-cvs-window-l65-source.yml",
+    "detG_nonzero": "not a separate premise: CvSTraceGammaV1.det_pert_ge gives the determinant lower bound used by CvSTraceCellL65V1.cell_sound in every cell",
     "canonical_RH": "not claimed"
   }
 }
