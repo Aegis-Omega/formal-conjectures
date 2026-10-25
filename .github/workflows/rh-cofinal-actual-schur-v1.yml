@@ -26,6 +26,7 @@ on:
       - 'AEGISOverlay/RHActualElevenSpectralV1.lean'
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
+      - 'AEGISOverlay/RHUniformBudgetObstructionV1.lean'
       - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean'
       - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
@@ -337,7 +338,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -631,6 +632,9 @@ jobs:
             AEGISOverlay/RHActualUniversalFineGramV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualUniversalFineGramV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHUniformBudgetObstructionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHUniformBudgetObstructionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHScaleRowCompositionV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
@@ -839,33 +843,3 @@ jobs:
           (cache/"source-blobs.txt").write_text("".join(blobs))
           (cache/"oleans.sha256").write_text("".join(hashes))
           (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
-          with open(__import__("os").environ["GITHUB_OUTPUT"],"a") as out:
-              out.write("count="+str(len(accepted))+"\n")
-          print("SAVED_SOURCE_BOUND_PARTIAL_MODULES",len(accepted))
-          PY
-
-      - name: Save partial cofinal checkpoint
-        if: always() && steps.cofinal-checkpoint.outputs.count != '' && steps.cofinal-checkpoint.outputs.count != '0'
-        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
-        with:
-          path: .rh-cofinal-checkpoint
-          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
-
-      - name: Record exact-head receipt
-        if: always()
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p evidence-cofinal
-          git rev-parse HEAD > evidence-cofinal/formal-conjectures-sha.txt
-          git -C .lake/packages/mathlib rev-parse HEAD > evidence-cofinal/mathlib-sha.txt || true
-          lean --version > evidence-cofinal/lean-version.txt || true
-
-      - name: Upload evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: rh-cofinal-actual-schur-${{ github.sha }}-${{ github.run_id }}
-          path: evidence-cofinal/
-          if-no-files-found: warn
-          retention-days: 30
