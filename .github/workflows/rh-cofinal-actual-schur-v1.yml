@@ -843,3 +843,33 @@ jobs:
           (cache/"source-blobs.txt").write_text("".join(blobs))
           (cache/"oleans.sha256").write_text("".join(hashes))
           (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
+          with open(__import__("os").environ["GITHUB_OUTPUT"],"a") as out:
+              out.write("count="+str(len(accepted))+"\n")
+          print("SAVED_SOURCE_BOUND_PARTIAL_MODULES",len(accepted))
+          PY
+
+      - name: Save partial cofinal checkpoint
+        if: always() && steps.cofinal-checkpoint.outputs.count != '' && steps.cofinal-checkpoint.outputs.count != '0'
+        uses: actions/cache/save@5a3ec84eff668545956fd18022155c47e93e2684
+        with:
+          path: .rh-cofinal-checkpoint
+          key: rh-cofinal-partial-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.MATHLIB_SHA }}-${{ env.AEGIS_SHA }}-${{ env.LI_CRITERION_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Record exact-head receipt
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-cofinal
+          git rev-parse HEAD > evidence-cofinal/formal-conjectures-sha.txt
+          git -C .lake/packages/mathlib rev-parse HEAD > evidence-cofinal/mathlib-sha.txt || true
+          lean --version > evidence-cofinal/lean-version.txt || true
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-cofinal-actual-schur-${{ github.sha }}-${{ github.run_id }}
+          path: evidence-cofinal/
+          if-no-files-found: warn
+          retention-days: 30
