@@ -27,6 +27,7 @@ on:
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
       - 'AEGISOverlay/RHUniformBudgetObstructionV1.lean'
+      - 'AEGISOverlay/RHMixedBudgetRefinementV1.lean'
       - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean'
       - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
@@ -338,7 +339,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -634,6 +635,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHUniformBudgetObstructionV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHUniformBudgetObstructionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHMixedBudgetRefinementV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHMixedBudgetRefinementV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHScaleRowCompositionV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
