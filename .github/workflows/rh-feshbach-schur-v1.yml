@@ -429,7 +429,7 @@ jobs:
           lean -DwarningAsError=true -o "$RING/CvSK3PR90InteropV1.olean" research/rh/feshbach_lean_v1/CvSK3PR90InteropV1.lean 2>&1 | tee -a ring.log
           python3 research/rh/feshbach_lean_v1/tools/gen_projected_entry.py
           python3 - <<'PY'
-          import re
+          import json, re
           log = open('ring.log').read()
           if 'sorryAx' in log:
               raise SystemExit('SORRY_AXIOM')
