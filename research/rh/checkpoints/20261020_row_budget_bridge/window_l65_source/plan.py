@@ -78,6 +78,13 @@ for mod in ['CvSMomentTraceV1', 'CvSMomentWindowBridgeV1', 'CvSActualMomentWindo
 for r in json.loads(Path('research/rh/feshbach_lean_v1/tools/krein_trace_modules.json').read_text())['modules']:
     put(r['name'], f"research/rh/feshbach_lean_v1/{r['name']}.lean", True, None, 'k3json')
 put('CvSHplusBoundsV1', 'research/rh/feshbach_lean_v1/CvSHplusBoundsV1.lean', True, None, 'k3')
+# 6. window exhaustion and the V13 RH bridge, for names no earlier source provides. The ported
+# copies differ on purpose, so the first directory wins, in the order of
+# aegis-pr606-fork-replay-v1.yml: Compat, then Source, then the PR606 port.
+for d, origin in [('AegisRH/PR606/Compat', 'pr606-compat'), ('AegisRH/PR606/Source', 'pr606-source'),
+                  ('AegisRH/PR606', 'pr606'), ('AegisRH/SmallWindow', 'small-window')]:
+    for p in sorted(Path(d).glob('*.lean')): src.setdefault(p.stem, (p, False, None, origin))
+put('RHWindowL65ExhaustionV1', B/'RHWindowL65ExhaustionV1.lean', True, None, 'script')
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):

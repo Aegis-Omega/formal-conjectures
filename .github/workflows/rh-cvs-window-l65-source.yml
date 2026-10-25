@@ -11,6 +11,7 @@ on:
       - .github/workflows/rh-cvs-window-l65-source.yml
       - research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/*.py
       - research/rh/checkpoints/20261020_row_budget_bridge/CvSWindowL65V1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/RHWindowL65ExhaustionV1.lean
       - research/rh/checkpoints/20261020_row_budget_bridge/CvSActualMomentWindowJoinV1.lean
   workflow_dispatch:
 
@@ -85,8 +86,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          if grep -n -E '\bsorry\b|\badmit\b|^axiom ' research/rh/checkpoints/20261020_row_budget_bridge/CvSWindowL65V1.lean; then exit 1; fi
-          python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/plan.py CvSWindowL65V1
+          B=research/rh/checkpoints/20261020_row_budget_bridge
+          if grep -n -E '\bsorry\b|\badmit\b|^axiom ' "$B/CvSWindowL65V1.lean" "$B/RHWindowL65ExhaustionV1.lean"; then exit 1; fi
+          # The exhaustion join imports CvSWindowL65V1, so its DAG contains the whole window chain.
+          python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1
 
       - name: Compile every module from source
         shell: bash
