@@ -46,7 +46,7 @@ def split_license(data: bytes) -> bytes:
     mandatory = (
         b'Licensed under the Apache License, Version 2.0 (the "License");',
         b"https://www.apache.org/licenses/LICENSE-2.0",
-        b"You may not use this file except in compliance with the License.",
+        b"you may not use this file except in compliance with the License.",
     )
     if any(part not in header for part in mandatory):
         raise ValueError("UNRECOGNIZED_APACHE_HEADER")
@@ -135,12 +135,12 @@ def preflight(repo: Path):
 def self_test():
     compact = (b'/-\nCopyright 2026 The Formal Conjectures Authors.\n'
                b'Licensed under the Apache License, Version 2.0 (the "License");\n'
-               b'You may not use this file except in compliance with the License.\n'
+               b'you may not use this file except in compliance with the License.\n'
                b'You may obtain a copy of the License at https://www.apache.org/licenses/LICENSE-2.0\n-/\n'
                b'import MathematicalSource\n')
     normalized = (b'/-\nCopyright 2026 The Formal Conjectures Authors.\n\n'
                   b'Licensed under the Apache License, Version 2.0 (the "License");\n'
-                  b'You may not use this file except in compliance with the License.\n'
+                  b'you may not use this file except in compliance with the License.\n'
                   b'You may obtain a copy of the License at\n\n'
                   b'    https://www.apache.org/licenses/LICENSE-2.0\n\n'
                   b'Unless required by applicable law or agreed to in writing, software\n'
