@@ -21,6 +21,13 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/run_ci_actual_moment_window_join.py
       - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
       - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
+  pull_request:
+    branches:
+      - proof/rh-cvs-checked-low-bridge-v1
+    paths:
+      - .github/workflows/rh-cvs-actual-row-replay.yml
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py
   workflow_dispatch:
 
 concurrency:
@@ -47,6 +54,7 @@ jobs:
       - name: Checkout exact head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -282,7 +290,7 @@ jobs:
         continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: source-cross-row-${{ github.sha }}
+          name: source-cross-row-${{ github.event.pull_request.head.sha || github.sha }}
           retention-days: 1
           include-hidden-files: true
           if-no-files-found: warn
@@ -319,6 +327,7 @@ jobs:
       - name: Checkout exact receipt tooling
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Recover the successful source-bound graph without rebuilding Lean
         env:
