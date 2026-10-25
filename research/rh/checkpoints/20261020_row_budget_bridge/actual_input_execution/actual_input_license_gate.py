@@ -158,7 +158,7 @@ def self_test():
         item = validate(name, origin, compact, normalized)
         assert item["classification"] == "PINNED_APACHE_HEADER_ONLY"
         failures = [
-            (compact, normalized + b"\ntheorem compromised : True := by trivial", "MATHEMATICAL_SOURCE_DIFF"),
+            (compact, normalized + b"\ntheorem compromised : True := by trivial", "UNAUTHORIZED_SOURCE_CHANGE"),
             (compact, normalized.replace(b"import MathematicalSource", b"import Other"), "UNAUTHORIZED_SOURCE_CHANGE"),
             (compact + b"x", normalized, "ARCHIVED_SOURCE_MISMATCH"),
         ]
@@ -169,6 +169,16 @@ def self_test():
                 assert message in str(err), (message, str(err))
             else:
                 raise AssertionError("FAIL_OPEN:" + message)
+        # Even if the recorded normalized digest were tampered with, a changed
+        # proof body must still be rejected by the independent source comparison.
+        compromised = normalized + b"\ntheorem compromised : True := by trivial"
+        EXPECTED_EXISTING[name] = (digest(compact), digest(compromised))
+        try:
+            validate(name, origin, compact, compromised)
+        except ValueError as err:
+            assert "MATHEMATICAL_SOURCE_DIFF" in str(err)
+        else:
+            raise AssertionError("FAIL_OPEN_BODY_DIFFERENCE")
     finally:
         EXPECTED_EXISTING[name] = old
     print("LICENSE_GATE_SELF_TEST_PASS")
