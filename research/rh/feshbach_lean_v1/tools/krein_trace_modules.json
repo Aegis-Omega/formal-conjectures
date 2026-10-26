@@ -1,6 +1,6 @@
 {
   "schema": "aegis.rh.krein_trace_modules.v1",
-  "note": "The krein-ring job compiles these in order after CvSHplusBoundsV1, each with -DwarningAsError=true. Every audit name must depend only on propext, Classical.choice and Quot.sound. Add new K3 modules here instead of editing the workflow.",
+  "note": "The krein-ring job compiles these in order after CvSHplusBoundsV1, each with -DwarningAsError=true. Every audit name must depend only on propext, Classical.choice and Quot.sound. Add new K3 modules, and the window-specific tau and diagonal modules they need, here instead of editing the workflow.",
   "modules": [
     {"name": "CvSMomentV1", "audit": ["trigAtom_moment", "trigPoly_moment", "half_add_ne_zero"]},
     {"name": "CvSTraceCoefV1", "audit": ["coef_fT", "coef_uS", "normSq_coef_fT", "normSq_coef_uS_le",
@@ -18,8 +18,17 @@
     {"name": "CvSTraceIntegralV1", "audit": ["volume_cellSet_le", "sFun_measurable", "integrable_mul",
       "integral_mul_le", "chain_cover", "slack_ge", "premises_of_cells", "gap_of_T"]},
     {"name": "CvSTraceCertL65V1", "audit": ["all_ok", "total_le", "trace_premises_L65"]},
-    {"name": "CvSTraceCellL43V1", "audit": ["e23_bounds", "mul_mem", "trig_mem", "A_cell", "tau_le",
-      "closed_le", "N0_le", "N1_le", "cell_sound"]},
+    {"name": "CvSTauL43V1", "audit": ["e23_bounds", "head_bounds", "tauCheck_sound"]},
+    {"name": "CvSTauL43DataV1", "audit": ["tauBatch0_true", "source_integral_mem"]},
+    {"name": "CvSTauPrimeL43V1", "audit": ["primeSum_eq", "prime_bounds", "tauFullCheck_sound",
+      "tauFullAll_true", "tau_mem"]},
+    {"name": "CvSTauR1SourceL43V1", "audit": ["source_integral_mem_R1"]},
+    {"name": "CvSTauR1PrimeL43V1", "audit": ["tauFullCheckR1_sound", "tau_mem_R1"]},
+    {"name": "CvSTauFarL43V1", "audit": ["tau_abs_le_far"]},
+    {"name": "CvSDiagL43V1", "audit": ["D_bounds", "cvsEntry_diag_eq", "Pd_bounds", "diagCheck_sound",
+      "diagAll_true", "diag_mem", "cvsEntry_diag_neg"]},
+    {"name": "CvSTraceCellL43V1", "audit": ["mul_mem", "trig_mem", "A_cell", "tau_le", "closed_le",
+      "N0_le", "N1_le", "cell_sound"]},
     {"name": "CvSTraceIntegralL43V1", "audit": ["volume_cellSet_le", "sFun_measurable",
       "integrable_mul", "integral_mul_le", "chain_cover", "slack_ge", "premises_of_cells", "gap_of_T"]},
     {"name": "CvSTraceCertL43V1", "audit": ["all_ok", "total_le", "trace_premises_L43"]}
