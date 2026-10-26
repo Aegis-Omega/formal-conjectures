@@ -1,6 +1,7 @@
 # The next window, 2r ≤ 4/3: numerical feasibility (2026-10-26)
 
-Status: validated numerics in Python, not Lean. One window only. Not RH.
+Status: numerics validated in Python; the trace side and the τ and diagonal boxes are in Lean
+(see "Lean port status"), the row certificates are not. One window only. Not RH.
 
 `RHWindowL65ExhaustionV1.rh_iff_windows_above_three_fifths` reduces RH to the log windows
 L > 3/5. The next window of the same route is the trial window LT = 4/3 (2r ≤ 4/3, frontier 2/3).
@@ -58,15 +59,38 @@ Each script reproduces the existing certificate before it is used at 4/3:
 | 4/3 | 40.1 | 0.836 (validated, κ = 44) | 3.385 | 1.061 |
 | 11/8 | 48.6 (float) | 0.895 | 3.524 | 1.039 |
 
-## What a Lean port needs
+## Row parameters for the Lean port: NP = 200, κ = 52
 
-The window-L65 DAG has about 900 generated modules and 23 hand-written modules with 6/5 in
-their statements or data. For LT = 4/3:
-- τ boxes for k ≤ 470, the diagonal boxes, the |τ| ≤ 13 tail bound, the projected entries, the
-  packed and relative row certificates (κ = 44, NP = 400), the full row table and the actual
-  inputs: regenerated at 4/3;
-- the trace cell checker with e^{−2/3} enclosures and 1430 cells;
-- the join and the window theorem with 4/3 and κ = 44, then `window_le_two_thirds` and
-  RH ↔ windows L > 2/3.
+With the certified trace bound T = 7/2 of `CvSTraceCertL43V1`, `hk` allows
+κ ≤ (2π)²·(4/3)·(8/5 − 7/(4π)) ≈ 54.9. NP = 150, the value used at 6/5, does not reach that
+(float κ ≈ 57 at the best eps). NP = 200 does: `validate_rows_gram_lt.py 4/3 200 7/10 52 0.0000003`
+gives PASS, robust to |dG| ≤ 3e-7, and needs a gap ≥ 0.9879. κ = 48 passes only without the
+robustness margin. This needs 260 rows outside the low block (160 at 6/5, 660 at NP = 400). The
+log is `VALIDATION_ROWS_NP200.log`.
+
+## Lean port status
+
+Kernel-checked, every listed name audited to `propext`, `Classical.choice`, `Quot.sound`
+(`feshbach_lean_v1/tools/krein_trace_modules.json`, krein-ring job):
+- trace and Krein premises: `CvSTraceCellL43V1`, `CvSTraceIntegralL43V1`, `CvSTraceCertL43V1`
+  (1430 cells, m = 8/5, T = 7/2, `hk` with κ = 52);
+- τ_k for 1 ≤ k ≤ 200 and every prime cutoff M ≥ 3: `CvSTauL43V1` (the source check, e^{−2/3}),
+  `CvSTauL43DataV1` (k ≤ 70), `CvSTauPrimeL43V1` (prime part, `tau_mem`),
+  `CvSTauR1SourceL43V1` and `CvSTauR1PrimeL43V1` (71 ≤ k ≤ 200, `tau_mem_R1`);
+- |τ_n| ≤ 13 for |n| ≥ 71: `CvSTauFarL43V1`;
+- the diagonal `cvsEntry M (4/3) n n`, n ≤ 70: `CvSDiagL43V1`.
+The data come from `tools/gen_tau43.py`, `gen_tau_prime43.py`, `gen_tau_r1_43.py` and
+`gen_diag43.py`. Each is a port of the 6/5 generator; at 6/5 the originals reproduce the committed
+data exactly. Every 4/3 box was also compared with mpmath at 30 digits.
+
+Not built yet:
+- the projected low block at 4/3: the packed 139 × 139 certificate (`certR`, `certL`, `certI`,
+  regenerated), the projected entries and their fast replay, the basis and low coercivity;
+- the relative row certificate with κ = 52, NP = 200, and the Gram tail at 4/3;
+- the full row table and the actual inputs;
+- the join, the window theorem at 4/3, `window_le_two_thirds` and RH ↔ windows L > 2/3.
+At 6/5 the packed and relative certificates are generated Lean files of 1–2 MB each and the
+actual-input sources a 28 MB archive, so at 4/3 they have to be generated in CI from committed
+generators.
 
 Not RH.

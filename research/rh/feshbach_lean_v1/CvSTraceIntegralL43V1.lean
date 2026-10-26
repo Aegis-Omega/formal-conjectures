@@ -272,9 +272,9 @@ theorem premises_of_cells (hk : constOk k = true) {cs : List Cell} (h : ∀ c �
     rw [← mul_add]
     exact mul_nonneg hW (by linarith)
 
-/-- `hk` of the window theorem at `L = 4/3`, with `κ = 44`, `m = 8/5` and any `T ≤ 7/2`. -/
+/-- `hk` of the window theorem at `L = 4/3`, with `κ = 52`, `m = 8/5` and any `T ≤ 7/2`. -/
 theorem gap_of_T {T : ℚ} (hT : T ≤ 7 / 2) :
-    44 ≤ (2 * Real.pi) ^ 2 * (4 / 3 : ℝ) * (8 / 5 - (T : ℝ) / (2 * Real.pi)) := by
+    52 ≤ (2 * Real.pi) ^ 2 * (4 / 3 : ℝ) * (8 / 5 - (T : ℝ) / (2 * Real.pi)) := by
   have hp := pi_bounds.1
   have hpos := Real.pi_pos
   have e : (2 * Real.pi) ^ 2 * (4 / 3 : ℝ) * (8 / 5 - (T : ℝ) / (2 * Real.pi)) =

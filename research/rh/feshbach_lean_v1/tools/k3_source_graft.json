@@ -35,7 +35,7 @@
     "K3e": "proved: CvSTraceCertL65V1.trace_premises_L65, compiled and axiom-audited by this workflow via krein_trace_modules.json",
     "K3f": "proved: CvSWindowL65V1.window_L65 (research/rh/checkpoints/20261020_row_budget_bridge), from-source build in rh-cvs-window-l65-source.yml",
     "detG_nonzero": "not a separate premise: CvSTraceGammaV1.det_pert_ge gives the determinant lower bound used by CvSTraceCellL65V1.cell_sound in every cell",
-    "K3e_L43": "proved: CvSTraceCertL43V1.trace_premises_L43 (L = 4/3, m = 8/5, T = 7/2, kappa = 44), compiled and axiom-audited by this workflow via krein_trace_modules.json; of the row side at 4/3 only the tau boxes (k <= 200), the far bound and the diagonal are built",
+    "K3e_L43": "proved: CvSTraceCertL43V1.trace_premises_L43 (L = 4/3, m = 8/5, T = 7/2, kappa = 52), compiled and axiom-audited by this workflow via krein_trace_modules.json; of the row side at 4/3 only the tau boxes (k <= 200), the far bound and the diagonal are built",
     "canonical_RH": "not claimed"
   }
 }

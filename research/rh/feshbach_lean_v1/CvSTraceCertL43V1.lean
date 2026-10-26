@@ -26,7 +26,7 @@ All checks run in the kernel (`decide +kernel`, no `native_decide`), in 34 chunk
 
 `trace_premises_L43` gives, for every trace family `V` (the 139 atoms and the two exponentials),
 the premises `hsm`, `hsB`, `hs0`, `hcert` (with `M = 3`, `m = 8/5`, no `H` and no `d`), `hR`, `hT`
-and `hk` (with `κ = 44`) of the window theorem at `L = 4/3`, with `T = 7/2`.
+and `hk` (with `κ = 52`) of the window theorem at `L = 4/3`, with `T = 7/2`.
 
 Not RH.
 -/
@@ -269,7 +269,7 @@ theorem total_le : total K0 cells ≤ Tq := by
   refine le_trans t33 ?_
   norm_num [Tq]
 
-/-- **The trace and Krein premises at L = 4/3** (`M = 3`, `m = 8/5`, `T = 7/2`, `κ = 44`), for every
+/-- **The trace and Krein premises at L = 4/3** (`M = 3`, `m = 8/5`, `T = 7/2`, `κ = 52`), for every
 trace family `V` of the 139 atoms and the two exponentials. -/
 theorem trace_premises_L43 {V : Fin 141 → ℝ → ℂ} (hV : TraceFamily (4 / 3) V)
     (hVc : ∀ i, Continuous (V i)) :
@@ -277,7 +277,7 @@ theorem trace_premises_L43 {V : Fin 141 → ℝ → ℂ} (hV : TraceFamily (4 / 
       (∀ t : ℝ, 0 ≤ Wt t * (ScertM 3 t - 8 / 5) + Wt t * sFun cells t) ∧
       Integrable (fun t => sFun cells t * trialDist 0 (4 / 3) V (cfC h43) t) ∧
       (∫ t, sFun cells t * trialDist 0 (4 / 3) V (cfC h43) t) ≤ (Tq : ℝ) ∧
-      44 ≤ (2 * Real.pi) ^ 2 * (4 / 3 : ℝ) * (8 / 5 - (Tq : ℝ) / (2 * Real.pi)) := by
+      52 ≤ (2 * Real.pi) ^ 2 * (4 / 3 : ℝ) * (8 / 5 - (Tq : ℝ) / (2 * Real.pi)) := by
   obtain ⟨h1, h2, h3, h4, h5, h6⟩ := premises_of_cells K0_ok all_ok (by norm_num) chain_ok tail_log
     tail_ok total_le hV hVc
   refine ⟨h1, h2, h3, fun t => ?_, h5, h6, gap_of_T (by norm_num [Tq])⟩

@@ -16,6 +16,7 @@ limitations under the License.
 
 import CvSTraceGammaV1
 import CvSHplusBoundsV1
+import CvSTauL43V1
 
 /-!
 # One cell of the trace certificate at L = 4/3
@@ -46,6 +47,7 @@ open AEGIS.CvSTauL12V1 AEGIS.CvSTauPrimeL12V1 AEGIS.CvSDiagL12V1 AEGIS.CvSHplusB
 open AEGIS.CvSPrimeBlockV1 AEGIS.CvSFourierIntervalV1 AEGIS.CvSTraceCoefV1 AEGIS.CvSTraceCramerV1
 open AEGIS.CvSTraceDistV1 AEGIS.CvSTraceGramPertV1 AEGIS.CvSTraceGammaV1 AEGIS.CvSTraceV1
 open AEGIS.RHKreinZetaBridgeV1 AEGIS.RHKreinZetaBridgeV3
+open AEGIS.CvSTauL43V1 (e23Lo e23Hi e23_bounds)
 
 /-! ### Rational interval products -/
 
@@ -93,16 +95,6 @@ theorem mul_mem {x y : ℝ} {x1 x2 y1 y2 : ℚ} (hx1 : (x1 : ℝ) ≤ x) (hx2 : 
     exact (lin_le hy1 hy2).trans (max_le (hA.trans (max_le t11 t21)) (hB.trans (max_le t12 t22)))
 
 /-! ### Constants -/
-
-def e23Lo : ℚ := 158894902126248433646108355 / 309485009821345068724781056
-def e23Hi : ℚ := 635579608504993734584433421 / 1237940039285380274899124224
-
-theorem e23_bounds : (e23Lo : ℝ) ≤ Real.exp (-2 / 3) ∧ Real.exp (-2 / 3) ≤ e23Hi := by
-  have h := Real.exp_bound (x := -2 / 3) (by norm_num [abs_div]) (n := 24) (by norm_num)
-  rw [abs_le] at h
-  simp only [Finset.sum_range_succ, Finset.sum_range_zero, Nat.factorial] at h
-  norm_num at h
-  constructor <;> simp only [e23Lo, e23Hi] <;> push_cast <;> linarith [h.1, h.2]
 
 def xL : ℚ := e23Lo
 def xH : ℚ := e23Hi
@@ -851,7 +843,6 @@ theorem cell_sound {m : ℚ} {k : Consts} (hk : constOk k = true) {c : Cell} (hc
 
 end AEGIS.CvSTraceCellL43V1
 
-#print axioms AEGIS.CvSTraceCellL43V1.e23_bounds
 #print axioms AEGIS.CvSTraceCellL43V1.mul_mem
 #print axioms AEGIS.CvSTraceCellL43V1.trig_mem
 #print axioms AEGIS.CvSTraceCellL43V1.A_cell
