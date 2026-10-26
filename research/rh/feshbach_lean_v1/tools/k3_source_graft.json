@@ -15,7 +15,7 @@
     "CvSTraceCellL65V1.lean": "053a56a20a03923810fe63b60a91cdadee1a0438",
     "CvSTraceIntegralV1.lean": "aad3861c38967d3e7a2921c4e737e5279834ff60",
     "CvSTraceCertL65V1.lean": "159a4726cf95e279c9d68f91adbe194a42b3ccb0",
-    "tools/krein_trace_modules.json": "99a4dff34ca6a16a75e98214405c2c14397c4809"
+    "tools/krein_trace_modules.json": "fb23532afd1d617044902a44225d44829f02a5ea"
   },
   "reused_identical_blobs": {
     "CvSPrimeBlockV1.lean": "70e3769f79371727c543725b70600b3039af3de6",
@@ -35,6 +35,7 @@
     "K3e": "proved: CvSTraceCertL65V1.trace_premises_L65, compiled and axiom-audited by this workflow via krein_trace_modules.json",
     "K3f": "proved: CvSWindowL65V1.window_L65 (research/rh/checkpoints/20261020_row_budget_bridge), from-source build in rh-cvs-window-l65-source.yml",
     "detG_nonzero": "not a separate premise: CvSTraceGammaV1.det_pert_ge gives the determinant lower bound used by CvSTraceCellL65V1.cell_sound in every cell",
+    "K3e_L43": "proved: CvSTraceCertL43V1.trace_premises_L43 (L = 4/3, m = 8/5, T = 7/2, kappa = 44), compiled and axiom-audited by this workflow via krein_trace_modules.json; the row side at 4/3 is not built yet",
     "canonical_RH": "not claimed"
   }
 }

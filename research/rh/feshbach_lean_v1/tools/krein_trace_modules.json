@@ -17,6 +17,11 @@
       "N0_le", "N1_le", "cell_sound"]},
     {"name": "CvSTraceIntegralV1", "audit": ["volume_cellSet_le", "sFun_measurable", "integrable_mul",
       "integral_mul_le", "chain_cover", "slack_ge", "premises_of_cells", "gap_of_T"]},
-    {"name": "CvSTraceCertL65V1", "audit": ["all_ok", "total_le", "trace_premises_L65"]}
+    {"name": "CvSTraceCertL65V1", "audit": ["all_ok", "total_le", "trace_premises_L65"]},
+    {"name": "CvSTraceCellL43V1", "audit": ["e23_bounds", "mul_mem", "trig_mem", "A_cell", "tau_le",
+      "closed_le", "N0_le", "N1_le", "cell_sound"]},
+    {"name": "CvSTraceIntegralL43V1", "audit": ["volume_cellSet_le", "sFun_measurable",
+      "integrable_mul", "integral_mul_le", "chain_cover", "slack_ge", "premises_of_cells", "gap_of_T"]},
+    {"name": "CvSTraceCertL43V1", "audit": ["all_ok", "total_le", "trace_premises_L43"]}
   ]
 }
