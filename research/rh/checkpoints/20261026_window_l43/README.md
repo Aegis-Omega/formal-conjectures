@@ -1,7 +1,8 @@
-# The next window, 2r ≤ 4/3: numerical feasibility (2026-10-26)
+# The next window, 2r ≤ 4/3 (numerics 2026-10-26, Lean 2026-10-28)
 
-Status: numerics validated in Python; the trace side and the τ and diagonal boxes are in Lean
-(see "Lean port status"), the row certificates are not. One window only. Not RH.
+Status: proved in Lean. `CvSWindowL43V1.window_L43` closes the window 2r ≤ 4/3 and
+`RHWindowL43ExhaustionV1.rh_iff_windows_above_two_thirds` reduces RH to the log windows L > 2/3
+(see "Lean port status"). The windows L > 2/3 are not proved. One window only. Not RH.
 
 `RHWindowL65ExhaustionV1.rh_iff_windows_above_three_fifths` reduces RH to the log windows
 L > 3/5. The next window of the same route is the trial window LT = 4/3 (2r ≤ 4/3, frontier 2/3).
@@ -83,14 +84,37 @@ The data come from `tools/gen_tau43.py`, `gen_tau_prime43.py`, `gen_tau_r1_43.py
 `gen_diag43.py`. Each is a port of the 6/5 generator; at 6/5 the originals reproduce the committed
 data exactly. Every 4/3 box was also compared with mpmath at 30 digits.
 
-Not built yet:
-- the projected low block at 4/3: the packed 139 × 139 certificate (`certR`, `certL`, `certI`,
-  regenerated), the projected entries and their fast replay, the basis and low coercivity;
-- the relative row certificate with κ = 52, NP = 200, and the Gram tail at 4/3;
-- the full row table and the actual inputs;
-- the join, the window theorem at 4/3, `window_le_two_thirds` and RH ↔ windows L > 2/3.
-At 6/5 the packed and relative certificates are generated Lean files of 1–2 MB each and the
-actual-input sources a 28 MB archive, so at 4/3 they have to be generated in CI from committed
-generators.
+The row side, the window and the exhaustion join (2026-10-28). The relative row certificate is
+built directly in the 139 atom coordinates against `Q_CvS`, so the projected low block, the full
+row table and the actual inputs of the 6/5 route are not needed (`Q_CvS ≥ 0` follows from
+`Brow ≤ 52 Q_CvS` and `Brow ≥ 0`). Modules in `feshbach_lean_v1`:
+- `CvSRelRowAlgebraV1`, `CvSRelRowHarmV1`: Cauchy–Schwarz and Schur tests, row sums of
+  1/|x − m| through the integer harmonic table `hupN`, `Int./` rounding;
+- `CvSRelRowDataL43V1` (generated, every table recomputed by the kernel), `CvSRelRowCertL43V1`
+  (generated packed factor), `CvSRelRowCheckL43V1`, `CvSRelRowPsdL43V1`, `CvSRelRowFormL43V1`:
+  the 139 × 139 integer check matrix (scale 2^-488) is positive (`Pm_psd`, seven kernel chunks),
+  which gives `midpoint_ge` for the midpoint kernel `Zt` minus the rank-two part;
+- `CvSRelRowBoxL43V1`, `CvSRelRowErrL43V1`, `CvSRelRowQL43V1`: τ and diagonal boxes as real
+  bounds, `|E − Et/2^128|` row sums ≤ `RE`, and `Q_CvS ≥ Re⟨â, Ê â⟩ − ε_Q |â|²`;
+- `CvSRelRowKtL43V1`, `CvSRelRowOutL43V1`: the rows 70 < |m| ≤ 200 through the kernel
+  `K̂ = Σ_m ŵ ŵ'` (partial fractions, `Kt_err`);
+- `CvSRelRowTailL43V1`: the Gram tail with `gramUp 200` positive on F (`G_psd`, `psd_split`);
+- `CvSRelRowInvL43V1`, `CvSRelRowInL43V1`: the rows |m| ≤ 70; the atom coefficients `lam` invert
+  the second differences, and the residual is the rank-two vector α₀ g̃₀ + α₁ g̃₁;
+- `CvSRelRowHBL43V1`: `hB`, `Brow M c ≤ 52 Q_CvS M (4/3) c` for M ≥ 3, NP = 200, T = 13,
+  ε = 7/10, with `K' = 52 ε_Q + ε_in + ε_out + ε_T ≈ 7.2164e-6 ≤ Kq/2^64 ≈ 7.2357e-6` (`K_ok`).
+
+In this directory:
+- `CvSWindowL43V1`: `window_L43`, from `window_of_certificate_gram_moment` with M = 3, L = 2,
+  LT = 4/3, m = 8/5, `trace_premises_L43` and `hB`;
+- `RHWindowL43ExhaustionV1`: `window_le_two_thirds`,
+  `final_sign_iff_windows_above_two_thirds`, `rh_iff_windows_above_two_thirds`.
+
+Data pipeline (untrusted; the kernel rechecks every table): `tools/gen_rr43.py` (reads the
+committed τ and diagonal boxes through `tools/boxes43.py`), `tools/cert43.py 64`,
+`tools/emit_rr43.py OUTDIR`. Its two outputs, `CvSRelRowDataL43V1.lean` (79 KB) and
+`CvSRelRowCertL43V1.lean` (132 KB), are not committed: `rh-cvs-window-l65-source.yml` generates
+them with mpmath 1.3.0, checks their sha256 against the local run that produced the proofs,
+compiles the whole DAG of both windows from source and audits the axioms.
 
 Not RH.

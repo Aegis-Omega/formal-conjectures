@@ -14,7 +14,13 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
             'AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin',
             'AEGIS.RHWindowL65ExhaustionV1.window_le_three_fifths',
             'AEGIS.RHWindowL65ExhaustionV1.final_sign_iff_windows_above_three_fifths',
-            'AEGIS.RHWindowL65ExhaustionV1.rh_iff_windows_above_three_fifths']
+            'AEGIS.RHWindowL65ExhaustionV1.rh_iff_windows_above_three_fifths',
+            'AEGIS.CvSWindowL43V1.window_L43', 'AEGIS.CvSTraceCertL43V1.trace_premises_L43',
+            'AEGIS.CvSRelRowHBL43V1.hB', 'AEGIS.CvSRelRowHBL43V1.K_ok',
+            'AEGIS.CvSRelRowFormL43V1.midpoint_ge', 'AEGIS.CvSRelRowCheckL43V1.certL_ok',
+            'AEGIS.RHWindowL43ExhaustionV1.window_le_two_thirds',
+            'AEGIS.RHWindowL43ExhaustionV1.final_sign_iff_windows_above_two_thirds',
+            'AEGIS.RHWindowL43ExhaustionV1.rh_iff_windows_above_two_thirds']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 state = json.loads(Path('.lake/real_status.json').read_text())
 audits, bad, sorries = {}, [], []
@@ -40,7 +46,10 @@ receipt = {
              'every compactly supported smooth g with the moment conditions and half-width r, '
              '2r <= 6/5, the Weil zero sum of its autocorrelation has nonnegative real part. '
              'One fixed window only. RHWindowL65ExhaustionV1: RH is equivalent to the arithmetic sign on '
-             'the log windows L > 3/5; those windows are not proved. Not RH.',
+             'the log windows L > 3/5; those windows are not proved. window_L43: the same for '
+             '2r <= 4/3, from the relative row certificate Brow <= 52 Q_CvS at NP = 200. '
+             'RHWindowL43ExhaustionV1: RH is equivalent to the arithmetic sign on the log windows '
+             'L > 2/3; those windows are not proved. Not RH.',
 }
 ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'])
 receipt['status'] = 'PASS' if ok else 'FAIL'
