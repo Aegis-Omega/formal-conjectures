@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import sys
 import urllib.request
 
@@ -35,8 +36,35 @@ def parsed_imports(source):
 
 
 def module_name(path):
-    # Research modules conventionally use basename imports. Detect collisions.
+    # Research modules use basenames; AEGISOverlay imports are qualified.
+    if path.startswith("AEGISOverlay/") and path.endswith(".lean"):
+        return path[:-5].replace("/", ".")
     return Path(path).stem
+
+
+def verified_local_overlay_sources():
+    """Load only tracked, unchanged overlay Lean blobs from this exact checkout."""
+    if not Path("AEGISOverlay").is_dir():
+        raise RuntimeError("LOCAL_OVERLAY_DIRECTORY_MISSING")
+    entries = subprocess.check_output(
+        ["git", "ls-tree", "-r", "HEAD", "--", "AEGISOverlay"], text=True)
+    result = {}
+    for entry in entries.splitlines():
+        metadata, path = entry.split("\t", 1)
+        mode, kind, expected_sha = metadata.split(" ")
+        if not path.endswith(".lean"):
+            continue
+        if mode != "100644" or kind != "blob" or not path.startswith("AEGISOverlay/"):
+            raise RuntimeError("OVERLAY_TREE_ENTRY_INVALID:" + path)
+        source = Path(path)
+        if not source.is_file() or source.is_symlink():
+            raise RuntimeError("OVERLAY_SOURCE_MISSING:" + path)
+        if git_blob_sha(source.read_bytes()) != expected_sha:
+            raise RuntimeError("OVERLAY_SOURCE_DRIFT:" + path)
+        result[path] = expected_sha
+    if not result:
+        raise RuntimeError("NO_VERIFIED_OVERLAY_SOURCES")
+    return result
 
 
 def git_blob_sha(raw):
@@ -90,7 +118,7 @@ def classify(graph, source_by_blob, local_sources, blob_limit=1200):
     absent = {p for p in candidates if p not in target_paths}
     divergent = {p for p in candidates if p in target_paths}
     all_names = defaultdict(set)
-    for path in set(target_paths) | set(candidates):
+    for path in set(target_paths) | set(candidates) | set(local_sources):
         all_names[module_name(path)].add(path)
     # The local checkout must match the exact candidate Git tree contents.
     target_imports = {}
@@ -104,7 +132,7 @@ def classify(graph, source_by_blob, local_sources, blob_limit=1200):
             raise RuntimeError("TARGET_SOURCE_SHA_MISMATCH:" + path)
         target_imports[path] = parsed_imports(raw.decode("utf-8"))
         actual_source_count += 1
-    local_names = {name for path in target_paths for name in (module_name(path),)}
+    local_names = {module_name(path) for path in set(target_paths) | set(local_sources)}
     missing_names = {module_name(p) for p in absent}
     edges = set()
     external = set()
@@ -183,6 +211,9 @@ def classify(graph, source_by_blob, local_sources, blob_limit=1200):
         "import_cycles": cycles,
         "scope_external_imports_not_bound": sorted(external),
         "candidates": candidate_detail,
+        "verified_local_overlay_source_count": len(local_sources),
+        "verified_local_overlay_source_blobs": dict(sorted(local_sources.items())),
+        "verified_local_overlay_modules": sorted(module_name(p) for p in local_sources),
         "source_only_audit_pass": True,
         "kernel_type_audit_pass": None,
         "auto_cherry_pick_authorized": False
@@ -240,6 +271,7 @@ def reconcile_archived_recovery(root, restored, manifest_file):
 def self_test():
     assert parsed_imports("import A B\n-- import NO\nimport Mathlib.Data.Real.Basic\n") == ["A", "B", "Mathlib.Data.Real.Basic"]
     assert module_name("research/rh/other/A.lean") == "A"
+    assert module_name("AEGISOverlay/ExampleV1.lean") == "AEGISOverlay.ExampleV1"
     assert git_blob_sha(b"x") == "c1b0730e0133447badcfd47fd144e254807b06e1"
     sample = {"target_exact_sha": "A", "repository": "org/repo",
               "inventory_complete": True, "errors": [],
@@ -263,6 +295,14 @@ def self_test():
         p.parent.mkdir(parents=True)
         p.write_bytes(b"import Mathlib\n")
         result = classify(sample, {git_blob_sha(b"import MathA\n"): "import MathA\n"}, {})
+        new_source = "import MathA AEGISOverlay.ExampleV1\n"
+        variant = json.loads(json.dumps(sample))
+        variant["tree_by_sha"]["B"]["sources"]["research/rh/new/NewB.lean"] = git_blob_sha(new_source.encode())
+        overlay = {"AEGISOverlay/ExampleV1.lean": git_blob_sha(b"import Mathlib\n")}
+        joined = classify(variant, {git_blob_sha(new_source.encode()): new_source}, overlay)
+        assert "AEGISOverlay.ExampleV1" not in joined["scope_external_imports_not_bound"]
+        assert joined["verified_local_overlay_source_blobs"] == overlay
+        assert joined["verified_local_overlay_source_count"] == 1
     assert result["absent_paths"] == 1
     assert result["classification_counts"] == {"SOURCE_READY_FOR_LEAN_PROBE": 1}
     assert not result["auto_cherry_pick_authorized"]
@@ -306,6 +346,9 @@ def main():
     if not token:
         ap.error("GITHUB_TOKEN is required")
     graph = json.loads(Path(args.graph).read_text())
+    actual_head = subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+    if graph.get("target_exact_sha") != actual_head:
+        raise RuntimeError("TARGET_CHECKOUT_HEAD_MISMATCH")
     if graph.get("repository") != args.repo:
         raise RuntimeError("GRAPH_REPOSITORY_MISMATCH")
     trees = graph["tree_by_sha"]
@@ -321,7 +364,7 @@ def main():
         for f in as_completed(futures):
             sha = futures[f]
             source_by_blob[sha] = f.result()
-    result = classify(graph, source_by_blob, {})
+    result = classify(graph, source_by_blob, verified_local_overlay_sources())
     if args.recovery_dir:
         target_paths = trees[graph["target_exact_sha"]]["sources"]
         variants = defaultdict(lambda: defaultdict(set))
