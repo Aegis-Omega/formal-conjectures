@@ -424,6 +424,39 @@ jobs:
           while read -r m; do
             lean -DwarningAsError=true -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
           done < krein_trace_modules.txt
+          # Strict K3 determinant obligation: build AFTER the trace source closure.
+          for m in CvSK3DetGBridgeV2 CvSK3FourierMinorV2; do
+            echo "K3_KERNEL_START $m"
+            lean -DwarningAsError=true -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
+            test -s "$RING/$m.olean"
+            echo "K3_KERNEL_BUILT $m"
+          done
+          python3 - <<'PYK3'
+          import re
+          from pathlib import Path
+          log = Path('ring.log').read_text()
+          names = [
+              'AEGIS.CvSK3DetGBridgeV2.detG_ne_zero_of_two_sample_minor',
+              'AEGIS.CvSK3DetGBridgeV2.detG70_ne_zero_of_minor',
+              'AEGIS.CvSK3FourierMinorV2.q_two_sample_minor_ne',
+              'AEGIS.CvSK3FourierMinorV2.detG_ne_zero_of_posN',
+              'AEGIS.CvSK3FourierMinorV2.detG70_ne_zero',
+              'AEGIS.CvSK3FourierMinorV2.moment_conds70',
+          ]
+          permitted = {'propext', 'Classical.choice', 'Quot.sound'}
+          for name in names:
+              m = re.search(r"'" + re.escape(name) + r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
+              if m:
+                  found = {s.strip() for s in m.group(1).split(',') if s.strip()}
+              elif "'" + name + "' does not depend on any axioms" in log:
+                  found = set()
+              else:
+                  raise SystemExit('K3_AXIOM_AUDIT_MISSING ' + name)
+              if not found <= permitted:
+                  raise SystemExit('K3_AXIOM_AUDIT_UNEXPECTED ' + name + ': ' + str(sorted(found)))
+              print('K3_AXIOM_AUDIT_PASS', name, sorted(found))
+          print('K3_DETG70_KERNEL_AND_AXIOM_PASS')
+          PYK3
           lean -DwarningAsError=true -o "$RING/CvSMomentTraceV1.olean" research/rh/checkpoints/20261020_row_budget_bridge/CvSMomentTraceV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSCheckedLowBridgeV1.olean" research/rh/feshbach_lean_v1/CvSCheckedLowBridgeV1.lean 2>&1 | tee -a ring.log
           lean -DwarningAsError=true -o "$RING/CvSK3PR90InteropV1.olean" research/rh/feshbach_lean_v1/CvSK3PR90InteropV1.lean 2>&1 | tee -a ring.log
