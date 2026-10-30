@@ -36,7 +36,7 @@ theorem detG_ne_zero_of_two_sample_minor {LT : ℝ} (hLT : 0 < LT) (N : ℕ)
     detG hLT N ≠ 0 := by
   classical
   let ι := ↥(K N)
-  letI : Fintype ι := Finset.fintypeCoeSort (K N)
+  -- `Finset.fintypeCoeSort` is already an inferred instance for this subtype.
   let j0 : ι := ⟨0, hk0⟩
   let j1 : ι := ⟨1, hk1⟩
   let v : Fin 2 → EuclideanSpace ℂ ι :=
@@ -68,7 +68,7 @@ theorem detG_ne_zero_of_two_sample_minor {LT : ℝ} (hLT : 0 < LT) (N : ℕ)
       rcases mul_eq_zero.mp ha1 with h | h
       · exact h
       · exact (hminor h).elim
-    funext s
+    intro s
     fin_cases s
     · exact hz0
     · exact hz1
@@ -81,9 +81,10 @@ theorem detG_ne_zero_of_two_sample_minor {LT : ℝ} (hLT : 0 < LT) (N : ℕ)
       calc
         _ = ∑ k : ι, conj (q hLT s k.1) * q hLT r k.1 := by
           simp only [Matrix.gram_apply, PiLp.inner_apply, RCLike.inner_apply',
-            v, PiLp.toLp_apply]
+            v]
         _ = ∑ k ∈ K N, conj (q hLT s k) * q hLT r k := by
-          rw [Finset.univ_eq_attach (K N), Finset.sum_attach]
+          simpa only using (Finset.sum_coe_sort (K N)
+            (fun k : ℤ => conj (q hLT s k) * q hLT r k))
         _ = ∑ k ∈ K N, q hLT r k * conj (q hLT s k) := by
           apply Finset.sum_congr rfl
           intro k hk

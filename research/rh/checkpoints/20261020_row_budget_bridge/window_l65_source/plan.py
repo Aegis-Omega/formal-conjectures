@@ -80,13 +80,24 @@ for r in json.loads(Path('research/rh/feshbach_lean_v1/tools/krein_trace_modules
     put(r['name'], f"research/rh/feshbach_lean_v1/{r['name']}.lean", True, None, 'k3json')
 put('CvSHplusBoundsV1', 'research/rh/feshbach_lean_v1/CvSHplusBoundsV1.lean', True, None, 'k3')
 # 5b. the window 2r <= 4/3: the relative row certificate, the window and its exhaustion join
-for mod in ['CvSRelRowAlgebraV1', 'CvSRelRowHarmV1', 'CvSRelRowDataL43V1', 'CvSRelRowCertL43V1',
-            'CvSRelRowCheckL43V1', 'CvSRelRowPsdL43V1', 'CvSRelRowFormL43V1', 'CvSRelRowBoxL43V1',
-            'CvSRelRowErrL43V1', 'CvSRelRowQL43V1', 'CvSRelRowKtL43V1', 'CvSRelRowOutL43V1',
-            'CvSRelRowTailL43V1', 'CvSRelRowInvL43V1', 'CvSRelRowInL43V1', 'CvSRelRowHBL43V1']:
-    put(mod, f'research/rh/feshbach_lean_v1/{mod}.lean', True, None, 'l43')
-for mod in ['CvSWindowL43V1', 'RHWindowL43ExhaustionV1']:
-    put(mod, f'research/rh/checkpoints/20261026_window_l43/{mod}.lean', True, None, 'l43')
+# Discover the actual row-table modules from files present at this exact checkout.
+# Generated Q96/LDLT data and certificate modules are included automatically once
+# the workflow has SHA-verified their bytes. The requested root imports, not a
+# hardcoded list of filenames, select the transitive proof closure.
+row_dir = Path('research/rh/feshbach_lean_v1')
+row_sources = sorted(row_dir.glob('CvSRelRow*.lean'))
+if not row_sources:
+    raise SystemExit('MISSING_CVS_ROW_SOURCES')
+for source in row_sources:
+    put(source.stem, source, True, None, 'l43-row-discovered')
+window_dir = Path('research/rh/checkpoints/20261026_window_l43')
+window_sources = sorted(window_dir.glob('*.lean'))
+if not window_sources:
+    raise SystemExit('MISSING_CVS_WINDOW_SOURCES')
+for source in window_sources:
+    put(source.stem, source, True, None, 'l43-window-discovered')
+print('DISCOVERED_CVS_ROW_TABLE_SOURCES', len(row_sources))
+print('DISCOVERED_CVS_WINDOW_SOURCES', len(window_sources))
 # 6. window exhaustion and the V13 RH bridge, for names no earlier source provides. The ported
 # copies differ on purpose, so the first directory wins, in the order of
 # aegis-pr606-fork-replay-v1.yml: Compat, then Source, then the PR606 port.
