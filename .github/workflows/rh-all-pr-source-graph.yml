@@ -6,6 +6,7 @@ on:
       - 'research/rh/assembly/pr_branch_coherence_audit.py'
       - 'research/rh/assembly/rh_import_coherence_audit.py'
       - 'research/rh/assembly/rh_source_reuse_pipeline.py'
+      - 'research/rh/assembly/repository_census.py'
       - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py'
       - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py'
       - '.github/workflows/rh-all-pr-source-graph.yml'
@@ -82,6 +83,26 @@ jobs:
             --recovery rh_source_recovery \
             --stage-dir rh_reuse_stage \
             --output rh_source_reuse_plan.json
+      - name: Build source-based RH repository census from the entire exact checkout
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/repository_census.py --self-test
+          python3 research/rh/assembly/repository_census.py \
+            --graph pr_branch_coherence.json \
+            --output repository_census.json
+          python3 - <<'PY'
+          import json, os, subprocess
+          r=json.load(open("repository_census.json", encoding="utf-8"))
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert r["repository"]["exact_head"]==head==os.environ["GITHUB_SHA"] or (
+            r["repository"]["exact_head"]==head==
+            os.environ.get("PR_HEAD_EXACT",head))
+          assert r["branch_inventory_summary"]["state"]=="VERIFIED_SOURCE_GRAPH_ONLY"
+          assert r["total_declarations"] is None and r["total_axioms"] is None
+          assert r["current_rh_status"]=="NOT_ASSESSED_ON_THIS_CENSUS"
+          print("RH_CENSUS_SOURCE_ONLY_BOUND",head,
+                r["total_modules"],r["source_counts"]["source_declaration_occurrences"])
+          PY
       - name: Attach exact SHA, digest, and non-proof boundary
         if: always()
         env:
@@ -94,6 +115,7 @@ jobs:
             test -f pr_branch_coherence.json && sha256sum pr_branch_coherence.json || true
             test -f rh_import_coherence.json && sha256sum rh_import_coherence.json || true
             test -f rh_source_reuse_plan.json && sha256sum rh_source_reuse_plan.json || true
+            test -f repository_census.json && sha256sum repository_census.json || true
             printf 'source_graph_only=true\n'
             printf 'lean_kernel_closure_claim=false\n'
           } | tee pr_graph_receipt.txt
@@ -109,6 +131,7 @@ jobs:
             rh_reuse_stage/
             actual_input_license_binding_receipt.json
             rh_source_recovery/
+            repository_census.json
             pr_graph_receipt.txt
           if-no-files-found: warn
           retention-days: 14
