@@ -376,8 +376,6 @@ theorem actual_four_log_three_prime_norm_family_sign
     AEGIS.RHArchRow29V1.actual_far_fine_gram_coercive_of_arch29_prime_row
       gs center hwidth hm hsep primeCost hsym hprime hrow
 
-/-- The exact prime row 1/4 and Arch row 29/65536 yield the stronger
-uniform actual-Weil margin 20829/16384, for the original sparse family. -/
 /-- No coefficient or dimension cutoff: exact, UNROUNDED weighted
 four-log-three actual Weil coercivity. Uses the genuine finite von Mangoldt
 prime term and Arch-29 envelope. The fixed sparse reconstruction hypotheses
