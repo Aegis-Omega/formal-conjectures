@@ -83,7 +83,91 @@ def source_scan(root):
                 or Path(name).stem.startswith(('RH','Weil','CvS'))})
     return modules,decls
 
-def build(root,graph_path=None,proof_path=None):
+
+def kernel_graph_census(head, proof_path, passport_path, environment_path, terms_path, tracked_by_path):
+    """Reuse the existing Lean exporter, never guess a declaration's kernel status."""
+    supplied=[proof_path,passport_path,environment_path,terms_path]
+    if any(x is None for x in supplied):
+        raise RuntimeError("INCOMPLETE_LEAN_EVIDENCE_BUNDLE")
+    graph=json.loads(proof_path.read_text())
+    passport=json.loads(passport_path.read_text())
+    environment=json.loads(environment_path.read_text())
+    terms=json.loads(terms_path.read_text())
+    if graph.get('exact_replay_sha')!=head or passport.get('exact_replay_sha')!=head:
+        raise RuntimeError('LEAN_EVIDENCE_HEAD_MISMATCH')
+    if passport.get('proof_term_graph_sha256')!=digest(terms_path.read_bytes()):
+        raise RuntimeError('LEAN_PROOF_TERMS_DIGEST_MISMATCH')
+    if graph.get('roots')!=terms.get('roots'):
+        raise RuntimeError('LEAN_PROOF_ROOTS_MISMATCH')
+    if not isinstance(graph.get('declarations'),list) or not isinstance(terms.get('declarations'),list):
+        raise RuntimeError('LEAN_PROOF_DECLARATIONS_MISSING')
+    source_rows={r['identifier']:r for r in terms['declarations']}
+    assembled_rows={r['identifier']:r for r in graph['declarations']}
+    if len(source_rows)!=len(terms['declarations']) or len(assembled_rows)!=len(graph['declarations']):
+        raise RuntimeError('DUPLICATE_LEAN_DECLARATION_IDENTIFIER')
+    if source_rows.keys()!=assembled_rows.keys() or not source_rows:
+        raise RuntimeError('LEAN_PROOF_SOURCE_DAG_INCONSISTENT')
+    if not set(terms['roots'])<=source_rows.keys():
+        raise RuntimeError('LEAN_ROOT_OUTSIDE_REACHABLE_DAG')
+    checked=[]
+    for key,root in sorted(source_rows.items()):
+        row=assembled_rows[key]
+        for field in ('identifier','module','is_axiom','has_body','axioms','direct_dependencies'):
+            if row.get(field)!=root.get(field):
+                raise RuntimeError('LEAN_PROOF_GRAPH_ROW_DRIFT '+key+' '+field)
+        if not isinstance(row.get('axioms'),list) or not isinstance(row.get('direct_dependencies'),list):
+            raise RuntimeError('LEAN_PROOF_GRAPH_INVALID_AXIOMS_OR_DEPS '+key)
+        src=row.get('source')
+        if isinstance(src,dict):
+            source_path=src.get('source')
+            local=tracked_by_path.get(source_path)
+            if local and src.get('sha256')!=local['sha256']:
+                raise RuntimeError('LEAN_SOURCE_IDENTITY_DRIFT '+source_path)
+        checked.append({'declaration':key,'module':row['module'],
+                        'kind':'axiom' if row['is_axiom'] else
+                           ('body_bearing' if row['has_body'] else 'UNKNOWN'),
+                        'is_axiom':row['is_axiom'],'has_body':row['has_body'],
+                        'axioms':row['axioms'],'dependencies':row['direct_dependencies'],
+                        'source':src,'kernel_scope':'EXACT_HEAD_REACHABLE_DAG'})
+    scan=graph.get('rh_closure_scan') or {}
+    pscan=passport.get('rh_closure_scan') or {}
+    for k in ('imported_environment_declaration_count','imported_environment_rh_type_candidates',
+              'reachable_declaration_count','closed_canonical_rh_declarations'):
+        if scan.get(k)!=pscan.get(k):
+            raise RuntimeError('LEAN_PASSPORT_CLOSURE_SCAN_DRIFT '+k)
+    if (scan.get('imported_environment_declaration_count')!=environment.get('inspected_count')
+        or scan.get('imported_environment_rh_type_candidates')!=len(environment.get('declarations',[]))
+        or scan.get('reachable_declaration_count')!=len(checked)):
+        raise RuntimeError('LEAN_ENVIRONMENT_CENSUS_COUNTER_MISMATCH')
+    if (environment.get('defeq_target_type')!='RiemannHypothesis'
+        or environment.get('inspected_count',0)<len(checked)
+        or environment.get('semantic_theorems_checked',0)>environment.get('inspected_count',0)):
+        raise RuntimeError('LEAN_ENVIRONMENT_CENSUS_INVALID')
+    env_matches=environment['declarations']
+    if any(x.get('type_defeq_riemann_hypothesis') is not True for x in env_matches):
+        raise RuntimeError('LEAN_RH_TYPE_WITNESS_INVALID')
+    if sorted(scan.get('closed_canonical_rh_from_imported_environment',[]))!=sorted(
+        x['identifier'] for x in env_matches
+        if x.get('has_body') is True and x.get('is_axiom') is False
+        and isinstance(x.get('axioms'),list)
+        and set(x['axioms'])<={'propext','Classical.choice','Quot.sound'}):
+        raise RuntimeError('LEAN_CANONICAL_RH_CLOSURE_CONFLICT')
+    return ({'status':'EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED',
+             'exact_head':head,'proof_graph_sha256':digest(proof_path.read_bytes()),
+             'proof_terms_sha256':digest(terms_path.read_bytes()),
+             'evidence_passport_sha256':digest(passport_path.read_bytes()),
+             'environment_census_sha256':digest(environment_path.read_bytes()),
+             'root_count':len(terms['roots']),
+             'reachable_declaration_rows':len(checked),
+             'imported_environment_declarations':environment['inspected_count'],
+             'imported_environment_theorems':environment['semantic_theorems_checked'],
+             'imported_environment_axioms':None,
+             'canonical_rh_type_candidates':len(env_matches),
+             'canonical_rh_closed_in_imported_environment':scan.get('closed_canonical_rh_declarations',[]),
+             'claim_limit':'Counts cover this imported Lean environment / selected DAG, not all repo branches'},
+            checked,env_matches)
+
+def build(root,graph_path=None,proof_path=None,passport_path=None,environment_path=None,terms_path=None):
     head=run('git','rev-parse','HEAD',cwd=root)
     tree=run('git','rev-parse','HEAD^{tree}',cwd=root)
     if run('git','status','--porcelain','--untracked-files=no',cwd=root):
@@ -119,14 +203,11 @@ def build(root,graph_path=None,proof_path=None):
         rows=[n for n in graph.get('github_pr_base_graph',{}).get('nodes',[])
               if n.get('number')==92 and n.get('head_sha')==head]
         if len(rows)!=1:raise RuntimeError('PR92_HEAD_NOT_IN_BRANCH_GRAPH')
-    kernel={'status':'UNKNOWN','reason':'source-only census; no exact-head kernel receipts'}
-    if proof_path:
-        proof=json.loads(proof_path.read_text())
-        kernel={'status':'UNVERIFIED_EXPORT_WITHOUT_EXACT_HEAD_RECEIPT',
-                'proof_graph_sha256':digest(proof_path.read_bytes()),
-                'root_count':len(proof.get('roots',[])),
-                'reachable_declaration_rows':len(proof.get('declarations',[])),
-                'claim_limit':'This graph is root-reachable only, not all Lean declarations'}
+    kernel={'status':'UNKNOWN','reason':'source-only census; no exact-head Lean evidence bundle'}
+    verified_decls=[];rh_candidates=[]
+    if any(x is not None for x in (proof_path,passport_path,environment_path,terms_path)):
+        kernel,verified_decls,rh_candidates=kernel_graph_census(
+            head,proof_path,passport_path,environment_path,terms_path,by_path)
     counts=Counter(x['kind'] for x in decls)
     rhpaths={m['path'] for m in modules if m['rh_related_source']}
     authority=[{'artifact':'PR #92','current_authority':bool(graph),
@@ -143,7 +224,7 @@ def build(root,graph_path=None,proof_path=None):
                   else 'UNKNOWN','exact_head':head,'git_tree':tree},
         'scope':{'tracked_git_sources':'COMPLETE_EXACT_HEAD','branch_source_graph':branch['state'],
                  'total_git_history':'NOT_EXHAUSTIVE','other_repositories':'NOT_ASSESSED',
-                 'lean_environment':'KERNEL_UNVERIFIED'},
+                 'lean_environment':kernel['status']},
         'total_modules':len(modules),
         'total_declarations':None,'total_theorems':None,'total_axioms':None,
         'total_rh_related_declarations':None,
@@ -158,6 +239,8 @@ def build(root,graph_path=None,proof_path=None):
                  sum(d['module_path'] in rhpaths for d in decls),
              'warning':'All source counts are syntactic occurrences, not Lean kernel-checked declarations'},
         'branch_inventory_summary':branch,'kernel_inventory_summary':kernel,
+        'kernel_reachable_declaration_inventory':verified_decls,
+        'kernel_rh_type_candidates':rh_candidates,
         'declaration_inventory':decls,'module_inventory':modules,
         'rh_path_inventory':paths,
         'active_rh_paths':[p for p in paths if p['status']=='ACTIVE'],
@@ -169,7 +252,8 @@ def build(root,graph_path=None,proof_path=None):
         'limits':['Lean macros, namespaces and generated declarations require elaborated kernel environment',
                   'Open obligations list covers explicit selected routes only; it is not mathematically exhaustive',
                   'No total of theorem proofs or axioms can be inferred from source regex',
-                  'Branch graph enumerates RH sources at PR/branch heads, not entire historical commit universe']}
+                  'Branch graph enumerates RH sources at PR/branch heads, not entire historical commit universe',
+                  'Kernel proof DAG and imported-environment totals have different coverage and cannot be added together']}
 
 def self_test():
     s='''/- theorem Fake : False := by sorry\n /- lemma Hidden -/\n-/\nimport Mathlib.Tactic\n-- axiom Nope : False\nnamespace N\nprivate theorem real : True := by trivial\nlemma another : True := by trivial\n#print axioms N.real\n'''
@@ -196,6 +280,44 @@ def self_test():
         try:build(root,g)
         except RuntimeError as e:assert str(e)=='EXACT_HEAD_PR_GRAPH_MISMATCH'
         else:raise AssertionError('stale graph was admitted')
+    # A fabricated bundle tests structural consistency; no assertion of real proof.
+    with tempfile.TemporaryDirectory() as tmp:
+        root=Path(tmp)
+        subprocess.run(['git','init','-q',str(root)],check=True)
+        for name,val in [('user.email','fixture@example.invalid'),('user.name','Fixture')]:
+            subprocess.run(['git','-C',str(root),'config',name,val],check=True)
+        (root/'A.lean').write_text('theorem witness : True := by trivial\n')
+        subprocess.run(['git','-C',str(root),'add','A.lean'],check=True)
+        subprocess.run(['git','-C',str(root),'commit','-qm','fixture'],check=True)
+        h=run('git','rev-parse','HEAD',cwd=root)
+        declaration={'identifier':'Fixture.witness','module':'A','is_axiom':False,
+                     'has_body':True,'axioms':['propext'],
+                     'direct_dependencies':[]}
+        terms={'roots':['Fixture.witness'],'declarations':[declaration]}
+        (root/'terms.json').write_text(json.dumps(terms))
+        graph={'exact_replay_sha':h,'roots':terms['roots'],
+               'declarations':[dict(declaration)],'rh_closure_scan':{
+                 'reachable_declaration_count':1,'imported_environment_declaration_count':4,
+                 'imported_environment_rh_type_candidates':0,'closed_canonical_rh_declarations':[],
+                 'closed_canonical_rh_from_imported_environment':[]}}
+        passport={'exact_replay_sha':h,'proof_term_graph_sha256':digest((root/'terms.json').read_bytes()),
+                  'rh_closure_scan':graph['rh_closure_scan']}
+        environment={'inspected_count':4,'semantic_theorems_checked':2,
+                     'defeq_target_type':'RiemannHypothesis','declarations':[]}
+        for name,data in [('graph.json',graph),('passport.json',passport),('env.json',environment)]:
+            (root/name).write_text(json.dumps(data))
+        paths=[root/z for z in ('graph.json','passport.json','env.json','terms.json')]
+        out=build(root,proof_path=paths[0],passport_path=paths[1],environment_path=paths[2],terms_path=paths[3])
+        assert out['kernel_inventory_summary']['imported_environment_declarations']==4
+        assert out['kernel_reachable_declaration_inventory'][0]['dependencies']==[]
+        assert out['total_declarations'] is None
+        passport['exact_replay_sha']='stale';paths[1].write_text(json.dumps(passport))
+        try:build(root,proof_path=paths[0],passport_path=paths[1],environment_path=paths[2],terms_path=paths[3])
+        except RuntimeError as e:assert str(e)=='LEAN_EVIDENCE_HEAD_MISMATCH'
+        else:raise AssertionError('stale proof passport admitted')
+        try:build(root,proof_path=paths[0])
+        except RuntimeError as e:assert str(e)=='INCOMPLETE_LEAN_EVIDENCE_BUNDLE'
+        else:raise AssertionError('partial proof evidence admitted')
     print('REPOSITORY_CENSUS_SELF_TEST_PASS')
 
 if __name__=='__main__':
@@ -203,12 +325,15 @@ if __name__=='__main__':
     ap.add_argument('--root',type=Path,default=Path('.'))
     ap.add_argument('--graph',type=Path)
     ap.add_argument('--proof-graph',type=Path)
+    ap.add_argument('--proof-passport',type=Path)
+    ap.add_argument('--environment-census',type=Path)
+    ap.add_argument('--proof-terms',type=Path)
     ap.add_argument('--output',type=Path,default=Path('repository_census.json'))
     ap.add_argument('--self-test',action='store_true')
     a=ap.parse_args()
     if a.self_test:self_test()
     else:
-        result=build(a.root.resolve(),a.graph,a.proof_graph)
+        result=build(a.root.resolve(),a.graph,a.proof_graph,a.proof_passport,a.environment_census,a.proof_terms)
         a.output.write_text(json.dumps(result,indent=2,ensure_ascii=False,sort_keys=True)+'\n')
         print('REPOSITORY_CENSUS_SOURCE_COUNT',result['total_modules'],
               result['source_counts']['source_declaration_occurrences'],
