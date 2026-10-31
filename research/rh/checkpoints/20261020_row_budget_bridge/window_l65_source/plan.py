@@ -90,12 +90,18 @@ if not row_sources:
     raise SystemExit('MISSING_CVS_ROW_SOURCES')
 for source in row_sources:
     put(source.stem, source, True, None, 'l43-row-discovered')
+# The window 2r <= 11/8: its tau, diagonal and trace modules sit next to the row modules but are
+# not in krein_trace_modules.json (the krein-ring job is close to its time limit).
+for source in sorted(row_dir.glob('CvS*L118*.lean')):
+    put(source.stem, source, True, None, 'l118-discovered')
 window_dir = Path('research/rh/checkpoints/20261026_window_l43')
 window_sources = sorted(window_dir.glob('*.lean'))
 if not window_sources:
     raise SystemExit('MISSING_CVS_WINDOW_SOURCES')
 for source in window_sources:
     put(source.stem, source, True, None, 'l43-window-discovered')
+for source in sorted(Path('research/rh/checkpoints/20261031_window_l118').glob('*.lean')):
+    put(source.stem, source, True, None, 'l118-window-discovered')
 print('DISCOVERED_CVS_ROW_TABLE_SOURCES', len(row_sources))
 print('DISCOVERED_CVS_WINDOW_SOURCES', len(window_sources))
 # 6. window exhaustion and the V13 RH bridge, for names no earlier source provides. The ported

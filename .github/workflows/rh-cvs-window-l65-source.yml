@@ -1,10 +1,10 @@
-name: RH CvS windows L = 6/5 and 4/3 from source
+name: RH CvS windows L = 6/5, 4/3 and 11/8 from source
 
 # Compiles the whole actual-row chain behind window_L65 from source in one job: the Krein ring
 # closure, the source row bridge, the full row table, the actual inputs, the 141-moment join and
-# the K3 trace certificate. The same DAG also carries window_L43 (2r <= 4/3): the relative row
-# certificate at L = 4/3 and its exhaustion join. Nothing is restored from earlier runs, so it
-# does not depend on expired artifacts. Not RH.
+# the K3 trace certificate. The same DAG also carries window_L43 (2r <= 4/3) and window_L118
+# (2r <= 11/8): the tau chains, the relative row certificates and their exhaustion joins. Nothing
+# is restored from earlier runs, so it does not depend on expired artifacts. Not RH.
 
 on:
   pull_request:
@@ -15,11 +15,16 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/RHWindowL65ExhaustionV1.lean
       - research/rh/checkpoints/20261020_row_budget_bridge/CvSActualMomentWindowJoinV1.lean
       - research/rh/checkpoints/20261026_window_l43/*.lean
+      - research/rh/checkpoints/20261031_window_l118/*.lean
+      - research/rh/feshbach_lean_v1/CvS*L118*.lean
       - research/rh/feshbach_lean_v1/CvSRelRow*.lean
       - research/rh/feshbach_lean_v1/tools/gen_rr43.py
       - research/rh/feshbach_lean_v1/tools/cert43.py
       - research/rh/feshbach_lean_v1/tools/emit_rr43.py
       - research/rh/feshbach_lean_v1/tools/boxes43.py
+      - research/rh/feshbach_lean_v1/tools/gen_rr118.py
+      - research/rh/feshbach_lean_v1/tools/emit_rr118.py
+      - research/rh/feshbach_lean_v1/tools/boxes118.py
   workflow_dispatch:
 
 concurrency:
@@ -113,16 +118,38 @@ jobs:
           50603b6eb3463eaf848110be56c553080d4a4caaa9ca2a11ff3346916e5ff7df  research/rh/feshbach_lean_v1/CvSRelRowCertL43V1.lean
           SUMS
 
-      - name: Resolve the source DAG of window_L65 and window_L43
+      # The same for L = 11/8 (NP = 250, kappa = 58); cert43.py is shared.
+      - name: Generate the L = 11/8 row data from the committed boxes
+        shell: bash
+        run: |
+          set -euo pipefail
+          PY="$RUNNER_TEMP/rr43venv/bin/python"
+          T="$GITHUB_WORKSPACE/research/rh/feshbach_lean_v1/tools"
+          W="$RUNNER_TEMP/rr118"
+          mkdir -p "$W/out"
+          ( cd "$W" && "$PY" "$T/gen_rr118.py" && "$PY" "$T/cert43.py" 64 && "$PY" "$T/emit_rr118.py" "$W/out" )
+          for m in CvSRelRowDataL118V1 CvSRelRowCertL118V1; do
+            test ! -e "research/rh/feshbach_lean_v1/$m.lean"
+            cp "$W/out/$m.lean" "research/rh/feshbach_lean_v1/$m.lean"
+          done
+          sha256sum -c - <<'SUMS'
+          6fac652b2cb22b853854aebd1c76b76beee10b6673a9d850d3e84ddfd21c6ebf  research/rh/feshbach_lean_v1/CvSRelRowDataL118V1.lean
+          b65d52e0b9a39a515969a7f006b8086f57aaba5f625794563cc492f83ea8555c  research/rh/feshbach_lean_v1/CvSRelRowCertL118V1.lean
+          SUMS
+
+      - name: Resolve the source DAG of window_L65, window_L43 and window_L118
         shell: bash
         run: |
           set -euo pipefail
           B=research/rh/checkpoints/20261020_row_budget_bridge
           W=research/rh/checkpoints/20261026_window_l43
+          W2=research/rh/checkpoints/20261031_window_l118
           if grep -n -E '\bsorry\b|\badmit\b|^axiom ' "$B/CvSWindowL65V1.lean" "$B/RHWindowL65ExhaustionV1.lean" \
-               "$W"/*.lean research/rh/feshbach_lean_v1/CvSRelRow*.lean; then exit 1; fi
+               "$W"/*.lean "$W2"/*.lean research/rh/feshbach_lean_v1/CvSRelRow*.lean \
+               research/rh/feshbach_lean_v1/CvS*L118*.lean; then exit 1; fi
           # Each exhaustion join imports its window, so the DAG contains both window chains.
-          python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1
+          python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1 \
+            RHWindowL118ExhaustionV1
 
       - name: Compile every module from source
         shell: bash

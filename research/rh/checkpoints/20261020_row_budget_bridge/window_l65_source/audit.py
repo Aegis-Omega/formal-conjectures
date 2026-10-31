@@ -20,7 +20,15 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
             'AEGIS.CvSRelRowFormL43V1.midpoint_ge', 'AEGIS.CvSRelRowCheckL43V1.certL_ok',
             'AEGIS.RHWindowL43ExhaustionV1.window_le_two_thirds',
             'AEGIS.RHWindowL43ExhaustionV1.final_sign_iff_windows_above_two_thirds',
-            'AEGIS.RHWindowL43ExhaustionV1.rh_iff_windows_above_two_thirds']
+            'AEGIS.RHWindowL43ExhaustionV1.rh_iff_windows_above_two_thirds',
+            'AEGIS.CvSWindowL118V1.window_L118', 'AEGIS.CvSTraceCertL118V1.trace_premises_L118',
+            'AEGIS.CvSRelRowHBL118V1.hB', 'AEGIS.CvSRelRowHBL118V1.K_ok',
+            'AEGIS.CvSRelRowFormL118V1.midpoint_ge', 'AEGIS.CvSRelRowCheckL118V1.certL_ok',
+            'AEGIS.CvSTauR1PrimeL118V1.tau_mem_R1', 'AEGIS.CvSTauFarL118V1.tau_abs_le_far',
+            'AEGIS.CvSDiagL118V1.diag_mem',
+            'AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths',
+            'AEGIS.RHWindowL118ExhaustionV1.final_sign_iff_windows_above_eleven_sixteenths',
+            'AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 state = json.loads(Path('.lake/real_status.json').read_text())
 audits, bad, sorries = {}, [], []
@@ -49,7 +57,9 @@ receipt = {
              'the log windows L > 3/5; those windows are not proved. window_L43: the same for '
              '2r <= 4/3, from the relative row certificate Brow <= 52 Q_CvS at NP = 200. '
              'RHWindowL43ExhaustionV1: RH is equivalent to the arithmetic sign on the log windows '
-             'L > 2/3; those windows are not proved. Not RH.',
+             'L > 2/3; those windows are not proved. window_L118: the same for 2r <= 11/8, from '
+             'Brow <= 58 Q_CvS at NP = 250. RHWindowL118ExhaustionV1: RH is equivalent to the '
+             'arithmetic sign on the log windows L > 11/16; those windows are not proved. Not RH.',
 }
 ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'])
 receipt['status'] = 'PASS' if ok else 'FAIL'
