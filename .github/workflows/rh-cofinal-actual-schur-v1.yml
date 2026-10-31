@@ -43,6 +43,13 @@ on:
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
       - 'research/rh/assembly/repository_census.py'
+      - 'research/rh/assembly/repository-census.schema.json'
+      - 'research/rh/assembly/repository_census_v11.py'
+      - 'research/rh/assembly/merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/validate_repository_census_v11.py'
       - 'scripts/rh_submission_from_checkpoint.py'
       - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -58,6 +65,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
@@ -838,6 +846,20 @@ jobs:
           set -euo pipefail
           python3 scripts/test_rh_submission_from_checkpoint.py
           python3 scripts/rh_submission_from_checkpoint.py
+
+      - name: Census kernel cross-artifact auto join (kernel worker, exact head)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet 'jsonschema==4.25.1'
+          python3 research/rh/assembly/test_merge_rh_kernel_census_v11.py
+          python3 research/rh/assembly/test_auto_join_rh_census_v11.py
+          python3 research/rh/assembly/auto_join_rh_census_v11.py \
+            --mode kernel-local \
+            --output-dir evidence-cofinal/assembly
 
       - name: Preserve completed source-bound cofinal modules
         id: cofinal-checkpoint

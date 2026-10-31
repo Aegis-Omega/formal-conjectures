@@ -24,8 +24,8 @@ def check_semantics(d,previous=None):
     rh=d['rh_inventory'];frontier=d['math_frontier'];authority=d['authority_inventory']
     expect(d['repository']['full_name']!='UNKNOWN','REPOSITORY_IDENTITY_UNKNOWN')
     expect(s['total_modules']==source['total_modules'],'MODULE_COUNT_CONTRADICTION')
-    expect(s['total_declarations']==kernel['total_declarations'],'KERNEL_DECLARATION_COUNT_CONTRADICTION')
-    expect(s['total_theorems']==kernel['total_theorems'],'KERNEL_THEOREM_COUNT_CONTRADICTION')
+    expect((s['total_declarations'] is None and kernel['coverage'] != 'COMPLETE') or s['total_declarations']==kernel['total_declarations'], 'KERNEL_DECLARATION_COUNT_CONTRADICTION')
+    expect((s['total_theorems'] is None and kernel['coverage'] != 'COMPLETE') or s['total_theorems']==kernel['total_theorems'], 'KERNEL_THEOREM_COUNT_CONTRADICTION')
     expect(s['total_axioms']==kernel['total_axioms'],'KERNEL_AXIOM_COUNT_CONTRADICTION')
     expect(s['current_rh_status']==rh.get('current_rh_status'),'RH_STATUS_CONTRADICTION')
     if source['coverage']=='COMPLETE':

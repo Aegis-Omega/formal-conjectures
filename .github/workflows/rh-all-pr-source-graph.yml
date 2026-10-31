@@ -7,6 +7,10 @@ on:
       - 'research/rh/assembly/rh_import_coherence_audit.py'
       - 'research/rh/assembly/rh_source_reuse_pipeline.py'
       - 'research/rh/assembly/repository_census.py'
+      - 'research/rh/assembly/auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/test_auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_merge_rh_kernel_census_v11.py'
       - 'research/rh/assembly/repository-census.schema.json'
       - 'research/rh/assembly/repository_census_v11.py'
       - 'research/rh/assembly/validate_repository_census_v11.py'
@@ -25,6 +29,7 @@ permissions:
   contents: read
   pull-requests: read
   checks: read
+  actions: read
 
 concurrency:
   group: rh-all-pr-source-graph-${{ github.event.pull_request.head.sha || github.sha }}
@@ -121,6 +126,17 @@ jobs:
             --schema research/rh/assembly/repository-census.schema.json \
             --input repository_census_v1.1.json
           test "$(git rev-parse HEAD)" = "$PR_HEAD_EXACT"
+      - name: Census kernel cross-artifact auto join (source worker, exact head)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/test_merge_rh_kernel_census_v11.py
+          python3 research/rh/assembly/test_auto_join_rh_census_v11.py
+          python3 research/rh/assembly/auto_join_rh_census_v11.py \
+            --mode source-local \
+            --output-dir .
       - name: Attach exact SHA, digest, and non-proof boundary
         if: always()
         env:
@@ -135,6 +151,8 @@ jobs:
             test -f rh_source_reuse_plan.json && sha256sum rh_source_reuse_plan.json || true
             test -f repository_census.json && sha256sum repository_census.json || true
             test -f repository_census_v1.1.json && sha256sum repository_census_v1.1.json || true
+            test -f repository_census_v1.1_kernel_bound.json && sha256sum repository_census_v1.1_kernel_bound.json || true
+            test -f repository_census_v1.1_kernel_receipt.json && sha256sum repository_census_v1.1_kernel_receipt.json || true
             printf 'source_graph_only=true\n'
             printf 'lean_kernel_closure_claim=false\n'
           } | tee pr_graph_receipt.txt
@@ -152,6 +170,9 @@ jobs:
             rh_source_recovery/
             repository_census.json
             repository_census_v1.1.json
+            repository_census_v1.1_kernel_bound.json
+            repository_census_v1.1_kernel_receipt.json
+            census_auto_join_status.json
             pr_graph_receipt.txt
           if-no-files-found: warn
           retention-days: 14
