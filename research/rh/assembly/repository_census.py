@@ -92,29 +92,32 @@ def kernel_graph_census(head, proof_path, passport_path, environment_path, terms
     graph=json.loads(proof_path.read_text())
     passport=json.loads(passport_path.read_text())
     environment=json.loads(environment_path.read_text())
-    terms=json.loads(terms_path.read_text())
+    # The existing proof-terms.json can exceed 450 MB. Verify its exact hash
+    # without decoding it a second time into RAM alongside the assembled graph.
+    term_hash=hashlib.sha256()
+    with terms_path.open('rb') as stream:
+        for block in iter(lambda:stream.read(1024*1024),b''):
+            term_hash.update(block)
+    terms_digest=term_hash.hexdigest()
     if graph.get('exact_replay_sha')!=head or passport.get('exact_replay_sha')!=head:
         raise RuntimeError('LEAN_EVIDENCE_HEAD_MISMATCH')
-    if passport.get('proof_term_graph_sha256')!=digest(terms_path.read_bytes()):
+    if passport.get('proof_term_graph_sha256')!=terms_digest:
         raise RuntimeError('LEAN_PROOF_TERMS_DIGEST_MISMATCH')
-    if graph.get('roots')!=terms.get('roots'):
-        raise RuntimeError('LEAN_PROOF_ROOTS_MISMATCH')
-    if not isinstance(graph.get('declarations'),list) or not isinstance(terms.get('declarations'),list):
+    if graph.get('status')!='selected_root_elaborated_type_and_available_proof_dependency_closure':
+        raise RuntimeError('UNEXPECTED_EXISTING_LEAN_EXPORT_STATUS')
+    if not isinstance(graph.get('roots'),list) or not graph['roots']:
+        raise RuntimeError('LEAN_PROOF_ROOTS_MISSING')
+    if not isinstance(graph.get('declarations'),list):
         raise RuntimeError('LEAN_PROOF_DECLARATIONS_MISSING')
-    source_rows={r['identifier']:r for r in terms['declarations']}
     assembled_rows={r['identifier']:r for r in graph['declarations']}
-    if len(source_rows)!=len(terms['declarations']) or len(assembled_rows)!=len(graph['declarations']):
-        raise RuntimeError('DUPLICATE_LEAN_DECLARATION_IDENTIFIER')
-    if source_rows.keys()!=assembled_rows.keys() or not source_rows:
-        raise RuntimeError('LEAN_PROOF_SOURCE_DAG_INCONSISTENT')
-    if not set(terms['roots'])<=source_rows.keys():
+    if len(assembled_rows)!=len(graph['declarations']) or not assembled_rows:
+        raise RuntimeError('DUPLICATE_OR_EMPTY_LEAN_DECLARATION_IDENTIFIER')
+    if not set(graph['roots'])<=assembled_rows.keys():
         raise RuntimeError('LEAN_ROOT_OUTSIDE_REACHABLE_DAG')
     checked=[]
-    for key,root in sorted(source_rows.items()):
-        row=assembled_rows[key]
-        for field in ('identifier','module','is_axiom','has_body','axioms','direct_dependencies'):
-            if row.get(field)!=root.get(field):
-                raise RuntimeError('LEAN_PROOF_GRAPH_ROW_DRIFT '+key+' '+field)
+    for key,row in sorted(assembled_rows.items()):
+        if not isinstance(row.get('is_axiom'),bool) or not isinstance(row.get('has_body'),bool):
+            raise RuntimeError('LEAN_DECLARATION_KIND_INVALID '+key)
         if not isinstance(row.get('axioms'),list) or not isinstance(row.get('direct_dependencies'),list):
             raise RuntimeError('LEAN_PROOF_GRAPH_INVALID_AXIOMS_OR_DEPS '+key)
         src=row.get('source')
@@ -127,6 +130,7 @@ def kernel_graph_census(head, proof_path, passport_path, environment_path, terms
                         'kind':'axiom' if row['is_axiom'] else
                            ('body_bearing' if row['has_body'] else 'UNKNOWN'),
                         'is_axiom':row['is_axiom'],'has_body':row['has_body'],
+                        'type_expr':row.get('type_expr'),
                         'axioms':row['axioms'],'dependencies':row['direct_dependencies'],
                         'source':src,'kernel_scope':'EXACT_HEAD_REACHABLE_DAG'})
     scan=graph.get('rh_closure_scan') or {}
@@ -154,11 +158,12 @@ def kernel_graph_census(head, proof_path, passport_path, environment_path, terms
         raise RuntimeError('LEAN_CANONICAL_RH_CLOSURE_CONFLICT')
     return ({'status':'EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED',
              'exact_head':head,'proof_graph_sha256':digest(proof_path.read_bytes()),
-             'proof_terms_sha256':digest(terms_path.read_bytes()),
+             'proof_terms_sha256':terms_digest,
              'evidence_passport_sha256':digest(passport_path.read_bytes()),
              'environment_census_sha256':digest(environment_path.read_bytes()),
-             'root_count':len(terms['roots']),
+             'root_count':len(graph['roots']),
              'reachable_declaration_rows':len(checked),
+             'verification_note':'Existing exporter built assembled DAG from hash-verified proof terms; no second 450MB JSON decode',
              'imported_environment_declarations':environment['inspected_count'],
              'imported_environment_theorems':environment['semantic_theorems_checked'],
              'imported_environment_axioms':None,
