@@ -378,7 +378,11 @@ theorem actual_four_log_three_prime_norm_family_sign
 
 /-- The exact prime row 1/4 and Arch row 29/65536 yield the stronger
 uniform actual-Weil margin 20829/16384, for the original sparse family. -/
-theorem actual_four_log_three_weighted_norm_coercive_sharp
+/-- No coefficient or dimension cutoff: exact, UNROUNDED weighted
+four-log-three actual Weil coercivity. Uses the genuine finite von Mangoldt
+prime term and Arch-29 envelope. The fixed sparse reconstruction hypotheses
+are retained, and this does not assert an unconditional RH conclusion. -/
+theorem actual_four_log_three_weighted_norm_coercive_exact
     {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
     (center : Fin (n + 1) → ℝ)
     (hwidth : ∀ i,
@@ -398,7 +402,7 @@ theorem actual_four_log_three_weighted_norm_coercive_sharp
           ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
     (z : Fin (n + 1) → ℂ) :
     (B (packetSum z gs) (packetSum z gs)).re ≤
-      -(20829 / 16384 : ℝ) *
+      -(1041451 / 819200 : ℝ) *
         (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
   let primeCost : Fin (n + 1) → Fin (n + 1) → ℝ :=
     fun i j => (1 / 9 : ℝ) ^ Nat.dist i j
@@ -422,15 +426,11 @@ theorem actual_four_log_three_weighted_norm_coercive_sharp
     · have hji : j ≠ i := Ne.symm hij
       simp [c, primeCost, archCost, hij, hji, Nat.dist_comm]
   have hdiag : ∀ i,
-      (116142 / 65536 : ℝ) * energy (gs i).1 ≤
+      (5671 / 3200 : ℝ) * energy (gs i).1 ≤
         -(B (gs i) (gs i)).re := by
     intro i
-    have hfine :=
-      AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
-        (gs i) (center i) (hwidth i)
-    exact (mul_le_mul_of_nonneg_right
-      (by norm_num : (116142 / 65536 : ℝ) ≤ 5671 / 3200)
-      (energy_nonnegative (gs i).1)).trans hfine
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hwidth i)
   have hprime : ∀ i j : Fin (n + 1), i < j →
       ‖WeilPrimeSumV1 (mixed (gs i) (gs j))‖ ≤
         primeCost i j * (energy (gs i).1 + energy (gs j).1) := by
@@ -543,16 +543,49 @@ theorem actual_four_log_three_weighted_norm_coercive_sharp
   have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
     (fun i j => B (gs i) (gs j)) z
     (fun i => energy (gs i).1) c w
-    (116142 / 65536 : ℝ) (32826 / 65536 : ℝ)
+    (5671 / 3200 : ℝ) (32826 / 65536 : ℝ)
     (fun i => energy_nonnegative (gs i).1)
     hcpos hcdiag hcsym hweight hdiag hcross hrow
   have hmargin :
-      (116142 / 65536 : ℝ) - 32826 / 65536 = 20829 / 16384 :=
+      (5671 / 3200 : ℝ) - 32826 / 65536 = 1041451 / 819200 :=
     by norm_num
   rw [hmargin] at h
   rw [B_packetSum]
   exact h
 
+
+/-- Backwards-compatible old margin; the proof now follows by the exact,
+strictly stronger weighted margin with no new numerical rounding. -/
+theorem actual_four_log_three_weighted_norm_coercive_sharp
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3)
+    (z : Fin (n + 1) → ℂ) :
+    (B (packetSum z gs) (packetSum z gs)).re ≤
+      -(20829 / 16384 : ℝ) *
+        (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) := by
+
+  have hExact :=
+    actual_four_log_three_weighted_norm_coercive_exact
+      gs center hwidth hm hsep K g a hw hfamily hgap z
+  have hE : 0 ≤ (∑ i, energy (gs i).1 * ‖z i‖ ^ 2) :=
+    Finset.sum_nonneg (fun i _ =>
+      mul_nonneg (energy_nonnegative (gs i).1) (sq_nonneg _))
+  nlinarith [hExact, hE]
 
 theorem actual_four_log_three_weighted_norm_coercive
     {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
@@ -818,6 +851,7 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_complex_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_prime_four_log_three_norm_cost_at_centers
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_prime_norm_family_sign
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_exact
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive_sharp
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
