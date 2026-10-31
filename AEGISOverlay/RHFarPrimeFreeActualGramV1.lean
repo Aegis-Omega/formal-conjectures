@@ -19,13 +19,15 @@ import AEGISOverlay.RHActualMixedDefectV1
 import AEGISOverlay.RHCofinalSchurAdapterV1
 
 /-!
-# Exact genuine Weil two-packet positivity on arbitrary prime-log-free separations
+# Exact genuine Weil two-packet positivity on prime-log-free separations
 
 The source-certified far Archimedean decay and *actual* prime-term vanishing
-are combined with the source-proved fine diagonal margin. This works for
-differently shaped moment-zero fine packets and does not bound the gap above.
-The integer-log avoidance is an explicit geometric hypothesis, not a sign
-assumption and not an unconditional global theorem for all separations.
+are combined with the source-proved fine diagonal margin for differently
+shaped moment-zero fine packets. There is no fixed distance cutoff in the
+theorem syntax. The integer-log avoidance is nevertheless a substantial
+geometric restriction, not a global estimate: logarithms of successive
+integers become closer than 1/128 beyond index 128. These proofs make NO
+claim of arbitrary-distance nonresonance, unrestricted RH positivity, or RH.
 -/
 
 open Finset
