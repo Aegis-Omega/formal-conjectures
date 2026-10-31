@@ -21,11 +21,14 @@ on:
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
+      - 'AEGISOverlay/RHFarPrimeFreeActualGramV1.lean'
       - 'AEGISOverlay/RHActualLogFourV1.lean'
       - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
       - 'AEGISOverlay/RHActualElevenSpectralV1.lean'
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
+      - 'AEGISOverlay/RHUniformBudgetObstructionV1.lean'
+      - 'AEGISOverlay/RHMixedBudgetRefinementV1.lean'
       - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean'
       - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
@@ -40,6 +43,14 @@ on:
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
+      - 'research/rh/assembly/repository_census.py'
+      - 'research/rh/assembly/repository-census.schema.json'
+      - 'research/rh/assembly/repository_census_v11.py'
+      - 'research/rh/assembly/merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/validate_repository_census_v11.py'
       - 'scripts/rh_submission_from_checkpoint.py'
       - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -55,6 +66,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
@@ -337,7 +349,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -631,6 +643,12 @@ jobs:
             AEGISOverlay/RHActualUniversalFineGramV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualUniversalFineGramV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHUniformBudgetObstructionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHUniformBudgetObstructionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHMixedBudgetRefinementV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHMixedBudgetRefinementV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHScaleRowCompositionV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
@@ -652,6 +670,25 @@ jobs:
              evidence-cofinal/compile-AEGISOverlay_RHMellinDetectorCenteredV1.log
            grep -F 'AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer' \
             evidence-cofinal/compile-AEGISOverlay_RHOptimizedSchurGlobalJoinV1.log
+          # Audit the arithmetic producer even if its exact-source .olean was
+          # restored from a verified checkpoint (which has no compile log).
+          # Generate every probe from this HEAD's source, not a static list.
+          python3 - <<'PY'
+          import pathlib, re
+          src = pathlib.Path("AEGISOverlay/RHFourLogThreeActualPrimeV1.lean")
+          names = re.findall(r"^#print axioms (\S+)$", src.read_text(), re.M)
+          if not names or len(names) != len(set(names)):
+              raise RuntimeError("FOUR_LOG_THREE_AXIOM_PROBES_INVALID")
+          pathlib.Path("RHFourLogThreeAxiomAudit.lean").write_text(
+              "import AEGISOverlay.RHFourLogThreeActualPrimeV1\n\n"
+              + "\n".join("#print axioms " + name for name in names) + "\n")
+          print("FOUR_LOG_THREE_AXIOM_PROBE_COUNT", len(names))
+          PY
+          lake env lean RHFourLogThreeAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFourLogThreeActualPrimeV1.lean \
+            evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHArchRow29V1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHArchRow29V1.log
@@ -735,6 +772,10 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualLocalGramCoercivityV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
+          for theorem in prime_free_far_actual_B_q16 prime_free_far_two_packet_actual_gram_margin prime_free_far_two_packet_actual_zero_margin; do
+            grep -F "AEGIS.RHFarPrimeFreeActualGramV1.$theorem" \
+              evidence-cofinal/compile-AEGISOverlay_RHFarPrimeFreeActualGramV1.log
+          done
           grep -F "AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive" \
             evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
@@ -783,6 +824,26 @@ jobs:
             2>&1 | tee evidence-cofinal/assembly/graph-export.log
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
+          python3 research/rh/assembly/repository_census.py --self-test
+          python3 research/rh/assembly/repository_census.py \
+            --proof-graph evidence-cofinal/assembly/RH_PROOF_GRAPH.json \
+            --proof-terms evidence-cofinal/assembly/proof-terms.json \
+            --environment-census evidence-cofinal/assembly/environment-rh-candidates.json \
+            --proof-passport evidence-cofinal/assembly/RH_EVIDENCE_PASSPORT.json \
+            --output evidence-cofinal/assembly/repository_census.json
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          r=json.loads(Path("evidence-cofinal/assembly/repository_census.json").read_text())
+          h=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert r["repository"]["exact_head"]==h
+          assert r["kernel_inventory_summary"]["status"]=="EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED"
+          assert r["kernel_inventory_summary"]["reachable_declaration_rows"]==len(r["kernel_reachable_declaration_inventory"])
+          assert r["total_declarations"] is None
+          print("RH_CENSUS_KERNEL_GRAPH_BOUND",h,
+                r["kernel_inventory_summary"]["reachable_declaration_rows"],
+                r["kernel_inventory_summary"]["imported_environment_declarations"])
+          PY
 
       - name: Prepare official RH submission from existing kernel checkpoint
         shell: bash
@@ -790,6 +851,20 @@ jobs:
           set -euo pipefail
           python3 scripts/test_rh_submission_from_checkpoint.py
           python3 scripts/rh_submission_from_checkpoint.py
+
+      - name: Census kernel cross-artifact auto join (kernel worker, exact head)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet 'jsonschema==4.25.1'
+          python3 research/rh/assembly/test_merge_rh_kernel_census_v11.py
+          python3 research/rh/assembly/test_auto_join_rh_census_v11.py
+          python3 research/rh/assembly/auto_join_rh_census_v11.py \
+            --mode kernel-local \
+            --output-dir evidence-cofinal/assembly
 
       - name: Preserve completed source-bound cofinal modules
         id: cofinal-checkpoint

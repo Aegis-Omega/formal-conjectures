@@ -1,0 +1,155 @@
+name: RH CvS windows L = 6/5 and 4/3 from source
+
+# Compiles the whole actual-row chain behind window_L65 from source in one job: the Krein ring
+# closure, the source row bridge, the full row table, the actual inputs, the 141-moment join and
+# the K3 trace certificate. The same DAG also carries window_L43 (2r <= 4/3): the relative row
+# certificate at L = 4/3 and its exhaustion join. Nothing is restored from earlier runs, so it
+# does not depend on expired artifacts. Not RH.
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/rh-cvs-window-l65-source.yml
+      - research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/*.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/CvSWindowL65V1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/RHWindowL65ExhaustionV1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/CvSActualMomentWindowJoinV1.lean
+      - research/rh/checkpoints/20261026_window_l43/*.lean
+      - research/rh/feshbach_lean_v1/CvSRelRow*.lean
+      - research/rh/feshbach_lean_v1/tools/gen_rr43.py
+      - research/rh/feshbach_lean_v1/tools/cert43.py
+      - research/rh/feshbach_lean_v1/tools/emit_rr43.py
+      - research/rh/feshbach_lean_v1/tools/boxes43.py
+  workflow_dispatch:
+
+concurrency:
+  group: rh-cvs-window-l65-source-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+
+jobs:
+  window-l65-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Bind pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      # Same provider recipe as rh-cvs-actual-row-replay.yml.
+      - name: Checkout immutable PR51 source for the pinned provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+      - name: Checkout exact external provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+      - name: Restore pinned provider build
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .li-provider/.lake/build
+          key: rh-li-provider-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.LI_CRITERION_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
+        run: python3 research/rh/m8_kernel_v1/replay.py provider
+
+      # The two generated modules of the L = 4/3 row certificate are not committed: they are
+      # produced here from the committed tau and diagonal boxes (untrusted generators, pinned
+      # mpmath) and every table in them is rechecked by the kernel.
+      - name: Generate the L = 4/3 row data from the committed boxes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv "$RUNNER_TEMP/rr43venv"
+          PY="$RUNNER_TEMP/rr43venv/bin/python"
+          "$PY" -m pip install --quiet mpmath==1.3.0
+          T="$GITHUB_WORKSPACE/research/rh/feshbach_lean_v1/tools"
+          W="$RUNNER_TEMP/rr43"
+          mkdir -p "$W/out"
+          ( cd "$W" && "$PY" "$T/gen_rr43.py" && "$PY" "$T/cert43.py" 64 && "$PY" "$T/emit_rr43.py" "$W/out" )
+          for m in CvSRelRowDataL43V1 CvSRelRowCertL43V1; do
+            test ! -e "research/rh/feshbach_lean_v1/$m.lean"
+            cp "$W/out/$m.lean" "research/rh/feshbach_lean_v1/$m.lean"
+          done
+          # The local run that produced the proofs generated the same bytes.
+          sha256sum -c - <<'SUMS'
+          b0563dfac98d4acfec9f5c4d6d8f8d49723bbb74eff7f257def55548805c2401  research/rh/feshbach_lean_v1/CvSRelRowDataL43V1.lean
+          50603b6eb3463eaf848110be56c553080d4a4caaa9ca2a11ff3346916e5ff7df  research/rh/feshbach_lean_v1/CvSRelRowCertL43V1.lean
+          SUMS
+
+      - name: Resolve the source DAG of window_L65 and window_L43
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=research/rh/checkpoints/20261020_row_budget_bridge
+          W=research/rh/checkpoints/20261026_window_l43
+          if grep -n -E '\bsorry\b|\badmit\b|^axiom ' "$B/CvSWindowL65V1.lean" "$B/RHWindowL65ExhaustionV1.lean" \
+               "$W"/*.lean research/rh/feshbach_lean_v1/CvSRelRow*.lean; then exit 1; fi
+          # Each exhaustion join imports its window, so the DAG contains both window chains.
+          python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1
+
+      - name: Compile every module from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -u research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/build.py \
+            "$GITHUB_WORKSPACE/.lake/build/lib/lean" 3 2>&1 | tee window-l65-build.log
+
+      - name: Audit axioms of every module
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/audit.py
+
+      - name: Upload receipt and logs
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: window-l65-source-${{ github.sha }}
+          retention-days: 7
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: |
+            WINDOW_L65_SOURCE_RECEIPT.json
+            window-l65-build.log
+            .lake/real_plan.json
+            .lake/real_status.json
+            .lake/reallogs/*.log

@@ -46,6 +46,9 @@ def run_closure_probes(root, meta, out):
 
 manifest = json.loads((ROOT / "evidence-cofinal/source-manifest.json").read_text())
 head = git_sha()
+ACTIVE_REPO = os.environ.get("GITHUB_REPOSITORY")
+if not ACTIVE_REPO or "/" not in ACTIVE_REPO:
+    raise RuntimeError("GITHUB_REPOSITORY_NOT_PROVIDED")
 modules = {}
 source_snapshots = {line.split()[0]: line.split()[1]
                     for line in (ROOT / "evidence-cofinal/archived-source-lock.txt").read_text().splitlines()}
@@ -69,19 +72,19 @@ for record in manifest:
                       "sha": os.environ["LI_CRITERION_SHA"],
                       "adaptation_note": "Factorization has three source-locked API edits recorded in the workflow"}
     elif str(source).startswith(("AEGISOverlay/", "FormalConjecturesUtil/", "research/", "AegisRH/")):
-        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head}
+        provenance = {"repo": ACTIVE_REPO, "sha": head}
     else:
-        provenance = {"repo": "tarikskalic33/formal-conjectures",
+        provenance = {"repo": ACTIVE_REPO,
                       "replay_sha": head, "historical_containing_commit": None,
                       "note": "Archived/blob-staged input; see archived-source-lock and archive digest"}
     if module in source_snapshots:
         snapshot = "research/rh/assembly/exact-source-inputs/" + module + ".lean.txt"
         assert source.read_bytes() == (ROOT / snapshot).read_bytes(), module
-        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+        provenance = {"repo": ACTIVE_REPO, "sha": head,
                       "source_file": snapshot, "git_blob": source_snapshots[module],
                       "original_historical_commit": None}
     elif module in abel_members:
-        provenance = {"repo": "tarikskalic33/formal-conjectures", "sha": head,
+        provenance = {"repo": ACTIVE_REPO, "sha": head,
                       "source_archive": "research/rh/integration/AEGIS_PR63_ARCHIVED_ABEL_SOURCES_V6.tar.gz",
                       "archive_member": module + ".lean"}
     original = originals_by_name.get(module)
@@ -232,7 +235,7 @@ rh_assessment = (
 # null is *unknown outside the inspected graph*, never proof of absence.
 rh_proven_in_reachable_graph = True if closed_rh_declarations else None
 rh_closure_scan = {
-    "scope": "all currently imported kernel constants plus the full 66-root dependency DAG",
+    "scope": f"all currently imported kernel constants plus the full {len(terms['roots'])}-root dependency DAG",
     "reachable_declaration_count": len(rows),
     "imported_environment_declaration_count": env_rh_census["inspected_count"],
     "imported_environment_rh_type_candidates": len(env_rh_candidates),
@@ -306,7 +309,13 @@ passport.update(verification_status="SELECTED_ROOTS_KERNEL_AND_AXIOM_PASS; " + r
                 root_coverage=root_coverage,
                 unconditional_proof_scope="All compiled/imported kernel declarations; null means unverified outside this environment",
                 exact_replay_sha=head, new_candidate_axioms=root_axioms,
-                active_repository="tarikskalic33/formal-conjectures",
+                active_repository=ACTIVE_REPO,
+                active_integration_target={
+                    "repository": ACTIVE_REPO,
+                    "pull_request": (event.get("pull_request") or {}).get("number"),
+                    "branch": os.environ.get("GITHUB_HEAD_REF") or os.environ.get("GITHUB_REF_NAME"),
+                    "exact_sha": head,
+                },
                 active_pull_request=(event.get("pull_request") or {}).get("number"),
                 active_branch=os.environ.get("GITHUB_HEAD_REF") or None,
                 proof_graph_status=graph["status"],
@@ -335,7 +344,7 @@ for root, axioms in root_axioms.items():
     if record:
         prov = record["provenance"]
         sha = prov.get("sha", head)
-        repo = prov.get("repo", "tarikskalic33/formal-conjectures")
+        repo = prov.get("repo", ACTIVE_REPO)
         path = prov.get("source_file", record["source"])
         if path.startswith(".aegis/"): path = path[len(".aegis/"):]
         url = "https://github.com/" + repo + "/blob/" + sha + "/" + path

@@ -94,6 +94,9 @@ def main() -> int:
 
     head = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    active_repo = os.environ.get("GITHUB_REPOSITORY")
+    if not active_repo or active_repo.count("/") != 1:
+        raise RuntimeError("GITHUB_REPOSITORY_NOT_PROVIDED")
     manifest = json.loads(manifest_path.read_text())
     census = json.loads(graph_path.read_text())
     if census.get("defeq_target_type") != "RiemannHypothesis":
@@ -125,7 +128,7 @@ def main() -> int:
     declaration = None
     receipt = {
         "schema": "aegis.rh.official-submission-checkpoint.v1",
-        "repository": "tarikskalic33/formal-conjectures",
+        "repository": active_repo,
         "exact_head": head,
         "target": "_root_.RiemannHypothesis",
         "upstream_repository": DEEP_MIND_REPOSITORY,

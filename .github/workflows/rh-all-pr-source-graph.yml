@@ -1,0 +1,178 @@
+name: RH all-PR source graph (exact-head audit)
+
+on:
+  pull_request:
+    paths:
+      - 'research/rh/assembly/pr_branch_coherence_audit.py'
+      - 'research/rh/assembly/rh_import_coherence_audit.py'
+      - 'research/rh/assembly/rh_source_reuse_pipeline.py'
+      - 'research/rh/assembly/repository_census.py'
+      - 'research/rh/assembly/auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/test_auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/repository-census.schema.json'
+      - 'research/rh/assembly/repository_census_v11.py'
+      - 'research/rh/assembly/validate_repository_census_v11.py'
+      - 'research/rh/assembly/test_repository_census_v11.py'
+      - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py'
+      - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py'
+      - '.github/workflows/rh-all-pr-source-graph.yml'
+  workflow_dispatch:
+    inputs:
+      target_pr:
+        description: 'Existing integration PR number (no new PR is created)'
+        required: true
+        type: number
+
+permissions:
+  contents: read
+  pull-requests: read
+  checks: read
+  actions: read
+
+concurrency:
+  group: rh-all-pr-source-graph-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout the immutable candidate SHA
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Regression test exact-source Apache header gate
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py --self-test
+      - name: Verify complete actual-input archive and historical/current source binding
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py \
+            --preflight --receipt actual_input_license_binding_receipt.json
+      - name: Self-test the automatic source/PR DAG auditor
+        run: python3 research/rh/assembly/pr_branch_coherence_audit.py --self-test
+      - name: Scan ALL PRs and ALL branches plus exact source and check-run evidence
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          TARGET_PR: ${{ github.event.pull_request.number || inputs.target_pr }}
+        run: |
+          set -euo pipefail
+          test -n "$TARGET_PR"
+          python3 research/rh/assembly/pr_branch_coherence_audit.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --target-pr "$TARGET_PR" \
+            --output pr_branch_coherence.json \
+            --workers 5
+      - name: Self-test import-level source audit
+        run: python3 research/rh/assembly/rh_import_coherence_audit.py --self-test
+      - name: Resolve cross-PR Lean import paths from verified immutable source blobs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/rh_import_coherence_audit.py \
+            --repo "$GITHUB_REPOSITORY" \
+            --graph pr_branch_coherence.json \
+            --output rh_import_coherence.json \
+            --recovery-dir rh_source_recovery \
+            --workers 8
+      - name: Self-test and automatically stage all historical missing Lean imports
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/rh_source_reuse_pipeline.py --self-test
+          python3 research/rh/assembly/rh_source_reuse_pipeline.py \
+            --graph pr_branch_coherence.json \
+            --imports rh_import_coherence.json \
+            --recovery rh_source_recovery \
+            --stage-dir rh_reuse_stage \
+            --output rh_source_reuse_plan.json
+      - name: Build source-based RH repository census from the entire exact checkout
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/repository_census.py --self-test
+          python3 research/rh/assembly/repository_census.py \
+            --graph pr_branch_coherence.json \
+            --output repository_census.json
+          python3 - <<'PY'
+          import json, os, subprocess
+          r=json.load(open("repository_census.json", encoding="utf-8"))
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert r["repository"]["exact_head"]==head==os.environ["GITHUB_SHA"] or (
+            r["repository"]["exact_head"]==head==
+            os.environ.get("PR_HEAD_EXACT",head))
+          assert r["branch_inventory_summary"]["state"]=="VERIFIED_SOURCE_GRAPH_ONLY"
+          assert r["total_declarations"] is None and r["total_axioms"] is None
+          assert r["current_rh_status"]=="NOT_ASSESSED_ON_THIS_CENSUS"
+          print("RH_CENSUS_SOURCE_ONLY_BOUND",head,
+                r["total_modules"],r["source_counts"]["source_declaration_occurrences"])
+          PY
+      - name: Validate v1.1 Draft-07 contract and cross-object preservation invariants
+        env:
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet 'jsonschema==4.25.1'
+          python3 research/rh/assembly/test_repository_census_v11.py
+          python3 research/rh/assembly/repository_census_v11.py \
+            --source repository_census.json \
+            --output repository_census_v1.1.json
+          python3 research/rh/assembly/validate_repository_census_v11.py \
+            --schema research/rh/assembly/repository-census.schema.json \
+            --input repository_census_v1.1.json
+          test "$(git rev-parse HEAD)" = "$PR_HEAD_EXACT"
+      - name: Census kernel cross-artifact auto join (source worker, exact head)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/test_merge_rh_kernel_census_v11.py
+          python3 research/rh/assembly/test_auto_join_rh_census_v11.py
+          python3 research/rh/assembly/auto_join_rh_census_v11.py \
+            --mode source-local \
+            --output-dir .
+      - name: Attach exact SHA, digest, and non-proof boundary
+        if: always()
+        env:
+          PR_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          {
+            printf 'exact_candidate_sha=%s\n' "$PR_HEAD"
+            printf 'actual_checkout_sha=%s\n' "$(git rev-parse HEAD)"
+            test "$(git rev-parse HEAD)" = "$PR_HEAD"
+            test -f pr_branch_coherence.json && sha256sum pr_branch_coherence.json || true
+            test -f rh_import_coherence.json && sha256sum rh_import_coherence.json || true
+            test -f rh_source_reuse_plan.json && sha256sum rh_source_reuse_plan.json || true
+            test -f repository_census.json && sha256sum repository_census.json || true
+            test -f repository_census_v1.1.json && sha256sum repository_census_v1.1.json || true
+            test -f repository_census_v1.1_kernel_bound.json && sha256sum repository_census_v1.1_kernel_bound.json || true
+            test -f repository_census_v1.1_kernel_receipt.json && sha256sum repository_census_v1.1_kernel_receipt.json || true
+            printf 'source_graph_only=true\n'
+            printf 'lean_kernel_closure_claim=false\n'
+          } | tee pr_graph_receipt.txt
+      - name: Preserve complete source graph and receipt, even on an audit failure
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-all-pr-source-graph-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            pr_branch_coherence.json
+            rh_import_coherence.json
+            rh_source_reuse_plan.json
+            rh_reuse_stage/
+            actual_input_license_binding_receipt.json
+            rh_source_recovery/
+            repository_census.json
+            repository_census_v1.1.json
+            repository_census_v1.1_kernel_bound.json
+            repository_census_v1.1_kernel_receipt.json
+            census_auto_join_status.json
+            pr_graph_receipt.txt
+          if-no-files-found: warn
+          retention-days: 14
