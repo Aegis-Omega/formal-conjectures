@@ -141,9 +141,64 @@ theorem l43_full_weighted_actual_gram_nonpositive
   rw [AEGIS.RHGramExpansionV13.B_packetSum] at hsign
   exact hsign
 
+/-! ## Genuine signed mixed-entry control over the larger L=4/3 window -/
+
+/-- Two fine packets whose centers are at most 509/384 apart fit a common
+half-width-2/3 logarithmic window. The constant is exact:
+(1/256) + (509/384)/2 = 2/3. -/
+theorem fine_width_into_l43_midpoint
+    (u : WeilCompactSmoothGV1) (a b : ℝ)
+    (hu : HalfWidthAt u (1 / 256) a)
+    (hab : |a - b| ≤ (509 / 384 : ℝ)) :
+    HalfWidthAt u (2 / 3) ((a + b) / 2) := by
+  change tsupport (lift u.1) ⊆
+    Icc ((a + b) / 2 - 2 / 3) ((a + b) / 2 + 2 / 3)
+  change tsupport (lift u.1) ⊆
+    Icc (a - 1 / 256) (a + 1 / 256) at hu
+  intro t ht
+  obtain ⟨hlo, hhi⟩ := hu ht
+  obtain ⟨hablo, habhi⟩ := abs_le.mp hab
+  constructor <;> linarith
+
+/-- Signed TRUE mixed Weil interaction for any two differently shaped
+moment-zero fine atoms with centers separated by ≤ 509/384. This extends
+the existing Trigram near-pair cutoff 507/640 and retains the full
+cross-term without a numerical Schur assumption. -/
+theorem l43_fine_pair_signed_mixed_bound
+    (u v : WeilCompactSmoothGV1) (a b : ℝ)
+    (hmu : WeilMomentConditionsV1 u)
+    (hmv : WeilMomentConditionsV1 v)
+    (hu : HalfWidthAt u (1 / 256) a)
+    (hv : HalfWidthAt v (1 / 256) b)
+    (hab : |a - b| ≤ (509 / 384 : ℝ)) :
+    2 * (B u v).re ≤ -(B u u).re - (B v v).re := by
+  have hwa : HalfWidthAt u (2 / 3) ((a + b) / 2) :=
+    fine_width_into_l43_midpoint u a b hu hab
+  have hwb : HalfWidthAt v (2 / 3) ((a + b) / 2) := by
+    have hba : |b - a| ≤ (509 / 384 : ℝ) := by
+      simpa only [abs_sub_comm] using hab
+    simpa only [add_comm] using
+      fine_width_into_l43_midpoint v b a hv hba
+  have hw : HalfWidthAt (addPacket u v) (2 / 3) ((a + b) / 2) :=
+    halfWidth_add u v ((a + b) / 2) (2 / 3) hwa hwb
+  have hm : WeilMomentConditionsV1 (addPacket u v) :=
+    momentConditions_addPacket_v10 u v hmu hmv
+  have hzero := AEGIS.CvSWindowL43V1.window_L43
+    (addPacket u v) hm (2 / 3) ((a + b) / 2) hw (by norm_num)
+  have hsign :
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 (addPacket u v))).re ≤ 0 :=
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (addPacket u v) hm).mpr hzero
+  change (B (addPacket u v) (addPacket u v)).re ≤ 0 at hsign
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients u v
+  linarith
+
 end AEGIS.RHL43ActualWeightedGramV1
 
 #print axioms AEGIS.RHL43ActualWeightedGramV1.halfWidth_scale
 #print axioms AEGIS.RHL43ActualWeightedGramV1.halfWidth_add
 #print axioms AEGIS.RHL43ActualWeightedGramV1.halfWidth_packetSum
 #print axioms AEGIS.RHL43ActualWeightedGramV1.l43_full_weighted_actual_gram_nonpositive
+#print axioms AEGIS.RHL43ActualWeightedGramV1.fine_width_into_l43_midpoint
+#print axioms AEGIS.RHL43ActualWeightedGramV1.l43_fine_pair_signed_mixed_bound
