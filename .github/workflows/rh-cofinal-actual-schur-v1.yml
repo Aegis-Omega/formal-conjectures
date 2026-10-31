@@ -42,6 +42,7 @@ on:
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
+      - 'research/rh/assembly/repository_census.py'
       - 'scripts/rh_submission_from_checkpoint.py'
       - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -810,6 +811,26 @@ jobs:
             2>&1 | tee evidence-cofinal/assembly/graph-export.log
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
+          python3 research/rh/assembly/repository_census.py --self-test
+          python3 research/rh/assembly/repository_census.py \
+            --proof-graph evidence-cofinal/assembly/RH_PROOF_GRAPH.json \
+            --proof-terms evidence-cofinal/assembly/proof-terms.json \
+            --environment-census evidence-cofinal/assembly/environment-rh-candidates.json \
+            --proof-passport evidence-cofinal/assembly/RH_EVIDENCE_PASSPORT.json \
+            --output evidence-cofinal/assembly/repository_census.json
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          r=json.loads(Path("evidence-cofinal/assembly/repository_census.json").read_text())
+          h=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert r["repository"]["exact_head"]==h
+          assert r["kernel_inventory_summary"]["status"]=="EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED"
+          assert r["kernel_inventory_summary"]["reachable_declaration_rows"]==len(r["kernel_reachable_declaration_inventory"])
+          assert r["total_declarations"] is None
+          print("RH_CENSUS_KERNEL_GRAPH_BOUND",h,
+                r["kernel_inventory_summary"]["reachable_declaration_rows"],
+                r["kernel_inventory_summary"]["imported_environment_declarations"])
+          PY
 
       - name: Prepare official RH submission from existing kernel checkpoint
         shell: bash
