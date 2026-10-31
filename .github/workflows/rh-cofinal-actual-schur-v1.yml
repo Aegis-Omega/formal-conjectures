@@ -660,6 +660,25 @@ jobs:
              evidence-cofinal/compile-AEGISOverlay_RHMellinDetectorCenteredV1.log
            grep -F 'AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer' \
             evidence-cofinal/compile-AEGISOverlay_RHOptimizedSchurGlobalJoinV1.log
+          # Audit the arithmetic producer even if its exact-source .olean was
+          # restored from a verified checkpoint (which has no compile log).
+          # Generate every probe from this HEAD's source, not a static list.
+          python3 - <<'PY'
+          import pathlib, re
+          src = pathlib.Path("AEGISOverlay/RHFourLogThreeActualPrimeV1.lean")
+          names = re.findall(r"^#print axioms (\S+)$", src.read_text(), re.M)
+          if not names or len(names) != len(set(names)):
+              raise RuntimeError("FOUR_LOG_THREE_AXIOM_PROBES_INVALID")
+          pathlib.Path("RHFourLogThreeAxiomAudit.lean").write_text(
+              "import AEGISOverlay.RHFourLogThreeActualPrimeV1\n\n"
+              + "\n".join("#print axioms " + name for name in names) + "\n")
+          print("FOUR_LOG_THREE_AXIOM_PROBE_COUNT", len(names))
+          PY
+          lake env lean RHFourLogThreeAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFourLogThreeActualPrimeV1.lean \
+            evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHArchRow29V1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHArchRow29V1.log
