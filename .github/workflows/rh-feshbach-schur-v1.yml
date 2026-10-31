@@ -424,6 +424,34 @@ jobs:
           while read -r m; do
             lean -DwarningAsError=true -o "$RING/$m.olean" "research/rh/feshbach_lean_v1/$m.lean" 2>&1 | tee -a ring.log
           done < krein_trace_modules.txt
+          # V10: independently kernel-check the NEW five-mode source, never infer
+          # its compilation from unrelated successful cofinal/K3 checks.
+          echo "V10_SINFOURTH_KERNEL_START"
+          lean -DwarningAsError=true -o "$RING/CvSSinFourthAtomV1.olean" research/rh/feshbach_lean_v1/CvSSinFourthAtomV1.lean 2>&1 | tee -a ring.log
+          test -s "$RING/CvSSinFourthAtomV1.olean"
+          python3 - <<'PYV10'
+          import re
+          from pathlib import Path
+          log = Path('ring.log').read_text()
+          permitted = {'propext', 'Classical.choice', 'Quot.sound'}
+          names = [
+              'AEGIS.CvSSinFourthAtomV1.sinFourthAtom_eq_fiveEz',
+              'AEGIS.CvSSinFourthAtomV1.fiveStencil_sum_zero',
+              'AEGIS.CvSSinFourthAtomV1.fiveStencil_firstMoment_zero',
+          ]
+          for name in names:
+              m = re.search(r"'" + re.escape(name) + r"'\s+depends on axioms:\s*\[([^\]]*)\]", log)
+              if m:
+                  found = {v.strip() for v in m.group(1).split(',') if v.strip()}
+              elif "'" + name + "' does not depend on any axioms" in log:
+                  found = set()
+              else:
+                  raise SystemExit("V10_AXIOM_AUDIT_MISSING " + name)
+              if not found <= permitted:
+                  raise SystemExit("V10_AXIOM_AUDIT_UNEXPECTED " + name + " " + repr(sorted(found)))
+              print("V10_AXIOM_AUDIT_PASS", name, sorted(found), flush=True)
+          print("V10_SINFOURTH_KERNEL_PASS", flush=True)
+          PYV10
           # Strict K3 determinant obligation: build AFTER the trace source closure.
           for m in CvSK3DetGBridgeV2 CvSK3FourierMinorV2; do
             echo "K3_KERNEL_START $m"
