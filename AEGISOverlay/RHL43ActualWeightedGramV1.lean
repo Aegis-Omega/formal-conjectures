@@ -182,7 +182,7 @@ theorem l43_fine_pair_signed_mixed_bound
   have hw : HalfWidthAt (addPacket u v) (2 / 3) ((a + b) / 2) :=
     halfWidth_add u v ((a + b) / 2) (2 / 3) hwa hwb
   have hm : WeilMomentConditionsV1 (addPacket u v) :=
-    momentConditions_addPacket_v10 u v hmu hmv
+    AEGIS.WeilFinalSignTranslationBoundV10.momentConditions_addPacket_v10 u v hmu hmv
   have hzero := AEGIS.CvSWindowL43V1.window_L43
     (addPacket u v) hm (2 / 3) ((a + b) / 2) hw (by norm_num)
   have hsign :

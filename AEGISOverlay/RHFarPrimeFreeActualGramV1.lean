@@ -101,7 +101,7 @@ theorem prime_free_far_two_packet_actual_zero_margin
         WeilZeroIndexSummandV1
           (WeilAutocorrelationV1 (addPacket u v)) rho).re := by
   have hm : WeilMomentConditionsV1 (addPacket u v) :=
-    momentConditions_addPacket_v10 u v hmU hmV
+    AEGIS.WeilFinalSignTranslationBoundV10.momentConditions_addPacket_v10 u v hmU hmV
   have hreal := prime_free_far_two_packet_actual_gram_margin
     u v a b hu hv hmU hgap havoid
   have hEF :=
