@@ -77,7 +77,7 @@ substitution of an arbitrary PSD matrix for the Weil operator. -/
 theorem certified_actual_cvs_lowblock_nonneg
     (M : ℕ) (hM : 3 ≤ M) (v : Fin 139 → ℂ) :
     0 ≤ AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS M (6 / 5)
-      AEGIS.CvSMomentBasisV1.atomCenter
+      AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
       (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v) := by
   rw [← AEGIS.CvSProjectedTransportL12V1.hTransport M v]
   exact certified_source_projectedQ_nonneg M hM v
@@ -93,7 +93,7 @@ def UniversalActualCvSLowBlockApproximation : Prop :=
       Tendsto
         (fun j =>
           AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS (M j) (6 / 5)
-            AEGIS.CvSMomentBasisV1.atomCenter
+            AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
             (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis (v j)))
         atTop
         (𝓝 ((∑' rho : RiemannNontrivialZeroIndexV2,
@@ -113,7 +113,7 @@ theorem universal_zero_of_actual_cvs_lowblock_approximation
       g (N := M)
       (q := fun j =>
         AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS (M j) (6 / 5)
-          AEGIS.CvSMomentBasisV1.atomCenter
+          AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
           (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis (v j)))
       (normSq := fun _ => (0 : ℝ)) (normSqLimit := 0)
       hcofinal hreproduce tendsto_const_nhds
