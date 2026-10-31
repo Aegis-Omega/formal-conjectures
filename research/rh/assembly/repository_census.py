@@ -300,7 +300,8 @@ def self_test():
                      'direct_dependencies':[]}
         terms={'roots':['Fixture.witness'],'declarations':[declaration]}
         (root/'terms.json').write_text(json.dumps(terms))
-        graph={'exact_replay_sha':h,'roots':terms['roots'],
+        graph={'exact_replay_sha':h,'status':'selected_root_elaborated_type_and_available_proof_dependency_closure',
+               'roots':terms['roots'],
                'declarations':[dict(declaration)],'rh_closure_scan':{
                  'reachable_declaration_count':1,'imported_environment_declaration_count':4,
                  'imported_environment_rh_type_candidates':0,'closed_canonical_rh_declarations':[],
