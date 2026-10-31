@@ -5,6 +5,7 @@ on:
     paths:
       - 'research/rh/assembly/pr_branch_coherence_audit.py'
       - 'research/rh/assembly/rh_import_coherence_audit.py'
+      - 'research/rh/assembly/rh_source_reuse_pipeline.py'
       - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py'
       - 'research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py'
       - '.github/workflows/rh-all-pr-source-graph.yml'
@@ -71,6 +72,16 @@ jobs:
             --output rh_import_coherence.json \
             --recovery-dir rh_source_recovery \
             --workers 8
+      - name: Self-test and automatically stage all historical missing Lean imports
+        run: |
+          set -euo pipefail
+          python3 research/rh/assembly/rh_source_reuse_pipeline.py --self-test
+          python3 research/rh/assembly/rh_source_reuse_pipeline.py \
+            --graph pr_branch_coherence.json \
+            --imports rh_import_coherence.json \
+            --recovery rh_source_recovery \
+            --stage-dir rh_reuse_stage \
+            --output rh_source_reuse_plan.json
       - name: Attach exact SHA, digest, and non-proof boundary
         if: always()
         env:
@@ -82,6 +93,7 @@ jobs:
             test "$(git rev-parse HEAD)" = "$PR_HEAD"
             test -f pr_branch_coherence.json && sha256sum pr_branch_coherence.json || true
             test -f rh_import_coherence.json && sha256sum rh_import_coherence.json || true
+            test -f rh_source_reuse_plan.json && sha256sum rh_source_reuse_plan.json || true
             printf 'source_graph_only=true\n'
             printf 'lean_kernel_closure_claim=false\n'
           } | tee pr_graph_receipt.txt
@@ -93,6 +105,8 @@ jobs:
           path: |
             pr_branch_coherence.json
             rh_import_coherence.json
+            rh_source_reuse_plan.json
+            rh_reuse_stage/
             actual_input_license_binding_receipt.json
             rh_source_recovery/
             pr_graph_receipt.txt
