@@ -752,6 +752,58 @@ theorem actual_four_log_three_signed_gram_sharp
     mul_le_mul_of_nonneg_right (by norm_num) hE
   linarith [hdefect, hlocal, hfloor]
 
+
+/-- Exact source-derived signed Weil-Gram margin for every finite
+four-log-three same-mother family. No rounding of the diagonal constant
+or of the prime/Arch row. The number of atoms `n` is unrestricted.
+
+This is a genuine stronger local coercivity result, not a reconstruction
+of an arbitrary Weil packet and not an unconditional RH theorem. -/
+theorem actual_four_log_three_signed_gram_source_margin
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hwidth : ∀ i,
+      AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i))
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hsep : ∀ i j : Fin (n + 1), i < j →
+      1 ≤ Nat.dist i j ∧
+        (65 / 32 : ℝ) * (Nat.dist i j : ℝ) ≤ center j - center i)
+    (K : ℕ) (g : WeilCompactSmoothGV1) (a : ℝ)
+    (hw : HalfWidthAt g
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.timeHorizonRadius K) a)
+    (hfamily : ∀ i, gs i = translatePacket g (center i))
+    (hgap : ∀ i j : Fin (n + 1), i < j →
+      4 * Nat.dist i j ≤ K ∧
+        center j - center i =
+          ((4 * Nat.dist i j : ℕ) : ℝ) * Real.log 3) :
+    (B (packetSum (fun _ => (1 : ℂ)) gs)
+      (packetSum (fun _ => (1 : ℂ)) gs)).re ≤
+      -((5671 / 3200 : ℝ) -
+        2 * ((1 / 4 : ℝ) + (29 / 65536 : ℝ))) *
+        (∑ i, energy (gs i).1) := by
+  obtain ⟨c, hsym, hcross, hrow⟩ :=
+    actual_four_log_three_source_signed_row_certificate
+      gs center hwidth hm hsep K g a hw hfamily hgap
+  have hdiag : ∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+      -(B (gs i) (gs i)).re := by
+    intro i
+    exact AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      (gs i) (center i) (hwidth i)
+  have hdefect :=
+    AEGIS.RHActualUniversalFineGramV1.actual_mixed_defect_le_of_signed_symmetric_row
+      gs c (16413 / 65536 : ℝ) hsym hcross hrow
+  have hlocal :=
+    AEGIS.RHActualUniversalFineGramV1.fine_mixed_defect_lower_bound n gs hdiag
+  have hgram :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+      (∑ i, ∑ j, B (gs i) (gs j)).re := by
+    rw [B_packetSum]
+    simp
+  rw [← hgram] at hlocal
+  linarith [hdefect, hlocal]
+
 end AEGIS.RHFourLogThreeActualPrimeV1
 
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.triadicHalf_four_mul
@@ -770,3 +822,4 @@ end AEGIS.RHFourLogThreeActualPrimeV1
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_weighted_norm_coercive
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp
+#print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_source_margin
