@@ -10,6 +10,11 @@ import json
 import pathlib
 import re
 
+
+def normalize_repo(repo):
+    m=re.fullmatch(r'(?:https://github\.com/|git@github\.com:)([A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+?)(?:\.git|/)?',repo)
+    return m.group(1) if m else repo
+
 SHA = re.compile(r'^[0-9a-f]{40}$')
 
 
@@ -29,7 +34,12 @@ def convert(v1, repository=None, head=None):
     prov=v1.get('provenance',{})
     root=v1.get('repository',{})
     if isinstance(root,str):root={'name':root}
-    repo=repository or prov.get('repo') or root.get('name') or 'UNKNOWN'
+    repo=normalize_repo(repository or prov.get('repo') or root.get('name') or 'UNKNOWN')
+    if not re.fullmatch(r'[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+',repo):
+        raise ValueError('CANONICAL_REPOSITORY_OWNER_NAME_REQUIRED')
+    kernel_record=v1.get('kernel_inventory_summary',{})
+    if kernel_record.get('status')=='EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED' or v1.get('kernel_reachable_declaration_inventory'):
+        raise ValueError('VERIFIED_KERNEL_EVIDENCE_REQUIRES_NONLOSSY_V11_IMPORT')
     head=head or prov.get('exact_head') or root.get('exact_head')
     if not head or not SHA.fullmatch(head):raise ValueError('EXACT_HEAD_SHA_REQUIRED')
     observed=v1.get('generated_at_utc') or v1.get('generated_at')

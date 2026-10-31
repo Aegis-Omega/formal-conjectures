@@ -30,6 +30,15 @@ class CensusTests(unittest.TestCase):
         jsonschema.Draft7Validator.check_schema(S)
         self.assertEqual(S['$schema'],'http://json-schema.org/draft-07/schema#')
     def test_valid_source_only_preflight(self):self.assertEqual(validate(D,S),[])
+    def test_git_remote_normalization(self):
+        x=copy.deepcopy(OLD);x['provenance'].pop('repo');x['repository']={
+            'name':'https://github.com/Aegis-Omega/formal-conjectures.git'}
+        self.assertEqual(convert(x)['repository']['full_name'],'Aegis-Omega/formal-conjectures')
+    def test_kernel_evidence_not_silently_discarded(self):
+        x=copy.deepcopy(OLD);x['kernel_inventory_summary']={'status':'EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED'}
+        with self.assertRaisesRegex(ValueError,'NONLOSSY'):
+            convert(x)
+
     def test_cannot_fake_verified_rh(self):
         d=copy.deepcopy(D);d['rh_inventory']['RH_PROVEN_UNCONDITIONALLY']=True
         self.assertRejected(d,'should be non-empty')
