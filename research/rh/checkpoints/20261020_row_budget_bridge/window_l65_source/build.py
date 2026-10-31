@@ -3,11 +3,13 @@
 Usage: python3 build.py EXTRA_LEAN_PATH [WORKERS] [--resume]. Run from the repo root.
 Each module is compiled after all its imports passed, with the flags the existing replay uses for
 it (-DwarningAsError=true and -R where they apply). A module killed by a signal (out of memory)
-is retried alone, at most twice. A failed module blocks its dependants. --resume keeps modules
-that passed in an earlier local run of this script. Logs go to .lake/reallogs/<Module>.log,
+is retried alone, at most twice. No new module starts while less than 6 GB is available, and below
+2.5 GB the youngest running compile is killed (and so retried alone), so that several large kernel
+checks at once cannot take the runner down. A failed module blocks its dependants. --resume keeps
+modules that passed in an earlier local run of this script. Logs go to .lake/reallogs/<Module>.log,
 status to .lake/real_status.json.
 """
-import json, os, subprocess, sys, time
+import json, os, subprocess, sys, threading, time
 from concurrent.futures import ThreadPoolExecutor, FIRST_COMPLETED, wait
 from functools import lru_cache
 from pathlib import Path
@@ -32,12 +34,29 @@ if '--resume' in sys.argv and sp.exists():
         if v == 'PASS' and m in plan and (ring/(m + '.olean')).is_file() and (logs/(m + '.log')).is_file():
             status[m] = 'PASS'; seconds[m] = old.get('seconds', {}).get(m, 0)
     print('RESUME', len(status), 'modules kept', flush=True)
+procs, plock = {}, threading.Lock()  # module -> (process, start time) of the running compiles
+def avail_kb():
+    for line in open('/proc/meminfo'):
+        if line.startswith('MemAvailable:'): return int(line.split()[1])
+    return 1 << 40
+def guard():  # keep the machine away from the kernel OOM killer
+    while True:
+        time.sleep(1)
+        if avail_kb() < 2_500_000:
+            with plock:
+                if len(procs) < 2: continue
+                mod, (p, _) = max(procs.items(), key=lambda kv: kv[1][1])
+            print('MEMGUARD', mod, avail_kb(), flush=True); p.kill(); time.sleep(10)
+threading.Thread(target=guard, daemon=True).start()
 def run(mod):
     r = plan[mod]
     cmd = ['lean'] + (['-DwarningAsError=true'] if r['strict'] else []) + (['-R', r['root']] if r['root'] else []) + ['-o', str(ring/(mod + '.olean')), r['path']]
-    t = time.monotonic(); p = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
-    (logs/(mod + '.log')).write_text(' '.join(cmd) + '\n' + p.stdout + f'\n[exit {p.returncode}]\n')
-    return mod, p.returncode, ': error' not in p.stdout, time.monotonic() - t
+    t = time.monotonic(); p = subprocess.Popen(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    with plock: procs[mod] = (p, t)
+    out, _ = p.communicate()
+    with plock: procs.pop(mod, None)
+    (logs/(mod + '.log')).write_text(' '.join(cmd) + '\n' + out + f'\n[exit {p.returncode}]\n')
+    return mod, p.returncode, ': error' not in out, time.monotonic() - t
 pending, running, solo = set(plan) - set(status), {}, []
 with ThreadPoolExecutor(workers) as pool:
     while pending or running or solo:
@@ -47,7 +66,8 @@ with ThreadPoolExecutor(workers) as pool:
             if not running: m = solo.pop(0); running[pool.submit(run, m)] = m
         else:
             ready = sorted((m for m in pending if all(status.get(d) == 'PASS' for d in plan[m]['deps'])), key=lambda m: (-height(m), m))
-            for m in ready[:max(0, workers - len(running))]:
+            free = workers - len(running) if not running or avail_kb() >= 6_000_000 else 0
+            for m in ready[:max(0, free)]:
                 pending.discard(m); running[pool.submit(run, m)] = m
         if not running:
             if pending: raise SystemExit('DEADLOCK ' + ' '.join(sorted(pending)[:10]))
