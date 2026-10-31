@@ -8,6 +8,7 @@ import argparse
 from collections import defaultdict
 import hashlib
 import json
+import re
 from pathlib import Path, PurePosixPath
 import tempfile
 import zipfile
@@ -91,6 +92,31 @@ def build(graph, imports, recovery, stage=None):
     for path in target_paths:
         if path.endswith(".lean"):
             existing[PurePosixPath(path).stem].add(path)
+    # Recursively use verified historical providers for the complete
+    # missing-source import closure, not just the first import layer.
+    pending = [(name, item) for name, item in selected.items()]
+    transitive = []
+    while pending:
+        consumer_name, item = pending.pop()
+        source = recovery.read(item["path"]).decode("utf-8")
+        for dependency in re.findall(r"^import\s+([A-Za-z_][A-Za-z0-9_]*)\s*$",
+                                     source, flags=re.MULTILINE):
+            if dependency in selected or dependency in existing:
+                continue
+            providers = by_name.get(dependency, [])
+            if len(providers) == 1:
+                provider = providers[0]
+                selected[dependency] = provider
+                pending.append((dependency, provider))
+                transitive.append({"consumer": consumer_name, "module": dependency,
+                                   "path": provider["path"],
+                                   "blob_sha": provider["blob_sha"]})
+            elif len(providers) > 1:
+                ambiguous.append({"consumer": consumer_name, "module": dependency,
+                                  "candidate_paths": sorted(
+                                      x["path"] for x in providers)})
+            # Sources outside historical research/rh are resolved separately
+            # by actual Lake imports; never hallucinate an external provider.
     for name, item in selected.items():
         if name in existing:
             ambiguous.append({"consumer": "target_tree", "module": name,
@@ -104,6 +130,8 @@ def build(graph, imports, recovery, stage=None):
                "historical_blobs_checked": len(checked),
                "missing_import_occurrences": sum(len(x) for x in missing_by_consumer.values()),
                "uniquely_recovered": len(selected),
+               "transitive_recovered": transitive,
+               "transitive_recovered_count": len(transitive),
                "unresolved": unresolved, "ambiguous": ambiguous,
                "consumers": sorted(consumers, key=lambda x: (-x["import_count"], x["consumer"])),
                "stage_root": None, "no_merge_no_deploy_no_spend": True}
@@ -129,19 +157,25 @@ def self_test():
         root = d / "recovered"
         file = root / "research/rh/test/AutoModule.lean"
         file.parent.mkdir(parents=True)
-        original = b"theorem automatic : True := trivial\n"
+        original = b"import NestedModule\ntheorem automatic : True := trivial\n"
         file.write_bytes(original)
+        extra = root / "research/rh/test/NestedModule.lean"
+        extra.write_bytes(b"theorem nested : True := trivial\n")
         head = "a" * 40
         (root / "RECOVERY_MANIFEST.json").write_text(json.dumps({
             "original_target_sha": head, "restored": [
-                {"path": "research/rh/test/AutoModule.lean", "blob_sha": git_blob(original)}]}))
+                {"path": "research/rh/test/AutoModule.lean", "blob_sha": git_blob(original)},
+                {"path": "research/rh/test/NestedModule.lean",
+                 "blob_sha": git_blob(extra.read_bytes())}]}))
         graph = {"target_exact_sha": head, "repository": "test/repo",
                  "tree_by_sha": {head: {"sources": {"research/rh/test/Consumer.lean": "b"*40}}}}
         imports = {"target_exact_sha": head, "source_only_audit_pass": True,
                    "target_imports_absent_modules": [
                        {"source": "research/rh/test/Consumer.lean", "missing": "AutoModule"}]}
         receipt = build(graph, imports, Recovery(root), d / "stage")
-        assert receipt["uniquely_recovered"] == 1 and receipt["kernel_verified"] is None
+        assert receipt["uniquely_recovered"] == 2 and receipt["kernel_verified"] is None
+        assert receipt["transitive_recovered_count"] == 1
+        assert (d / "stage/NestedModule.lean").read_bytes() == extra.read_bytes()
         assert (d / "stage/AutoModule.lean").read_bytes() == original
         try:
             build({**graph, "target_exact_sha": "c"*40}, imports, Recovery(root))
