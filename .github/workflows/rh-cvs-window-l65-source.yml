@@ -4,7 +4,8 @@ name: RH CvS windows L = 6/5, 4/3 and 11/8 from source
 # closure, the source row bridge, the full row table, the actual inputs, the 141-moment join and
 # the K3 trace certificate. The same DAG also carries window_L43 (2r <= 4/3) and window_L118
 # (2r <= 11/8): the tau chains, the relative row certificates and their exhaustion joins. Nothing
-# is restored from earlier runs, so it does not depend on expired artifacts. Not RH.
+# is restored from earlier runs, so it does not depend on expired artifacts. The AEGIS Math core
+# root (research/rh/aegis_math) is compiled in the same DAG. Not RH.
 
 on:
   pull_request:
@@ -16,6 +17,10 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/CvSActualMomentWindowJoinV1.lean
       - research/rh/checkpoints/20261026_window_l43/*.lean
       - research/rh/checkpoints/20261031_window_l118/*.lean
+      - research/rh/aegis_math/*.lean
+      - research/rh/moment_killer_v1/*.lean
+      - AEGISOverlay/RHWidthQuantifierObstructionV1.lean
+      - AEGISOverlay/RHEulerOperatorObstructionV1.lean
       - research/rh/feshbach_lean_v1/CvS*L118*.lean
       - research/rh/feshbach_lean_v1/CvSRelRow*.lean
       - research/rh/feshbach_lean_v1/tools/gen_rr43.py
@@ -146,10 +151,10 @@ jobs:
           W2=research/rh/checkpoints/20261031_window_l118
           if grep -n -E '\bsorry\b|\badmit\b|^axiom ' "$B/CvSWindowL65V1.lean" "$B/RHWindowL65ExhaustionV1.lean" \
                "$W"/*.lean "$W2"/*.lean research/rh/feshbach_lean_v1/CvSRelRow*.lean \
-               research/rh/feshbach_lean_v1/CvS*L118*.lean; then exit 1; fi
+               research/rh/feshbach_lean_v1/CvS*L118*.lean research/rh/aegis_math/*.lean; then exit 1; fi
           # Each exhaustion join imports its window, so the DAG contains both window chains.
           python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1 \
-            RHWindowL118ExhaustionV1
+            RHWindowL118ExhaustionV1 AegisMathCoreV1
 
       - name: Compile every module from source
         shell: bash
