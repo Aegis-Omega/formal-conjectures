@@ -19,3 +19,7 @@ FormalConjectures/All.lean
 
 # Python bytecode from the scripts in `scripts/`.
 __pycache__/
+
+# Coverage data and reports from `coverage run` / `coverage xml`.
+.coverage
+coverage.xml
