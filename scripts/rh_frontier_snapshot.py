@@ -109,7 +109,9 @@ def snapshot(root: Path, files: list[Path]) -> dict[str, object]:
             "files_scanned": len(files),
             "theorem_count": theorem_total,
             "placeholder_count": placeholder_total,
-            "rh_closed_unconditionally": placeholder_total == 0,
+            # Lexical absence of placeholders is NOT Lean kernel verification.
+            "rh_closed_unconditionally": False,
+            "rh_closure_evidence": "SOURCE_SCAN_ONLY_NOT_KERNEL_VERIFIED",
         },
         "files": per_file,
     }

@@ -63,6 +63,32 @@ class RHFrontierSnapshotTests(unittest.TestCase):
             eqv = data["files"][EQUIVALENTS.as_posix()]
             self.assertEqual(eqv["local_imports"], ["FormalConjectures.Millennium.RiemannHypothesis"])
 
+    def test_empty_files_never_claim_unconditional_rh(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            for rel in (OFFICIAL, EQUIVALENTS):
+                path = root / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text("import External.Unverified\n", encoding="utf-8")
+            data = snapshot(root, [OFFICIAL, EQUIVALENTS])
+            self.assertEqual(data["summary"]["theorem_count"], 0)
+            self.assertFalse(data["summary"]["rh_closed_unconditionally"])
+
+    def test_axiom_dependent_theorem_never_claims_unconditional_rh(self):
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            for rel in (OFFICIAL, EQUIVALENTS):
+                path = root / rel
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(
+                    "import External.Unverified\n"
+                    "theorem riemannHypothesis : False := by\n"
+                    "  exact hiddenAxiom\n", encoding="utf-8"
+                )
+            data = snapshot(root, [OFFICIAL, EQUIVALENTS])
+            self.assertEqual(data["summary"]["placeholder_count"], 0)
+            self.assertFalse(data["summary"]["rh_closed_unconditionally"])
+
     def test_main_fails_closed_when_file_missing(self):
         with tempfile.TemporaryDirectory() as td:
             root = Path(td)
