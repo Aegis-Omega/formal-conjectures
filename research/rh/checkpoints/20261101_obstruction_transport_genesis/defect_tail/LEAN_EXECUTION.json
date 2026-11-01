@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/home/agent/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+    "-M5632",
+    "-j1",
+    "-DwarningAsError=true",
+    "-o",
+    "/tmp/aegis-rh-defect-tail-20261101/build/NormalizationConflictV1.olean",
+    "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101/NormalizationConflictV1.lean"
+  ],
+  "exit_code": 0,
+  "seconds": 2.4738595480002914,
+  "source_sha256": "530a675f86eaf9f3fe8c1a00a3d1ab31059fd1f0f1cf445759b5c722d0c97fd1",
+  "scope": "Only scalar incompatibility of necessary low- and high-frequency bounds; analytic symbol connection is not formalized."
+}
