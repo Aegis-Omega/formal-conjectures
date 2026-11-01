@@ -11,7 +11,7 @@ PR606_LOCAL = Path(__file__).resolve().parents[1] / "AegisRH" / "PR606"
 
 def is_header_only_lean(content: str) -> bool:
     """Recognize the license-only placeholder used by the local PR606 overlay."""
-    text = content.lstrip("﻿ \t\r\n")
+    text = content.lstrip("\N{ZERO WIDTH NO-BREAK SPACE} \t\r\n")
     if not text.startswith("/-"):
         return not text.strip()
     end = text.find("-/", 2)

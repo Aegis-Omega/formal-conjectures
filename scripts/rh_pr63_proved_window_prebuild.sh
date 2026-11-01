@@ -38,7 +38,7 @@ roots=(base, wbase, local, src, compat, overlay, win)
 groups=[{p.stem:p for p in r.glob("*.lean")} for r in roots]
 allmods=set().union(*(set(g) for g in groups))
 def header_only(p):
-    text=p.read_text(encoding="utf-8").lstrip("﻿ \t\r\n")
+    text=p.read_text(encoding="utf-8").lstrip("\N{ZERO WIDTH NO-BREAK SPACE} \t\r\n")
     if not text.startswith("/-"): return not text.strip()
     end=text.find("-/",2)
     return end >= 0 and not text[end+2:].strip()
