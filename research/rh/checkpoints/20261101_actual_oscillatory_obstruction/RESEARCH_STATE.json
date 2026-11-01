@@ -31,7 +31,7 @@
       "id": "corrected_compression_nonincrease",
       "status": "FALSIFIED",
       "proof": "ACTUAL_PACKET_THEOREM.md",
-      "scope": "actual smooth moment-zero packets; ordinary asymptotic proof; unnormalized compression"
+      "scope": "actual smooth moment-zero packets inside every positive window; fixed M\u22651; ordinary asymptotic proof; unnormalized compression"
     },
     {
       "id": "oscillatory_moment_support",

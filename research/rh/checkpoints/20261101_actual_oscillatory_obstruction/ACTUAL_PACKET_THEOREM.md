@@ -84,6 +84,52 @@ The proof holds with a fixed M throughout. It assumes neither RH nor a
 uniform prime-error estimate. It proves a failure of this particular
 transport inequality, not failure of the desired positivity.
 
+## The same obstruction occurs inside every positive window
+
+Fix any integer M≥1 and any L>0. Choose ε>0 with
+`2ε < min(L, log(M+1))`, and replace eta by `eta(x/ε)` in the preceding
+construction. Its source and corrected scaled packets now have widths at
+most 2ε and ε. Both satisfy the actual moment conditions and fit strictly
+inside the window L; the source cutoff M is valid for both.
+
+The same proof applies to the fixed finite symbol S_M. If C_ε is the
+positive Fourier mass of eta(x/ε), then
+
+    (Q(g'_T)-Q(g_T))/(T⁴ log T) → 7 C_ε > 0.
+
+Define the actual critical-line mass `N(g)=(1/(2π))∫Nr_g`. The same
+two-lobe dominated-convergence proof without the logarithmic symbol yields
+
+    N(g_T)/T⁴ → C_ε > 0,
+    [ (1/(2π))∫(-Δ_(2,M)) Nr_(g_T) ] / N(g_T) → -∞.
+
+Indeed the numerator is asymptotic to `-7 C_ε T⁴ log T`. A fixed real m
+contributes only m*N(g_T), and any measurable bounded slack σ satisfies
+`|(1/(2π))∫σ Nr_(g_T)|≤||σ||∞ N(g_T)`. Neither can offset the logarithmic
+negative divergence. This also rules out the corresponding universal
+certificate conclusion with any fixed m and bounded slack, on these actual
+packets. The argument uses the generic `certificate_raw` if L exceeds
+log(M+1); it does not assume the extra window condition in the specialized
+`certificate_slack` theorem.
+
+In particular, for sufficiently large T the actual density of g_T obeys
+
+    (1/(2π)) ∫ Δ_(2,M)(u) Nr_(g_T)(u) du > 0,
+    Δ_(2,M)(u) = S_M(2u)/2
+      * ((4u²+1/4)/(u²+1/4))² - S_M(u).
+
+This is the complete density-weighted defect from the previous checkpoint,
+not a pointwise comparison. The corresponding integral with -Δ is strictly
+negative on an admissible packet. Therefore no total correction with a
+well-defined pairing that vanishes for every packet in that window can establish universal
+nonnegativity of that integral. In particular, the existing
+`RHKreinZetaBridgeV4.certificate_raw` cannot discharge this particular
+unnormalized transport claim with any fixed finite m, irrespective of the
+values of its finite certificate parameters. This conclusion does not rule out normalization,
+nonzero paid defects, different decompositions, or other RH approaches.
+For an infinite correction family, convergence of the total pairing and
+interchange with any sum would themselves need justification.
+
 ## Verification boundary
 
 The asymptotic proof above is ordinary analysis; the complete theorem is not
