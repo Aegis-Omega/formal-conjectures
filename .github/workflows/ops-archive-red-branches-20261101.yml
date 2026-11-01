@@ -1,0 +1,85 @@
+name: Ops archive red stale branches 20261101
+
+on:
+  push:
+    branches:
+      - 'ops/archive-red-branches-20261101'
+    paths:
+      - '.github/workflows/ops-archive-red-branches-20261101.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ops-archive-red-branches-20261101
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Tag four unique heads, then delete twelve red stale branches
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          case "$REPO" in
+            Aegis-Omega/formal-conjectures|tarikskalic33/formal-conjectures) ;;
+            *) echo "UNEXPECTED_REPO $REPO"; exit 1 ;;
+          esac
+
+          head_of() { gh api "repos/$REPO/git/ref/heads/$1" --jq .object.sha; }
+          tag_of() { gh api "repos/$REPO/git/ref/tags/$1" --jq .object.sha 2>/dev/null || true; }
+
+          # Heads with commits on no other branch: tag before deleting.
+          TAG_AND_DELETE=(
+            'evidence/rh-restricted-weil-continuation-6db2-v1|63710b2cdd907b536720c5df18c598472e37c5c5'
+            'evidence/rh-restricted-weil-resolvent-bde4-v1|ecee69b7ccf3a4f3c8bb4194769834483dc9a436'
+            'proof/rh-deepmind-target-direct-replay-v1|5920218e03dca84f3d152a86e9c0668588cecb03'
+            'proof/rh-feshbach-schur-v1|bd12c0cd5d871e0b8977f53b771894e4de5a1a15'
+          )
+          # Closed superseded PRs (commits kept under refs/pull/N/head) and a
+          # branch fully contained in review-7031-upstream-clean-20261010-webtest.
+          DELETE_ONLY=(
+            'fix/rh-lean-imports-namespaces-copyright-v1|5cf3dc2f49edf6658a500f6a82adab8a8af07d03'
+            'fix/rh-red-checks-20261009|9fdaca5c42b0c877b1279ac1671c69ab04427f2d'
+            'fix/rh-legacy-import-bridge-2026-10-09|126344780c69a709f06e0372ee4bd0ebb8bbaca7'
+            'fix/rh-module-import-lint-20261009|53b6aa646a694629b06c43f2c5eab3ce625e5ff4'
+            'ci/fork-replay-summary-failclosed-20261010|b69bc69911d3c64ecb6b1407a3d4e33c3a15a2e7'
+            'proof/rh-trigram-source-recovery-20261012|e086507cc17969042586d58e2154134321dadcf0'
+            'integration/rh-k3-source-graft-20261024|33b17a5b56efe8bfa9bbab616d2f2866e7c67c50'
+            'review-7031-upstream-clean-20261010|7e8dd8046a915787769ee37036e5dcfc3d39271b'
+          )
+
+          # 1. Fail closed: every listed branch must still be at its recorded head.
+          for e in "${TAG_AND_DELETE[@]}" "${DELETE_ONLY[@]}"; do
+            b="${e%%|*}"; s="${e##*|}"
+            h="$(head_of "$b")"
+            if [ "$h" != "$s" ]; then echo "HEAD_MISMATCH $b $h != $s"; exit 1; fi
+            echo "HEAD_OK $b $s"
+          done
+
+          # 2. Archive tags at the exact heads.
+          for e in "${TAG_AND_DELETE[@]}"; do
+            b="${e%%|*}"; s="${e##*|}"; t="archive/$b"
+            if [ -z "$(tag_of "$t")" ]; then
+              gh api -X POST "repos/$REPO/git/refs" -f ref="refs/tags/$t" -f sha="$s" > /dev/null
+            fi
+            if [ "$(tag_of "$t")" != "$s" ]; then echo "TAG_FAIL $t"; exit 1; fi
+            echo "TAG_OK $t $s"
+          done
+
+          # 3. Delete the twelve branches.
+          for e in "${TAG_AND_DELETE[@]}" "${DELETE_ONLY[@]}"; do
+            b="${e%%|*}"
+            gh api -X DELETE "repos/$REPO/git/refs/heads/$b"
+            echo "DELETED $b"
+          done
+
+          # 4. Remove this temporary branch.
+          gh api -X DELETE "repos/$REPO/git/refs/heads/$GITHUB_REF_NAME"
+          echo "DELETED $GITHUB_REF_NAME"
+          echo 'OPS_ARCHIVE_RED_BRANCHES_DONE'
