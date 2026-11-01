@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/home/agent/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+    "-M5632",
+    "-j1",
+    "-DwarningAsError=true",
+    "-o",
+    "/tmp/aegis-rh-oscillatory-20261101/build/OscillatoryKreinPacketsV1.olean",
+    "/workspace/aegis-rh-next-local-20261028/actual_oscillatory_obstruction_20261101/OscillatoryKreinPacketsV1.lean"
+  ],
+  "exit_code": 0,
+  "seconds": 3.1135552060004557,
+  "source_sha256": "12036e1b55f129ca63954089cae6be7d614287482e73b163d2359ff6c7fd0ffd"
+}
