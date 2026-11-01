@@ -130,6 +130,27 @@ nonzero paid defects, different decompositions, or other RH approaches.
 For an infinite correction family, convergence of the total pairing and
 interchange with any sum would themselves need justification.
 
+## Necessary condition for constant normalization
+
+The same two-lobe argument applies to every fixed compression s>1. With
+`G'_(s,T)=A(f_T(s·))`, Fourier scaling gives a Jacobian 1/s and the weight
+`W(su)`, hence
+
+    Q(g'_(s,T))/(T⁴ log T) → s³ C_ε.
+
+For a fixed complex scalar c, the source quadratic form is homogeneous:
+`Q(c g)=|c|² Q(g)`. Therefore any proposed uniform inequality
+`Q(g) ≥ Q(c g'_s)` on all moment-zero packets in a positive window must
+satisfy
+
+    |c|² ≤ s^(-3).
+
+If `|c|²>s^(-3)`, the same actual oscillatory packets falsify the claimed
+inequality for all sufficiently large T. The boundary value and smaller
+normalizations are not decided by this high-frequency argument. In
+particular this necessary condition is not a proof that a normalized
+transport exists.
+
 ## Verification boundary
 
 The asymptotic proof above is ordinary analysis; the complete theorem is not

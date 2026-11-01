@@ -1,7 +1,7 @@
 {
   "status": "ACTUAL_PACKET_COMPRESSION_OBSTRUCTION_KERNEL_MOMENTS_VERIFIED_RH_OPEN",
   "VERIFIED": {
-    "ordinary_theorem": "For the original real compact bump eta, the actual source and corrected compressed packets satisfy Q(g_T)/(T^4 log T)->C and Q(g_prime_T)/(T^4 log T)->8C, C>0. Thus Q(g_prime_T)>Q(g_T)>0 eventually. For any fixed M>=1 and L>0, such a counterexample exists with both packets inside the window L and the same valid cutoff M; the actual integral of -Delta against that packet density is negative. The actual critical-line mass satisfies N(g_T)/T^4->C_epsilon>0, while the integral of -Delta divided by N(g_T) tends to -infinity. No fixed finite m or bounded slack can make the corresponding universal certificate conclusion true.",
+    "ordinary_theorem": "For the original real compact bump eta, the actual source and corrected compressed packets satisfy Q(g_T)/(T^4 log T)->C and Q(g_prime_T)/(T^4 log T)->8C, C>0. Thus Q(g_prime_T)>Q(g_T)>0 eventually. For any fixed M>=1 and L>0, such a counterexample exists with both packets inside the window L and the same valid cutoff M; the actual integral of -Delta against that packet density is negative. The actual critical-line mass satisfies N(g_T)/T^4->C_epsilon>0, while the integral of -Delta divided by N(g_T) tends to -infinity. No fixed finite m or bounded slack can make the corresponding universal certificate conclusion true. For general fixed compression s>1, the compressed/original high-frequency ratio tends to s^3; any uniform constant-amplitude nonincrease would require |c|^2<=s^(-3).",
     "ordinary_proof": "ACTUAL_PACKET_THEOREM.md",
     "independent_ordinary_review": "Independent agent checked Fourier convention, two lobes, integrable majorant, cross term, exact support and cutoff. This is not Lean verification. The every-positive-window strengthening and fixed quantifier order were independently reviewed; convergence and zero pairing of any total infinite correction must be justified.",
     "kernel_scope": "Smoothness, compactness, both moments, and source/scaled support inclusion for all real frequencies; no Q asymptotic formalized.",
@@ -48,7 +48,7 @@
     },
     "count_new_roots": 5
   },
-  "FALSIFIED": "Unnormalized corrected-compression nonincrease on actual compact smooth moment-zero packets, even in any positive window; also any fixed finite m and bounded slack in the associated universal certificate conclusion.",
+  "FALSIFIED": "Unnormalized corrected-compression nonincrease on actual compact smooth moment-zero packets, even in any positive window; also any fixed finite m and bounded slack in the associated universal certificate conclusion. For general s>1, every constant normalization with |c|^2>s^(-3) also fails on actual packets.",
   "OPEN": [
     "Lean proof of the actual S_7 asymptotic, Fourier dominated convergence, and full-Q counterexample.",
     "Any normalized or other valid density-weighted positivity transport.",
@@ -72,16 +72,20 @@
     "OscillatoryKreinPacketsV1.rejected-1.lean.txt": "2d37994a064dcdf5346fb83ca25e7b1c042eb48c576d7faa7efe9b168dd60a1f",
     "LEAN_ATTEMPT_4.log": "ddc748778364e3a699f607dcdd311d2006c4d998486c70427b0c6ac0e4f56408",
     "LEAN_ATTEMPT_1.log": "a96ba6d775c6b5b2040cae9325a276173f316b61d5fe15b48fb1ce77e1a3d878",
+    "FINAL_RECEIPT.json.v2": "7141ddf0d6d43e03f1bc96ba59b3b88cf12d416ae336504c3275191bcc5be8cc",
     "SOURCE_BINDINGS.json": "ac998c5b7305714eed206059aed0cec1ae6a434c3c3f4a48525ddaaaf59ffc7f",
+    "FINAL_RECEIPT.sha256.v2": "c5d5bcd700414bfae47bba06221dd7c9dfcc0f3665103cd8a3378762bcc4827a",
     "ACTUAL_PACKET_THEOREM.md.v1": "7db654d74814017f16ae2c3b5883b4f83fe29369f2395a22cef6256395f276a6",
-    "ACTUAL_PACKET_THEOREM.md": "433eb66c128890a158ae18a8869f75e040ab3179da6f141260df8dc4b958bb62",
+    "ACTUAL_PACKET_THEOREM.md": "d618ad0cc7b2dacb314ba70b068d593e0b5dbc12278b020ca373454961f41673",
     "RESEARCH_STATE.json": "feb2029b7079c7a58cec3aedb573527aba995a5263d770c9b8357535fe6e524d",
+    "ACTUAL_PACKET_THEOREM.md.v2": "433eb66c128890a158ae18a8869f75e040ab3179da6f141260df8dc4b958bb62",
     "LEAN_ATTEMPT_3.json": "257d4f5033176527e7e734f6faaa6fc516b3cec75add3a904ee398aca392841c",
     "LEAN_ATTEMPT_3.log": "576ddae00d236ab829a54c66b157dc4a96bb3448b8e1b38360309f45348f650f",
     "FINAL_RECEIPT.json.v1": "61f3cedbc8ecb4d3ca7ef714d8a15c46df1387bc5a565f49e90ea01e40a5dd1e",
     "LEAN_ATTEMPT_2.json": "f23572333550615186ff28d1231ead78e37557474ee271fd05e4cd5e2e351a2e",
     "LEAN_ATTEMPT_4.json": "c9974e39d927dfc68d0e32f3363360a1a2a76965e4945bb433dbd7101d0068f3",
     "LEAN_ATTEMPT_1.json": "c977a3f14841907952c4941a42fb0c3eb20d8ba17004db87c8781c62fcf83f45",
-    "LEAN_ATTEMPT_2.log": "774edd5e9b195ca76c1fed19d15fa70fd47c912d6bbc2c53da3b57e882a98ecf"
+    "LEAN_ATTEMPT_2.log": "774edd5e9b195ca76c1fed19d15fa70fd47c912d6bbc2c53da3b57e882a98ecf",
+    "RESEARCH_STATE.json.v2": "feb2029b7079c7a58cec3aedb573527aba995a5263d770c9b8357535fe6e524d"
   }
 }
