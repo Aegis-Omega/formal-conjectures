@@ -111,6 +111,12 @@ for d, origin in [('AegisRH/PR606/Compat', 'pr606-compat'), ('AegisRH/PR606/Sour
                   ('AegisRH/PR606', 'pr606'), ('AegisRH/SmallWindow', 'small-window')]:
     for p in sorted(Path(d).glob('*.lean')): src.setdefault(p.stem, (p, False, None, origin))
 put('RHWindowL65ExhaustionV1', B/'RHWindowL65ExhaustionV1.lean', True, None, 'script')
+# 7. The AEGIS Math core root, the moment-killer range modules and the AEGISOverlay modules it
+# re-exports, only for names no source above provides (setdefault), so the window DAG is unchanged.
+for d, strict, origin in [('research/rh/aegis_math', True, 'aegis-math'),
+                          ('research/rh/moment_killer_v1', True, 'moment-killer'),
+                          ('AEGISOverlay', False, 'overlay')]:
+    for p in sorted(Path(d).glob('*.lean')): src.setdefault(p.stem, (p, strict, None, origin))
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):

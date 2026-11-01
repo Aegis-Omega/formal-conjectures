@@ -28,7 +28,14 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
             'AEGIS.CvSDiagL118V1.diag_mem',
             'AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths',
             'AEGIS.RHWindowL118ExhaustionV1.final_sign_iff_windows_above_eleven_sixteenths',
-            'AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths']
+            'AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths',
+            'AegisMath.Windows.window_le_eleven_sixteenths',
+            'AegisMath.Windows.final_sign_iff_windows_above_eleven_sixteenths',
+            'AegisMath.Windows.rh_iff_windows_above_eleven_sixteenths',
+            'AegisMath.Criterion.final_sign_iff_rh', 'AegisMath.Criterion.no_zero_re_gt_half_of_final_sign',
+            'AegisMath.MomentKiller.exists_momentKiller_packet', 'AegisMath.MomentKiller.exists_momentKiller_eq',
+            'AegisMath.Obstructions.no_common_positive_width',
+            'AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 state = json.loads(Path('.lake/real_status.json').read_text())
 audits, bad, sorries = {}, [], []
@@ -59,7 +66,9 @@ receipt = {
              'RHWindowL43ExhaustionV1: RH is equivalent to the arithmetic sign on the log windows '
              'L > 2/3; those windows are not proved. window_L118: the same for 2r <= 11/8, from '
              'Brow <= 58 Q_CvS at NP = 250. RHWindowL118ExhaustionV1: RH is equivalent to the '
-             'arithmetic sign on the log windows L > 11/16; those windows are not proved. Not RH.',
+             'arithmetic sign on the log windows L > 11/16; those windows are not proved. '
+             'AegisMathCoreV1: aliases of kernel-checked theorems (windows, criterion, '
+             'moment-killer, obstructions) under AegisMath; nothing new is proved there. Not RH.',
 }
 ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'])
 receipt['status'] = 'PASS' if ok else 'FAIL'
