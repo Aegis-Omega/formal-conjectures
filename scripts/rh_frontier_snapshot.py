@@ -7,9 +7,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 import re
 import sys
+from urllib.parse import quote
+from urllib.request import Request, urlopen
 
 OFFICIAL = Path("FormalConjectures/Millennium/RiemannHypothesis.lean")
 EQUIVALENTS = Path("FormalConjectures/Paper/RiemannHypothesisEquivalents.lean")
@@ -86,7 +89,55 @@ def parse_placeholders(source: str) -> list[dict[str, object]]:
     return out
 
 
-def snapshot(root: Path, files: list[Path]) -> dict[str, object]:
+def github_json(url: str) -> dict[str, object]:
+    headers = {"User-Agent": "formal-conjectures-rh-frontier-snapshot"}
+    token = os.environ.get("GITHUB_TOKEN", "").strip()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    req = Request(url, headers=headers)
+    with urlopen(req, timeout=30) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def fetch_external_repo_signal(owner: str, repo: str, max_items: int = 20,
+                               fetch_json=github_json) -> dict[str, object]:
+    queries = [
+        f"repo:{owner}/{repo} RiemannHypothesis in:file extension:lean",
+        f"repo:{owner}/{repo} riemann in:file extension:lean",
+    ]
+    seen: set[tuple[str, str]] = set()
+    hits: list[dict[str, object]] = []
+    total = 0
+    for q in queries:
+        url = "https://api.github.com/search/code?q=" + quote(q, safe="")
+        payload = fetch_json(url)
+        total += int(payload.get("total_count", 0))
+        for item in payload.get("items", []):
+            path = str(item.get("path", ""))
+            sha = str(item.get("sha", ""))
+            key = (path, sha)
+            if not path or key in seen:
+                continue
+            seen.add(key)
+            hits.append({
+                "name": item.get("name", ""),
+                "path": path,
+                "sha": sha,
+                "html_url": item.get("html_url", ""),
+            })
+            if len(hits) >= max_items:
+                break
+        if len(hits) >= max_items:
+            break
+    return {
+        "repo": f"{owner}/{repo}",
+        "query_total_count": total,
+        "returned_hit_count": len(hits),
+        "hits": hits,
+    }
+
+
+def snapshot(root: Path, files: list[Path], external: list[dict[str, object]] | None = None) -> dict[str, object]:
     per_file: dict[str, object] = {}
     theorem_total = 0
     placeholder_total = 0
@@ -112,8 +163,10 @@ def snapshot(root: Path, files: list[Path]) -> dict[str, object]:
             # Lexical absence of placeholders is NOT Lean kernel verification.
             "rh_closed_unconditionally": False,
             "rh_closure_evidence": "SOURCE_SCAN_ONLY_NOT_KERNEL_VERIFIED",
+            "external_repo_count": 0 if external is None else len(external),
         },
         "files": per_file,
+        "external_repositories": [] if external is None else external,
     }
 
 
@@ -122,6 +175,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--root", type=Path, default=Path("."))
     p.add_argument("--official", type=Path, default=OFFICIAL)
     p.add_argument("--equivalents", type=Path, default=EQUIVALENTS)
+    p.add_argument("--external-repo", action="append", default=[],
+                   help="Optional owner/repo to include RH-related Lean signal from GitHub code search")
+    p.add_argument("--external-max-items", type=int, default=20)
     p.add_argument("--output", type=Path)
     args = p.parse_args(argv)
 
@@ -132,7 +188,21 @@ def main(argv: list[str] | None = None) -> int:
         print(json.dumps({"missing_files": missing}, sort_keys=True))
         return 1
 
-    data = snapshot(args.root, files)
+    external: list[dict[str, object]] = []
+    for spec in args.external_repo:
+        if "/" not in spec:
+            print("RH_FRONTIER_SNAPSHOT=FAIL")
+            print(json.dumps({"invalid_external_repo": spec}, sort_keys=True))
+            return 1
+        owner, repo = spec.split("/", 1)
+        try:
+            external.append(fetch_external_repo_signal(owner, repo, max_items=args.external_max_items))
+        except Exception as ex:
+            print("RH_FRONTIER_SNAPSHOT=FAIL")
+            print(json.dumps({"external_repo_error": spec, "error": str(ex)}, sort_keys=True))
+            return 1
+
+    data = snapshot(args.root, files, external=external)
     text = json.dumps(data, indent=2, sort_keys=True) + "\n"
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)

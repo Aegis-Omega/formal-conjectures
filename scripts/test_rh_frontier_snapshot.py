@@ -9,9 +9,16 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+from urllib.parse import quote
 
 sys.path.insert(0, str(Path(__file__).parent))
-from rh_frontier_snapshot import EQUIVALENTS, OFFICIAL, main, snapshot
+from rh_frontier_snapshot import (
+    EQUIVALENTS,
+    OFFICIAL,
+    fetch_external_repo_signal,
+    main,
+    snapshot,
+)
 
 
 OFFICIAL_SOURCE = """import FormalConjecturesUtil
@@ -110,6 +117,40 @@ class RHFrontierSnapshotTests(unittest.TestCase):
             self.assertEqual(rc, 0)
             payload = json.loads(out.read_text(encoding="utf-8"))
             self.assertEqual(payload["schema"], "aegis.rh.frontier.snapshot.v1")
+
+    def test_external_repo_signal_deduplicates_hits(self):
+        owner, repo = "Aegis-Omega", "AEGIS-OMEGA"
+        q1 = "https://api.github.com/search/code?q=" + quote(
+            f"repo:{owner}/{repo} RiemannHypothesis in:file extension:lean", safe=""
+        )
+        q2 = "https://api.github.com/search/code?q=" + quote(
+            f"repo:{owner}/{repo} riemann in:file extension:lean", safe=""
+        )
+        payloads = {
+            q1: {
+                "total_count": 2,
+                "items": [
+                    {"name": "A.lean", "path": "src/A.lean", "sha": "sha1", "html_url": "u1"},
+                    {"name": "B.lean", "path": "src/B.lean", "sha": "sha2", "html_url": "u2"},
+                ],
+            },
+            q2: {
+                "total_count": 2,
+                "items": [
+                    {"name": "A.lean", "path": "src/A.lean", "sha": "sha1", "html_url": "u1"},
+                    {"name": "C.lean", "path": "src/C.lean", "sha": "sha3", "html_url": "u3"},
+                ],
+            },
+        }
+
+        def fake_fetch(url: str):
+            return payloads[url]
+
+        data = fetch_external_repo_signal(owner, repo, max_items=10, fetch_json=fake_fetch)
+        self.assertEqual(data["repo"], "Aegis-Omega/AEGIS-OMEGA")
+        self.assertEqual(data["query_total_count"], 4)
+        self.assertEqual(data["returned_hit_count"], 3)
+        self.assertEqual([h["path"] for h in data["hits"]], ["src/A.lean", "src/B.lean", "src/C.lean"])
 
 
 if __name__ == "__main__":
