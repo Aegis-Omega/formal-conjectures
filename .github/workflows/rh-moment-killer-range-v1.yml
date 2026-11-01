@@ -1,15 +1,18 @@
 name: RH moment-killer range V1
 
-# Compiles AegisRH/PR606/WeilMomentKillerConstructionV1.lean and WeilMomentKillerRangeV1.lean from
-# source against the pinned Mathlib, with warnings as errors, and fails unless the three theorems
-# depend on exactly propext, Classical.choice and Quot.sound. Not RH.
+# Compiles the moment-killer construction, the canonical Weil domain and the log change of variables
+# (AegisRH/PR606) and the two range modules in research/rh/moment_killer_v1 from source against the
+# pinned Mathlib, with warnings as errors, and fails unless the four range theorems depend on
+# exactly propext, Classical.choice and Quot.sound. Not RH.
 
 on:
   pull_request:
     paths:
       - .github/workflows/rh-moment-killer-range-v1.yml
+      - research/rh/moment_killer_v1/**
       - AegisRH/PR606/WeilMomentKillerConstructionV1.lean
-      - AegisRH/PR606/WeilMomentKillerRangeV1.lean
+      - AegisRH/PR606/WeilCriterionCompactSmoothV1.lean
+      - AegisRH/PR606/WeilLogChangeOfVariablesV1.lean
   workflow_dispatch:
 
 concurrency:
@@ -58,22 +61,27 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          D=AegisRH/PR606
-          if grep -nE '\bsorry\b|\badmit\b|^axiom ' "$D/WeilMomentKillerRangeV1.lean"; then exit 1; fi
+          M=research/rh/moment_killer_v1
+          if grep -nE '\bsorry\b|\badmit\b|^axiom ' "$M"/*.lean; then exit 1; fi
           out="$RUNNER_TEMP/mkr"; mkdir -p "$out"
           export LEAN_PATH="$out:$(lake env printenv LEAN_PATH)"
-          lean -DwarningAsError=true -o "$out/WeilMomentKillerConstructionV1.olean" \
-            "$D/WeilMomentKillerConstructionV1.lean" > construction.log 2>&1 || { cat construction.log; exit 1; }
-          lean -DwarningAsError=true -o "$out/WeilMomentKillerRangeV1.olean" \
-            "$D/WeilMomentKillerRangeV1.lean" > range.log 2>&1 || { cat range.log; exit 1; }
+          for f in AegisRH/PR606/WeilMomentKillerConstructionV1.lean AegisRH/PR606/WeilCriterionCompactSmoothV1.lean \
+                   AegisRH/PR606/WeilLogChangeOfVariablesV1.lean "$M/WeilMomentKillerRangeV1.lean" \
+                   "$M/WeilMomentKillerPacketRangeV1.lean"; do
+            m=$(basename "$f" .lean)
+            lean -DwarningAsError=true -o "$out/$m.olean" "$f" > "$m.log" 2>&1 || { cat "$m.log"; exit 1; }
+          done
+          cat WeilMomentKillerRangeV1.log WeilMomentKillerPacketRangeV1.log > range.log
           cat range.log
           python3 - <<'PY'
           import re, sys
           log = open('range.log').read()
           want = {'propext', 'Classical.choice', 'Quot.sound'}
-          for t in ('exists_momentKiller_eq_of_vanish', 'exists_momentKiller_eq',
-                    'exists_moment_preserving_dilation'):
-              m = re.search(r"'AEGIS\.WeilMomentKillerRangeV1\." + t + r"' depends on axioms: \[([^\]]*)\]", log)
+          for t in ('WeilMomentKillerRangeV1.exists_momentKiller_eq_of_vanish',
+                    'WeilMomentKillerRangeV1.exists_momentKiller_eq',
+                    'WeilMomentKillerRangeV1.exists_moment_preserving_dilation',
+                    'WeilMomentKillerPacketRangeV1.exists_momentKiller_packet'):
+              m = re.search(r"'AEGIS\." + re.escape(t) + r"' depends on axioms: \[([^\]]*)\]", log)
               got = {a.strip() for a in m.group(1).split(',')} if m else None
               if got != want:
                   sys.exit(f'AXIOM_AUDIT_FAIL {t} {got}')
