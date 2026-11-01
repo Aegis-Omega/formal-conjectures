@@ -1,7 +1,7 @@
 name: RH moment-killer range V1
 
 # Compiles AegisRH/PR606/WeilMomentKillerConstructionV1.lean and WeilMomentKillerRangeV1.lean from
-# source against the pinned Mathlib, with warnings as errors, and fails unless both range theorems
+# source against the pinned Mathlib, with warnings as errors, and fails unless the three theorems
 # depend on exactly propext, Classical.choice and Quot.sound. Not RH.
 
 on:
@@ -71,7 +71,8 @@ jobs:
           import re, sys
           log = open('range.log').read()
           want = {'propext', 'Classical.choice', 'Quot.sound'}
-          for t in ('exists_momentKiller_eq_of_vanish', 'exists_momentKiller_eq'):
+          for t in ('exists_momentKiller_eq_of_vanish', 'exists_momentKiller_eq',
+                    'exists_moment_preserving_dilation'):
               m = re.search(r"'AEGIS\.WeilMomentKillerRangeV1\." + t + r"' depends on axioms: \[([^\]]*)\]", log)
               got = {a.strip() for a in m.group(1).split(',')} if m else None
               if got != want:

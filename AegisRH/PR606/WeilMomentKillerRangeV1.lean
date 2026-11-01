@@ -26,7 +26,11 @@ function `momentKiller ψ = ψ' + ψ''` is smooth, compactly supported, and has
 * `exists_momentKiller_eq_of_vanish`: if `φ` is smooth, vanishes for `u ≤ a` and for `u ≥ b`, and
   has both moments zero, then `φ = momentKiller ψ` for a smooth `ψ` that also vanishes for
   `u ≤ a` and for `u ≥ b`, so `ψ` lives in the same window as `φ`;
-* `exists_momentKiller_eq`: the same with `HasCompactSupport` in place of an explicit window.
+* `exists_momentKiller_eq`: the same with `HasCompactSupport` in place of an explicit window;
+* `exists_moment_preserving_dilation`: a plain dilation `u ↦ φ (u / s)` keeps `∫ φ = 0` but in
+  general breaks `∫ φ e^u = 0`. Dilating the potential instead does not: with `φ = momentKiller ψ`,
+  the packet `momentKiller (u ↦ ψ (u / s))` is smooth, has both moments zero and topological
+  support in `[s a, s b]`, and equals `φ` at `s = 1`. No correction term is needed.
 
 Together with the forward direction, the moment-killer is a bijection from smooth compactly
 supported functions onto the smooth compactly supported functions with both moments zero
@@ -162,6 +166,33 @@ theorem exists_momentKiller_eq_of_vanish (hab : a ≤ b) (hφ : ContDiff ℝ ∞
     dsimp only
     ring
 
+/-- Moment-preserving dilation: dilate the potential, not the packet. For `0 < s`, the packet
+`momentKiller (u ↦ ψ (u / s))` built from the potential `ψ` of `φ` is smooth, has both moments zero and
+lives in `[s a, s b]`; at `s = 1` it is `φ` itself. -/
+theorem exists_moment_preserving_dilation (hab : a ≤ b) (hφ : ContDiff ℝ ∞ φ)
+    (hl : ∀ t, t ≤ a → φ t = 0) (hr : ∀ t, b ≤ t → φ t = 0)
+    (h1 : ∫ u, φ u = 0) (h2 : ∫ u, φ u * Real.exp u = 0) :
+    ∃ ψ : ℝ → ℝ, momentKiller ψ = φ ∧ ∀ s : ℝ, 0 < s →
+      ContDiff ℝ ∞ (momentKiller fun u => ψ (u / s)) ∧
+      tsupport (momentKiller fun u => ψ (u / s)) ⊆ Icc (s * a) (s * b) ∧
+      (∫ u, momentKiller (fun u => ψ (u / s)) u = 0) ∧
+      (∫ u, momentKiller (fun u => ψ (u / s)) u * Real.exp u = 0) := by
+  obtain ⟨ψ, hψs, hψl, hψr, hψ⟩ := exists_momentKiller_eq_of_vanish hab hφ hl hr h1 h2
+  refine ⟨ψ, hψ, fun s hs => ?_⟩
+  have hd : ContDiff ℝ ∞ fun u => ψ (u / s) := hψs.comp (contDiff_id.div_const s)
+  have hsub : tsupport (fun u => ψ (u / s)) ⊆ Icc (s * a) (s * b) := by
+    refine closure_minimal (fun t ht => ?_) isClosed_Icc
+    by_contra hn
+    refine ht ?_
+    simp only [mem_Icc, not_and_or, not_le] at hn
+    rcases hn with h | h
+    · exact hψl _ ((div_le_iff₀ hs).2 (by linarith))
+    · exact hψr _ ((le_div_iff₀ hs).2 (by linarith))
+  have hc : HasCompactSupport fun u => ψ (u / s) :=
+    isCompact_Icc.of_isClosed_subset (isClosed_tsupport _) hsub
+  exact ⟨momentKiller_contDiff hd, (tsupport_momentKiller_subset _).trans hsub,
+    integral_momentKiller hd hc, integral_momentKiller_mul_exp hd hc⟩
+
 /-- The converse of the moment-killer construction, compact-support form. -/
 theorem exists_momentKiller_eq (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ)
     (h1 : ∫ u, φ u = 0) (h2 : ∫ u, φ u * Real.exp u = 0) :
@@ -192,3 +223,4 @@ end AEGIS.WeilMomentKillerRangeV1
 
 #print axioms AEGIS.WeilMomentKillerRangeV1.exists_momentKiller_eq_of_vanish
 #print axioms AEGIS.WeilMomentKillerRangeV1.exists_momentKiller_eq
+#print axioms AEGIS.WeilMomentKillerRangeV1.exists_moment_preserving_dilation
