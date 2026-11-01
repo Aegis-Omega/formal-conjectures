@@ -106,10 +106,25 @@ def git(*a):
 def statement(path, full):
     short = full.rsplit('.', 1)[1]
     t = Path(path).read_text()
-    m = re.search(r'^theorem ' + re.escape(short) + r'\b(.*?):=', t, re.S | re.M)
+    m = re.search(r'^(?:theorem|lemma) ' + re.escape(short) + r'\b(.*?):=', t, re.S | re.M)
     if not m:
         raise SystemExit(f'STATEMENT_NOT_FOUND {full} {path}')
     return ' '.join(m.group(1).split())
+
+CAT = Path('research/rh/aegis_math/CATALOG.json')
+INDEX = Path('research/rh/aegis_math/INDEX.tsv')
+INDEX_RUNS = {'rh-cofinal-actual-schur-v1.yml': 41285865947, 'rh-consolidated-v1.yml': 41285865807,
+              'rh-cvs-actual-row-replay.yml': 41285865827, 'rh-cvs-window-l65-source.yml': 41285866006,
+              'rh-feshbach-schur-v1.yml': 41285865808, 'rh-moment-killer-range-v1.yml': 41285865902,
+              'rh-snowflake-log23-globalization-v1.yml': 41285865788}
+
+def declared(path, full):
+    prefix, short = full.rsplit('.', 1) if '.' in full else ('', full)
+    t = Path(path).read_text()
+    if not re.search(r'^(theorem|lemma) ' + re.escape(short) + r'\b', t, re.M):
+        return False
+    spaces = re.findall(r'^namespace ([A-Za-z0-9_.]+)', t, re.M)
+    return prefix == '' or prefix in spaces or '.'.join(spaces).endswith(prefix)
 
 entries = []
 for eid, alias, src, path, run, deps in LEAN:
@@ -117,19 +132,42 @@ for eid, alias, src, path, run, deps in LEAN:
     then = git('rev-parse', f'{CHECKED}:{path}')
     if then and then != blob:
         raise SystemExit(f'SOURCE_CHANGED_SINCE_CHECK {path}')
-    wf, rid = RUNS[run]
-    entries.append({'id': eid, 'kind': 'lean_kernel', 'aegis_math_name': alias, 'source_name': src,
-                    'source': path, 'blob': blob, 'statement': statement(path, src),
-                    'checked_by': {'workflow': wf, 'run': rid, 'commit': CHECKED},
-                    'axioms': ['propext', 'Classical.choice', 'Quot.sound'], 'depends_on': deps})
+    e = {'id': eid, 'kind': 'lean_kernel', 'name': alias, 'source_name': src, 'source': path, 'blob': blob,
+         'workflow': RUNS[run][0], 'statement': statement(path, src)}
+    if deps:
+        e['depends_on'] = deps
+    entries.append(e)
+
+# INDEX.tsv: theorems covered by the fail-closed axiom audit of a green workflow, harvested from the
+# workflow sources. Every row must be a theorem declared in that file under that namespace, with a
+# readable statement, in a file byte-identical to the one the green run compiled; otherwise stop.
+rows = [l.split('\t') for l in INDEX.read_text().splitlines() if l and not l.startswith('#')]
+names = {e['source_name'] for e in entries}
+for name, path, wf, area, role in rows:
+    if name in names:
+        raise SystemExit(f'INDEX_DUPLICATE {name}')
+    names.add(name)
+    if wf not in INDEX_RUNS or not Path(path).is_file() or not declared(path, name):
+        raise SystemExit(f'INDEX_ROW_INVALID {name} {path} {wf}')
+    if git('rev-parse', f'{CHECKED}:{path}') != git('hash-object', path):
+        raise SystemExit(f'INDEX_SOURCE_CHANGED_SINCE_CHECK {path}')
+    statement(path, name)
 entries += OTHER
 ids = {e['id'] for e in entries}
+if len(ids) != len(entries):
+    raise SystemExit('DUPLICATE_ID')
 for e in entries:
     for d in e.get('depends_on', []):
         if d not in ids:
             raise SystemExit(f'UNKNOWN_DEPENDENCY {e["id"]} -> {d}')
 out = {'schema': 'aegis-math-catalog/v1', 'core': 'research/rh/aegis_math/AegisMathCoreV1.lean',
        'kinds': ['lean_kernel', 'numerical', 'literature', 'external_claim', 'open'],
+       'lean_kernel_means': 'the named workflow compiles the source from scratch and its fail-closed axiom audit '
+                            '(a #print axioms line or a required-name list) covers the theorem; its run on '
+                            'checked_commit passed and the file blob equals the one compiled there',
+       'checked_commit': CHECKED, 'axioms': ['propext', 'Classical.choice', 'Quot.sound'],
+       'runs': dict(sorted({**dict(RUNS.values()), **INDEX_RUNS}.items())),
+       'index': {'file': 'research/rh/aegis_math/INDEX.tsv', 'rows': len(rows), 'all_rows_verified': True},
        'entries': entries}
-Path('research/rh/aegis_math/CATALOG.json').write_text(json.dumps(out, indent=1, ensure_ascii=False) + '\n')
-print('CATALOG', len(entries), 'entries')
+CAT.write_text(json.dumps(out, indent=1, ensure_ascii=False) + '\n')
+print('CATALOG', len(entries), 'entries; INDEX', len(rows), 'rows verified')

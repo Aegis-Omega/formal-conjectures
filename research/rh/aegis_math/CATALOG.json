@@ -8,45 +8,47 @@
   "external_claim",
   "open"
  ],
+ "lean_kernel_means": "the named workflow compiles the source from scratch and its fail-closed axiom audit (a #print axioms line or a required-name list) covers the theorem; its run on checked_commit passed and the file blob equals the one compiled there",
+ "checked_commit": "fe117ae12374199b9102ea0c58e0689bab585a75",
+ "axioms": [
+  "propext",
+  "Classical.choice",
+  "Quot.sound"
+ ],
+ "runs": {
+  "rh-cofinal-actual-schur-v1.yml": 41285865947,
+  "rh-consolidated-v1.yml": 41285865807,
+  "rh-cvs-actual-row-replay.yml": 41285865827,
+  "rh-cvs-window-l65-source.yml": 41285866006,
+  "rh-feshbach-schur-v1.yml": 41285865808,
+  "rh-moment-killer-range-v1.yml": 41285865902,
+  "rh-snowflake-log23-globalization-v1.yml": 41285865788
+ },
+ "index": {
+  "file": "research/rh/aegis_math/INDEX.tsv",
+  "rows": 203,
+  "all_rows_verified": true
+ },
  "entries": [
   {
    "id": "windows.window_le_eleven_sixteenths",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Windows.window_le_eleven_sixteenths",
+   "name": "AegisMath.Windows.window_le_eleven_sixteenths",
    "source_name": "AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths",
    "source": "research/rh/checkpoints/20261031_window_l118/RHWindowL118ExhaustionV1.lean",
    "blob": "8c80352c1e1c3ab43fc064ca002602d85b098805",
-   "statement": "{L : ℝ} (hL : L ≤ 11 / 16) : WindowArithmeticNonpositiveV1 L",
-   "checked_by": {
-    "workflow": "rh-cvs-window-l65-source.yml",
-    "run": 41285866006,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-cvs-window-l65-source.yml",
+   "statement": "{L : ℝ} (hL : L ≤ 11 / 16) : WindowArithmeticNonpositiveV1 L"
   },
   {
    "id": "windows.final_sign_iff_windows_above_eleven_sixteenths",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Windows.final_sign_iff_windows_above_eleven_sixteenths",
+   "name": "AegisMath.Windows.final_sign_iff_windows_above_eleven_sixteenths",
    "source_name": "AEGIS.RHWindowL118ExhaustionV1.final_sign_iff_windows_above_eleven_sixteenths",
    "source": "research/rh/checkpoints/20261031_window_l118/RHWindowL118ExhaustionV1.lean",
    "blob": "8c80352c1e1c3ab43fc064ca002602d85b098805",
+   "workflow": "rh-cvs-window-l65-source.yml",
    "statement": ": FinalSignResidualV1 ↔ ∀ L : ℝ, 11 / 16 < L → WindowArithmeticNonpositiveV1 L",
-   "checked_by": {
-    "workflow": "rh-cvs-window-l65-source.yml",
-    "run": 41285866006,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
    "depends_on": [
     "windows.window_le_eleven_sixteenths"
    ]
@@ -54,21 +56,12 @@
   {
    "id": "windows.rh_iff_windows_above_eleven_sixteenths",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Windows.rh_iff_windows_above_eleven_sixteenths",
+   "name": "AegisMath.Windows.rh_iff_windows_above_eleven_sixteenths",
    "source_name": "AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths",
    "source": "research/rh/checkpoints/20261031_window_l118/RHWindowL118ExhaustionV1.lean",
    "blob": "8c80352c1e1c3ab43fc064ca002602d85b098805",
+   "workflow": "rh-cvs-window-l65-source.yml",
    "statement": ": RiemannHypothesis ↔ ∀ L : ℝ, 11 / 16 < L → WindowArithmeticNonpositiveV1 L",
-   "checked_by": {
-    "workflow": "rh-cvs-window-l65-source.yml",
-    "run": 41285866006,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
    "depends_on": [
     "windows.final_sign_iff_windows_above_eleven_sixteenths",
     "criterion.final_sign_iff_rh"
@@ -77,61 +70,32 @@
   {
    "id": "criterion.final_sign_iff_rh",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Criterion.final_sign_iff_rh",
+   "name": "AegisMath.Criterion.final_sign_iff_rh",
    "source_name": "AEGIS.V13Scratch.final_sign_iff_rh_v13",
    "source": "AegisRH/PR606/V13Scratch.lean",
    "blob": "443d97837d8731f2b56f7a2ee83ce544f21a40b2",
-   "statement": ": FinalSignResidualV1 ↔ RiemannHypothesis",
-   "checked_by": {
-    "workflow": "rh-cvs-window-l65-source.yml",
-    "run": 41285866006,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-cvs-window-l65-source.yml",
+   "statement": ": FinalSignResidualV1 ↔ RiemannHypothesis"
   },
   {
    "id": "criterion.no_zero_re_gt_half_of_final_sign",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Criterion.no_zero_re_gt_half_of_final_sign",
+   "name": "AegisMath.Criterion.no_zero_re_gt_half_of_final_sign",
    "source_name": "AEGIS.V13Scratch.no_zero_re_gt_half_of_final_sign_v13",
    "source": "AegisRH/PR606/V13Scratch.lean",
    "blob": "443d97837d8731f2b56f7a2ee83ce544f21a40b2",
-   "statement": "(h : FinalSignResidualV1) (rho : RiemannNontrivialZeroIndexV2) : ¬ (1 / 2 : ℝ) < rho.1.re",
-   "checked_by": {
-    "workflow": "rh-cvs-window-l65-source.yml",
-    "run": 41285866006,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-cvs-window-l65-source.yml",
+   "statement": "(h : FinalSignResidualV1) (rho : RiemannNontrivialZeroIndexV2) : ¬ (1 / 2 : ℝ) < rho.1.re"
   },
   {
    "id": "moment_killer.exists_momentKiller_packet",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.MomentKiller.exists_momentKiller_packet",
+   "name": "AegisMath.MomentKiller.exists_momentKiller_packet",
    "source_name": "AEGIS.WeilMomentKillerPacketRangeV1.exists_momentKiller_packet",
    "source": "research/rh/moment_killer_v1/WeilMomentKillerPacketRangeV1.lean",
    "blob": "ed490d6948a8492e04dba89a4c5c051af3721737",
+   "workflow": "rh-moment-killer-range-v1.yml",
    "statement": "(g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) {a b : ℝ} (hab : a ≤ b) (hl : ∀ x, x ≤ Real.exp a → g.1 x = 0) (hr : ∀ x, Real.exp b ≤ x → g.1 x = 0) : ∃ ψr ψi : ℝ → ℝ, ContDiff ℝ ∞ ψr ∧ ContDiff ℝ ∞ ψi ∧ (∀ t, t ≤ a → ψr t = 0) ∧ (∀ t, b ≤ t → ψr t = 0) ∧ (∀ t, t ≤ a → ψi t = 0) ∧ (∀ t, b ≤ t → ψi t = 0) ∧ ∀ x, g.1 x = (AEGIS.WeilLogChangeOfVariablesV1.mulPacket (momentKiller ψr) x : ℂ) + (AEGIS.WeilLogChangeOfVariablesV1.mulPacket (momentKiller ψi) x : ℂ) * I",
-   "checked_by": {
-    "workflow": "rh-moment-killer-range-v1.yml",
-    "run": 41285865902,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
    "depends_on": [
     "moment_killer.exists_momentKiller_eq"
    ]
@@ -139,102 +103,52 @@
   {
    "id": "moment_killer.exists_momentKiller_eq",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.MomentKiller.exists_momentKiller_eq",
+   "name": "AegisMath.MomentKiller.exists_momentKiller_eq",
    "source_name": "AEGIS.WeilMomentKillerRangeV1.exists_momentKiller_eq",
    "source": "research/rh/moment_killer_v1/WeilMomentKillerRangeV1.lean",
    "blob": "b2919856c535091dd10ae11e1013587e8112364c",
-   "statement": "(hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) (h1 : ∫ u, φ u = 0) (h2 : ∫ u, φ u * Real.exp u = 0) : ∃ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ ∧ HasCompactSupport ψ ∧ momentKiller ψ = φ",
-   "checked_by": {
-    "workflow": "rh-moment-killer-range-v1.yml",
-    "run": 41285865902,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-moment-killer-range-v1.yml",
+   "statement": "(hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) (h1 : ∫ u, φ u = 0) (h2 : ∫ u, φ u * Real.exp u = 0) : ∃ ψ : ℝ → ℝ, ContDiff ℝ ∞ ψ ∧ HasCompactSupport ψ ∧ momentKiller ψ = φ"
   },
   {
    "id": "obstructions.no_common_positive_width",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Obstructions.no_common_positive_width",
+   "name": "AegisMath.Obstructions.no_common_positive_width",
    "source_name": "AEGIS.RHWidthQuantifierObstructionV1.no_common_positive_width",
    "source": "AEGISOverlay/RHWidthQuantifierObstructionV1.lean",
    "blob": "11215bb1a08b4d10a89375291005c1cd875f99b7",
-   "statement": ": ¬ ∃ r : ℝ, 0 < r ∧ ∀ (n : ℕ) (z : Fin n → ℝ), 0 ≤ gram r n z",
-   "checked_by": {
-    "workflow": "rh-snowflake-log23-globalization-v1.yml",
-    "run": 41285865788,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-snowflake-log23-globalization-v1.yml",
+   "statement": ": ¬ ∃ r : ℝ, 0 < r ∧ ∀ (n : ℕ) (z : Fin n → ℝ), 0 ≤ gram r n z"
   },
   {
    "id": "obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative",
    "kind": "lean_kernel",
-   "aegis_math_name": "AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative",
+   "name": "AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative",
    "source_name": "AEGIS.RHEulerOperatorObstructionV1.vonMangoldt_weights_do_not_imply_operator_nonnegative",
    "source": "AEGISOverlay/RHEulerOperatorObstructionV1.lean",
    "blob": "1a1ee9cce06e72f518c6a7e829f704525548ca52",
-   "statement": ": (∀ n : ℕ, 0 ≤ ArithmeticFunction.vonMangoldt n) ∧ ¬ (∀ x y : ℝ, 0 ≤ twoPointForm (ArithmeticFunction.vonMangoldt 1) (ArithmeticFunction.vonMangoldt 2) x y)",
-   "checked_by": {
-    "workflow": "rh-snowflake-log23-globalization-v1.yml",
-    "run": 41285865788,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-snowflake-log23-globalization-v1.yml",
+   "statement": ": (∀ n : ℕ, 0 ≤ ArithmeticFunction.vonMangoldt n) ∧ ¬ (∀ x y : ℝ, 0 ≤ twoPointForm (ArithmeticFunction.vonMangoldt 1) (ArithmeticFunction.vonMangoldt 2) x y)"
   },
   {
    "id": "obstructions.not_uniformFineMixedBudget",
    "kind": "lean_kernel",
-   "aegis_math_name": null,
+   "name": null,
    "source_name": "AEGIS.RHUniformBudgetObstructionV1.not_uniformFineMixedBudget",
    "source": "AEGISOverlay/RHUniformBudgetObstructionV1.lean",
    "blob": "d9553d6d9e9254c78927dec96dff562b88e5b4b0",
-   "statement": ": ¬ UniformFineMixedBudget",
-   "checked_by": {
-    "workflow": "rh-cofinal-actual-schur-v1.yml",
-    "run": 41285865947,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-cofinal-actual-schur-v1.yml",
+   "statement": ": ¬ UniformFineMixedBudget"
   },
   {
    "id": "obstructions.extra_mellin_zero_obstructs_universal_approximation",
    "kind": "lean_kernel",
-   "aegis_math_name": null,
+   "name": null,
    "source_name": "AEGIS.RHTranslateSpectralObstructionV1.extra_mellin_zero_obstructs_universal_approximation",
    "source": "AEGISOverlay/RHTranslateSpectralObstructionV1.lean",
    "blob": "a778e6fef7371ef7d69f2a1e3eb6753493d8d75e",
-   "statement": "(g : WeilCompactSmoothGV1) (s : ℂ) (hs0 : s ≠ 0) (hs1 : s ≠ 1) (hg : mellin g.1 s = 0) : ∃ f : WeilCompactSmoothGV1, WeilMomentConditionsV1 f ∧ ∀ p : ℕ → WeilCompactSmoothGV1, (∀ k, TranslateSpanPacket g (p k)) → ¬ Tendsto (fun k => mellin (p k).1 s) atTop (𝓝 (mellin f.1 s))",
-   "checked_by": {
-    "workflow": "rh-snowflake-log23-globalization-v1.yml",
-    "run": 41285865788,
-    "commit": "fe117ae12374199b9102ea0c58e0689bab585a75"
-   },
-   "axioms": [
-    "propext",
-    "Classical.choice",
-    "Quot.sound"
-   ],
-   "depends_on": []
+   "workflow": "rh-snowflake-log23-globalization-v1.yml",
+   "statement": "(g : WeilCompactSmoothGV1) (s : ℂ) (hs0 : s ≠ 0) (hs1 : s ≠ 1) (hg : mellin g.1 s = 0) : ∃ f : WeilCompactSmoothGV1, WeilMomentConditionsV1 f ∧ ∀ p : ℕ → WeilCompactSmoothGV1, (∀ k, TranslateSpanPacket g (p k)) → ¬ Tendsto (fun k => mellin (p k).1 s) atTop (𝓝 (mellin f.1 s))"
   },
   {
    "id": "numerical.lambda_a_decay",
