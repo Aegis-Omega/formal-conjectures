@@ -16,6 +16,12 @@
       "bytes": 6096220,
       "sha256": "2923efefd904b39d13d5058580ed7eb7c360f87aae850e146aa4e464a9717945",
       "scope": "lossless source index only; not semantic proof review"
+    },
+    {
+      "path": "AEGIS_FOLLOWUP_SOURCES.zip",
+      "bytes": 31189,
+      "sha256": "553424ae75c34af90c26c1e5a754d92138a2208f4c026b8686d2e488282fdfe1",
+      "manifest": "MANIFEST.json"
     }
   ],
   "rh_proven": false,

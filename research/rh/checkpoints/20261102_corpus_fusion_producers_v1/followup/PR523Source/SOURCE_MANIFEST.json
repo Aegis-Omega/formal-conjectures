@@ -1,0 +1,92 @@
+[
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchFiniteQuadraticV1.lean",
+    "blob": "4f8ba8db61b696465a4b80a9a3006ce94245d42c",
+    "copy": "WeilArchFiniteQuadraticV1.lean",
+    "sha256": "98dc811d4dbec57a9e06c9a2f82fad95c2dac0dd8425cfe75b10cd16d5a69a71",
+    "bytes": 927,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchSineKernelIntegerV1.lean",
+    "blob": "7f16181960884f1a2254bc409f30b26158c0a59e",
+    "copy": "WeilArchSineKernelIntegerV1.lean",
+    "sha256": "9b7fa37a55a9c5867a91b6a090f08ee07c282ae9d4858b8e35f2e48bd30623be",
+    "bytes": 24348,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchSineKernelV1.lean",
+    "blob": "cab69e4ec0e921977a25dfb79cdee7e4467839ff",
+    "copy": "WeilArchSineKernelV1.lean",
+    "sha256": "9a74deb7f2c5b1cdc5a7e4a8b4a17b4c8a37304d18a1da2562587337e7d9c3cd",
+    "bytes": 3992,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchTailIntegralV1.lean",
+    "blob": "ec35e6d8bbf7d3b1f175691f35164529542eeba3",
+    "copy": "WeilArchTailIntegralV1.lean",
+    "sha256": "adf55c8cc4a99f3f296ffb5ec884191c21f7692d8312f58f18e005adb230cb1d",
+    "bytes": 2077,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchTailWeightSignV1.lean",
+    "blob": "c170eeaea67a8c6e3375bd08b94b2cb68a277437",
+    "copy": "WeilArchTailWeightSignV1.lean",
+    "sha256": "5c32e930e1755672f1a90e3637f2465ca0e54a21b3336057678760934b43a1ac",
+    "bytes": 4058,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchWeightDigammaSignV1.lean",
+    "blob": "35ba7019c86347eac6e4ee4efa6b35d396bc431b",
+    "copy": "WeilArchWeightDigammaSignV1.lean",
+    "sha256": "d4b32949c18bc508fb0bb7d7a9bbf0648a699664c699d7e4cc9a5c12153cba42",
+    "bytes": 4007,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilArchWeightRealSignV1.lean",
+    "blob": "c34770331820fd775d8dcca278e55430028fcc86",
+    "copy": "WeilArchWeightRealSignV1.lean",
+    "sha256": "c9cd35fcd9b6faedcfa18a63a4574b7bcfbd1202221ceb17ed997bd1bf696239",
+    "bytes": 5349,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/bridges/lean/WeilFiniteSourceCalculusV1.lean",
+    "blob": "8098853100b7bdd7410e03f2347e7b40c3e94516",
+    "copy": "WeilFiniteSourceCalculusV1.lean",
+    "sha256": "ead5c9d300074b9028d00020763343ed08cf25fd903b3193e790a86b6762924b",
+    "bytes": 18492,
+    "git_blob_verified": true
+  },
+  {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "8633831e652e3622e3b3d3ace6cdcbafe3d67058",
+    "path": "sovereign-omega-v2/formal/tests/lean/WeilFiniteSourceCalculusV1Spec.lean",
+    "blob": "3009718be8e712d310039b2da7c963fb2c542296",
+    "copy": "WeilFiniteSourceCalculusV1Spec.lean",
+    "sha256": "0b269fad84dd3d717ec7f2a088a35babd5dfdd8f79962825271559312f6de310",
+    "bytes": 2810,
+    "git_blob_verified": true
+  }
+]
