@@ -2,7 +2,7 @@
 
 Each entry carries one kind of evidence and is never promoted to another kind:
 lean_kernel (checked by the Lean kernel in CI from source, axioms only propext,
-Classical.choice, Quot.sound), numerical, literature, external_claim (reported, not replayed)
+Classical.choice, Quot.sound), certified_numerical (ball arithmetic), numerical, literature, external_claim (reported, not replayed)
 and open. Lean statements are read from the source files, so a renamed or moved theorem
 stops this script instead of leaving a stale entry. Not RH.
 """
@@ -59,6 +59,14 @@ LEAN = [
 ]
 
 OTHER = [
+    {'id': 'certified.lambda0_upper_bounds', 'kind': 'certified_numerical',
+     'source': 'research/rh/checkpoints/20261101_lambda_lab_s1/certify.py (results in CERTIFIED.txt)',
+     'statement': "For a = 3/4, 1, 5/4, 3/2 there is an explicit v = psi/4 - psi'', psi(x) = (1 - (x/a)^2)^2 p(x/a) with "
+                  'p of degree 39 with rational coefficients, supported in [-a, a] with both log moments exactly zero, '
+                  'such that QW(v)/||v||^2 <= 7.67846e-10, 1.93609e-18, 4.98549e-23, 4.22158e-26 respectively.',
+     'limits': 'arb ball arithmetic at 800 bits; rigorous up to the arb library and the script, not checked by the '
+               'Lean kernel. Upper bounds for lambda0_a only.',
+     'depends_on': ['moment_killer.exists_momentKiller_eq']},
     {'id': 'numerical.lambda_a_decay', 'kind': 'numerical', 'source': LAB,
      'statement': 'Ritz upper bounds for the lowest eigenvalue of the Weil form on [-a, a]: '
                   'lambda_a = 9.4e-7 (a = 0.5), 1.3e-12 (a = 11/16), <= 9.3e-42 (a = 2); on moment-zero '
@@ -70,9 +78,10 @@ OTHER = [
     {'id': 'numerical.family_budget_must_decay', 'kind': 'numerical', 'source': LAB,
      'statement': 'Fine moment-zero packets span the moment-zero subspace of [-a, a]; with bounded overlap a '
                   'family bound QW(sum g_i) >= c sum ||g_i||^2 with c independent of a would force lambda0_a >= c/2, '
-                  'which the computed upper bounds exclude.',
+                  'which the computed upper bounds exclude; with the certified bound at a = 3/2, c <= 8.45e-26.',
      'limits': 'Argument written out in the README, not formalized; relies on the numerical upper bounds.',
-     'depends_on': ['moment_killer.exists_momentKiller_packet', 'numerical.lambda_a_decay']},
+     'depends_on': ['moment_killer.exists_momentKiller_packet', 'numerical.lambda_a_decay',
+                    'certified.lambda0_upper_bounds']},
     {'id': 'literature.yoshida_suzuki_continuity', 'kind': 'literature',
      'source': 'Suzuki, arXiv 2606.09096, Thm 1.3 and the remark after it; Yoshida 1992',
      'statement': 'lambda_a is continuous in a; RH holds iff the localized Weil form is nondegenerate for every a.'},
@@ -161,7 +170,7 @@ for e in entries:
         if d not in ids:
             raise SystemExit(f'UNKNOWN_DEPENDENCY {e["id"]} -> {d}')
 out = {'schema': 'aegis-math-catalog/v1', 'core': 'research/rh/aegis_math/AegisMathCoreV1.lean',
-       'kinds': ['lean_kernel', 'numerical', 'literature', 'external_claim', 'open'],
+       'kinds': ['lean_kernel', 'certified_numerical', 'numerical', 'literature', 'external_claim', 'open'],
        'lean_kernel_means': 'the named workflow compiles the source from scratch and its fail-closed axiom audit '
                             '(a #print axioms line or a required-name list) covers the theorem; its run on '
                             'checked_commit passed and the file blob equals the one compiled there',

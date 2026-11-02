@@ -6,6 +6,7 @@ exactly one kind of evidence, and no kind is promoted to another.
 | kind | meaning |
 |---|---|
 | `lean_kernel` | checked by the Lean kernel in CI from source; axioms only `propext`, `Classical.choice`, `Quot.sound` |
+| `certified_numerical` | interval (ball) arithmetic on explicit objects; rigorous up to the arithmetic library, not kernel-checked |
 | `numerical` | reproducible computation; not a proof |
 | `literature` | published or preprint result, not formalized here |
 | `external_claim` | reported by another system, not replayed |

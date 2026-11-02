@@ -3,6 +3,7 @@
  "core": "research/rh/aegis_math/AegisMathCoreV1.lean",
  "kinds": [
   "lean_kernel",
+  "certified_numerical",
   "numerical",
   "literature",
   "external_claim",
@@ -151,6 +152,16 @@
    "statement": "(g : WeilCompactSmoothGV1) (s : ℂ) (hs0 : s ≠ 0) (hs1 : s ≠ 1) (hg : mellin g.1 s = 0) : ∃ f : WeilCompactSmoothGV1, WeilMomentConditionsV1 f ∧ ∀ p : ℕ → WeilCompactSmoothGV1, (∀ k, TranslateSpanPacket g (p k)) → ¬ Tendsto (fun k => mellin (p k).1 s) atTop (𝓝 (mellin f.1 s))"
   },
   {
+   "id": "certified.lambda0_upper_bounds",
+   "kind": "certified_numerical",
+   "source": "research/rh/checkpoints/20261101_lambda_lab_s1/certify.py (results in CERTIFIED.txt)",
+   "statement": "For a = 3/4, 1, 5/4, 3/2 there is an explicit v = psi/4 - psi'', psi(x) = (1 - (x/a)^2)^2 p(x/a) with p of degree 39 with rational coefficients, supported in [-a, a] with both log moments exactly zero, such that QW(v)/||v||^2 <= 7.67846e-10, 1.93609e-18, 4.98549e-23, 4.22158e-26 respectively.",
+   "limits": "arb ball arithmetic at 800 bits; rigorous up to the arb library and the script, not checked by the Lean kernel. Upper bounds for lambda0_a only.",
+   "depends_on": [
+    "moment_killer.exists_momentKiller_eq"
+   ]
+  },
+  {
    "id": "numerical.lambda_a_decay",
    "kind": "numerical",
    "source": "research/rh/checkpoints/20261101_lambda_lab_s1/README.md",
@@ -168,11 +179,12 @@
    "id": "numerical.family_budget_must_decay",
    "kind": "numerical",
    "source": "research/rh/checkpoints/20261101_lambda_lab_s1/README.md",
-   "statement": "Fine moment-zero packets span the moment-zero subspace of [-a, a]; with bounded overlap a family bound QW(sum g_i) >= c sum ||g_i||^2 with c independent of a would force lambda0_a >= c/2, which the computed upper bounds exclude.",
+   "statement": "Fine moment-zero packets span the moment-zero subspace of [-a, a]; with bounded overlap a family bound QW(sum g_i) >= c sum ||g_i||^2 with c independent of a would force lambda0_a >= c/2, which the computed upper bounds exclude; with the certified bound at a = 3/2, c <= 8.45e-26.",
    "limits": "Argument written out in the README, not formalized; relies on the numerical upper bounds.",
    "depends_on": [
     "moment_killer.exists_momentKiller_packet",
-    "numerical.lambda_a_decay"
+    "numerical.lambda_a_decay",
+    "certified.lambda0_upper_bounds"
    ]
   },
   {

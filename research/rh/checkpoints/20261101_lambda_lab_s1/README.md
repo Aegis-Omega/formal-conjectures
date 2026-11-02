@@ -74,6 +74,26 @@ lowest eigenvalue is simple (λ2/λ1 = 29, 207, 365, 606) and its eigenvector is
 decouple exactly; the observation is that the minimum sits in the even block.
 This matches CCM's "simple-even" hypothesis and Suzuki Thm 1.4 for these `a`.
 
+## S1c: certified upper bounds (`certify.py`, `CERTIFIED.txt`)
+
+`v = ψ/4 − ψ''` with `ψ(x) = (1 − (x/a)²)² p(x/a)`, `p` of degree 39 with rational
+coefficients. ψ and ψ' vanish at `±a`, so both log moments of `v` are exactly zero (the
+computed moment balls contain 0 with radius ~1e-233). Every term of `QW(v)` is evaluated in
+arb ball arithmetic at 800 bits (exact rational Legendre data, `acb.integral` for the
+archimedean, pole and moment integrals), so `QW(v)/‖v‖²` is an enclosure, not an estimate:
+
+| a | primes in the form | certified `QW(v)/‖v‖²` ≤ |
+|---|---|---|
+| 3/4 | 2, 3, 4 | 7.67846e-10 |
+| 1 | 2 … 7 | 1.93609e-18 |
+| 5/4 | 2 … 11 | 4.98549e-23 |
+| 3/2 | 2 … 19 | 4.22158e-26 |
+
+These are rigorous upper bounds for `λ0_a` (rigorous up to arb and this script, not checked
+by the Lean kernel). With the argument in point 2 below, a family bound
+`QW(Σ g_i) ≥ c Σ ‖g_i‖²` for fine packets with bounded overlap spread over `[−3/2, 3/2]`
+must have `c ≤ 8.45e-26`.
+
 ## Consequences for the budget route on this PR
 
 1. The window `2r ≤ 11/8` (a = 11/16) proved in Lean sits where `λ0_a ≈ 1.7e-7`.
