@@ -1,0 +1,21 @@
+{
+  "schema": "AEGIS_MOMENT_LEGAL_CONE_ADDENDUM_V1",
+  "source_parent": "2fa184b1a9d04de7c8b22fcbad499a03dc6b98ec",
+  "rh_proven": false,
+  "final_theorem": null,
+  "formal_kernel_replay": false,
+  "ordinary_result": "For every a>log(2)/2, the transported positive-potential cone has positive disjoint mixed entries on the actual two-moment-zero Weil class; no bounded self-adjoint perturbation can repair positivity preservation on this cone.",
+  "quantitative_result": "normalized mixed = sqrt(2)*log(2)-c0*delta^5+error, abs(error)<=C*delta^7, explicit c0>0 and C",
+  "certificate_hashes": [
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_RECEIPT_FINAL_1000.json",
+      "sha256": "4eac8ede04ae3406e4a108a1cd26541910e80cbbe33cccc5bddfec38dfafd432"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_RECEIPT_FINAL_2000.json",
+      "sha256": "e265eacee03b79aec3aaa9ff9a075873e54b7e8789f5e978728203a49790a646"
+    }
+  ],
+  "remaining_mathematical_producer": "The all-radius actual low/high Schur sign stated in the parent checkpoint remains unproved.",
+  "prior_archive_recreated": false
+}
