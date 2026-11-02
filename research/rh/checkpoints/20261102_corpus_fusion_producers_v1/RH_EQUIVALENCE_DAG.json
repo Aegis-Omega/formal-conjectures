@@ -1,0 +1,23 @@
+{
+  "schema": "AEGIS_EXISTING_EQUIVALENCES_DIAGNOSTIC_ONLY",
+  "new_equivalences_proved": 0,
+  "reviewed_edges": [
+    {
+      "from": "FinalSignResidualV1",
+      "to": "_root_.RiemannHypothesis",
+      "directions": "both",
+      "source": "AEGIS.V13Scratch.final_sign_iff_rh_v13",
+      "status": "EXISTING_SOURCE_REUSED"
+    },
+    {
+      "from": "_root_.RiemannHypothesis",
+      "to": "forall L>11/16, WindowArithmeticNonpositiveV1 L",
+      "directions": "both",
+      "source": "AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths",
+      "blob": "8c80352c1e1c3ab43fc064ca002602d85b098805",
+      "status": "EXISTING_SOURCE_REUSED"
+    }
+  ],
+  "other_equivalences": "retained in corpus; not exhaustively re-audited or assumed from names",
+  "rh_proven": false
+}

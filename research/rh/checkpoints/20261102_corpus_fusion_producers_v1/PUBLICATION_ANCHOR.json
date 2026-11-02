@@ -1,0 +1,15 @@
+{
+  "schema": "AEGIS_PUBLICATION_ANCHOR_V1",
+  "repository": "Aegis-Omega/formal-conjectures",
+  "branch": "fix/rh-live-evidence-provenance-20261024",
+  "prefix": "research/rh/checkpoints/20261102_corpus_fusion_producers_v1",
+  "source_snapshot_observed_parent": "80e0f5b4bf3b6ade35a4a597a654a6502b84aeff",
+  "publication_base": "8f99b0e7206a8ba46f4cb710bf7300262dcfeb24",
+  "publication_base_tree": "ed014d33930c02ef283a6862a60b488b6896beb9",
+  "manifest_scope": "MANIFEST.json binds the ZIP contents. Direct readable copies and publication anchor surround that frozen archive.",
+  "rh_proven": false,
+  "authorized": "User explicitly requested publishing needed work for other agents",
+  "protected_main_modified": false,
+  "new_branch_created": false,
+  "forced_update": false
+}
