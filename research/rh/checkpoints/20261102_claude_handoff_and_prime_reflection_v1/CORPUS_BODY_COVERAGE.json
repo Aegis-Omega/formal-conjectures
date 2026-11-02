@@ -1,0 +1,11 @@
+{
+  "baseline_tips": 941,
+  "requested_distinct_source_bodies": 13469,
+  "recovered_distinct_source_bodies": 13469,
+  "missing": 0,
+  "all_recovered_git_blob_ids_checked": true,
+  "semantic_audit_complete": false,
+  "private_source_metadata_republished": false,
+  "role": "source availability evidence, not a mathematical proof",
+  "rh_proven": false
+}

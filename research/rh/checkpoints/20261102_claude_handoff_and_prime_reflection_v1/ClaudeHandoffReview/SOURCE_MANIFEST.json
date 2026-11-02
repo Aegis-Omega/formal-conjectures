@@ -1,0 +1,34 @@
+[
+  {
+    "path": "research/rh/aegis_math/HANDOFF.md",
+    "blob": "1814d6fb6423a331477e327c7995c41266423369",
+    "sha256": "cf2be6525e100753f2509cc47f006b767d091a03fa6281840dd845e62cb33c4a",
+    "bytes": 6292,
+    "repo": "Aegis-Omega/formal-conjectures",
+    "pin": "8686704f8d90853d5e0934d28db7964420ba847b"
+  },
+  {
+    "path": "research/rh/checkpoints/20261101_lambda_lab_s1/certify.py",
+    "blob": "35087597b9f1be6ec5de922383960ae8b5725a3f",
+    "sha256": "facfaa4990b6b0339adee5c291ddf4278ad5af67ddfaf2afedc6717c5e569cc9",
+    "bytes": 4490,
+    "repo": "Aegis-Omega/formal-conjectures",
+    "pin": "8686704f8d90853d5e0934d28db7964420ba847b"
+  },
+  {
+    "path": "research/rh/checkpoints/20261101_lambda_lab_s1/CERTIFIED.txt",
+    "blob": "c1f0fb34c56138e2ee5a2334de7f84d9e5947932",
+    "sha256": "7fa392e1ef834a0b923cf30ce6c72530fa02423183d892171750a45022416223",
+    "bytes": 896,
+    "repo": "Aegis-Omega/formal-conjectures",
+    "pin": "8686704f8d90853d5e0934d28db7964420ba847b"
+  },
+  {
+    "path": "research/rh/checkpoints/20261101_lambda_lab_s1/README.md",
+    "blob": "7638661913bdef22da842318edc6bc138cf09b06",
+    "sha256": "889effcc447ee91c80a7c2de3da1829b7fe4425690561ad3106b38a284d8a2f9",
+    "bytes": 5986,
+    "repo": "Aegis-Omega/formal-conjectures",
+    "pin": "8686704f8d90853d5e0934d28db7964420ba847b"
+  }
+]
