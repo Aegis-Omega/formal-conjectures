@@ -32,12 +32,21 @@ from pathlib import Path
 import hashlib
 import sys
 base, wbase, src, compat, local, overlay, win, orderpath, out = map(Path, sys.argv[1:])
-roots=(base, wbase, src, compat, local, overlay, win)
+# Later roots win: source-bound COMPAT/SRC repairs take precedence over the
+# local exact-upstream copies, which take precedence over the AEGIS bases.
+roots=(base, wbase, local, src, compat, overlay, win)
 groups=[{p.stem:p for p in r.glob("*.lean")} for r in roots]
 allmods=set().union(*(set(g) for g in groups))
+def header_only(p):
+    text=p.read_text(encoding="utf-8").lstrip("\N{ZERO WIDTH NO-BREAK SPACE} \t\r\n")
+    if not text.startswith("/-"): return not text.strip()
+    end=text.find("-/",2)
+    return end >= 0 and not text[end+2:].strip()
 def chosen(n):
     for group in reversed(groups):
-        if n in group: return group[n]
+        if n in group:
+            if header_only(group[n]): raise SystemExit(f"RH_WINDOW_SOURCE_HEADER_ONLY:{n}:{group[n]}")
+            return group[n]
     raise SystemExit(f"RH_WINDOW_SOURCE_MISSING:{n}")
 done=set()
 active=set()
