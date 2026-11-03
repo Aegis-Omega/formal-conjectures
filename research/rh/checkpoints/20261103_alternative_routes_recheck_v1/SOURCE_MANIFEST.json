@@ -1,0 +1,43 @@
+{
+  "source_parent": "e9403b9ff441d051834ea4476e2937fd05abad87",
+  "aegis_sources": [
+    {
+      "blob": "4df8893f13319ce78aa3f336c298823c17f909bc",
+      "sha256": "ba2a783e24428beb65f278b8ec92610a8fffba1f3395fca5052ac408b4355ad5",
+      "provenance": {
+        "commit": "5213510f3a6d5be92db4e334546272ab2a08c024",
+        "path": "AegisRH/Li/RHLiWeightedPairedTargetV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-li-weighted-paired-target-v1"
+      }
+    },
+    {
+      "blob": "1beed9eb71a4d40b921777b277e4ee7257c1e104",
+      "sha256": "fb7c92cc774bc54895b41f7998ee2eecd759e78a7353715ae5a4282d58f29cd8",
+      "provenance": {
+        "commit": "805703116e4eb312899972d55e13f15cefbc569c",
+        "path": "AegisRH/Li/RHLiPairedLaurentV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-li-paired-laurent-v1"
+      }
+    },
+    {
+      "blob": "f5bdb087535964b881403e5ad68565f0cdc4ea32",
+      "sha256": "f230e64bcbe4bb6fe089756d0c3281fd2a5131d4d4591cf25f1c6117e856a827",
+      "provenance": {
+        "commit": "f081f2ffccbb8e25a855c04211f6e97bc9f94b28",
+        "path": "research/rh/aegis_source_4d7578e/lean/WeilPairedHadamardTsumFusionV1.lean.src",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-actual-krein-factor-join-v1"
+      }
+    }
+  ],
+  "provider": {
+    "repository": "nicholasbulka/li-criterion-rh-equivalence-lean",
+    "commit": "35df682f3b709ffe5fbcfdd452dfa964bd622b87",
+    "XiGrowth_blob": "dd18b3bd669bd380c5754af69934769b45ac448a",
+    "HadamardBridge_blob": "088eef5ee66da37630ef41b873656a7b3726c41d"
+  },
+  "fresh_full_provider_replay": false,
+  "rh_proven": false
+}

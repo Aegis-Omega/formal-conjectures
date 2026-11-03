@@ -1,0 +1,12 @@
+{
+  "schema": "AEGIS_GENERIC_LI_BRIDGE_FALSIFIER_V1",
+  "checker_sha256": "0b48a576390f9930501908c532251db8271057a18dfcd035218af57854253d17",
+  "exact_arithmetic": "Python fractions.Fraction; no floating-point decisions",
+  "falsified": "generic analytic-properties producer of all Li signs",
+  "actual_zeta_redefined": false,
+  "provider_criterion_refuted": false,
+  "full_analytic_kernel_verification": false,
+  "rh_proven": false
+}
+b= 1 positive prefix= 5 negative Li index= 6
+b= 20 positive prefix= 124 negative Li index= 125

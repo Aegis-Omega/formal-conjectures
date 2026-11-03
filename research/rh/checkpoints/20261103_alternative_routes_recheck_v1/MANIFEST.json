@@ -1,0 +1,95 @@
+{
+  "schema": "AEGIS_ALTERNATIVE_ROUTES_PUBLIC_MANIFEST_V1",
+  "source_parent": "e9403b9ff441d051834ea4476e2937fd05abad87",
+  "source_results_created": "2026-11-02",
+  "published_date": "2026-11-03",
+  "novelty": "NOT_CLAIMED; USER_REPORTS_PRIOR_COVERAGE",
+  "files": [
+    {
+      "path": "EVIDENCE.json",
+      "bytes": 753,
+      "sha256": "9d2696fa25451da4718fb4ce4db1ea8112a985dc34fc003ef6efa9265f62599a"
+    },
+    {
+      "path": "EXACT_REPLAY.log",
+      "bytes": 530,
+      "sha256": "d8217a28f7d10057f774dcc417997cd0ac5dde4dbf459dd8d9b3f727ec7e976f"
+    },
+    {
+      "path": "HANDOFF_SUZUKI_NEXT.md",
+      "bytes": 3889,
+      "sha256": "fc14acd0c50d2297708ddaab3d9822acb09d824d0105a13eefc15bd775fbff63"
+    },
+    {
+      "path": "INTEGER_REPLAY_RECEIPT.json",
+      "bytes": 768,
+      "sha256": "1ddc00a91b7737109f92fded7e529e657ff0ea788d34c0a9d160e3d2733e27cd"
+    },
+    {
+      "path": "LEANCHECKER_FRESH.log",
+      "bytes": 43,
+      "sha256": "03fab09985d75fa095a9ff9e148b3f7ce5475481efcb20a38922d8125a434ee1"
+    },
+    {
+      "path": "LEAN_TRUST0.log",
+      "bytes": 488,
+      "sha256": "47e9081e05bb6c1c3610f52ad1e9af70b3c503dccd07bd38abedd3c0c6d2ad78"
+    },
+    {
+      "path": "LI_ROUTE_ATTACK.md",
+      "bytes": 5785,
+      "sha256": "e2a74a085f3514dc941fda15149c1f0952cfa8ea98904a73f329cbd7eea1ac15"
+    },
+    {
+      "path": "LiQuartetArithmetic.lean",
+      "bytes": 1266,
+      "sha256": "36b16b6227d9fd9d4c486e6bf827a49e045bbed4c4590694afe8881b6836ae35"
+    },
+    {
+      "path": "POSITIVE_EULER_PRODUCT_FALSIFIER.md",
+      "bytes": 4883,
+      "sha256": "7f75a3478f04e1d42cea8d5b49415eb126e67bc29d85c4084f9683c3320e987c"
+    },
+    {
+      "path": "POSITIVE_KERNEL_DIAGNOSTIC.json",
+      "bytes": 1036,
+      "sha256": "e26e4e6a99d7abc15621aa829ce53cdfccc8d0c67b8215001f79b0337fb7d016"
+    },
+    {
+      "path": "POSITIVE_KERNEL_DIAGNOSTIC.log",
+      "bytes": 1036,
+      "sha256": "e26e4e6a99d7abc15621aa829ce53cdfccc8d0c67b8215001f79b0337fb7d016"
+    },
+    {
+      "path": "POSITIVE_MELLIN_KERNEL_FALSIFIER.md",
+      "bytes": 6813,
+      "sha256": "fe11ccded8f162c0baa1bbcd9c51b5d026f5f39f4284a5a8db91464c8579172e"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 1734,
+      "sha256": "d064925f79a0b8b17f0dd6bda0b83429a1998431fb04789aedbe7fd88955a070"
+    },
+    {
+      "path": "fresh_compile/LEAN_TRUST0.log",
+      "bytes": 488,
+      "sha256": "47e9081e05bb6c1c3610f52ad1e9af70b3c503dccd07bd38abedd3c0c6d2ad78"
+    },
+    {
+      "path": "replay/EXACT_COUNTEREXAMPLE_RECEIPT.json",
+      "bytes": 130281,
+      "sha256": "04cc37de7096786c51c4bdccb35bfa7a135fcc18db95141a3ec63968989d7788"
+    },
+    {
+      "path": "verify_counterexample.py",
+      "bytes": 3630,
+      "sha256": "0b48a576390f9930501908c532251db8271057a18dfcd035218af57854253d17"
+    },
+    {
+      "path": "verify_positive_kernel_diagnostic.py",
+      "bytes": 1625,
+      "sha256": "510e9892e46155802b250ce5af16f45dea8cbc2a730ac01228f9df1f8813335b"
+    }
+  ],
+  "rh_proven": false
+}
