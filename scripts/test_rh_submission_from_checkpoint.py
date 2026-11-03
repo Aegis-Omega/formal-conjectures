@@ -68,14 +68,14 @@ class SubmissionCheckpointTests(unittest.TestCase):
             git("config", "user.name", "Local RH Gate Test")
             git("config", "user.email", "local-rh-gate@example.invalid")
             source = root / "Producer.lean"
-            source.write_text("theorem Producer : True := by trivial\\n")
+            source.write_text("theorem Producer : True := by trivial\n")
             git("add", "Producer.lean")
             git("commit", "-qm", "record original source")
             record = {"source": "Producer.lean", "sha256": sha256(source)}
             self.assertEqual(tracked_source(root, record, "AEGIS.Producer"),
                              ("Producer.lean", 1))
 
-            source.write_text("theorem Producer : True := by exact True.intro\\n")
+            source.write_text("theorem Producer : True := by exact True.intro\n")
             record["sha256"] = sha256(source)
             self.assertIsNone(tracked_source(root, record, "AEGIS.Producer"))
 
