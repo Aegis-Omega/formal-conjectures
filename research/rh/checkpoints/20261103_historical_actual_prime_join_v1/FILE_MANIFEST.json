@@ -1,0 +1,50 @@
+{
+  "schema": "AEGIS_SOURCE_MANIFEST_V1",
+  "files": [
+    {
+      "path": "ACTUAL_PRIME_SOURCE_COMPOSITION.md",
+      "bytes": 12197,
+      "sha256": "845640252343f65d4cc792bf76f9c7160279123556339bf4a200a115f60b156b"
+    },
+    {
+      "path": "COMPILER_SOURCE_RECOVERY.json",
+      "bytes": 2108,
+      "sha256": "8888edff1eee3d701409a2fd3bfc7f3f2e20c3304c6d2726e65457e9c1f0f4ed"
+    },
+    {
+      "path": "COMPOSITION_CHECKPOINT.md",
+      "bytes": 5802,
+      "sha256": "17c53a1abc5e681821f82c00b83cf2fc2cc8b0e2c8c83abd226150488a42ad5c"
+    },
+    {
+      "path": "HISTORICAL_COMPOSITION_FINDING.md",
+      "bytes": 8329,
+      "sha256": "5098397ddc4e475e5c686f7fc6839632af02fef2cdc962ce59f1c6043a4cbf7c"
+    },
+    {
+      "path": "HISTORICAL_COMPOSITION_SOURCE_SCOPE.json",
+      "bytes": 5640,
+      "sha256": "f2689491700d16cc3362708818593f55a0a357620bb7ab8ce0cde09b135a4a57"
+    },
+    {
+      "path": "HISTORICAL_PYTHON_REVIEW.md",
+      "bytes": 16875,
+      "sha256": "3d92b8735c78c48049ee97a0da78695cdb35c0f86310ecdd88709accc607734f"
+    },
+    {
+      "path": "PRIME_JOIN_DIAGNOSTIC.json",
+      "bytes": 3405,
+      "sha256": "f009c17cb63d2f6a3de6b4f8da6d69115119e739ba6e4f3d861cced475dafda4"
+    },
+    {
+      "path": "RH_FINAL_EVIDENCE.json",
+      "bytes": 1217,
+      "sha256": "3608f4bf73f6a847769ea843879e3e2bfadd711d611d50828861c5ace932b118"
+    },
+    {
+      "path": "replay_actual_prime_join.py",
+      "bytes": 4828,
+      "sha256": "3633f4380bff6abcf10da87dda2bffa458a58b07771c9474d07ed309ed331762"
+    }
+  ]
+}
