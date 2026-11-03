@@ -69,10 +69,17 @@ def tracked_source(root: Path, record: dict, identifier: str) -> tuple[str, int]
     rel = Path(path)
     if rel.is_absolute() or ".." in rel.parts or not (root / rel).is_file():
         return None
-    git = subprocess.run(
-        ["git", "cat-file", "-e", f"HEAD:{rel.as_posix()}"],
-        cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if git.returncode != 0 or sha256(root / rel) != record.get("sha256"):
+    # A manifest hash alone is not evidence that the working source came
+    # from the recorded HEAD. Bind the actual bytes to the committed blob.
+    committed_blob = subprocess.run(
+        ["git", "rev-parse", "--verify", f"HEAD:{rel.as_posix()}"],
+        cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    working_blob = subprocess.run(
+        ["git", "hash-object", "--", rel.as_posix()],
+        cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    if (committed_blob.returncode != 0 or working_blob.returncode != 0
+            or committed_blob.stdout.strip() != working_blob.stdout.strip()
+            or sha256(root / rel) != record.get("sha256")):
         return None
     name = identifier.rsplit(".", 1)[-1]
     pattern = re.compile(r"^\s*(?:(?:noncomputable|private|protected)\s+)*"
