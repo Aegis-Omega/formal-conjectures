@@ -121,6 +121,23 @@ for d, strict, origin in [('research/rh/aegis_math', True, 'aegis-math'),
 # A source imported as AEGISOverlay.X must produce AEGISOverlay/X.olean.
 for p in sorted(Path('AEGISOverlay').glob('*.lean')):
     src.setdefault('AEGISOverlay.' + p.stem, (p, False, None, 'overlay-qualified'))
+# Reuse the SAME pinned AEGIS source checkout as the established cofinal Schur replay.
+# Only the L118 actual fine-Gram root needs these additional historical sources.
+if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
+    aegis = Path('.aegis/sovereign-omega-v2/formal/bridges/lean')
+    expected_aegis = '2c3d041b633147ec97c7ef753aa9d157a47bb9f5'
+    actual_aegis = subprocess.run(['git', '-C', '.aegis', 'rev-parse', 'HEAD'],
+        capture_output=True, text=True).stdout.strip()
+    if actual_aegis != expected_aegis or not aegis.is_dir():
+        raise SystemExit('AEGIS_SOURCE_HEAD_NOT_PINNED ' + actual_aegis)
+    for source in sorted(aegis.glob('*.lean')):
+        src.setdefault(source.stem, (source, False, None, 'aegis-pinned-v13'))
+    # Reuse historical Krein sources from this checkout, not generated stand-ins.
+    for d in ('research/rh/krein_reflective_v1', 'research/rh/m8_kernel_v1',
+              'research/rh/finite_m8_v1', 'research/rh/krein_L105_v1',
+              'research/rh/krein_ring_v1'):
+        for source in sorted(Path(d).glob('*.lean')):
+            src.setdefault(source.stem, (source, False, None, 'existing-krein'))
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):
