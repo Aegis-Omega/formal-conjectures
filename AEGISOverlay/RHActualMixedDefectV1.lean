@@ -803,6 +803,57 @@ theorem distinct_logCross_norm_le_mean_energy
             logLift_energy_eq_packet_energy]
           ring
 
+/-- Genuine reciprocal von Mangoldt sample for *two different*
+smooth packets.  The multiplicative/logarithmic identity and the
+independent-packet mean-energy bound are both source-proved.  No
+same-mother hypothesis and no prime-tail truncation are used here. -/
+theorem distinct_reciprocal_mixed_norm_le_mean_energy_v1
+    (p q : WeilCompactSmoothGV1) (m : ℕ) (hm : 0 < m) :
+    ‖(1 / (m : ℂ)) * mixed p q ((m : ℝ)⁻¹)‖ ≤
+      Real.exp (-Real.log (m : ℝ) / 2) *
+        ((energy p.1 + energy q.1) / 2) := by
+  have hmpos : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  let α : ℝ := Real.exp (-Real.log (m : ℝ) / 2)
+  have hα0 : 0 ≤ α := by dsimp [α]; positivity
+  have ht := logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
+  have ht' :
+      (α : ℂ) * mixed p q ((m : ℝ)⁻¹) =
+        logCrossV28 p q (-Real.log (m : ℝ)) := by
+    dsimp [α]
+    simpa only [Real.exp_neg, Real.exp_log hmpos] using ht.symm
+  have hnormeq := congrArg norm ht'
+  have hnormα : ‖(α : ℂ)‖ = α := by
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hα0]
+  have hprod :
+      α * ‖mixed p q ((m : ℝ)⁻¹)‖ ≤
+        (energy p.1 + energy q.1) / 2 := by
+    have heq :
+        α * ‖mixed p q ((m : ℝ)⁻¹)‖ =
+          ‖logCrossV28 p q (-Real.log (m : ℝ))‖ := by
+      simpa only [norm_mul, hnormα] using hnormeq
+    rw [heq]
+    exact distinct_logCross_norm_le_mean_energy p q _
+  have hinv : (m : ℝ)⁻¹ = α * α := by
+    dsimp [α]
+    rw [← Real.exp_add]
+    have harg :
+        -Real.log (m : ℝ) / 2 + -Real.log (m : ℝ) / 2 =
+          -Real.log (m : ℝ) := by ring
+    rw [harg, Real.exp_neg, Real.exp_log hmpos]
+  rw [norm_mul]
+  have hscalar : ‖(1 / (m : ℂ))‖ = (m : ℝ)⁻¹ := by
+    simp [one_div]
+  rw [hscalar]
+  change (m : ℝ)⁻¹ * ‖mixed p q ((m : ℝ)⁻¹)‖ ≤
+    α * ((energy p.1 + energy q.1) / 2)
+  calc
+    (m : ℝ)⁻¹ * ‖mixed p q ((m : ℝ)⁻¹)‖ =
+        α * (α * ‖mixed p q ((m : ℝ)⁻¹)‖) := by
+          rw [hinv]
+          ring
+    _ ≤ α * ((energy p.1 + energy q.1) / 2) :=
+      mul_le_mul_of_nonneg_left hprod hα0
+
 /-- The actual separated ARCH term for arbitrary distinct fine local
 Weil atoms, with an exact gap threshold log 2 and no postulated cross
 correlation bound. The sum of energies is explicit. -/
@@ -2073,6 +2124,7 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_norm
 
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_logCross_norm_le_mean_energy
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_reciprocal_mixed_norm_le_mean_energy_v1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_norm_le
 
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_mixed_one_zero
