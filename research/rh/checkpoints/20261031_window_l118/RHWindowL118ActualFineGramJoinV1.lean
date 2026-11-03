@@ -18,6 +18,7 @@ import RHWindowL118ExhaustionV1
 import AEGISOverlay.RHActualUniversalFineGramV1
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import RHKreinMultiplicativeTransportV1
+import AEGISOverlay.RHPrimeFreeRecompositionJoinV1
 
 /-!
 # AEGIS Ω: certified 11/8 window → actual finite Weil Gram signed budget
@@ -136,8 +137,41 @@ theorem actual_krein_two_block_signed_budget_on_l118_window
   rw [hzero] at hzero_nonnegative
   exact hzero_nonnegative
 
+
+/-- Combined genuine Weil receipt for the SAME source in an L118 window:
+construct fine actual moment-zero packets, certify all available log-prime-free
+pair estimates, AND pay the full signed mixed defect including resonances.
+The first two certificates alone do not prove the last one globally. -/
+theorem actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : L ≤ 11 / 16)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∀ i j,
+        AEGIS.RHPrimeFreeRecompositionJoinV1.FineLogFreeGap
+          |center j - center i| →
+        ‖B (gs i) (gs j)‖ ≤
+          (676 / 65536 : ℝ) *
+            (energy (gs i).1 + energy (gs j).1)) ∧
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, _hgram, hfree⟩ :=
+    AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_gram_with_log_free_pairs
+      g hm
+  refine ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, hfree, ?_⟩
+  exact every_actual_finite_gram_sharp_signed_budget_on_l118_window
+    g hm L hL hw gs hpacket
+
 end AEGIS.RHWindowL118ActualFineGramJoinV1
 
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_signed_fine_gram_on_l118_window
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.every_actual_finite_gram_sharp_signed_budget_on_l118_window
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_krein_two_block_signed_budget_on_l118_window
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window
