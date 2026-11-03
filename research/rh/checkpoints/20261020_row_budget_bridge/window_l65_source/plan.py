@@ -117,6 +117,10 @@ for d, strict, origin in [('research/rh/aegis_math', True, 'aegis-math'),
                           ('research/rh/moment_killer_v1', True, 'moment-killer'),
                           ('AEGISOverlay', False, 'overlay')]:
     for p in sorted(Path(d).glob('*.lean')): src.setdefault(p.stem, (p, strict, None, origin))
+# Preserve the actual qualified Lean module names alongside legacy bare imports.
+# A source imported as AEGISOverlay.X must produce AEGISOverlay/X.olean.
+for p in sorted(Path('AEGISOverlay').glob('*.lean')):
+    src.setdefault('AEGISOverlay.' + p.stem, (p, False, None, 'overlay-qualified'))
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):
