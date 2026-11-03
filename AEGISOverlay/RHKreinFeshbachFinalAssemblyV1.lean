@@ -18,6 +18,8 @@ import RHKreinMultiplicativeTransportV1
 import RHCofinalSchurAdapterV1
 import RHRestrictedWeilBridgeV13
 import Mathlib.Tactic
+import AEGISOverlay.RHSignedPrimeChebyshevFiniteBridgeV6
+import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 
 /-!
 # AEGIS Ω: actual Krein decomposition → actual Feshbach bound → canonical RH
@@ -32,6 +34,7 @@ The only open analytic input is explicitly named below. No assumption is
 silently supplied and no finite-window certificate is promoted to all windows.
 -/
 
+open scoped BigOperators
 set_option autoImplicit false
 noncomputable section
 
@@ -120,8 +123,58 @@ theorem riemannHypothesis_of_krein_feshbach_producer_v1
   AEGIS.RHRestrictedWeilBridgeV13.restricted_weil_criterion_kernel_bridge_v13
     (universal_of_krein_feshbach_producer_v1 h)
 
+
+/-! ## Exact cross-carrier reuse: Abel/Chebyshev → signed-prime → RH → Krein/Weil
+
+The finite Abel-Chebyshev result V6 and the signed-prime/zero-kernel V5
+are consumed by their exact theorem names. The resulting canonical RH
+criterion is transported into the EXISTING actual finite mixed Gram carrier.
+This joins two previously separate routes without new axioms, surrogate
+forms, artificial reconstruction hypotheses, or extra certificate fields.
+V6's two analytic closure inputs and the genuine prime-only growth input
+remain explicit; this source composition alone is not unconditional RH.
+-/
+
+/-- The original V6 and V5 theorem statements compose at the SAME fixed
+detecting packet; no new dictionary or named mathematical assumption. -/
+theorem riemannHypothesis_of_existing_abel_prime_chain_v1
+    (hExtend :
+      AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.EventuallyChebyshevFiniteIntegralExtendsV6)
+    (hIntegrable :
+      AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.EventuallyArithmeticConvolutionsIntegrableV6)
+    (hPrime : AEGIS.RHSubexpBoundedPerturbationV1.SubexponentialAtTopV1
+      (AEGIS.RHPrimeOnlyGrowthBridgeV1.primeOnlyOrbitV1
+        AEGIS.RHFixedPacketFrontierV1.detectingPacket)) :
+    RiemannHypothesis :=
+  AEGIS.RHSignedPrimeActualKernelTailV5.riemannHypothesis_of_signed_dictionary_and_prime_growth
+    (AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.eventual_signed_prime_equals_combined_of_analytic_closure
+      hExtend hIntegrable) hPrime
+
+/-- SOURCE-COMPATIBLE cross-route handoff:
+the prime/Abel carrier fills the exact *signed actual Weil Gram* interface
+already used by the unconditional Krein fine-partition constructor.
+The only assumptions are inherited unchanged from the prior V6/V5 route. -/
+theorem actual_fine_signed_gram_of_abel_prime_v1
+    (hExtend :
+      AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.EventuallyChebyshevFiniteIntegralExtendsV6)
+    (hIntegrable :
+      AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.EventuallyArithmeticConvolutionsIntegrableV6)
+    (hPrime : AEGIS.RHSubexpBoundedPerturbationV1.SubexponentialAtTopV1
+      (AEGIS.RHPrimeOnlyGrowthBridgeV1.primeOnlyOrbitV1
+        AEGIS.RHFixedPacketFrontierV1.detectingPacket)) :
+    ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+      ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+        g = AEGIS.RHGramExpansionV13.packetSum (fun _ => (1 : ℂ)) gs ∧
+        AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+          -(∑ i, (AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) :=
+  AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget.mp
+    (riemannHypothesis_of_existing_abel_prime_chain_v1 hExtend hIntegrable hPrime)
+
 end AEGIS.RHKreinFeshbachFinalAssemblyV1
 
 #print axioms AEGIS.RHKreinFeshbachFinalAssemblyV1.universal_of_krein_signed_budget_v1
 #print axioms AEGIS.RHKreinFeshbachFinalAssemblyV1.universal_of_krein_feshbach_producer_v1
 #print axioms AEGIS.RHKreinFeshbachFinalAssemblyV1.riemannHypothesis_of_krein_feshbach_producer_v1
+
+#print axioms AEGIS.RHKreinFeshbachFinalAssemblyV1.riemannHypothesis_of_existing_abel_prime_chain_v1
+#print axioms AEGIS.RHKreinFeshbachFinalAssemblyV1.actual_fine_signed_gram_of_abel_prime_v1
