@@ -1,9 +1,14 @@
 # Copyright 2026 The Formal Conjectures Authors.
 # SPDX-License-Identifier: Apache-2.0
 """Regression tests for the exact-head RH submission checkpoint gate."""
+import subprocess
+import tempfile
 import unittest
+from pathlib import Path
+
 from rh_submission_from_checkpoint import (
     ALLOWED_AXIOMS, audited_axioms, closed_candidates, make_probe,
+    sha256, tracked_source,
 )
 
 
@@ -48,6 +53,36 @@ class SubmissionCheckpointTests(unittest.TestCase):
         self.assertIn("#print axioms AEGIS.RealProof", s)
         with self.assertRaises(ValueError):
             make_probe("AEGISOverlay.Valid\naxiom False", "AEGIS.RealProof")
+
+    def test_tracked_source_requires_exact_head_blob(self):
+        # A changed source whose manifest was also updated is NOT an
+        # exact-head source, even though HEAD still contains that path.
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+
+            def git(*args):
+                subprocess.run(["git", *args], cwd=root, check=True,
+                               stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+            git("init", "-q")
+            git("config", "user.name", "Local RH Gate Test")
+            git("config", "user.email", "local-rh-gate@example.invalid")
+            source = root / "Producer.lean"
+            source.write_text("theorem Producer : True := by trivial\\n")
+            git("add", "Producer.lean")
+            git("commit", "-qm", "record original source")
+            record = {"source": "Producer.lean", "sha256": sha256(source)}
+            self.assertEqual(tracked_source(root, record, "AEGIS.Producer"),
+                             ("Producer.lean", 1))
+
+            source.write_text("theorem Producer : True := by exact True.intro\\n")
+            record["sha256"] = sha256(source)
+            self.assertIsNone(tracked_source(root, record, "AEGIS.Producer"))
+
+            git("add", "Producer.lean")
+            git("commit", "-qm", "record updated source")
+            self.assertEqual(tracked_source(root, record, "AEGIS.Producer"),
+                             ("Producer.lean", 1))
 
     def test_only_named_declarations_axioms_count(self):
         logs = (
