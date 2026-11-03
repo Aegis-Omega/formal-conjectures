@@ -1,0 +1,42 @@
+{
+  "rh_proven": false,
+  "final_theorem": null,
+  "source_head": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "lean_version": "4.33.1",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "axioms": null,
+  "axiom_audit": "NO_NEW_FINAL_THEOREM_TO_AUDIT",
+  "new_analytic_Lean_replay": "NOT_RUN",
+  "positive_written_compositions": [
+    {
+      "path": "direct_eleven/DIRECT_EXISTING_SOURCE_COMPOSITION.md",
+      "constant": "1203957/1136000",
+      "domain": "all independent legal shapes within the specified eleven translated fine windows, every complex coefficient vector",
+      "independent_review": "direct_eleven/INDEPENDENT_DIRECT_ELEVEN_REVIEW.md"
+    },
+    {
+      "path": "signed_sectors/ACTUAL_LOG3_INDEPENDENT_SHAPES.md",
+      "constant": "10517/9600",
+      "domain": "two independent legal fine shapes at exact gap 2log3; signed prime inner product retained"
+    },
+    {
+      "path": "signed_sectors/SIGNED_SECTOR_COMPOSITION.md",
+      "domain": "full phase coupling and existing per-packet mixed-budget witness for every packet in the same V_11(a) space",
+      "stronger_margin_available": "1203957/1136000"
+    }
+  ],
+  "previous_Suzuki_checkpoint_unchanged": true,
+  "all_routes_exhausted": false,
+  "new_RH_equivalence": false,
+  "one_selected_next_obligation": {
+    "consumer": "AEGIS.RHActualUniversalFineGramV1.riemannHypothesis_of_one_actual_mixed_budget_per_packet",
+    "mathematical_statement": "For every legal moment-zero packet g, produce one actual finite reconstruction with the source diagonal bounds and actualMixedDefect <= (5671/3200)*sum_i energy(gs_i).",
+    "producer_found_here": "proved for the exact specified nonlocal families; no producer for arbitrary g obtained in these source compositions",
+    "scope_note": "selected sufficient OR route; not a unique required architecture"
+  },
+  "open_obligations": [
+    "The source-bound per-packet budget has not been supplied for every legal packet."
+  ],
+  "independent_replays": [],
+  "verification_note": "New results are written analytic/source proofs with actual separate agent reviews. No numerical or kernel replay of a new analytic adapter was performed."
+}
