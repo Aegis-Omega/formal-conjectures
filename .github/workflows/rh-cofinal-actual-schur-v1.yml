@@ -695,6 +695,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenLatticeV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
+          # Exact named independent-shape consumer: make its axiom output an explicit CI gate.
+          grep -F "AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_coercive_of_actual_cross" \
+            evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHBaguaActualWeilV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHBaguaActualWeilV1.log
