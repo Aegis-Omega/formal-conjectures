@@ -35,7 +35,11 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
             'AegisMath.Criterion.final_sign_iff_rh', 'AegisMath.Criterion.no_zero_re_gt_half_of_final_sign',
             'AegisMath.MomentKiller.exists_momentKiller_packet', 'AegisMath.MomentKiller.exists_momentKiller_eq',
             'AegisMath.Obstructions.no_common_positive_width',
-            'AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative']
+            'AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative',
+    'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_signed_fine_gram_on_l118_window',
+    'AEGIS.RHWindowL118ActualFineGramJoinV1.every_actual_finite_gram_sharp_signed_budget_on_l118_window',
+    'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_krein_two_block_signed_budget_on_l118_window',
+    'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 state = json.loads(Path('.lake/real_status.json').read_text())
 audits, bad, sorries = {}, [], []
