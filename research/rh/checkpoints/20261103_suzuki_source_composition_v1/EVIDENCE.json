@@ -1,0 +1,47 @@
+{
+  "schema": "AEGIS_SUZUKI_SOURCE_COMPOSITION_V1",
+  "rh_proven": false,
+  "canonical_final_theorem": null,
+  "new_lean_proof_terms": [],
+  "status_dimensions": {
+    "primary_sources": "RECOVERED_AND_SELECTED_SECTIONS_READ",
+    "literature_local_spectral_theorems": "PROVED_UNDER_STATED_HYPOTHESES_IN_SOURCE",
+    "new_derivative_identity": "WRITTEN_DERIVATION_WITH_ARBITRARY_T_SCOPE",
+    "derivative_finite_cross_checks": "OUTWARD_BALLS",
+    "independent_mpmath": "DIAGNOSTIC_ONLY",
+    "lean_replay": "NOT_RUN",
+    "independent_person_review": "NOT_RUN",
+    "finite_height_external_certificate": "SOURCE_READ_REPLAY_NOT_RUN",
+    "old_AEGIS_Suzuki_extraction": "NOT_LOCATED_IN_SEARCHED_SCOPE",
+    "RH_composition": "NOT_CLOSED"
+  },
+  "preserved_previous_commit": "4af47485db18d261974e75a46cfa2f7473bf6a68",
+  "one_selected_open_mathematical_producer": {
+    "statement": "exists real T>0, forall real t>=T, Psi_0(t)>=0",
+    "object": "exact Suzuki 2206.03682v4 equation (1.1)",
+    "known_consumer": "existing Theorem 11.1",
+    "status": "NO_UNCONDITIONAL_PRODUCER_RECOVERED_IN_REVIEWED_COMPOSITIONS",
+    "unsearched_sources_not_excluded": true
+  },
+  "mathematical_attempts": [
+    {
+      "route": "finite-a real-zero spectral characteristic functions",
+      "reused": "Suzuki 2606.09096v3 Theorem 1.5",
+      "composition_failure": "Corollary 1.6 needs unproved normalized locally uniform limit; Section 7 assumes positivity"
+    },
+    {
+      "route": "arithmetic shift omega>=1/2 to omega=0",
+      "reused": "Suzuki 2206.03682v4 Section 11",
+      "composition_failure": "inverse transform has negative integral coefficient; actual-function sign estimate not supplied"
+    },
+    {
+      "route": "finite-height zeros and graded density tail",
+      "reused": "Mittermeier v2 Proposition 6.6",
+      "composition_failure": "positive-exponent tail envelope exceeds bounded certified contribution at finite t; source retains infinite tail"
+    }
+  ],
+  "no_unique_global_Schur_bottleneck_claim": true,
+  "no_new_equivalence_formalized": true,
+  "private_source_content_published": false,
+  "whole_corpus_semantic_audit_complete": false
+}

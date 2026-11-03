@@ -1,0 +1,44 @@
+{
+  "parent_commit": "4af47485db18d261974e75a46cfa2f7473bf6a68",
+  "repository": "Aegis-Omega/formal-conjectures",
+  "branch": "fix/rh-live-evidence-provenance-20261024",
+  "publication_scope": "own additive audit and checker; no private handoffs or full third-party sources",
+  "runtime": {
+    "python": "3.12.14",
+    "python_flint": "0.9.0"
+  },
+  "public_sources": [
+    {
+      "file": "SUZUKI_2206_03682v4.pdf",
+      "url": "https://export.arxiv.org/pdf/2206.03682v4.pdf",
+      "bytes": 433447,
+      "sha256": "eabccec3c2bfee2eb12077181b564e508270f80698f4a8c64ccf105b30119f41"
+    },
+    {
+      "file": "SUZUKI_2606_09096v3.pdf",
+      "url": "https://export.arxiv.org/pdf/2606.09096v3.pdf",
+      "bytes": 491037,
+      "sha256": "75b8512f7081bd69152781c7a20f3b5dad4374fe0dfc80f3014f9223f044c81a"
+    },
+    {
+      "file": "261021_Mittermeier_RH_Zero_Side_Certificate_Companion_v2.pdf",
+      "url": "https://zenodo.org/api/records/23544568/files/261021_Mittermeier_RH_Zero_Side_Certificate_Companion_v2.pdf/content",
+      "bytes": 695101,
+      "sha256": "3e1e5042de02808da11a956916a994ec2c769fd83067eca00e5ba02a0f26859c"
+    },
+    {
+      "file": "261021_Mittermeier_RH_Zero_Side_Certificate_Companion_v2_repro.zip",
+      "url": "https://zenodo.org/api/records/23544568/files/261021_Mittermeier_RH_Zero_Side_Certificate_Companion_v2_repro.zip/content",
+      "bytes": 69451,
+      "sha256": "a2df7435fac43fc5af80c9b3aacfbf6655d041d7541785aa71f5bcb6fd23ba90"
+    }
+  ],
+  "rh_proven": false,
+  "aegis_comparison": {
+    "commit": "8686704f8d90853d5e0934d28db7964420ba847b",
+    "path": "research/rh/checkpoints/20261101_lambda_lab_s1/certify.py",
+    "local_qwhp_sha256": "be519c5118e4c84e02178fc841e720574032f0881a51504a6b1eef234cbb8ff4",
+    "local_qwhp_remote_path": "NOT_REESTABLISHED_IN_THIS_CONTINUATION",
+    "convention": "angular Fourier, full digamma and -log(pi), no older printed derivative constant"
+  }
+}
