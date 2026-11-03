@@ -35,6 +35,15 @@ theorem exact_margin :
 
 theorem positive_margin : 0 < (394709 : Nat) := by decide
 
+/- The stronger independent-shape argument pays each off-diagonal cost
+only once. Keep the original factor-two certificate above unchanged, and
+kernel-check the improved exact rational margin separately. -/
+theorem exact_direct_independent_margin :
+    (5671 : Nat) * 355 = 25289 * 32 + 1203957 := by decide
+
+theorem positive_direct_independent_margin :
+    0 < (1203957 : Nat) := by decide
+
 theorem improves_previous_weights :
     (732143 : Nat) * 1136000 < 394709 * 2107520 := by decide
 
@@ -46,4 +55,6 @@ end AEGIS.WeightedIndependentShapeArithmetic
 #print axioms AEGIS.WeightedIndependentShapeArithmetic.maximum_attained
 #print axioms AEGIS.WeightedIndependentShapeArithmetic.exact_margin
 #print axioms AEGIS.WeightedIndependentShapeArithmetic.positive_margin
+#print axioms AEGIS.WeightedIndependentShapeArithmetic.exact_direct_independent_margin
+#print axioms AEGIS.WeightedIndependentShapeArithmetic.positive_direct_independent_margin
 #print axioms AEGIS.WeightedIndependentShapeArithmetic.improves_previous_weights
