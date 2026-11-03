@@ -11,6 +11,39 @@ Use these detailed guides when the task needs them:
 - [PROOFS.md](PROOFS.md) for proofs and `formal_proof` claims
 - [STATEMENTS.md](STATEMENTS.md) for adding and reviewing statements
 
+## AEGIS RH proof research preflight (AEGISOverlay, AegisRH, research/rh)
+
+For AEGIS-related RH work, first inspect the effective repository instructions,
+exact Git head, pinned Lean/Mathlib versions, existing caches and prior verified
+checkpoints. Search the actual source trees of formal-conjectures, AEGIS-OMEGA,
+research-lanes, and available Library archives before introducing a new theorem
+or declaring a dependency absent. Deduplicate byte-identical sources by Git
+blob; never silently substitute different historical versions of a module.
+
+Model the RH proof landscape as an **AND/OR graph**: alternative sufficient
+routes are OR branches, while hypotheses jointly needed by one theorem form
+an AND branch. Record each exact proposition, quantifier domain, imports,
+source SHA, producer, consumer, and kernel status. Before choosing any alleged
+final missing premise, test whether it is route-only, already proved elsewhere,
+stronger than needed, contradicted by a known source counterexample, or truly
+open. An unavailable compiler, cache, CI runner, import, or unmerged branch
+is not a mathematical disproof.
+
+Reuse complete existing proofs and compose source-backed results across Weil,
+CvS/tau, Krein/Feshbach, Abel/Suzuki/Bombieri, Li/Hadamard, and Coq whenever
+their types permit. Do not create new hcross/hselect/hprime-style assumptions
+just to obtain a conditional terminal theorem. If one chosen route fails,
+preserve its valid results and continue checking viable alternatives.
+
+Validate changed targets incrementally with pinned Lean/Mathlib and existing
+checkpoints; do not launch full CI merely to diagnose one import. Distinguish
+mathematical truth, formal theorem statement, kernel replay, CI status, and
+protected-main integration. Claim unconditional RH only with the exact
+canonical theorem term, audited axioms, and reproducible kernel evidence.
+No protected-main merge, production change, credential access, or new spending
+without explicit authorization. Never stop at a status report when an
+authorized, executable source composition remains available.
+
 ## Start with existing code
 
 Follow the style of an existing file. Start by copying one from the same directory.
