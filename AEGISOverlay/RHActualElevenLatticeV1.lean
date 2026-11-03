@@ -576,3 +576,6 @@ end AEGIS.RHActualElevenLatticeV1
 #print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_integer_certificate
 #print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_row_bound
 #print axioms AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_optimized_q16_coercive
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_row
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_actual_diagonal
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_coercive_of_actual_cross
