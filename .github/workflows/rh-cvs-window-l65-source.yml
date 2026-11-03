@@ -154,7 +154,7 @@ jobs:
                research/rh/feshbach_lean_v1/CvS*L118*.lean research/rh/aegis_math/*.lean; then exit 1; fi
           # Each exhaustion join imports its window, so the DAG contains both window chains.
           python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1 \
-            RHWindowL118ExhaustionV1 AegisMathCoreV1
+            RHWindowL118ExhaustionV1 RHWindowL118ActualFineGramJoinV1 AegisMathCoreV1
 
       - name: Compile every module from source
         shell: bash
