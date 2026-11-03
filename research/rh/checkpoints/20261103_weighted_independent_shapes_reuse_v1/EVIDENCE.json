@@ -1,0 +1,50 @@
+{
+  "schema": "AEGIS_WEIGHTED_SHAPE_COMPOSITION_EVIDENCE_V1",
+  "rh_proven": false,
+  "final_rh_theorem": null,
+  "source_commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "same_mother_bound": "all_actual_eleven_mixed_bounds; existing source result",
+  "mixed_bound_producer": {
+    "ordinary_proof": "Complete under the same common source-window and two-moment hypotheses, separately for each independent packet",
+    "conclusion": "norm(B(T_i u,T_j v)) <= 2*c_ij*sqrt(E(u))*sqrt(E(v))",
+    "extra_hcross_assumption": false,
+    "formal_analytic_replay": "NOT_RUN_REQUIRED_IMPORT_CLOSURE_UNAVAILABLE"
+  },
+  "weighted_family_conclusion": "-Re B(F,F) >= 394709/1136000 * sum_i E(h_i)*norm(z_i)^2",
+  "quantifiers": "For every real a, every independent family h:Fin11 -> WeilCompactSmoothGV1 with both moments zero and each source support in[a-1/256,a+1/256], and every z:Fin11 -> Complex; F=sum_i z_i T_{i log(33/16)}h_i",
+  "existing_weights_reused": [
+    427,
+    355,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    355,
+    427
+  ],
+  "new_weight_search": false,
+  "new_general_schur_proof": false,
+  "integer_component": {
+    "kernel_endpoints": 7,
+    "fresh_compiles": 2,
+    "leanchecker_fresh_replays": 2,
+    "axioms_union": [
+      "propext"
+    ],
+    "receipt": "ARITHMETIC_KERNEL_RECEIPT.json"
+  },
+  "global_reconstruction_status": "Existing arbitrary-packet reconstruction retained. It does not assert the specific11-window geometry or supply interactions between different such unions.",
+  "closed_mathematical_input_in_this_family": "Square-root-energy mixed bound, without an additional hcross hypothesis",
+  "whole_rh_closure": "NOT_PRODUCED",
+  "independent_analytic_review": {
+    "status": "ORDINARY_ARGUMENT_VALIDATED",
+    "reviewer": "/root/analytic_audit",
+    "file": "INDEPENDENT_ANALYTIC_AUDIT.md",
+    "sha256": "6b2e979038fac9d6bf65d69a42e8c30c6246a3c70104e5a65629ce2a35a6e26d",
+    "independent_row_arithmetic_reviewer": "/root/analytic_audit/row_arithmetic_audit",
+    "analytic_kernel_replay": false
+  }
+}

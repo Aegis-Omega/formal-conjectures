@@ -1,0 +1,42 @@
+{
+  "schema": "AEGIS_EXACT_SOURCE_WEIGHT_REUSE_V1",
+  "source_repo": "Aegis-Omega/formal-conjectures",
+  "source_commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "original_source_path": "AEGISOverlay/RHActualElevenLatticeV1.lean",
+  "source_git_blob": "97a98db382e433488ed20f7df0980f41b20e4cbc",
+  "source_sha256": "123fc514966112dbacdad41b403ffad8ff6f1764c9597c2c3fd983138a940413",
+  "weights": [
+    427,
+    355,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    24,
+    355,
+    427
+  ],
+  "row_bounds": [
+    "225089/315980",
+    "25289/35500",
+    "427/600",
+    "427/600",
+    "427/600",
+    "427/600",
+    "427/600",
+    "427/600",
+    "427/600",
+    "25289/35500",
+    "225089/315980"
+  ],
+  "max_row": "25289/35500",
+  "independent_shape_margin": "394709/1136000",
+  "margin_for_previous_weights": "732143/2107520",
+  "lean_file": "WeightedIndependentShapeArithmetic.lean",
+  "lean_sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268",
+  "new_weight_optimization": false,
+  "kernel_replay": "SEPARATE_RECEIPT",
+  "rh_proven": false
+}
