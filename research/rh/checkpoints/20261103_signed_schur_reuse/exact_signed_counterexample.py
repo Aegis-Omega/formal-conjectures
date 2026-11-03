@@ -14,7 +14,7 @@ for j in range(1,n): C[0][j]=C[j][0]=Q(1)
 for i in range(1,n):
     for j in range(1,n): C[i][j]=Q(chi[(i-j)%5])
 def multiply(A,B):
-    return [[sum(A[i][k]*B[k][j] for k in range(n)) for i in range(n)]
+    return [[sum(A[i][k]*B[k][j] for k in range(n)) for j in range(n)] for i in range(n)]
 I=[[Q(i==j) for j in range(n)] for i in range(n)]
 assert C==[list(r) for r in zip(*C)]
 assert multiply(C,C)==[[5*I[i][j] for j in range(n)] for i in range(n)]
