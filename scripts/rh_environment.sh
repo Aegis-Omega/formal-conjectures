@@ -52,7 +52,19 @@ if [[ "$MODE" == '--status' ]]; then
   if [[ "$(git -C "$REPO/.lake/packages/mathlib" rev-parse HEAD 2>/dev/null || :)" != "$MATHLIB_SHA" ]]; then
     printf 'AEGIS_RH_MATHLIB=NOT_RESTORED\nAEGIS_RH_ENV=BLOCKED\n'; exit 2
   fi
-  printf 'AEGIS_RH_MATHLIB=VERIFIED\nAEGIS_RH_ENV=SOURCE_BOUND_READY\n'; exit 0
+  [[ -x "$LAKE_BIN" ]] || fail LAKE_MISSING 'Lake binary is missing.'
+  # Avoid a false-green status when the source checkout exists but its
+  # compiled imports are absent or incompatible with the pinned compiler.
+  export PATH="$(dirname "$LEAN_BIN"):$PATH"
+  smoke="$(mktemp "${TMPDIR:-/tmp}/aegis-rh-status.XXXXXX.lean")"
+  trap 'rm -f "$smoke"' EXIT
+  printf 'import Mathlib\nexample : True := by trivial\n' > "$smoke"
+  if ! (cd "$REPO" && lake env lean --trust=0 "$smoke"); then
+    fail MATHLIB_KERNEL_SMOKE_FAILED 'Mathlib source is pinned but cannot be imported by the Lean kernel.'
+  fi
+  rm -f "$smoke"
+  trap - EXIT
+  printf 'AEGIS_RH_MATHLIB=KERNEL_SMOKE_PASS\nAEGIS_RH_ENV=SOURCE_BOUND_READY\n'; exit 0
 fi
 [[ "$MODE" == '--install' ]] || fail BAD_ARGUMENT 'Use --status or --install.'
 
