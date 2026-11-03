@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "path": "HISTORY_INTAKE_MANIFEST.json.gz",
+      "bytes": 98436,
+      "sha256": "20e27bbd40be413b16e77e89298b9d3f73f437396554216514afd5c1f6815291"
+    },
+    {
+      "path": "READ_THIS_BEFORE_MORE_PROOFS.md",
+      "bytes": 4503,
+      "sha256": "7a19be31ad62106f1ac4ba2112731a5de43280fe4c401a6ba9852689d3f5145f"
+    },
+    {
+      "path": "TARGETED_REVIEW.json",
+      "bytes": 1896,
+      "sha256": "07200ffae2190ae9eb27b612ecddbb897552d0f623c17d8c85eefc25d30b86d1"
+    }
+  ],
+  "self_excluded": true
+}
