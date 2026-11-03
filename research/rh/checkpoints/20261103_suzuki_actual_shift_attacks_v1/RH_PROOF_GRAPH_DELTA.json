@@ -1,0 +1,86 @@
+{
+  "kind": "AND_OR_DELTA_TO_EXISTING_RH_GRAPH",
+  "exhaustive_corpus_census": false,
+  "existing_exporter": "research/rh/assembly/RHProofGraphExport.lean",
+  "nodes": [
+    {
+      "id": "actual_positive_shift",
+      "statement": "forall a>=1/2, forall t>=0, Psi_a(t)>=0",
+      "source": "Suzuki2206 Section11",
+      "status": "UNCONDITIONAL_SOURCE_THEOREM",
+      "fresh_Lean_replay": false
+    },
+    {
+      "id": "descending_shift_monotonicity",
+      "statement": "partial_a Psi_a(t)<=0 for all a in[0,1/2],t>0",
+      "status": "FALSIFIED_FOR_ACTUAL_FUNCTION",
+      "witness": "OMEGA_VARIATION_ATTACK.md: every real a and 0<t<=log rho, rho^3-rho-1=0, derivative is strictly positive"
+    },
+    {
+      "id": "recent_history_inverse_bound",
+      "statement": "exists T, forall a>=1/2, forall t>=T, B_a(t)<0",
+      "status": "WRITTEN_PROOF_INDEPENDENTLY_REVIEWED",
+      "source": "omega_attack/UNIFORM_RECENT_HISTORY_OBSTRUCTION.md",
+      "fresh_Lean_replay": false
+    },
+    {
+      "id": "finite_positive_resolvent",
+      "statement": "forall a>0, lambda<lambda_a, T_a=A_a-lambda I>0 and W_boundary has only real zeros",
+      "status": "UNCONDITIONAL_SOURCE_THEOREM",
+      "source": "Suzuki2606 Theorem1.5",
+      "fresh_Lean_replay": false
+    },
+    {
+      "id": "automatic_zeta_resolvent_identification",
+      "statement": "finite positivity plus canonical normalization forces the zeta safe-region limit for admissible shifts",
+      "status": "FALSIFIED_FOR_ACTUAL_OBJECTS",
+      "witness": "admissible large shifts yield m_a -> i, not the nonconstant zeta candidate"
+    },
+    {
+      "id": "selected_full_inverse_history_budget",
+      "statement": "exists T>=4, forall t>=T, exp(t/2)F_(1/2)(t)+integral_0^t exp(u/2)((t-u)/4-1)F_(1/2)(u)du>=0",
+      "status": "NO_UNCONDITIONAL_PRODUCER_OBTAINED_IN_THESE_ATTEMPTS",
+      "new_equivalence_claimed": false
+    },
+    {
+      "id": "exact_RH_target",
+      "statement": "canonical external RiemannHypothesis proposition",
+      "status": "NO_UNCONDITIONAL_FINAL_TERM_ASSEMBLED"
+    }
+  ],
+  "edges": [
+    {
+      "from": [
+        "actual_positive_shift"
+      ],
+      "to": "descending_shift_monotonicity",
+      "status": "REJECTED_ATTEMPT"
+    },
+    {
+      "from": [
+        "actual_positive_shift",
+        "unconditional_PNT_estimate",
+        "exact_forward_transform"
+      ],
+      "to": "recent_history_inverse_bound",
+      "status": "UNCONDITIONAL_WRITTEN_DERIVATION"
+    },
+    {
+      "from": [
+        "finite_positive_resolvent"
+      ],
+      "to": "automatic_zeta_resolvent_identification",
+      "status": "REJECTED_ATTEMPT"
+    },
+    {
+      "from": [
+        "selected_full_inverse_history_budget",
+        "existing_Suzuki_Theorem11_1_consumer"
+      ],
+      "to": "exact_RH_target",
+      "status": "INPUT_NOT_DISCHARGED"
+    }
+  ],
+  "other_AEGIS_routes_are_OR_branches": true,
+  "no_unique_global_bottleneck_claim": true
+}
