@@ -16,6 +16,8 @@ from pathlib import Path
 args = [a for a in sys.argv[1:] if a != '--resume']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 ring = Path('.lake/ringout').resolve(); ring.mkdir(parents=True, exist_ok=True)
+def olean_for(mod):
+    return ring / (mod.replace('.', '/') + '.olean')
 logs = Path('.lake/reallogs'); logs.mkdir(exist_ok=True)
 sp = Path('.lake/real_status.json')
 env = os.environ.copy()
@@ -31,7 +33,7 @@ status, seconds, kills = {}, {}, {}
 if '--resume' in sys.argv and sp.exists():
     old = json.loads(sp.read_text()); old_status = old.get('status', old)
     for m, v in old_status.items():
-        if v == 'PASS' and m in plan and (ring/(m + '.olean')).is_file() and (logs/(m + '.log')).is_file():
+        if v == 'PASS' and m in plan and olean_for(m).is_file() and (logs/(m + '.log')).is_file():
             status[m] = 'PASS'; seconds[m] = old.get('seconds', {}).get(m, 0)
     print('RESUME', len(status), 'modules kept', flush=True)
 procs, plock = {}, threading.Lock()  # module -> (process, start time) of the running compiles
@@ -50,7 +52,9 @@ def guard():  # keep the machine away from the kernel OOM killer
 threading.Thread(target=guard, daemon=True).start()
 def run(mod):
     r = plan[mod]
-    cmd = ['lean'] + (['-DwarningAsError=true'] if r['strict'] else []) + (['-R', r['root']] if r['root'] else []) + ['-o', str(ring/(mod + '.olean')), r['path']]
+    obj = olean_for(mod)
+    obj.parent.mkdir(parents=True, exist_ok=True)
+    cmd = ['lean'] + (['-DwarningAsError=true'] if r['strict'] else []) + (['-R', r['root']] if r['root'] else []) + ['-o', str(obj), r['path']]
     t = time.monotonic(); p = subprocess.Popen(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     with plock: procs[mod] = (p, t)
     out, _ = p.communicate()
