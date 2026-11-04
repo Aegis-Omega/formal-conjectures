@@ -478,6 +478,7 @@ theorem independent_eleven_exact_cost_symmetric (i j : Fin 11) :
 
 /-- The exact, unrounded cost row for the original 427/355/24 weights.
 No Q16.16 relaxation or reduced packet count is introduced. -/
+set_option maxHeartbeats 4000000 in
 theorem independent_eleven_exact_row (i : Fin 11) :
     (∑ j : Fin 11,
       independentElevenExactCost i j *
