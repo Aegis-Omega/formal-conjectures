@@ -182,7 +182,9 @@ jobs:
         if: steps.mode.outputs.website_only != 'true'
         run: |
           rm -f FormalConjectures/All.lean
-          lake exe mk_all --lib FormalConjectures || true
+          rm -f FormalConjectures.lean
+          lake exe mk_all --lib FormalConjectures
+          test -s FormalConjectures.lean
           mv FormalConjectures.lean FormalConjectures/All.lean
           echo "set_option linter.style.moduleDocstring false" >> FormalConjectures/All.lean
 
