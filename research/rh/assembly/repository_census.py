@@ -84,6 +84,140 @@ def source_scan(root):
     return modules,decls
 
 
+
+# Source-signature evidence only. These are typed interface risks, not Lean proofs.
+RH_INTERFACE_GATES = [
+    ("UNIFORM_BUDGET_REFUTATION", "AEGISOverlay/RHUniformBudgetObstructionV1.lean",
+     "not_uniformFineMixedBudget", ("¬ UniformFineMixedBudget",)),
+    ("UNIFORM_BUDGET_CONSUMER", "AEGISOverlay/RHUniformBudgetObstructionV1.lean",
+     "consumer_of_budget", ("UniformFineMixedBudget", "RiemannHypothesis")),
+    ("SCHUR_HZERO_INPUT", "AEGISOverlay/RHCheckpointTrigramPacketSchurV1.lean",
+     "packet_schur_of_zero_nonnegative", ("hzero : 0 ≤", "PacketSchurFamily g")),
+    ("SCHUR_HZERO_OUTPUT", "AEGISOverlay/RHFeshbachWeilClosureV2.lean",
+     "packet_zero_quadratic_nonnegative", ("PacketSchurFamily g", "0 ≤")),
+    ("WEIGHTED_HZERO_DIAGONAL", "AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean",
+     "actual_packet_sum_nonpositive_of_optimized_rows", ("hzero : ∀ i, c i i = 0",)),
+    ("OPTIMIZED_HSELECT", "AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean",
+     "riemannHypothesis_of_optimized_actual_row_producer",
+     ("hselect :", "RiemannHypothesis")),
+    ("KREIN_HSELECT", "AEGISOverlay/RHKreinFeshbachFinalAssemblyV1.lean",
+     "riemannHypothesis_of_selected_krein_feshbach_producer_v2",
+     ("hselect : SelectedKreinFeshbachProducerV2", "RiemannHypothesis")),
+    ("CVS_APPROXIMATION", "AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean",
+     "riemannHypothesis_of_universal_actual_cvs_cofinal",
+     ("happrox : UniversalActualCvSCofinalApproximation", "RiemannHypothesis")),
+    ("FOUR_LOG_THREE_RECONSTRUCTION", "AEGISOverlay/RHFourLogThreeWeightedRHBridgeV1.lean",
+     "riemannHypothesis_of_weighted_four_log_three_reconstruction",
+     ("hglobal :", "HasWeightedFourLogThreeReconstruction", "RiemannHypothesis")),
+    ("SIGNED_BUDGET_FROM_STRICT_SIGN", "AEGISOverlay/RHMixedBudgetRefinementV1.lean",
+     "certificate_of_strict_sign", ("hneg : (B g g).re < 0", "MixedBudgetCertificate")),
+    ("CANONICAL_RH_TARGET", "FormalConjectures/Millennium/RiemannHypothesis.lean",
+     "riemannHypothesis", ("RiemannHypothesis",)),
+]
+
+
+def source_proof_interfaces(root, modules):
+    """Scan tracked Lean declaration signatures; never infer kernel closure.
+
+    The same binder name is not a proof that two propositions coincide.
+    Only signatures at the exact checkout are classified, and missing or
+    drifting signatures remain UNKNOWN rather than silently passing.
+    """
+    evidence = []
+    declarations = {}
+    names_of_interest = (
+        "hzero", "hselect", "hbudget", "happrox", "hresidual",
+        "hcert", "hglobal", "hK", "hRH", "hcross",
+    )
+    binder = re.compile(r"\b(" + "|".join(names_of_interest) + r")\s*:")
+    for module in modules:
+        path = module["path"]
+        if not (module["rh_related_source"] or
+                path == "FormalConjectures/Millennium/RiemannHypothesis.lean"):
+            continue
+        code = code_only((root / path).read_text(encoding="utf-8"))
+        decls = list(DECL.finditer(code))
+        for i, m in enumerate(decls):
+            next_start = decls[i + 1].start() if i + 1 < len(decls) else len(code)
+            assignment = code.find(":=", m.end(), next_start)
+            if assignment < 0:
+                continue
+            signature = " ".join(code[m.start():assignment].split())
+            hypothesis_names = sorted(set(binder.findall(signature)))
+            contains_rh = "RiemannHypothesis" in signature
+            item = {
+                "path": path, "blob_sha1": module["blob_sha1"],
+                "symbol": m.group(2), "kind": m.group(1),
+                "line": code.count("\n", 0, m.start()) + 1,
+                "hypothesis_names": hypothesis_names,
+                "hypothesis_type_excerpts": {
+                    name: signature[match.end():match.end()+160]
+                    for match in binder.finditer(signature)
+                    for name in [match.group(1)]
+                },
+                "mentions_RiemannHypothesis_in_signature": contains_rh,
+                "signature_excerpt": signature[:460],
+                "kernel_verified": None,
+            }
+            declarations[(path, m.group(2))] = (item, signature)
+            if contains_rh or hypothesis_names:
+                evidence.append(item)
+
+    bindings = []
+    for identifier, path, symbol, expected in RH_INTERFACE_GATES:
+        found = declarations.get((path, symbol))
+        signature = found[1] if found else ""
+        verified = found is not None and all(text in signature for text in expected)
+        bindings.append({
+            "id": identifier,
+            "source_state": "SIGNATURE_MATCH" if verified else "UNKNOWN",
+            "reason": None if verified else (
+                "SIGNATURE_DRIFT" if found else "DECLARATION_NOT_FOUND"),
+            "path": path, "symbol": symbol,
+            "line": found[0]["line"] if found else None,
+            "blob_sha1": found[0]["blob_sha1"] if found else None,
+            "kernel_verified": None,
+        })
+
+    found_ids = {row["id"] for row in bindings
+                 if row["source_state"] == "SIGNATURE_MATCH"}
+    diagnostics = []
+    checks = [
+        ("HZERO_SCHUR_RECIPROCAL_INTERFACES",
+         "CIRCULAR_IF_USED_TO_ESTABLISH_INPUT",
+         ("SCHUR_HZERO_INPUT", "SCHUR_HZERO_OUTPUT")),
+        ("UNIFORM_BUDGET_REFUTED_IN_SOURCE",
+         "CONTRADICTION_IN_DECLARED_PREMISE",
+         ("UNIFORM_BUDGET_REFUTATION", "UNIFORM_BUDGET_CONSUMER")),
+        ("DISTINCT_HSELECT_TYPES",
+         "ADAPTER_NOT_VERIFIED_BY_SOURCE_SCAN",
+         ("OPTIMIZED_HSELECT", "KREIN_HSELECT")),
+    ]
+    for identifier, category, requirements in checks:
+        if set(requirements) <= found_ids:
+            diagnostics.append({
+                "id": identifier, "classification": category,
+                "source_evidence": list(requirements),
+                "kernel_verified": None,
+                "scope": "SOURCE_INTERFACE_DIAGNOSTIC_NOT_A_PROOF_VERDICT",
+            })
+    return {
+        "scope": "TRACKED_RH_SOURCE_AT_EXACT_CHECKOUT",
+        "proof_status": "SOURCE_ONLY_KERNEL_UNVERIFIED",
+        "source_interfaces": evidence,
+        "source_signature_bindings": bindings,
+        "diagnostics": diagnostics,
+        "counts": {
+            "indexed_interfaces": len(evidence),
+            "rh_signature_occurrences": sum(
+                x["mentions_RiemannHypothesis_in_signature"] for x in evidence),
+            "named_hypothesis_interfaces": sum(bool(x["hypothesis_names"]) for x in evidence),
+            "matched_gates": len(found_ids),
+            "unresolved_gates": len(RH_INTERFACE_GATES) - len(found_ids),
+        },
+    }
+
+
 def kernel_graph_census(head, proof_path, passport_path, environment_path, terms_path, tracked_by_path):
     """Reuse the existing Lean exporter, never guess a declaration's kernel status."""
     supplied=[proof_path,passport_path,environment_path,terms_path]
@@ -247,6 +381,7 @@ def build(root,graph_path=None,proof_path=None,passport_path=None,environment_pa
         'kernel_reachable_declaration_inventory':verified_decls,
         'kernel_rh_type_candidates':rh_candidates,
         'declaration_inventory':decls,'module_inventory':modules,
+        'proof_interface_inventory':source_proof_interfaces(root, modules),
         'rh_path_inventory':paths,
         'active_rh_paths':[p for p in paths if p['status']=='ACTIVE'],
         'questioned_rh_paths':[p for p in paths if p['status']=='QUESTIONED'],
@@ -261,6 +396,41 @@ def build(root,graph_path=None,proof_path=None,passport_path=None,environment_pa
                   'Kernel proof DAG and imported-environment totals have different coverage and cannot be added together']}
 
 def self_test():
+    # Source-only regression: logical cycle must be visible, never promoted.
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        samples = {
+            "AEGISOverlay/RHCheckpointTrigramPacketSchurV1.lean":
+                "def packet_schur_of_zero_nonnegative (hzero : 0 ≤ Q) : PacketSchurFamily g := by sorry\n",
+            "AEGISOverlay/RHFeshbachWeilClosureV2.lean":
+                "theorem packet_zero_quadratic_nonnegative (h : PacketSchurFamily g) : 0 ≤ Q := by sorry\n",
+            "AEGISOverlay/RHUniformBudgetObstructionV1.lean":
+                "theorem consumer_of_budget (h : UniformFineMixedBudget) : RiemannHypothesis := by sorry\n"
+                "theorem not_uniformFineMixedBudget : ¬ UniformFineMixedBudget := by sorry\n",
+            "FormalConjectures/Millennium/RiemannHypothesis.lean":
+                "theorem riemannHypothesis : RiemannHypothesis := by sorry\n",
+        }
+        for path, contents in samples.items():
+            dest = root / path
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_text(contents, encoding="utf-8")
+        modules = [{"path": path, "rh_related_source": True,
+                    "blob_sha1": git_blob(contents.encode("utf-8"))}
+                   for path, contents in samples.items()]
+        report = source_proof_interfaces(root, modules)
+        ids = {row["id"] for row in report["diagnostics"]}
+        assert ids == {"HZERO_SCHUR_RECIPROCAL_INTERFACES",
+                       "UNIFORM_BUDGET_REFUTED_IN_SOURCE"}
+        assert report["proof_status"] == "SOURCE_ONLY_KERNEL_UNVERIFIED"
+        # A commented-out producer is not an available declaration.
+        (root / "AEGISOverlay/RHFeshbachWeilClosureV2.lean").write_text(
+            "-- theorem packet_zero_quadratic_nonnegative : 0 ≤ Q := by sorry\n")
+        report = source_proof_interfaces(root, modules)
+        ids = {row["id"] for row in report["diagnostics"]}
+        assert "HZERO_SCHUR_RECIPROCAL_INTERFACES" not in ids
+        assert "UNIFORM_BUDGET_REFUTED_IN_SOURCE" in ids
+        assert report["counts"]["unresolved_gates"] > 0
+
     s='''/- theorem Fake : False := by sorry\n /- lemma Hidden -/\n-/\nimport Mathlib.Tactic\n-- axiom Nope : False\nnamespace N\nprivate theorem real : True := by trivial\nlemma another : True := by trivial\n#print axioms N.real\n'''
     c=code_only(s)
     assert [(m.group(1),m.group(2)) for m in DECL.finditer(c)]==[('theorem','real'),('lemma','another')]
