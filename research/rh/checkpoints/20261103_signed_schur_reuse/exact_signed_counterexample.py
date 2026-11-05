@@ -68,6 +68,46 @@ weights=[Q(9),Q(2),Q(15),Q(1),Q(3),Q(8)]
 i=min(range(n),key=lambda k:weights[k])
 weighted_min_row=sum(abs(A[i][j])*weights[j]/weights[i] for j in range(n) if j!=i)
 assert weighted_min_row>=Q(5,4)>1
+# Gate-II unitary Schur short, checked with exact rational arithmetic.
+# This is an algebraic interface/negative control, NOT an identification with
+# Desogus's actual localized Weil operator. The source Schur debit is taken ONCE.
+def dot(a,b): return sum(x*y for x,y in zip(a,b))
+def mv(M,v): return [dot(row,v) for row in M]
+def matmul(A,B):
+    return [[dot(A[i],[B[k][j] for k in range(len(B))])
+             for j in range(len(B[0]))] for i in range(len(A))]
+def trans(A): return [list(r) for r in zip(*A)]
+def inv2(M):
+    det=M[0][0]*M[1][1]-M[0][1]*M[1][0]
+    assert det>0
+    return [[M[1][1]/det,-M[0][1]/det],[-M[1][0]/det,M[0][0]/det]]
+
+def certify_gate2_one_debit(alpha):
+    gram=[[I[i][j]-alpha*C[i][j] for j in range(n)] for i in range(n)]
+    source=[row[:2] for row in gram[:2]]
+    cross=[row[2:] for row in gram[:2]]
+    target=[row[2:] for row in gram[2:]]
+    source_inv=inv2(source)
+    debit=matmul(matmul(trans(cross),source_inv),cross)
+    short=[[target[i][j]-debit[i][j] for j in range(4)] for i in range(4)]
+    rotation=[[Q(0),Q(1)],[Q(-1),Q(0)]]
+    rotated_source=matmul(matmul(trans(rotation),source),rotation)
+    for y in [[Q(1),Q(-1),Q(2),Q(0)]] + [
+            [Q(i==j) for i in range(4)] for j in range(4)]:
+        force=mv(cross,y)
+        x=[-z for z in mv(source_inv,force)]
+        raw=dot(y,mv(target,y))
+        cost=dot(force,mv(source_inv,force))
+        complete=dot(x,mv(source,x))+2*dot(x,force)+raw
+        assert complete==raw-cost==dot(y,mv(short,y))
+        force_rot=mv(trans(rotation),force)
+        assert dot(force_rot,mv(inv2(rotated_source),force_rot))==cost
+    assert short==trans(short)
+    return {'alpha':str(alpha), 'one_source_debit':'PASS',
+            'source_rotation_covariance':'PASS','vectors_checked':5}
+
+gate2_certificates=[certify_gate2_one_debit(a)
+                    for a in (Q(21,100),Q(1,4),Q(1,3),Q(2,5))]
 # For every v in C^6, -v* A v = (1/2) ||G v||² + (11/32)||v||².
 # The exact matrix identity G = (1/2) G^2 + (11/32)I proves this, universally.
 result={'source':'Exact standalone symmetric Paley conference matrix, not actual Weil B',
@@ -81,6 +121,7 @@ result={'source':'Exact standalone symmetric Paley conference matrix, not actual
         'strict_negative_definite_certificate':'-A = 1/2*(-A)^2 + 11/32*I',
         'certificate_verified_exactly':True,
         'parametric_full_signed_gram_family':family,
+        'gate2_one_debit_exact_rational_certificates':gate2_certificates,
         'parametric_proof':'For 1/5<alpha and 5*alpha^2<1, G=I-alpha*C=(G^2+(1-5*alpha^2)*I)/2 is strictly positive, while every absolute Schur row and column sum is 5*alpha>1.',
         'conclusion':'Absolute Gershgorin/Schur row dominance is NOT necessary for negative definiteness',
         'does_not_imply':['AEGIS actual Weil Gram positivity','Riemann hypothesis','kernel-verified theorem']}
