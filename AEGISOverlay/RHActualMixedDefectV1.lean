@@ -1186,6 +1186,143 @@ theorem independent_adjacent_fine_weighted_three_quarters_v1
   exact hcoeff.trans hbase
 
 
+/-! ## Independent three-shape dyadic Hermitian certificate with one full unit
+
+At log centers a, a+log(2)/2, a+log(2), the outer pair has the
+genuine m=2 von Mangoldt resonance, while BOTH inner pairs lie in
+the source-proved prime-free interval 35/128 ... log(2)-1/128.
+Consequently the exact signed three-packet Weil form has a uniform
+coercivity reserve 1, with no same-mother assumption. -/
+
+/-- A genuine three-packet positive Gram certificate for three different
+moment-zero fine packet shapes. The full dyadic prime resonance of the
+outer pair is retained, not omitted or replaced by an arbitrary budget. -/
+theorem independent_midpoint_three_packet_one_v1
+    (p q mid : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hmid : WidthOneOneTwentyEightAt mid (a + Real.log 2 / 2))
+    (hmp : WeilMomentConditionsV1 p)
+    (_hmq : WeilMomentConditionsV1 q)
+    (hmm : WeilMomentConditionsV1 mid) :
+    energy p.1 + energy q.1 + energy mid.1 ≤
+      -(B (addPacket (addPacket p q) mid)
+         (addPacket (addPacket p q) mid)).re := by
+  have hlogLow : (693 / 1000 : ℝ) < Real.log 2 :=
+    AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_lower
+  have hsep : (35 / 128 : ℝ) ≤ Real.log 2 / 2 := by
+    linarith
+  have hfree : Real.log 2 / 2 < Real.log 2 - 1 / 128 := by
+    linarith
+  have hsepPM : (35 / 128 : ℝ) ≤ (a + Real.log 2 / 2) - a := by
+    linarith
+  have hfreePM :
+      (a + Real.log 2 / 2) - a < Real.log 2 - 1 / 128 := by
+    linarith
+  have hsepMQ :
+      (35 / 128 : ℝ) ≤ (a + Real.log 2) - (a + Real.log 2 / 2) := by
+    linarith
+  have hfreeMQ :
+      (a + Real.log 2) - (a + Real.log 2 / 2) <
+        Real.log 2 - 1 / 128 := by
+    linarith
+  have hPM := distinct_fine_actual_B_q16_middle_gap
+    p mid a (a + Real.log 2 / 2) hp hmid hmp hsepPM hfreePM
+  have hMQ := distinct_fine_actual_B_q16_middle_gap
+    mid q (a + Real.log 2 / 2) (a + Real.log 2)
+    hmid hq hmm hsepMQ hfreeMQ
+  have hQM :
+      ‖B q mid‖ ≤ (676 / 65536 : ℝ) *
+        (energy q.1 + energy mid.1) := by
+    calc
+      ‖B q mid‖ = ‖B mid q‖ := by
+        rw [B_hermitian, Complex.norm_conj]
+      _ ≤ (676 / 65536 : ℝ) *
+        (energy mid.1 + energy q.1) := hMQ
+      _ = (676 / 65536 : ℝ) *
+        (energy q.1 + energy mid.1) := by ring
+  have hcross :
+      (B (addPacket p q) mid).re ≤
+        (676 / 65536 : ℝ) *
+          (energy p.1 + energy q.1 + 2 * energy mid.1) := by
+    calc
+      (B (addPacket p q) mid).re =
+          (B p mid).re + (B q mid).re := by
+            rw [B_add_left, Complex.add_re]
+      _ ≤ ‖B p mid‖ + ‖B q mid‖ :=
+        add_le_add (Complex.re_le_norm _) (Complex.re_le_norm _)
+      _ ≤ (676 / 65536 : ℝ) *
+          (energy p.1 + energy mid.1) +
+          (676 / 65536 : ℝ) *
+          (energy q.1 + energy mid.1) :=
+        add_le_add hPM hQM
+      _ = (676 / 65536 : ℝ) *
+          (energy p.1 + energy q.1 + 2 * energy mid.1) := by ring
+  have houter := independent_adjacent_fine_two_packet_coercive_v1
+    p q a hp hq hmp
+  have hdiag := AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+    mid (a + Real.log 2 / 2) hmid
+  have hlog0 : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  have hlogUpper : Real.log (2 : ℝ) ≤ 7 / 10 :=
+    le_of_lt AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper
+  have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
+    apply Real.exp_le_exp.mpr
+    linarith
+  have hproduct :
+      Real.log 2 * Real.exp (-Real.log 2 / 2) ≤ (7 / 10 : ℝ) := by
+    have hx := mul_le_mul_of_nonneg_left hexp hlog0
+    nlinarith
+  have houterBudget :
+      (1 : ℝ) + 2 * (676 / 65536 : ℝ) ≤
+        (5671 / 3200 : ℝ) -
+          Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100 := by
+    nlinarith
+  have hmidBudget :
+      (1 : ℝ) + 4 * (676 / 65536 : ℝ) ≤ (5671 / 3200 : ℝ) := by
+    norm_num
+  have hEp : 0 ≤ energy p.1 := energy_nonnegative p.1
+  have hEq : 0 ≤ energy q.1 := energy_nonnegative q.1
+  have hEm : 0 ≤ energy mid.1 := energy_nonnegative mid.1
+  have houterPaid := mul_le_mul_of_nonneg_right houterBudget
+    (add_nonneg hEp hEq)
+  have hmidPaid := mul_le_mul_of_nonneg_right hmidBudget hEm
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients
+      (addPacket p q) mid
+  nlinarith
+
+/-- A 3×3 Hermitian Gram certificate valid for ALL complex phases and
+amplitudes of three independent genuine-Weil fine packets. The uniform
+rational spectral reserve is one. -/
+theorem independent_midpoint_three_packet_weighted_one_v1
+    (p q mid : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hmid : WidthOneOneTwentyEightAt mid (a + Real.log 2 / 2))
+    (hmp : WeilMomentConditionsV1 p)
+    (hmq : WeilMomentConditionsV1 q)
+    (hmm : WeilMomentConditionsV1 mid) (z w v : ℂ) :
+    ‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1 +
+      ‖v‖ ^ 2 * energy mid.1 ≤
+        -(B (addPacket (addPacket (scalePacket z p) (scalePacket w q))
+              (scalePacket v mid))
+           (addPacket (addPacket (scalePacket z p) (scalePacket w q))
+              (scalePacket v mid))).re := by
+  have hbase := independent_midpoint_three_packet_one_v1
+    (scalePacket z p) (scalePacket w q) (scalePacket v mid) a
+    (fine_width_scale p z a hp)
+    (fine_width_scale q w (a + Real.log 2) hq)
+    (fine_width_scale mid v (a + Real.log 2 / 2) hmid)
+    (momentConditions_scalePacket_v10 z p hmp)
+    (momentConditions_scalePacket_v10 w q hmq)
+    (momentConditions_scalePacket_v10 v mid hmm)
+  rw [independent_adjacent_fine_energy_scale_complex_v1 z p,
+      independent_adjacent_fine_energy_scale_complex_v1 w q,
+      independent_adjacent_fine_energy_scale_complex_v1 v mid] at hbase
+  exact hbase
+
+
 /-! ## Moment-zero removal of the distant rank-one Arch kernel
 
 Exact reuse of the source-pinned separated Arch integral identity,
@@ -2426,3 +2563,6 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_energy_scale_complex_v1
 #print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_coefficient_ge_three_quarters_v1
 #print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_weighted_three_quarters_v1
+
+#print axioms AEGIS.RHActualMixedDefectV1.independent_midpoint_three_packet_one_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_midpoint_three_packet_weighted_one_v1
