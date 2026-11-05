@@ -109,6 +109,32 @@ jobs:
           assert r["branch_inventory_summary"]["state"]=="VERIFIED_SOURCE_GRAPH_ONLY"
           assert r["total_declarations"] is None and r["total_axioms"] is None
           assert r["current_rh_status"]=="NOT_ASSESSED_ON_THIS_CENSUS"
+          interface=r["proof_interface_inventory"]
+          assert interface["proof_status"]=="SOURCE_ONLY_KERNEL_UNVERIFIED"
+          expected={
+            "UNIFORM_BUDGET_REFUTATION", "UNIFORM_BUDGET_CONSUMER",
+            "SCHUR_HZERO_INPUT", "SCHUR_HZERO_OUTPUT",
+            "WEIGHTED_HZERO_DIAGONAL", "OPTIMIZED_HSELECT",
+            "KREIN_HSELECT", "CVS_APPROXIMATION",
+            "FOUR_LOG_THREE_RECONSTRUCTION",
+            "SIGNED_BUDGET_FROM_STRICT_SIGN", "CANONICAL_RH_TARGET",
+          }
+          observed={row["id"]:row for row in interface["source_signature_bindings"]}
+          gaps=sorted(k for k in expected if
+                      observed.get(k,{}).get("source_state")!="SIGNATURE_MATCH")
+          known={row["id"] for row in interface["diagnostics"]}
+          required_diagnostics={
+            "HZERO_SCHUR_RECIPROCAL_INTERFACES",
+            "UNIFORM_BUDGET_REFUTED_IN_SOURCE",
+            "DISTINCT_HSELECT_TYPES",
+          }
+          print("RH_PREMISE_INTERFACE_RECEIPT",
+                json.dumps({"exact_head":head,"counts":interface["counts"],
+                            "missing_signatures":gaps,
+                            "diagnostics":sorted(known)},sort_keys=True))
+          assert not gaps, "RH_PREMISE_SOURCE_SIGNATURE_DRIFT"
+          assert required_diagnostics<=known, "RH_PREMISE_DIAGNOSTIC_MISSING"
+          assert all(d["kernel_verified"] is None for d in interface["diagnostics"])
           print("RH_CENSUS_SOURCE_ONLY_BOUND",head,
                 r["total_modules"],r["source_counts"]["source_declaration_occurrences"])
           PY
