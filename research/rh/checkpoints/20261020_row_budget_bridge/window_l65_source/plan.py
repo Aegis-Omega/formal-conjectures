@@ -177,6 +177,31 @@ if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
               'research/rh/krein_ring_v1'):
         for source in sorted(Path(d).glob('*.lean')):
             src.setdefault(source.stem, (source, False, None, 'existing-krein'))
+    # Stage exact PR721 Lean source bytes from the existing SHA-pinned manifest.
+    # Preserve already-selected providers; fail closed on source or hash drift.
+    staged_pr721 = Path('.lake/pr721-exact-sources')
+    for row in manifest['files']:
+        mod = row['module']
+        source = Path(row['archive'])
+        if not source.as_posix().startswith('research/rh/aegis_pr721_fb983fd/lean/'):
+            continue
+        if mod in src:
+            continue
+        if not source.is_file():
+            raise SystemExit('PR721_SOURCE_MISSING ' + str(source))
+        blob = subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip()
+        if blob != row['sha']:
+            raise SystemExit('PR721_SOURCE_BLOB_MISMATCH ' + mod)
+        staged_pr721.mkdir(parents=True, exist_ok=True)
+        staged = staged_pr721 / (mod + '.lean')
+        staged.write_bytes(source.read_bytes())
+        src[mod] = (staged, False, None, 'pr721-exact-blob')
+    # Qualified M8 import needs a qualified source key, not only its bare name.
+    bound = Path('research/rh/m8_kernel_v1/RHKreinCorrectionM8BoundV1.lean')
+    if not bound.is_file():
+        raise SystemExit('M8_CORRECTION_BOUND_SOURCE_MISSING')
+    src.setdefault('AEGISOverlay.RHKreinCorrectionM8BoundV1',
+                   (bound, False, None, 'existing-m8-qualified'))
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):
