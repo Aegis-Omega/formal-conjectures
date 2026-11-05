@@ -106,6 +106,41 @@ theorem nonneg_of_cofinal_invFourth_fixed_window_lower_bound
   nonneg_of_vanishing_error_norm
     hq (tendsto_invFourthError_along_cofinal hN) hnorm hlower
 
+/-! ## Exact nested-section specialization of the PR7 cofinal certificate
+
+A fixed finite trigonometric packet is embedded by zero-padding in every
+larger moment-restricted matrix. When the matrix coefficients and the Gram
+mass on that padded vector are exactly compatible across dimensions, the
+quadratic value and mass are constant. Thus, for THAT packet, no separate
+analytic convergence proof for q_N or ||v_N||^2 is needed.
+
+The cofinal shifted inequalities remain hypotheses; this theorem does NOT
+assert that PR7's finitely many positive matrices prove all-N positivity,
+density of trigonometric packets, or RH.
+-/
+
+/-- A single finitely supported packet inherits nonnegativity from a
+cofinal collection of *nested*, N^(-4)-shifted positive sections. In contrast
+to the general PR7 limit bridge, the quadratic and Gram values are literally
+constant under the supplied zero-padding compatibility conditions. -/
+theorem nonneg_of_cofinal_nested_shifted_sections
+    {N : ℕ → ℕ} {q mass : ℕ → ℝ} (m : ℕ)
+    (hN : Tendsto N atTop atTop)
+    (hlarge : ∀ j, m ≤ N j)
+    (hq : ∀ j, m ≤ N j → q (N j) = q m)
+    (hmass : ∀ j, m ≤ N j → mass (N j) = mass m)
+    (hshifted : ∀ j,
+      -(invFourthError 0 (N j)) * mass (N j) ≤ q (N j)) :
+    0 ≤ q m := by
+  have hfixed : ∀ j,
+      -(invFourthError 0 (N j)) * mass m ≤ q m := by
+    intro j
+    simpa only [hmass j (hlarge j), hq j (hlarge j)] using hshifted j
+  exact nonneg_of_cofinal_invFourth_fixed_window_lower_bound
+    (N := N) (q := fun _ => q m) (normSq := fun _ => mass m)
+    (Q := q m) (normSqLimit := mass m)
+    hN tendsto_const_nhds tendsto_const_nhds hfixed
+
 theorem all_positive_windows_of_pi_nat_windows
     (P : ℝ → Prop)
     (hmono : ∀ {R₁ R₂ : ℝ}, R₁ ≤ R₂ → P R₂ → P R₁)
@@ -133,3 +168,5 @@ theorem all_positive_windows_iff_pi_nat_windows
   · exact all_positive_windows_of_pi_nat_windows P hmono
 
 end FormalConjecturesUtil.FixedWindowLimitBridge
+
+#print axioms FormalConjecturesUtil.FixedWindowLimitBridge.nonneg_of_cofinal_nested_shifted_sections
