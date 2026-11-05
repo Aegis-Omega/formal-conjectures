@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Live, source-bound inventory of every GitHub PR/branch and RH source graft path.
+"""PR/branch inventory with scoped research/rh Lean blob comparisons.
 
-This is a Git/source coherence audit, not a Lean proof certificate.
-Never infer theorem closure from a green check, source match, or PR metadata.
+PR metadata and live branches are read in full. Lean source-graft comparisons
+cover ONLY research/rh/*.lean, not AEGISOverlay, AegisRH, FormalConjectures,
+or other repositories. A GREEN source graph is not a full Lean source census,
+kernel proof, or universal RH closure.
 """
 from __future__ import annotations
 
@@ -62,7 +64,7 @@ class GitHub:
 
 
 def rh_tree(client, sha):
-    """Read the RH subtree from immutable Git tree objects, not live default branch."""
+    """Read only research/rh from immutable Git trees, not every Lean root."""
     root = client.get("/git/trees/" + sha)
     if root.get("truncated"):
         raise RuntimeError("TRUNCATED_ROOT_TREE:" + sha)
@@ -200,7 +202,11 @@ def build_report(client, repo, target_pr, workers=5):
         "repository": repo, "target_pr": target_pr,
         "target_exact_sha": by_number[target_pr]["head"]["sha"],
         "scope": {"all_prs": True, "all_live_branches": True,
-                  "all_pr_head_sha_including_deleted_branches": True},
+                  "all_pr_head_sha_including_deleted_branches": True,
+                  "compared_source_prefix": "research/rh/",
+                  "compared_source_suffix": ".lean",
+                  "other_lean_roots_in_scope": False,
+                  "cross_repository_sources_in_scope": False},
         "counts": {
             "prs": len(nodes), "live_branches": len(branches),
             "open_prs": sum(n["state"] == "open" for n in nodes),
@@ -270,6 +276,9 @@ def fake_test():
     assert result["github_pr_base_graph"]["target_descendants"] == [2]
     assert result["inventory_complete"]
     assert result["formal_kernel_coherence_verified"] is None
+    assert result["scope"]["compared_source_prefix"] == "research/rh/"
+    assert result["scope"]["other_lean_roots_in_scope"] is False
+    assert result["scope"]["cross_repository_sources_in_scope"] is False
     candidate = next(x for x in result["source_graft_candidates_by_pr"] if x["pr"] == 2)
     assert candidate["reused_exact_count"] == 1
     assert candidate["absent_on_target_count"] == 1
