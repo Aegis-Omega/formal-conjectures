@@ -18,7 +18,7 @@ import AEGISOverlay.RHKreinMultiplicativeTransportV1
 import RHCofinalSchurAdapterV1
 import RHRestrictedWeilBridgeV13
 import Mathlib.Tactic
-import AEGISOverlay.RHSignedPrimeChebyshevFiniteBridgeV6
+import RHSignedPrimeChebyshevFiniteBridgeV6
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 
 /-!
