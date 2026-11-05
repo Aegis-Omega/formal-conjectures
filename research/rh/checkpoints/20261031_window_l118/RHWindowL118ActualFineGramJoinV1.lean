@@ -169,9 +169,51 @@ theorem actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window
   exact every_actual_finite_gram_sharp_signed_budget_on_l118_window
     g hm L hL hw gs hpacket
 
+
+/-! ## The exact residual signed-budget interface to the canonical RH theorem
+
+The full L118 sign is already proved, so ONLY packets with a larger source
+window need a signed certificate. This is a precise compatibility interface
+between the actual CvS/Krein/Gram consumers and the canonical V13 RH target.
+The equivalence does not manufacture the as-yet-unproved large-window
+certificate: any stronger claim would be circular.
+-/
+
+/-- Canonical RH is equivalent to constructing ONE source-exact finite
+signed Weil Gram certificate for every moment-zero packet in every
+log-window of half-width above 11/16. The smaller windows are discharged
+by the already-compiled CvS L118 theorem, so this consumes no arbitrary
+partition, pairwise absolute-row bounds, or artificial uniform coercivity. -/
+theorem rh_iff_remaining_windows_actual_sharp_signed_budget :
+    RiemannHypothesis ↔
+      ∀ (L : ℝ), 11 / 16 < L →
+        ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+          AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L →
+          ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+            g = packetSum (fun _ => (1 : ℂ)) gs ∧
+            AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+              -(∑ i, (B (gs i) (gs i)).re) := by
+  constructor
+  · intro hRH L _ g hm _
+    exact (AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget.mp
+      hRH) g hm
+  · intro hcert
+    apply AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths.mpr
+    intro L hL g hm hw
+    obtain ⟨n, gs, hpacket, hbudget⟩ := hcert L hL g hm hw
+    have hsign :
+        (B (packetSum (fun _ => (1 : ℂ)) gs)
+           (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 :=
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
+        gs).mp hbudget
+    change (B g g).re ≤ 0
+    rw [hpacket]
+    exact hsign
+
 end AEGIS.RHWindowL118ActualFineGramJoinV1
 
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_signed_fine_gram_on_l118_window
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.rh_iff_remaining_windows_actual_sharp_signed_budget
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.every_actual_finite_gram_sharp_signed_budget_on_l118_window
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_krein_two_block_signed_budget_on_l118_window
 #print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window
