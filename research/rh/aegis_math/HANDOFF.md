@@ -71,6 +71,9 @@ blueprints (Buzzard, Tao; the Equational Theories Project: many small verified t
 * Blocked on the user: Pages; stale red branches (tag, then delete); the Claude GitHub App;
   the leftover branch `ops/archive-red-branches-20261101`; approval of the #95 bot run.
 
+* Q4 (2026-11-05 Gate-II exact check): source `research/rh/checkpoints/20261103_signed_schur_reuse/exact_signed_counterexample.py` at commit `0390796a74e1814b4e34306777ad1ce13cbedba6`, blob `5fdecf5e1bc3b6d9093c5be75183cf67a8a819d7`, was executed locally with Python/Fraction and had matching Git blob. Four alpha cases PASS for whole-matrix Schur congruence, 3 source-basis changes per case, positive lower reserve, and a deliberate double-debit negative control. Scope: standalone rational signed Gram, NOT actual Weil operator or a Lean kernel proof. No additional GitHub Actions run was spawned ([skip ci]).
+* Q5 (external review, not promoted): Desogus `The Three Gates` arXiv:2609.20367v3/V4 claims the physical odd Weil operator Gate-II induction. rStation post 21 (2026-10-18) presents an un-replayed certified theta trial at k=7, conditional on identifying its true physical collar ground. Independently checked only the elementary physical polar versus odd-constant overlap (L2 distance ~0.0207382), the published e_w versus constant overlap (~0.0192702), and the conditional scalar inequality 2.30*(1.90-2.37/4)^2=3.931979375>2.16. These are NUMERICAL/EXTERNAL_CLAIM, not a verified counterexample. The next high-value proof is the exact physical identification of the collar source ground and independent replay of the theta energy certificate; do not import an external RH claim as an axiom.
+
 ## 6. Standing constraints
 
 Reply in BHS, briefly. No sorry, axioms, fake modules or duplicates; change existing proofs only
