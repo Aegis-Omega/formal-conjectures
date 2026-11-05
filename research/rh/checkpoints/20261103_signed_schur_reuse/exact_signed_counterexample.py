@@ -26,6 +26,17 @@ assert R==G
 assert all(A[i][i]==-1 for i in range(n))
 rows=[sum(abs(A[i][j]) for j in range(n) if j!=i) for i in range(n)]
 assert rows==[Q(5,4)]*n
+# A source-exact UNIVERSAL weighted-row obstruction, not a single
+# numerical choice of weights. K is the nonnegative absolute off-diagonal
+# Schur matrix. Every column (and row) sum is exactly 5/4.
+# For arbitrary w_i > 0:
+#   sum_i (K w)_i = (5/4)*sum_i w_i > sum_i w_i.
+# Thus it is impossible that (K w)_i <= w_i for all i.
+# The checked rational column-sum identity is the finite certificate
+# for the universal statement, with no search over weights.
+K=[[abs(A[i][j]) if i!=j else Q(0) for j in range(n)] for i in range(n)]
+assert all(sum(K[i][j] for i in range(n)) == Q(5,4) for j in range(n))
+assert all(sum(K[i][j] for j in range(n)) == Q(5,4) for i in range(n))
 # For *any* positive row weights w, at a minimal-weight index i the weighted
 # row is >= 5/4. This is a universal no-go for weighted absolute Schur
 # dominance for this fixed signed Gram, not merely for equal weights.
@@ -40,6 +51,8 @@ result={'source':'Exact standalone symmetric Paley conference matrix, not actual
         'C_squared_equals_5I':True,'matrix_A':[[str(v) for v in row] for row in A],
         'all_absolute_offdiagonal_row_sums':[str(v) for v in rows],
         'negative_diagonal_magnitude':'1',
+        'absolute_schur_column_sums':[str(sum(K[i][j] for i in range(n))) for j in range(n)],
+        'universal_weighted_row_exact_certificate':'For any strictly positive w, sum_i (K w)_i = (5/4)*sum_i w_i > sum_i w_i; therefore K w <= w componentwise is impossible.',
         'universal_weighted_row_obstruction':'At an index of smallest positive w_i, sum_{j != i} |A_ij| w_j / w_i >= 5/4 > 1 for EVERY w>0',
         'strict_negative_definite_certificate':'-A = 1/2*(-A)^2 + 11/32*I',
         'certificate_verified_exactly':True,
