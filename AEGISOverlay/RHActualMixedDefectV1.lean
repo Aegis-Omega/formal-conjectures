@@ -2431,8 +2431,10 @@ theorem independent_midpoint_three_packet_one_v1
   have hlogUpper : Real.log (2 : ℝ) ≤ 7 / 10 :=
     le_of_lt AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper
   have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
-    apply Real.exp_le_exp.mpr
-    linarith
+    calc
+      Real.exp (-Real.log (2 : ℝ) / 2) ≤ Real.exp 0 :=
+        Real.exp_le_exp.mpr (by linarith)
+      _ = 1 := Real.exp_zero
   have hproduct :
       Real.log 2 * Real.exp (-Real.log 2 / 2) ≤ (7 / 10 : ℝ) := by
     have hx := mul_le_mul_of_nonneg_left hexp hlog0
