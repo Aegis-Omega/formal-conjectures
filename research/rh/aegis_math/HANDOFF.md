@@ -1,7 +1,7 @@
 # RH lab: handoff and operating protocol
 
 Save file for the next session. Read it first; update §5 at the end of every session.
-State as of 2026-11-02 08:30 UTC.
+Historical handoff updated for source activity through 2026-11-05. Live HEAD must be read from PR #92; this file is not an immutable-current-head receipt.
 
 ## 1. Where things are
 
@@ -14,8 +14,8 @@ State as of 2026-11-02 08:30 UTC.
   `certify.py`, `CERTIFIED.txt`, README with all tables).
 * Windows: `research/rh/checkpoints/20261031_window_l118/`; build DAG in
   `research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/` (`plan.py`, `build.py`, `audit.py`).
-* Last commit with every RH workflow green: `777d7d88` (windows run 41362109721). Later commits are
-  `[skip ci]` data and docs.
+* Historical all-green checkpoint: `777d7d88` (windows run 41362109721). Later source commits exist and have their own CI runs; historical GREEN must never be projected onto a newer SHA.
+* Latest source head checked before this handoff update: `e017d2aa916ecfd0db112a3a40bdc6200edb881c` (PR #92). The current live HEAD may differ after any subsequent commit. This head adds the conditional `rh_iff_remaining_windows_actual_sharp_signed_budget` to the existing stronger `RHWindowL118ActualFineGramJoinV1.lean` without asserting universal RH. Source blob at that head: `240fc3927bfa0a7fad540427843b3454d39add02`; source-graph run `42048897477` SUCCESS, moment-killer run `42048897294` SUCCESS; CvS full source run `42048897448` was PENDING at inspection. No exact-head kernel PASS for the new theorem has been observed.
 
 ## 2. Mathematics
 
@@ -64,11 +64,10 @@ blueprints (Buzzard, Tao; the Equational Theories Project: many small verified t
 
 ## 5. Queue
 
-* Q0: build-and-docs dispatch 41411757322 on `80e0f5b4` was still queued with 0 jobs 15 minutes
-  after dispatch. If it is still stuck, cancel it and dispatch once more. The user changed the
-  Actions policy on 2026-11-02 (all actions allowed).
-* Q1: when Codex pushes, review only its diff and catalog its claims as `external_claim` until replayed.
-* Q2: route 1 at a = 0.3 first: a certified lower bound for the second eigenvalue on the even block.
+* Q0: ensure `.github/workflows/rh-cvs-window-l65-source.yml` compiles the existing `RHWindowL118ActualFineGramJoinV1` root and `audit.py` REQUIRES its `rh_iff_remaining_windows_actual_sharp_signed_budget` `#print axioms` result. The workflow must compare the checked-out Git HEAD with the triggering PR head SHA and preserve the actual source hashes in the receipt. A queued, pending or running workflow is not a source-level PASS.
+* Q1: inspect fresh exact-head CI jobs and the first failing compile log if any. Fix only the actual failed import/type/check while retaining the old passing checkpoints and without weakening any proposition or audit.
+* Q2: search actual existing source/archives for a producer of the remaining-window signed Gram certificate (or an independent sufficient RH route) before adding any theorem. The stronger existing L118 full-signed-Gram join must not be duplicated.
+* Q3: when Codex pushes, inspect only its diff and classify candidate-only claims until source-bound replay. The spectral simple-even lower-bound experiment at a=0.3 remains a separate bounded research track.
 * Blocked on the user: Pages; stale red branches (tag, then delete); the Claude GitHub App;
   the leftover branch `ops/archive-red-branches-20261101`; approval of the #95 bot run.
 
