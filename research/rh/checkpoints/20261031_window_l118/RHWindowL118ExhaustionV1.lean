@@ -17,7 +17,6 @@ limitations under the License.
 import CvSWindowL118V1
 import WeilWindowExhaustionV1
 import V13Scratch
-import AEGISOverlay.RHActualUniversalFineGramV1
 
 /-!
 # The window `2r ≤ 11/8` in the window-exhaustion chain
@@ -59,45 +58,6 @@ theorem window_le_eleven_sixteenths {L : ℝ} (hL : L ≤ 11 / 16) :
   exact (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10 g hm).mpr
     (window_L118 g hm L 0 hw (by linarith))
 
-/-! ## Actual Weil Gram signed budget on the full proven 11/16 window
-
-Unlike the earlier 693/2000 alignment, this result uses the exact CvS
-11/8 certificate. It retains every real off-diagonal Weil pairing.
-The conclusion is the sharp signed budget, NOT the stronger uniform
-energy-relative mixed budget, which cannot be inferred from weak sign.
--/
-
-/-- Every source with log-support half-width at most 11/16 has an
-actual moment-zero fine Gram reconstruction whose full *signed*
-mixed defect is paid by its genuine diagonal Weil entries. -/
-theorem certified_eleven_sixteenths_fine_gram_sharp_signed_budget
-    (g : WeilCompactSmoothGV1)
-    (hm : WeilMomentConditionsV1 g)
-    (hw : LogWindowContainsV1 g (11 / 16)) :
-    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
-      (center : Fin (n + 1) → ℝ),
-      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
-      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
-        -(AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) ∧
-      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
-        (gs i) (center i)) ∧
-      g = AEGIS.RHGramExpansionV13.packetSum (fun _ => (1 : ℂ)) gs ∧
-      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
-        -(∑ i, (AEGIS.WeilMixedAlgebraV2.B (gs i) (gs i)).re) := by
-  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, hgram⟩ :=
-    AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support
-      g hm
-  have hwindow :
-      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
-    window_le_eleven_sixteenths (L := 11 / 16) (le_refl _) g hm hw
-  have hsum :
-      (∑ i, ∑ j, AEGIS.WeilMixedAlgebraV2.B (gs i) (gs j)).re ≤ 0 := by
-    rw [← hgram]
-    exact hwindow
-  refine ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, ?_⟩
-  unfold AEGIS.RHActualMixedDefectV1.actualMixedDefect
-  linarith
-
 /-- The final sign residual is equivalent to the sign on the windows `L > 11/16`. -/
 theorem final_sign_iff_windows_above_eleven_sixteenths :
     FinalSignResidualV1 ↔ ∀ L : ℝ, 11 / 16 < L → WindowArithmeticNonpositiveV1 L := by
@@ -119,6 +79,5 @@ theorem rh_iff_windows_above_eleven_sixteenths :
 end AEGIS.RHWindowL118ExhaustionV1
 
 #print axioms AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths
-#print axioms AEGIS.RHWindowL118ExhaustionV1.certified_eleven_sixteenths_fine_gram_sharp_signed_budget
 #print axioms AEGIS.RHWindowL118ExhaustionV1.final_sign_iff_windows_above_eleven_sixteenths
 #print axioms AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths
