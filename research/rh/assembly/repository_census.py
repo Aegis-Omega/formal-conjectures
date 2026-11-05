@@ -132,10 +132,15 @@ def source_proof_interfaces(root, modules):
     binder = re.compile(r"\b(" + "|".join(names_of_interest) + r")\s*:")
     for module in modules:
         path = module["path"]
-        if not (module["rh_related_source"] or
-                path == "FormalConjectures/Millennium/RiemannHypothesis.lean"):
-            continue
+        # Root-level RH joins and general conjecture files are not necessarily
+        # tagged by the RH path prefix. Inspect every tracked Lean source;
+        # retain declarations only when their signatures mention RH or a
+        # named interface premise. A missing root must not become green CI.
         code = code_only((root / path).read_text(encoding="utf-8"))
+        if not (module["rh_related_source"] or
+                "RiemannHypothesis" in code or
+                "hzero" in code or "hselect" in code):
+            continue
         decls = list(DECL.finditer(code))
         for i, m in enumerate(decls):
             next_start = decls[i + 1].start() if i + 1 < len(decls) else len(code)
@@ -202,7 +207,7 @@ def source_proof_interfaces(root, modules):
                 "scope": "SOURCE_INTERFACE_DIAGNOSTIC_NOT_A_PROOF_VERDICT",
             })
     return {
-        "scope": "TRACKED_RH_SOURCE_AT_EXACT_CHECKOUT",
+        "scope": "ALL_TRACKED_LEAN_SOURCE_RH_INTERFACES_EXACT_CHECKOUT",
         "proof_status": "SOURCE_ONLY_KERNEL_UNVERIFIED",
         "source_interfaces": evidence,
         "source_signature_bindings": bindings,
@@ -409,6 +414,10 @@ def self_test():
                 "theorem not_uniformFineMixedBudget : ¬ UniformFineMixedBudget := by sorry\n",
             "FormalConjectures/Millennium/RiemannHypothesis.lean":
                 "theorem riemannHypothesis : RiemannHypothesis := by sorry\n",
+            "AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean":
+                "theorem riemannHypothesis_of_universal_actual_cvs_cofinal"
+                " (happrox : UniversalActualCvSCofinalApproximation) :"
+                " RiemannHypothesis := by sorry\n",
         }
         for path, contents in samples.items():
             dest = root / path
@@ -422,6 +431,8 @@ def self_test():
         assert ids == {"HZERO_SCHUR_RECIPROCAL_INTERFACES",
                        "UNIFORM_BUDGET_REFUTED_IN_SOURCE"}
         assert report["proof_status"] == "SOURCE_ONLY_KERNEL_UNVERIFIED"
+        assert next(x for x in report["source_signature_bindings"]
+                    if x["id"] == "CVS_APPROXIMATION")["source_state"] == "SIGNATURE_MATCH"
         # A commented-out producer is not an available declaration.
         (root / "AEGISOverlay/RHFeshbachWeilClosureV2.lean").write_text(
             "-- theorem packet_zero_quadratic_nonnegative : 0 ≤ Q := by sorry\n")
