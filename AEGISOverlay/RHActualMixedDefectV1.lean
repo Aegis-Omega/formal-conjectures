@@ -1026,6 +1026,101 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_arch
   exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
 
 
+/-! ## Independent-shape dyadic resonance: exact m=2 sample to actual two-packet coercivity
+
+These results use the native von Mangoldt term, not a surrogate Gram entry.
+The input packets are independently shaped. They do not assume a common
+mother, a universal row budget, or the sign of the final Weil form. -/
+
+/-- The isolated genuine prime term at the log-2 resonance is bounded by
+the exact von Mangoldt weight and the two source energies. -/
+theorem independent_adjacent_fine_prime_norm_le_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2)) :
+    ‖WeilPrimeSumV1 (mixed p q)‖ ≤
+      Real.log 2 * Real.exp (-Real.log 2 / 2) *
+        ((energy p.1 + energy q.1) / 2) := by
+  have hsingle :=
+    independent_adjacent_fine_prime_sum_single_v1 p q a hp hq
+  have hz := independent_adjacent_fine_mixed_nat_zero_v1
+    p q a hp hq 2 (by norm_num)
+  have hterm :
+      WeilPrimeTermV1 (mixed p q) 1 =
+        ((Real.log 2 : ℝ) : ℂ) *
+          ((1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)) := by
+    simp [WeilPrimeTermV1, hz,
+      ArithmeticFunction.vonMangoldt_apply_prime (by norm_num : Nat.Prime 2)]
+  have hrec := distinct_reciprocal_mixed_norm_le_mean_energy_v1
+    p q 2 (by norm_num)
+  have hlog : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  calc
+    ‖WeilPrimeSumV1 (mixed p q)‖ =
+        ‖((Real.log 2 : ℝ) : ℂ) *
+          ((1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹))‖ := by
+            rw [hsingle, hterm]
+    _ = Real.log 2 * ‖(1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)‖ := by
+      rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hlog]
+    _ ≤ Real.log 2 * Real.exp (-Real.log 2 / 2) *
+          ((energy p.1 + energy q.1) / 2) := by
+      calc
+        Real.log 2 * ‖(1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)‖ ≤
+            Real.log 2 * (Real.exp (-Real.log 2 / 2) *
+              ((energy p.1 + energy q.1) / 2)) :=
+          mul_le_mul_of_nonneg_left hrec hlog
+        _ = _ := by ring
+
+/-- New full arithmetic mixed-Weil bound at one genuine prime resonance,
+including the separately proved archimedean remainder. -/
+theorem independent_adjacent_fine_actual_B_norm_le_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) :
+    ‖B p q‖ ≤
+      (Real.log 2 * Real.exp (-Real.log 2 / 2) / 2 + 1 / 200) *
+        (energy p.1 + energy q.1) := by
+  have hprime :=
+    independent_adjacent_fine_prime_norm_le_v1 p q a hp hq
+  have hfull := distinct_fine_far_actual_B_norm_le_prime_plus_arch
+    p q a (a + Real.log 2) hp hq hm (by simp)
+  calc
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+        (1 / 200 : ℝ) * (energy p.1 + energy q.1) := hfull
+    _ ≤ Real.log 2 * Real.exp (-Real.log 2 / 2) *
+          ((energy p.1 + energy q.1) / 2) +
+        (1 / 200 : ℝ) * (energy p.1 + energy q.1) :=
+          add_le_add_right hprime _
+    _ = (Real.log 2 * Real.exp (-Real.log 2 / 2) / 2 + 1 / 200) *
+        (energy p.1 + energy q.1) := by ring
+
+/-- For two independently shaped fine packets at one dyadic prime
+resonance, the *actual* two-packet Weil Gram retains an explicit diagonal
+reserve. The coefficient is symbolic and makes no unproved positivity claim
+for an arbitrary number of prime-resonant blocks. -/
+theorem independent_adjacent_fine_two_packet_coercive_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) :
+    ((5671 / 3200 : ℝ) -
+        Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100) *
+      (energy p.1 + energy q.1) ≤
+        -(B (addPacket p q) (addPacket p q)).re := by
+  have hdiagP :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3 p a hp
+  have hdiagQ :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      q (a + Real.log 2) hq
+  have hcross :=
+    independent_adjacent_fine_actual_B_norm_le_v1 p q a hp hq hm
+  have hreal := Complex.re_le_norm (B p q)
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients p q
+  nlinarith
+
+
 /-! ## Moment-zero removal of the distant rank-one Arch kernel
 
 Exact reuse of the source-pinned separated Arch integral identity,
