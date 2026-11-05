@@ -202,6 +202,18 @@ if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
         raise SystemExit('M8_CORRECTION_BOUND_SOURCE_MISSING')
     src.setdefault('AEGISOverlay.RHKreinCorrectionM8BoundV1',
                    (bound, False, None, 'existing-m8-qualified'))
+    # Reuse the same declaration-free correction aliases as the already-green
+    # cofinal exact-source DAG. Both aliases import the single genuine symbol.
+    adapter = Path('research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean')
+    expected_adapter = 'cb70597230e1cd1863bef40e0901c9e317dedf20'
+    if not adapter.is_file():
+        raise SystemExit('CORRECTION_SYMBOL_ADAPTER_MISSING')
+    actual_adapter = subprocess.check_output(
+        ['git', 'hash-object', str(adapter)], text=True).strip()
+    if actual_adapter != expected_adapter:
+        raise SystemExit('CORRECTION_SYMBOL_ADAPTER_BLOB_MISMATCH ' + actual_adapter)
+    for mod in ('RHKreinExplicitCorrectionV1', 'AEGISOverlay.RHKreinCorrectionSymbolV1'):
+        src[mod] = (adapter, False, None, 'existing-cofinal-correction-alias')
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):
