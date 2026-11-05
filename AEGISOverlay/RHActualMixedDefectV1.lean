@@ -1123,6 +1123,68 @@ theorem independent_adjacent_fine_two_packet_coercive_v1
   nlinarith
 
 
+/-! ## Two-dimensional Hermitian positivity at a genuine prime resonance
+
+The previous two-packet estimate controls p+q. This extension permits
+independent complex coefficients and proves a strict rational Gram reserve.
+It reuses the same source-exact von Mangoldt and Archimedean estimates. -/
+
+/-- Exact complex-scaling law for the genuine L² packet energy. -/
+theorem independent_adjacent_fine_energy_scale_complex_v1
+    (z : ℂ) (p : WeilCompactSmoothGV1) :
+    energy (scalePacket z p).1 = ‖z‖ ^ 2 * energy p.1 := by
+  unfold energy
+  change (∫ t : ℝ, ‖z * p.1 t‖ ^ 2) =
+    ‖z‖ ^ 2 * ∫ t : ℝ, ‖p.1 t‖ ^ 2
+  simp_rw [norm_mul, mul_pow]
+  exact integral_const_mul _ _
+
+/-- The exact dyadic prime-resonant coercivity factor exceeds 3/4.
+The bound uses only log(2) ≤ 1 and exp(-log(2)/2) ≤ 1. -/
+theorem independent_adjacent_fine_coefficient_ge_three_quarters_v1 :
+    (3 / 4 : ℝ) ≤
+      (5671 / 3200 : ℝ) -
+        Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100 := by
+  have hlog0 : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  have hlog1 : Real.log (2 : ℝ) ≤ 1 := by
+    simpa using
+      (Real.log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 2))
+  have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
+    have hneg : -Real.log (2 : ℝ) / 2 ≤ 0 := by linarith
+    simpa using (Real.exp_le_exp.mpr hneg)
+  have hprod :=
+    mul_le_mul_of_nonneg_left hexp hlog0
+  nlinarith
+
+/-- Full 2×2 Hermitian Gram coercivity for any two independently shaped
+moment-zero fine packets separated by log(2), and for ALL complex phases
+and amplitudes. The reserve is a fixed rational 3/4, not an asymptotic
+claim or a global-RH premise. -/
+theorem independent_adjacent_fine_weighted_three_quarters_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) (z w : ℂ) :
+    (3 / 4 : ℝ) *
+      (‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1) ≤
+        -(B (addPacket (scalePacket z p) (scalePacket w q))
+           (addPacket (scalePacket z p) (scalePacket w q))).re := by
+  have hbase := independent_adjacent_fine_two_packet_coercive_v1
+    (scalePacket z p) (scalePacket w q) a
+    (fine_width_scale p z a hp)
+    (fine_width_scale q w (a + Real.log 2) hq)
+    (momentConditions_scalePacket_v10 z p hm)
+  rw [independent_adjacent_fine_energy_scale_complex_v1 z p,
+      independent_adjacent_fine_energy_scale_complex_v1 w q] at hbase
+  have hnonneg :
+      0 ≤ ‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1 := by
+    positivity
+  have hcoeff := mul_le_mul_of_nonneg_right
+    independent_adjacent_fine_coefficient_ge_three_quarters_v1 hnonneg
+  exact hcoeff.trans hbase
+
+
 /-! ## Moment-zero removal of the distant rank-one Arch kernel
 
 Exact reuse of the source-pinned separated Arch integral identity,
@@ -2356,3 +2418,10 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.moment_zero_fine_middle_arch_q16
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_q16_middle_gap
+
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_prime_norm_le_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_actual_B_norm_le_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_two_packet_coercive_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_energy_scale_complex_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_coefficient_ge_three_quarters_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_weighted_three_quarters_v1
