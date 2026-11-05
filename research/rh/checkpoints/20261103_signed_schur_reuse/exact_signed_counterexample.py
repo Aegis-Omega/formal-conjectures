@@ -90,21 +90,52 @@ def certify_gate2_one_debit(alpha):
     source_inv=inv2(source)
     debit=matmul(matmul(trans(cross),source_inv),cross)
     short=[[target[i][j]-debit[i][j] for j in range(4)] for i in range(4)]
-    rotation=[[Q(0),Q(1)],[Q(-1),Q(0)]]
-    rotated_source=matmul(matmul(trans(rotation),source),rotation)
-    for y in [[Q(1),Q(-1),Q(2),Q(0)]] + [
-            [Q(i==j) for i in range(4)] for j in range(4)]:
-        force=mv(cross,y)
-        x=[-z for z in mv(source_inv,force)]
-        raw=dot(y,mv(target,y))
-        cost=dot(force,mv(source_inv,force))
-        complete=dot(x,mv(source,x))+2*dot(x,force)+raw
-        assert complete==raw-cost==dot(y,mv(short,y))
-        force_rot=mv(trans(rotation),force)
-        assert dot(force_rot,mv(inv2(rotated_source),force_rot))==cost
+    # Exact whole-matrix congruence: proves the Schur square completion
+    # for ALL rational/real target vectors, not a sample of five vectors.
+    # H^T G H = Schur and T^T G T = diag(source, Schur).
+    h_top=[[-v for v in row] for row in matmul(source_inv,cross)]
+    H=h_top+[[Q(i==j) for j in range(4)] for i in range(4)]
+    assert matmul(matmul(trans(H),gram),H)==short
+    T=[([Q(i==j) for j in range(2)]+h_top[i]) for i in range(2)]
+    T += [([Q(0),Q(0)]+[Q(i==j) for j in range(4)]) for i in range(4)]
+    diagonal=[source[i]+[Q(0)]*4 for i in range(2)]
+    diagonal += [[Q(0)]*2+short[i] for i in range(4)]
+    assert matmul(matmul(trans(T),gram),T)==diagonal
+    # Under ANY invertible source-coordinate change U, the exact source
+    # cost and Schur complement are invariant. Check orthogonal AND
+    # genuinely nonorthogonal rational basis changes.
+    source_changes=[[[Q(0),Q(1)],[-Q(1),Q(0)]],
+                    [[Q(1),Q(2)],[Q(1),Q(3)]],
+                    [[Q(2),Q(1)],[Q(1),Q(1)]]]
+    for U in source_changes:
+        changed_source=matmul(matmul(trans(U),source),U)
+        changed_cross=matmul(trans(U),cross)
+        changed_inv=inv2(changed_source)
+        changed_debit=matmul(matmul(trans(changed_cross),changed_inv),changed_cross)
+        assert changed_debit==debit
+        assert [[target[i][j]-changed_debit[i][j] for j in range(4)]
+                for i in range(4)]==short
+    # Positivity of Schur for ALL y follows from exact source coercivity
+    # G = 0.5 G^2 + margin I: ||H y||^2 >= ||y||^2.
+    margin=(Q(1)-Q(5)*alpha*alpha)/Q(2)
+    assert margin>0
+    squared=matmul(gram,gram)
+    assert gram==[[squared[i][j]/Q(2)+margin*I[i][j]
+                   for j in range(n)] for i in range(n)]
+    # An accidental second subtraction of the source cost is detected.
+    y=[Q(1),Q(-1),Q(2),Q(0)]
+    force=mv(cross,y)
+    cost=dot(force,mv(source_inv,force))
+    assert cost>0
+    assert dot(y,mv(short,y))==dot(y,mv(target,y))-cost
+    assert dot(y,mv(short,y))!=dot(y,mv(target,y))-2*cost
     assert short==trans(short)
-    return {'alpha':str(alpha), 'one_source_debit':'PASS',
-            'source_rotation_covariance':'PASS','vectors_checked':5}
+    return {'alpha':str(alpha), 'whole_matrix_Schur_congruence':'PASS',
+            'one_source_debit':'PASS', 'source_rotation_covariance':'PASS',
+            'invertible_source_changes_checked':len(source_changes),
+            'full_dimension':6, 'source_dimension':2, 'target_dimension':4,
+            'strict_Schur_lower_bound':str(margin),
+            'double_debit_regression':'PASS'}
 
 gate2_certificates=[certify_gate2_one_debit(a)
                     for a in (Q(21,100),Q(1,4),Q(1,3),Q(2,5))]
