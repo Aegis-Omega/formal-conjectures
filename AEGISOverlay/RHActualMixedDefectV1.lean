@@ -18,6 +18,7 @@ import AEGISOverlay.RHActualLocalGramCoercivityV1
 import RHWindowNineOver64GlobalizationV14
 import WeilFinalSignTranslationBoundV10
 import WeilSeparatedArchBridgeV31
+import RHDyadicWindowV13
 
 /-!
 AEGIS Ω — genuine full-Weil mixed-term defect, without dropped off-diagonals.
@@ -741,6 +742,99 @@ theorem nearby_fine_pair_actual_mixed_norm
     (hpolarM Complex.I) (hpolarW Complex.I)
     (hpolarM (-Complex.I)) (hpolarW (-Complex.I))
 
+
+/-! ## Independent-shape adjacent dyadic prime isolation
+
+The two packets have different shapes, and no common mother packet is assumed.
+Only the original von Mangoldt sample at 2 survives. This is a finite
+arithmetic identity, not global Weil positivity.
+-/
+
+/-- Positive integer mixed samples vanish for two independently shaped fine
+packets centered at a and a + log 2. -/
+theorem independent_adjacent_fine_mixed_nat_zero_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (m : ℕ) (hm : 0 < m) :
+    mixed p q (m : ℝ) = 0 := by
+  have hmreal : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  have hlog : 0 ≤ Real.log (m : ℝ) :=
+    Real.log_nonneg (by exact_mod_cast (Nat.one_le_iff_ne_zero.mpr (Nat.ne_of_gt hm)))
+  have hz : logCrossV28 p q (Real.log (m : ℝ)) = 0 := by
+    apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+      (Real.log (m : ℝ)) hp hq
+    right
+    linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_lower]
+  have hid := logCross_eq_mixed_v28 p q (Real.log (m : ℝ))
+  rw [hz, Real.exp_log hmreal] at hid
+  exact (mul_eq_zero.mp hid.symm).resolve_left
+    (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))
+
+/-- The only possibly nonzero reciprocal integer sample is m = 2,
+even when the two fine packets have different shapes. -/
+theorem independent_adjacent_fine_mixed_inv_nat_zero_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (m : ℕ) (hm : 0 < m) (hne : m ≠ 2) :
+    mixed p q ((m : ℝ)⁻¹) = 0 := by
+  have hmreal : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  have hfar : (1 / 128 : ℝ) < |Real.log (m : ℝ) - Real.log 2| := by
+    by_contra hnot
+    have hwindow :
+        |Real.log (m : ℝ) - Real.log 2| ≤ 2 * (1 / 256 : ℝ) := by
+      nlinarith [le_of_not_gt hnot]
+    have h2 : m = 2 ^ (1 : ℕ) :=
+      AEGIS.RHDyadicWindowV13.nat_eq_pow_of_log_window
+        1 (by norm_num) (1 / 256) (by norm_num) (by norm_num)
+        hm (by simpa only [Nat.cast_one, one_mul] using hwindow)
+    exact hne (by simpa using h2)
+  have hz : logCrossV28 p q (-Real.log (m : ℝ)) = 0 := by
+    rcases lt_or_ge (Real.log (m : ℝ)) (Real.log 2) with hlt | hge
+    · have hdiff : Real.log (m : ℝ) - Real.log 2 < 0 :=
+        sub_neg.mpr hlt
+      rw [abs_of_neg hdiff] at hfar
+      apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+        (a - 1 / 256) (a + 1 / 256)
+        (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+        (-Real.log (m : ℝ)) hp hq
+      right
+      linarith
+    · rw [abs_of_nonneg (sub_nonneg.mpr hge)] at hfar
+      apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+        (a - 1 / 256) (a + 1 / 256)
+        (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+        (-Real.log (m : ℝ)) hp hq
+      left
+      linarith
+  have hid := logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
+  have hexp : Real.exp (-Real.log (m : ℝ)) = (m : ℝ)⁻¹ := by
+    rw [Real.exp_neg, Real.exp_log hmreal]
+  rw [hz, hexp] at hid
+  exact (mul_eq_zero.mp hid.symm).resolve_left
+    (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))
+
+/-- Exact singleton von Mangoldt sum for two *different* moment-zero
+packet shapes separated by log 2. The moment hypotheses are not needed
+for sample isolation. -/
+theorem independent_adjacent_fine_prime_sum_single_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2)) :
+    WeilPrimeSumV1 (mixed p q) = WeilPrimeTermV1 (mixed p q) 1 := by
+  unfold WeilPrimeSumV1
+  apply tsum_eq_single 1
+  intro n hn
+  have hnpos : 0 < n + 1 := by omega
+  have hnnot : n + 1 ≠ 2 := by omega
+  have hz := independent_adjacent_fine_mixed_nat_zero_v1
+    p q a hp hq (n + 1) hnpos
+  have hi := independent_adjacent_fine_mixed_inv_nat_zero_v1
+    p q a hp hq (n + 1) hnpos hnnot
+  simp only [WeilPrimeTermV1, hz, hi, mul_zero, add_zero]
 
 /-! ## Actual distant-window ARCH control for unequal packet shapes
 
