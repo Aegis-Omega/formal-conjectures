@@ -18,6 +18,30 @@ def multiply(A,B):
 I=[[Q(i==j) for j in range(n)] for i in range(n)]
 assert C==[list(r) for r in zip(*C)]
 assert multiply(C,C)==[[5*I[i][j] for j in range(n)] for i in range(n)]
+# A parameter FAMILY of exact positive signed Gram matrices outside EVERY
+# absolute weighted Schur/Gershgorin cone.
+# For any real alpha with 1/5 < alpha and 5*alpha^2 < 1,
+#   G_alpha = I - alpha*C
+#           = (G_alpha^2 + (1-5*alpha^2)*I)/2  > 0.
+# The absolute off-diagonal matrix K_alpha has every column sum 5*alpha > 1.
+# Summing K_alpha*w <= w would imply (5*alpha)*sum(w) <= sum(w),
+# impossible for ANY strictly positive vector w.
+# The identity is symbolic given C^2=5I; rational witnesses are checked below.
+def certify_signed_family(alpha):
+    assert Q(1,5) < alpha and 5*alpha*alpha < 1
+    gram=[[I[i][j]-alpha*C[i][j] for j in range(n)] for i in range(n)]
+    squared=multiply(gram,gram)
+    margin=(1-5*alpha*alpha)/2
+    assert margin > 0
+    assert gram==[[squared[i][j]/2+margin*I[i][j] for j in range(n)] for i in range(n)]
+    abs_off=[[abs(gram[i][j]) if i!=j else Q(0) for j in range(n)] for i in range(n)]
+    assert all(sum(abs_off[i][j] for j in range(n))==5*alpha for i in range(n))
+    assert all(sum(abs_off[i][j] for i in range(n))==5*alpha for j in range(n))
+    return {'alpha':str(alpha),'strict_PSD_reserve':str(margin),
+            'absolute_schur_weighted_obstruction_ratio':str(5*alpha)}
+
+family=[certify_signed_family(a)
+        for a in (Q(21,100), Q(1,4), Q(1,3), Q(2,5))]
 A=[[-I[i][j]+Q(1,4)*C[i][j] for j in range(n)] for i in range(n)]
 G=[[-x for x in row] for row in A]
 G2=multiply(G,G)
@@ -56,6 +80,8 @@ result={'source':'Exact standalone symmetric Paley conference matrix, not actual
         'universal_weighted_row_obstruction':'At an index of smallest positive w_i, sum_{j != i} |A_ij| w_j / w_i >= 5/4 > 1 for EVERY w>0',
         'strict_negative_definite_certificate':'-A = 1/2*(-A)^2 + 11/32*I',
         'certificate_verified_exactly':True,
+        'parametric_full_signed_gram_family':family,
+        'parametric_proof':'For 1/5<alpha and 5*alpha^2<1, G=I-alpha*C=(G^2+(1-5*alpha^2)*I)/2 is strictly positive, while every absolute Schur row and column sum is 5*alpha>1.',
         'conclusion':'Absolute Gershgorin/Schur row dominance is NOT necessary for negative definiteness',
         'does_not_imply':['AEGIS actual Weil Gram positivity','Riemann hypothesis','kernel-verified theorem']}
 resultfile=Path(__file__).with_name('EXACT_CERTIFICATE.json')
