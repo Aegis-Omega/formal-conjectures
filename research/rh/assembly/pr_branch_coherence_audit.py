@@ -181,16 +181,15 @@ def build_report(client, repo, target_pr, workers=5):
     } for path, variants in sorted(sources.items()) if len(variants) > 1]
     checks_by_sha = {}
     open_sha = sorted({n["head_sha"] for n in nodes if n["state"] == "open"})
-    with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
-        futures = {pool.submit(check_head, client, sha): sha for sha in open_sha}
-        for future in concurrent.futures.as_completed(futures):
-            sha = futures[future]
-            try:
-                checks_by_sha[sha] = future.result()
-                if not checks_by_sha[sha]["complete"]:
-                    errors.append({"stage": "checks_pagination", "sha": sha})
-            except Exception as exc:
-                errors.append({"stage": "check_runs", "sha": sha, "error": str(exc)})
+    # Serial historical check-run reads avoid GitHub's intermittent concurrent
+    # HTTP 500 errors. Missing or incomplete data still fails closed.
+    for sha in open_sha:
+        try:
+            checks_by_sha[sha] = check_head(client, sha)
+            if not checks_by_sha[sha]["complete"]:
+                errors.append({"stage": "checks_pagination", "sha": sha})
+        except Exception as exc:
+            errors.append({"stage": "check_runs", "sha": sha, "error": str(exc)})
     no_pr_head = sorted(b["name"] for b in branches
                         if b["name"] not in by_ref)
     unused_branches = sorted(b for b in no_pr_head
