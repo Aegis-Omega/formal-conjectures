@@ -34,7 +34,7 @@ The only open analytic input is explicitly named below. No assumption is
 silently supplied and no finite-window certificate is promoted to all windows.
 -/
 
-open scoped BigOperators ContDiff
+open scoped ContDiff BigOperators ContDiff
 set_option autoImplicit false
 noncomputable section
 
