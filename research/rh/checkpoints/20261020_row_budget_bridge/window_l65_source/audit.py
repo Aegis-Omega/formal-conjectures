@@ -4,7 +4,7 @@ Every `#print axioms` result in every compiled module must use only propext, Cla
 and Quot.sound, no log may report a `sorry`, and the named roots below must all be audited.
 Writes WINDOW_L65_SOURCE_RECEIPT.json. Not RH.
 """
-import hashlib, json, re, subprocess
+import hashlib, json, os, re, subprocess
 from pathlib import Path
 allowed = {'propext', 'Classical.choice', 'Quot.sound'}
 required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_premises_L65',
@@ -37,6 +37,7 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
             'AegisMath.Obstructions.no_common_positive_width',
             'AegisMath.Obstructions.vonMangoldt_weights_do_not_imply_operator_nonnegative',
     'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_signed_fine_gram_on_l118_window',
+    'AEGIS.RHWindowL118ActualFineGramJoinV1.rh_iff_remaining_windows_actual_sharp_signed_budget',
     'AEGIS.RHWindowL118ActualFineGramJoinV1.every_actual_finite_gram_sharp_signed_budget_on_l118_window',
     'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_krein_two_block_signed_budget_on_l118_window',
     'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window']
@@ -52,8 +53,27 @@ for mod in sorted(plan):
         if not set(xs) <= allowed: bad.append((mod, name, xs))
     for name in re.findall(r"'([^']+)' does not depend on any axioms", text): audits.setdefault(name, [])
 out = lambda *a: subprocess.check_output(a, text=True).strip()
+# Hosted workflow checks out the PR *source* head, not the synthetic merge SHA.
+# A green axiom audit from any other commit must not be accepted for this run.
+checkout_sha = out('git', 'rev-parse', 'HEAD')
+event_file = os.environ.get('GITHUB_EVENT_PATH')
+expected_head = None
+provenance_error = None
+if os.environ.get('GITHUB_ACTIONS') == 'true':
+    if not event_file or not Path(event_file).is_file():
+        provenance_error = 'MISSING_GITHUB_EVENT'
+    else:
+        event = json.loads(Path(event_file).read_text())
+        expected_head = (event.get('pull_request') or {}).get('head', {}).get('sha') or os.environ.get('GITHUB_SHA')
+        if not expected_head:
+            provenance_error = 'MISSING_TRIGGER_HEAD'
+        elif expected_head != checkout_sha:
+            provenance_error = f'HEAD_MISMATCH expected={expected_head} checkout={checkout_sha}'
+
 receipt = {
-    'commit': out('git', 'rev-parse', 'HEAD'), 'lean': out('lean', '--version'),
+    'commit': checkout_sha, 'expected_trigger_head': expected_head,
+    'head_binding_status': 'PASS' if os.environ.get('GITHUB_ACTIONS') == 'true' and not provenance_error else ('NOT_CHECKED_LOCAL' if os.environ.get('GITHUB_ACTIONS') != 'true' else 'FAIL'),
+    'head_binding_error': provenance_error, 'lean': out('lean', '--version'),
     'mathlib': out('git', '-C', '.lake/packages/mathlib', 'rev-parse', 'HEAD'),
     'modules': len(plan), 'passed': sum(v == 'PASS' for v in state['status'].values()),
     'compile_seconds_total': round(sum(state['seconds'].values()), 1),
@@ -74,7 +94,7 @@ receipt = {
              'AegisMathCoreV1: aliases of kernel-checked theorems (windows, criterion, '
              'moment-killer, obstructions) under AegisMath; nothing new is proved there. Not RH.',
 }
-ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'])
+ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'] and not provenance_error)
 receipt['status'] = 'PASS' if ok else 'FAIL'
 Path('WINDOW_L65_SOURCE_RECEIPT.json').write_text(json.dumps(receipt, indent=1) + '\n')
 for n in required: print(n, audits.get(n))
