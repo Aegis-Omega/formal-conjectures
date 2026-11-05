@@ -1148,8 +1148,7 @@ theorem independent_adjacent_fine_coefficient_ge_three_quarters_v1 :
   have hlog0 : 0 ≤ Real.log (2 : ℝ) :=
     Real.log_nonneg (by norm_num)
   have hlog1 : Real.log (2 : ℝ) ≤ 1 := by
-    simpa using
-      (Real.log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 2))
+    nlinarith [Real.log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 2)]
   have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
     have hneg : -Real.log (2 : ℝ) / 2 ≤ 0 := by linarith
     simpa using (Real.exp_le_exp.mpr hneg)
@@ -1179,7 +1178,9 @@ theorem independent_adjacent_fine_weighted_three_quarters_v1
       independent_adjacent_fine_energy_scale_complex_v1 w q] at hbase
   have hnonneg :
       0 ≤ ‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1 := by
-    positivity
+    exact add_nonneg
+      (mul_nonneg (sq_nonneg _) (energy_nonnegative p.1))
+      (mul_nonneg (sq_nonneg _) (energy_nonnegative q.1))
   have hcoeff := mul_le_mul_of_nonneg_right
     independent_adjacent_fine_coefficient_ge_three_quarters_v1 hnonneg
   exact hcoeff.trans hbase
