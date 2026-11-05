@@ -761,14 +761,14 @@ theorem independent_adjacent_fine_mixed_nat_zero_v1
   have hmreal : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
   have hlog : 0 ≤ Real.log (m : ℝ) :=
     Real.log_nonneg (by exact_mod_cast (Nat.one_le_iff_ne_zero.mpr (Nat.ne_of_gt hm)))
-  have hz : logCrossV28 p q (Real.log (m : ℝ)) = 0 := by
+  have hz : AEGIS.WeilThreeBlockCrossPrimeV28.logCrossV28 p q (Real.log (m : ℝ)) = 0 := by
     apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
       (a - 1 / 256) (a + 1 / 256)
       (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
       (Real.log (m : ℝ)) hp hq
     right
     linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_lower]
-  have hid := logCross_eq_mixed_v28 p q (Real.log (m : ℝ))
+  have hid := AEGIS.WeilThreeBlockCrossPrimeV28.logCross_eq_mixed_v28 p q (Real.log (m : ℝ))
   rw [hz, Real.exp_log hmreal] at hid
   exact (mul_eq_zero.mp hid.symm).resolve_left
     (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))
@@ -792,7 +792,7 @@ theorem independent_adjacent_fine_mixed_inv_nat_zero_v1
         1 (by norm_num) (1 / 256) (by norm_num) (by norm_num)
         hm (by simpa only [Nat.cast_one, one_mul] using hwindow)
     exact hne (by simpa using h2)
-  have hz : logCrossV28 p q (-Real.log (m : ℝ)) = 0 := by
+  have hz : AEGIS.WeilThreeBlockCrossPrimeV28.logCrossV28 p q (-Real.log (m : ℝ)) = 0 := by
     rcases lt_or_ge (Real.log (m : ℝ)) (Real.log 2) with hlt | hge
     · have hdiff : Real.log (m : ℝ) - Real.log 2 < 0 :=
         sub_neg.mpr hlt
@@ -810,7 +810,7 @@ theorem independent_adjacent_fine_mixed_inv_nat_zero_v1
         (-Real.log (m : ℝ)) hp hq
       left
       linarith
-  have hid := logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
+  have hid := AEGIS.WeilThreeBlockCrossPrimeV28.logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
   have hexp : Real.exp (-Real.log (m : ℝ)) = (m : ℝ)⁻¹ := by
     rw [Real.exp_neg, Real.exp_log hmreal]
   rw [hz, hexp] at hid
