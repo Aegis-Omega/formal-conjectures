@@ -117,6 +117,45 @@ for d, strict, origin in [('research/rh/aegis_math', True, 'aegis-math'),
                           ('research/rh/moment_killer_v1', True, 'moment-killer'),
                           ('AEGISOverlay', False, 'overlay')]:
     for p in sorted(Path(d).glob('*.lean')): src.setdefault(p.stem, (p, strict, None, origin))
+# Recover exact source identities used by the already-green cofinal Schur replay.
+# Do not synthesize proof terms or replace a previously selected module.
+if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
+    manifest = json.loads(Path('research/rh/aegis_pr721_fb983fd/source_manifest.json').read_text())
+    entries = manifest['files']
+    for mod in ('RHFineDiagonalUpgradeV3', 'RHWindowNineOver64GlobalizationV14'):
+        matches = [row for row in entries if row['module'] == mod]
+        if len(matches) != 1:
+            raise SystemExit('PR721_SOURCE_MANIFEST_MISSING ' + mod)
+        row = matches[0]
+        source = Path(row['archive'])
+        if not source.is_file():
+            raise SystemExit('PR721_SOURCE_MISSING ' + str(source))
+        blob = subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip()
+        if blob != row['sha']:
+            raise SystemExit('PR721_SOURCE_BLOB_MISMATCH ' + mod)
+        src.setdefault(mod, (source, False, None, 'pr721-exact-blob'))
+    m8 = Path('research/rh/m8_kernel_v1/RHKreinM8AnalyticV1.lean')
+    if not m8.is_file():
+        raise SystemExit('M8_ANALYTIC_SOURCE_MISSING')
+    src.setdefault('AEGISOverlay.RHKreinM8AnalyticV1',
+                   (m8, False, None, 'existing-m8-qualified'))
+    finite = Path('research/rh/finite_m8_v1/RHKreinM8FiniteWindowV1.lean')
+    src.setdefault('research.rh.finite_m8_v1.RHKreinM8FiniteWindowV1',
+                   (finite, False, None, 'existing-finite-m8-qualified'))
+    generator = Path('research/rh/m8_kernel_v1/cell15_direct/gen.py')
+    model = Path('research/rh/m8_kernel_v1/cell15_direct/model.py')
+    for source, expected in ((generator, '8fc5e3898b30a5047398663334baf083794e673d'),
+                             (model, '834ba9df2213e01c9ec8668038aa7752552c8de2')):
+        if subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip() != expected:
+            raise SystemExit('CELL15_GENERATOR_BLOB_MISMATCH ' + str(source))
+    generated = Path('research/rh/m8_kernel_v1/RHKreinFifteenthCellDirectCorrectionV1.lean')
+    if not generated.is_file():
+        subprocess.run([sys.executable, str(generator), str(generated)], check=True)
+    if not generated.is_file() or not generated.stat().st_size:
+        raise SystemExit('CELL15_GENERATION_FAILED')
+    src.setdefault('RHKreinFifteenthCellDirectCorrectionV1',
+                   (generated, False, None, 'pinned-cell15-generator'))
+
 # Preserve the actual qualified Lean module names alongside legacy bare imports.
 # A source imported as AEGISOverlay.X must produce AEGISOverlay/X.olean.
 for p in sorted(Path('AEGISOverlay').glob('*.lean')):
