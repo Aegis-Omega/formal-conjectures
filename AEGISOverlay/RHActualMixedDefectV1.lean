@@ -1049,7 +1049,9 @@ theorem independent_adjacent_fine_prime_norm_le_v1
       WeilPrimeTermV1 (mixed p q) 1 =
         ((Real.log 2 : ℝ) : ℂ) *
           ((1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)) := by
-    simp [WeilPrimeTermV1, hz,
+    have hz' : mixed p q (2 : ℝ) = 0 := by
+      simpa only [Nat.cast_ofNat] using hz
+    simp [WeilPrimeTermV1, hz',
       ArithmeticFunction.vonMangoldt_apply_prime (by norm_num : Nat.Prime 2)]
   have hrec := distinct_reciprocal_mixed_norm_le_mean_energy_v1
     p q 2 (by norm_num)
@@ -1091,7 +1093,7 @@ theorem independent_adjacent_fine_actual_B_norm_le_v1
     _ ≤ Real.log 2 * Real.exp (-Real.log 2 / 2) *
           ((energy p.1 + energy q.1) / 2) +
         (1 / 200 : ℝ) * (energy p.1 + energy q.1) :=
-          add_le_add_right hprime _
+          add_le_add hprime le_rfl
     _ = (Real.log 2 * Real.exp (-Real.log 2 / 2) / 2 + 1 / 200) *
         (energy p.1 + energy q.1) := by ring
 
