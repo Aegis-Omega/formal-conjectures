@@ -156,6 +156,14 @@ if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
     src.setdefault('RHKreinFifteenthCellDirectCorrectionV1',
                    (generated, False, None, 'pinned-cell15-generator'))
 
+# Compile these local import nodes from the pinned repo, not external oleans.
+for mod in ('FormalConjectures.Millennium.RHSnowflakeLog23',
+            'FormalConjecturesUtil.FixedWindowLimitBridge'):
+    source = Path(*mod.split('.')).with_suffix('.lean')
+    if not source.is_file():
+        raise SystemExit('MISSING_LOCAL_FORMAL_SOURCE ' + str(source))
+    put(mod, source, True, None, 'local-formal-source')
+
 # Preserve the actual qualified Lean module names alongside legacy bare imports.
 # A source imported as AEGISOverlay.X must produce AEGISOverlay/X.olean.
 for p in sorted(Path('AEGISOverlay').glob('*.lean')):
@@ -226,7 +234,7 @@ while todo:
     if mod not in src: missing.add(mod); continue
     need.add(mod); ds = []
     for i in imports(src[mod][0]):
-        if i.split('.')[0] in ext + prov or i.startswith('FormalConjectures'): continue
+        if i.split('.')[0] in ext + prov: continue
         ds.append(i); todo.append(i)
     deps[mod] = ds
 if missing: raise SystemExit('MISSING_SOURCE ' + ' '.join(sorted(missing)))

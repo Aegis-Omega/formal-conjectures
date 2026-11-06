@@ -43,9 +43,13 @@ required = ['AEGIS.CvSWindowL65V1.window_L65', 'AEGIS.CvSTraceCertL65V1.trace_pr
     'AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window']
 plan = json.loads(Path('.lake/real_plan.json').read_text())
 state = json.loads(Path('.lake/real_status.json').read_text())
-audits, bad, sorries = {}, [], []
+audits, bad, sorries, missing_logs = {}, [], [], []
 for mod in sorted(plan):
-    text = (Path('.lake/reallogs')/(mod + '.log')).read_text()
+    log_path = Path('.lake/reallogs') / (mod + '.log')
+    if not log_path.is_file():
+        missing_logs.append(mod)
+        continue  # FAIL CLOSED while still auditing available logs
+    text = log_path.read_text()
     if re.search(r"declaration uses 'sorry'|sorryAx", text): sorries.append(mod)
     for name, ax in re.findall(r"'([^']+)' depends on axioms:\s*\[([^\]]*)\]", text):
         xs = sorted(x.strip() for x in ax.split(',') if x.strip())
@@ -79,6 +83,7 @@ receipt = {
     'compile_seconds_total': round(sum(state['seconds'].values()), 1),
     'source_sha256': {m: hashlib.sha256(Path(r['path']).read_bytes()).hexdigest() for m, r in sorted(plan.items())},
     'axiom_audits': audits, 'unexpected_axioms': bad, 'sorry_modules': sorries,
+    'missing_module_logs': sorted(missing_logs),
     'missing_required': [n for n in required if n not in audits],
     'required_roots': {n: audits.get(n) for n in required},
     'scope': 'Every module compiled from source in this run; no binary reuse. window_L65: for '
@@ -94,7 +99,7 @@ receipt = {
              'AegisMathCoreV1: aliases of kernel-checked theorems (windows, criterion, '
              'moment-killer, obstructions) under AegisMath; nothing new is proved there. Not RH.',
 }
-ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'] and not provenance_error)
+ok = (receipt['passed'] == len(plan) and not bad and not sorries and not receipt['missing_required'] and not missing_logs and not provenance_error)
 receipt['status'] = 'PASS' if ok else 'FAIL'
 Path('WINDOW_L65_SOURCE_RECEIPT.json').write_text(json.dumps(receipt, indent=1) + '\n')
 for n in required: print(n, audits.get(n))
