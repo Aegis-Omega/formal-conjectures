@@ -70,7 +70,10 @@ theorem genuine_weil_prime_tsum_eq_finite_of_sieve
     obtain ⟨hpos, hinv⟩ :=
       distinct_fine_prime_samples_vanish_of_integer_log_gap
         p q a b hp hq hsep (n + 1) hm hgap
-    simp [WeilPrimeTermV1, hpos, hinv]
+    unfold WeilPrimeTermV1
+    dsimp
+    rw [hpos, hinv]
+    simp
   · simp [WeilPrimeTermV1, hΛ]
 
 /-- Reduce the infinite real-log exclusion to just two endpoint
@@ -376,7 +379,7 @@ theorem gap10_exact_primepower_indices :
     interval_cases n <;>
       simp [npp_1383, npp_1384, npp_1385, npp_1386, npp_1387, npp_1388, npp_1389, npp_1390, npp_1391, npp_1392, npp_1393, npp_1394, npp_1395, npp_1396, npp_1397, npp_1398, pp_1399, npp_1400, npp_1401, npp_1402, npp_1403, gap10Indices]
   · have hnot : n ∉ gap10Indices := by
-      simp only [gap10Indices, Finset.mem_insert, Finset.mem_singleton]
+      simp only [gap10Indices, Finset.mem_singleton]
       omega
     simp [hin, hnot]
 

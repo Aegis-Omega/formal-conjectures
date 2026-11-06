@@ -811,7 +811,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
-          test "$(git hash-object AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean)" = "0147bc29d3e8076431bf89e7f35f770566812e32"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean)" = "be3a3a32f806ede2d30339ca495ff9293e45b106"
           mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
           lake env lean --trust=0 \
             -o .lake/build/lib/lean/AEGISOverlay/WeilPrimeReindexV1.olean \
