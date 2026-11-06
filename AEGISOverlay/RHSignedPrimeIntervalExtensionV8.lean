@@ -37,6 +37,7 @@ namespace AEGIS.RHSignedPrimeIntervalExtensionV8
 
 open AEGIS.WeilPrimeAbelReductionV1
 open AEGIS.WeilPrimeDiscrepancyV1
+open AEGIS.WeilSignedKernelReductionV1
 open AEGIS.WeilPrimeDiscrepancyEstimateV1
 open AEGIS.WeilWindowExhaustionV1
 open AEGIS.WeilThreeBlockTranslatedPacketsV22
