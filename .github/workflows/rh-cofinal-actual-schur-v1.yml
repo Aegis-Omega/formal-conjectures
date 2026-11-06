@@ -235,6 +235,11 @@ jobs:
           printf '%s  %s\n' dafcf849489f9b5f5ed7275ca74c53e4d0e6740d14bddbe51b62332d79a40801 "$archive" | sha256sum -c -
           test "$(tar -tzf "$archive" | wc -l)" -eq 4
           tar -xzf "$archive" -C .
+          # Original PR63 source blobs: reject any altered Abel/Chebyshev implementation.
+          test "$(git hash-object WeilSignedPrimeFiniteSupportV1.lean)" = "5800bea6ca4468c8ea2f028738cadda1f818bc0e"
+          test "$(git hash-object WeilPrimeAbelReductionV1.lean)" = "10ebac3a041ca87840e18aca521a93790f647a20"
+          test "$(git hash-object WeilPrimeDiscrepancyV1.lean)" = "9d43fb9bd3b7bca72c94ab76eb604fde2d0a9e36"
+          test "$(git hash-object WeilPrimeDiscrepancyEstimateV1.lean)" = "a8a48cafc2bc2117e2c7836abdbdf3eef4884600"
 
       - name: Validate assembly evidence scripts
         shell: bash
@@ -569,6 +574,18 @@ jobs:
             ! grep -F 'error:' "evidence-cofinal/compile-${m//./_}.log"
             printf '%s\n' "$m" >> evidence-cofinal/completed-modules.txt
           done < evidence-cofinal/module-order.txt
+
+          # Issue #96: this explicit axiom-log path also forces fresh V6 compilation
+          # in rh_restore_source_bound_oleans.py (audit_modules), even with a valid cache.
+          test -s .lake/build/lib/lean/RHSignedPrimeChebyshevFiniteBridgeV6.olean
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHSignedPrimeChebyshevFiniteBridgeV6.lean \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          grep -F "AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.neg_abel_integrand_eq_chebyshev_integrand" \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          grep -F "AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.signed_prime_eq_finite_chebyshev_convolution" \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          echo "PR96_V6_FRESH_KERNEL_AND_AXIOMS_PASS HEAD=$(git rev-parse HEAD)"
 
           # Compile and independently audit PR7's nested finite-section theorem.
           # Do not infer this kernel root from unrelated successful checks.
