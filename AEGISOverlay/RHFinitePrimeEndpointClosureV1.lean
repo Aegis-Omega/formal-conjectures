@@ -47,7 +47,7 @@ private theorem exp_one_128_le :
   have h := Real.exp_bound_div_one_sub_of_interval
     (show (0 : ℝ) ≤ 1 / 128 by norm_num)
     (show (1 / 128 : ℝ) < 1 by norm_num)
-  convert h using 1 <;> norm_num
+  convert h using 1; norm_num
 
 /-- A generic *exact rational* endpoint test: two rational comparisons
 suffice to enclose both real logarithmic endpoints. -/
@@ -136,8 +136,8 @@ theorem finite_actual_prime_of_rational_window
   apply genuine_weil_prime_tsum_eq_finite_of_interval_and_sieve
     p q a (a + (k : ℝ) * Real.log ((33 : ℝ) / 16))
     hp hq hsep lo hi s
-  · convert hlow using 1 <;> ring
-  · convert hhigh using 1 <;> ring
+  · convert hlow using 1; ring
+  · convert hhigh using 1; ring
   · intro n hn hnnot
     rw [ArithmeticFunction.vonMangoldt_eq_zero_iff]
     intro hnprime
