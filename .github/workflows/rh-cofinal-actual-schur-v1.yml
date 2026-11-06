@@ -492,7 +492,9 @@ jobs:
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
-              "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"22b7b266355b4b0a21a7c17a2bc9846488c9d79f",
+              "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"f4bbf4738eb07711ed431177534059ec556f1e9e",
+              "AEGISOverlay/RHBaguaHexagramSignedChebyshevJoinV1.lean":"9f7a5cd89b15cde48ae333763a1a7820158e5f0d",
+              "AEGISOverlay/RHSignedPrimeIntervalExtensionV8.lean":"cb1579e772fe2c3dc4704a036318c024fbe3604e",
               "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean":"3fac46ae976087f75248662af12966dd04ea6770",
               "AegisRH/PR606/Source/WeilOffLineSeedV10.lean":"36a9554f02786b7dd6de41ac9a649f9aad5d36ee",
