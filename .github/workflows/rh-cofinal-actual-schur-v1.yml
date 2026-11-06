@@ -832,6 +832,26 @@ jobs:
           test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
           echo "V7_FIRST_MODULE_KERNEL_PASS HEAD=$(git rev-parse HEAD) RH_ADMISSION=OPEN"
 
+      - name: V7 rational endpoint closure kernel probe (non-admission)
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean)" = "131fa9e090c44bc9078a3fcdb200004327a555c0"
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
+          mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeEndpointClosureV1.olean \
+            AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean \
+            > evidence-cofinal/v7/endpoint.log 2>&1 || {
+              tail -n 120 evidence-cofinal/v7/endpoint.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean evidence-cofinal/v7/endpoint.log
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeEndpointClosureV1.olean
+          echo "V7_ENDPOINT_KERNEL_PASS HEAD=$(git rev-parse HEAD) RH_ADMISSION=OPEN"
+
       - name: Compile exact official RH target into the same proof environment
         shell: bash
         run: |
