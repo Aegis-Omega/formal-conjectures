@@ -493,7 +493,7 @@ jobs:
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
               "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"f4bbf4738eb07711ed431177534059ec556f1e9e",
-              "AEGISOverlay/RHBaguaHexagramSignedChebyshevJoinV1.lean":"94eeaa8a9e94d75e9a5d765b455f431699944ff4",
+              "AEGISOverlay/RHBaguaHexagramSignedChebyshevJoinV1.lean":"7efcbbcf71bf35bc31ebb53887f5776c00925aa0",
               "AEGISOverlay/RHSignedPrimeIntervalExtensionV8.lean":"aca81da53c256cf59b09be7b84ea6fca573c7184",
               "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean":"3fac46ae976087f75248662af12966dd04ea6770",
