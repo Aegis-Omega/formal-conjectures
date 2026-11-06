@@ -805,6 +805,33 @@ jobs:
           done
           echo "SCALED_WEIL_JOIN=KERNEL_PASS; CANONICAL_RH_ADMISSION=EVALUATED_BY_EXACT_HEAD_PROOF_GRAPH_EXPORT"
 
+      - name: V7 finite-prime sieve first kernel probe (non-admission)
+        shell: bash
+        timeout-minutes: 30
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean)" = "dfdaa8e9ef8c6b432cda7347bc952a5db25808af"
+          mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/WeilPrimeReindexV1.olean \
+            AEGISOverlay/WeilPrimeReindexV1.lean \
+            > evidence-cofinal/v7/reindex.log 2>&1 || {
+              tail -n 100 evidence-cofinal/v7/reindex.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/WeilPrimeReindexV1.lean evidence-cofinal/v7/reindex.log
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean \
+            AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean \
+            > evidence-cofinal/v7/first-module.log 2>&1 || {
+              tail -n 100 evidence-cofinal/v7/first-module.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean evidence-cofinal/v7/first-module.log
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
+          echo "V7_FIRST_MODULE_KERNEL_PASS HEAD=$(git rev-parse HEAD) RH_ADMISSION=OPEN"
+
       - name: Compile exact official RH target into the same proof environment
         shell: bash
         run: |
