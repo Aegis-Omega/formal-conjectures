@@ -39,7 +39,7 @@ AUTHORITY_EFFECT = NONE.
 -/
 
 open Set Filter Topology Complex
-open scoped BigOperators
+open scoped BigOperators ComplexConjugate
 
 set_option autoImplicit false
 noncomputable section
@@ -78,10 +78,11 @@ theorem mellin_translatePacket_v11
     have hlog :
         Complex.log (((Real.exp (-d) : ℝ) : ℂ)) = (-d : ℂ) := by
       rw [← Complex.ofReal_log (Real.exp_pos (-d)).le, Real.log_exp]
+      push_cast
     rw [hlog]
     congr 1
     ring
-  rw [hpow, ← Complex.ofReal_exp, ← Complex.exp_add]
+  rw [hpow, Complex.ofReal_exp, ← Complex.exp_add]
   congr 1
   push_cast
   ring
