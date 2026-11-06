@@ -48,6 +48,7 @@ open AEGIS.RHSignedPrimeIntervalExtensionV8
 open AEGIS.WeilMixedAlgebraV2
 open AEGIS.WeilSignedKernelReductionV1
 open AEGIS.WeilPrimeDiscrepancyEstimateV1
+open AEGIS.RHPrimePowerKernelConnectorV1
 open AEGIS.WeilThreeBlockTranslatedPacketsV22
 open AEGIS.RHPrimeOnlyGrowthBridgeV1
 
