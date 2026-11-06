@@ -1,0 +1,89 @@
+# Copyright 2026 The Formal Conjectures Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: RH PR92 five-module import smoke
+
+# PR-only read-only exact-head kernel replay, NOT full window CI or RH admission.
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rh-pr92-targeted-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-pr92-targeted-smoke-${{ github.event.pull_request.head.sha || github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  source-imports:
+    if: github.event_name == 'pull_request' && github.event.pull_request.number == 92
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Checkout exact PR source head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check pinned source and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          test "$(cat lean-toolchain)" = "leanprover/lean4:v4.33.1"
+          grep -F '0df444a360eaa60ab8c11dca51a86af692955474' lake-manifest.json
+
+      - name: Install pinned Lean 4.33.1
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Restore pinned Mathlib build cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "0df444a360eaa60ab8c11dca51a86af692955474"
+          lean --version
+
+      - name: Compile five source modules and audit actual kernel roots
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/targeted_smoke.py \
+            --head "${{ github.event.pull_request.head.sha }}"
+          cat .lake/RH_PR92_TARGETED_SMOKE_RECEIPT.json
+
+      - name: Report failure diagnostics without waiving gates
+        if: failure()
+        shell: bash
+        run: |
+          set -uo pipefail
+          if test -f .lake/real_status.json; then cat .lake/real_status.json; fi
+          if test -d .lake/reallogs; then
+            for f in .lake/reallogs/*.log; do
+              if test -f "$f"; then
+                echo "========== $f =========="
+                tail -n 35 "$f"
+              fi
+            done
+          fi
