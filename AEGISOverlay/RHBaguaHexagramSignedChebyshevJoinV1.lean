@@ -81,6 +81,49 @@ theorem bagua_actual_weil_and_signed_chebyshev
   · exact signed_prime_eq_full_chebyshev_for_packet_v8
       (packetSum z (baguaMode gs)) (bagua_weighted_packet_moments gs hm z)
 
+/-! ## Golden Eight: the actual resonant lattice, not an artificial 8-packet example -/
+
+/-- Golden multiplicative ratio q = phi^2 = (3 + sqrt 5)/2, in log coordinates. -/
+def goldenStepV1 : ℝ :=
+  Real.log ((3 + Real.sqrt 5) / 2)
+
+/-- Eight consecutive actual Golden translates, indexed by the 3-bit Bagua carrier. -/
+def goldenEightFamilyV1 (g : WeilCompactSmoothGV1)
+    (i : Fin 8) : WeilCompactSmoothGV1 :=
+  translatePacket g ((i.val : ℝ) * goldenStepV1)
+
+/-- No new moment conditions are assumed for translated packets. -/
+theorem goldenEightFamily_moments
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) :
+    ∀ i : Fin 8, WeilMomentConditionsV1 (goldenEightFamilyV1 g i) := by
+  intro i
+  exact AEGIS.WeilThreeBlockTranslatedPacketsV22.translate_preserves_moments
+    g ((i.val : ℝ) * goldenStepV1) hm
+
+/-- Actual Golden-8 to Bagua-Walsh to signed Chebyshev V8 join.
+All 64 mixed Weil coefficients are retained in the H8-transformed Gram.
+The stored rational Golden-8 sign margin is independent of this identity,
+and no new sign, cofinal or universal positivity hypothesis is hidden here. -/
+theorem goldenEight_bagua_actual_weil_and_signed_chebyshev
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (z : Fin 8 → ℂ) :
+    (B (packetSum z (baguaMode (goldenEightFamilyV1 g)))
+        (packetSum z (baguaMode (goldenEightFamilyV1 g))) =
+      ∑ a : Fin 8, ∑ b : Fin 8,
+        z a * star (z b) *
+          baguaActualGram (goldenEightFamilyV1 g) a b) ∧
+    (∃ T : ℝ, ∀ d : ℝ, T ≤ d →
+      SignedPrimeCorrelationV1
+        (packetSum z (baguaMode (goldenEightFamilyV1 g))) d =
+        ∫ x in Ioi (0 : ℝ),
+          primeDiscrepancyKernelV1
+            (packetSum z (baguaMode (goldenEightFamilyV1 g)))
+              (d - Real.log x) *
+            (((Real.exp (-Real.log x / 2) *
+                (Chebyshev.psi x - x) : ℝ) : ℂ) / (x : ℂ))) := by
+  exact bagua_actual_weil_and_signed_chebyshev
+    (goldenEightFamilyV1 g) (goldenEightFamily_moments g hm) z
+
 /-- Every complex-weighted H64 mode family is still moment zero. -/
 theorem hexagram64_weighted_packet_moments
     (gs : Fin 64 → WeilCompactSmoothGV1)
@@ -134,6 +177,8 @@ end AEGIS.RHBaguaHexagramSignedChebyshevJoinV1
 
 #print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.bagua_weighted_packet_moments
 #print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.bagua_actual_weil_and_signed_chebyshev
+#print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.goldenEightFamily_moments
+#print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.goldenEight_bagua_actual_weil_and_signed_chebyshev
 #print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.hexagram64_weighted_packet_moments
 #print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.hexagram64_actual_weil_and_signed_chebyshev
 #print axioms AEGIS.RHBaguaHexagramSignedChebyshevJoinV1.hexagram64_actual_signed_defect_iff_weil_nonpositive
