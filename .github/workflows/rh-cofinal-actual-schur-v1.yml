@@ -857,7 +857,7 @@ jobs:
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
-          test "$(git hash-object AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean)" = "131fa9e090c44bc9078a3fcdb200004327a555c0"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean)" = "67b0a33135f96c2613b65f40d8d97286b100f80e"
           test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
           mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
           lake env lean --trust=0 \
