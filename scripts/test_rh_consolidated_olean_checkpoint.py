@@ -86,6 +86,22 @@ class SourceBoundOleanCheckpointTests(unittest.TestCase):
             module.resumable_modules(graph, graph, lambda m: present[m]),
             set(graph))
 
+    def test_cross_stage_rejects_stale_indirect_import(self):
+        graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
+        present = {"ProofA": False, "ProofB": True, "ProofC": False}
+        self.assertEqual(
+            module.missing_upstream_oleans(
+                graph, graph, {"ProofC"}, lambda m: present[m]),
+            ["ProofB"])
+
+    def test_cross_stage_accepts_exact_upstream_import_closure(self):
+        graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
+        present = {"ProofA": True, "ProofB": True, "ProofC": False}
+        self.assertEqual(
+            module.missing_upstream_oleans(
+                graph, graph, {"ProofC"}, lambda m: present[m]),
+            [])
+
 
 if __name__ == "__main__":
     unittest.main()
