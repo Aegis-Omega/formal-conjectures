@@ -988,7 +988,8 @@ jobs:
               blob=subprocess.check_output(["git","hash-object",str(src)],text=True).strip()
               rel="oleans/"+module+".olean"
               shutil.copyfile(olean,cache/rel)
-              digest=hashlib.sha256((cache/rel).read_bytes()).hexdigest()
+              with (cache/rel).open("rb") as binary:
+                  digest=hashlib.file_digest(binary,"sha256").hexdigest()
               blobs.append(module+" "+blob+"\n")
               hashes.append(digest+"  "+rel+"\n")
               accepted.add(module)
@@ -1019,7 +1020,8 @@ jobs:
                                            text=True).strip()
               rel="oleans/"+module+".olean"
               shutil.copyfile(olean,cache/rel)
-              digest=hashlib.sha256((cache/rel).read_bytes()).hexdigest()
+              with (cache/rel).open("rb") as binary:
+                  digest=hashlib.file_digest(binary,"sha256").hexdigest()
               blobs.append(module+" "+blob+"\n")
               hashes.append(digest+"  "+rel+"\n")
               accepted.add(module)
