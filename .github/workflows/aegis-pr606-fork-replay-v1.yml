@@ -11,11 +11,13 @@ on:
       - 'proof/rh-deepmind-target-direct-replay-v2'
     paths:
       - 'AegisRH/PR606/**'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'FormalConjectures/Millennium/RiemannHypothesis.lean'
       - '.github/workflows/aegis-pr606-fork-replay-v1.yml'
   pull_request:
     paths:
       - 'AegisRH/PR606/**'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'FormalConjectures/Millennium/RiemannHypothesis.lean'
       - '.github/workflows/aegis-pr606-fork-replay-v1.yml'
   workflow_dispatch:
@@ -77,6 +79,9 @@ jobs:
           test "$(git -C .aegis-base rev-parse HEAD)" = "$AEGIS_BASE_SHA"
           test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
           test "$(git -C .li hash-object Hadamard/General/Factorization.lean)" = "$LI_FACTORIZATION_BLOB"
+          # Both PR606 stages must select the same source-locked two-point theorem.
+          test "$(git hash-object AegisRH/PR606/Compat/WeilZeroTwoPointV11.lean)" = "416eb252794a2b0b550c796330a08a946aeabed4"
+          grep -F 'if n == "WeilZeroTwoPointV11":' scripts/rh_pr63_proved_window_prebuild.sh
           python3 - <<'PY'
           import json, os
           m=json.load(open('AegisRH/PR606/PORT_MANIFEST.json'))
