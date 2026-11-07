@@ -35,6 +35,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -99,7 +100,13 @@ def main():
     targets = stage_targets(stage, mods, deps)
     out.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, LEAN_PATH=f"{out}:{os.environ.get('LEAN_PATH', '')}")
-    has_olean = lambda m: (out / (m.replace(".", "/") + ".olean")).exists()
+    def has_olean(m):
+        olean = out / (m.replace(".", "/") + ".olean")
+        receipt = Path(str(olean) + ".sha256")
+        return (olean.is_file() and olean.stat().st_size > 0
+                and receipt.is_file()
+                and receipt.read_text().strip()
+                    == hashlib.sha256(olean.read_bytes()).hexdigest())
     done, failed = set(mods) - targets, []
     missing = sorted({d for m in targets for d in deps[m] if d in done and not has_olean(d)})
     if missing:
@@ -116,10 +123,21 @@ def main():
         root = e["path"][: -len(rel)] or "."
         olean = out / (m.replace(".", "/") + ".olean")
         olean.parent.mkdir(parents=True, exist_ok=True)
+        stamp = Path(str(olean) + ".sha256")
+        olean.unlink(missing_ok=True)
+        stamp.unlink(missing_ok=True)
         t = time.time()
         r = subprocess.run(["lean", "-R", root, "-o", str(olean), e["path"]],
                            env=env, capture_output=True, text=True)
-        return m, r.returncode, r.stdout + r.stderr, time.time() - t
+        success = r.returncode == 0 and olean.is_file() and olean.stat().st_size > 0
+        if success:
+            stamp.write_text(hashlib.sha256(olean.read_bytes()).hexdigest() + "\n")
+        else:
+            olean.unlink(missing_ok=True)
+            stamp.unlink(missing_ok=True)
+        return (m, 0 if success else r.returncode or 1,
+                r.stdout + r.stderr + ("" if success else "\nMISSING_OR_FAILED_OLEAN " + m),
+                time.time() - t)
 
     with cf.ThreadPoolExecutor(jobs) as ex:
         running = {}
@@ -168,6 +186,47 @@ def main():
             sys.exit(f"headline theorems not reported: {missing}")
         for h in HEADLINE:
             print(f"  {h}: OK")
+
+    # Source and binary integrity must hold for EVERY module claimed by this stage.
+    # Imported stages have their own checkpoint and .olean SHA-256 sidecars.
+    for m in targets:
+        if not has_olean(m):
+            sys.exit("MISSING_OR_HASH_DRIFT_OLEAN " + m)
+    records = []
+    for m, e in mods.items():
+        if has_olean(m):
+            olean = out / (m.replace(".", "/") + ".olean")
+            records.append({
+                "module": m, "source": e["path"], "source_sha256": e["sha256"],
+                "olean": str(olean.relative_to(out)),
+                "olean_sha256": Path(str(olean) + ".sha256").read_text().strip()
+            })
+    if stage in ("all", "final") and len(records) != len(mods):
+        sys.exit(f"RHC_CHECKPOINT_INCOMPLETE {len(records)}/{len(mods)}")
+    stage_name = stage.replace(":", "-").replace("/", "-")
+    receipt = {
+        "schema": "aegis.rh.consolidated_olean_checkpoint.v1",
+        "stage": stage, "module_count": len(records),
+        "manifest_source_sha256": hashlib.sha256((HERE / "manifest.json").read_bytes()).hexdigest(),
+        "lean_toolchain": Path("lean-toolchain").read_text().strip(),
+        "mathlib_sha": os.environ.get("MATHLIB_SHA"),
+        "modules": records, "rh_unconditional": None,
+        "axiom_admission": "HEADLINE_PROBES_ONLY" if stage in ("all", "final") else "NOT_ASSESSED"
+    }
+    checkpoint = out / ("rhc-checkpoint-" + stage_name + ".json")
+    checkpoint.write_text(json.dumps(receipt, indent=2) + "\n")
+    if stage == "final":
+        final_dir = out / "rhc-final"
+        final_dir.mkdir(exist_ok=True)
+        for m in targets:
+            rel = Path(m.replace(".", "/") + ".olean")
+            dest = final_dir / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(out / rel, dest)
+            shutil.copyfile(Path(str(out / rel) + ".sha256"),
+                            Path(str(dest) + ".sha256"))
+        shutil.copyfile(checkpoint, final_dir / "rhc-checkpoint-final.json")
+    print("RHC_ALL_STAGE_OLEANS_CHECKPOINTED", stage, len(records), "/", len(mods))
 
 
 if __name__ == "__main__":
