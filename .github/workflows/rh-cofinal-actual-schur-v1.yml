@@ -1071,6 +1071,11 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rh-cofinal-actual-schur-${{ github.sha }}-${{ github.run_id }}
-          path: evidence-cofinal/
+          # One evidence artifact includes actual .olean files, not just logs.
+          # The checkpoint directory begins with '.', so opt in explicitly.
+          path: |
+            evidence-cofinal/
+            .rh-cofinal-checkpoint/
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30
