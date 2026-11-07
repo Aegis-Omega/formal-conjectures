@@ -356,7 +356,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
+          targets=["RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -578,8 +578,8 @@ jobs:
 
           # Exact-source binary and independent kernel/axiom check for PR92's
           # conditional two-phase real-kernel theorem; never promotes to RH.
-          TWO_PHASE_MOD=AEGISOverlay.RHFixedPacketFrontierV1
-          test -s .lake/build/lib/lean/AEGISOverlay/RHFixedPacketFrontierV1.olean
+          TWO_PHASE_MOD=RHFixedPacketFrontierV1
+          test -s .lake/build/lib/lean/RHFixedPacketFrontierV1.olean
           python3 - <<'PY'
           import pathlib, re
           path=pathlib.Path("AEGISOverlay/RHFixedPacketFrontierV1.lean")
@@ -591,7 +591,7 @@ jobs:
           if not expected.issubset(set(roots)) or len(set(roots))!=len(roots):
               raise SystemExit("TWO_PHASE_REQUIRED_AXIOM_ROOTS_MISSING")
           pathlib.Path("evidence-cofinal/RHTwoPhaseAxiomAudit.lean").write_text(
-              "import AEGISOverlay.RHFixedPacketFrontierV1\n"
+              "import RHFixedPacketFrontierV1\n"
               + "".join("#print axioms " + root + "\n" for root in roots)
           )
           PY
@@ -603,9 +603,9 @@ jobs:
           python3 - <<'PY'
           import hashlib,json,pathlib,subprocess
           root=pathlib.Path(".")
-          module="AEGISOverlay.RHFixedPacketFrontierV1"
+          module="RHFixedPacketFrontierV1"
           source=root/"AEGISOverlay/RHFixedPacketFrontierV1.lean"
-          binary=root/".lake/build/lib/lean/AEGISOverlay/RHFixedPacketFrontierV1.olean"
+          binary=root/".lake/build/lib/lean/RHFixedPacketFrontierV1.olean"
           if not binary.is_file() or binary.stat().st_size==0:
               raise SystemExit("TWO_PHASE_OLEAN_MISSING")
           manifest=json.loads((root/"evidence-cofinal/source-manifest.json").read_text())
