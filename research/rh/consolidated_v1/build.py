@@ -106,6 +106,22 @@ def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) ->
                 == sha256_file(olean))
 
 
+def resumable_modules(mods, deps, has_olean):
+    """Admit only transitive, source-identical cached import closures."""
+    trusted = set()
+    remaining = set(mods)
+    while remaining:
+        newly_trusted = {
+            m for m in remaining
+            if has_olean(m) and all(d in trusted for d in deps[m])
+        }
+        if not newly_trusted:
+            break
+        trusted.update(newly_trusted)
+        remaining.difference_update(newly_trusted)
+    return trusted
+
+
 def main():
     out, log = Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve()
     jobs = int(sys.argv[3]) if len(sys.argv) > 3 else 2
@@ -137,7 +153,9 @@ def main():
         sys.exit(f"stage {stage}: missing .olean of earlier stages: {missing}")
     logs = {}
     if os.environ.get("RHC_RESUME") == "1":  # local restarts only; CI always builds from scratch
-        done |= {m for m in targets if has_olean(m)}
+        # A changed earlier dependency invalidates all transitive dependents,
+        # even when their own source and object bytes still match old stamps.
+        done |= resumable_modules(mods, deps, has_olean) & targets
     started = set(done)
 
     def compile_one(m):
