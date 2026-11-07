@@ -165,8 +165,10 @@ def main():
     # Match the exact Lean/Mathlib/provider environment across independent jobs.
     # An .olean checksum by itself cannot prove that its imports are compatible.
     context_sha = hashlib.sha256(
-        Path("lean-toolchain").read_bytes()
+        b"AEGIS_RHC_CHECKPOINT_ABI_V2_NO_SORRY\\0"
+        + Path("lean-toolchain").read_bytes()
         + Path("lake-manifest.json").read_bytes()
+        + Path("lakefile.toml").read_bytes()
         + (HERE / "li-provider.patch").read_bytes()
         + os.environ.get("LI_PROVIDER_SHA", "").encode()
     ).hexdigest()
