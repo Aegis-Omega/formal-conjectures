@@ -87,8 +87,9 @@ def stage_targets(stage, mods, deps):
 
 def clean_kernel_compile_output(text: str) -> bool:
     """Never checkpoint a Lean object with explicit error or placeholder evidence."""
-    if ("sorryAx" in text or "declaration uses 'sorry'" in text
-            or re.search(r"(?m)^[^:\n]*:\d+:\d+: error", text)):
+    if ("sorryAx" in text
+            or re.search(r"(?i)\bdeclaration\b[^\n]*\buses\s+['\"]sorry['\"]", text)
+            or re.search(r"(?m)^(?:[^:\n]*:\d+:\d+:\s*)?error(?:\([^\n)]*\))?:", text)):
         return False
     reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
     for _, axioms in reports:
@@ -245,8 +246,8 @@ def main():
         sys.exit(f"compile failed: {failed}")
 
     text = log.read_text(encoding="utf-8")
-    if "sorryAx" in text or re.search(r"declaration uses 'sorry'", text):
-        sys.exit("sorry found")
+    if not clean_kernel_compile_output(text):
+        sys.exit("LEAN_KERNEL_OUTPUT_REJECTED")
     reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
     for name, axs in reports:
         extra = {a.strip() for a in axs.split(",") if a.strip()} - ALLOWED
