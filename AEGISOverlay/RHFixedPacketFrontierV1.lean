@@ -140,8 +140,7 @@ theorem two_phase_real_kernel_bound_v1
   rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (-1)] at hminus
   change 0 ≤ WeilTwoPointValueV1 a z 1 at hplus
   change 0 ≤ WeilTwoPointValueV1 a z (-1) at hminus
-  simp [WeilTwoPointValueV1, Complex.normSq_apply,
-    Complex.mul_re] at hplus hminus
+  simp [WeilTwoPointValueV1, Complex.normSq_apply] at hplus hminus
   have hre : |z.re| ≤ a :=
     abs_le.mpr ⟨by linarith, by linarith⟩
   have hzim : z.im = 0 := hreal d
