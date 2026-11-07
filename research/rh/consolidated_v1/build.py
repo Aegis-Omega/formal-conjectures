@@ -85,6 +85,12 @@ def stage_targets(stage, mods, deps):
     return {b for b in batch if BATCH.match(b)[1] in mine}
 
 
+def sha256_file(path: Path) -> str:
+    """Hash large kernel binaries with bounded memory, not read_bytes()."""
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
 def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) -> bool:
     """Accept an object only if bytes, source identity and build context match."""
     olean = out / (module.replace(".", "/") + ".olean")
@@ -97,7 +103,7 @@ def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) ->
             and source_file.read_text().strip() == source_sha
             and context_file.read_text().strip() == context_sha
             and digest_file.read_text().strip()
-                == hashlib.sha256(olean.read_bytes()).hexdigest())
+                == sha256_file(olean))
 
 
 def main():
@@ -151,7 +157,7 @@ def main():
                            env=env, capture_output=True, text=True)
         success = r.returncode == 0 and olean.is_file() and olean.stat().st_size > 0
         if success:
-            stamp.write_text(hashlib.sha256(olean.read_bytes()).hexdigest() + "\n")
+            stamp.write_text(sha256_file(olean) + "\n")
             source_stamp.write_text(e["sha256"] + "\n")
             context_stamp.write_text(context_sha + "\n")
         else:
