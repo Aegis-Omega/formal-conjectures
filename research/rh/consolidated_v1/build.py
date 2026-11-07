@@ -268,14 +268,29 @@ def main():
     for m in targets:
         if not has_olean(m):
             sys.exit("MISSING_OR_HASH_DRIFT_OLEAN " + m)
+    # The final artifact contains only final-stage objects. Enumerate the other
+    # artifact bundles explicitly instead of claiming one ZIP contains them all.
+    bundles = {"rhc-base": stage_targets("base", mods, deps),
+               "rhc-final": stage_targets("final", mods, deps)}
+    bundles.update({
+        f"rhc-shard-{n}": stage_targets(f"shard:{n}/12", mods, deps)
+        for n in range(12)
+    })
+    if stage != "all":
+        assigned = [m for group in bundles.values() for m in group]
+        if sorted(assigned) != sorted(mods):
+            sys.exit("RHC_CHECKPOINT_ARTIFACT_PARTITION_MISMATCH")
     records = []
     for m, e in mods.items():
         if has_olean(m):
             olean = out / (m.replace(".", "/") + ".olean")
+            artifact = ("rhc-all" if stage == "all" else
+                        next(label for label, group in bundles.items() if m in group))
             records.append({
                 "module": m, "source": e["path"], "source_sha256": e["sha256"],
                 "olean": str(olean.relative_to(out)),
-                "olean_sha256": Path(str(olean) + ".sha256").read_text().strip()
+                "olean_sha256": Path(str(olean) + ".sha256").read_text().strip(),
+                "artifact": artifact
             })
     if stage in ("all", "final") and len(records) != len(mods):
         sys.exit(f"RHC_CHECKPOINT_INCOMPLETE {len(records)}/{len(mods)}")
@@ -283,6 +298,11 @@ def main():
     receipt = {
         "schema": "aegis.rh.consolidated_olean_checkpoint.v1",
         "stage": stage, "module_count": len(records),
+        "complete_source_closure": len(records) == len(mods),
+        "artifact_partition": (
+            {"rhc-all": len(mods)} if stage == "all" else
+            {label: len(group) for label, group in bundles.items()}
+        ),
         "manifest_source_sha256": hashlib.sha256((HERE / "manifest.json").read_bytes()).hexdigest(),
         "lean_toolchain": Path("lean-toolchain").read_text().strip(),
         "mathlib_sha": os.environ.get("MATHLIB_SHA"),
