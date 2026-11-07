@@ -100,11 +100,24 @@ def main():
     targets = stage_targets(stage, mods, deps)
     out.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, LEAN_PATH=f"{out}:{os.environ.get('LEAN_PATH', '')}")
+    # Match the exact Lean/Mathlib/provider environment across independent jobs.
+    # An .olean checksum by itself cannot prove that its imports are compatible.
+    context_sha = hashlib.sha256(
+        Path("lean-toolchain").read_bytes()
+        + Path("lake-manifest.json").read_bytes()
+        + (HERE / "li-provider.patch").read_bytes()
+        + os.environ.get("LI_PROVIDER_SHA", "").encode()
+    ).hexdigest()
     def has_olean(m):
         olean = out / (m.replace(".", "/") + ".olean")
         receipt = Path(str(olean) + ".sha256")
+        source_stamp = Path(str(olean) + ".source.sha256")
+        context_stamp = Path(str(olean) + ".context.sha256")
         return (olean.is_file() and olean.stat().st_size > 0
-                and receipt.is_file()
+                and receipt.is_file() and source_stamp.is_file()
+                and context_stamp.is_file()
+                and source_stamp.read_text().strip() == mods[m]["sha256"]
+                and context_stamp.read_text().strip() == context_sha
                 and receipt.read_text().strip()
                     == hashlib.sha256(olean.read_bytes()).hexdigest())
     done, failed = set(mods) - targets, []
@@ -124,17 +137,21 @@ def main():
         olean = out / (m.replace(".", "/") + ".olean")
         olean.parent.mkdir(parents=True, exist_ok=True)
         stamp = Path(str(olean) + ".sha256")
-        olean.unlink(missing_ok=True)
-        stamp.unlink(missing_ok=True)
+        source_stamp = Path(str(olean) + ".source.sha256")
+        context_stamp = Path(str(olean) + ".context.sha256")
+        for artifact in (olean, stamp, source_stamp, context_stamp):
+            artifact.unlink(missing_ok=True)
         t = time.time()
         r = subprocess.run(["lean", "-R", root, "-o", str(olean), e["path"]],
                            env=env, capture_output=True, text=True)
         success = r.returncode == 0 and olean.is_file() and olean.stat().st_size > 0
         if success:
             stamp.write_text(hashlib.sha256(olean.read_bytes()).hexdigest() + "\n")
+            source_stamp.write_text(e["sha256"] + "\n")
+            context_stamp.write_text(context_sha + "\n")
         else:
-            olean.unlink(missing_ok=True)
-            stamp.unlink(missing_ok=True)
+            for artifact in (olean, stamp, source_stamp, context_stamp):
+                artifact.unlink(missing_ok=True)
         return (m, 0 if success else r.returncode or 1,
                 r.stdout + r.stderr + ("" if success else "\nMISSING_OR_FAILED_OLEAN " + m),
                 time.time() - t)
@@ -210,6 +227,7 @@ def main():
         "manifest_source_sha256": hashlib.sha256((HERE / "manifest.json").read_bytes()).hexdigest(),
         "lean_toolchain": Path("lean-toolchain").read_text().strip(),
         "mathlib_sha": os.environ.get("MATHLIB_SHA"),
+        "build_context_sha256": context_sha,
         "modules": records, "rh_unconditional": None,
         "axiom_admission": "HEADLINE_PROBES_ONLY" if stage in ("all", "final") else "NOT_ASSESSED"
     }
@@ -223,8 +241,9 @@ def main():
             dest = final_dir / rel
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(out / rel, dest)
-            shutil.copyfile(Path(str(out / rel) + ".sha256"),
-                            Path(str(dest) + ".sha256"))
+            for suffix in (".sha256", ".source.sha256", ".context.sha256"):
+                shutil.copyfile(Path(str(out / rel) + suffix),
+                                Path(str(dest) + suffix))
         shutil.copyfile(checkpoint, final_dir / "rhc-checkpoint-final.json")
     print("RHC_ALL_STAGE_OLEANS_CHECKPOINTED", stage, len(records), "/", len(mods))
 
