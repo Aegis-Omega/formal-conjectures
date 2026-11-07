@@ -148,9 +148,14 @@ def main():
     def has_olean(m):
         return verified_olean(out, m, mods[m]["sha256"], context_sha)
     done, failed = set(mods) - targets, []
-    missing = sorted({d for m in targets for d in deps[m] if d in done and not has_olean(d)})
+    # Check the complete upstream import graph before compiling the current
+    # stage. A valid direct import does not excuse a stale transitive import.
+    prior_deps = {m: [d for d in deps[m] if d in done] for m in done}
+    trusted_prior = resumable_modules(done, prior_deps, has_olean)
+    required_prior = {d for m in targets for d in deps[m] if d in done}
+    missing = sorted(required_prior - trusted_prior)
     if missing:
-        sys.exit(f"stage {stage}: missing .olean of earlier stages: {missing}")
+        sys.exit(f"stage {stage}: stale or missing transitive .olean closure: {missing}")
     logs = {}
     if os.environ.get("RHC_RESUME") == "1":  # local restarts only; CI always builds from scratch
         # A changed earlier dependency invalidates all transitive dependents,
