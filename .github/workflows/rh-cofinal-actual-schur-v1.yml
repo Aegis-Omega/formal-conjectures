@@ -1027,6 +1027,21 @@ jobs:
           (cache/"source-blobs.txt").write_text("".join(blobs))
           (cache/"oleans.sha256").write_text("".join(hashes))
           (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
+          # Keep an inspectable receipt inside the existing CI evidence archive;
+          # binary .oleans remain in the verified GitHub cache, not in Git.
+          receipt_dir=root/"checkpoint"
+          receipt_dir.mkdir(exist_ok=True)
+          for filename in ("source-blobs.txt","oleans.sha256","head.txt"):
+              shutil.copyfile(cache/filename,receipt_dir/filename)
+          (receipt_dir/"status.json").write_text(json.dumps({
+              "schema":"aegis.rh.cofinal_olean_checkpoint.v1",
+              "head":(cache/"head.txt").read_text().strip(),
+              "verified_module_count":len(accepted),
+              "module_names":sorted(accepted),
+              "binary_storage":"GitHub Actions source-bound cache",
+              "rh_unconditional":None,
+              "admission":"OPEN"
+          },indent=2)+"\n")
           with open(__import__("os").environ["GITHUB_OUTPUT"],"a") as out:
               out.write("count="+str(len(accepted))+"\n")
           print("SAVED_SOURCE_BOUND_PARTIAL_MODULES",len(accepted))
