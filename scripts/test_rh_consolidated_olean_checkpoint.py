@@ -125,6 +125,14 @@ class SourceBoundOleanCheckpointTests(unittest.TestCase):
         self.assertFalse(module.clean_kernel_compile_output(
             "Example.lean:18:9: error: unsolved goals"))
 
+    def test_rejects_named_declaration_sorry_warning(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "warning: declaration 'AEGIS.SomeTheorem' uses 'sorry'"))
+
+    def test_rejects_global_lean_error_without_file_location(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "error(lean.unknownIdentifier): unknown identifier"))
+
 
 if __name__ == "__main__":
     unittest.main()
