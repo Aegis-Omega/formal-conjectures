@@ -73,6 +73,19 @@ class SourceBoundOleanCheckpointTests(unittest.TestCase):
             hashlib.sha256(b"").hexdigest() + "\n")
         self.assertFalse(self.trusted())
 
+    def test_resume_rejects_transitive_dependents_of_stale_module(self):
+        graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
+        present = {"ProofA": False, "ProofB": True, "ProofC": True}
+        self.assertEqual(
+            module.resumable_modules(graph, graph, lambda m: present[m]), set())
+
+    def test_resume_accepts_complete_dependency_closure(self):
+        graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
+        present = {"ProofA": True, "ProofB": True, "ProofC": True}
+        self.assertEqual(
+            module.resumable_modules(graph, graph, lambda m: present[m]),
+            set(graph))
+
 
 if __name__ == "__main__":
     unittest.main()
