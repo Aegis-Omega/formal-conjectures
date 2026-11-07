@@ -142,8 +142,9 @@ theorem zero_translation_kernel_summable_v11
   have hre :
       (((rho.1 - (1 / 2 : ℂ)) * (d : ℂ))).re ≤
         |d| / 2 := by
+    have hhalf : ((1 / 2 : ℂ)).re = (1 / 2 : ℝ) := by norm_num
     simp only [Complex.mul_re, Complex.sub_re, Complex.ofReal_re,
-      Complex.ofReal_im, mul_zero, sub_zero]
+      Complex.ofReal_im, mul_zero, sub_zero, hhalf]
     have habs : |rho.1.re - 1 / 2| ≤ (1 / 2 : ℝ) := by
       rw [abs_le]
       constructor <;> linarith [hs.1, hs.2]
@@ -160,7 +161,12 @@ theorem zero_translation_kernel_summable_v11
     unfold WeilZeroTranslationFactorV11 C
     rw [Complex.norm_exp]
     exact Real.exp_le_exp.mpr hre
-  exact mul_le_mul_of_nonneg_left hfactor (norm_nonneg _)
+  calc
+    ‖WeilZeroCoefficientV11 g rho‖ *
+        ‖WeilZeroTranslationFactorV11 rho d‖
+        ≤ ‖WeilZeroCoefficientV11 g rho‖ * C :=
+          mul_le_mul_of_nonneg_left hfactor (norm_nonneg _)
+    _ = C * ‖WeilZeroCoefficientV11 g rho‖ := mul_comm _ _
 
 /-- Canonical translated zero kernel. -/
 def WeilZeroTranslationKernelV11
@@ -178,8 +184,10 @@ private theorem reflected_translation_factor_v11
         (((1 - conj rho.1) - (1 / 2 : ℂ)) * (d : ℂ))) =
       WeilZeroTranslationFactorV11 rho (-d) := by
   unfold WeilZeroTranslationFactorV11
-  rw [map_exp]
+  rw [← Complex.exp_conj]
   congr 1
+  simp only [map_mul, map_sub, map_one, map_div₀, map_ofNat,
+    Complex.conj_conj, Complex.conj_ofReal]
   push_cast
   ring
 
@@ -201,7 +209,22 @@ theorem twoPoint_zero_summand_expansion_v11
     map_mul, map_add, map_one, map_mul,
     reflected_translation_factor_v11]
   unfold WeilZeroTranslationFactorV11
-  ring
+  have hcancel :
+      Complex.exp ((rho.1 - (1 / 2 : ℂ)) * (d : ℂ)) *
+        Complex.exp ((rho.1 - (1 / 2 : ℂ)) * ((-d : ℝ) : ℂ)) = 1 := by
+    rw [← Complex.exp_add]
+    have hzero :
+        (rho.1 - (1 / 2 : ℂ)) * (d : ℂ) +
+          (rho.1 - (1 / 2 : ℂ)) * ((-d : ℝ) : ℂ) = 0 := by
+      push_cast
+      ring
+    rw [hzero]
+    exact Complex.exp_zero
+  linear_combination
+    ((analyticOrderNatAt riemannZeta rho.1 : ℂ) *
+      mellin g.1 rho.1 *
+      conj (mellin g.1 (1 - conj rho.1)) *
+      c * conj c) * hcancel
 
 /-- Canonical zero quadratic of a two-point translated packet. -/
 theorem twoPoint_zero_quadratic_expansion_v11
@@ -260,10 +283,7 @@ theorem twoPoint_zero_quadratic_expansion_v11
         have h1 := hbase.mul_left (1 + c * conj c)
         have h2 := hd.mul_left c
         have h3 := hnd.mul_left (conj c)
-        rw [← h1.tsum_add (h2.add h3), ← h2.tsum_add h3]
-        apply tsum_congr
-        intro rho
-        ring
+        rw [← h1.tsum_add h2, ← (h1.add h2).tsum_add h3]
     _ = _ := by
       rfl
 
