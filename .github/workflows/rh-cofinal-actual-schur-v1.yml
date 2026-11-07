@@ -35,6 +35,7 @@ on:
       - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
       - 'AEGISOverlay/RHFourLogThreeActualPrimeV1.lean'
       - 'AEGISOverlay/RHMellinDetectorCenteredV1.lean'
+      - 'AEGISOverlay/RHFixedPacketFrontierV1.lean'
       - 'AEGISOverlay/RHArchRow29V1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
@@ -355,7 +356,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
+          targets=["AEGISOverlay.RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -574,6 +575,63 @@ jobs:
             ! grep -F 'error:' "evidence-cofinal/compile-${m//./_}.log"
             printf '%s\n' "$m" >> evidence-cofinal/completed-modules.txt
           done < evidence-cofinal/module-order.txt
+
+          # Exact-source binary and independent kernel/axiom check for PR92's
+          # conditional two-phase real-kernel theorem; never promotes to RH.
+          TWO_PHASE_MOD=AEGISOverlay.RHFixedPacketFrontierV1
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFixedPacketFrontierV1.olean
+          python3 - <<'PY'
+          import pathlib, re
+          path=pathlib.Path("AEGISOverlay/RHFixedPacketFrontierV1.lean")
+          roots=re.findall(r"^#print axioms (\S+)$",path.read_text(),re.M)
+          expected={
+              "AEGIS.RHFixedPacketFrontierV1.two_phase_real_kernel_bound_v1",
+              "AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_two_phase_real_kernel_v1",
+          }
+          if not expected.issubset(set(roots)) or len(set(roots))!=len(roots):
+              raise SystemExit("TWO_PHASE_REQUIRED_AXIOM_ROOTS_MISSING")
+          pathlib.Path("evidence-cofinal/RHTwoPhaseAxiomAudit.lean").write_text(
+              "import AEGISOverlay.RHFixedPacketFrontierV1\n"
+              + "".join("#print axioms " + root + "\n" for root in roots)
+          )
+          PY
+          lake env lean evidence-cofinal/RHTwoPhaseAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/axioms-RHTwoPhaseV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFixedPacketFrontierV1.lean \
+            evidence-cofinal/axioms-RHTwoPhaseV1.log
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          root=pathlib.Path(".")
+          module="AEGISOverlay.RHFixedPacketFrontierV1"
+          source=root/"AEGISOverlay/RHFixedPacketFrontierV1.lean"
+          binary=root/".lake/build/lib/lean/AEGISOverlay/RHFixedPacketFrontierV1.olean"
+          if not binary.is_file() or binary.stat().st_size==0:
+              raise SystemExit("TWO_PHASE_OLEAN_MISSING")
+          manifest=json.loads((root/"evidence-cofinal/source-manifest.json").read_text())
+          matches=[rec for rec in manifest if rec["module"]==module]
+          source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
+          if len(matches)!=1 or matches[0]["sha256"]!=source_hash:
+              raise SystemExit("TWO_PHASE_SOURCE_MANIFEST_DRIFT")
+          with binary.open("rb") as f: binary_hash=hashlib.file_digest(f,"sha256").hexdigest()
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          receipt={
+              "status":"VERIFIED_KERNEL_CONDITIONAL_ONLY",
+              "scope":"TWO_PHASE_REAL_KERNEL_REDUCTION_NOT_RH_PROOF",
+              "exact_head":head,
+              "module":module,
+              "source_sha256":source_hash,
+              "olean_sha256":binary_hash,
+              "lean":subprocess.check_output(["lean","--version"],text=True).strip(),
+              "mathlib_sha":"0df444a360eaa60ab8c11dca51a86af692955474",
+              "aegis_provider_sha":"2c3d041b633147ec97c7ef753aa9d157a47bb9f5",
+              "axioms_log":"evidence-cofinal/axioms-RHTwoPhaseV1.log",
+          }
+          (root/"evidence-cofinal/two-phase-exact-head-receipt.json").write_text(
+              json.dumps(receipt,sort_keys=True,indent=2)+"\n")
+          print("TWO_PHASE_SOURCE_BOUND_OLEAN_VERIFIED",head,source_hash,binary_hash)
+          PY
+
 
           # Issue #96: this explicit axiom-log path also forces fresh V6 compilation
           # in rh_restore_source_bound_oleans.py (audit_modules), even with a valid cache.

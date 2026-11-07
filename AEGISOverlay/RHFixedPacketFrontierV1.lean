@@ -171,3 +171,6 @@ end AEGIS.RHFixedPacketFrontierV1
 #print axioms AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_fixed_detecting_packet_bound
 #print axioms AEGIS.RHFixedPacketFrontierV1.universal_of_fixed_detecting_packet_sign
 #print axioms AEGIS.RHFixedPacketFrontierV1.fixed_detecting_packet_sign_iff_universal
+
+#print axioms AEGIS.RHFixedPacketFrontierV1.two_phase_real_kernel_bound_v1
+#print axioms AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_two_phase_real_kernel_v1
