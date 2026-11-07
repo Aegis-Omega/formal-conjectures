@@ -119,6 +119,112 @@ theorem riemannHypothesis_of_dense_fixed_packet_sign (h : DenseFixedPacketSign) 
     RiemannHypothesis :=
   riemannHypothesis_of_fixed_detecting_packet_sign (dense_fixed_packet_sign_iff_fixed_sign.mp h)
 
+
+/-!
+## Two phases on a countable dense translation group
+
+The real-kernel assumption is NOT discharged here.  The theorem proves
+that the arithmetic signs at c = +/- 1 on the snowflake shift group
+are sufficient to obtain the previously checked real-kernel RH criterion.
+The reverse direction is the established RH => universal Weil sign.
+-/
+
+/-- Two actual Weil arithmetic inequalities, only at integer combinations
+of log 2 and log 3.  This is still an open sign obligation. -/
+def DensePacketTwoPhaseSignV1 (g : WeilCompactSmoothGV1) : Prop :=
+  ∀ d : ℝ, d ∈ SnowflakeShiftGroup →
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1
+        (WeilTwoPointTranslateV11 g d (1 : ℂ)))).re ≤ 0 ∧
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1
+        (WeilTwoPointTranslateV11 g d (-1 : ℂ)))).re ≤ 0
+
+/-- Extend the two signs from the countable dense group to all real
+translations by the existing continuity theorem. -/
+theorem dense_packet_two_phase_implies_all_shifts_v1
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (h : DensePacketTwoPhaseSignV1 g) :
+    TwoPhaseArithmeticSignV1 g := by
+  intro d
+  have hnonneg (c : ℂ) (hc : c = 1 ∨ c = -1) :
+      ∀ x : ℝ,
+        0 ≤ WeilTwoPointValueV1
+          (WeilAutocorrelationZeroQuadraticV11 g).re
+          (WeilZeroTranslationKernelV11 g x) c := by
+    apply snowflake_nonnegative_of_continuous
+      (fun x : ℝ =>
+        WeilTwoPointValueV1
+          (WeilAutocorrelationZeroQuadraticV11 g).re
+          (WeilZeroTranslationKernelV11 g x) c)
+      (translated_four_phase_value_continuous g c)
+    intro x hx
+    have hs :
+        (WeilExplicitRightSideV1
+          (WeilAutocorrelationV1
+            (WeilTwoPointTranslateV11 g x c))).re ≤ 0 := by
+      rcases hc with rfl | rfl
+      · exact (h x hx).1
+      · exact (h x hx).2
+    have hQ : 0 ≤
+        (WeilAutocorrelationZeroQuadraticV11
+          (WeilTwoPointTranslateV11 g x c)).re :=
+      (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+        (WeilTwoPointTranslateV11 g x c)
+        (twoPointTranslate_preserves_moments_v11 g x c hm)).mp hs
+    rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm x c] at hQ
+    exact hQ
+  constructor
+  · apply (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 g d (1 : ℂ))
+      (twoPointTranslate_preserves_moments_v11 g d (1 : ℂ) hm)).mpr
+    rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (1 : ℂ)]
+    exact hnonneg (1 : ℂ) (Or.inl rfl) d
+  · apply (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 g d (-1 : ℂ))
+      (twoPointTranslate_preserves_moments_v11 g d (-1 : ℂ) hm)).mpr
+    rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (-1 : ℂ)]
+    exact hnonneg (-1 : ℂ) (Or.inr rfl) d
+
+/-- For moment-zero packets, the two-phase sign on the snowflake group
+is equivalent to the two-phase sign for every real translation. -/
+theorem dense_packet_two_phase_iff_all_shifts_v1
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) :
+    DensePacketTwoPhaseSignV1 g ↔ TwoPhaseArithmeticSignV1 g := by
+  constructor
+  · exact dense_packet_two_phase_implies_all_shifts_v1 g hm
+  · intro h d _hd
+    exact h d
+
+/-- An exact RH equivalence for any specified packet with BOTH zero
+detection and a real translation kernel.  Neither hypothesis, nor
+the dense arithmetic sign, is asserted unconditionally. -/
+theorem rh_iff_dense_packet_two_phase_real_kernel_v1
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (hdetect : ∀ rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroCoefficientV11 g rho ≠ 0)
+    (hreal : ∀ d : ℝ, (WeilZeroTranslationKernelV11 g d).im = 0) :
+    RiemannHypothesis ↔ DensePacketTwoPhaseSignV1 g := by
+  constructor
+  · intro hRH d _hd
+    have hU :
+        AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10 :=
+      AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13 hRH
+    constructor
+    · have hp := twoPointTranslate_preserves_moments_v11 g d (1 : ℂ) hm
+      exact (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+        (WeilTwoPointTranslateV11 g d (1 : ℂ)) hp).mpr
+        (hU _ hp)
+    · have hn := twoPointTranslate_preserves_moments_v11 g d (-1 : ℂ) hm
+      exact (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+        (WeilTwoPointTranslateV11 g d (-1 : ℂ)) hn).mpr
+        (hU _ hn)
+  · intro hs
+    exact riemannHypothesis_of_two_phase_real_kernel_v1
+      g hm hdetect hreal
+      (dense_packet_two_phase_implies_all_shifts_v1 g hm hs)
+
 end AEGIS.RHFixedPacketDenseShiftV1
 
 #print axioms AEGIS.RHFixedPacketDenseShiftV1.translated_four_phase_value_continuous
@@ -127,3 +233,6 @@ end AEGIS.RHFixedPacketDenseShiftV1
 #print axioms AEGIS.RHFixedPacketDenseShiftV1.universal_of_dense_fixed_packet_sign
 #print axioms AEGIS.RHFixedPacketDenseShiftV1.dense_fixed_packet_sign_iff_universal
 #print axioms AEGIS.RHFixedPacketDenseShiftV1.riemannHypothesis_of_dense_fixed_packet_sign
+#print axioms AEGIS.RHFixedPacketDenseShiftV1.dense_packet_two_phase_implies_all_shifts_v1
+#print axioms AEGIS.RHFixedPacketDenseShiftV1.dense_packet_two_phase_iff_all_shifts_v1
+#print axioms AEGIS.RHFixedPacketDenseShiftV1.rh_iff_dense_packet_two_phase_real_kernel_v1

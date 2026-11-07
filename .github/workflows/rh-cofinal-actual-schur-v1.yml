@@ -36,6 +36,7 @@ on:
       - 'AEGISOverlay/RHFourLogThreeActualPrimeV1.lean'
       - 'AEGISOverlay/RHMellinDetectorCenteredV1.lean'
       - 'AEGISOverlay/RHFixedPacketFrontierV1.lean'
+      - 'AEGISOverlay/RHFixedPacketDenseShiftV1.lean'
       - 'AEGISOverlay/RHArchRow29V1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
@@ -356,7 +357,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
+          targets=["AEGISOverlay.RHFixedPacketDenseShiftV1","RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -630,6 +631,35 @@ jobs:
           (root/"evidence-cofinal/two-phase-exact-head-receipt.json").write_text(
               json.dumps(receipt,sort_keys=True,indent=2)+"\n")
           print("TWO_PHASE_SOURCE_BOUND_OLEAN_VERIFIED",head,source_hash,binary_hash)
+          PY
+
+          # Audit the actual newly compiled dense two-phase RH criterion,
+          # including all added #print axioms roots, against the source and OLEAN.
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFixedPacketDenseShiftV1.olean
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFixedPacketDenseShiftV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHFixedPacketDenseShiftV1.log
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          mod="AEGISOverlay.RHFixedPacketDenseShiftV1"
+          s=pathlib.Path("AEGISOverlay/RHFixedPacketDenseShiftV1.lean")
+          b=pathlib.Path(".lake/build/lib/lean/AEGISOverlay/RHFixedPacketDenseShiftV1.olean")
+          entries=json.loads(pathlib.Path("evidence-cofinal/source-manifest.json").read_text())
+          source_sha=hashlib.sha256(s.read_bytes()).hexdigest()
+          if len([x for x in entries if x["module"]==mod and x["sha256"]==source_sha])!=1:
+              raise SystemExit("DENSE_TWO_PHASE_SOURCE_MANIFEST_DRIFT")
+          with b.open("rb") as stream:
+              olean_sha=hashlib.file_digest(stream,"sha256").hexdigest()
+          receipt={
+            "status":"VERIFIED_KERNEL_CONDITIONAL_ONLY",
+            "scope":"DENSE_TWO_PHASE_RH_EQUIVALENCE_NOT_UNCONDITIONAL_RH",
+            "head":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+            "module":mod,"source_sha256":source_sha,"olean_sha256":olean_sha,
+            "axiom_log":"evidence-cofinal/compile-AEGISOverlay_RHFixedPacketDenseShiftV1.log",
+          }
+          pathlib.Path("evidence-cofinal/dense-two-phase-exact-head-receipt.json").write_text(
+              json.dumps(receipt,sort_keys=True,indent=2)+"\n")
+          print("DENSE_TWO_PHASE_SOURCE_BOUND_OLEAN_VERIFIED",receipt["head"])
           PY
 
 
