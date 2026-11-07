@@ -85,6 +85,19 @@ def stage_targets(stage, mods, deps):
     return {b for b in batch if BATCH.match(b)[1] in mine}
 
 
+def clean_kernel_compile_output(text: str) -> bool:
+    """Never checkpoint a Lean object with explicit error or placeholder evidence."""
+    if ("sorryAx" in text or "declaration uses 'sorry'" in text
+            or re.search(r"(?m)^[^:\n]*:\d+:\d+: error", text)):
+        return False
+    reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+    for _, axioms in reports:
+        used = {a.strip() for a in axioms.split(",") if a.strip()}
+        if not used <= ALLOWED:
+            return False
+    return True
+
+
 def sha256_file(path: Path) -> str:
     """Hash large kernel binaries with bounded memory, not read_bytes()."""
     with path.open("rb") as stream:
@@ -185,7 +198,8 @@ def main():
         t = time.time()
         r = subprocess.run(["lean", "-R", root, "-o", str(olean), e["path"]],
                            env=env, capture_output=True, text=True)
-        success = r.returncode == 0 and olean.is_file() and olean.stat().st_size > 0
+        success = (r.returncode == 0 and clean_kernel_compile_output(r.stdout + r.stderr)
+                   and olean.is_file() and olean.stat().st_size > 0)
         if success:
             stamp.write_text(sha256_file(olean) + "\n")
             source_stamp.write_text(e["sha256"] + "\n")
