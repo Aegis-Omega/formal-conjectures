@@ -178,11 +178,15 @@ theorem dense_packet_two_phase_implies_all_shifts_v1
   · apply (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
       (WeilTwoPointTranslateV11 g d (1 : ℂ))
       (twoPointTranslate_preserves_moments_v11 g d (1 : ℂ) hm)).mpr
+    change 0 ≤ (WeilAutocorrelationZeroQuadraticV11
+      (WeilTwoPointTranslateV11 g d (1 : ℂ))).re
     rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (1 : ℂ)]
     exact hnonneg (1 : ℂ) (Or.inl rfl) d
   · apply (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
       (WeilTwoPointTranslateV11 g d (-1 : ℂ))
       (twoPointTranslate_preserves_moments_v11 g d (-1 : ℂ) hm)).mpr
+    change 0 ≤ (WeilAutocorrelationZeroQuadraticV11
+      (WeilTwoPointTranslateV11 g d (-1 : ℂ))).re
     rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (-1 : ℂ)]
     exact hnonneg (-1 : ℂ) (Or.inr rfl) d
 
