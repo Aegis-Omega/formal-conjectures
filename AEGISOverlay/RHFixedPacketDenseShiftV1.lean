@@ -124,7 +124,7 @@ theorem riemannHypothesis_of_dense_fixed_packet_sign (h : DenseFixedPacketSign) 
 ## Two phases on a countable dense translation group
 
 The real-kernel assumption is NOT discharged here.  The theorem proves
-that the arithmetic signs at c = +/- 1 on the snowflake shift group
+that the arithmetic signs at coefficients 1 and -1 on the snowflake shift group
 are sufficient to obtain the previously checked real-kernel RH criterion.
 The reverse direction is the established RH => universal Weil sign.
 -/
