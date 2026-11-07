@@ -102,6 +102,29 @@ class SourceBoundOleanCheckpointTests(unittest.TestCase):
                 graph, graph, {"ProofC"}, lambda m: present[m]),
             [])
 
+    def test_accepts_clean_lean_kernel_output(self):
+        self.assertTrue(module.clean_kernel_compile_output(""))
+
+    def test_accepts_standard_kernel_axioms(self):
+        self.assertTrue(module.clean_kernel_compile_output(
+            "'AEGIS.Example.t' depends on axioms: [propext, Classical.choice, Quot.sound]"))
+
+    def test_rejects_sorry_axiom_even_if_lean_returns_zero(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "'AEGIS.Example.t' depends on axioms: [sorryAx]"))
+
+    def test_rejects_sorry_warning_even_if_lean_returns_zero(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "warning: declaration uses 'sorry'"))
+
+    def test_rejects_nonstandard_axiom_report(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "'AEGIS.Example.t' depends on axioms: [Classical.choice, User.cheat]"))
+
+    def test_rejects_lean_error_in_stdout(self):
+        self.assertFalse(module.clean_kernel_compile_output(
+            "Example.lean:18:9: error: unsolved goals"))
+
 
 if __name__ == "__main__":
     unittest.main()
