@@ -78,7 +78,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           repository: Aegis-Omega/formal-conjectures
-          run-id: 42100439764
+          run-id: 42292998025
           github-token: ${{ github.token }}
           name: rhc-base
           path: ${{ runner.temp }}/rhc
@@ -87,7 +87,7 @@ jobs:
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           repository: Aegis-Omega/formal-conjectures
-          run-id: 42100439764
+          run-id: 42292998025
           github-token: ${{ github.token }}
           pattern: rhc-shard-*
           merge-multiple: true
@@ -200,7 +200,7 @@ jobs:
           receipt={"schema":"aegis.rh.final_native_replay.v1",
               "exact_head":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
               "source_manifest_blob":"214ecf7be2f62829a42a3991e2ccfddee5a6d7e5",
-              "historical_run_id":42100439764,
+              "historical_run_id":42292998025,
               "historical_314_binary_set_sha256":digest,
               "binary_count":len(current),"final_generated":{m:current[m] for m in sorted(targets)},
               "axiom_audit":"STANDARD_AXIOMS_ONLY",
