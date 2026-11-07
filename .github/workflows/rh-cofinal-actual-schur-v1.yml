@@ -992,6 +992,38 @@ jobs:
               blobs.append(module+" "+blob+"\n")
               hashes.append(digest+"  "+rel+"\n")
               accepted.add(module)
+          # Independently audited V7 kernels belong in the same source-bound cache.
+          # A compiled but unaudited .olean is not proof admission.
+          for module, srcname, logname in (
+              ("AEGISOverlay.WeilPrimeReindexV1",
+               "AEGISOverlay/WeilPrimeReindexV1.lean", "v7/reindex.log"),
+              ("AEGISOverlay.RHFinitePrimeSieveBridgeV1",
+               "AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean", "v7/first-module.log"),
+              ("AEGISOverlay.RHFinitePrimeEndpointClosureV1",
+               "AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean", "v7/endpoint.log"),
+          ):
+              if module in accepted:
+                  continue
+              src=pathlib.Path(srcname)
+              log=root/logname
+              olean=pathlib.Path(".lake/build/lib/lean")/(module.replace(".","/")+".olean")
+              if not (src.is_file() and log.is_file() and olean.is_file()
+                      and olean.stat().st_size):
+                  continue
+              audit=subprocess.run(["python3","scripts/verify_rh_overlay_axioms.py",
+                                    str(src),str(log)],capture_output=True,text=True)
+              if audit.returncode!=0:
+                  print("V7_CHECKPOINT_NOT_ADMITTED",module,audit.stderr)
+                  continue
+              blob=subprocess.check_output(["git","hash-object",str(src)],
+                                           text=True).strip()
+              rel="oleans/"+module+".olean"
+              shutil.copyfile(olean,cache/rel)
+              digest=hashlib.sha256((cache/rel).read_bytes()).hexdigest()
+              blobs.append(module+" "+blob+"\n")
+              hashes.append(digest+"  "+rel+"\n")
+              accepted.add(module)
+              print("V7_SOURCE_AND_OLEAN_CHECKPOINTED",module,digest)
           (cache/"source-blobs.txt").write_text("".join(blobs))
           (cache/"oleans.sha256").write_text("".join(hashes))
           (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
