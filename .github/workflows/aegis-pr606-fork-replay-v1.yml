@@ -286,7 +286,8 @@ jobs:
               if not all(p.is_file() for p in (source, olean, sstamp, ostamp)) or not olean.stat().st_size:
                   raise SystemExit('PR606_CHECKPOINT_MISSING:' + module)
               ssh = hashlib.sha256(source.read_bytes()).hexdigest()
-              osh = hashlib.sha256(olean.read_bytes()).hexdigest()
+              with olean.open('rb') as binary:
+                  osh = hashlib.file_digest(binary, 'sha256').hexdigest()
               if ssh != sstamp.read_text().strip() or osh != ostamp.read_text().strip():
                   raise SystemExit('PR606_CHECKPOINT_HASH_DRIFT:' + module)
               blob = subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip()
