@@ -122,6 +122,15 @@ def resumable_modules(mods, deps, has_olean):
     return trusted
 
 
+def missing_upstream_oleans(mods, deps, targets, has_olean):
+    """Identify stage imports whose transitive prerequisite closures are not valid."""
+    done = set(mods) - set(targets)
+    prior_deps = {m: [d for d in deps[m] if d in done] for m in done}
+    trusted_prior = resumable_modules(done, prior_deps, has_olean)
+    required_prior = {d for m in targets for d in deps[m] if d in done}
+    return sorted(required_prior - trusted_prior)
+
+
 def main():
     out, log = Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve()
     jobs = int(sys.argv[3]) if len(sys.argv) > 3 else 2
@@ -148,12 +157,8 @@ def main():
     def has_olean(m):
         return verified_olean(out, m, mods[m]["sha256"], context_sha)
     done, failed = set(mods) - targets, []
-    # Check the complete upstream import graph before compiling the current
-    # stage. A valid direct import does not excuse a stale transitive import.
-    prior_deps = {m: [d for d in deps[m] if d in done] for m in done}
-    trusted_prior = resumable_modules(done, prior_deps, has_olean)
-    required_prior = {d for m in targets for d in deps[m] if d in done}
-    missing = sorted(required_prior - trusted_prior)
+    # A direct import is unsafe if a transitive upstream .olean has drifted.
+    missing = missing_upstream_oleans(mods, deps, targets, has_olean)
     if missing:
         sys.exit(f"stage {stage}: stale or missing transitive .olean closure: {missing}")
     logs = {}
