@@ -184,6 +184,7 @@ jobs:
           (root/"evidence-rhc-final/audit.log").write_text(log)
           reports=re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]",log)
           names={x for x,_ in reports}
+          names.update(re.findall(r"'([^']+)' does not depend on any axioms",log))
           expected={line.split()[-1] for line in checks.splitlines()}
           if (chk.returncode or names!=expected or "sorryAx" in log or
              any(not set(a.strip() for a in axs.split(",") if a.strip()) <=
@@ -204,9 +205,20 @@ jobs:
               "binary_count":len(current),"final_generated":{m:current[m] for m in sorted(targets)},
               "axiom_audit":"STANDARD_AXIOMS_ONLY",
               "rh_unconditional":None,"proof_admission":"NOT_ASSESSED"}
+          all_hashes="".join(
+              f"{current[m]}  oleans/{m.replace('.','/')}.olean\n"
+              for m in sorted(current))
+          all_digest=hashlib.sha256(all_hashes.encode()).hexdigest()
+          receipt["all_317_binary_set_sha256"]=all_digest
+          receipt["source_sha256"]={
+              m:mods[m]["sha256"] for m in sorted(targets)}
+          receipt["toolchain"]=os.environ["LEAN_TOOLCHAIN"]
+          receipt["mathlib_sha"]=os.environ["MATHLIB_SHA"]
+          receipt["li_provider_sha"]=os.environ["LI_PROVIDER_SHA"]
+          (root/"evidence-rhc-final/oleans-317.sha256").write_text(all_hashes)
           (root/"evidence-rhc-final/receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
           (final/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
-          print("RHC_NATIVE_OLEANS_317_OF_317",receipt["exact_head"],flush=True)
+          print("RHC_NATIVE_OLEANS_317_OF_317",receipt["exact_head"],all_digest,flush=True)
           PY
 
       - name: Archive actual three final .olean objects
