@@ -13,6 +13,8 @@ on:
       - 'scripts/rh_restore_source_bound_oleans.py'
       - 'scripts/test_rh_restore_source_bound_oleans.py'
       - 'scripts/test_rh_consolidated_olean_checkpoint.py'
+      - 'scripts/rh_verify_olean_recovery.py'
+      - 'scripts/test_rh_verify_olean_recovery.py'
       - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'research/rh/consolidated_v1/build.py'
       - '.github/workflows/rh-olean-checkpoint-fast-v1.yml'
@@ -21,6 +23,8 @@ on:
       - 'scripts/rh_restore_source_bound_oleans.py'
       - 'scripts/test_rh_restore_source_bound_oleans.py'
       - 'scripts/test_rh_consolidated_olean_checkpoint.py'
+      - 'scripts/rh_verify_olean_recovery.py'
+      - 'scripts/test_rh_verify_olean_recovery.py'
       - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'research/rh/consolidated_v1/build.py'
       - '.github/workflows/rh-olean-checkpoint-fast-v1.yml'
@@ -55,6 +59,8 @@ jobs:
             scripts/rh_restore_source_bound_oleans.py \
             scripts/test_rh_restore_source_bound_oleans.py \
             scripts/test_rh_consolidated_olean_checkpoint.py \
+            scripts/rh_verify_olean_recovery.py \
+            scripts/test_rh_verify_olean_recovery.py \
             research/rh/consolidated_v1/build.py
           bash -n scripts/rh_pr63_proved_window_prebuild.sh
 
