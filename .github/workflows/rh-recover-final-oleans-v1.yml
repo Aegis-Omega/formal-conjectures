@@ -11,6 +11,7 @@ on:
     paths:
       - '.github/workflows/rh-recover-final-oleans-v1.yml'
   pull_request:
+    types: [edited, synchronize]
     paths:
       - '.github/workflows/rh-recover-final-oleans-v1.yml'
   workflow_dispatch:
