@@ -44,7 +44,7 @@ def chosen(n):
         if not source.is_file():
             raise SystemExit("RH_WINDOW_TWO_POINT_COMPAT_MISSING")
         payload = source.read_bytes()
-        blob = hashlib.sha1(f"blob {len(payload)}\\0".encode() + payload).hexdigest()
+        blob = hashlib.sha1(f"blob {len(payload)}\0".encode() + payload).hexdigest()
         if blob != "416eb252794a2b0b550c796330a08a946aeabed4":
             raise SystemExit("RH_WINDOW_TWO_POINT_COMPAT_SOURCE_DRIFT:" + blob)
         return source
