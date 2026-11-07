@@ -86,6 +86,15 @@ class SourceBoundOleanCheckpointTests(unittest.TestCase):
             module.resumable_modules(graph, graph, lambda m: present[m]),
             set(graph))
 
+    def test_resume_hashes_each_cached_olean_once(self):
+        graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
+        calls = {m: 0 for m in graph}
+        def checked(m):
+            calls[m] += 1
+            return True
+        self.assertEqual(module.resumable_modules(graph, graph, checked), set(graph))
+        self.assertEqual(calls, {m: 1 for m in graph})
+
     def test_cross_stage_rejects_stale_indirect_import(self):
         graph = {"ProofA": [], "ProofB": ["ProofA"], "ProofC": ["ProofB"]}
         present = {"ProofA": False, "ProofB": True, "ProofC": False}
