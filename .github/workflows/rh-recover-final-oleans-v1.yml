@@ -20,7 +20,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: rh-final-314-to-317-${{ github.sha }}
+  group: rh-final-314-to-317-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: false
 
 env:
@@ -36,7 +36,7 @@ jobs:
       - name: Checkout exact branch head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
 
       - name: Preflight embedded final-replay Python (no Lean download)
@@ -69,7 +69,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$GITHUB_SHA"
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
           test "$(git hash-object research/rh/consolidated_v1/manifest.json)" = "214ecf7be2f62829a42a3991e2ccfddee5a6d7e5"
           test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
