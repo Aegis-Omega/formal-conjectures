@@ -51,6 +51,7 @@ open AEGIS.WeilAutocorrelationMellinV11
 open AEGIS.WeilZeroTwoPointV11
 open AEGIS.WeilMomentKillerConstructionV1
 open AEGIS.WeilThreeBlockTranslatedPacketsV22
+open AEGIS.WeilMixedAlgebraV2
 
 private theorem targetPsi_tsupport_subset_psi0_v11 (rho : ℂ) :
     tsupport (TargetPsiV11 rho) ⊆ tsupport psi0 := by
@@ -349,8 +350,7 @@ theorem exists_residue_packet_autocorrelation_mellin_ne_zero_v11
   obtain ⟨g, hm, hr, href⟩ :=
     exists_residue_packet_v11 rho
   refine ⟨g, hm, ?_⟩
-  rw [AEGIS.WeilAutocorrelationMellinV11
-    .weil_autocorrelation_mellin_factorization_v11]
+  rw [AEGIS.WeilAutocorrelationMellinV11.weil_autocorrelation_mellin_factorization_v11]
   exact mul_ne_zero hr (map_ne_zero conj href)
 
 end AEGIS.RestrictedWeilCriterionResidueWitnessV11
