@@ -85,6 +85,21 @@ def stage_targets(stage, mods, deps):
     return {b for b in batch if BATCH.match(b)[1] in mine}
 
 
+def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) -> bool:
+    """Accept an object only if bytes, source identity and build context match."""
+    olean = out / (module.replace(".", "/") + ".olean")
+    digest_file = Path(str(olean) + ".sha256")
+    source_file = Path(str(olean) + ".source.sha256")
+    context_file = Path(str(olean) + ".context.sha256")
+    return (olean.is_file() and olean.stat().st_size > 0
+            and digest_file.is_file() and source_file.is_file()
+            and context_file.is_file()
+            and source_file.read_text().strip() == source_sha
+            and context_file.read_text().strip() == context_sha
+            and digest_file.read_text().strip()
+                == hashlib.sha256(olean.read_bytes()).hexdigest())
+
+
 def main():
     out, log = Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve()
     jobs = int(sys.argv[3]) if len(sys.argv) > 3 else 2
@@ -109,17 +124,7 @@ def main():
         + os.environ.get("LI_PROVIDER_SHA", "").encode()
     ).hexdigest()
     def has_olean(m):
-        olean = out / (m.replace(".", "/") + ".olean")
-        receipt = Path(str(olean) + ".sha256")
-        source_stamp = Path(str(olean) + ".source.sha256")
-        context_stamp = Path(str(olean) + ".context.sha256")
-        return (olean.is_file() and olean.stat().st_size > 0
-                and receipt.is_file() and source_stamp.is_file()
-                and context_stamp.is_file()
-                and source_stamp.read_text().strip() == mods[m]["sha256"]
-                and context_stamp.read_text().strip() == context_sha
-                and receipt.read_text().strip()
-                    == hashlib.sha256(olean.read_bytes()).hexdigest())
+        return verified_olean(out, m, mods[m]["sha256"], context_sha)
     done, failed = set(mods) - targets, []
     missing = sorted({d for m in targets for d in deps[m] if d in done and not has_olean(d)})
     if missing:
