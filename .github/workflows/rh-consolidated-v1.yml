@@ -295,6 +295,9 @@ jobs:
           path: |
             ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean
             ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean
+            ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean.sha256
+            ${{ runner.temp }}/rhc/rhc-checkpoint-shard-${{ matrix.shard }}-12.json
           if-no-files-found: error
           retention-days: 3
 
@@ -376,6 +379,14 @@ jobs:
         run: |
           set -euo pipefail
           lake env python3 research/rh/consolidated_v1/build.py "$RUNNER_TEMP/rhc" consolidated-final.log 3 final
+
+      - name: Upload final .olean files and complete source-bound checkpoint
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhc-final
+          path: ${{ runner.temp }}/rhc/rhc-final/
+          if-no-files-found: error
+          retention-days: 3
 
       - name: Upload log
         if: always()
