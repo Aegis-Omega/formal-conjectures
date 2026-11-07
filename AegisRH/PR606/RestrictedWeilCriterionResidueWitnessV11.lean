@@ -38,7 +38,7 @@ AUTHORITY_EFFECT = NONE.
 -/
 
 open Set Filter Topology MeasureTheory Complex
-open scoped Topology
+open scoped Topology ComplexConjugate
 
 set_option autoImplicit false
 noncomputable section
@@ -50,6 +50,7 @@ open AEGIS.RestrictedWeilCriterionKernelBridgeV10
 open AEGIS.WeilAutocorrelationMellinV11
 open AEGIS.WeilZeroTwoPointV11
 open AEGIS.WeilMomentKillerConstructionV1
+open AEGIS.WeilThreeBlockTranslatedPacketsV22
 
 private theorem targetPsi_tsupport_subset_psi0_v11 (rho : ℂ) :
     tsupport (TargetPsiV11 rho) ⊆ tsupport psi0 := by
@@ -67,7 +68,7 @@ private theorem targetPsi_tsupport_subset_psi0_v11 (rho : ℂ) :
   rwa [hbase] at hu'
 
 private theorem targetPhi_vanishes_below_v11
-    (rho : ℂ) {u : ℝ} (hu : u ≤ -(1 / 32 : ℝ)) :
+    (rho : ℂ) {u : ℝ} (hu : u < -(1 / 32 : ℝ)) :
     TargetPhiV11 rho u = 0 := by
   have hnot0 : u ∉ tsupport psi0 := by
     rw [psi0_tsupport, Real.closedBall_eq_Icc]
@@ -86,7 +87,7 @@ private theorem targetPhi_vanishes_below_v11
   simp [TargetPhiV11, h1, h2]
 
 private theorem targetPhi_vanishes_above_v11
-    (rho : ℂ) {u : ℝ} ((1 / 32 : ℝ) ≤ u) :
+    (rho : ℂ) {u : ℝ} (hu : (1 / 32 : ℝ) < u) :
     TargetPhiV11 rho u = 0 := by
   have hnot0 : u ∉ tsupport psi0 := by
     rw [psi0_tsupport, Real.closedBall_eq_Icc]
@@ -116,28 +117,26 @@ private theorem targetPacketFun_of_pos_v11
 
 private theorem targetPacketFun_eq_zero_below_v11
     (rho : ℂ) {x : ℝ}
-    (hx : x ≤ Real.exp (-(1 / 32 : ℝ))) :
+    (hx : x < Real.exp (-(1 / 32 : ℝ))) :
     TargetPacketFunV11 rho x = 0 := by
   rcases le_or_gt x 0 with hnonpos | hpos
   · simp [TargetPacketFunV11, not_lt.mpr hnonpos]
   · rw [targetPacketFun_of_pos_v11 rho hpos]
     apply targetPhi_vanishes_below_v11 rho
     have hlog :=
-      (Real.log_le_log_iff hpos
-        (Real.exp_pos (-(1 / 32 : ℝ)))).2 hx
+      Real.log_lt_log hpos hx
     simpa using hlog
 
 private theorem targetPacketFun_eq_zero_above_v11
     (rho : ℂ) {x : ℝ}
-    (hx : Real.exp (1 / 32 : ℝ) ≤ x) :
+    (hx : Real.exp (1 / 32 : ℝ) < x) :
     TargetPacketFunV11 rho x = 0 := by
   have hpos : 0 < x :=
-    lt_of_lt_of_le (Real.exp_pos (1 / 32 : ℝ)) hx
+    lt_trans (Real.exp_pos (1 / 32 : ℝ)) hx
   rw [targetPacketFun_of_pos_v11 rho hpos]
   apply targetPhi_vanishes_above_v11 rho
   have hlog :=
-    (Real.log_le_log_iff
-      (Real.exp_pos (1 / 32 : ℝ)) hpos).2 hx
+    Real.log_lt_log (Real.exp_pos (1 / 32 : ℝ)) hx
   simpa using hlog
 
 theorem targetPacketFun_contDiff_v11 (rho : ℂ) :
@@ -161,7 +160,7 @@ theorem targetPacketFun_contDiff_v11 (rho : ℂ) :
         TargetPacketFunV11 rho =ᶠ[𝓝 x] fun _ => (0 : ℂ) :=
       eventuallyEq_of_mem hmem
         (fun y hy =>
-          targetPacketFun_eq_zero_below_v11 rho (le_of_lt hy))
+          targetPacketFun_eq_zero_below_v11 rho hy)
     exact
       ContDiffAt.congr_of_eventuallyEq contDiffAt_const hEq
 
@@ -174,16 +173,14 @@ theorem targetPacketFun_tsupport_subset_v11 (rho : ℂ) :
   by_contra hnot
   apply hx
   rcases not_and_or.mp (fun h => hnot ⟨h.1, h.2⟩) with h | h
-  · exact targetPacketFun_eq_zero_below_v11 rho (le_of_not_ge h)
-  · exact targetPacketFun_eq_zero_above_v11 rho (le_of_not_ge h)
+  · exact targetPacketFun_eq_zero_below_v11 rho (lt_of_not_ge h)
+  · exact targetPacketFun_eq_zero_above_v11 rho (lt_of_not_ge h)
 
 theorem targetPacketFun_hasCompactSupport_v11 (rho : ℂ) :
     HasCompactSupport (TargetPacketFunV11 rho) := by
-  exact
-    (isCompact_Icc : IsCompact
-      (Icc (Real.exp (-(1 / 32 : ℝ)))
-        (Real.exp (1 / 32 : ℝ))))
-      .of_isClosed_subset
+  exact (isCompact_Icc : IsCompact
+    (Icc (Real.exp (-(1 / 32 : ℝ)))
+      (Real.exp (1 / 32 : ℝ)))).of_isClosed_subset
         (isClosed_tsupport _)
         (targetPacketFun_tsupport_subset_v11 rho)
 
