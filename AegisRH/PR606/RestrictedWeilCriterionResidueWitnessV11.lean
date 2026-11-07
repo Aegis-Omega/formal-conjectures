@@ -38,7 +38,7 @@ AUTHORITY_EFFECT = NONE.
 -/
 
 open Set Filter Topology MeasureTheory Complex
-open scoped Topology ComplexConjugate
+open scoped Topology ContDiff ComplexConjugate
 
 set_option autoImplicit false
 noncomputable section
