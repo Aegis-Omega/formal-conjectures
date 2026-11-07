@@ -31,6 +31,9 @@ python3 - "$BASE" "$WBASE" "$SRC" "$COMPAT" "$LOCAL" "$OVERLAY" "$WIN" "$ORDER" 
 from pathlib import Path
 import hashlib
 import sys
+def file_sha256(path):
+    with path.open("rb") as binary:
+        return hashlib.file_digest(binary, "sha256").hexdigest()
 base, wbase, src, compat, local, overlay, win, orderpath, out = map(Path, sys.argv[1:])
 roots=(base, wbase, src, compat, local, overlay, win)
 groups=[{p.stem:p for p in r.glob("*.lean")} for r in roots]
@@ -91,7 +94,7 @@ for n in order:
            and stamp.read_text(encoding="ascii").strip()==digest
            and olean_stamp.is_file()
            and olean_stamp.read_text(encoding="ascii").strip()
-             == hashlib.sha256(olean.read_bytes()).hexdigest())
+             == file_sha256(olean))
     if dirty or not valid:
         dirty=True
         pending.append((n,source,digest))
@@ -132,6 +135,9 @@ python3 "$ROOT/scripts/verify_rh_overlay_axioms.py" "$AUDIT" "$LOG"
 # A checkpoint is valid only after the complete closure and terminal axiom audit.
 python3 - "$ORDER.all.tsv" "$OUT" "$ROOT" "$WINDOW_SHA" <<'PY'
 import hashlib, json, pathlib, subprocess, sys
+def file_sha256(path):
+    with path.open("rb") as binary:
+        return hashlib.file_digest(binary, "sha256").hexdigest()
 orderfile, out, root = map(pathlib.Path, sys.argv[1:4])
 window_sha = sys.argv[4]
 records = []
@@ -144,7 +150,7 @@ for line in orderfile.read_text(encoding="utf-8").splitlines():
     if not all(p.is_file() for p in (source, olean, src_stamp, bin_stamp)):
         raise SystemExit("RH_WINDOW_CHECKPOINT_MISSING:" + module)
     actual_source = hashlib.sha256(source.read_bytes()).hexdigest()
-    actual_olean = hashlib.sha256(olean.read_bytes()).hexdigest()
+    actual_olean = file_sha256(olean)
     if (not olean.stat().st_size or actual_source != source_sha
         or src_stamp.read_text().strip() != source_sha
         or bin_stamp.read_text().strip() != actual_olean):
