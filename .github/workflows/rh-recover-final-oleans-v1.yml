@@ -10,6 +10,9 @@ on:
       - 'fix/rh-live-evidence-provenance-20261024'
     paths:
       - '.github/workflows/rh-recover-final-oleans-v1.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/rh-recover-final-oleans-v1.yml'
   workflow_dispatch:
 
 permissions:
@@ -222,12 +225,21 @@ jobs:
           PY
 
       - name: Archive actual three final .olean objects
-        if: always()
+        if: success()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rhc-final-native-3-${{ github.run_id }}
           path: |
             ${{ runner.temp }}/rhc/rhc-final/
             evidence-rhc-final/
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Archive failure diagnostics separately
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhc-final-replay-failure-${{ github.run_id }}
+          path: evidence-rhc-final/
           if-no-files-found: warn
           retention-days: 30
