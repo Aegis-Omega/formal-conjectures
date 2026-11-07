@@ -1,0 +1,11 @@
+{
+  "source_pin": "f8cb6544e9451910fbf1ed5fa71e76a5fa1b747f",
+  "S1_source_pin": "d7e6bc7602ccfe4bf5fb094ab595b36eb532d8d5",
+  "publication_parent_observed": "80e0f5b4bf3b6ade35a4a597a654a6502b84aeff",
+  "newer_parent_status": "contains Arb upper-certificate work, not independently reviewed by this packet",
+  "new_density_producer_status": "ORDINARY_PROOF_PRIMARY_RECONSTRUCTION; PORT_PENDING; not independently replayed",
+  "user_publish_authorization": "explicit request to push all necessary work for other agents",
+  "protected_main_modified": false,
+  "branch_created": false,
+  "rh_proven": false
+}

@@ -94,6 +94,74 @@ theorem fixed_detecting_packet_sign_iff_universal :
             (twoPointTranslate_preserves_moments_v11 detectingPacket d c
               detectingPacket_moments))
 
+
+/-!
+## Two real phases suffice for a fixed detecting packet
+
+This is a conditional, kernel-checkable reduction: the real-valuedness of the
+actual zero translation kernel is an explicit hypothesis, NOT inferred from
+moment conditions or the existing detecting-packet choice.  The only
+arithmetic inputs are the actual signs for coefficients +1 and -1.
+-/
+
+/-- Two actual arithmetic sign tests for each real translation. -/
+def TwoPhaseArithmeticSignV1 (g : WeilCompactSmoothGV1) : Prop :=
+  ∀ d : ℝ,
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1 (WeilTwoPointTranslateV11 g d 1))).re ≤ 0 ∧
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1 (WeilTwoPointTranslateV11 g d (-1)))).re ≤ 0
+
+/-- Only two signs are needed for the *real* kernel.  The bound is the
+sharp |K(d)| ≤ Q(g), rather than the four-phase 2 Q(g) bound. -/
+theorem two_phase_real_kernel_bound_v1
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (hreal : ∀ d : ℝ, (WeilZeroTranslationKernelV11 g d).im = 0)
+    (hsign : TwoPhaseArithmeticSignV1 g) :
+    AEGIS.RHDetectingPacketCriterionV1.PacketKernelBoundV1 g := by
+  let a : ℝ := (WeilAutocorrelationZeroQuadraticV11 g).re
+  refine ⟨a, ?_⟩
+  intro d
+  let z : ℂ := WeilZeroTranslationKernelV11 g d
+  have hmplus := twoPointTranslate_preserves_moments_v11 g d (1 : ℂ) hm
+  have hmminus := twoPointTranslate_preserves_moments_v11 g d (-1 : ℂ) hm
+  have hplus : 0 ≤
+      (WeilAutocorrelationZeroQuadraticV11
+        (WeilTwoPointTranslateV11 g d (1 : ℂ))).re :=
+    (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 g d (1 : ℂ)) hmplus).mp (hsign d).1
+  have hminus : 0 ≤
+      (WeilAutocorrelationZeroQuadraticV11
+        (WeilTwoPointTranslateV11 g d (-1 : ℂ))).re :=
+    (autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      (WeilTwoPointTranslateV11 g d (-1 : ℂ)) hmminus).mp (hsign d).2
+  rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d 1] at hplus
+  rw [twoPoint_zero_quadratic_re_eq_four_phase_value g hm d (-1)] at hminus
+  change 0 ≤ WeilTwoPointValueV1 a z 1 at hplus
+  change 0 ≤ WeilTwoPointValueV1 a z (-1) at hminus
+  simp [WeilTwoPointValueV1, Complex.normSq_apply] at hplus hminus
+  have hre : |z.re| ≤ a :=
+    abs_le.mpr ⟨by linarith, by linarith⟩
+  have hzim : z.im = 0 := hreal d
+  have hnorm : ‖z‖ ≤ |z.re| := by
+    have h := Complex.norm_le_abs_re_add_abs_im z
+    simpa [hzim] using h
+  exact le_trans hnorm hre
+
+/-- The actual RH criterion with two arithmetic tests and explicit
+zero detection and real-kernel hypotheses; no new RH producer is assumed. -/
+theorem riemannHypothesis_of_two_phase_real_kernel_v1
+    (g : WeilCompactSmoothGV1)
+    (hm : WeilMomentConditionsV1 g)
+    (hdetect : ∀ rho : RiemannNontrivialZeroIndexV2,
+      WeilZeroCoefficientV11 g rho ≠ 0)
+    (hreal : ∀ d : ℝ, (WeilZeroTranslationKernelV11 g d).im = 0)
+    (hsign : TwoPhaseArithmeticSignV1 g) :
+    RiemannHypothesis :=
+  riemannHypothesis_of_detecting_bounded_kernel g hdetect
+    (two_phase_real_kernel_bound_v1 g hm hreal hsign)
+
 end AEGIS.RHFixedPacketFrontierV1
 
 #print axioms AEGIS.RHFixedPacketFrontierV1.detectingPacket_moments
@@ -102,3 +170,6 @@ end AEGIS.RHFixedPacketFrontierV1
 #print axioms AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_fixed_detecting_packet_bound
 #print axioms AEGIS.RHFixedPacketFrontierV1.universal_of_fixed_detecting_packet_sign
 #print axioms AEGIS.RHFixedPacketFrontierV1.fixed_detecting_packet_sign_iff_universal
+
+#print axioms AEGIS.RHFixedPacketFrontierV1.two_phase_real_kernel_bound_v1
+#print axioms AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_two_phase_real_kernel_v1

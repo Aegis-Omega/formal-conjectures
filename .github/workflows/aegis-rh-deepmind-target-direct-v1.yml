@@ -91,8 +91,52 @@ jobs:
           test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
           test "$(git -C .li hash-object Hadamard/General/Factorization.lean)" = "$LI_FACTORIZATION_BLOB"
           test -f FormalConjectures/Millennium/RiemannHypothesis.lean
-          grep -Fx 'import RHRestrictedWeilCriterionV13' FormalConjectures/Millennium/RiemannHypothesis.lean
-          ! grep -n -A3 'theorem riemannHypothesis : RiemannHypothesis' FormalConjectures/Millennium/RiemannHypothesis.lean | grep -F 'sorry'
+          test "$(git hash-object FormalConjectures/Millennium/RiemannHypothesis.lean)" = "$UPSTREAM_RH_BLOB"
+
+      - name: Record exact official RH source status (fail closed)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-rh-official
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import re
+          import subprocess
+          from pathlib import Path
+          from scripts.rh_official_target_gate import OFFICIAL, THEOREM, rh_body
+
+          source = Path(OFFICIAL).read_bytes()
+          proof_body = rh_body(source.decode("utf-8"))
+          eligible = proof_body is not None and re.search(
+              r"\b(?:sorry|sorryAx|admit|axiom)\b", proof_body
+          ) is None
+          receipt = {
+              "schema": "aegis.rh.direct-source-preflight.v1",
+              "target": THEOREM,
+              "file": OFFICIAL,
+              "head_sha": subprocess.check_output(
+                  ["git", "rev-parse", "HEAD"], text=True
+              ).strip(),
+              "source_git_blob": subprocess.check_output(
+                  ["git", "hash-object", OFFICIAL], text=True
+              ).strip(),
+              "source_sha256": hashlib.sha256(source).hexdigest(),
+              "disposition": (
+                  "SOURCE_ELIGIBLE_FOR_KERNEL" if eligible
+                  else "TARGET_SOURCE_INVALID"
+              ),
+              "compiler_attempted": False,
+              "axiom_audit_attempted": False,
+              "rh_proven_unconditionally": None,
+          }
+          out = Path("evidence-rh-official/source-preflight.json")
+          out.write_text(json.dumps(receipt, sort_keys=True, indent=2) + "\n")
+          print("RH_DIRECT_SOURCE_PREFLIGHT=" + receipt["disposition"])
+          print("RH_DIRECT_SOURCE_RECEIPT=" + str(out))
+          if not eligible:
+              raise SystemExit("RH_UNPROVEN_OFFICIAL_SOURCE: see exact-head receipt")
+          PY
 
       - name: Install pinned Lean and Mathlib cache
         shell: bash
@@ -261,7 +305,6 @@ jobs:
           export RH_EXACT_HEAD="$(git rev-parse HEAD)"
           TARGET="FormalConjectures/Millennium/RiemannHypothesis.lean"
           test -f "$TARGET"
-          ! grep -n -A3 'theorem riemannHypothesis : RiemannHypothesis' "$TARGET" | grep -F 'sorry'
           mkdir -p .lake/build/lib/lean/FormalConjectures/Millennium
           set +e
           lean -o .lake/build/lib/lean/FormalConjectures/Millennium/RiemannHypothesis.olean "$TARGET" > "$EVIDENCE/target-compile.log" 2>&1

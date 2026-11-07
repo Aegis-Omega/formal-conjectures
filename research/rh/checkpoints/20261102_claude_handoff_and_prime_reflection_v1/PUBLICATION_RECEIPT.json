@@ -1,0 +1,21 @@
+{
+  "repository": "Aegis-Omega/formal-conjectures",
+  "branch": "fix/rh-live-evidence-provenance-20261024",
+  "source_commit": "2fa184b1a9d04de7c8b22fcbad499a03dc6b98ec",
+  "previous_head": "8686704f8d90853d5e0934d28db7964420ba847b",
+  "publication_scope": "53 additive files under one new research checkpoint directory",
+  "main_modified": false,
+  "canonical_target_modified": false,
+  "workflow_modified": false,
+  "force_push": false,
+  "download": {
+    "url": "https://raw.githubusercontent.com/Aegis-Omega/formal-conjectures/2fa184b1a9d04de7c8b22fcbad499a03dc6b98ec/research/rh/checkpoints/20261102_claude_handoff_and_prime_reflection_v1/AEGIS_CLAUDE_HANDOFF_AND_PRIME_REFLECTION_V1.zip",
+    "http_status": 200,
+    "bytes": 91141,
+    "sha256": "55b504dfd0e54996b363a0a511a131da6492f71eb9f7ae9f40c217d08961ec00",
+    "zip_members": 51,
+    "manifest_entries_verified": 50
+  },
+  "formal_RH_replay": false,
+  "rh_proven": false
+}

@@ -1,0 +1,32 @@
+{
+  "rh_proven": false,
+  "kind": "ordinary mathematical derivation; no numerical experiment or Lean replay",
+  "primary_pdf": {
+    "path": "/workspace/aegis-nov3-suzuki/primary_sources/SUZUKI_2606_09096v3.pdf",
+    "sha256": "75b8512f7081bd69152781c7a20f3b5dad4374fe0dfc80f3014f9223f044c81a"
+  },
+  "primary_extracted_text": {
+    "path": "/workspace/aegis-nov3-suzuki/primary_sources/SUZUKI_2606_09096v3.txt",
+    "sha256": "b7cbc1d25358bff426d50b2ffa2834d1d53182ce89ecff04ad8f11a1dbb6fdb8"
+  },
+  "prior_audit_read": "/workspace/aegis-nov3-suzuki/audit/SUZUKI_SOURCE_COMPOSITION.md",
+  "primary_sections_read": [
+    "Theorem 1.5",
+    "Corollary 1.6",
+    "2.4, especially (2.8)",
+    "3.1 form domain qualification",
+    "4.5 parity",
+    "6.1-6.5 exact inverse and boundary definitions",
+    "7.8-7.9 model normalization and singularity"
+  ],
+  "argument": {
+    "path": "/workspace/aegis-nov3-suzuki/resolvent_attack/RESOLVENT_SAFE_REGION_ATTACK.md",
+    "sha256": "a125ed10b3e735962d4618fc2f551952835c062204becdbb8bd60796bb6c0194",
+    "result": "An admissible exact shifted-operator sequence has canonical normalized Herglotz limit i, different from the zeta candidate on Im z>1/2; near-ground inverse has an uncontrolled epsilon^-1 ground projection."
+  },
+  "limitations": [
+    "Does not exclude all selected epsilon_a sequences",
+    "No proof of safe-region resolvent identification",
+    "No unconditional RH proof"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "schema": "AEGIS_POSITIVE_MELLIN_DIAGNOSTIC_V1",
+  "checker_sha256": "510e9892e46155802b250ce5af16f45dea8cbc2a730ac01228f9df1f8813335b",
+  "python_flint": "0.9.0",
+  "arb_precision": 800,
+  "exact_z0": "1/4+i*pi/4",
+  "exact_rho": "3/4+i*pi/4",
+  "B_value": "[0.679265222349456602849767535635975966252117850733209165138555 +/- 2.20e-61] + [0.100913219123723500202233898075254932400760302842922127179985 +/- 2.43e-61]j",
+  "B_interval_excludes_zero": true,
+  "cosh_zero_expression": "[+/- 1.49e-240] + [+/- 6.96e-241]j",
+  "exact_zero_identity": "cosh(1+i*pi)+cosh(1)=0; ordinary analytic identity",
+  "identity_proved_by_interval_containment": false,
+  "mobius_modulus": "[0.758971505881851130699602797669512045085765167258288283110996 +/- 4.55e-61]",
+  "pole_strictly_inside_unit_disk": true,
+  "integral_identity": "B_a(z)=2*K_z(a), a>0; classical integral representation",
+  "role": "independent special-function diagnostic; ordinary proof establishes the universal claims",
+  "analytic_Lean_port": false,
+  "rh_proven": false
+}

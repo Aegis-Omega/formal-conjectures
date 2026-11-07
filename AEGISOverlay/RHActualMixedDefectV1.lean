@@ -18,6 +18,7 @@ import AEGISOverlay.RHActualLocalGramCoercivityV1
 import RHWindowNineOver64GlobalizationV14
 import WeilFinalSignTranslationBoundV10
 import WeilSeparatedArchBridgeV31
+import RHDyadicWindowV13
 
 /-!
 AEGIS Ω — genuine full-Weil mixed-term defect, without dropped off-diagonals.
@@ -742,6 +743,99 @@ theorem nearby_fine_pair_actual_mixed_norm
     (hpolarM (-Complex.I)) (hpolarW (-Complex.I))
 
 
+/-! ## Independent-shape adjacent dyadic prime isolation
+
+The two packets have different shapes, and no common mother packet is assumed.
+Only the original von Mangoldt sample at 2 survives. This is a finite
+arithmetic identity, not global Weil positivity.
+-/
+
+/-- Positive integer mixed samples vanish for two independently shaped fine
+packets centered at a and a + log 2. -/
+theorem independent_adjacent_fine_mixed_nat_zero_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (m : ℕ) (hm : 0 < m) :
+    mixed p q (m : ℝ) = 0 := by
+  have hmreal : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  have hlog : 0 ≤ Real.log (m : ℝ) :=
+    Real.log_nonneg (by exact_mod_cast (Nat.one_le_iff_ne_zero.mpr (Nat.ne_of_gt hm)))
+  have hz : AEGIS.WeilThreeBlockCrossPrimeV28.logCrossV28 p q (Real.log (m : ℝ)) = 0 := by
+    apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+      (a - 1 / 256) (a + 1 / 256)
+      (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+      (Real.log (m : ℝ)) hp hq
+    right
+    linarith [AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_lower]
+  have hid := AEGIS.WeilThreeBlockCrossPrimeV28.logCross_eq_mixed_v28 p q (Real.log (m : ℝ))
+  rw [hz, Real.exp_log hmreal] at hid
+  exact (mul_eq_zero.mp hid.symm).resolve_left
+    (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))
+
+/-- The only possibly nonzero reciprocal integer sample is m = 2,
+even when the two fine packets have different shapes. -/
+theorem independent_adjacent_fine_mixed_inv_nat_zero_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (m : ℕ) (hm : 0 < m) (hne : m ≠ 2) :
+    mixed p q ((m : ℝ)⁻¹) = 0 := by
+  have hmreal : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  have hfar : (1 / 128 : ℝ) < |Real.log (m : ℝ) - Real.log 2| := by
+    by_contra hnot
+    have hwindow :
+        |Real.log (m : ℝ) - Real.log 2| ≤ 2 * (1 / 256 : ℝ) := by
+      nlinarith [le_of_not_gt hnot]
+    have h2 : m = 2 ^ (1 : ℕ) :=
+      AEGIS.RHDyadicWindowV13.nat_eq_pow_of_log_window
+        1 (by norm_num) (1 / 256) (by norm_num) (by norm_num)
+        hm (by simpa only [Nat.cast_one, one_mul] using hwindow)
+    exact hne (by simpa using h2)
+  have hz : AEGIS.WeilThreeBlockCrossPrimeV28.logCrossV28 p q (-Real.log (m : ℝ)) = 0 := by
+    rcases lt_or_ge (Real.log (m : ℝ)) (Real.log 2) with hlt | hge
+    · have hdiff : Real.log (m : ℝ) - Real.log 2 < 0 :=
+        sub_neg.mpr hlt
+      rw [abs_of_neg hdiff] at hfar
+      apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+        (a - 1 / 256) (a + 1 / 256)
+        (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+        (-Real.log (m : ℝ)) hp hq
+      right
+      linarith
+    · rw [abs_of_nonneg (sub_nonneg.mpr hge)] at hfar
+      apply AEGIS.WeilSeparatedArchBridgeV31.logCross_zero_outside p q
+        (a - 1 / 256) (a + 1 / 256)
+        (a + Real.log 2 - 1 / 256) (a + Real.log 2 + 1 / 256)
+        (-Real.log (m : ℝ)) hp hq
+      left
+      linarith
+  have hid := AEGIS.WeilThreeBlockCrossPrimeV28.logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
+  have hexp : Real.exp (-Real.log (m : ℝ)) = (m : ℝ)⁻¹ := by
+    rw [Real.exp_neg, Real.exp_log hmreal]
+  rw [hz, hexp] at hid
+  exact (mul_eq_zero.mp hid.symm).resolve_left
+    (Complex.ofReal_ne_zero.mpr (Real.exp_ne_zero _))
+
+/-- Exact singleton von Mangoldt sum for two *different* moment-zero
+packet shapes separated by log 2. The moment hypotheses are not needed
+for sample isolation. -/
+theorem independent_adjacent_fine_prime_sum_single_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2)) :
+    WeilPrimeSumV1 (mixed p q) = WeilPrimeTermV1 (mixed p q) 1 := by
+  unfold WeilPrimeSumV1
+  apply tsum_eq_single 1
+  intro n hn
+  have hnpos : 0 < n + 1 := by omega
+  have hnnot : n + 1 ≠ 2 := by omega
+  have hz := independent_adjacent_fine_mixed_nat_zero_v1
+    p q a hp hq (n + 1) hnpos
+  have hi := independent_adjacent_fine_mixed_inv_nat_zero_v1
+    p q a hp hq (n + 1) hnpos hnnot
+  simp only [WeilPrimeTermV1, hz, hi, mul_zero, add_zero]
+
 /-! ## Actual distant-window ARCH control for unequal packet shapes
 
 The existing separated support theorem bounds the real arithmetic
@@ -802,6 +896,57 @@ theorem distinct_logCross_norm_le_mean_energy
           rw [shifted_logLift_sq_integral_v25,
             logLift_energy_eq_packet_energy]
           ring
+
+/-- Genuine reciprocal von Mangoldt sample for *two different*
+smooth packets.  The multiplicative/logarithmic identity and the
+independent-packet mean-energy bound are both source-proved.  No
+same-mother hypothesis and no prime-tail truncation are used here. -/
+theorem distinct_reciprocal_mixed_norm_le_mean_energy_v1
+    (p q : WeilCompactSmoothGV1) (m : ℕ) (hm : 0 < m) :
+    ‖(1 / (m : ℂ)) * mixed p q ((m : ℝ)⁻¹)‖ ≤
+      Real.exp (-Real.log (m : ℝ) / 2) *
+        ((energy p.1 + energy q.1) / 2) := by
+  have hmpos : (0 : ℝ) < (m : ℝ) := by exact_mod_cast hm
+  let α : ℝ := Real.exp (-Real.log (m : ℝ) / 2)
+  have hα0 : 0 ≤ α := by dsimp [α]; positivity
+  have ht := logCross_eq_mixed_v28 p q (-Real.log (m : ℝ))
+  have ht' :
+      (α : ℂ) * mixed p q ((m : ℝ)⁻¹) =
+        logCrossV28 p q (-Real.log (m : ℝ)) := by
+    dsimp [α]
+    simpa only [Real.exp_neg, Real.exp_log hmpos] using ht.symm
+  have hnormeq := congrArg norm ht'
+  have hnormα : ‖(α : ℂ)‖ = α := by
+    rw [Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hα0]
+  have hprod :
+      α * ‖mixed p q ((m : ℝ)⁻¹)‖ ≤
+        (energy p.1 + energy q.1) / 2 := by
+    have heq :
+        α * ‖mixed p q ((m : ℝ)⁻¹)‖ =
+          ‖logCrossV28 p q (-Real.log (m : ℝ))‖ := by
+      simpa only [norm_mul, hnormα] using hnormeq
+    rw [heq]
+    exact distinct_logCross_norm_le_mean_energy p q _
+  have hinv : (m : ℝ)⁻¹ = α * α := by
+    dsimp [α]
+    rw [← Real.exp_add]
+    have harg :
+        -Real.log (m : ℝ) / 2 + -Real.log (m : ℝ) / 2 =
+          -Real.log (m : ℝ) := by ring
+    rw [harg, Real.exp_neg, Real.exp_log hmpos]
+  rw [norm_mul]
+  have hscalar : ‖(1 / (m : ℂ))‖ = (m : ℝ)⁻¹ := by
+    simp [one_div]
+  rw [hscalar]
+  change (m : ℝ)⁻¹ * ‖mixed p q ((m : ℝ)⁻¹)‖ ≤
+    α * ((energy p.1 + energy q.1) / 2)
+  calc
+    (m : ℝ)⁻¹ * ‖mixed p q ((m : ℝ)⁻¹)‖ =
+        α * (α * ‖mixed p q ((m : ℝ)⁻¹)‖) := by
+          rw [hinv]
+          ring
+    _ ≤ α * ((energy p.1 + energy q.1) / 2) :=
+      mul_le_mul_of_nonneg_left hprod hα0
 
 /-- The actual separated ARCH term for arbitrary distinct fine local
 Weil atoms, with an exact gap threshold log 2 and no postulated cross
@@ -879,6 +1024,166 @@ theorem distinct_fine_far_actual_B_norm_le_prime_plus_arch
     ring
   rw [heq]
   exact (norm_add_le _ _).trans (add_le_add le_rfl harch)
+
+
+/-! ## Independent-shape dyadic resonance: exact m=2 sample to actual two-packet coercivity
+
+These results use the native von Mangoldt term, not a surrogate Gram entry.
+The input packets are independently shaped. They do not assume a common
+mother, a universal row budget, or the sign of the final Weil form. -/
+
+/-- The isolated genuine prime term at the log-2 resonance is bounded by
+the exact von Mangoldt weight and the two source energies. -/
+theorem independent_adjacent_fine_prime_norm_le_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2)) :
+    ‖WeilPrimeSumV1 (mixed p q)‖ ≤
+      Real.log 2 * Real.exp (-Real.log 2 / 2) *
+        ((energy p.1 + energy q.1) / 2) := by
+  have hsingle :=
+    independent_adjacent_fine_prime_sum_single_v1 p q a hp hq
+  have hz := independent_adjacent_fine_mixed_nat_zero_v1
+    p q a hp hq 2 (by norm_num)
+  have hterm :
+      WeilPrimeTermV1 (mixed p q) 1 =
+        ((Real.log 2 : ℝ) : ℂ) *
+          ((1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)) := by
+    have hz' : mixed p q (2 : ℝ) = 0 := by
+      simpa only [Nat.cast_ofNat] using hz
+    simp [WeilPrimeTermV1, hz',
+      ArithmeticFunction.vonMangoldt_apply_prime (by norm_num : Nat.Prime 2)]
+  have hrec := distinct_reciprocal_mixed_norm_le_mean_energy_v1
+    p q 2 (by norm_num)
+  have hlog : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  calc
+    ‖WeilPrimeSumV1 (mixed p q)‖ =
+        ‖((Real.log 2 : ℝ) : ℂ) *
+          ((1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹))‖ := by
+            rw [hsingle, hterm]
+    _ = Real.log 2 * ‖(1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)‖ := by
+      rw [norm_mul, Complex.norm_real, Real.norm_eq_abs, abs_of_nonneg hlog]
+    _ ≤ Real.log 2 * Real.exp (-Real.log 2 / 2) *
+          ((energy p.1 + energy q.1) / 2) := by
+      calc
+        Real.log 2 * ‖(1 / (2 : ℂ)) * mixed p q ((2 : ℝ)⁻¹)‖ ≤
+            Real.log 2 * (Real.exp (-Real.log 2 / 2) *
+              ((energy p.1 + energy q.1) / 2)) :=
+          mul_le_mul_of_nonneg_left hrec hlog
+        _ = _ := by ring
+
+/-- New full arithmetic mixed-Weil bound at one genuine prime resonance,
+including the separately proved archimedean remainder. -/
+theorem independent_adjacent_fine_actual_B_norm_le_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) :
+    ‖B p q‖ ≤
+      (Real.log 2 * Real.exp (-Real.log 2 / 2) / 2 + 1 / 200) *
+        (energy p.1 + energy q.1) := by
+  have hprime :=
+    independent_adjacent_fine_prime_norm_le_v1 p q a hp hq
+  have hfull := distinct_fine_far_actual_B_norm_le_prime_plus_arch
+    p q a (a + Real.log 2) hp hq hm (by simp)
+  calc
+    ‖B p q‖ ≤ ‖WeilPrimeSumV1 (mixed p q)‖ +
+        (1 / 200 : ℝ) * (energy p.1 + energy q.1) := hfull
+    _ ≤ Real.log 2 * Real.exp (-Real.log 2 / 2) *
+          ((energy p.1 + energy q.1) / 2) +
+        (1 / 200 : ℝ) * (energy p.1 + energy q.1) :=
+          add_le_add hprime le_rfl
+    _ = (Real.log 2 * Real.exp (-Real.log 2 / 2) / 2 + 1 / 200) *
+        (energy p.1 + energy q.1) := by ring
+
+/-- For two independently shaped fine packets at one dyadic prime
+resonance, the *actual* two-packet Weil Gram retains an explicit diagonal
+reserve. The coefficient is symbolic and makes no unproved positivity claim
+for an arbitrary number of prime-resonant blocks. -/
+theorem independent_adjacent_fine_two_packet_coercive_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) :
+    ((5671 / 3200 : ℝ) -
+        Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100) *
+      (energy p.1 + energy q.1) ≤
+        -(B (addPacket p q) (addPacket p q)).re := by
+  have hdiagP :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3 p a hp
+  have hdiagQ :=
+    AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+      q (a + Real.log 2) hq
+  have hcross :=
+    independent_adjacent_fine_actual_B_norm_le_v1 p q a hp hq hm
+  have hreal := Complex.re_le_norm (B p q)
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients p q
+  nlinarith
+
+
+/-! ## Two-dimensional Hermitian positivity at a genuine prime resonance
+
+The previous two-packet estimate controls p+q. This extension permits
+independent complex coefficients and proves a strict rational Gram reserve.
+It reuses the same source-exact von Mangoldt and Archimedean estimates. -/
+
+/-- Exact complex-scaling law for the genuine L² packet energy. -/
+theorem independent_adjacent_fine_energy_scale_complex_v1
+    (z : ℂ) (p : WeilCompactSmoothGV1) :
+    energy (scalePacket z p).1 = ‖z‖ ^ 2 * energy p.1 := by
+  unfold energy
+  change (∫ t : ℝ, ‖z * p.1 t‖ ^ 2) =
+    ‖z‖ ^ 2 * ∫ t : ℝ, ‖p.1 t‖ ^ 2
+  simp_rw [norm_mul, mul_pow]
+  exact integral_const_mul _ _
+
+/-- The exact dyadic prime-resonant coercivity factor exceeds 3/4.
+The bound uses only log(2) ≤ 1 and exp(-log(2)/2) ≤ 1. -/
+theorem independent_adjacent_fine_coefficient_ge_three_quarters_v1 :
+    (3 / 4 : ℝ) ≤
+      (5671 / 3200 : ℝ) -
+        Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100 := by
+  have hlog0 : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  have hlog1 : Real.log (2 : ℝ) ≤ 1 := by
+    nlinarith [Real.log_le_sub_one_of_pos (by norm_num : (0 : ℝ) < 2)]
+  have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
+    have hneg : -Real.log (2 : ℝ) / 2 ≤ 0 := by linarith
+    simpa using (Real.exp_le_exp.mpr hneg)
+  have hprod :=
+    mul_le_mul_of_nonneg_left hexp hlog0
+  nlinarith
+
+/-- Full 2×2 Hermitian Gram coercivity for any two independently shaped
+moment-zero fine packets separated by log(2), and for ALL complex phases
+and amplitudes. The reserve is a fixed rational 3/4, not an asymptotic
+claim or a global-RH premise. -/
+theorem independent_adjacent_fine_weighted_three_quarters_v1
+    (p q : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hm : WeilMomentConditionsV1 p) (z w : ℂ) :
+    (3 / 4 : ℝ) *
+      (‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1) ≤
+        -(B (addPacket (scalePacket z p) (scalePacket w q))
+           (addPacket (scalePacket z p) (scalePacket w q))).re := by
+  have hbase := independent_adjacent_fine_two_packet_coercive_v1
+    (scalePacket z p) (scalePacket w q) a
+    (fine_width_scale p z a hp)
+    (fine_width_scale q w (a + Real.log 2) hq)
+    (momentConditions_scalePacket_v10 z p hm)
+  rw [independent_adjacent_fine_energy_scale_complex_v1 z p,
+      independent_adjacent_fine_energy_scale_complex_v1 w q] at hbase
+  have hnonneg :
+      0 ≤ ‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1 := by
+    exact add_nonneg
+      (mul_nonneg (sq_nonneg _) (energy_nonnegative p.1))
+      (mul_nonneg (sq_nonneg _) (energy_nonnegative q.1))
+  have hcoeff := mul_le_mul_of_nonneg_right
+    independent_adjacent_fine_coefficient_ge_three_quarters_v1 hnonneg
+  exact hcoeff.trans hbase
 
 
 /-! ## Moment-zero removal of the distant rank-one Arch kernel
@@ -2045,6 +2350,145 @@ theorem distinct_fine_actual_B_q16_first_two_log_free_windows
   · exact distinct_fine_actual_B_q16_between_log_two_three
       p q a b hp hq hm hsep hafter hbeforeThree
 
+/-! ## Independent three-shape dyadic Hermitian certificate with one full unit
+
+At log centers a, a+log(2)/2, a+log(2), the outer pair has the
+genuine m=2 von Mangoldt resonance, while BOTH inner pairs lie in
+the source-proved prime-free interval 35/128 ... log(2)-1/128.
+Consequently the exact signed three-packet Weil form has a uniform
+coercivity reserve 1, with no same-mother assumption. -/
+
+/-- A genuine three-packet positive Gram certificate for three different
+moment-zero fine packet shapes. The full dyadic prime resonance of the
+outer pair is retained, not omitted or replaced by an arbitrary budget. -/
+theorem independent_midpoint_three_packet_one_v1
+    (p q mid : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hmid : WidthOneOneTwentyEightAt mid (a + Real.log 2 / 2))
+    (hmp : WeilMomentConditionsV1 p)
+    (_hmq : WeilMomentConditionsV1 q)
+    (hmm : WeilMomentConditionsV1 mid) :
+    energy p.1 + energy q.1 + energy mid.1 ≤
+      -(B (addPacket (addPacket p q) mid)
+         (addPacket (addPacket p q) mid)).re := by
+  have hlogLow : (693 / 1000 : ℝ) < Real.log 2 :=
+    AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_lower
+  have hsep : (35 / 128 : ℝ) ≤ Real.log 2 / 2 := by
+    linarith
+  have hfree : Real.log 2 / 2 < Real.log 2 - 1 / 128 := by
+    linarith
+  have hsepPM : (35 / 128 : ℝ) ≤ (a + Real.log 2 / 2) - a := by
+    linarith
+  have hfreePM :
+      (a + Real.log 2 / 2) - a < Real.log 2 - 1 / 128 := by
+    linarith
+  have hsepMQ :
+      (35 / 128 : ℝ) ≤ (a + Real.log 2) - (a + Real.log 2 / 2) := by
+    linarith
+  have hfreeMQ :
+      (a + Real.log 2) - (a + Real.log 2 / 2) <
+        Real.log 2 - 1 / 128 := by
+    linarith
+  have hPM := distinct_fine_actual_B_q16_middle_gap
+    p mid a (a + Real.log 2 / 2) hp hmid hmp hsepPM hfreePM
+  have hMQ := distinct_fine_actual_B_q16_middle_gap
+    mid q (a + Real.log 2 / 2) (a + Real.log 2)
+    hmid hq hmm hsepMQ hfreeMQ
+  have hQM :
+      ‖B q mid‖ ≤ (676 / 65536 : ℝ) *
+        (energy q.1 + energy mid.1) := by
+    calc
+      ‖B q mid‖ = ‖B mid q‖ := by
+        rw [B_hermitian, Complex.norm_conj]
+      _ ≤ (676 / 65536 : ℝ) *
+        (energy mid.1 + energy q.1) := hMQ
+      _ = (676 / 65536 : ℝ) *
+        (energy q.1 + energy mid.1) := by ring
+  have hcross :
+      (B (addPacket p q) mid).re ≤
+        (676 / 65536 : ℝ) *
+          (energy p.1 + energy q.1 + 2 * energy mid.1) := by
+    calc
+      (B (addPacket p q) mid).re =
+          (B p mid).re + (B q mid).re := by
+            rw [B_add_left, Complex.add_re]
+      _ ≤ ‖B p mid‖ + ‖B q mid‖ :=
+        add_le_add (Complex.re_le_norm _) (Complex.re_le_norm _)
+      _ ≤ (676 / 65536 : ℝ) *
+          (energy p.1 + energy mid.1) +
+          (676 / 65536 : ℝ) *
+          (energy q.1 + energy mid.1) :=
+        add_le_add hPM hQM
+      _ = (676 / 65536 : ℝ) *
+          (energy p.1 + energy q.1 + 2 * energy mid.1) := by ring
+  have houter := independent_adjacent_fine_two_packet_coercive_v1
+    p q a hp hq hmp
+  have hdiag := AEGIS.RHFineDiagonalUpgradeV3.fine_diagonal_5671_over_3200_v3
+    mid (a + Real.log 2 / 2) hmid
+  have hlog0 : 0 ≤ Real.log (2 : ℝ) :=
+    Real.log_nonneg (by norm_num)
+  have hlogUpper : Real.log (2 : ℝ) ≤ 7 / 10 :=
+    le_of_lt AEGIS.WeilThreeBlockAnalyticConstantsV21.log_two_upper
+  have hexp : Real.exp (-Real.log (2 : ℝ) / 2) ≤ 1 := by
+    calc
+      Real.exp (-Real.log (2 : ℝ) / 2) ≤ Real.exp 0 :=
+        Real.exp_le_exp.mpr (by linarith)
+      _ = 1 := Real.exp_zero
+  have hproduct :
+      Real.log 2 * Real.exp (-Real.log 2 / 2) ≤ (7 / 10 : ℝ) := by
+    have hx := mul_le_mul_of_nonneg_left hexp hlog0
+    nlinarith
+  have houterBudget :
+      (1 : ℝ) + 2 * (676 / 65536 : ℝ) ≤
+        (5671 / 3200 : ℝ) -
+          Real.log 2 * Real.exp (-Real.log 2 / 2) - 1 / 100 := by
+    nlinarith
+  have hmidBudget :
+      (1 : ℝ) + 4 * (676 / 65536 : ℝ) ≤ (5671 / 3200 : ℝ) := by
+    norm_num
+  have hEp : 0 ≤ energy p.1 := energy_nonnegative p.1
+  have hEq : 0 ≤ energy q.1 := energy_nonnegative q.1
+  have hEm : 0 ≤ energy mid.1 := energy_nonnegative mid.1
+  have houterPaid := mul_le_mul_of_nonneg_right houterBudget
+    (add_nonneg hEp hEq)
+  have hmidPaid := mul_le_mul_of_nonneg_right hmidBudget hEm
+  have hgram :=
+    AEGIS.RHCofinalSchurAdapterV1.actual_two_block_gram_coefficients
+      (addPacket p q) mid
+  nlinarith
+
+/-- A 3×3 Hermitian Gram certificate valid for ALL complex phases and
+amplitudes of three independent genuine-Weil fine packets. The uniform
+rational spectral reserve is one. -/
+theorem independent_midpoint_three_packet_weighted_one_v1
+    (p q mid : WeilCompactSmoothGV1) (a : ℝ)
+    (hp : WidthOneOneTwentyEightAt p a)
+    (hq : WidthOneOneTwentyEightAt q (a + Real.log 2))
+    (hmid : WidthOneOneTwentyEightAt mid (a + Real.log 2 / 2))
+    (hmp : WeilMomentConditionsV1 p)
+    (hmq : WeilMomentConditionsV1 q)
+    (hmm : WeilMomentConditionsV1 mid) (z w v : ℂ) :
+    ‖z‖ ^ 2 * energy p.1 + ‖w‖ ^ 2 * energy q.1 +
+      ‖v‖ ^ 2 * energy mid.1 ≤
+        -(B (addPacket (addPacket (scalePacket z p) (scalePacket w q))
+              (scalePacket v mid))
+           (addPacket (addPacket (scalePacket z p) (scalePacket w q))
+              (scalePacket v mid))).re := by
+  have hbase := independent_midpoint_three_packet_one_v1
+    (scalePacket z p) (scalePacket w q) (scalePacket v mid) a
+    (fine_width_scale p z a hp)
+    (fine_width_scale q w (a + Real.log 2) hq)
+    (fine_width_scale mid v (a + Real.log 2 / 2) hmid)
+    (momentConditions_scalePacket_v10 z p hmp)
+    (momentConditions_scalePacket_v10 w q hmq)
+    (momentConditions_scalePacket_v10 v mid hmm)
+  rw [independent_adjacent_fine_energy_scale_complex_v1 z p,
+      independent_adjacent_fine_energy_scale_complex_v1 w q,
+      independent_adjacent_fine_energy_scale_complex_v1 v mid] at hbase
+  exact hbase
+
+
 end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.quantitative_lower_of_diagonal
@@ -2073,6 +2517,7 @@ end AEGIS.RHActualMixedDefectV1
 #print axioms AEGIS.RHActualMixedDefectV1.nearby_fine_pair_actual_mixed_norm
 
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_logCross_norm_le_mean_energy
+#print axioms AEGIS.RHActualMixedDefectV1.distinct_reciprocal_mixed_norm_le_mean_energy_v1
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_arch_norm_le
 
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_far_mixed_one_zero
@@ -2113,3 +2558,13 @@ end AEGIS.RHActualMixedDefectV1
 
 #print axioms AEGIS.RHActualMixedDefectV1.moment_zero_fine_middle_arch_q16
 #print axioms AEGIS.RHActualMixedDefectV1.distinct_fine_actual_B_q16_middle_gap
+
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_prime_norm_le_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_actual_B_norm_le_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_two_packet_coercive_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_energy_scale_complex_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_coefficient_ge_three_quarters_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_adjacent_fine_weighted_three_quarters_v1
+
+#print axioms AEGIS.RHActualMixedDefectV1.independent_midpoint_three_packet_one_v1
+#print axioms AEGIS.RHActualMixedDefectV1.independent_midpoint_three_packet_weighted_one_v1

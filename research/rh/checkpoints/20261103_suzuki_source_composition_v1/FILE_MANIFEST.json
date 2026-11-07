@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "path": "EVIDENCE.json",
+      "bytes": 2158,
+      "sha256": "f093571f91ffdfdccbd129ce23674cbe8b837e5283f9859bb956ab848ee091ad"
+    },
+    {
+      "path": "FAIL_CLOSED_REPLAY.json",
+      "bytes": 575,
+      "sha256": "47c30e39f70f065725847914cdd6865cec456b78d7086dbf7fde708dc77840fe"
+    },
+    {
+      "path": "INDEPENDENT_DIAGNOSTIC.json",
+      "bytes": 1406,
+      "sha256": "e3b4ef2ecbab3530799fff629657b97d4aac70b60cac37a4e84bab66947b27d0"
+    },
+    {
+      "path": "NORMALIZATION_RECEIPT.json",
+      "bytes": 3035,
+      "sha256": "aa7649ae46563e1a497ebb32ddd3184fef62ac75e7db039052353678253133b4"
+    },
+    {
+      "path": "README.md",
+      "bytes": 2408,
+      "sha256": "1fb760bdc16b8a9e157569970c3b1f20c456c2fa6c6ca2f956685adee2b321fb"
+    },
+    {
+      "path": "RECOVERED_LITERATURE_SCOPE.md",
+      "bytes": 3339,
+      "sha256": "ee5b0b7141e53f429ac55add4cb90e781d4a11d9dfa1c0740f8d6c4eaf706426"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 1936,
+      "sha256": "f8fbf45029312eb9c41b59cd0ae5c9055e3ab187dba24664628ca777a94b3538"
+    },
+    {
+      "path": "SUZUKI_SOURCE_COMPOSITION.md",
+      "bytes": 7342,
+      "sha256": "56ccfc229726d7ee1d34965af0fde08520718f9cd26f991db4add8a0402d2f09"
+    },
+    {
+      "path": "verify_suzuki_normalization.py",
+      "bytes": 3700,
+      "sha256": "1deb6ca1b8ef1dc86b8ed9aa4c6dffd97d9b55c301f2d2c70fbc752bf7b337fd"
+    }
+  ],
+  "self_excluded": true
+}

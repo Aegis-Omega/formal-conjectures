@@ -1,0 +1,30 @@
+{
+  "repository": "Aegis-Omega/formal-conjectures",
+  "branch": "fix/rh-live-evidence-provenance-20261024",
+  "commit": "bbd47b4ea64cfb9ce06862b0feccaf7a58d98fe5",
+  "parent": "8f99b0e7206a8ba46f4cb710bf7300262dcfeb24",
+  "published_paths": 24,
+  "downloads": [
+    {
+      "url": "https://raw.githubusercontent.com/Aegis-Omega/formal-conjectures/bbd47b4ea64cfb9ce06862b0feccaf7a58d98fe5/research/rh/checkpoints/20261102_corpus_fusion_producers_v1/AEGIS_CONTINUATION_SOURCES.zip",
+      "http_status": 200,
+      "bytes": 548609,
+      "sha256": "686efcd5f674b561b01454799f55a30b80f86a456490756b0d00e79cd7df372f",
+      "anonymous_request": true,
+      "verified": true
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Aegis-Omega/formal-conjectures/bbd47b4ea64cfb9ce06862b0feccaf7a58d98fe5/research/rh/checkpoints/20261102_corpus_fusion_producers_v1/CORPUS_INDEX.json.gz",
+      "http_status": 200,
+      "bytes": 6096220,
+      "sha256": "2923efefd904b39d13d5058580ed7eb7c360f87aae850e146aa4e464a9717945",
+      "anonymous_request": true,
+      "verified": true
+    }
+  ],
+  "downloaded_zip_manifest_files": 267,
+  "protected_main_modified": false,
+  "new_branch_created": false,
+  "forced_update": false,
+  "rh_proven": false
+}

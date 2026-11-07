@@ -35,6 +35,7 @@ import hashlib
 import json
 import os
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -84,6 +85,69 @@ def stage_targets(stage, mods, deps):
     return {b for b in batch if BATCH.match(b)[1] in mine}
 
 
+def clean_kernel_compile_output(text: str) -> bool:
+    """Never checkpoint a Lean object with explicit error or placeholder evidence."""
+    if ("sorryAx" in text
+            or re.search(r"(?i)\bdeclaration\b[^\n]*\buses\s+['\"]sorry['\"]", text)
+            or re.search(r"(?m)^(?:[^:\n]*:\d+:\d+:\s*)?error(?:\([^\n)]*\))?:", text)):
+        return False
+    reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
+    for _, axioms in reports:
+        used = {a.strip() for a in axioms.split(",") if a.strip()}
+        if not used <= ALLOWED:
+            return False
+    return True
+
+
+def sha256_file(path: Path) -> str:
+    """Hash large kernel binaries with bounded memory, not read_bytes()."""
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) -> bool:
+    """Accept an object only if bytes, source identity and build context match."""
+    olean = out / (module.replace(".", "/") + ".olean")
+    digest_file = Path(str(olean) + ".sha256")
+    source_file = Path(str(olean) + ".source.sha256")
+    context_file = Path(str(olean) + ".context.sha256")
+    return (olean.is_file() and olean.stat().st_size > 0
+            and digest_file.is_file() and source_file.is_file()
+            and context_file.is_file()
+            and source_file.read_text().strip() == source_sha
+            and context_file.read_text().strip() == context_sha
+            and digest_file.read_text().strip()
+                == sha256_file(olean))
+
+
+def resumable_modules(mods, deps, has_olean):
+    """Admit only transitive, source-identical cached import closures."""
+    # SHA256 can be expensive for multi-megabyte kernel certificates.
+    # Hash each candidate exactly once; only graph trust propagates in rounds.
+    eligible = {m for m in mods if has_olean(m)}
+    trusted = set()
+    remaining = set(mods)
+    while remaining:
+        newly_trusted = {
+            m for m in remaining
+            if m in eligible and all(d in trusted for d in deps[m])
+        }
+        if not newly_trusted:
+            break
+        trusted.update(newly_trusted)
+        remaining.difference_update(newly_trusted)
+    return trusted
+
+
+def missing_upstream_oleans(mods, deps, targets, has_olean):
+    """Identify stage imports whose transitive prerequisite closures are not valid."""
+    done = set(mods) - set(targets)
+    prior_deps = {m: [d for d in deps[m] if d in done] for m in done}
+    trusted_prior = resumable_modules(done, prior_deps, has_olean)
+    required_prior = {d for m in targets for d in deps[m] if d in done}
+    return sorted(required_prior - trusted_prior)
+
+
 def main():
     out, log = Path(sys.argv[1]).resolve(), Path(sys.argv[2]).resolve()
     jobs = int(sys.argv[3]) if len(sys.argv) > 3 else 2
@@ -91,6 +155,8 @@ def main():
     heavy = int(os.environ.get("RHC_HEAVY_JOBS", "1"))
     entries = json.loads((HERE / "manifest.json").read_text(encoding="utf-8"))
     mods = {e["module"]: e for e in entries}
+    if len(mods) != len(entries):
+        sys.exit("RHC_DUPLICATE_MANIFEST_MODULE")
     bad = [e["path"] for e in entries
            if hashlib.sha256(Path(e["path"]).read_bytes()).hexdigest() != e["sha256"]]
     if bad:
@@ -99,14 +165,28 @@ def main():
     targets = stage_targets(stage, mods, deps)
     out.mkdir(parents=True, exist_ok=True)
     env = dict(os.environ, LEAN_PATH=f"{out}:{os.environ.get('LEAN_PATH', '')}")
-    has_olean = lambda m: (out / (m.replace(".", "/") + ".olean")).exists()
+    # Match the exact Lean/Mathlib/provider environment across independent jobs.
+    # An .olean checksum by itself cannot prove that its imports are compatible.
+    context_sha = hashlib.sha256(
+        b"AEGIS_RHC_CHECKPOINT_ABI_V2_NO_SORRY\\0"
+        + Path("lean-toolchain").read_bytes()
+        + Path("lake-manifest.json").read_bytes()
+        + Path("lakefile.toml").read_bytes()
+        + (HERE / "li-provider.patch").read_bytes()
+        + os.environ.get("LI_PROVIDER_SHA", "").encode()
+    ).hexdigest()
+    def has_olean(m):
+        return verified_olean(out, m, mods[m]["sha256"], context_sha)
     done, failed = set(mods) - targets, []
-    missing = sorted({d for m in targets for d in deps[m] if d in done and not has_olean(d)})
+    # A direct import is unsafe if a transitive upstream .olean has drifted.
+    missing = missing_upstream_oleans(mods, deps, targets, has_olean)
     if missing:
-        sys.exit(f"stage {stage}: missing .olean of earlier stages: {missing}")
+        sys.exit(f"stage {stage}: stale or missing transitive .olean closure: {missing}")
     logs = {}
     if os.environ.get("RHC_RESUME") == "1":  # local restarts only; CI always builds from scratch
-        done |= {m for m in targets if has_olean(m)}
+        # A changed earlier dependency invalidates all transitive dependents,
+        # even when their own source and object bytes still match old stamps.
+        done |= resumable_modules(mods, deps, has_olean) & targets
     started = set(done)
 
     def compile_one(m):
@@ -116,10 +196,26 @@ def main():
         root = e["path"][: -len(rel)] or "."
         olean = out / (m.replace(".", "/") + ".olean")
         olean.parent.mkdir(parents=True, exist_ok=True)
+        stamp = Path(str(olean) + ".sha256")
+        source_stamp = Path(str(olean) + ".source.sha256")
+        context_stamp = Path(str(olean) + ".context.sha256")
+        for artifact in (olean, stamp, source_stamp, context_stamp):
+            artifact.unlink(missing_ok=True)
         t = time.time()
         r = subprocess.run(["lean", "-R", root, "-o", str(olean), e["path"]],
                            env=env, capture_output=True, text=True)
-        return m, r.returncode, r.stdout + r.stderr, time.time() - t
+        success = (r.returncode == 0 and clean_kernel_compile_output(r.stdout + r.stderr)
+                   and olean.is_file() and olean.stat().st_size > 0)
+        if success:
+            stamp.write_text(sha256_file(olean) + "\n")
+            source_stamp.write_text(e["sha256"] + "\n")
+            context_stamp.write_text(context_sha + "\n")
+        else:
+            for artifact in (olean, stamp, source_stamp, context_stamp):
+                artifact.unlink(missing_ok=True)
+        return (m, 0 if success else r.returncode or 1,
+                r.stdout + r.stderr + ("" if success else "\nMISSING_OR_FAILED_OLEAN " + m),
+                time.time() - t)
 
     with cf.ThreadPoolExecutor(jobs) as ex:
         running = {}
@@ -130,6 +226,9 @@ def main():
                         continue
                     started.add(m)
                     running[ex.submit(compile_one, m)] = m
+            if not running:
+                blocked = sorted(set(mods) - done)
+                sys.exit("RHC_IMPORT_DAG_STALLED: " + ", ".join(blocked))
             fin, _ = cf.wait(running, return_when=cf.FIRST_COMPLETED)
             for f in fin:
                 del running[f]
@@ -152,8 +251,8 @@ def main():
         sys.exit(f"compile failed: {failed}")
 
     text = log.read_text(encoding="utf-8")
-    if "sorryAx" in text or re.search(r"declaration uses 'sorry'", text):
-        sys.exit("sorry found")
+    if not clean_kernel_compile_output(text):
+        sys.exit("LEAN_KERNEL_OUTPUT_REJECTED")
     reports = re.findall(r"'([^']+)' depends on axioms: \[([^\]]*)\]", text)
     for name, axs in reports:
         extra = {a.strip() for a in axs.split(",") if a.strip()} - ALLOWED
@@ -168,6 +267,69 @@ def main():
             sys.exit(f"headline theorems not reported: {missing}")
         for h in HEADLINE:
             print(f"  {h}: OK")
+
+    # Source and binary integrity must hold for EVERY module claimed by this stage.
+    # Imported stages have their own checkpoint and .olean SHA-256 sidecars.
+    for m in targets:
+        if not has_olean(m):
+            sys.exit("MISSING_OR_HASH_DRIFT_OLEAN " + m)
+    # The final artifact contains only final-stage objects. Enumerate the other
+    # artifact bundles explicitly instead of claiming one ZIP contains them all.
+    bundles = {"rhc-base": stage_targets("base", mods, deps),
+               "rhc-final": stage_targets("final", mods, deps)}
+    bundles.update({
+        f"rhc-shard-{n}": stage_targets(f"shard:{n}/12", mods, deps)
+        for n in range(12)
+    })
+    if stage != "all":
+        assigned = [m for group in bundles.values() for m in group]
+        if sorted(assigned) != sorted(mods):
+            sys.exit("RHC_CHECKPOINT_ARTIFACT_PARTITION_MISMATCH")
+    records = []
+    for m, e in mods.items():
+        if has_olean(m):
+            olean = out / (m.replace(".", "/") + ".olean")
+            artifact = ("rhc-all" if stage == "all" else
+                        next(label for label, group in bundles.items() if m in group))
+            records.append({
+                "module": m, "source": e["path"], "source_sha256": e["sha256"],
+                "olean": str(olean.relative_to(out)),
+                "olean_sha256": Path(str(olean) + ".sha256").read_text().strip(),
+                "artifact": artifact
+            })
+    if stage in ("all", "final") and len(records) != len(mods):
+        sys.exit(f"RHC_CHECKPOINT_INCOMPLETE {len(records)}/{len(mods)}")
+    stage_name = stage.replace(":", "-").replace("/", "-")
+    receipt = {
+        "schema": "aegis.rh.consolidated_olean_checkpoint.v1",
+        "stage": stage, "module_count": len(records),
+        "complete_source_closure": len(records) == len(mods),
+        "artifact_partition": (
+            {"rhc-all": len(mods)} if stage == "all" else
+            {label: len(group) for label, group in bundles.items()}
+        ),
+        "manifest_source_sha256": hashlib.sha256((HERE / "manifest.json").read_bytes()).hexdigest(),
+        "lean_toolchain": Path("lean-toolchain").read_text().strip(),
+        "mathlib_sha": os.environ.get("MATHLIB_SHA"),
+        "build_context_sha256": context_sha,
+        "modules": records, "rh_unconditional": None,
+        "axiom_admission": "HEADLINE_PROBES_ONLY" if stage in ("all", "final") else "NOT_ASSESSED"
+    }
+    checkpoint = out / ("rhc-checkpoint-" + stage_name + ".json")
+    checkpoint.write_text(json.dumps(receipt, indent=2) + "\n")
+    if stage == "final":
+        final_dir = out / "rhc-final"
+        final_dir.mkdir(exist_ok=True)
+        for m in targets:
+            rel = Path(m.replace(".", "/") + ".olean")
+            dest = final_dir / rel
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(out / rel, dest)
+            for suffix in (".sha256", ".source.sha256", ".context.sha256"):
+                shutil.copyfile(Path(str(out / rel) + suffix),
+                                Path(str(dest) + suffix))
+        shutil.copyfile(checkpoint, final_dir / "rhc-checkpoint-final.json")
+    print("RHC_ALL_STAGE_OLEANS_CHECKPOINTED", stage, len(records), "/", len(mods))
 
 
 if __name__ == "__main__":

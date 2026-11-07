@@ -1,0 +1,51 @@
+{
+  "scope": "all addendum files except this manifest",
+  "files": [
+    {
+      "path": "ADDENDUM_EVIDENCE.json",
+      "bytes": 1106,
+      "sha256": "07df7b11ab4e8c8850c828c246375b218b9b2599f074c6e7315b2e030970c26a"
+    },
+    {
+      "path": "CONTINUATION_ADDENDUM.md",
+      "bytes": 1618,
+      "sha256": "0115a80c850464bf1b3ebb1ebae9fdb02d3d46b8f968972da6d7f62f7f64b864"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_POTENTIAL_CONE_ADDENDUM.md",
+      "bytes": 7066,
+      "sha256": "3e91fb872562f084d797bb37f1379861a47a31c249f9d75a56eda375c6e3fda6"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_RECEIPT_FINAL_1000.json",
+      "bytes": 2128,
+      "sha256": "4eac8ede04ae3406e4a108a1cd26541910e80cbbe33cccc5bddfec38dfafd432"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_RECEIPT_FINAL_2000.json",
+      "bytes": 2131,
+      "sha256": "e265eacee03b79aec3aaa9ff9a075873e54b7e8789f5e978728203a49790a646"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_REPLAY_FINAL_1000.log",
+      "bytes": 2128,
+      "sha256": "4eac8ede04ae3406e4a108a1cd26541910e80cbbe33cccc5bddfec38dfafd432"
+    },
+    {
+      "path": "OddSemigroupAttack/MOMENT_LEGAL_REPLAY_FINAL_2000.log",
+      "bytes": 2131,
+      "sha256": "e265eacee03b79aec3aaa9ff9a075873e54b7e8789f5e978728203a49790a646"
+    },
+    {
+      "path": "OddSemigroupAttack/verify_moment_legal_reflection.py",
+      "bytes": 5038,
+      "sha256": "2869611253c0a49ed54310892d56286e328c13123eca571768b68e7bb4fe7925"
+    },
+    {
+      "path": "PUBLICATION_RECEIPT.json",
+      "bytes": 938,
+      "sha256": "1bf6f0444f5596df8cf76ddf1c0b0e776d4e7a63ca04cc28db5a7f9e81eada87"
+    }
+  ],
+  "rh_proven": false
+}

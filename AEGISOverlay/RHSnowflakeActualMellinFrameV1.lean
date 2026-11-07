@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHWeilTiltComplementarityV1
+import RHKreinCriticalLineBridgeV1
 import Mathlib
 
 /-!
@@ -210,6 +211,68 @@ theorem one_actual_pair_complex_pointwise_bezout :
     actual_mellin_pair_complex_pointwise_bezout p q hno
   exact ⟨p, q, hp, hq, A, B, hAB⟩
 
+
+/-!
+## Unconditional strict critical-line spectral frame for genuine Weil packets
+
+The SAME two actual moment-zero packets have no common Mellin zero in
+the entire open critical strip.  The established autocorrelation
+factorization then turns the two critical-line values into a strictly
+positive REAL sum at EVERY real frequency.
+
+The conclusion concerns test-packet Mellin transforms, not the absence
+of zeros of the Riemann zeta function, nor positivity at off-line zeros.
+-/
+
+/-- One fixed pair of genuine moment-zero Weil packets gives strictly positive
+joint autocorrelation Mellin mass at every point of the critical line. -/
+theorem one_actual_pair_critical_line_strict_mass_v1 :
+    ∃ p q : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 p ∧ WeilMomentConditionsV1 q ∧
+      ∀ t : ℝ,
+        0 <
+          (mellin (WeilAutocorrelationV1 p)
+            (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)).re +
+          (mellin (WeilAutocorrelationV1 q)
+            (((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I)).re := by
+  obtain ⟨p, q, hp, hq, hno⟩ :=
+    unconditional_moment_zero_complementary_pair
+  refine ⟨p, q, hp, hq, ?_⟩
+  intro t
+  let z : ℂ := ((1 / 2 : ℝ) : ℂ) + (t : ℂ) * Complex.I
+  have hzre : z.re = (1 / 2 : ℝ) := by
+    simp [z]
+  have hnotboth :
+      ¬ (mellin p.1 z = 0 ∧ mellin q.1 z = 0) :=
+    hno z (by rw [hzre]; norm_num) (by rw [hzre]; norm_num)
+  have hmass (g : WeilCompactSmoothGV1) :
+      mellin (WeilAutocorrelationV1 g) z =
+        ((Complex.normSq (mellin g.1 z) : ℝ) : ℂ) := by
+    dsimp [z]
+    rw [AEGIS.WeilAutocorrelationMellinV11.weil_autocorrelation_mellin_factorization_v11,
+      AEGIS.RHKreinCriticalLineBridgeV1.critical_reflection_v1 t,
+      Complex.mul_conj]
+  have hstrict :
+      0 < Complex.normSq (mellin p.1 z) +
+        Complex.normSq (mellin q.1 z) := by
+    by_cases hpzero : mellin p.1 z = 0
+    · have hqzero : mellin q.1 z ≠ 0 := by
+        intro hqzero
+        exact hnotboth ⟨hpzero, hqzero⟩
+      have hqp : 0 < Complex.normSq (mellin q.1 z) := by
+        rw [Complex.normSq_eq_norm_sq]
+        exact pow_pos (norm_pos_iff.mpr hqzero) 2
+      exact add_pos_of_nonneg_of_pos (Complex.normSq_nonneg _) hqp
+    · have hpp : 0 < Complex.normSq (mellin p.1 z) := by
+        rw [Complex.normSq_eq_norm_sq]
+        exact pow_pos (norm_pos_iff.mpr hpzero) 2
+      exact add_pos_of_pos_of_nonneg hpp (Complex.normSq_nonneg _)
+  change 0 <
+    (mellin (WeilAutocorrelationV1 p) z).re +
+    (mellin (WeilAutocorrelationV1 q) z).re
+  rw [hmass p, hmass q]
+  simpa only [Complex.ofReal_re] using hstrict
+
 end AEGIS.RHSnowflakeActualMellinFrameV1
 
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_continuous
@@ -219,3 +282,4 @@ end AEGIS.RHSnowflakeActualMellinFrameV1
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_complex_frame_with_cubic_tail
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.actual_mellin_pair_complex_pointwise_bezout
 #print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_complex_pointwise_bezout
+#print axioms AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_critical_line_strict_mass_v1
