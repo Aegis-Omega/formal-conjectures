@@ -39,6 +39,24 @@ jobs:
           ref: ${{ github.sha }}
           persist-credentials: false
 
+      - name: Preflight embedded final-replay Python (no Lean download)
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import ast
+          from pathlib import Path
+          src = Path(".github/workflows/rh-recover-final-oleans-v1.yml").read_text().splitlines()
+          start = next(i + 1 for i, line in enumerate(src)
+                       if line.strip() == "lake env python3 - <<'PY'")
+          end = next(i for i in range(start, len(src)) if src[i].strip() == "PY")
+          code = src[start:end]
+          if not code or any(line.strip() and not line.startswith("          ") for line in code):
+              raise SystemExit("RHC_FINAL_INLINE_PYTHON_INDENTATION_DRIFT")
+          ast.parse("\n".join(line[10:] for line in code))
+          print("RHC_FINAL_INLINE_PYTHON_SYNTAX_PASS", len(code))
+          PY
+
       - name: Checkout pinned Li criterion provider
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
