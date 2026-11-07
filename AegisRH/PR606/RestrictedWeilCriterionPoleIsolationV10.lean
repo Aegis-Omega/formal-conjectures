@@ -17,6 +17,8 @@ limitations under the License.
 import RestrictedWeilCriterionLaplaceV10
 import BoundedZeroFinitenessV1
 import Mathlib.NumberTheory.LSeries.ZetaZeros
+import Mathlib.Topology.Separation.Basic
+import Mathlib.Topology.MetricSpace.Pseudo.Defs
 import Mathlib.Tactic
 
 /-!
@@ -79,8 +81,9 @@ theorem exists_centered_zero_isolation_v10
   have hrhoZ : rho.1 ∈ riemannZetaZeros := by
     exact mem_riemannZetaZeros.mpr rho.2.1
   obtain ⟨ε, hε, hball⟩ :=
-    exists_ball_inter_eq_singleton_of_mem_discrete
-      isDiscrete_riemannZetaZeros hrhoZ
+    Filter.HasBasis.exists_inter_eq_singleton_of_mem_discrete
+      isDiscrete_riemannZetaZeros
+      (Metric.nhds_basis_ball (x := rho.1)) hrhoZ
   refine ⟨ε, hε, ?_⟩
   intro sigma hsigma
   have hsigmaZ : sigma.1 ∈ riemannZetaZeros := by
