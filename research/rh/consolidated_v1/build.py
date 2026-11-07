@@ -122,12 +122,15 @@ def verified_olean(out: Path, module: str, source_sha: str, context_sha: str) ->
 
 def resumable_modules(mods, deps, has_olean):
     """Admit only transitive, source-identical cached import closures."""
+    # SHA256 can be expensive for multi-megabyte kernel certificates.
+    # Hash each candidate exactly once; only graph trust propagates in rounds.
+    eligible = {m for m in mods if has_olean(m)}
     trusted = set()
     remaining = set(mods)
     while remaining:
         newly_trusted = {
             m for m in remaining
-            if has_olean(m) and all(d in trusted for d in deps[m])
+            if m in eligible and all(d in trusted for d in deps[m])
         }
         if not newly_trusted:
             break
