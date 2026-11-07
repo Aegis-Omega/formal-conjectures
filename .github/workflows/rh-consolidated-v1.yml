@@ -138,7 +138,7 @@ on:
         description: 'Replay only three final .oleans using pinned 314 archived objects'
         required: true
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: read
