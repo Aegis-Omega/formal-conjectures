@@ -36,6 +36,18 @@ roots=(base, wbase, src, compat, local, overlay, win)
 groups=[{p.stem:p for p in r.glob("*.lean")} for r in roots]
 allmods=set().union(*(set(g) for g in groups))
 def chosen(n):
+    # PR606 fork closure selects Compat before Source.  The proved-window
+    # replay must not silently shadow the same theorem with a different LOCAL
+    # proof body: reuse the exact source-locked PR606 compatibility module.
+    if n == "WeilZeroTwoPointV11":
+        source = compat / (n + ".lean")
+        if not source.is_file():
+            raise SystemExit("RH_WINDOW_TWO_POINT_COMPAT_MISSING")
+        payload = source.read_bytes()
+        blob = hashlib.sha1(f"blob {len(payload)}\\0".encode() + payload).hexdigest()
+        if blob != "416eb252794a2b0b550c796330a08a946aeabed4":
+            raise SystemExit("RH_WINDOW_TWO_POINT_COMPAT_SOURCE_DRIFT:" + blob)
+        return source
     for group in reversed(groups):
         if n in group: return group[n]
     raise SystemExit(f"RH_WINDOW_SOURCE_MISSING:{n}")
