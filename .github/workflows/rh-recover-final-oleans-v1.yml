@@ -17,7 +17,7 @@ permissions:
   actions: read
 
 concurrency:
-  group: rh-final-314-to-317-\${{ github.sha }}
+  group: rh-final-314-to-317-${{ github.sha }}
   cancel-in-progress: false
 
 env:
@@ -33,14 +33,14 @@ jobs:
       - name: Checkout exact branch head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: \${{ github.sha }}
+          ref: ${{ github.sha }}
           persist-credentials: false
 
       - name: Checkout pinned Li criterion provider
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: nicholasbulka/li-criterion-rh-equivalence-lean
-          ref: \${{ env.LI_PROVIDER_SHA }}
+          ref: ${{ env.LI_PROVIDER_SHA }}
           path: .li
           persist-credentials: false
 
@@ -79,19 +79,19 @@ jobs:
         with:
           repository: Aegis-Omega/formal-conjectures
           run-id: 42100439764
-          github-token: \${{ github.token }}
+          github-token: ${{ github.token }}
           name: rhc-base
-          path: \${{ runner.temp }}/rhc
+          path: ${{ runner.temp }}/rhc
 
       - name: Recover historical native batch .olean objects
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           repository: Aegis-Omega/formal-conjectures
           run-id: 42100439764
-          github-token: \${{ github.token }}
+          github-token: ${{ github.token }}
           pattern: rhc-shard-*
           merge-multiple: true
-          path: \${{ runner.temp }}/rhc
+          path: ${{ runner.temp }}/rhc
 
       - name: Verify 314 historical .oleans then kernel-compile the 3 final objects
         shell: bash
@@ -213,9 +213,9 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: rhc-final-native-3-\${{ github.run_id }}
+          name: rhc-final-native-3-${{ github.run_id }}
           path: |
-            \${{ runner.temp }}/rhc/rhc-final/
+            ${{ runner.temp }}/rhc/rhc-final/
             evidence-rhc-final/
           if-no-files-found: warn
           retention-days: 30
