@@ -138,6 +138,8 @@ def main():
     heavy = int(os.environ.get("RHC_HEAVY_JOBS", "1"))
     entries = json.loads((HERE / "manifest.json").read_text(encoding="utf-8"))
     mods = {e["module"]: e for e in entries}
+    if len(mods) != len(entries):
+        sys.exit("RHC_DUPLICATE_MANIFEST_MODULE")
     bad = [e["path"] for e in entries
            if hashlib.sha256(Path(e["path"]).read_bytes()).hexdigest() != e["sha256"]]
     if bad:
@@ -204,6 +206,9 @@ def main():
                         continue
                     started.add(m)
                     running[ex.submit(compile_one, m)] = m
+            if not running:
+                blocked = sorted(set(mods) - done)
+                sys.exit("RHC_IMPORT_DAG_STALLED: " + ", ".join(blocked))
             fin, _ = cf.wait(running, return_when=cf.FIRST_COMPLETED)
             for f in fin:
                 del running[f]
