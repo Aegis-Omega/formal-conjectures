@@ -301,13 +301,6 @@ jobs:
           (out/'olean-source-checkpoint-v1.json').write_text(json.dumps(receipt,indent=2)+'\n')
           print('PR606_ALL_CLOSURE_OLEANS_CHECKPOINTED',len(rows))
           PY
-      - name: Save incremental PR606 fork closure cache
-        if: always()
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .lake/aegis-pr606
-          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
-
       - name: Compile upstream #606 spec
         shell: bash
         run: |
@@ -407,3 +400,21 @@ jobs:
         shell: bash
         run: |
           printf '%s\n'             "UPSTREAM_PR=606"             "UPSTREAM_BASE=$AEGIS_BASE_SHA"             "UPSTREAM_HEAD=$AEGIS_HEAD_SHA"             "PORT=FORMAL_CONJECTURES_FORK"             "SOURCE_BYTES_PRESERVED=FALSE"             "SOURCE_PROVENANCE=AEGIS_PR606_589adf_WITH_EXPLICIT_FORK_COMPAT_PATCHES"             "COMPATIBILITY_REPAIRS=SOURCE_BOUND_REVIEWABLE"             "RH_PROMOTION=NOT_IMPLIED_BY_PORT"             "AUTHORITY_EFFECT=NONE"
+
+      - name: Save incremental PR606 fork closure cache
+        if: always()
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lake/aegis-pr606
+          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Preserve source-bound OLEAN checkpoint receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-pr606-olean-checkpoints-${{ github.run_id }}
+          path: |
+            .lake/aegis-pr606/olean-source-checkpoint-v1.json
+            .lake/aegis-pr606/rh-proved-window-checkpoint-v1.json
+          if-no-files-found: warn
+          retention-days: 3
