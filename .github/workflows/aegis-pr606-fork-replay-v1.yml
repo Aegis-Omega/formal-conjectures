@@ -218,9 +218,9 @@ jobs:
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .lake/aegis-pr606
-          key: pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
+          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
           restore-keys: |
-            pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-
+            pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-
 
       - name: Compile full #606 fork closure
         shell: bash
@@ -233,6 +233,9 @@ jobs:
           BASE_LEAN_PATH="$GITHUB_WORKSPACE/.li/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
           export LEAN_PATH="$OUT:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
 
+          # The first dirty module invalidates every following module conservatively.
+          # An .olean without a matching SHA-256 sidecar is never reused.
+          rm -f "$OUT/olean-source-checkpoint-v1.json"
           dirty=0
           while IFS= read -r MOD; do
             [ -z "$MOD" ] && continue
@@ -242,26 +245,68 @@ jobs:
             if [ -f "$COMPAT/$MOD.lean" ]; then FILE="$COMPAT/$MOD.lean"; KIND="COMPAT"; fi
             FILE_SHA="$(sha256sum "$FILE" | awk '{print $1}')"
             STAMP="$OUT/$MOD.source.sha256"
-            if [ "$dirty" -eq 0 ] && [ -f "$OUT/$MOD.olean" ] && [ -f "$STAMP" ] && [ "$(cat "$STAMP")" = "$FILE_SHA" ]; then
-              echo "=== $KIND $MOD (CACHED) ==="
+            OLEAN_STAMP="$OUT/$MOD.olean.sha256"
+            if [ "$dirty" -eq 0 ] && [ -s "$OUT/$MOD.olean" ] && [ -f "$STAMP" ] && [ -f "$OLEAN_STAMP" ] && [ "$(cat "$STAMP")" = "$FILE_SHA" ] && [ "$(sha256sum "$OUT/$MOD.olean" | cut -d ' ' -f 1)" = "$(cat "$OLEAN_STAMP")" ]; then
+              echo "=== $KIND $MOD (SOURCE_AND_OLEAN_SHA_VERIFIED) ==="
               continue
             fi
             dirty=1
             echo "=== $KIND $MOD ==="
-            if lean -o "$OUT/$MOD.olean" "$FILE"; then
+            rm -f "$OUT/$MOD.olean" "$STAMP" "$OLEAN_STAMP"
+            if lean -o "$OUT/$MOD.olean" "$FILE" && [ -s "$OUT/$MOD.olean" ]; then
               printf '%s\n' "$FILE_SHA" > "$STAMP"
+              sha256sum "$OUT/$MOD.olean" | awk '{print $1}' > "$OLEAN_STAMP"
             else
-              rm -f "$OUT/$MOD.olean" "$STAMP"
+              rm -f "$OUT/$MOD.olean" "$STAMP" "$OLEAN_STAMP"
               exit 1
             fi
           done < "$GITHUB_WORKSPACE/.pr606-order.txt"
 
+          # Source-bound checkpoint for EVERY module in the compiled fork DAG.
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          out = root / '.lake/aegis-pr606'
+          base = root / '.aegis-base/sovereign-omega-v2/formal/bridges/lean'
+          src = root / 'AegisRH/PR606/Source'
+          compat = root / 'AegisRH/PR606/Compat'
+          rows = []
+          for module in (root / '.pr606-order.txt').read_text().splitlines():
+              source = next((p / (module + '.lean') for p in (compat, src, base) if (p / (module + '.lean')).is_file()), None)
+              if source is None:
+                  raise SystemExit('PR606_CHECKPOINT_SOURCE_MISSING:' + module)
+              olean = out / (module + '.olean')
+              sstamp = out / (module + '.source.sha256')
+              ostamp = out / (module + '.olean.sha256')
+              if not all(p.is_file() for p in (source, olean, sstamp, ostamp)) or not olean.stat().st_size:
+                  raise SystemExit('PR606_CHECKPOINT_MISSING:' + module)
+              ssh = hashlib.sha256(source.read_bytes()).hexdigest()
+              osh = hashlib.sha256(olean.read_bytes()).hexdigest()
+              if ssh != sstamp.read_text().strip() or osh != ostamp.read_text().strip():
+                  raise SystemExit('PR606_CHECKPOINT_HASH_DRIFT:' + module)
+              blob = subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip()
+              rows.append({'module':module, 'source':str(source.relative_to(root)), 'source_sha256':ssh,
+                  'source_git_blob':blob, 'olean':str(olean.relative_to(root)), 'olean_sha256':osh})
+          if not rows or len({r['module'] for r in rows}) != len(rows):
+              raise SystemExit('PR606_CHECKPOINT_INCOMPLETE')
+          receipt = {'schema':'aegis.rh.pr606_olean_checkpoint.v1',
+              'head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'lean_toolchain':(root/'lean-toolchain').read_text().strip(),
+              'mathlib_sha':os.environ['MATHLIB_SHA'],
+              'aegis_base_sha':os.environ['AEGIS_BASE_SHA'],
+              'aegis_head_sha':os.environ['AEGIS_HEAD_SHA'],
+              'li_provider_sha':os.environ['LI_PROVIDER_SHA'],
+              'module_count':len(rows), 'modules':rows,
+              'rh_unconditional':None, 'axiom_admission':'NOT_ASSESSED_BY_OLEAN_CHECKPOINT'}
+          (out/'olean-source-checkpoint-v1.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print('PR606_ALL_CLOSURE_OLEANS_CHECKPOINTED',len(rows))
+          PY
       - name: Save incremental PR606 fork closure cache
         if: always()
         uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .lake/aegis-pr606
-          key: pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
+          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
 
       - name: Compile upstream #606 spec
         shell: bash
