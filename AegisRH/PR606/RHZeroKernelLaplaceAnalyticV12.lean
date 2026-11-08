@@ -369,9 +369,8 @@ theorem zero_kernel_laplace_differentiableAt_v12
             (fun z : ℂ => Complex.exp (-(z * (t : ℂ))))
             (-(t : ℂ) *
               Complex.exp (-(w * (t : ℂ)))) w := by
-        convert
-          ((hasDerivAt_id w).mul_const (t : ℂ)).neg.cexp using 1 <;>
-          (try { funext z; ring }) <;> (try ring)
+        simpa [mul_comm, mul_left_comm, mul_assoc] using
+          (((hasDerivAt_id w).mul_const (t : ℂ)).neg.cexp)
       exact hExp.mul_const
         (WeilZeroTranslationKernelV11 g t))
 
