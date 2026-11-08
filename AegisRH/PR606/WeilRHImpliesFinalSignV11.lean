@@ -182,7 +182,7 @@ theorem autocorrelation_critical_profile_convolution_v11
   have hExp :=
     integral_comp_exp_v11
       (fun y : ℝ =>
-        g.1 (Real.exp (-u) * y) * conj (g.1 y))
+        g.1 (Real.exp (-u) * y) * star (g.1 y))
   rw [← hExp]
   rw [← integral_const_mul]
   have hneg :=
@@ -212,7 +212,7 @@ theorem fourier_critical_adjoint_v11
     (Measure.measurePreserving_neg (volume : Measure ℝ)).integral_comp
       (Homeomorph.neg ℝ).measurableEmbedding
       (fun t : ℝ =>
-        Complex.exp ((↑(-2 * Real.pi * t * ξ) * I)) *
+        Complex.exp ((↑(-2 * Real.pi * inner ℝ t ξ) * I)) •
           CriticalLogAdjointV11 g t)
   rw [← hneg]
   apply integral_congr_ae
@@ -271,7 +271,11 @@ theorem autocorrelation_mellin_critical_normSq_v11
     change CriticalLogProfileV11 A (-u) =
       (Hstar ⋆[mul ℂ ℂ] H) (-u)
     rw [← hw]
-    simpa [A, H, Hstar] using hc
+    change
+      MellinWeightedLogProfileV1 (WeilAutocorrelationV1 g) (1 / 2) u =
+        ((CriticalLogAdjointV11 g) ⋆[mul ℂ ℂ]
+          (CriticalLogProfileV11 g)) (-u)
+    exact hc
 
   rw [hprof] at hmA
   have hconv :=
@@ -303,6 +307,10 @@ theorem autocorrelation_mellin_critical_normSq_v11
     rw [hadj] at hc
     exact hc
 
+  change
+    mellin A.1 (((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I) =
+      (Complex.normSq
+        (mellin g.1 (((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I)) : ℂ)
   rw [hmA]
   have hmAneg :
       𝓕 (fun u : ℝ => (Hstar ⋆[mul ℂ ℂ] H) (-u)) ξ =
@@ -346,8 +354,21 @@ theorem rh_zero_summand_nonnegative_v11
     · simp
   unfold WeilZeroIndexSummandV1
   rw [hrho, autocorrelation_mellin_critical_normSq_v11 g rho.1.im]
-  simp [Complex.normSq_apply]
-  positivity
+  have hcoeff :
+      0 ≤ (analyticOrderNatAt riemannZeta rho.1 : ℝ) :=
+    Nat.cast_nonneg _
+  have hsq :
+      0 ≤ Complex.normSq
+        (mellin g.1 (((1 / 2 : ℝ) : ℂ) +
+          (rho.1.im : ℂ) * I)) :=
+    Complex.normSq_nonneg _
+  have hproduct :
+      0 ≤ (analyticOrderNatAt riemannZeta rho.1 : ℝ) *
+        Complex.normSq
+          (mellin g.1 (((1 / 2 : ℝ) : ℂ) +
+            (rho.1.im : ℂ) * I)) :=
+    mul_nonneg hcoeff hsq
+  simpa [Complex.mul_re] using hproduct
 
 /-- RH makes the entire canonical autocorrelation zero quadratic nonnegative. -/
 theorem rh_zero_quadratic_nonnegative_v11
