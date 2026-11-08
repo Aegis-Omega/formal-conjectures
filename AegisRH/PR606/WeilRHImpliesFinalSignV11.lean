@@ -213,6 +213,8 @@ theorem autocorrelation_critical_profile_convolution_v11
     simp only [neg_neg, Complex.real_smul, map_mul, Complex.conj_ofReal]
     rw [harg]
     rw [show -u - -t = -u + t by ring]
+    simp only [mul_one]
+    rw [show -((1 / 2 : ℝ) * u) = -u / 2 by ring]
     calc
       (Real.exp (-u / 2) : ℂ) *
           ((Real.exp t : ℂ) *
@@ -245,8 +247,15 @@ theorem fourier_critical_adjoint_v11
         conj (Complex.exp
           (((-2 * Real.pi * inner ℝ t ξ : ℝ) : ℂ) * I)) := by
       rw [← Complex.exp_conj]
-      congr 1
-      simp [inner_neg_left, mul_assoc]
+      apply congrArg Complex.exp
+      simp [inner_neg_left, Complex.conj_mul, Complex.conj_ofReal] <;> ring
+    change
+      Complex.exp
+        (((-2 * Real.pi * inner ℝ (-t) ξ : ℝ) : ℂ) * I) •
+          CriticalLogAdjointV11 g (-t) =
+        conj (Complex.exp
+          (((-2 * Real.pi * inner ℝ t ξ : ℝ) : ℂ) * I) •
+          CriticalLogProfileV11 g t)
     rw [hphase]
     simp [CriticalLogAdjointV11, map_mul])
 
