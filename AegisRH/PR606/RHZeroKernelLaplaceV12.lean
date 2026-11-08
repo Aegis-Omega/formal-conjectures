@@ -18,6 +18,8 @@ import RHZeroKernelBoundV11
 import WeilFixedLineKernelIntegralV6
 import Mathlib.Analysis.SpecialFunctions.ImproperIntegrals
 import Mathlib.MeasureTheory.Integral.DominatedConvergence
+import Mathlib.NumberTheory.LSeries.ZetaZeros
+import Mathlib.Topology.Compactness.Lindelof
 import Mathlib.Tactic
 
 /-!
@@ -66,9 +68,9 @@ theorem centered_zero_re_mem_v12
   have hs :=
     riemann_zeta_nontrivial_zero_critical_strip_v1
       rho.2.1 rho.2.2
-  unfold WeilCenteredZeroExponentV12
-  simp only [Complex.sub_re, Complex.ofReal_re]
-  constructor <;> linarith
+  have hhalf : ((1 / 2 : ℂ)).re = (1 / 2 : ℝ) := by norm_num
+  simp only [WeilCenteredZeroExponentV12, Complex.sub_re, hhalf]
+  constructor <;> linarith [hs.1, hs.2]
 
 /-- Absolute summability of the zero coefficients, inherited from the
 repository's compact-smooth autocorrelation zero summability theorem. -/
@@ -107,13 +109,16 @@ theorem zero_laplace_term_integrable_v12
     integrableOn_exp_mul_complex_Ioi
       (a := -(w - WeilCenteredZeroExponentV12 rho))
       hneg 0
-  refine he.const_mul (WeilZeroCoefficientV11 g rho) |>.congr_fun ?_
-    measurableSet_Ioi
-  intro t ht
-  unfold WeilZeroLaplaceTermV12
-  congr 2
-  push_cast
-  ring
+  have hterm :
+      WeilZeroLaplaceTermV12 g w rho =
+        (fun t : ℝ =>
+          WeilZeroCoefficientV11 g rho *
+            Complex.exp
+              ((-(w - WeilCenteredZeroExponentV12 rho)) * (t : ℂ))) := by
+    funext t
+    simp only [WeilZeroLaplaceTermV12, neg_mul]
+  rw [hterm]
+  exact he.const_mul (WeilZeroCoefficientV11 g rho)
 
 /-- Exact integral of one Laplace term. -/
 theorem zero_laplace_term_integral_v12
@@ -152,9 +157,7 @@ theorem zero_laplace_term_integral_v12
     have hre := congrArg Complex.re hz
     simp at hre
     linarith
-  simp [hden]
-  field_simp [hden]
-  ring
+  simp [div_eq_mul_inv]
 
 /-- Norm integral of one Laplace term. -/
 theorem zero_laplace_term_norm_integral_v12
@@ -186,8 +189,8 @@ theorem zero_laplace_term_norm_integral_v12
     ring
   rw [hfun, integral_const_mul,
     integral_exp_mul_Ioi (a := -delta) (by linarith) 0]
-  simp [hdelta.ne']
-  field_simp [hdelta.ne']
+  simp only [mul_zero, Real.exp_zero, neg_div, div_neg, neg_neg, mul_one]
+  dsimp [delta]
   ring
 
 /-- The family of norm integrals is summable uniformly on each half-plane
@@ -248,11 +251,19 @@ theorem tsum_zero_laplace_term_eq_kernel_v12
   rw [← hsum.tsum_mul_left (Complex.exp (-(w * (t : ℂ))))]
   apply tsum_congr
   intro rho
-  unfold WeilZeroLaplaceTermV12 WeilZeroTranslationFactorV11
-    WeilCenteredZeroExponentV12
-  rw [← Complex.exp_add]
-  ring_nf
-  congr 1
+  change
+    WeilZeroCoefficientV11 g rho *
+      Complex.exp
+        (-((w - WeilCenteredZeroExponentV12 rho) * (t : ℂ))) =
+      Complex.exp (-(w * (t : ℂ))) *
+        (WeilZeroCoefficientV11 g rho *
+          Complex.exp (WeilCenteredZeroExponentV12 rho * (t : ℂ)))
+  have harg :
+      -((w - WeilCenteredZeroExponentV12 rho) * (t : ℂ)) =
+        -(w * (t : ℂ)) +
+          WeilCenteredZeroExponentV12 rho * (t : ℂ) := by
+    ring
+  rw [harg, Complex.exp_add]
   ring
 
 /-- Resolvent sum on the initial right half-plane. -/
@@ -275,6 +286,18 @@ theorem zero_kernel_laplace_eq_resolvent_v12
     (hw : (1 / 2 : ℝ) < w.re) :
     WeilZeroKernelLaplaceV12 g w =
       WeilZeroResolventV12 g w := by
+  have hzeros_countable : riemannZetaZeros.Countable :=
+    isClosed_riemannZetaZeros.isLindelof.countable_of_isDiscrete
+      isDiscrete_riemannZetaZeros
+  letI : Countable ↥riemannZetaZeros := hzeros_countable.to_subtype
+  letI : Countable RiemannNontrivialZeroIndexV2 :=
+    Countable.of_injective
+      (fun rho : RiemannNontrivialZeroIndexV2 =>
+        (⟨rho.1, mem_riemannZetaZeros.mpr rho.2.1⟩ : ↥riemannZetaZeros))
+      (by
+        intro rho sigma h
+        apply Subtype.ext
+        exact congrArg Subtype.val h)
   have hint :
       ∀ rho : RiemannNontrivialZeroIndexV2,
         Integrable
