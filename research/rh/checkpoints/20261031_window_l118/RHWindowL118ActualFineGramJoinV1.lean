@@ -31,7 +31,7 @@ No universal-width positivity or unconditional RH is claimed.
 -/
 
 open Finset
-open scoped BigOperators
+open scoped ContDiff BigOperators
 set_option autoImplicit false
 noncomputable section
 
