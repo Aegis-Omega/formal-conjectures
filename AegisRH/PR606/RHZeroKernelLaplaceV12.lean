@@ -158,6 +158,11 @@ theorem zero_laplace_term_integral_v12
     simp at hre
     linarith
   simp [div_eq_mul_inv]
+  have hflip :
+      WeilCenteredZeroExponentV12 rho - w =
+        -(w - WeilCenteredZeroExponentV12 rho) := by ring
+  rw [hflip, inv_neg]
+  ring
 
 /-- Norm integral of one Laplace term. -/
 theorem zero_laplace_term_norm_integral_v12
@@ -291,13 +296,12 @@ theorem zero_kernel_laplace_eq_resolvent_v12
       isDiscrete_riemannZetaZeros
   letI : Countable ↥riemannZetaZeros := hzeros_countable.to_subtype
   letI : Countable RiemannNontrivialZeroIndexV2 :=
-    Countable.of_injective
+    (show Function.Injective
       (fun rho : RiemannNontrivialZeroIndexV2 =>
-        (⟨rho.1, mem_riemannZetaZeros.mpr rho.2.1⟩ : ↥riemannZetaZeros))
-      (by
+        (⟨rho.1, mem_riemannZetaZeros.mpr rho.2.1⟩ : ↥riemannZetaZeros)) from by
         intro rho sigma h
         apply Subtype.ext
-        exact congrArg Subtype.val h)
+        exact congrArg Subtype.val h).countable
   have hint :
       ∀ rho : RiemannNontrivialZeroIndexV2,
         Integrable
