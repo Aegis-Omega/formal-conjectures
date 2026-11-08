@@ -195,12 +195,34 @@ theorem autocorrelation_critical_profile_convolution_v11
   rw [← hneg]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall (fun t => by
+    have harg :
+        Real.exp (-u) * Real.exp t = Real.exp (-u + t) := by
+      rw [← Real.exp_add]
+    have hcoef :
+        Real.exp (-u / 2) * Real.exp t =
+          Real.exp (t / 2) * Real.exp ((-u + t) / 2) := by
+      rw [← Real.exp_add, ← Real.exp_add]
+      congr 1
+      ring
+    have hcoefC :
+        (Real.exp (-u / 2) : ℂ) * (Real.exp t : ℂ) =
+          (Real.exp (t / 2) : ℂ) *
+            (Real.exp ((-u + t) / 2) : ℂ) := by
+      exact_mod_cast hcoef
     unfold CriticalLogAdjointV11 CriticalLogProfileV11 logLift
-    simp [Complex.real_smul]
-    rw [← Real.exp_add]
-    congr 1
-    · ring_nf
-    · congr 2 <;> ring)
+    simp only [neg_neg, Complex.real_smul, map_mul, Complex.conj_ofReal]
+    rw [harg]
+    rw [show -u - -t = -u + t by ring]
+    calc
+      (Real.exp (-u / 2) : ℂ) *
+          ((Real.exp t : ℂ) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))))
+        = ((Real.exp (-u / 2) : ℂ) * (Real.exp t : ℂ)) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))) := by ring
+      _ = ((Real.exp (t / 2) : ℂ) *
+            (Real.exp ((-u + t) / 2) : ℂ)) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))) := by rw [hcoefC]
+      _ = _ := by ring)
 
 /-- Fourier transform of the reflected-conjugate profile. -/
 theorem fourier_critical_adjoint_v11
@@ -217,10 +239,16 @@ theorem fourier_critical_adjoint_v11
   rw [← hneg]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall (fun t => by
-    unfold CriticalLogAdjointV11
-    simp [map_mul, Complex.exp_conj]
-    congr 1
-    ring)
+    have hphase :
+        Complex.exp
+          (((-2 * Real.pi * inner ℝ (-t) ξ : ℝ) : ℂ) * I) =
+        conj (Complex.exp
+          (((-2 * Real.pi * inner ℝ t ξ : ℝ) : ℂ) * I)) := by
+      rw [← Complex.exp_conj]
+      congr 1
+      simp [inner_neg_left, mul_assoc]
+    rw [hphase]
+    simp [CriticalLogAdjointV11, map_mul])
 
 /-- Critical-line Mellin transform as Fourier transform of the reflected
 positive log profile. -/
@@ -326,9 +354,8 @@ theorem autocorrelation_mellin_critical_normSq_v11
   have hmul :=
     Complex.mul_conj (𝓕 H (-ξ))
   apply Complex.ext
-  · simp [Complex.normSq_apply]
-    ring
-  · simp
+  · simp [Complex.normSq_apply] <;> ring
+  · simp <;> ring
 
 /-- Under RH, every canonical zero summand of the autocorrelation has
 nonnegative real part. -/
@@ -355,7 +382,8 @@ theorem rh_zero_summand_nonnegative_v11
   unfold WeilZeroIndexSummandV1
   rw [hrho, autocorrelation_mellin_critical_normSq_v11 g rho.1.im]
   have hcoeff :
-      0 ≤ (analyticOrderNatAt riemannZeta rho.1 : ℝ) :=
+      0 ≤ (analyticOrderNatAt riemannZeta
+        (((1 / 2 : ℝ) : ℂ) + (rho.1.im : ℂ) * I) : ℝ) :=
     Nat.cast_nonneg _
   have hsq :
       0 ≤ Complex.normSq
@@ -363,7 +391,8 @@ theorem rh_zero_summand_nonnegative_v11
           (rho.1.im : ℂ) * I)) :=
     Complex.normSq_nonneg _
   have hproduct :
-      0 ≤ (analyticOrderNatAt riemannZeta rho.1 : ℝ) *
+      0 ≤ (analyticOrderNatAt riemannZeta
+        (((1 / 2 : ℝ) : ℂ) + (rho.1.im : ℂ) * I) : ℝ) *
         Complex.normSq
           (mellin g.1 (((1 / 2 : ℝ) : ℂ) +
             (rho.1.im : ℂ) * I)) :=
