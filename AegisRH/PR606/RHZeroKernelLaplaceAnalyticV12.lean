@@ -104,7 +104,14 @@ private theorem zero_kernel_term_local_bound_v12
     unfold WeilZeroTranslationFactorV11
     rw [Complex.norm_exp]
     exact Real.exp_le_exp.mpr hexpRe
-  exact mul_le_mul_of_nonneg_left hfactor (norm_nonneg _)
+  calc
+    ‖WeilZeroCoefficientV11 g rho‖ *
+        ‖WeilZeroTranslationFactorV11 rho t‖
+      ≤ ‖WeilZeroCoefficientV11 g rho‖ *
+          Real.exp ((|t0| + 1) / 2) :=
+        mul_le_mul_of_nonneg_left hfactor (norm_nonneg _)
+    _ = Real.exp ((|t0| + 1) / 2) *
+          ‖WeilZeroCoefficientV11 g rho‖ := mul_comm _ _
 
 /-- The canonical zero translation kernel is a continuous function of the
 real translation parameter. -/
@@ -145,8 +152,12 @@ def ZeroLaplaceRightHalfPlaneV12 : Set ℂ :=
 
 theorem zeroLaplaceRightHalfPlane_isOpen_v12 :
     IsOpen ZeroLaplaceRightHalfPlaneV12 := by
-  simpa [ZeroLaplaceRightHalfPlaneV12] using
-    (Complex.continuous_re.isOpen_preimage (Ioi (0 : ℝ)) isOpen_Ioi)
+  change IsOpen {w : ℂ | 0 < w.re}
+  have hopen :=
+    Complex.continuous_re.isOpen_preimage (Ioi (0 : ℝ)) isOpen_Ioi
+  convert hopen using 1
+  ext w
+  simp
 
 /-- Final-sign bound in a compact form used by the Laplace estimates. -/
 private theorem zero_kernel_uniform_bound_v12
@@ -201,9 +212,12 @@ theorem zero_kernel_laplace_integrable_of_final_sign_v12
     have hre :
         (-(w * (t : ℂ))).re = -w.re * t := by
       simp
-      ring
     rw [hre]
-    exact mul_le_mul_of_nonneg_left hK (Real.exp_nonneg _))
+    calc
+      Real.exp (-w.re * t) * ‖WeilZeroTranslationKernelV11 g t‖
+        ≤ Real.exp (-w.re * t) * B :=
+          mul_le_mul_of_nonneg_left hK (Real.exp_nonneg _)
+      _ = B * Real.exp (-w.re * t) := mul_comm _ _)
 
 /-- An integrable first-moment exponential tail used to dominate the
 w-derivative locally. -/
@@ -212,24 +226,33 @@ private theorem first_moment_exp_tail_integrable_v12
     IntegrableOn
       (fun t : ℝ => B * (t * Real.exp (-(δ * t))))
       (Ioi (0 : ℝ)) := by
-  by_cases hB : B = 0
-  · simp [hB]
+  have hgamma :
+      IntegrableOn
+        (fun x : ℝ => Real.exp (-x) * x)
+        (Ioi (0 : ℝ)) := by
+    simpa using
+      (Real.GammaIntegral_convergent (s := (2 : ℝ)) (by norm_num))
+  have hscaled :
+      IntegrableOn
+        (fun t : ℝ => Real.exp (-(δ * t)) * (δ * t))
+        (Ioi (0 : ℝ)) := by
+    simpa only [mul_zero] using
+      (integrableOn_Ioi_comp_mul_left_iff
+        (fun x : ℝ => Real.exp (-x) * x) 0
+        (a := δ) hδ).mpr hgamma
+  have hfun :
+      (fun t : ℝ => t * Real.exp (-(δ * t))) =
+      (fun t : ℝ =>
+        δ⁻¹ * (Real.exp (-(δ * t)) * (δ * t))) := by
+    funext t
+    field_simp [ne_of_gt hδ]
+    ring
   have hbase :
       IntegrableOn
         (fun t : ℝ => t * Real.exp (-(δ * t)))
         (Ioi (0 : ℝ)) := by
-    have key :=
-      Real.integral_rpow_mul_exp_neg_mul_Ioi
-        (a := (2 : ℝ)) (r := δ) (by norm_num) hδ
-    apply IntegrableOn.of_integral_ne_zero
-    rw [show
-      (fun t : ℝ => t * Real.exp (-(δ * t))) =
-      (fun t : ℝ =>
-        t ^ ((2 : ℝ) - 1) * Real.exp (-(δ * t))) by
-          funext t
-          simp]
-    rw [key]
-    positivity
+    rw [hfun]
+    exact hscaled.const_mul δ⁻¹
   exact hbase.const_mul B
 
 /-- Differentiability of the bounded-kernel Laplace transform at every point
@@ -269,13 +292,14 @@ theorem zero_kernel_laplace_differentiableAt_v12
       ∀ᶠ w in 𝓝 w0,
         AEStronglyMeasurable (F w)
           (volume.restrict (Ioi (0 : ℝ))) := by
-    exact Filter.Eventually.of_forall (fun w => by
-      apply AEStronglyMeasurable.restrict
-      exact
-        ((by fun_prop :
-          Continuous (fun t : ℝ =>
-            Complex.exp (-(w * (t : ℂ))))).aestronglyMeasurable.mul
-          (zero_translation_kernel_continuous_v12 g).aestronglyMeasurable)
+    apply Filter.Eventually.of_forall
+    intro w
+    apply AEStronglyMeasurable.restrict
+    exact
+      ((by fun_prop :
+        Continuous (fun t : ℝ =>
+          Complex.exp (-(w * (t : ℂ))))).aestronglyMeasurable.mul
+        (zero_translation_kernel_continuous_v12 g).aestronglyMeasurable)
 
   have hFint :
       Integrable (F w0) (volume.restrict (Ioi (0 : ℝ))) := by
