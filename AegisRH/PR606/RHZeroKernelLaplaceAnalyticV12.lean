@@ -230,23 +230,26 @@ private theorem first_moment_exp_tail_integrable_v12
       IntegrableOn
         (fun x : ℝ => Real.exp (-x) * x)
         (Ioi (0 : ℝ)) := by
-    simpa using
+    simpa only [show (2 : ℝ) - 1 = 1 by norm_num, Real.rpow_one] using
       (Real.GammaIntegral_convergent (s := (2 : ℝ)) (by norm_num))
   have hscaled :
       IntegrableOn
         (fun t : ℝ => Real.exp (-(δ * t)) * (δ * t))
         (Ioi (0 : ℝ)) := by
+    have hright :
+        IntegrableOn (fun x : ℝ => Real.exp (-x) * x)
+          (Ioi (δ * 0)) := by
+      simpa only [mul_zero] using hgamma
     simpa only [mul_zero] using
       (integrableOn_Ioi_comp_mul_left_iff
         (fun x : ℝ => Real.exp (-x) * x) 0
-        (a := δ) hδ).mpr hgamma
+        (a := δ) hδ).mpr hright
   have hfun :
       (fun t : ℝ => t * Real.exp (-(δ * t))) =
       (fun t : ℝ =>
         δ⁻¹ * (Real.exp (-(δ * t)) * (δ * t))) := by
     funext t
     field_simp [ne_of_gt hδ]
-    ring
   have hbase :
       IntegrableOn
         (fun t : ℝ => t * Real.exp (-(δ * t)))
@@ -329,7 +332,7 @@ theorem zero_kernel_laplace_differentiableAt_v12
         simpa [Complex.sub_re] using Complex.abs_re_le_norm (w - w0)
       have hwre : δ ≤ w.re := by
         have hlo := (abs_lt.mp (lt_of_le_of_lt hreDiff hdist)).1
-        dsimp [δ]
+        dsimp [δ] at hlo ⊢
         linarith
       have hK := zero_kernel_uniform_bound_v12 h g hm t
       unfold F' bound
@@ -338,7 +341,6 @@ theorem zero_kernel_laplace_differentiableAt_v12
       have hre :
           (-(w * (t : ℂ))).re = -w.re * t := by
         simp
-        ring
       rw [hre]
       have hexp :
           Real.exp (-w.re * t) ≤ Real.exp (-(δ * t)) := by
@@ -368,7 +370,8 @@ theorem zero_kernel_laplace_differentiableAt_v12
             (-(t : ℂ) *
               Complex.exp (-(w * (t : ℂ)))) w := by
         convert
-          ((hasDerivAt_id w).mul_const (t : ℂ)).neg.cexp using 1 <;> ring
+          ((hasDerivAt_id w).mul_const (t : ℂ)).neg.cexp using 1 <;>
+          (try { funext z; ring }) <;> (try ring)
       exact hExp.mul_const
         (WeilZeroTranslationKernelV11 g t))
 
@@ -379,7 +382,8 @@ theorem zero_kernel_laplace_differentiableAt_v12
       hs hFmeas hFint hF'meas hbound hboundInt hdiff
 
   have hder := main.2.differentiableAt
-  simpa [WeilZeroKernelLaplaceV12, F] using hder
+  change DifferentiableAt ℂ (WeilZeroKernelLaplaceV12 g) w0 at hder
+  exact hder
 
 /-- Under final sign, the zero-kernel Laplace transform is holomorphic on the
 entire open right half-plane. -/
