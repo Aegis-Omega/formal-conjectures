@@ -54,7 +54,7 @@ AUTHORITY_EFFECT = NONE.
 The reverse implication is not asserted in this file.
 -/
 
-open Set Filter Topology Complex MeasureTheory Convolution
+open Set Filter Topology Complex MeasureTheory Convolution ContinuousLinearMap
 open AEGIS.RHFinalClosureV1
 open scoped BigOperators FourierTransform Convolution ContDiff ComplexConjugate
 
@@ -145,9 +145,9 @@ theorem critical_mellin_profile_eq_log_reflection_v11
       CriticalLogProfileV11 g (-u) := by
   unfold MellinWeightedLogProfileV1 MellinComplexWeightV1
     MellinWeightV1 MellinLogProfileV1 CriticalLogProfileV11 logLift
+  have he : -(1 / 2 : ℝ) * u = (-u) / 2 := by ring
+  rw [he]
   simp [Complex.real_smul]
-  congr 2
-  ring
 
 /-- Whole-line exponential substitution for complex test functions, by the
 one-dimensional Jacobian formula at the pinned Mathlib version. -/
@@ -230,12 +230,21 @@ theorem mellin_critical_eq_fourier_log_v11
       𝓕 (fun u : ℝ => CriticalLogProfileV11 g (-u))
         (γ / (2 * Real.pi)) := by
   rw [mellin_eq_fourier]
-  simp only [add_re, ofReal_re, mul_re, I_re, I_im, ofReal_im,
-    zero_mul, sub_zero, add_im, mul_im, one_mul, zero_add]
+  have hre :
+      ((((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I).re) = (1 / 2 : ℝ) := by
+    simp
+  have him :
+      ((((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I).im) = γ := by
+    simp
+  rw [hre, him]
   apply congrArg (fun F : ℝ → ℂ =>
     𝓕 F (γ / (2 * Real.pi)))
   funext u
-  rw [critical_mellin_profile_eq_log_reflection_v11]
+  change
+    Real.exp (-(1 / 2 : ℝ) * u) • g.1 (Real.exp (-u)) =
+      ((Real.exp ((-u) / 2) : ℝ) : ℂ) * g.1 (Real.exp (-u))
+  rw [show -(1 / 2 : ℝ) * u = (-u) / 2 by ring]
+  simp [Complex.real_smul]
 
 /-- The critical-line Mellin transform of the actual multiplicative
 autocorrelation is a modulus square. -/
@@ -350,6 +359,9 @@ theorem rh_zero_quadratic_nonnegative_v11
   have hsum :=
     weil_compact_smooth_zero_summable_v1
       (WeilAutocorrelationCompactSmoothV1 g)
+  change Summable
+    (fun rho : RiemannNontrivialZeroIndexV2 =>
+      WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho) at hsum
   rw [Complex.re_tsum hsum]
   exact tsum_nonneg (fun rho => rh_zero_summand_nonnegative_v11 hRH g rho)
 
