@@ -54,7 +54,8 @@ AUTHORITY_EFFECT = NONE.
 The reverse implication is not asserted in this file.
 -/
 
-open Set Filter Topology Complex MeasureTheory
+open Set Filter Topology Complex MeasureTheory Convolution
+open AEGIS.RHFinalClosureV1
 open scoped BigOperators FourierTransform Convolution ContDiff
 
 set_option autoImplicit false
@@ -77,7 +78,10 @@ private theorem critical_log_profile_continuous_v11
     (g : WeilCompactSmoothGV1) :
     Continuous (CriticalLogProfileV11 g) := by
   unfold CriticalLogProfileV11 logLift
-  fun_prop
+  have hg : Continuous (fun t : ℝ => g.1 (Real.exp t)) :=
+    g.2.1.continuous.comp Real.continuous_exp
+  exact (Complex.continuous_ofReal.comp
+    (Real.continuous_exp.comp (continuous_id.div_const 2))).mul hg
 
 private theorem critical_log_profile_hasCompactSupport_v11
     (g : WeilCompactSmoothGV1) :
