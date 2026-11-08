@@ -301,7 +301,7 @@ theorem zero_kernel_laplace_eq_resolvent_v12
         (⟨rho.1, mem_riemannZetaZeros.mpr rho.2.1⟩ : ↥riemannZetaZeros)) from by
         intro rho sigma h
         apply Subtype.ext
-        exact congrArg Subtype.val h).countable
+        exact congrArg (fun z : ↥riemannZetaZeros => z.1) h).countable
   have hint :
       ∀ rho : RiemannNontrivialZeroIndexV2,
         Integrable
