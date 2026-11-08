@@ -56,7 +56,7 @@ The reverse implication is not asserted in this file.
 
 open Set Filter Topology Complex MeasureTheory Convolution
 open AEGIS.RHFinalClosureV1
-open scoped BigOperators FourierTransform Convolution ContDiff
+open scoped BigOperators FourierTransform Convolution ContDiff ComplexConjugate
 
 set_option autoImplicit false
 noncomputable section
@@ -149,6 +149,25 @@ theorem critical_mellin_profile_eq_log_reflection_v11
   congr 2
   ring
 
+/-- Whole-line exponential substitution for complex test functions, by the
+one-dimensional Jacobian formula at the pinned Mathlib version. -/
+private theorem integral_comp_exp_v11 (f : ℝ → ℂ) :
+    (∫ t : ℝ, Real.exp t • f (Real.exp t)) =
+      ∫ y in Ioi (0 : ℝ), f y := by
+  have hcov :=
+    MeasureTheory.integral_image_eq_integral_abs_deriv_smul
+      (f := Real.exp)
+      (f' := Real.exp)
+      (s := Set.univ)
+      MeasurableSet.univ
+      (fun x _ => (Real.hasDerivAt_exp x).hasDerivWithinAt)
+      (Set.injOn_of_injective Real.exp_injective)
+      f
+  have himage : Real.exp '' Set.univ = Ioi (0 : ℝ) := by
+    rw [Set.image_univ, Real.range_exp]
+  rw [himage] at hcov
+  simpa [abs_of_pos (Real.exp_pos _)] using hcov.symm
+
 /-- Multiplicative autocorrelation becomes ordinary additive correlation after
 the unitary logarithmic lift. -/
 theorem autocorrelation_critical_profile_convolution_v11
@@ -161,7 +180,7 @@ theorem autocorrelation_critical_profile_convolution_v11
     MellinWeightV1 MellinLogProfileV1 WeilAutocorrelationV1
   simp only [Complex.real_smul]
   have hExp :=
-    integral_comp_exp
+    integral_comp_exp_v11
       (fun y : ℝ =>
         g.1 (Real.exp (-u) * y) * conj (g.1 y))
   rw [← hExp]
