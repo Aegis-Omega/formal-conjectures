@@ -121,7 +121,7 @@ theorem zero_laplace_term_integral_v12
     (rho : RiemannNontrivialZeroIndexV2)
     (hw : (WeilCenteredZeroExponentV12 rho).re < w.re) :
     (∫ t : ℝ in Ioi (0 : ℝ),
-      WeilZeroLaplaceTermV12 g w rho) =
+      WeilZeroLaplaceTermV12 g w rho t) =
       WeilZeroCoefficientV11 g rho /
         (w - WeilCenteredZeroExponentV12 rho) := by
   have hneg :
@@ -309,7 +309,7 @@ theorem zero_kernel_laplace_eq_resolvent_v12
     _ =
     ∑' rho : RiemannNontrivialZeroIndexV2,
       ∫ t : ℝ in Ioi (0 : ℝ),
-        WeilZeroLaplaceTermV12 g w rho := hswap.symm
+        WeilZeroLaplaceTermV12 g w rho t := hswap.symm
     _ =
     ∑' rho : RiemannNontrivialZeroIndexV2,
       WeilZeroCoefficientV11 g rho /
