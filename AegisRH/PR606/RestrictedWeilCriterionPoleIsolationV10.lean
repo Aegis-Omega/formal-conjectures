@@ -89,10 +89,7 @@ theorem exists_centered_zero_isolation_v10
   have hsigmaZ : sigma.1 ∈ riemannZetaZeros := by
     exact mem_riemannZetaZeros.mpr sigma.2.1
   have hdist : dist sigma.1 rho.1 < ε := by
-    simpa [dist_comm] using
-      (show
-        dist (CenteredZeroExponentV10 sigma)
-          (CenteredZeroExponentV10 rho) < ε from hsigma)
+    simpa only [dist_centeredZeroExponent_v10] using hsigma
   have hmem :
       sigma.1 ∈ Metric.ball rho.1 ε ∩ riemannZetaZeros := by
     exact ⟨by simpa [Metric.mem_ball] using hdist, hsigmaZ⟩
