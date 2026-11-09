@@ -224,7 +224,9 @@ theorem autocorrelation_critical_profile_convolution_v11
       _ = ((Real.exp (t / 2) : ℂ) *
             (Real.exp ((-u + t) / 2) : ℂ)) *
             (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))) := by rw [hcoefC]
-      _ = _ := by simp only [starRingEnd_apply])
+      _ = _ := by
+        simp only [starRingEnd_apply]
+        ring)
 
 /-- Fourier transform of the reflected-conjugate profile. -/
 theorem fourier_critical_adjoint_v11
