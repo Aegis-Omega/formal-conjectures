@@ -1,6 +1,7 @@
 # `hresidual` fails on a near-kernel packet (analysis and float check, 2026-11-10)
 
-Evidence kind: `numerical`, with an analytic derivation. Nothing here is kernel-checked.
+Evidence kind: `numerical`, with an analytic derivation. Step 1 of the derivation is
+kernel-checked (`lean_kernel`, abstract form); steps 2 to 4 and the float check are not.
 RH status: OPEN.
 
 ## Claim
@@ -12,16 +13,24 @@ fails for a near-kernel packet of the proved window `2r ≤ 11/8`.
 ## Derivation
 
 Notation: `E_a = energy (gs a)`, `B_ab = (B (gs a) (gs b)).re`, `LF` = `FineLogFreeGap` of the
-centre gap, `c = 676/65536`, `β = 57430/65536`.
+centre gap, `c = 676/65536`, `β = 57430/65536`, `κ = 5671/3200`.
 
 1. Algebra, from the hypothesis alone. Multiply row `a` by `E_a ≥ 0`, sum over `a`, and use the
    symmetry of `residual` and of `LF`, the bound for pairs that are not log-free, and the diagonal
-   bound `(5671/3200) E_a ≤ −B_aa`:
+   bound `κ E_a ≤ −B_aa`:
 
-       −Re B(g,g) ≥ (641/32768) ∑_a E_a + ∑_{a ≠ b, LF} [c (E_a + E_b) − B_ab]        (N)
+       −Re B(g,g) ≥ (κ − 2β) ∑_a E_a + ∑_{a ≠ b, LF} [c (E_a + E_b) − B_ab]        (N)
 
-   (`641/32768 = 5671/3200 − 2β`). With the log-free lemma the bracket is nonnegative and (N)
-   gives the conclusion of `actual_source_gram_coercive_of_resonance_row`. (N) keeps the bracket.
+   Here `κ − 2β = 8013/409600`, and `641/32768` is a lower bound for it. With the log-free lemma
+   the bracket is nonnegative and (N) gives the conclusion of
+   `actual_source_gram_coercive_of_resonance_row`. (N) keeps the bracket.
+
+   Kernel-checked in abstract form: `weighted_row_sum` and `hresidual_constants` in
+   `RHResonanceRowWeightedSumV1.lean` (Mathlib only; Lean 4.33.1, Mathlib
+   `0df444a360eaa60ab8c11dca51a86af692955474`, `lean --trust=0`, exit 0, no `sorry`, axioms
+   `[propext, Classical.choice, Quot.sound]`, `leanchecker` exit 0; source SHA-256
+   `8778257b04add7d93917da88c5bc1ffa96a8d35a3f7dd3c5738f7615e1b8165d`). The instantiation to the
+   lab's `B`, `energy` and `FineLogFreeGap` is not compiled.
 
 2. Grouping. Group the pieces by centre; let `H_i` be the sum of group `i`, `e_i` its energy and
    `k_i` its size. Cauchy–Schwarz gives `∑_{a ∈ i} E_a ≥ e_i / k_i`, and
@@ -63,7 +72,7 @@ obstruction appears only where the form has a near-kernel.
   The lab constant is consistent with it: `2c = 0.02063` against `K(34/128)/128 = 0.0166`.
 - Energy is taken as the `L²` norm in the log variable. Another weight changes the constants by
   at most `e^{0.7}`.
-- Steps 1 and 2 are finite sums and can be kernel-checked with Mathlib only. Not done here.
+- Step 2 is a finite-sum argument and can be kernel-checked with Mathlib only. Not done here.
 
 ## Consequence
 
