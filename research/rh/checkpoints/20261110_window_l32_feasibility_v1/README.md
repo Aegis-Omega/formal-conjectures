@@ -1,6 +1,10 @@
-# Feasibility of the window 2r ≤ 3/2 (float model, 2026-11-10)
+# Feasibility of the window 2r ≤ 3/2 (2026-11-10)
 
-Evidence kind: `numerical` (untrusted float model). No theorem. RH status: OPEN.
+Evidence kind: `numerical`. The row side uses the lab's exact mirror (untrusted Python, exact
+rational arithmetic); the trace side is a float model. No theorem. RH status: OPEN.
+
+This README replaces the first version of the same day, whose row parameters came from a float
+model and were too optimistic (see "What changed").
 
 ## Question
 
@@ -8,66 +12,88 @@ Evidence kind: `numerical` (untrusted float model). No theorem. RH status: OPEN.
 `window_of_certificate_gram_moment` be instantiated beyond `log 4`, where the prime power 4 enters
 (`M = 4`, `LT < Real.log 5`)? `ScertM`, `tau` and `cvsEntry` are already defined for every `M`.
 
-## Model (`feas.py`)
+## Row certificate: exact mirror (`CERT_FEASIBILITY_32.log`)
 
-- Row side: the model of `../20261026_window_l43/kappa.py`, with the number of atoms as a
-  parameter (frequencies `|k| ≤ K`, `2K − 1` atoms) and atom columns scaled to unit norm. Prime
-  powers `n < e^LT` enter with weight `2Λ(n)/√n`; `n = 4` has weight `log 2`.
-- Trace side: `T(m) = ∫ s(t) · dist²(e_t, V) dt` with `s(t) = max(0, m + W − h₊(t))`, `W` the
-  worst-case prime sum (as `mkCell` in the trace certificates) and `V` the atoms and `exp(±x/2)`.
-- Feasible when `m − T/(2π) ≥ κ / ((2π)² LT)`.
+`make_gen_rr_k.py` derives `gen_rr_k.py` from `../20261031_window_l118/gen_rr_lt.py`: the atom
+count (frequencies `|k| ≤ KK`), the far bound `T_τ` and the fixed slack of `epsIn` become
+parameters, and the prime power 4 (weight `log 2`) enters for `LT ≥ log 4`. With `KK = 70` at
+`LT = 11/8` it reproduces the log line of the 11/8 port exactly (`K' 1.2892e-06`, scaled
+`λ_min 4.98641e-7`).
 
-## Calibration on the proved window 11/8
+At `LT = 3/2`, `KK = 150` (299 atoms), `T_τ = 14`:
 
-139 atoms, `NP = 250`: the model gives `κ = 54.14` at `ε = 0.7`, the same value as `kappa.py`;
-the proved certificate uses `κ = 58`. The model gives `T = 1.44` at `m = 33/20`; the certificate
-proves `T ≤ 7/2`. So the certified `T` is about 2.43 times the model value. The last column below
-applies that factor.
+| NP | ε | κ | boxes (low / high / diagonal) | scaled λ_min of the check matrix |
+|---|---|---|---|---|
+| 500 | 1/2 | 56 | 5e-11 / 5e-10 / 4e-11 | −4.43e-8 |
+| 500 | 1/2 | 56, 60, 64 | 5e-13 / 5e-11 / 4e-13 | −4.24e-8, −3.96e-8, −3.72e-8 |
+| 500 | 7/10 | 60 | same | −2.72e-8 |
+| 500 | 1 | 60 | same | −1.89e-8 |
+| 700 | 7/10 | 60 | same | +1.84e-10 |
+| 900 | 1 | 60 | same | +1.02e-8 |
+| 1000 | 1 | 62 | same | +9.96e-9 |
+| 1000 | 7/5 | 62 | same | +1.06e-8 |
 
-## Results (`FEASIBILITY_32.log`)
+- Tightening the boxes does not help at `NP = 500`; the tail does. The check passes from about
+  `NP = 900`.
+- With boxes near `5e-13` the error budget is `K' ≈ 7e-11`, well below the margin `1e-8`.
+- The LDL certificate of `tools/cert43.py` closes on the last matrix at scales `2^80` and `2^88`
+  (`ok True`). `cert43.py` assumes every diagonal of `P` is at least `1/2` in its units;
+  `rescale_pkl.py` multiplies `P` by a power of 4 first. The scale `2^64` of the 11/8 port is not
+  enough here.
 
-| LT | atoms (K) | NP | λ_min of Q, unit atoms | gap needed | model gap | gap with T × 2.43 |
-|---|---|---|---|---|---|---|
-| 11/8 | 139 (70) | 250 | 3.26e-7 | 0.998 | 1.421 (m = 1.65) | 1.093 (proved) |
-| 3/2 | 299 (150) | 500 | 1.78e-9 | 0.887 | 1.411 (m = 1.65) | 1.068 |
-| 3/2 | 349 (175) | 600 | 1.77e-9 | 0.819 | 1.461 (m = 1.65) | 1.190 |
-| 3/2 | 399 (200) | 700 | 1.77e-9 | 0.762 | 1.606 (m = 1.80) | 1.329 |
-| 8/5 | 329 (165) | 560 | 1.45e-11 | 1.051 | 1.423 (m = 1.65) | 1.099 |
+## Trace side: float model only (`feas.py`, `FEASIBILITY_32.log`)
 
-## Reading
+`T(m) = ∫ s(t) · dist²(e_t, V) dt` with `s(t) = max(0, m + W − h₊(t))`, `W` the worst-case prime
+sum (as `mkCell`) and `V` the atoms and `exp(±x/2)`. Calibration at 11/8: the model gives
+`T = 1.44` at `m = 33/20`, the certificate proves `T ≤ 7/2`, a factor 2.43.
 
-- The window `3/2` looks feasible with about 299 atoms: gap needed 0.887 against about 1.07 after
-  the calibration factor. That is more room than the window 11/8 had.
-- The slack must cover `|t| < 2π · exp(m + W) ≈ 620` (it was 310 at 11/8), so the atoms must reach
-  `K ≥ 620 · LT / (2π) ≈ 148`. With too few atoms the trace term explodes: see `m = 1.80` at 11/8
-  in the log, where the slack passes the atom range and `T` jumps from 1.4 to 7.6.
-- The minimum eigenvalue of the unit-atom low block drops from 3.3e-7 to 1.8e-9, about 180 times,
-  and does not improve with more atoms. Boxes for `τ` and the diagonal and the fixed-point scale
-  must tighten by about that factor. At 11/8 the scale `2^64` passes with `K' ≈ 1.2961e-6` against
-  `1.2974e-6`, so expect a scale near `2^72` or more and box radii near `5e-11`.
-- `max |τ_k|` beyond the low block is 13.35 in the model; the far bound `|τ| ≤ 13` used at 11/8
-  has to become 14.
-- The window `8/5` is marginal (1.05 needed against about 1.10) with `λ_min ≈ 1.4e-11`. It is not
-  a first target.
+| atoms (K) | model gap at m = 1.65 | gap with T × 2.43 |
+|---|---|---|
+| 299 (150) | 1.411 | 1.068 |
+| 349 (175) | 1.461 | 1.190 |
+
+The window theorem needs `m − T/(2π) ≥ κ / ((2π)² LT)`: 1.013 for `κ = 60`, 1.047 for `κ = 62`.
+With 299 atoms that leaves about 5 percent on the calibrated estimate. This is not verified by
+any exact computation. With 349 atoms there is more room, but the row check must then be redone
+for `KK = 175`.
+
+The slack must cover `|t| < 2π · exp(m + W) ≈ 620` (310 at 11/8), which is why the atoms must
+reach `K ≥ 620 · LT / (2π) ≈ 148`.
 
 ## Proposed parameters for a port
 
-`M = 4`, `L = 2`, `LT = 3/2`, `m = 33/20`, atoms centred at `−149, …, 149`, `NP = 500`,
-`T_τ = 14`, `ε = 1/2`, `κ` near 53 to 56, trace cells on `|t| < 620` with the weight of `n = 4`
-added to the slack. The module list is that of the 11/8 port
-(`../20261031_window_l118/README.md`).
+`M = 4`, `L = 2`, `LT = 3/2`, `m = 33/20`, atoms centred at `−149, …, 149`, `NP = 900`, `ε = 1`,
+`κ = 60`, `T_τ = 14`, boxes near `5e-13` for `τ_k` with `k ≤ 150` and for the diagonal, near
+`5e-11` for `150 < k ≤ 900`, LDL scale `2^80` or more, trace cells on `|t| < 620` with the weight
+of `n = 4` added to the slack. The module list is that of the 11/8 port
+(`../20261031_window_l118/README.md`). Compared with 11/8: about twice the atoms, 3.6 times the
+rows, boxes about 20,000 times tighter, and a margin about 50 times smaller.
+
+## What changed
+
+The first version proposed `NP = 500` and `κ` near 53 to 56 from the float row model of `feas.py`
+(the model of `kappa.py` with the atom count as a parameter). The exact mirror refutes those
+values. The same gap between the float row model and the exact mirror is already visible at 11/8
+for `ε = 1/2` in `../20261031_window_l118/FEASIBILITY_118.log`. Use the exact mirror for row
+parameters. `feas.py` remains useful for the trace estimate and for the size of the low-block
+minimum eigenvalue (3.3e-7, 1.8e-9, 1.4e-11 at 11/8, 3/2, 8/5).
 
 ## Why this route does not exhaust the windows
 
 The slack cutoff is `t* = 2π · exp(m + W(LT))` with `W(LT) = ∑_{n < e^LT} 2Λ(n)/√n`, and the
 atom count is about `t* · LT / π`. For `LT = 2` (`n ≤ 7`, `W ≈ 5.85`) that is about 7,200 atoms.
 `W` grows like `4 e^{LT/2}`, so the atom count grows doubly exponentially in `LT`, while the
-low-block minimum eigenvalue falls (3.3e-7, 1.8e-9, 1.4e-11 at 11/8, 3/2, 8/5). A proved window
-moves the frontier of `rh_iff_windows_above_eleven_sixteenths`. No finite list of windows gives RH.
+low-block minimum eigenvalue falls. A proved window moves the frontier of
+`rh_iff_windows_above_eleven_sixteenths`. No finite list of windows gives RH.
 
 ## Reproduce
 
     python3 -m venv venv && ./venv/bin/pip install mpmath numpy
+    ./venv/bin/python make_gen_rr_k.py ../20261031_window_l118/gen_rr_lt.py > gen_rr_k.py
+    ./venv/bin/python gen_rr_k.py 3/2 900 1 60 5e-13 5e-11 4e-13 150 14 15
+    ./venv/bin/python rescale_pkl.py
+    ./venv/bin/python ../../feshbach_lean_v1/tools/cert43.py 80
     ./venv/bin/python feas.py 3/2 150 500 14 1.5,1.65
 
-Arguments: `LT K NP TF m1,m2,...`. Each run takes under a minute.
+`gen_rr_k.py` arguments: `LT NP EPS KAPPA RHO_LOW RHO_HIGH RHO_DIAG KK [TF] [SLACK_EXP]`. A run at
+`KK = 150` takes about a minute, `cert43.py` about a minute and a half.
