@@ -195,7 +195,9 @@ jobs:
             observed=subprocess.check_output(
               ['git', 'hash-object', str(p)], text=True).strip()
             expected=subprocess.check_output(
-              ['git', 'rev-parse', 'HEAD:'+p.as_posix()], text=True).strip()
+              ['git', 'rev-parse',
+               'HEAD:'+p.relative_to(pathlib.Path.cwd()).as_posix()],
+              text=True).strip()
             if observed != expected:
               raise SystemExit('PR606_LOCAL_REPAIR_EXACT_HEAD_MISMATCH:'+m)
             print('PR606_LOCAL_REPAIR_EXACT_HEAD_PASS', m, observed)
