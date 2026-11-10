@@ -13,6 +13,9 @@ Branch `fix/rh-live-evidence-provenance-20261024` (PR #92). RH status: OPEN.
   has no Lean compile error.
 - The approximation hypotheses are restatements of the sign claim (section 2). Files:
   `research/rh/checkpoints/20261110_hrepresentation_equivalence_v1/`.
+- `hresidual` fails on a near-kernel packet (analysis and float check, not kernel-checked):
+  `research/rh/checkpoints/20261110_hresidual_obstruction_v1/`.
+- The 28 RH equivalences sorted by open side: `RH_EQUIVALENCES_20261110.md` in this directory.
 
 ## 2. Frontier map
 
@@ -57,12 +60,12 @@ Kernel-checked (Mathlib only): `representation_iff_nonneg` and `cofinal_represen
 in the checkpoint directory of section 1. The instantiation to `projectedQ` is read from source and
 not compiled locally (section 3 says why).
 
-`hresidual` (`AEGISOverlay/RHPrimeFreeRecompositionJoinV1.lean`) is different: it binds the pieces
-to `g` (`g = packetSum 1 gs`) and implies RH. Whether it can hold is not assessed. One unverified
-count: with pieces of width 1/128, a piece inside a support longer than about 2.2 has roughly 197
-log-free neighbours, a fixed cost near 2.03 against the row budget 57430/65536 ≈ 0.876, so the
-remaining residuals of that row must sum below about −1.16. Check this against the definition of
-`WidthOneOneTwentyEightAt` and on one explicit `g` before any formal work.
+`hresidual` (`AEGISOverlay/RHPrimeFreeRecompositionJoinV1.lean`) binds the pieces to `g` and
+implies RH, but it cannot hold for every `g`. It charges every log-free pair of pieces the fixed
+positive allowance `676/65536`. From the hypothesis alone one gets a lower bound on `−Re B(g,g)`
+in terms of the mass of `g` on two intervals at log-free distance, and the near-kernel packet of
+the proved window `11/8` misses that bound by a factor of about 9,500 in the float model. Do not
+look for a producer. The derivation is not kernel-checked.
 
 ## 3. Local replay recipe
 
@@ -78,6 +81,7 @@ remaining residuals of that row must sum below about −1.16. Check this against
 - The CvS chain imports `Lc.*` and `Hadamard.*`. Those come from the `.li` checkout made inside
   `.github/workflows/aegis-pr606-fork-replay-v1.yml`. Without it the chain does not compile locally.
 - After the container has been idle, the first `import Mathlib` can take ten minutes.
+- Float models need `python3 -m venv venv && ./venv/bin/pip install mpmath numpy`.
 
 ## 4. Access
 
@@ -88,14 +92,19 @@ remaining residuals of that row must sum below about −1.16. Check this against
 
 ## 5. Next steps, in order
 
-1. Next window. Instantiate `window_of_certificate_gram_moment` with `M = 4` and a window `LT`
-   in `(11/8, Real.log 5)`. It needs a new trace certificate, atom set, far-row bound and row
-   budget, as in the `20261031_window_l118` checkpoint. Expect a much smaller margin than at 11/8;
-   check first whether the 64-bit scale `certQ` still suffices. A proved window moves the frontier
-   of `rh_iff_windows_above_eleven_sixteenths`; it is a theorem about one window, not RH.
-2. RH needs the window sign for every width. No finite list of windows gives it. Any claimed
-   uniform argument must be stated as a theorem over all `LT`, with no free sequence of vectors.
-3. Correct the docstrings of the three approximation hypotheses, or retire them.
-4. Compile the instantiation of the two equivalences to `projectedQ` where `.li` is available.
-5. Decide `hresidual`: definition check, then one explicit numerical test.
+1. Next window. Instantiate `window_of_certificate_gram_moment` with `M = 4` at `LT = 3/2`. The
+   float model in `research/rh/checkpoints/20261110_window_l32_feasibility_v1/` says it is
+   feasible with about 299 atoms, `NP = 500`, `m = 33/20`, and that the low-block minimum
+   eigenvalue is about 180 times smaller than at 11/8, so boxes and the fixed-point scale must
+   tighten. The port follows the module list of the `20261031_window_l118` checkpoint, with the
+   prime power 4 added to `τ`, the diagonal and the trace slack. A proved window moves the
+   frontier of `rh_iff_windows_above_eleven_sixteenths`; it is a theorem about one window, not RH.
+2. RH needs the window sign for every width. No finite list of windows gives it, and the atom
+   count grows doubly exponentially in the window. A uniform argument must be a theorem over all
+   `LT`, or about one fixed packet and all shifts (family 3 of `RH_EQUIVALENCES_20261110.md`),
+   with no free sequence of vectors.
+3. Correct the docstrings of the three approximation hypotheses and of `hresidual`, or retire them.
+4. Kernel-check steps 1 and 2 of the `hresidual` obstruction (finite sums, Mathlib only) and derive
+   its step 3 from the Lean definition of `B`.
+5. Compile the instantiation of the two equivalences to `projectedQ` where `.li` is available.
 6. Standing constraints of `HANDOFF.md` section 6 are unchanged. RH is never declared proved.
