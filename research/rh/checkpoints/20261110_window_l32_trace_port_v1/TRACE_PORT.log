@@ -1,0 +1,32 @@
+# provider: nicholasbulka/li-criterion-rh-equivalence-lean @ 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+# Hadamard/General/Factorization.lean blob 10d38a54580ff72d698a30be64fe1c3c44f862a2, the three workflow replacements applied
+# lean --trust=0 -DmaxSynthPendingDepth=3 -DautoImplicit=false, closure of the four workflow targets
+ALL_OK 28 wall 198
+
+# lab DAG from source: plan.py CvSTraceIntegralL118V1 CvSTauFarL118V1 ; build.py PROVIDER_LIB 3
+PLAN 131 modules
+REAL_BUILD PASS 131 / 131
+
+# L32 modules: lean --root=. -o lib/<M>.olean <M>.lean (default trust level)
+CvSExpL32V1 exit=0 secs=174 errors=0 sorry=0
+CvSTraceM4SlackV1 exit=0 secs=5 errors=0 sorry=0
+CvSTraceDistK150V1 exit=0 secs=6 errors=0 sorry=0
+CvSTraceCellL32V1 exit=0 secs=16 errors=0 sorry=0
+CvSTraceIntegralL32V1 exit=0 secs=6 errors=0 sorry=0
+# axioms printed by the modules: [propext, Classical.choice, Quot.sound] for
+# e34_bounds, ppw_three, scertM_four_ge, cf_sum_eq, young_cs, trialDist_le, cfC_continuous,
+# trialDist_continuous, mul_mem, trig_mem, A_cell, tau_le, closed_le, N0_le, N1_le, cell_sound,
+# volume_cellSet_le, sFun_measurable, integrable_mul, integral_mul_le, chain_cover, slack_ge,
+# premises_of_cells, gap_of_T
+
+# first attempt of CvSTraceM4SlackV1 failed (log of 2^2 after push_cast, missing opens for hplus,
+# ambiguous ppw_zero); fixed by hand. The three derived modules compiled without edits.
+
+# certificate, Lean evaluator (gen_cert32.py OUT.lean --eval): not the kernel
+CvSTraceCertEvalL32 exit=0 secs=42 errors=0 sorry=0
+constOk K0 = true ; chainOk 0 cells 621 = true ; logOk tail = true ; tail_ok = true
+cellOk on 73 of 73 chunks: true
+chunk totals x 1e5: sum 296053 -> T = 2.96053 ; segments 0.53717 0.31175 0.61100 1.50061
+
+# certificate, kernel (CvSTraceCertL32V1, 73 chunks by decide +kernel): started, not finished at
+# the time of this commit; resident size above 10 GB after 4 minutes on a 15 GB machine
