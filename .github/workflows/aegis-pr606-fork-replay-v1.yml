@@ -179,19 +179,26 @@ jobs:
           mkdir -p "$OUT"
 
           python3 - "$BASE" "$SRC" "$COMPAT" "$LOCAL" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
-          import pathlib, sys
+          import pathlib, subprocess, sys
           base=pathlib.Path(sys.argv[1])
           src=pathlib.Path(sys.argv[2])
           compat=pathlib.Path(sys.argv[3])
           local=pathlib.Path(sys.argv[4])
           out=pathlib.Path(sys.argv[5])
 
-          # Select the exact-head PR92 fixes only for these two modules.
+          # Select and cryptographically bind the two PR92 repaired modules.
           repaired={'WeilRHImpliesFinalSignV11', 'RHZeroKernelLaplaceAnalyticV12'}
           local_mods={m:local/(m+'.lean') for m in repaired}
           for m,p in local_mods.items():
             if not p.is_file():
               raise SystemExit('PR606_LOCAL_REPAIR_SOURCE_MISSING:'+m)
+            observed=subprocess.check_output(
+              ['git', 'hash-object', str(p)], text=True).strip()
+            expected=subprocess.check_output(
+              ['git', 'rev-parse', 'HEAD:'+p.as_posix()], text=True).strip()
+            if observed != expected:
+              raise SystemExit('PR606_LOCAL_REPAIR_EXACT_HEAD_MISMATCH:'+m)
+            print('PR606_LOCAL_REPAIR_EXACT_HEAD_PASS', m, observed)
           base_mods={p.stem:p for p in base.glob('*.lean')}
           src_mods={p.stem:p for p in src.glob('*.lean')}
           compat_mods={p.stem:p for p in compat.glob('*.lean')}
@@ -253,9 +260,9 @@ jobs:
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           BASE_LEAN_PATH="$GITHUB_WORKSPACE/.li/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
-          export LEAN_PATH="$OUT:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
-
           LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
+          export LEAN_PATH="$OUT:$LOCAL:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
+
           # The first dirty module invalidates every following module conservatively.
           # An .olean without a matching SHA-256 sidecar is never reused.
           rm -f "$OUT/olean-source-checkpoint-v1.json"
