@@ -16,8 +16,9 @@ Branch `fix/rh-live-evidence-provenance-20261024` (PR #92). RH status: OPEN.
 - `hresidual` fails on a near-kernel packet (analysis and float check; only the first, algebraic
   step is kernel-checked): `research/rh/checkpoints/20261110_hresidual_obstruction_v1/`.
 - The 28 RH equivalences sorted by open side: `RH_EQUIVALENCES_20261110.md` in this directory.
-- Row certificate of the window `3/2` passes in the lab's exact mirror (untrusted Python):
-  `research/rh/checkpoints/20261110_window_l32_feasibility_v1/`.
+- Window `3/2`: the row certificate passes in the lab's exact mirror and the trace certificate
+  closes in a float mirror of the cell bound that reproduces the 11/8 totals to four digits
+  (untrusted Python, no theorem): `research/rh/checkpoints/20261110_window_l32_feasibility_v1/`.
 
 ## 2. Frontier map
 
@@ -42,7 +43,9 @@ prime cutoff `M`, a window `LT` with `LT < Real.log (M + 1)`, a trace certificat
 budget `Brow` and the low-block inequality `hlow`, and concludes `0 ≤ Z g` for every moment-zero
 `g` with `2 * r ≤ LT`. There the finite certificate is bound to `g` through the window, and it
 covers the whole infinite-dimensional window space. `window_L118` is the instance `M = 3`,
-`LT = 11 / 8`, 139 atoms.
+`LT = 11 / 8`, 139 atoms, with a slack-only trace certificate of 2205 cells and no correction
+terms. The order-19 hat certificate of 2199 cells (`research/rh/krein_reflective_v1/`) is a
+different, earlier object: a pointwise certificate for half-width `2/5`.
 
 Three other hypotheses are offered as routes to the universal sign:
 
@@ -94,14 +97,15 @@ look for a producer. Only the algebraic first step (`weighted_row_sum`) is kerne
 
 ## 5. Next steps, in order
 
-1. Next window. Instantiate `window_of_certificate_gram_moment` with `M = 4` at `LT = 3/2`.
-   `research/rh/checkpoints/20261110_window_l32_feasibility_v1/` has the parameters: about 299
-   atoms, `NP = 900`, `κ = 60`, `ε = 1`, `m = 33/20`, `T_τ = 14`, boxes near `5e-13`, LDL scale
-   `2^80` or more. The row check passes in the lab's exact mirror with a margin near `1e-8`
-   (`5e-7` at 11/8). The trace side is only a float estimate, with about 5 percent of room at 299
-   atoms; settle it first, with the exact trace cells at `M = 4`, before porting the row modules.
-   The port follows the module list of the `20261031_window_l118` checkpoint, with the prime
-   power 4 added to `τ`, the diagonal and the trace slack. A proved window moves the frontier of
+1. Port the window `3/2`. Instantiate `window_of_certificate_gram_moment` with `M = 4`, `L = 2`,
+   `LT = 3/2`, `m = 33/20`, 299 atoms. Parameters and mirrors are in
+   `research/rh/checkpoints/20261110_window_l32_feasibility_v1/`: rows `NP = 900`, `κ = 60`,
+   `ε = 1` (or `NP = 700`, `κ = 66`), `T_τ = 14`, boxes near `5e-13`, LDL scale `2^80` or more,
+   row margin near `1e-8`; trace `T = 3` on 3123 cells, which allows `κ` up to about 69. Start
+   with the trace modules (`CvSTraceCell`, `CvSTraceIntegral`, `CvSTraceCert`): they are the
+   smallest port and the kernel totals can be compared with `trace_cells_k.py` cell by cell. Then
+   `τ`, the diagonal and the row certificate, with the prime power 4 added. The module list is
+   that of the `20261031_window_l118` checkpoint. A proved window moves the frontier of
    `rh_iff_windows_above_eleven_sixteenths`; it is a theorem about one window, not RH.
 2. RH needs the window sign for every width. No finite list of windows gives it, and the atom
    count grows doubly exponentially in the window. A uniform argument must be a theorem over all
@@ -111,5 +115,6 @@ look for a producer. Only the algebraic first step (`weighted_row_sum`) is kerne
 4. Kernel-check step 2 of the `hresidual` obstruction (finite sums, Mathlib only) and derive its
    step 3 from the Lean definition of `B`.
 5. Compile the instantiation of the two equivalences to `projectedQ` where `.li` is available.
-6. Use the exact mirror, not the float row model, when choosing row parameters.
+6. Use the exact mirror, not the float row model, when choosing row parameters. For `cert43.py`,
+   a pass is `eta < eps`, not a finished process (`CERT43_NOTES.md`).
 7. Standing constraints of `HANDOFF.md` section 6 are unchanged. RH is never declared proved.
