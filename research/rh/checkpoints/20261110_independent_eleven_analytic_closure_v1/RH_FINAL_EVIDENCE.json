@@ -1,0 +1,218 @@
+{
+  "schema": "aegis.rh.atomic-pr92-composition.v1",
+  "rh_proven": false,
+  "final_theorem": null,
+  "exact_head": "023e7239e9af3df93fe2456a3be5e7a655a2f8e3",
+  "pr97_head": "34325ef91faad247ba84cc10e8d87931e2783147",
+  "lean_version": "4.33.1",
+  "compiler": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "verified_scoped_endpoint": "AEGIS.RHIndependentElevenCompositionV1.actual_independent_eleven_coercive",
+  "verified_scoped_endpoint_full_type": "AEGIS.RHIndependentElevenCompositionV1.actual_independent_eleven_coercive : ∀ (gs : Fin 11 → WeilCompactSmoothGV1)\n  (a : ℝ),\n  (∀ (i : Fin 11), AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt (gs i) a) →\n    (∀ (i : Fin 11), WeilMomentConditionsV1 (gs i)) →\n      ∀ (z : Fin 11 → ℂ),\n        LE.le.{0}\n          (WeilExplicitRightSideV1\n              (WeilAutocorrelationV1\n                (AEGIS.RHGramExpansionV13.packetSum z (AEGIS.RHActualElevenLatticeV1.independentElevenAtoms gs)))).re\n          (HMul.hMul.{0, 0, 0} (Neg.neg.{0} (1203957 / 1136000))\n            (∑ i,\n              HMul.hMul.{0, 0, 0} (AEGIS.WeilDisjointEnergyV2.energy ↑(gs i))\n                (HPow.hPow.{0, 0, 0} (Norm.norm.{0} (z i)) 2)))",
+  "catalog_sorry_is_permitted_by_handoff_for_external_proof_submission": true,
+  "native_RH_scan_scope": "all constants in the compiled/imported Lean environment",
+  "native_RH_declarations_inspected": 806481,
+  "native_RH_candidates": [
+    {
+      "type_expr": "RiemannHypothesis",
+      "type_defeq_riemann_hypothesis": true,
+      "module": "FormalConjectures.Millennium.RiemannHypothesis",
+      "is_axiom": false,
+      "identifier": "RiemannHypothesis.riemannHypothesis",
+      "has_body": true,
+      "axioms": [
+        "propext",
+        "sorryAx",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "native_artifact": {
+    "run": 42499406146,
+    "artifact_id": 13624844131,
+    "sha256": "8c0c554ef9be49af0b065a0efa09410560ecc9da222db618635e37bd4d83632c",
+    "size_bytes": 242647186
+  },
+  "independent_replays": [
+    {
+      "name": "fresh_target_compile",
+      "command": [
+        "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+        "--trust=0",
+        "--threads=2",
+        "--memory=12288",
+        "-o",
+        "/workspace/aegis-pr92-replay-20261110/root_independent_replay/RHIndependentElevenCompositionV1.olean",
+        "/workspace/aegis-pr92-replay-20261110/root_independent_replay/RHIndependentElevenCompositionV1.lean"
+      ],
+      "status": "completed",
+      "exit_code": 0,
+      "seconds": 5.032,
+      "source_sha256": "097c6100a828786151204533d79bc462a7f1551747ce687ed2a10b371bdb6ece",
+      "log_sha256": "23bc2bd94a1164202e158256d78a1401c9475027c4614227341bab1a287a9ae8",
+      "replay_kind": "separate_process_same_runtime_not_independent_machine"
+    },
+    {
+      "name": "fresh_environment_kernel_replay",
+      "command": [
+        "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/leanchecker",
+        "--fresh",
+        "--verbose",
+        "RHIndependentElevenCompositionV1"
+      ],
+      "status": "timeout",
+      "exit_code": null,
+      "seconds": 360.261,
+      "source_sha256": "097c6100a828786151204533d79bc462a7f1551747ce687ed2a10b371bdb6ece",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "replay_kind": "separate_process_same_runtime_not_independent_machine"
+    },
+    {
+      "name": "target_kernel_replay_from_verified_imports",
+      "command": [
+        "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/leanchecker",
+        "--verbose",
+        "RHIndependentElevenCompositionV1"
+      ],
+      "status": "completed",
+      "exit_code": 0,
+      "seconds": 5.177,
+      "log_sha256": "7d697a98eed1ed9cb9b34dd53ebdde4471736f0491c392e001832592dc9fd424",
+      "scope": "F declarations replayed against source-bound kernel-checked imports; fullfreshallimports attempt timed out and is not counted as pass"
+    }
+  ],
+  "open_obligations": [
+    {
+      "statement": "Unconditional positivity on the full actual moment-zero test class (or another unconditional producer reaching exactly RiemannHypothesis).",
+      "route_scope": "The new checked eleven-window theorem does not supply an arbitrary-packet reconstruction/global signed budget. Alternative unimported sources remain outside this audit.",
+      "status": "NOT_DISCHARGED_BY_THIS_EXECUTION",
+      "exact_existing_identifier": "AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10",
+      "exact_existing_definition": "∀ g : WeilCompactSmoothGV1, WeilMomentConditionsV1 g → 0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2, WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re",
+      "interpretation": "Existing global target, not a new theorem or a claim that no producer exists in unsearched sources."
+    }
+  ],
+  "certificate_hashes": [],
+  "new_numeric_certificate_used": false,
+  "source_closure_count": 186,
+  "fresh_count": 24,
+  "source_bound_reuse_count": 162,
+  "scoped_endpoint_axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "axioms": [],
+  "axiom_scope_note": "No final RH term exists in this execution. The separately listed three standard axioms belong to the checked scoped endpoint.",
+  "warning_strict_replay": {
+    "schema": "aegis.rh.warning-strict-targeted-replay.v1",
+    "trust": 0,
+    "warningAsError": true,
+    "scope": "six port and type-audit modules, previously verified imports; no whole-environment fresh replay",
+    "rh_proven": false,
+    "rows": [
+      {
+        "module": "RHIndependentFinePrimeSupportV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentFinePrimeSupportV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentFinePrimeSupportV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 2.872,
+        "source_sha256": "5fc244ac5e61b16865cf6654abc85428dcef9db4159d2ca718bf1b8c9a2e3907",
+        "log_sha256": "9ca66eb1858872be4ad3e21e3552b323385f3aa7d23cfebe5a0b480a63e1db2a"
+      },
+      {
+        "module": "RHIndependentFinePrimeWindowV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentFinePrimeWindowV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentFinePrimeWindowV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 2.272,
+        "source_sha256": "4d304cdeec0a6efca784d212e5f6f3480baa0db5ad2891496d4c5d95acc30895",
+        "log_sha256": "5ba372e2006c12d25ef89e29cb1fd5d961bffbaf851acaafe544bdbc86c127b5"
+      },
+      {
+        "module": "RHIndependentFinePrimeNormV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentFinePrimeNormV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentFinePrimeNormV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 4.527,
+        "source_sha256": "7fe6052cc034ee2dec7d79fc1c1c7b799779f737d6127f7cea8e34960d1846fc",
+        "log_sha256": "1f8a04423157fe79eb0e4779c7d6adb49338499fbc36158ec045a050d438aa35"
+      },
+      {
+        "module": "RHIndependentFineGapNineTenV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentFineGapNineTenV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentFineGapNineTenV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 4.831,
+        "source_sha256": "08fdff51d8918619f96156631c4a881dd5172570ec7d5262290d3cab73fc7ce2",
+        "log_sha256": "8bb7fe8776f9f20278ca3d7e2c3366c70ec079916e0b2cf4e1179a0b22edf2a5"
+      },
+      {
+        "module": "RHIndependentElevenCompositionV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentElevenCompositionV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentElevenCompositionV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 4.732,
+        "source_sha256": "097c6100a828786151204533d79bc462a7f1551747ce687ed2a10b371bdb6ece",
+        "log_sha256": "23bc2bd94a1164202e158256d78a1401c9475027c4614227341bab1a287a9ae8"
+      },
+      {
+        "module": "RHIndependentElevenTypeAuditV1",
+        "command": [
+          "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+          "--trust=0",
+          "--threads=2",
+          "--memory=12288",
+          "-DwarningAsError=true",
+          "-o",
+          "/workspace/aegis-pr92-replay-20261110/warning_strict_replay/RHIndependentElevenTypeAuditV1.olean",
+          "/workspace/aegis-pr92-replay-20261110/new_sources/RHIndependentElevenTypeAuditV1.lean"
+        ],
+        "exit_code": 0,
+        "seconds": 3.829,
+        "source_sha256": "6d6acca2351106814c823664cc8c2f792266fc1e33967673488c6e4b92607101",
+        "log_sha256": "54c9f626d270f2a26875f037472d4febbfb153ce2a249519b5b3fcdecaaee5bb"
+      }
+    ]
+  }
+}
