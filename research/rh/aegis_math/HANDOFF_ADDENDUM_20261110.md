@@ -13,9 +13,11 @@ Branch `fix/rh-live-evidence-provenance-20261024` (PR #92). RH status: OPEN.
   has no Lean compile error.
 - The approximation hypotheses are restatements of the sign claim (section 2). Files:
   `research/rh/checkpoints/20261110_hrepresentation_equivalence_v1/`.
-- `hresidual` fails on a near-kernel packet (analysis and float check, not kernel-checked):
-  `research/rh/checkpoints/20261110_hresidual_obstruction_v1/`.
+- `hresidual` fails on a near-kernel packet (analysis and float check; only the first, algebraic
+  step is kernel-checked): `research/rh/checkpoints/20261110_hresidual_obstruction_v1/`.
 - The 28 RH equivalences sorted by open side: `RH_EQUIVALENCES_20261110.md` in this directory.
+- Row certificate of the window `3/2` passes in the lab's exact mirror (untrusted Python):
+  `research/rh/checkpoints/20261110_window_l32_feasibility_v1/`.
 
 ## 2. Frontier map
 
@@ -65,7 +67,7 @@ implies RH, but it cannot hold for every `g`. It charges every log-free pair of 
 positive allowance `676/65536`. From the hypothesis alone one gets a lower bound on `−Re B(g,g)`
 in terms of the mass of `g` on two intervals at log-free distance, and the near-kernel packet of
 the proved window `11/8` misses that bound by a factor of about 9,500 in the float model. Do not
-look for a producer. The derivation is not kernel-checked.
+look for a producer. Only the algebraic first step (`weighted_row_sum`) is kernel-checked.
 
 ## 3. Local replay recipe
 
@@ -92,19 +94,22 @@ look for a producer. The derivation is not kernel-checked.
 
 ## 5. Next steps, in order
 
-1. Next window. Instantiate `window_of_certificate_gram_moment` with `M = 4` at `LT = 3/2`. The
-   float model in `research/rh/checkpoints/20261110_window_l32_feasibility_v1/` says it is
-   feasible with about 299 atoms, `NP = 500`, `m = 33/20`, and that the low-block minimum
-   eigenvalue is about 180 times smaller than at 11/8, so boxes and the fixed-point scale must
-   tighten. The port follows the module list of the `20261031_window_l118` checkpoint, with the
-   prime power 4 added to `τ`, the diagonal and the trace slack. A proved window moves the
-   frontier of `rh_iff_windows_above_eleven_sixteenths`; it is a theorem about one window, not RH.
+1. Next window. Instantiate `window_of_certificate_gram_moment` with `M = 4` at `LT = 3/2`.
+   `research/rh/checkpoints/20261110_window_l32_feasibility_v1/` has the parameters: about 299
+   atoms, `NP = 900`, `κ = 60`, `ε = 1`, `m = 33/20`, `T_τ = 14`, boxes near `5e-13`, LDL scale
+   `2^80` or more. The row check passes in the lab's exact mirror with a margin near `1e-8`
+   (`5e-7` at 11/8). The trace side is only a float estimate, with about 5 percent of room at 299
+   atoms; settle it first, with the exact trace cells at `M = 4`, before porting the row modules.
+   The port follows the module list of the `20261031_window_l118` checkpoint, with the prime
+   power 4 added to `τ`, the diagonal and the trace slack. A proved window moves the frontier of
+   `rh_iff_windows_above_eleven_sixteenths`; it is a theorem about one window, not RH.
 2. RH needs the window sign for every width. No finite list of windows gives it, and the atom
    count grows doubly exponentially in the window. A uniform argument must be a theorem over all
    `LT`, or about one fixed packet and all shifts (family 3 of `RH_EQUIVALENCES_20261110.md`),
    with no free sequence of vectors.
 3. Correct the docstrings of the three approximation hypotheses and of `hresidual`, or retire them.
-4. Kernel-check steps 1 and 2 of the `hresidual` obstruction (finite sums, Mathlib only) and derive
-   its step 3 from the Lean definition of `B`.
+4. Kernel-check step 2 of the `hresidual` obstruction (finite sums, Mathlib only) and derive its
+   step 3 from the Lean definition of `B`.
 5. Compile the instantiation of the two equivalences to `projectedQ` where `.li` is available.
-6. Standing constraints of `HANDOFF.md` section 6 are unchanged. RH is never declared proved.
+6. Use the exact mirror, not the float row model, when choosing row parameters.
+7. Standing constraints of `HANDOFF.md` section 6 are unchanged. RH is never declared proved.
