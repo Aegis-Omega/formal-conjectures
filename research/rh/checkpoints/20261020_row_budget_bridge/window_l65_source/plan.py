@@ -222,6 +222,38 @@ if 'RHWindowL118ActualFineGramJoinV1' in sys.argv[1:]:
         raise SystemExit('CORRECTION_SYMBOL_ADAPTER_BLOB_MISMATCH ' + actual_adapter)
     for mod in ('RHKreinExplicitCorrectionV1', 'AEGISOverlay.RHKreinCorrectionSymbolV1'):
         src[mod] = (adapter, False, None, 'existing-cofinal-correction-alias')
+# 8. Terminal PR606 replay must not silently select older Compat/Source
+# providers for the two corrected terminal modules. Window/legacy replay
+# retains its historical provider order. This changes source selection only
+# for explicit terminal roots; it does not assert the RH theorem.
+TERMINAL_ROOTS = {
+    'RHZeroKernelLaplaceAnalyticV12',
+    'WeilRHImpliesFinalSignV11',
+    'RHRestrictedWeilCriterionV13',
+    'RHFinalClosureSpineV1',
+    'RHMillenniumGateV10',
+}
+TERMINAL_HEAD_SOURCES = {
+    'RHZeroKernelLaplaceAnalyticV12':
+        Path('AegisRH/PR606/RHZeroKernelLaplaceAnalyticV12.lean'),
+    'WeilRHImpliesFinalSignV11':
+        Path('AegisRH/PR606/WeilRHImpliesFinalSignV11.lean'),
+}
+if TERMINAL_ROOTS.intersection(sys.argv[1:]):
+    for module, path in TERMINAL_HEAD_SOURCES.items():
+        if module not in src or not path.is_file():
+            raise SystemExit('MISSING_TERMINAL_SOURCE ' + module)
+        observed = subprocess.check_output(
+            ['git', 'hash-object', str(path)], text=True).strip()
+        expected = subprocess.check_output(
+            ['git', 'rev-parse', 'HEAD:' + path.as_posix()],
+            text=True).strip()
+        if observed != expected:
+            raise SystemExit('TERMINAL_SOURCE_NOT_EXACT_HEAD ' + module)
+        # Only actual checked-out, byte-identical native source is admitted.
+        src[module] = (path, False, None, 'pr606-terminal-exact-head')
+        print('TERMINAL_SOURCE_REBOUND', module, observed)
+
 ext = ('Mathlib', 'Lean', 'Std', 'Batteries', 'Aesop', 'Qq', 'Init', 'Plausible', 'ProofWidgets', 'ImportGraph', 'LeanSearchClient')
 prov = ('Lc', 'Hadamard', 'FunctionsOfOneComplexVariable')
 def imports(p):
