@@ -82,6 +82,25 @@ jobs:
           # Both PR606 stages must select the same source-locked two-point theorem.
           test "$(git hash-object AegisRH/PR606/Compat/WeilZeroTwoPointV11.lean)" = "416eb252794a2b0b550c796330a08a946aeabed4"
           grep -F 'if n == "WeilZeroTwoPointV11":' scripts/rh_pr63_proved_window_prebuild.sh
+          # Source-bound regression: the fork must not recover pre-repair
+          # Laplace, final-sign, translation or target-witness code.
+          # Check the staged bytes AND immutable exact-head Git tree blobs.
+          for entry in \
+            'AegisRH/PR606/RHZeroKernelLaplaceAnalyticV12.lean:8afab69e4b59a1520f73b2ad1c4c349251a4b254' \
+            'AegisRH/PR606/WeilRHImpliesFinalSignV11.lean:9f32e58018dfb4573417ca0f0919e91456b13b5d' \
+            'AegisRH/PR606/Compat/WeilTranslatedKernelBoundV11.lean:bb1ad7d5e8749c1641078369eeadd0ba6a2af465' \
+            'AegisRH/PR606/Compat/RestrictedWeilCriterionTargetWitnessV11.lean:c17f771e2622d7917413ff35bbe2afe82f9b4e97'; do
+            file="${entry%%:*}"
+            expected_blob="${entry##*:}"
+            test -s "$file"
+            observed_blob="$(git hash-object "$file")"
+            tree_blob="$(git rev-parse "HEAD:$file")"
+            if [[ "$observed_blob" != "$expected_blob" || "$tree_blob" != "$expected_blob" ]]; then
+              echo "::error::RH_PR606_SOURCE_IDENTITY_MISMATCH:$file" >&2
+              exit 1
+            fi
+            echo "RH_PR606_SOURCE_BOUND_PASS:$file:$expected_blob"
+          done
           python3 - <<'PY'
           import json, os
           m=json.load(open('AegisRH/PR606/PORT_MANIFEST.json'))
