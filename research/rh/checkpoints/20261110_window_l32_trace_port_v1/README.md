@@ -1,8 +1,9 @@
 # Trace modules of the window 3/2: port (2026-11-10)
 
-Evidence kind: `lean_kernel` for the five modules listed under "Compiled"; `numerical` (Lean
-evaluator, not the kernel) for the certificate cells. The kernel run of the certificate is not
-finished and not claimed. No theorem about the window `3/2` exists yet. RH status: OPEN.
+Evidence kind: `lean_kernel` for the six modules listed under "Compiled", including the trace
+certificate. This is the trace half of the input of the window theorem. The row certificate, `τ`
+and the diagonal at `M = 4` are not ported, so no theorem about the window `3/2` exists yet.
+RH status: OPEN.
 
 ## What this is
 
@@ -26,7 +27,8 @@ The trace side of `window_of_certificate_gram_moment` at `LT = 3/2`, `M = 4`, 29
   - `CvSTraceCellL32V1.lean` from `CvSTraceCellL118V1.lean`,
   - `CvSTraceIntegralL32V1.lean` from `CvSTraceIntegralL118V1.lean`.
 - `make_gen_cert32.py`: derives `gen_cert32.py` from `../20261031_window_l118/gen_cert118.py`
-  (3123 cells on `|t| < 621`, 73 chunks, `Tq = 3`, `κ = 66`).
+  (3123 cells on `|t| < 621`, 73 chunks, `Tq = 3`, `κ = 66`). `gen_cert32.py` with
+  `cert32_totals.json` writes `CvSTraceCertL32V1.lean`.
 - `cert32_totals.json`: the chunk totals printed by the `--eval` file (times `10^5`, rounded up).
 - `DERIVED_SHA256.txt`: inputs (git blobs at 21fb824) and SHA-256 of every derived file.
 - `TRACE_PORT.log`: what was run and what came back.
@@ -46,28 +48,40 @@ Against the lab DAG built from source locally (`plan.py CvSTraceIntegralL118V1 C
 | `CvSTraceDistK150V1` | exit 0, no `sorry` |
 | `CvSTraceCellL32V1` | exit 0, no `sorry` |
 | `CvSTraceIntegralL32V1` | exit 0, no `sorry` |
+| `CvSTraceCertL32V1` | exit 0, no `sorry`, 2494 s, 73 chunks by `decide +kernel` |
 
 `#print axioms` of `e34_bounds`, `ppw_three`, `scertM_four_ge`, `trialDist_le`, `cell_sound`,
-`premises_of_cells` and `gap_of_T`: `[propext, Classical.choice, Quot.sound]`. The three derived
-modules compiled without any manual edit. These runs used the default trust level; a `--trust=0`
-run with the strict flags of the lab planner is still to be done.
+`premises_of_cells`, `gap_of_T`, `all_ok`, `total_le` and `trace_premises_L32`:
+`[propext, Classical.choice, Quot.sound]`. The derived modules compiled without any manual edit.
 
-Statements obtained:
+Limits of this run: default trust level and plain `lean`, as the lab planner does for most
+modules; no `--trust=0` run, no `leanchecker` replay and no second machine yet. The certificate
+needed more than 10 GB of memory.
+
+## Statements obtained
 
 - `cell_sound`: for `|t|` in a checked cell, `trialDist 0 (3/2) V (cfC h32) t ≤ c.TD k` and
   `m − ScertM 4 t ≤ c.s`, for every trace family `V : Fin 301 → ℝ → ℂ`.
 - `gap_of_T`: `66 ≤ (2π)² · (3/2) · (33/20 − T/(2π))` for `T ≤ 3`.
+- `trace_premises_L32`: for every trace family `V` of the 299 atoms and the two exponentials,
+  with `cells` the 3123 checked cells and `Tq = 3`:
+
+      Measurable (sFun cells) ∧ (∀ t, |sFun cells t| ≤ sMax cells) ∧ (∀ t, 0 ≤ sFun cells t) ∧
+      (∀ t, 0 ≤ Wt t * (ScertM 4 t − 33/20) + Wt t * sFun cells t) ∧
+      Integrable (fun t => sFun cells t * trialDist 0 (3/2) V (cfC h32) t) ∧
+      (∫ t, sFun cells t * trialDist 0 (3/2) V (cfC h32) t) ≤ Tq ∧
+      66 ≤ (2π)² · (3/2) · (33/20 − Tq/(2π))
+
+  These are the premises `hsm`, `hsB`, `hs0`, `hcert` (no `H`, no `d`), `hR`, `hT` and `hk` of
+  `window_of_certificate_gram_moment` at `M = 4`, `LT = 3/2`, `m = 33/20`.
 
 ## Certificate cells
 
-`gen_cert32.py OUT.lean --eval`, compiled: `constOk K0`, `chainOk 0 cells 621`, the two tail
-checks and `cellOk` on all 73 chunks evaluate to `true`. The chunk totals sum to `296053 / 10^5`,
-so `T = 2.96053 ≤ 3`. By segment: `0.53717 0.31175 0.61100 1.50061`; the Python mirror
-`trace_cells_k.py` gave `0.5371 0.3117 0.6109 1.5004`.
-
-This is the Lean evaluator, not the kernel. `CvSTraceCertL32V1.lean` (73 theorems by
-`decide +kernel`, then `trace_premises_L32`) was still compiling when this was written, with a
-resident size above 10 GB on a 15 GB machine.
+Evaluator first (`gen_cert32.py OUT.lean --eval`): every check `true`, chunk totals summing to
+`296053 / 10^5`, so `T = 2.96053 ≤ 3`. By segment: `0.53717 0.31175 0.61100 1.50061`; the Python
+mirror `trace_cells_k.py` had given `0.5371 0.3117 0.6109 1.5004`. Then the kernel: the 73 chunk
+theorems `c{i}_ok : ch{i}.all (cellOk m0) = true ∧ total K0 ch{i} ≤ tot_i / 100000`, `K0_ok`,
+`chain_ok`, `tail_log` and `tail_ok`, all by `decide +kernel`.
 
 ## Reproduce
 
@@ -78,13 +92,14 @@ resident size above 10 GB on a 15 GB machine.
     python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/build.py PROVIDER_LIB 3
     python3 port_trace_l32.py REPO OUT
     python3 make_gen_cert32.py ../20261031_window_l118/gen_cert118.py > gen_cert32.py
-    # compile, in this order, with LEAN_PATH = OUT/lib : .lake/ringout : PROVIDER_LIB : toolchain : packages
-    #   CvSExpL32V1, CvSTraceM4SlackV1, CvSTraceDistK150V1, CvSTraceCellL32V1, CvSTraceIntegralL32V1
     python3 gen_cert32.py OUT/CvSTraceCertL32V1.lean cert32_totals.json
+    # compile, in this order, with LEAN_PATH = OUT/lib : .lake/ringout : PROVIDER_LIB : toolchain : packages
+    #   CvSExpL32V1, CvSTraceM4SlackV1, CvSTraceDistK150V1, CvSTraceCellL32V1,
+    #   CvSTraceIntegralL32V1, CvSTraceCertL32V1
 
 ## Next
 
-1. Finish the kernel run of `CvSTraceCertL32V1`; if memory is the limit, compile it with one
-   thread or split the chunk theorems over several modules.
-2. Rerun the five modules at `--trust=0` with the planner flags.
-3. Port `τ`, the diagonal and the row certificate (`NP = 900, κ = 60` or `NP = 700, κ = 66`).
+1. Independent replay of the six modules (`--trust=0`, `leanchecker`, a second machine or CI).
+2. Port `τ` for `k ≤ NP` at `M = 4`, the far bound `|τ| ≤ 14`, the diagonal and the row
+   certificate (`NP = 900, κ = 60` or `NP = 700, κ = 66`; both are below `κ = 66` of `hk`).
+3. Then `window_L32` from `window_of_certificate_gram_moment 4 2 (3/2) (33/20)`.

@@ -28,5 +28,12 @@ constOk K0 = true ; chainOk 0 cells 621 = true ; logOk tail = true ; tail_ok = t
 cellOk on 73 of 73 chunks: true
 chunk totals x 1e5: sum 296053 -> T = 2.96053 ; segments 0.53717 0.31175 0.61100 1.50061
 
-# certificate, kernel (CvSTraceCertL32V1, 73 chunks by decide +kernel): started, not finished at
-# the time of this commit; resident size above 10 GB after 4 minutes on a 15 GB machine
+# certificate, kernel (gen_cert32.py CvSTraceCertL32V1.lean cert32_totals.json; 21785 bytes,
+# 78 uses of decide +kernel: K0_ok, chain_ok, tail_log, tail_ok, 73 chunk theorems)
+73 chunks 3123 cells
+CvSTraceCertL32V1 exit=0 secs=2494 errors=0 sorry=0
+'AEGIS.CvSTraceCertL32V1.all_ok' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSTraceCertL32V1.total_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSTraceCertL32V1.trace_premises_L32' depends on axioms: [propext, Classical.choice, Quot.sound]
+# resident size above 10 GB during the run on a 15 GB machine; default trust level;
+# no leanchecker replay of this module yet
