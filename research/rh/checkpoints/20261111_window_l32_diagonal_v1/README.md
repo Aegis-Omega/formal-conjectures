@@ -1,9 +1,9 @@
 # Window 3/2 port — the diagonal `cvsEntry M (3/2) n n`, `n = 0, …, 150`
 
-Date: 2026-11-11. Status: **sources final; full kernel run in progress** (see Receipt). Not run in
-CI. **RH remains OPEN**; `window_L32` is not proved.
+Date: 2026-11-11. Status: **kernel-checked locally**, default trust and `--trust=0` (see Receipt).
+Not run in CI. **RH remains OPEN**; `window_L32` is not proved.
 
-## Target statement
+## Result
 
 ```lean
 theorem AEGIS.CvSDiagL32V1.diag_mem {M : ℕ} (hM : 4 ≤ M) {n : ℕ} (hn : n ≤ 150) :
@@ -13,9 +13,9 @@ theorem AEGIS.CvSDiagL32V1.cvsEntry_diag_neg {M : ℕ} (hM : 4 ≤ M) (n : ℤ) 
     cvsEntry M (3 / 2) (-n) (-n) = cvsEntry M (3 / 2) n n
 ```
 
-Every box has width at most `5.82·10⁻¹²` (radius `2.91·10⁻¹²`). The row-side feasibility study
-(`../20261110_window_l32_feasibility_v1/ROW_BOXES_20261111.md`) assumed diagonal radius `4·10⁻¹¹`,
-so the boxes are about 14 times tighter than required.
+Every box has width at most `5.82·10⁻¹²` (radius `2.91·10⁻¹²`). The row check
+(`../20261110_window_l32_feasibility_v1/ROW_BOXES_20261111.md`) passes with diagonal radius
+`4·10⁻¹¹`, so these boxes are about 14 times tighter than required.
 
 ## What is new compared with the `11/8` diagonal
 
@@ -35,7 +35,7 @@ so the boxes are about 14 times tighter than required.
 | File | Origin |
 |---|---|
 | `port_hplus.py` | derives `CvSHplusK300V1.lean` from lab `CvSDiagL12V1.lean` (`40 → 300`, `159/2 → 1199/2`), proofs unchanged |
-| `port_tau_l32.py` | derives `CvSTauL32V1.lean` from lab `CvSTauL118V1.lean` (`11/8 → 3/2`), using `CvSExpL32V1.e34_bounds`; gives `E_bounds` here and `tauCheck_sound` at `3/2` for the τ boxes |
+| `port_tau_l32.py` | derives `CvSTauL32V1.lean` from lab `CvSTauL118V1.lean` (`11/8 → 3/2`), using `CvSExpL32V1.e34_bounds` |
 | `CvSNodeL32V1.lean` | hand-written: `node_zero/one/two/three`, `node_big` at `L = 3/2` |
 | `make_gen_diag32.py` | derives the untrusted exact-rational mirror `gen_diag32.py` from lab `tools/gen_diag118.py`; the mirror emits E tables and boxes and cross-checks five entries against mpmath (40 digits) |
 | `port_diag_l32.py` | builds `CvSDiagL32V1.lean` from lab `CvSDiagL118V1.lean` + the hand-written third-term block (`cf4_bounds`, `cos4_eq_sin`, `P4_bounds`, `cvsEntry_diag_eq`) + the mirror's data |
@@ -70,23 +70,31 @@ lean CvSHplusK300V1.lean; lean CvSTauL32V1.lean; lean CvSNodeL32V1.lean; lean Cv
 
 | Module | default trust | `--trust=0` |
 |---|---|---|
-| `CvSHplusK300V1` | exit 0, 0 errors, 0 sorry | exit 0, 0 errors, 0 sorry |
-| `CvSTauL32V1` | exit 0, 0 errors, 0 sorry | pending |
-| `CvSNodeL32V1` | exit 0, 0 errors, 0 sorry | pending |
-| `CvSDiagL32V1` | all proofs + kernel check on a 3-entry probe (`n = 0, 1, 2`): exit 0, 0 errors, 0 sorry; **full 151-entry run in progress** (about 35 s per entry) | in progress |
+| `CvSHplusK300V1` | exit 0, 0 errors, 0 sorry (526 s, cold cache) | exit 0, 0 errors, 0 sorry (24 s) |
+| `CvSTauL32V1` | exit 0, 0 errors, 0 sorry | exit 0, 0 errors, 0 sorry (20 s) |
+| `CvSNodeL32V1` | exit 0, 0 errors, 0 sorry | exit 0, 0 errors, 0 sorry (7 s) |
+| `CvSDiagL32V1` (all 151 entries) | exit 0, 0 errors, 0 sorry (2162 s, peak 6.3 GB) | exit 0, 0 errors, 0 sorry (2497 s) |
 
-Axioms reported for `hplus_bounds`, `head_bounds`, `tauCheck_sound`, `node_three`, `node_big`, and
-(on the probe) `D_bounds`, `cvsEntry_diag_eq`, `Pd_bounds`, `P4_bounds`, `diagCheck_sound`,
-`diag_mem`, `cvsEntry_diag_neg`: `[propext, Classical.choice, Quot.sound]`.
+```
+'AEGIS.CvSDiagL32V1.D_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.cvsEntry_diag_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.Pd_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.P4_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.diagCheck_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.diagAll_true' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.diag_mem' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.CvSDiagL32V1.cvsEntry_diag_neg' depends on axioms: [propext, Classical.choice, Quot.sound]
+```
 
-Untrusted mirror: worst box width `5.819·10⁻¹²`; mpmath cross-check passes at `n = 0, 1, 2, 75, 150`
-(`cvsEntry n n = −4.62511361397364, 0.165529675783164, 0.185495209746613, 5.8724721768757,
-6.94715138516559`).
+`hplus_bounds`, `head_bounds`, `tauCheck_sound`, `node_three`, `node_big`: same three axioms.
+The `--trust=0` replay covers these four modules; the lab modules they import were compiled at
+default trust. Untrusted mirror: worst box width `5.819·10⁻¹²`; mpmath cross-check passes at
+`n = 0, 1, 2, 75, 150`.
 
-Until the full run is recorded here, the evidence kind of `diag_mem` for `n ≤ 150` is
-`certified_numerical` (exact-rational mirror), not `lean_kernel`.
+Evidence kind of `diag_mem`: `lean_kernel` (local build).
 
 ## Remaining for `window_L32`
 
-τ boxes at `M = 4` for `k ≤ NP` (radius `≈ 5·10⁻¹¹` for `k ≤ 150`, `≈ 5·10⁻¹⁰` above), the
-299×299 row certificate, the window theorem and the exhaustion step.
+The `τ_k` boxes are in `../20261111_window_l32_tau_v1/`. Still open: the 299×299 row certificate
+(`NP = 900`, `ε = 1`, `κ = 60`, LDL scale `2^80` or more), the window theorem and the exhaustion
+step.
