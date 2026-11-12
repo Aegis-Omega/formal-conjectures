@@ -1,0 +1,7 @@
+FastKronV1 research/rh/feshbach_lean_v1/FastKronV1.lean
+CvSRelRowHarmV1 research/rh/feshbach_lean_v1/CvSRelRowHarmV1.lean
+CvSRelRowAlgebraV1 research/rh/feshbach_lean_v1/CvSRelRowAlgebraV1.lean
+CvSSchurClosureFromBoundsV1 research/rh/feshbach_lean_v1/CvSSchurClosureFromBoundsV1.lean
+CvSGramTailV1 research/rh/feshbach_lean_v1/CvSGramTailV1.lean
+RHFixIntervalV1 research/rh/critical_line_v1/RHFixIntervalV1.lean
+CvSPackedGramV1 research/rh/feshbach_lean_v1/CvSPackedGramV1.lean
