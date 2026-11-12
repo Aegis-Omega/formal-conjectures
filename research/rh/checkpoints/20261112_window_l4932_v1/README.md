@@ -1,7 +1,7 @@
 # The window 2r ≤ 49/32 and the exhaustion step with frontier 49/64
 
-Date: 2026-11-12. Status: **kernel-checked locally**, default trust. The `--trust=0` replay of the 70
-modules is running (receipt below to be completed). Not run in CI.
+Date: 2026-11-12. Status: **kernel-checked locally**, default trust and `--trust=0` (70 modules
+each). Not run in CI.
 **RH remains OPEN.** The windows `L > 49/64` are not proved.
 
 ## Result
@@ -102,26 +102,27 @@ Lab closure as in `../20261112_window_l32_v1/` (1019 modules). Lab and 3/2 modul
 
 ## Receipt (local, 2026-11-12; Lean 4.33.1, Mathlib `0df444a`)
 
-Default trust, 70 / 70 modules exit 0, 0 errors, 0 `sorry`:
+Default trust and `--trust=0` (`build_order.txt` order): 70 / 70 modules exit 0 in each run, 0 errors,
+0 `sorry`; 20003 s and 20213 s in total.
 
-| module | default (s) |
-|---|---:|
-| `CvSTraceCertL4932V1` | 2674 |
-| `CvSTraceCellL4932V1`, `DistK156`, `Integral`, `CvSExpL4932V1` | 18, 6, 6, 6 |
-| `CvSTauL4932K{1,…,1951}V1` (40) | 6528 in total, at most 273 each |
-| `CvSTauL4932AllV1`, `CvSTauL4932V1`, `CvSTauFastL4932V1`, `CvSNodeL4932V1` | 19, 11, 11, 6 |
-| `CvSDiagL4932V1` | 2244 |
-| `CvSRelRowCertL4932V1` | 617 |
-| `CvSRelRowDataA0L4932V1`, `A1`, `A` | 331, 2095, 1934 |
-| `CvSRelRowDataL4932V1` | 729 |
-| `CvSRelRowCheckL4932V1` (16 chunks, about 133 s each) | 2329 |
-| `CvSRelRowBoxL4932V1` | 253 |
-| `Psd`, `Q`, `Tail`, `In`, `Err`, `Out`, `Kt`, `Form`, `HB`, `Inv` | 29, 21, 20, 16, 15, 13, 9, 7, 7, 6 |
-| `CvSTauFarL4932V1` | 13 |
-| `CvSWindowL4932V1`, `RHWindowL4932ExhaustionV1` | 23, 7 |
+| module | default (s) | `--trust=0` (s) |
+|---|---:|---:|
+| `CvSTraceCertL4932V1` | 2674 | 3043 |
+| `CvSTraceCellL4932V1`, `DistK156`, `Integral`, `CvSExpL4932V1` | 18, 6, 6, 6 | 19, 7, 7, 5 |
+| `CvSTauL4932K{1,…,1951}V1` (40) | 6528 in total, at most 273 each | 6296 in total, at most 275 each |
+| `CvSTauL4932AllV1`, `CvSTauL4932V1`, `CvSTauFastL4932V1`, `CvSNodeL4932V1` | 19, 11, 11, 6 | 18, 11, 13, 8 |
+| `CvSDiagL4932V1` | 2244 | 2389 |
+| `CvSRelRowCertL4932V1` | 617 | 596 |
+| `CvSRelRowDataA0L4932V1`, `A1`, `A` | 331, 2095, 1934 | 334, 1998, 1981 |
+| `CvSRelRowDataL4932V1` | 729 | 672 |
+| `CvSRelRowCheckL4932V1` (16 chunks, about 133 s each) | 2329 | 2298 |
+| `CvSRelRowBoxL4932V1` | 253 | 251 |
+| `Psd`, `Q`, `Tail`, `In`, `Err`, `Out`, `Kt`, `Form`, `HB`, `Inv` | 29, 21, 20, 16, 15, 13, 9, 7, 7, 6 | 65, 22, 17, 17, 13, 12, 9, 9, 7, 6 |
+| `CvSTauFarL4932V1` | 13 | 9 |
+| `CvSWindowL4932V1`, `RHWindowL4932ExhaustionV1` | 23, 7 | 75, 6 |
 
-Peak memory about 12.7 GB (`CvSRelRowCheckL4932V1`). All 152 `#print axioms` reports list a subset
-of `[propext, Classical.choice, Quot.sound]`:
+Peak memory about 12.7 GB (`CvSRelRowCheckL4932V1`). In both runs all 152 `#print axioms` reports
+list a subset of `[propext, Classical.choice, Quot.sound]`:
 
 ```
 'AEGIS.CvSWindowL4932V1.augment_family' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -130,8 +131,6 @@ of `[propext, Classical.choice, Quot.sound]`:
 'AEGIS.RHWindowL4932ExhaustionV1.final_sign_iff_windows_above_forty_nine_sixty_fourths' depends on axioms: [propext, Classical.choice, Quot.sound]
 'AEGIS.RHWindowL4932ExhaustionV1.rh_iff_windows_above_forty_nine_sixty_fourths' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
-
-`--trust=0`: running (`build_order.txt` order); to be recorded here.
 
 Evidence kind: `lean_kernel` (local).
 
