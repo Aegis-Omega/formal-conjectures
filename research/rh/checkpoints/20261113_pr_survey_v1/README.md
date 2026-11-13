@@ -92,8 +92,10 @@ singularity was cut at `η = 2⁻⁶⁴` and every entry carried a radius of abo
 | 48 | 46 | `4.8·10⁻⁷⁷` | 1600, 416 | yes |
 | 64 | 62 | `6.5·10⁻⁹⁸` | 2400, 560 | yes |
 
-(tolerance bits `2η` in the higher runs; `N = 64` took 6577 s. The `R = 2π` part of the CI run, `N = 8` to `32`,
-is being rerun the same way.)
+(tolerance bits `2η` in the higher runs; `N = 64` took 6577 s.) The `R = 2π` part of the CI run (prime powers
+`m < e^{4π}`; there the CI decided only `N = 8`), rerun at 1600 bits and `η = 2⁻⁴¹⁶` (997 s): unshifted `K_N > 0`
+for `N = 8, 16, 24, 32`, with `λ_min = 1.7·10⁻¹⁷, 6.7·10⁻³⁷, 4.4·10⁻⁵⁵, 2.1·10⁻⁷²`, about `2.3` decades per basis
+function.
 
 `eig_fw.py` gives the smallest generalised eigenvalue of the midpoints; `unshifted` is the receipt's own Arb verdict.
 The minimum falls between `1.7` (near `N = 10`) and `1.3` (near `N = 56`) decades per basis function, with no
