@@ -1,0 +1,3 @@
+'AEGIS.RHSparseReconstructionObstructionV1.no_reconstruction_of_two_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.RHSparseReconstructionObstructionV1.twoFine_two_points' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.RHSparseReconstructionObstructionV1.not_all_sparse_reconstructions' depends on axioms: [propext, Classical.choice, Quot.sound]
