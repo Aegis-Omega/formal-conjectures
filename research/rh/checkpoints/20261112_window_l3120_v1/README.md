@@ -1,7 +1,7 @@
 # The window 2r ≤ 31/20 and the exhaustion step with frontier 31/40
 
-Date: 2026-11-12. Status: **kernel-checked locally**, default trust (70 modules). The `--trust=0` replay
-is running (receipt below to be completed). Not run in CI.
+Date: 2026-11-12. Status: **kernel-checked locally**, default trust and `--trust=0` (70 modules
+each). Not run in CI.
 **RH remains OPEN.** The windows `L > 31/40` are not proved.
 
 ## Result
@@ -108,29 +108,31 @@ sha256: `rr43_data.pkl` before rescaling
 As `../20261112_window_l4932_v1/` (same lab and 3/2 modules), then `lean` on the modules of
 `build_order.txt` in that order.
 
-## Receipt (local, 2026-11-12; Lean 4.33.1, Mathlib `0df444a`)
+## Receipt (local, 2026-11-12/13; Lean 4.33.1, Mathlib `0df444a`)
 
-Default trust (`build_order.txt` order, after the three fixes above): 70 / 70 modules exit 0, 0 errors,
-0 `sorry`; 20840 s in total.
+Default trust (`build_order.txt` order, after the three fixes above) and `--trust=0` (same order): 70 / 70
+modules exit 0 in each run, 0 errors, 0 `sorry`; 20840 s and 19225 s in total.
 
-| module | default (s) |
-|---|---:|
-| `CvSTraceCertL3120V1` | 2772 |
-| `CvSTraceCellL3120V1`, `DistK156`, `Integral`, `CvSExpL3120V1` | 23, 8, 8, 7 |
-| `CvSTauL3120K{1,…,1951}V1` (40) | 6777 in total, at most 313 each (`K1`) |
-| `CvSTauL3120AllV1`, `CvSTauL3120V1`, `CvSTauFastL3120V1`, `CvSNodeL3120V1` | 17, 11, 13, 8 |
-| `CvSDiagL3120V1` | 2924 |
-| `CvSRelRowCertL3120V1` | 602 |
-| `CvSRelRowDataA0L3120V1`, `A1`, `A` | 311, 1980, 1941 |
-| `CvSRelRowDataL3120V1` | 657 |
-| `CvSRelRowCheckL3120V1` (16 chunks) | 2357 |
-| `CvSRelRowBoxL3120V1` | 227 |
-| `Psd`, `Q`, `Tail`, `In`, `Err`, `Out`, `Kt`, `Form`, `HB`, `Inv` | 38, 21, 16, 17, 14, 12, 8, 7, 6, 5 |
-| `CvSTauFarL3120V1` | 8 |
-| `CvSWindowL3120V1`, `RHWindowL3120ExhaustionV1` | 39, 6 |
+| module | default (s) | `--trust=0` (s) |
+|---|---:|---:|
+| `CvSTraceCertL3120V1` | 2772 | 2517 |
+| `CvSTraceCellL3120V1`, `DistK156`, `Integral`, `CvSExpL3120V1` | 23, 8, 8, 7 | 18, 7, 6, 6 |
+| `CvSTauL3120K{1,…,1951}V1` (40) | 6777 in total, at most 313 each (`K1`) | 6664 in total, at most 687 each (`K1751`) |
+| `CvSTauL3120AllV1`, `CvSTauL3120V1`, `CvSTauFastL3120V1`, `CvSNodeL3120V1` | 17, 11, 13, 8 | 18, 10, 11, 6 |
+| `CvSDiagL3120V1` | 2924 | 2634 |
+| `CvSRelRowCertL3120V1` | 602 | 558 |
+| `CvSRelRowDataA0L3120V1`, `A1`, `A` | 311, 1980, 1941 | 278, 1861, 1807 |
+| `CvSRelRowDataL3120V1` | 657 | 607 |
+| `CvSRelRowCheckL3120V1` (16 chunks) | 2357 | 1876 |
+| `CvSRelRowBoxL3120V1` | 227 | 198 |
+| `Psd`, `Q`, `Tail`, `In`, `Err`, `Out`, `Kt`, `Form`, `HB`, `Inv` | 38, 21, 16, 17, 14, 12, 8, 7, 6, 5 | 14, 14, 14, 15, 12, 12, 8, 6, 6, 5 |
+| `CvSTauFarL3120V1` | 8 | 7 |
+| `CvSWindowL3120V1`, `RHWindowL3120ExhaustionV1` | 39, 6 | 23, 7 |
 
-Peak memory about 14.7 GB (`CvSRelRowCheckL3120V1`). All 152 `#print axioms` reports list a subset
-of `[propext, Classical.choice, Quot.sound]`:
+The `--trust=0` run was interrupted by a machine restart and resumed (modules already written were kept);
+the times are per module as logged. Peak memory about 14.7 GB at default trust and about 13.5 GB at
+`--trust=0` (`CvSRelRowCheckL3120V1`, sampled every 5 s). In both runs all 152 `#print axioms` reports list a
+subset of `[propext, Classical.choice, Quot.sound]`:
 
 ```
 'AEGIS.CvSWindowL3120V1.augment_family' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -139,8 +141,6 @@ of `[propext, Classical.choice, Quot.sound]`:
 'AEGIS.RHWindowL3120ExhaustionV1.final_sign_iff_windows_above_thirty_one_fortieths' depends on axioms: [propext, Classical.choice, Quot.sound]
 'AEGIS.RHWindowL3120ExhaustionV1.rh_iff_windows_above_thirty_one_fortieths' depends on axioms: [propext, Classical.choice, Quot.sound]
 ```
-
-`--trust=0`: running (`build_order.txt` order); to be recorded here.
 
 Evidence kind: `lean_kernel` (local).
 
