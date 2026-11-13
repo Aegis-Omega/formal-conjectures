@@ -1,0 +1,130 @@
+{
+  "schema": "aegis.rh.immutable-source-truth-graph.v1",
+  "status": "SOURCE_PROVENANCE_RECONCILIATION_ONLY",
+  "exact_head": "054bed1834e0e8ed68aed6d123b68ce1f10d78d7",
+  "inputs": {
+    "graph_zip_sha256": "d3321f4a5e02b19afda518814cc2d24a37f4e84d0c429377b57a0acf6fcf405e",
+    "cofinal_zip_sha256": "a50f72aca8683c86e8715bd69f0d7bac5d1a89da485c17a1c00c82adc0f25a3e",
+    "tracked_research_RH_paths": 259,
+    "archive_recovered_exact_blobs": 238,
+    "cofinal_compiled_sources": 329
+  },
+  "unique_Lean_module_aliases": 780,
+  "source_occurrences": 826,
+  "same_module_multiple_surfaces": 46,
+  "same_module_same_source_blob": 42,
+  "same_module_divergent_source_blobs": 4,
+  "divergent_module_details": {
+    "RHFixIntervalV1": [
+      {
+        "surface": "tracked_research_rh_exact_head",
+        "path": "research/rh/checkpoints/20261020_row_budget_bridge/RHFixIntervalV1.lean",
+        "blob_sha": "85f166fd937055d63241d3f6832f9de890147c9d",
+        "bytes_verified": false
+      },
+      {
+        "surface": "tracked_research_rh_exact_head",
+        "path": "research/rh/critical_line_v1/RHFixIntervalV1.lean",
+        "blob_sha": "0ee94b9be264c170986500bc95598eb5a7e365f6",
+        "bytes_verified": false
+      }
+    ],
+    "RHDyadicDiagonalV13": [
+      {
+        "surface": "tracked_research_rh_exact_head",
+        "path": "research/rh/consolidated_v1/src/RHDyadicDiagonalV13.lean",
+        "blob_sha": "129e11894765ab9ae464a8794aa82aa854e5ba4e",
+        "bytes_verified": false
+      },
+      {
+        "surface": "cofinal_compiled_source",
+        "path": ".aegis/sovereign-omega-v2/formal/bridges/lean/RHDyadicDiagonalV13.lean",
+        "blob_sha": "d80ebc02cd36ddc02d25c19c6bd9c2cb46d7aa11",
+        "bytes_verified": true
+      }
+    ],
+    "RHEulerGammaV13": [
+      {
+        "surface": "tracked_research_rh_exact_head",
+        "path": "research/rh/consolidated_v1/src/RHEulerGammaV13.lean",
+        "blob_sha": "615c1fb34696391d730da5b92f76159157d81434",
+        "bytes_verified": false
+      },
+      {
+        "surface": "cofinal_compiled_source",
+        "path": ".aegis/sovereign-omega-v2/formal/bridges/lean/RHEulerGammaV13.lean",
+        "blob_sha": "7dc54d2ddad7a1edbda4ec8968fdeebbc35fef63",
+        "bytes_verified": true
+      }
+    ],
+    "RHKreinPairingV13": [
+      {
+        "surface": "tracked_research_rh_exact_head",
+        "path": "research/rh/consolidated_v1/src/RHKreinPairingV13.lean",
+        "blob_sha": "726da41281a8a49df2367b301742aa90fdb52626",
+        "bytes_verified": false
+      },
+      {
+        "surface": "cofinal_compiled_source",
+        "path": ".aegis/sovereign-omega-v2/formal/bridges/lean/RHKreinPairingV13.lean",
+        "blob_sha": "1943fc9ed3d2c4e4dd946ae84a2bf2ca51cccd11",
+        "bytes_verified": true
+      }
+    ]
+  },
+  "archive_vs_current_conflicts": [],
+  "audit_unbound_imports": 32,
+  "audit_unbound_but_resolved_from_merged_sources": [
+    "AEGISOverlay.AEGIS_RH_Unconditional",
+    "AEGISOverlay.RHActualElevenLatticeV1",
+    "AEGISOverlay.RHActualLocalGramCoercivityV1",
+    "AEGISOverlay.RHActualMixedDefectV1",
+    "AEGISOverlay.RHActualUniversalFineGramV1",
+    "AEGISOverlay.RHArchRow29V1",
+    "AEGISOverlay.RHBaguaRotatingTwoPairMellinV1",
+    "AEGISOverlay.RHCrossRepositoryFiveSpineV1",
+    "AEGISOverlay.RHFiniteActualGramJoinV1",
+    "AEGISOverlay.RHFourLogThreeActualPrimeV1",
+    "AEGISOverlay.RHGlobalizationChainV13",
+    "AEGISOverlay.RHHexagram64MellinWeilFusionV1",
+    "AEGISOverlay.RHKreinFiniteIntervalKernelV1",
+    "AEGISOverlay.RHKreinMultiplicativeTransportV1",
+    "AEGISOverlay.RHLogThreeSignedPrimeProducerV1",
+    "AEGISOverlay.RHMellinDetectorCenteredV1",
+    "AEGISOverlay.RHNarrowDetectingTrigramDenseV1",
+    "AEGISOverlay.RHOptimizedSchurGlobalJoinV1",
+    "AEGISOverlay.RHScaleRowCompositionV1",
+    "AEGISOverlay.RHTimeSliceWeilV1",
+    "RHCofinalActualTerminalV1",
+    "RHCofinalSchurAdapterV1",
+    "RHExistingProofFusionV1",
+    "RHFourBlockConcreteV3",
+    "RHNineFacesV13",
+    "WeilWindowExhaustionV1"
+  ],
+  "audit_unbound_remaining_after_merging": [
+    "Lean.Meta.Basic",
+    "Lean.Util.CollectAxioms",
+    "Lean.Util.FoldConsts",
+    "Mathlib",
+    "Mathlib.Analysis.SpecialFunctions.Pow.Real",
+    "RHHardyNormalizationV1"
+  ],
+  "canonical_RH_target_imported_environment": {
+    "scope": "all currently imported kernel constants plus the full 107-root dependency DAG",
+    "reachable_declaration_count": 72684,
+    "imported_environment_declaration_count": 806414,
+    "imported_environment_rh_type_candidates": 1,
+    "closed_canonical_rh_from_imported_environment": [],
+    "closed_canonical_rh_from_root_dependencies": [],
+    "closed_canonical_rh_declarations": [],
+    "closed_canonical_rh_selected_roots": [],
+    "not_scanned": "unimported source files, other refs, repos, archives",
+    "negative_result_is_global_nonexistence_claim": false
+  },
+  "source_identity_integrity_failures": [],
+  "has_finished_RH_proof": null,
+  "admission_basis": "Only Lean kernel exact-typed axiom-audited closed term establishes RH; this report cannot infer it.",
+  "multi_version_policy": "HOLD source selection on divergent blobs until provider/compilation provenance and import namespace are checked.",
+  "limits": "Research/RH tracked tree only, archival recovered 238 sources and cofinal 329 sources. Does not span other repos, refs outside the graph, or undiscovered archives."
+}
