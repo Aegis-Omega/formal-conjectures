@@ -1,0 +1,34 @@
+# gen_rr_k5.py (../20261112_window_l85_v1/gen_rr_k5.py, sha256 305a1651d922…): LT NP eps kappa rho_low rho_high rho_diag KK T_tau slack
+## 13/8 4000 7/5 36 5e-13 5e-10 3e-13 360 19 13
+LT 13/8 NP 4000 eps 7/5 kappa 36: scaled lambda_min -4.97424e-9  lambda_max 5.42054  (1038s)  (FEASIBILITY_85.log of the 8/5 checkpoint)
+## 13/8 4000 7/5 63 5e-13 5e-10 3e-13 360 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.372e-12 epsIn 1.00e-13 epsOut 3.40e-12 epsT 6.44e-23 K' 8.9946e-11  max|tau|>70 18.00
+LT 13/8 NP 4000 eps 7/5 kappa 63: scaled lambda_min -1.53323e-10  lambda_max 6.11722  (966s)
+## 13/8 4000 7/5 63 5e-14 5e-10 3e-14 360 19 13
+-- rho 5.33e-14 rhoH 5.00e-10 rhoD 3.20e-14 RE 1.454e-13 epsIn 1.00e-13 epsOut 3.39e-12 epsT 7.24e-25 K' 1.2656e-11  max|tau|>70 18.00
+LT 13/8 NP 4000 eps 7/5 kappa 63: scaled lambda_min -1.23941e-10  lambda_max 6.11722  (1271s)
+## 13/8 4000 7/5 69 5e-13 5e-10 3e-13 360 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.372e-12 epsIn 1.00e-13 epsOut 3.40e-12 epsT 6.44e-23 K' 9.8179e-11  max|tau|>70 18.00
+LT 13/8 NP 4000 eps 7/5 kappa 69: scaled lambda_min -1.51139e-10  lambda_max 6.7302  (1285s)
+## 13/8 8000 7/5 63 5e-13 5e-10 3e-13 360 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.372e-12 epsIn 1.00e-13 epsOut 3.69e-12 epsT 3.07e-23 K' 9.0233e-11  max|tau|>70 18.00
+LT 13/8 NP 8000 eps 7/5 kappa 63: scaled lambda_min -4.05122e-12  lambda_max 6.12313  (1290s)
+## 13/8 8000 7/5 69 5e-13 5e-10 3e-13 360 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.372e-12 epsIn 1.00e-13 epsOut 3.69e-12 epsT 3.07e-23 K' 9.8466e-11  max|tau|>70 18.00
+LT 13/8 NP 8000 eps 7/5 kappa 69: scaled lambda_min -1.98741e-12  lambda_max 6.73614  (1005s)
+## 13/8 8000 7/5 63 5e-14 5e-10 3e-14 360 19 13
+-- rho 5.33e-14 rhoH 5.00e-10 rhoD 3.20e-14 RE 1.454e-13 epsIn 1.00e-13 epsOut 3.68e-12 epsT 3.45e-25 K' 1.2943e-11  max|tau|>70 18.00
+LT 13/8 NP 8000 eps 7/5 kappa 63: scaled lambda_min 2.53297e-11  lambda_max 6.12313  (999s)
+## 9/5 4000 7/5 70 5e-13 5e-10 3e-13 320 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.466e-12 epsIn 1.00e-13 epsOut 3.71e-12 epsT 6.95e-23 K' 1.0642e-10  max|tau|>70 17.84
+LT 9/5 NP 4000 eps 7/5 kappa 70: scaled lambda_min -8.66979e-10  lambda_max 4.76372  (689s)
+## 9/5 4000 7/5 70 5e-13 5e-10 3e-13 400 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.507e-12 epsIn 1.00e-13 epsOut 4.63e-12 epsT 8.88e-23 K' 1.1020e-10  max|tau|>70 17.84
+LT 9/5 NP 4000 eps 7/5 kappa 70: scaled lambda_min -8.71693e-10  lambda_max 4.7645  (1636s)
+## 9/5 8000 7/5 70 5e-13 5e-10 3e-13 320 19 13
+-- rho 5.03e-13 rhoH 5.00e-10 rhoD 3.02e-13 RE 1.466e-12 epsIn 1.00e-13 epsOut 4.02e-12 epsT 3.33e-23 K' 1.0673e-10  max|tau|>70 17.93
+LT 9/5 NP 8000 eps 7/5 kappa 70: scaled lambda_min -2.17359e-10  lambda_max 4.76372  (708s)
+# exact LDL on the 13/8 NP 8000 tight pickle (rr43_data.pkl sha256 ebfe8fdf42703393331875fec188d4884745230220be1baeeb91a5999b61ba6a):
+# rescale_pkl.py (../20261110_window_l32_feasibility_v1/): exponents -12 8 shift 8; cert43.py (feshbach_lean_v1/tools/):
+-- q 92  eps 62713203237708276  eta 17188844928736694  ok True  B bits 47  base 2^115  (1312.3s)
+-- q 96  eps 1003411251803332423  eta 66232060574401701  ok True  B bits 49  base 2^119  (1260.4s)
