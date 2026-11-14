@@ -33,7 +33,9 @@ The exhaustion theorems (`RHWindowL…ExhaustionV1`) build on the 1019-module la
 `../20261020_row_budget_bridge/window_l65_source/plan.py` selects (as `rh-cvs-window-l65-source.yml`
 runs it) and `build.py` compiles; the local plan of the windows `3/2` to `39/25` (sha256
 `793b899f…`) passed 1019 / 1019. `check_plan_sources.py` compares every compiled source with every
-same-name `.lean` file in the tree (`PLAN_SOURCES_00d9b406.txt`):
+same-name `.lean` file in the tree (`PLAN_SOURCES_00d9b406.txt`; a qualified module name `A.B.M` is
+looked up as `M.lean` since 2026-11-14 — this plan has no qualified names and the report is
+unchanged byte for byte):
 
 * 873 modules are extracted from the committed `ACTUAL_INPUT_SOURCES.zip` and `FULL_TABLE_SOURCES.zip`
   (manifest hash checks in `plan.py`); 70 come from the Krein ring closure list, each checked by blob

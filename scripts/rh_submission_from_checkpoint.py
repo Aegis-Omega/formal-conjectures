@@ -187,7 +187,8 @@ def main() -> int:
             "probe_log_sha256": sha256(out / "RHOfficialExactTypeProbe.log"),
         })
         template = (root / "research/rh/assembly/upstream-formal-proof.patch.in").read_text()
-        patch = template.replace("FINAL_VERIFIED_SHA", head).replace(
+        # the link names the repository of the verified commit (GITHUB_REPOSITORY), not a fixed one
+        patch = template.replace("FINAL_REPOSITORY", active_repo).replace("FINAL_VERIFIED_SHA", head).replace(
             "FINAL_PROOF_PATH", source_path).replace("FINAL_DECLARATION_LINE", str(line))
         if ("FINAL_" in patch
                 or "category research solved" not in patch

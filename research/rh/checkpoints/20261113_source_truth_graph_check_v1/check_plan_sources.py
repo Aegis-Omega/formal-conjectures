@@ -1,6 +1,6 @@
 """For every module of a lab build plan (`.lake/real_plan.json`, written by
 ../20261020_row_budget_bridge/window_l65_source/plan.py), compare the compiled source with every
-same-name `.lean` file in the git tree at REV: identical bytes, a difference only in the licence
+same-name `.lean` file in the git tree at REV (for a qualified module name `A.B.M`, the files `M.lean`): identical bytes, a difference only in the licence
 header and `import` lines, or a different body. Run from the repository root after plan.py.
 usage: python3 check_plan_sources.py .lake/real_plan.json REV"""
 import collections
@@ -29,7 +29,7 @@ print('plan modules', len(plan), 'by origin', dict(sorted(origins.items())))
 kinds, hard = collections.Counter(), collections.OrderedDict()
 for m, v in sorted(plan.items()):
     mine = open(v['path'], 'rb').read()
-    for c in by.get(m, []):
+    for c in by.get(m.rsplit('.', 1)[-1], []):   # a qualified name (`A.B.M`) is the file `M.lean`
         other = subprocess.run(['git', 'cat-file', '-p', tree[c]], capture_output=True, check=True).stdout
         k = 'identical' if other == mine else 'header/import only' if body(other) == body(mine) else 'body differs'
         kinds[k] += 1

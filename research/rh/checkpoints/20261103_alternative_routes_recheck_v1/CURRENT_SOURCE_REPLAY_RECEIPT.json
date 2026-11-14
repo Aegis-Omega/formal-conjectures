@@ -1,0 +1,33 @@
+{
+  "schema": "AEGIS_CURRENT_SOURCE_REPLAY_V1",
+  "date": "2026-11-14",
+  "lean_file": "LiQuartetArithmetic.lean",
+  "bytes": 1845,
+  "sha256": "9ed484f731e811079a874d26c12aa665c2e4b26a6de39e81e20f87762a7f71fc",
+  "historical_receipt": "INTEGER_REPLAY_RECEIPT.json",
+  "historical_source_bytes": 1266,
+  "historical_source_sha256": "36b16b6227d9fd9d4c486e6bf827a49e045bbed4c4590694afe8881b6836ae35",
+  "relation": "The committed file is the Apache licence header (579 bytes, a comment) followed by exactly the historical bytes: removing the header gives the historical sha256. INTEGER_REPLAY_RECEIPT.json and MANIFEST.json are kept as the historical record of those bytes; this receipt binds the committed file.",
+  "lean_version": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "lean_trust": 0,
+  "warning_as_error": true,
+  "commands": [
+    "lean --trust=0 -DwarningAsError=true -o LiQuartetArithmetic.olean LiQuartetArithmetic.lean",
+    "LEAN_PATH=\"$PWD\" leanchecker --fresh -v LiQuartetArithmetic"
+  ],
+  "lean_exit_code": 0,
+  "leanchecker_fresh": "PASS",
+  "leanchecker_exit_code": 0,
+  "axioms": {
+    "AEGIS.LiQuartetArithmetic.gaussian_sixth_exact": [],
+    "AEGIS.LiQuartetArithmetic.denominator_exact_and_positive": [],
+    "AEGIS.LiQuartetArithmetic.sixth_numerator_exact_and_negative": []
+  },
+  "logs": {
+    "current_source_replay/LEAN_TRUST0.log": "47e9081e05bb6c1c3610f52ad1e9af70b3c503dccd07bd38abedd3c0c6d2ad78",
+    "current_source_replay/LEANCHECKER_FRESH.log": "03fab09985d75fa095a9ff9e148b3f7ce5475481efcb20a38922d8125a434ee1"
+  },
+  "scope": "three integer arithmetic endpoints only; no analytic or RH theorem",
+  "rh_proven": false
+}
