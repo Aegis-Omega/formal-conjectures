@@ -1,0 +1,29 @@
+{
+  "schema": "AEGIS_PUBLISHED_HANDOFF_DOWNLOADS_V1",
+  "repository": "Aegis-Omega/formal-conjectures",
+  "target_branch": "fix/rh-live-evidence-provenance-20261024",
+  "target_prefix": "research/rh/checkpoints/20261102_corpus_fusion_producers_v1",
+  "files": [
+    {
+      "path": "AEGIS_CONTINUATION_SOURCES.zip",
+      "bytes": 548609,
+      "sha256": "686efcd5f674b561b01454799f55a30b80f86a456490756b0d00e79cd7df372f",
+      "manifest": "MANIFEST.json",
+      "file_count": 268
+    },
+    {
+      "path": "CORPUS_INDEX.json.gz",
+      "bytes": 6096220,
+      "sha256": "2923efefd904b39d13d5058580ed7eb7c360f87aae850e146aa4e464a9717945",
+      "scope": "lossless source index only; not semantic proof review"
+    },
+    {
+      "path": "AEGIS_FOLLOWUP_SOURCES.zip",
+      "bytes": 31189,
+      "sha256": "553424ae75c34af90c26c1e5a754d92138a2208f4c026b8686d2e488282fdfe1",
+      "manifest": "MANIFEST.json"
+    }
+  ],
+  "rh_proven": false,
+  "public_urls": "Use the containing Git commit SHA with these relative paths; publication receipt supplies verified immutable links."
+}

@@ -1,0 +1,12 @@
+{
+  "archive": "AEGIS_OBSTRUCTION_TRANSPORT_GENESIS_20261101.zip",
+  "bytes": 171705,
+  "sha256": "3f5b6c6dbadab61ad207aa4f1a08ae670b4acdd4ea809d1f6f5b09fe01230287",
+  "prior_receipt_sha256": "f0ec0ab57e2a046c11af059e6412b5d27f2026d591516a9448e39316749821ba",
+  "local_source_checkout": "309ca3fa117fa499761f58f64ac371ccd1ff2f63",
+  "remote_parent_at_preparation": "fe117ae12374199b9102ea0c58e0689bab585a75",
+  "hosted_exact_head_replay": "NOT_RUN",
+  "canonical_RH_closed": false,
+  "source_archive_scope": "Preserved local code, source bindings, exact-rational experiment, seven accepted Krein transport roots, logs, bounded join attempts and resumable automation.",
+  "recent_tail_receipt_sha256": "9505ea69140543d3cbb12abfbc746d900441ab466e83abf8d49b90cee96db340"
+}

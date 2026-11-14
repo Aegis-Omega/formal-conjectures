@@ -21,6 +21,13 @@ on:
       - research/rh/checkpoints/20261020_row_budget_bridge/run_ci_actual_moment_window_join.py
       - research/rh/checkpoints/20261020_row_budget_bridge/audit_source_rows.py
       - research/rh/checkpoints/20261020_row_budget_bridge/reuse_source_checkpoint.py
+  pull_request:
+    branches:
+      - proof/rh-cvs-checked-low-bridge-v1
+    paths:
+      - .github/workflows/rh-cvs-actual-row-replay.yml
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/actual_input_license_gate.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution/run_ci_actual_inputs.py
   workflow_dispatch:
 
 concurrency:
@@ -42,11 +49,14 @@ jobs:
   source-cross-row:
     if: ${{ !contains(github.event.head_commit.message, '[recover-actual-graph]') }}
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    # A rejected or expired checkpoint falls back to compiling the full table
+    # and the actual inputs from source, which takes about three hours.
+    timeout-minutes: 330
     steps:
       - name: Checkout exact head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -203,11 +213,15 @@ jobs:
           set -euo pipefail
           export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
           ACTUAL="research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution"
-          if test -f "$ACTUAL/run_ci_actual_inputs.py"; then
-            python3 "$ACTUAL/reuse_complete_table_checkpoint.py" "$GITHUB_WORKSPACE/.lake/ringout"
+          FULL="research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution"
+          if test -f "$ACTUAL/run_ci_actual_inputs.py" &&
+             python3 "$ACTUAL/reuse_complete_table_checkpoint.py" "$GITHUB_WORKSPACE/.lake/ringout" \
+               2>&1 | tee complete-table-reuse.log; then
             lean -DwarningAsError=true COMPLETE_TABLE_CHECKPOINT_REAUDIT.lean 2>&1 | tee full-table-reaudit.log
           else
-            python3 research/rh/checkpoints/20261020_row_budget_bridge/full_table_execution/run_ci_full_table.py
+            # The checkpoint only covers a head with no other changes; compile from source.
+            echo "COMPLETE_TABLE_FRESH_SOURCE_COMPILATION"
+            python3 "$FULL/run_ci_full_table.py"
           fi
 
       - name: Replay actual source input identities and relative-budget producer
@@ -220,10 +234,17 @@ jobs:
           set -euo pipefail
           ACTUAL="research/rh/checkpoints/20261020_row_budget_bridge/actual_input_execution"
           export LEAN_PATH="$GITHUB_WORKSPACE/.lake/ringout:$(lake env printenv LEAN_PATH)"
-          python3 "$ACTUAL/reuse_actual_input_prefix.py" 39569164255 f118d06204bc50fe719810794af5bac4dfd14889 "$GITHUB_WORKSPACE/.lake/ringout"
-          lean -DwarningAsError=true ACTUAL_INPUT_PREFIX_REAUDIT.lean 2>&1 | tee actual-input-prefix-reaudit.log
-          python3 "$ACTUAL/reuse_actual_input_prefix.py" --check-reaudit actual-input-prefix-reaudit.log
-          python3 "$ACTUAL/run_ci_actual_inputs.py"
+          if python3 "$ACTUAL/reuse_actual_input_prefix.py" 39569164255 f118d06204bc50fe719810794af5bac4dfd14889 "$GITHUB_WORKSPACE/.lake/ringout" \
+               2>&1 | tee actual-input-prefix-reuse.log &&
+             lean -DwarningAsError=true ACTUAL_INPUT_PREFIX_REAUDIT.lean 2>&1 | tee actual-input-prefix-reaudit.log &&
+             python3 "$ACTUAL/reuse_actual_input_prefix.py" --check-reaudit actual-input-prefix-reaudit.log; then
+            python3 "$ACTUAL/run_ci_actual_inputs.py"
+          else
+            # The prefix artifact is rejected or expired; compile every module from source.
+            echo "ACTUAL_INPUT_FRESH_SOURCE_COMPILATION"
+            rm -f ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json
+            ACTUAL_INPUT_FRESH=1 python3 "$ACTUAL/run_ci_actual_inputs.py"
+          fi
 
       - name: Replay actual 139-row to 141-moment window (7 axiom roots)
         shell: bash
@@ -282,7 +303,7 @@ jobs:
         continue-on-error: true
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: source-cross-row-${{ github.sha }}
+          name: source-cross-row-${{ github.event.pull_request.head.sha || github.sha }}
           retention-days: 1
           include-hidden-files: true
           if-no-files-found: warn
@@ -295,6 +316,8 @@ jobs:
             FULL_TABLE_CI_RECEIPT.json
             COMPLETE_TABLE_REUSE_RECEIPT.json
             full-table-reaudit.log
+            complete-table-reuse.log
+            actual-input-prefix-reuse.log
             ACTUAL_INPUT_CI_RECEIPT.json
             ACTUAL_INPUT_PREFIX_REUSE_RECEIPT.json
             ACTUAL_INPUT_PREFIX_AXIOM_RECEIPT.json
@@ -319,6 +342,7 @@ jobs:
       - name: Checkout exact receipt tooling
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
       - name: Recover the successful source-bound graph without rebuilding Lean
         env:

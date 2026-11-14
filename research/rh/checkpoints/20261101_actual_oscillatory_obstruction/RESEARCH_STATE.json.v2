@@ -1,0 +1,51 @@
+{
+  "schema": "aegis.rh.frontier_fusion.v1",
+  "parent_research_graph_sha256": "0a3e93ca38a726878550a74854e392fb226c2dcb82adceaba0fcbb9207284ee2",
+  "current_local_checkout": "309ca3fa117fa499761f58f64ac371ccd1ff2f63",
+  "last_observed_source_proof_head": "fe117ae12374199b9102ea0c58e0689bab585a75",
+  "published_checkpoint_commit": "1ac6d3cfb4ece1ff5522827307d256bb9750d8d1",
+  "nodes": [
+    {
+      "id": "moment_zero_reconstruction",
+      "status": "VERIFIED",
+      "scope": "prior exact-head cofinal run 41285865947 at fe117ae",
+      "theorem": "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition"
+    },
+    {
+      "id": "uniform_all_decompositions",
+      "status": "FALSIFIED",
+      "scope": "prior exact-head cofinal run 41285865947 at fe117ae",
+      "theorem": "AEGIS.RHUniformBudgetObstructionV1.not_uniformFineMixedBudget"
+    },
+    {
+      "id": "one_signed_budget",
+      "status": "OPEN",
+      "statement": "For each actual moment-zero packet, construct one decomposition satisfying the actual signed mixed budget; the existing equivalence alone supplies no producer."
+    },
+    {
+      "id": "prime_only_growth",
+      "status": "OPEN",
+      "statement": "Prove subexponential growth for the same actual detectingPacket, for each epsilon>0; an exponent 1/2 bound alone is insufficient."
+    },
+    {
+      "id": "corrected_compression_nonincrease",
+      "status": "FALSIFIED",
+      "proof": "ACTUAL_PACKET_THEOREM.md",
+      "scope": "actual smooth moment-zero packets inside every positive window; fixed M\u22651; ordinary asymptotic proof; unnormalized compression"
+    },
+    {
+      "id": "oscillatory_moment_support",
+      "status": "VERIFIED",
+      "scope": "five new Lean roots, standard axioms",
+      "theorem": "AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_and_scaled_moments"
+    },
+    {
+      "id": "rh",
+      "status": "OPEN",
+      "statement": "_root_.RiemannHypothesis",
+      "canonical_closed": false
+    }
+  ],
+  "not_exhaustive_source_search": true,
+  "universal_RH_producer_constructed": false
+}

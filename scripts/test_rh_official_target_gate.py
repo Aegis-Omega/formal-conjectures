@@ -176,6 +176,31 @@ class TargetGateTests(unittest.TestCase):
             ), [(0, "$.RH_PROVEN_UNCONDITIONALLY")],
         )
 
+    def test_direct_workflow_preflight_cannot_block_v13_compilation(self):
+        workflow_path = (
+            Path(__file__).resolve().parents[1]
+            / ".github/workflows/aegis-rh-deepmind-target-direct-v1.yml"
+        )
+        workflow = workflow_path.read_text(encoding="utf-8")
+        # Keep the pinned historical source as provenance only.
+        self.assertIn("UPSTREAM_RH_BLOB: 5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542", workflow)
+        self.assertIn("candidate_matches_upstream_baseline", workflow)
+        self.assertNotIn(
+            'test "$(git hash-object FormalConjectures/Millennium/RiemannHypothesis.lean)" = "$UPSTREAM_RH_BLOB"',
+            workflow,
+        )
+        preflight = workflow.split(
+            "      - name: Record exact official RH source status "
+            "(non-admitting preflight)", 1
+        )[1].split("      - name: Install pinned Lean", 1)[0]
+        self.assertNotIn("raise SystemExit", preflight)
+        self.assertIn("RH_CANDIDATE_INELIGIBLE_PREFLIGHT_ONLY", preflight)
+        # Genuine Lean and axiom checks still gate final admission.
+        self.assertIn("Compile V13 terminal closure", workflow)
+        self.assertIn("Compile current DeepMind RH target", workflow)
+        self.assertIn("python3 scripts/rh_official_target_gate.py", workflow)
+        self.assertIn("--axioms-log", workflow)
+
     def test_grh_sorry_not_rh_placeholder(self):
         self.assertEqual(classify(SOURCE, EXPECTED, 1)[0], "OPEN_UNIVERSAL_ZERO_QUADRATIC")
     def test_success_with_compiler_error_rejected(self):

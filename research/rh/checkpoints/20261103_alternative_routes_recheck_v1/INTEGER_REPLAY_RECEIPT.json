@@ -1,0 +1,17 @@
+{
+  "schema": "AEGIS_LI_QUARTET_INTEGER_REPLAY_V1",
+  "source_sha256": "36b16b6227d9fd9d4c486e6bf827a49e045bbed4c4590694afe8881b6836ae35",
+  "lean_version": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "lean_trust": 0,
+  "fresh_source_compile_executed": true,
+  "axiom_reports": 3,
+  "axioms": [],
+  "scope": "three integer arithmetic endpoints only; no analytic or RH theorem",
+  "analytic_bridge_formalized": false,
+  "leanchecker_fresh": "PASS",
+  "rh_proven": false,
+  "leanchecker_exit_code": 0,
+  "independent_agent_used": false,
+  "diagnostic_note": "An unsupported leanchecker --help probe began a default scan and was terminated; it is not counted. The completed replay names --fresh -v LiQuartetArithmetic explicitly."
+}

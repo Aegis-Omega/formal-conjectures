@@ -12,6 +12,7 @@ on:
       - 'AEGISOverlay/RHFeshbachWeilClosureV2.lean'
       - 'AEGISOverlay/RHLocalKreinPartitionV1.lean'
       - 'AEGISOverlay/RHKreinMultiplicativeTransportV1.lean'
+      - 'AEGISOverlay/RHKreinFeshbachFinalAssemblyV1.lean'
       - 'AEGISOverlay/RHFiniteActualGramJoinV1.lean'
       - 'AEGISOverlay/RHBaguaWalshV1.lean'
       - 'AEGISOverlay/RHBaguaActualWeilV1.lean'
@@ -21,16 +22,22 @@ on:
       - 'AEGISOverlay/RHActualNarrowGramSignV1.lean'
       - 'AEGISOverlay/RHActualLocalGramCoercivityV1.lean'
       - 'AEGISOverlay/RHActualMixedDefectV1.lean'
+      - 'AEGISOverlay/RHFarPrimeFreeActualGramV1.lean'
       - 'AEGISOverlay/RHActualLogFourV1.lean'
       - 'AEGISOverlay/RHActualElevenLatticeV1.lean'
       - 'AEGISOverlay/RHActualElevenSpectralV1.lean'
       - 'AEGISOverlay/RHFiniteFinePartitionV1.lean'
       - 'AEGISOverlay/RHActualUniversalFineGramV1.lean'
+      - 'AEGISOverlay/RHUniformBudgetObstructionV1.lean'
+      - 'AEGISOverlay/RHMixedBudgetRefinementV1.lean'
       - 'AEGISOverlay/RHScaleRowCompositionV1.lean'
       - 'AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean'
       - 'AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean'
       - 'AEGISOverlay/RHFourLogThreeActualPrimeV1.lean'
       - 'AEGISOverlay/RHMellinDetectorCenteredV1.lean'
+      - 'AEGISOverlay/RHFixedPacketFrontierV1.lean'
+      - 'AEGISOverlay/RHFixedPacketDenseShiftV1.lean'
+      - 'AEGISOverlay/RHSnowflakeActualMellinFrameV1.lean'
       - 'AEGISOverlay/RHArchRow29V1.lean'
       - 'AEGISOverlay/RHGlobalizationChainV13.lean'
       - 'AEGISOverlay/AEGIS_RH_Unconditional.lean'
@@ -40,6 +47,14 @@ on:
       - 'AEGISOverlay/RHFeshbachScaledWeilV1.lean'
       - 'research/rh/assembly/RHProofGraphExport.lean'
       - 'research/rh/assembly/export_evidence.py'
+      - 'research/rh/assembly/repository_census.py'
+      - 'research/rh/assembly/repository-census.schema.json'
+      - 'research/rh/assembly/repository_census_v11.py'
+      - 'research/rh/assembly/merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_auto_join_rh_census_v11.py'
+      - 'research/rh/assembly/test_merge_rh_kernel_census_v11.py'
+      - 'research/rh/assembly/validate_repository_census_v11.py'
       - 'scripts/rh_submission_from_checkpoint.py'
       - 'scripts/test_rh_submission_from_checkpoint.py'
       - '.github/workflows/rh-cofinal-actual-schur-v1.yml'
@@ -55,6 +70,7 @@ concurrency:
 
 permissions:
   contents: read
+  actions: read
 
 env:
   MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
@@ -222,6 +238,11 @@ jobs:
           printf '%s  %s\n' dafcf849489f9b5f5ed7275ca74c53e4d0e6740d14bddbe51b62332d79a40801 "$archive" | sha256sum -c -
           test "$(tar -tzf "$archive" | wc -l)" -eq 4
           tar -xzf "$archive" -C .
+          # Original PR63 source blobs: reject any altered Abel/Chebyshev implementation.
+          test "$(git hash-object WeilSignedPrimeFiniteSupportV1.lean)" = "5800bea6ca4468c8ea2f028738cadda1f818bc0e"
+          test "$(git hash-object WeilPrimeAbelReductionV1.lean)" = "10ebac3a041ca87840e18aca521a93790f647a20"
+          test "$(git hash-object WeilPrimeDiscrepancyV1.lean)" = "9d43fb9bd3b7bca72c94ab76eb604fde2d0a9e36"
+          test "$(git hash-object WeilPrimeDiscrepancyEstimateV1.lean)" = "a8a48cafc2bc2117e2c7836abdbdf3eef4884600"
 
       - name: Validate assembly evidence scripts
         shell: bash
@@ -337,7 +358,7 @@ jobs:
           import hashlib, json, pathlib, shutil, subprocess
           root=pathlib.Path(".aegis/sovereign-omega-v2/formal/bridges/lean")
           overlay=pathlib.Path("AEGISOverlay")
-          targets=["AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3"]
+          targets=["AEGISOverlay.RHSnowflakeActualMellinFrameV1","AEGISOverlay.RHFixedPacketDenseShiftV1","RHFixedPacketFrontierV1","AEGISOverlay.RHMellinDetectorCenteredV1","AEGISOverlay.RHBaguaWalshV1","AEGISOverlay.RHBaguaActualWeilV1","AEGISOverlay.RHTimeSliceWeilV1","AEGISOverlay.RHLogThreeSignedPrimeProducerV1","AEGISOverlay.RHNarrowDetectingTrigramDenseV1","AEGISOverlay.AEGIS_RH_Unconditional","AEGISOverlay.RHCheckpointTrigramPacketSchurV1","AEGISOverlay.RHActualCertificateCofinalJoinV1","RHMomentDecayCofinalJoinV1","RHCofinalActualTerminalV1","RHCofinalSchurAdapterV1","RHLocalKreinPartitionV1","AEGISOverlay.RHKreinMultiplicativeTransportV1","AEGISOverlay.RHKreinFeshbachFinalAssemblyV1","AEGISOverlay.RHFiniteActualGramJoinV1","AEGISOverlay.RHActualNarrowGramSignV1","AEGISOverlay.RHActualLocalGramCoercivityV1","AEGISOverlay.RHActualElevenLatticeV1","AEGISOverlay.RHActualElevenSpectralV1","AEGISOverlay.RHActualMixedDefectV1","AEGISOverlay.RHFarPrimeFreeActualGramV1","AEGISOverlay.RHActualLogFourV1","AEGISOverlay.RHActualUniversalFineGramV1","AEGISOverlay.RHUniformBudgetObstructionV1","AEGISOverlay.RHMixedBudgetRefinementV1","AEGISOverlay.RHScaleRowCompositionV1","AEGISOverlay.RHOptimizedSchurGlobalJoinV1","AEGISOverlay.RHHexagram64MellinWeilFusionV1","AEGISOverlay.RHFourLogThreeActualPrimeV1","AEGISOverlay.RHBaguaRotatingTwoPairMellinV1","AEGISOverlay.RHArchRow29V1","AEGISOverlay.RHGlobalizationChainV13","AEGISOverlay.RHCrossRepositoryFiveSpineV1","RHFeshbachScaledErrorV1","RHFeshbachScaledWeilV1","RHFourBlockPrimeEightV3","RHFineMomentPacketV3","RHNarrowDiagonalUpgradeV2","RHFourBlockConcreteV3","FormalConjecturesUtil.FixedWindowLimitBridge"]
           deps={}; paths={}; seen=set(); active=set(); order=[]
           def locate(m):
               # Trigram uses an existing declaration-free adapter for two
@@ -479,7 +500,9 @@ jobs:
           pinned={
               "AEGISOverlay/RHTargetPacketMellinGeneralV2.lean":"9d87f75caa8711fc858bc594d4701fa8cab8ab17",
               "AEGISOverlay/RHNarrowFixedDetectorV1.lean":"21ea9492a375e45526f2be0d7076a7ba09661e57",
-              "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"22b7b266355b4b0a21a7c17a2bc9846488c9d79f",
+              "AEGISOverlay/RHHexagram64MellinWeilFusionV1.lean":"f4bbf4738eb07711ed431177534059ec556f1e9e",
+              "AEGISOverlay/RHBaguaHexagramSignedChebyshevJoinV1.lean":"7efcbbcf71bf35bc31ebb53887f5776c00925aa0",
+              "AEGISOverlay/RHSignedPrimeIntervalExtensionV8.lean":"aca81da53c256cf59b09be7b84ea6fca573c7184",
               "AegisRH/PR606/Source/WeilTranslationGapInvariantV10.lean":"45b6d528d6bb85e04da115dac85c4a897ae2d432",
               "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean":"3fac46ae976087f75248662af12966dd04ea6770",
               "AegisRH/PR606/Source/WeilOffLineSeedV10.lean":"36a9554f02786b7dd6de41ac9a649f9aad5d36ee",
@@ -555,6 +578,149 @@ jobs:
             printf '%s\n' "$m" >> evidence-cofinal/completed-modules.txt
           done < evidence-cofinal/module-order.txt
 
+          # Exact-source binary and independent kernel/axiom check for PR92's
+          # conditional two-phase real-kernel theorem; never promotes to RH.
+          TWO_PHASE_MOD=RHFixedPacketFrontierV1
+          test -s .lake/build/lib/lean/RHFixedPacketFrontierV1.olean
+          python3 - <<'PY'
+          import pathlib, re
+          path=pathlib.Path("AEGISOverlay/RHFixedPacketFrontierV1.lean")
+          roots=re.findall(r"^#print axioms (\S+)$",path.read_text(),re.M)
+          expected={
+              "AEGIS.RHFixedPacketFrontierV1.two_phase_real_kernel_bound_v1",
+              "AEGIS.RHFixedPacketFrontierV1.riemannHypothesis_of_two_phase_real_kernel_v1",
+          }
+          if not expected.issubset(set(roots)) or len(set(roots))!=len(roots):
+              raise SystemExit("TWO_PHASE_REQUIRED_AXIOM_ROOTS_MISSING")
+          pathlib.Path("evidence-cofinal/RHTwoPhaseAxiomAudit.lean").write_text(
+              "import RHFixedPacketFrontierV1\n"
+              + "".join("#print axioms " + root + "\n" for root in roots)
+          )
+          PY
+          lake env lean evidence-cofinal/RHTwoPhaseAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/axioms-RHTwoPhaseV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFixedPacketFrontierV1.lean \
+            evidence-cofinal/axioms-RHTwoPhaseV1.log
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          root=pathlib.Path(".")
+          module="RHFixedPacketFrontierV1"
+          source=root/"AEGISOverlay/RHFixedPacketFrontierV1.lean"
+          binary=root/".lake/build/lib/lean/RHFixedPacketFrontierV1.olean"
+          if not binary.is_file() or binary.stat().st_size==0:
+              raise SystemExit("TWO_PHASE_OLEAN_MISSING")
+          manifest=json.loads((root/"evidence-cofinal/source-manifest.json").read_text())
+          matches=[rec for rec in manifest if rec["module"]==module]
+          source_hash=hashlib.sha256(source.read_bytes()).hexdigest()
+          if len(matches)!=1 or matches[0]["sha256"]!=source_hash:
+              raise SystemExit("TWO_PHASE_SOURCE_MANIFEST_DRIFT")
+          with binary.open("rb") as f: binary_hash=hashlib.file_digest(f,"sha256").hexdigest()
+          head=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          receipt={
+              "status":"VERIFIED_KERNEL_CONDITIONAL_ONLY",
+              "scope":"TWO_PHASE_REAL_KERNEL_REDUCTION_NOT_RH_PROOF",
+              "exact_head":head,
+              "module":module,
+              "source_sha256":source_hash,
+              "olean_sha256":binary_hash,
+              "lean":subprocess.check_output(["lean","--version"],text=True).strip(),
+              "mathlib_sha":"0df444a360eaa60ab8c11dca51a86af692955474",
+              "aegis_provider_sha":"2c3d041b633147ec97c7ef753aa9d157a47bb9f5",
+              "axioms_log":"evidence-cofinal/axioms-RHTwoPhaseV1.log",
+          }
+          (root/"evidence-cofinal/two-phase-exact-head-receipt.json").write_text(
+              json.dumps(receipt,sort_keys=True,indent=2)+"\n")
+          print("TWO_PHASE_SOURCE_BOUND_OLEAN_VERIFIED",head,source_hash,binary_hash)
+          PY
+
+          # Audit the actual newly compiled dense two-phase RH criterion,
+          # including all added #print axioms roots, against the source and OLEAN.
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFixedPacketDenseShiftV1.olean
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFixedPacketDenseShiftV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHFixedPacketDenseShiftV1.log
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          mod="AEGISOverlay.RHFixedPacketDenseShiftV1"
+          s=pathlib.Path("AEGISOverlay/RHFixedPacketDenseShiftV1.lean")
+          b=pathlib.Path(".lake/build/lib/lean/AEGISOverlay/RHFixedPacketDenseShiftV1.olean")
+          entries=json.loads(pathlib.Path("evidence-cofinal/source-manifest.json").read_text())
+          source_sha=hashlib.sha256(s.read_bytes()).hexdigest()
+          if len([x for x in entries if x["module"]==mod and x["sha256"]==source_sha])!=1:
+              raise SystemExit("DENSE_TWO_PHASE_SOURCE_MANIFEST_DRIFT")
+          with b.open("rb") as stream:
+              olean_sha=hashlib.file_digest(stream,"sha256").hexdigest()
+          receipt={
+            "status":"VERIFIED_KERNEL_CONDITIONAL_ONLY",
+            "scope":"DENSE_TWO_PHASE_RH_EQUIVALENCE_NOT_UNCONDITIONAL_RH",
+            "head":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+            "module":mod,"source_sha256":source_sha,"olean_sha256":olean_sha,
+            "axiom_log":"evidence-cofinal/compile-AEGISOverlay_RHFixedPacketDenseShiftV1.log",
+          }
+          pathlib.Path("evidence-cofinal/dense-two-phase-exact-head-receipt.json").write_text(
+              json.dumps(receipt,sort_keys=True,indent=2)+"\n")
+          print("DENSE_TWO_PHASE_SOURCE_BOUND_OLEAN_VERIFIED",receipt["head"])
+          PY
+
+          # Complete-line strict joint spectral mass: mandatory exact-source
+          # compilation, independent standard-axiom audit, and OLEAN identity.
+          test -s .lake/build/lib/lean/AEGISOverlay/RHSnowflakeActualMellinFrameV1.olean
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHSnowflakeActualMellinFrameV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHSnowflakeActualMellinFrameV1.log
+          python3 - <<'PY'
+          import hashlib,json,pathlib,subprocess
+          mod="AEGISOverlay.RHSnowflakeActualMellinFrameV1"
+          s=pathlib.Path("AEGISOverlay/RHSnowflakeActualMellinFrameV1.lean")
+          b=pathlib.Path(".lake/build/lib/lean/AEGISOverlay/RHSnowflakeActualMellinFrameV1.olean")
+          roots=[
+            line.split("#print axioms ",1)[1].strip()
+            for line in s.read_text().splitlines()
+            if line.startswith("#print axioms ")
+          ]
+          required="AEGIS.RHSnowflakeActualMellinFrameV1.one_actual_pair_critical_line_strict_mass_v1"
+          if roots.count(required)!=1:
+              raise SystemExit("CRITICAL_STRICT_MASS_AXIOM_ROOT_MISSING")
+          entries=json.loads(pathlib.Path("evidence-cofinal/source-manifest.json").read_text())
+          source_sha=hashlib.sha256(s.read_bytes()).hexdigest()
+          if len([x for x in entries if x["module"]==mod and x["sha256"]==source_sha])!=1:
+              raise SystemExit("CRITICAL_STRICT_MASS_SOURCE_MANIFEST_DRIFT")
+          with b.open("rb") as stream:
+              olean_sha=hashlib.file_digest(stream,"sha256").hexdigest()
+          receipt={
+            "status":"VERIFIED_KERNEL_CONDITIONAL_SCOPE_ONLY",
+            "scope":"UNCONDITIONAL_STRICT_MELLIN_PAIR_MASS_ON_CRITICAL_LINE_NOT_RH",
+            "head":subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip(),
+            "module":mod,"source_sha256":source_sha,"olean_sha256":olean_sha,
+            "axiom_log":"evidence-cofinal/compile-AEGISOverlay_RHSnowflakeActualMellinFrameV1.log",
+          }
+          pathlib.Path("evidence-cofinal/critical-line-strict-pair-exact-head-receipt.json").write_text(
+              json.dumps(receipt,sort_keys=True,indent=2)+"\n")
+          print("CRITICAL_LINE_STRICT_PAIR_SOURCE_BOUND_OLEAN_VERIFIED",receipt["head"])
+          PY
+
+
+          # Issue #96: this explicit axiom-log path also forces fresh V6 compilation
+          # in rh_restore_source_bound_oleans.py (audit_modules), even with a valid cache.
+          test -s .lake/build/lib/lean/RHSignedPrimeChebyshevFiniteBridgeV6.olean
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHSignedPrimeChebyshevFiniteBridgeV6.lean \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          grep -F "AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.neg_abel_integrand_eq_chebyshev_integrand" \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          grep -F "AEGIS.RHSignedPrimeChebyshevFiniteBridgeV6.signed_prime_eq_finite_chebyshev_convolution" \
+            evidence-cofinal/compile-RHSignedPrimeChebyshevFiniteBridgeV6.log
+          echo "PR96_V6_FRESH_KERNEL_AND_AXIOMS_PASS HEAD=$(git rev-parse HEAD)"
+
+          # Compile and independently audit PR7's nested finite-section theorem.
+          # Do not infer this kernel root from unrelated successful checks.
+          python3 scripts/verify_rh_overlay_axioms.py \
+            FormalConjecturesUtil/FixedWindowLimitBridge.lean \
+            evidence-cofinal/compile-FormalConjecturesUtil_FixedWindowLimitBridge.log
+          grep -F "FormalConjecturesUtil.FixedWindowLimitBridge.nonneg_of_cofinal_nested_shifted_sections" \
+            evidence-cofinal/compile-FormalConjecturesUtil_FixedWindowLimitBridge.log
+
           # Positive regression: the REAL narrow producer is well typed.
           # The separate pi-sized probe is intentionally not compiled:
           # that implication is false and must never be silently admitted.
@@ -587,6 +753,9 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHKreinMultiplicativeTransportV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHKreinMultiplicativeTransportV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHKreinFeshbachFinalAssemblyV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHKreinFeshbachFinalAssemblyV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/AEGIS_RH_Unconditional.lean \
             evidence-cofinal/compile-AEGISOverlay_AEGIS_RH_Unconditional.log
@@ -631,6 +800,12 @@ jobs:
             AEGISOverlay/RHActualUniversalFineGramV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualUniversalFineGramV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHUniformBudgetObstructionV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHUniformBudgetObstructionV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHMixedBudgetRefinementV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHMixedBudgetRefinementV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHScaleRowCompositionV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHScaleRowCompositionV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
@@ -652,11 +827,33 @@ jobs:
              evidence-cofinal/compile-AEGISOverlay_RHMellinDetectorCenteredV1.log
            grep -F 'AEGIS.RHOptimizedSchurGlobalJoinV1.riemannHypothesis_of_optimized_actual_row_producer' \
             evidence-cofinal/compile-AEGISOverlay_RHOptimizedSchurGlobalJoinV1.log
+          # Audit the arithmetic producer even if its exact-source .olean was
+          # restored from a verified checkpoint (which has no compile log).
+          # Generate every probe from this HEAD's source, not a static list.
+          python3 - <<'PY'
+          import pathlib, re
+          src = pathlib.Path("AEGISOverlay/RHFourLogThreeActualPrimeV1.lean")
+          names = re.findall(r"^#print axioms (\S+)$", src.read_text(), re.M)
+          if not names or len(names) != len(set(names)):
+              raise RuntimeError("FOUR_LOG_THREE_AXIOM_PROBES_INVALID")
+          pathlib.Path("RHFourLogThreeAxiomAudit.lean").write_text(
+              "import AEGISOverlay.RHFourLogThreeActualPrimeV1\n\n"
+              + "\n".join("#print axioms " + name for name in names) + "\n")
+          print("FOUR_LOG_THREE_AXIOM_PROBE_COUNT", len(names))
+          PY
+          lake env lean RHFourLogThreeAxiomAudit.lean \
+            2>&1 | tee evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFourLogThreeActualPrimeV1.lean \
+            evidence-cofinal/axioms-RHFourLogThreeActualPrimeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHArchRow29V1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHArchRow29V1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualElevenLatticeV1.lean \
+            evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
+          # Exact named independent-shape consumer: make its axiom output an explicit CI gate.
+          grep -F "AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_coercive_of_actual_cross" \
             evidence-cofinal/compile-AEGISOverlay_RHActualElevenLatticeV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHBaguaActualWeilV1.lean \
@@ -735,6 +932,10 @@ jobs:
           python3 scripts/verify_rh_overlay_axioms.py \
             AEGISOverlay/RHActualLocalGramCoercivityV1.lean \
             evidence-cofinal/compile-AEGISOverlay_RHActualLocalGramCoercivityV1.log
+          for theorem in prime_free_far_actual_B_q16 prime_free_far_two_packet_actual_gram_margin prime_free_far_two_packet_actual_zero_margin; do
+            grep -F "AEGIS.RHFarPrimeFreeActualGramV1.$theorem" \
+              evidence-cofinal/compile-AEGISOverlay_RHFarPrimeFreeActualGramV1.log
+          done
           grep -F "AEGIS.RHActualNarrowGramSignV1.every_narrow_packet_actual_full_gram_nonpositive" \
             evidence-cofinal/compile-AEGISOverlay_RHActualNarrowGramSignV1.log
           python3 scripts/verify_rh_overlay_axioms.py \
@@ -748,6 +949,53 @@ jobs:
             grep -F "AEGIS.RHFeshbachScaledWeilV1.$thm" evidence-cofinal/compile-RHFeshbachScaledWeilV1.log
           done
           echo "SCALED_WEIL_JOIN=KERNEL_PASS; CANONICAL_RH_ADMISSION=EVALUATED_BY_EXACT_HEAD_PROOF_GRAPH_EXPORT"
+
+      - name: V7 finite-prime sieve first kernel probe (non-admission)
+        shell: bash
+        timeout-minutes: 30
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean)" = "be3a3a32f806ede2d30339ca495ff9293e45b106"
+          mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/WeilPrimeReindexV1.olean \
+            AEGISOverlay/WeilPrimeReindexV1.lean \
+            > evidence-cofinal/v7/reindex.log 2>&1 || {
+              tail -n 100 evidence-cofinal/v7/reindex.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/WeilPrimeReindexV1.lean evidence-cofinal/v7/reindex.log
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean \
+            AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean \
+            > evidence-cofinal/v7/first-module.log 2>&1 || {
+              tail -n 100 evidence-cofinal/v7/first-module.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean evidence-cofinal/v7/first-module.log
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
+          echo "V7_FIRST_MODULE_KERNEL_PASS HEAD=$(git rev-parse HEAD) RH_ADMISSION=OPEN"
+
+      - name: V7 rational endpoint closure kernel probe (non-admission)
+        shell: bash
+        timeout-minutes: 15
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          test "$(git hash-object AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean)" = "67b0a33135f96c2613b65f40d8d97286b100f80e"
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeSieveBridgeV1.olean
+          mkdir -p evidence-cofinal/v7 .lake/build/lib/lean/AEGISOverlay
+          lake env lean --trust=0 \
+            -o .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeEndpointClosureV1.olean \
+            AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean \
+            > evidence-cofinal/v7/endpoint.log 2>&1 || {
+              tail -n 120 evidence-cofinal/v7/endpoint.log; exit 1;
+            }
+          python3 scripts/verify_rh_overlay_axioms.py \
+            AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean evidence-cofinal/v7/endpoint.log
+          test -s .lake/build/lib/lean/AEGISOverlay/RHFinitePrimeEndpointClosureV1.olean
+          echo "V7_ENDPOINT_KERNEL_PASS HEAD=$(git rev-parse HEAD) RH_ADMISSION=OPEN"
 
       - name: Compile exact official RH target into the same proof environment
         shell: bash
@@ -783,6 +1031,26 @@ jobs:
             2>&1 | tee evidence-cofinal/assembly/graph-export.log
           ! grep -F 'error:' evidence-cofinal/assembly/graph-export.log
           python3 research/rh/assembly/export_evidence.py
+          python3 research/rh/assembly/repository_census.py --self-test
+          python3 research/rh/assembly/repository_census.py \
+            --proof-graph evidence-cofinal/assembly/RH_PROOF_GRAPH.json \
+            --proof-terms evidence-cofinal/assembly/proof-terms.json \
+            --environment-census evidence-cofinal/assembly/environment-rh-candidates.json \
+            --proof-passport evidence-cofinal/assembly/RH_EVIDENCE_PASSPORT.json \
+            --output evidence-cofinal/assembly/repository_census.json
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          r=json.loads(Path("evidence-cofinal/assembly/repository_census.json").read_text())
+          h=subprocess.check_output(["git","rev-parse","HEAD"],text=True).strip()
+          assert r["repository"]["exact_head"]==h
+          assert r["kernel_inventory_summary"]["status"]=="EXACT_HEAD_LEAN_EXPORT_BUNDLE_VERIFIED"
+          assert r["kernel_inventory_summary"]["reachable_declaration_rows"]==len(r["kernel_reachable_declaration_inventory"])
+          assert r["total_declarations"] is None
+          print("RH_CENSUS_KERNEL_GRAPH_BOUND",h,
+                r["kernel_inventory_summary"]["reachable_declaration_rows"],
+                r["kernel_inventory_summary"]["imported_environment_declarations"])
+          PY
 
       - name: Prepare official RH submission from existing kernel checkpoint
         shell: bash
@@ -790,6 +1058,20 @@ jobs:
           set -euo pipefail
           python3 scripts/test_rh_submission_from_checkpoint.py
           python3 scripts/rh_submission_from_checkpoint.py
+
+      - name: Census kernel cross-artifact auto join (kernel worker, exact head)
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_HEAD_EXACT: ${{ github.event.pull_request.head.sha || github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check --quiet 'jsonschema==4.25.1'
+          python3 research/rh/assembly/test_merge_rh_kernel_census_v11.py
+          python3 research/rh/assembly/test_auto_join_rh_census_v11.py
+          python3 research/rh/assembly/auto_join_rh_census_v11.py \
+            --mode kernel-local \
+            --output-dir evidence-cofinal/assembly
 
       - name: Preserve completed source-bound cofinal modules
         id: cofinal-checkpoint
@@ -832,13 +1114,62 @@ jobs:
               blob=subprocess.check_output(["git","hash-object",str(src)],text=True).strip()
               rel="oleans/"+module+".olean"
               shutil.copyfile(olean,cache/rel)
-              digest=hashlib.sha256((cache/rel).read_bytes()).hexdigest()
+              with (cache/rel).open("rb") as binary:
+                  digest=hashlib.file_digest(binary,"sha256").hexdigest()
               blobs.append(module+" "+blob+"\n")
               hashes.append(digest+"  "+rel+"\n")
               accepted.add(module)
+          # Independently audited V7 kernels belong in the same source-bound cache.
+          # A compiled but unaudited .olean is not proof admission.
+          for module, srcname, logname in (
+              ("AEGISOverlay.WeilPrimeReindexV1",
+               "AEGISOverlay/WeilPrimeReindexV1.lean", "v7/reindex.log"),
+              ("AEGISOverlay.RHFinitePrimeSieveBridgeV1",
+               "AEGISOverlay/RHFinitePrimeSieveBridgeV1.lean", "v7/first-module.log"),
+              ("AEGISOverlay.RHFinitePrimeEndpointClosureV1",
+               "AEGISOverlay/RHFinitePrimeEndpointClosureV1.lean", "v7/endpoint.log"),
+          ):
+              if module in accepted:
+                  continue
+              src=pathlib.Path(srcname)
+              log=root/logname
+              olean=pathlib.Path(".lake/build/lib/lean")/(module.replace(".","/")+".olean")
+              if not (src.is_file() and log.is_file() and olean.is_file()
+                      and olean.stat().st_size):
+                  continue
+              audit=subprocess.run(["python3","scripts/verify_rh_overlay_axioms.py",
+                                    str(src),str(log)],capture_output=True,text=True)
+              if audit.returncode!=0:
+                  print("V7_CHECKPOINT_NOT_ADMITTED",module,audit.stderr)
+                  continue
+              blob=subprocess.check_output(["git","hash-object",str(src)],
+                                           text=True).strip()
+              rel="oleans/"+module+".olean"
+              shutil.copyfile(olean,cache/rel)
+              with (cache/rel).open("rb") as binary:
+                  digest=hashlib.file_digest(binary,"sha256").hexdigest()
+              blobs.append(module+" "+blob+"\n")
+              hashes.append(digest+"  "+rel+"\n")
+              accepted.add(module)
+              print("V7_SOURCE_AND_OLEAN_CHECKPOINTED",module,digest)
           (cache/"source-blobs.txt").write_text("".join(blobs))
           (cache/"oleans.sha256").write_text("".join(hashes))
           (cache/"head.txt").write_text(subprocess.check_output(["git","rev-parse","HEAD"],text=True))
+          # Keep an inspectable receipt inside the existing CI evidence archive;
+          # binary .oleans remain in the verified GitHub cache, not in Git.
+          receipt_dir=root/"checkpoint"
+          receipt_dir.mkdir(exist_ok=True)
+          for filename in ("source-blobs.txt","oleans.sha256","head.txt"):
+              shutil.copyfile(cache/filename,receipt_dir/filename)
+          (receipt_dir/"status.json").write_text(json.dumps({
+              "schema":"aegis.rh.cofinal_olean_checkpoint.v1",
+              "head":(cache/"head.txt").read_text().strip(),
+              "verified_module_count":len(accepted),
+              "module_names":sorted(accepted),
+              "binary_storage":"GitHub Actions source-bound cache",
+              "rh_unconditional":None,
+              "admission":"OPEN"
+          },indent=2)+"\n")
           with open(__import__("os").environ["GITHUB_OUTPUT"],"a") as out:
               out.write("count="+str(len(accepted))+"\n")
           print("SAVED_SOURCE_BOUND_PARTIAL_MODULES",len(accepted))
@@ -866,6 +1197,11 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rh-cofinal-actual-schur-${{ github.sha }}-${{ github.run_id }}
-          path: evidence-cofinal/
+          # One evidence artifact includes actual .olean files, not just logs.
+          # The checkpoint directory begins with '.', so opt in explicitly.
+          path: |
+            evidence-cofinal/
+            .rh-cofinal-checkpoint/
+          include-hidden-files: true
           if-no-files-found: warn
           retention-days: 30

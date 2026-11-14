@@ -1,0 +1,27 @@
+# Row mirror: gen_rr_k.py of ../20261112_window_beyond_l32_feasibility_v1/ (sha256 258027887a4797980f4419ed915ffdaaaf88388c5eafe848f774139d91a25c07), arguments
+#   LT NP eps kappa rho_low rho_high rho_diag KK T_tau slack   (rho = box radii; slack 10^-13)
+# 2026-11-12, outputs as printed (stderr line "LT ... scaled lambda_min ...").
+# box radii of the 49/32 port: 5e-11 / 5e-10 / 3e-12
+31/20 2000 7/5 66 5e-11 5e-10 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min -2.47564e-10  lambda_max 5.43823  (85s)
+31/20 2500 7/5 66 5e-11 5e-10 3e-12 156 15 13   LT 31/20 NP 2500 eps 7/5 kappa 66: scaled lambda_min -8.20449e-11  lambda_max 5.44126  (91s)
+25/16 2500 7/5 66 5e-11 5e-10 3e-12 156 15 13   LT 25/16 NP 2500 eps 7/5 kappa 66: scaled lambda_min -8.38773e-10  lambda_max 5.6696  (91s)
+# which radius matters
+31/20 2000 7/5 66 5e-11 5e-11 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min -2.47338e-10  lambda_max 5.43823  (87s)
+31/20 2000 7/5 70 5e-11 5e-10 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 70: scaled lambda_min -2.31623e-10  lambda_max 5.76041  (84s)
+31/20 2000 7/5 66 5e-12 5e-11 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min 5.72851e-10  lambda_max 5.43823  (84s)
+77/50 2000 7/5 66 5e-11 5e-10 3e-12 156 15 13   LT 77/50 NP 2000 eps 7/5 kappa 66: scaled lambda_min 5.72124e-10  lambda_max 4.54903  (87s)
+# low boxes tightened
+31/20 2000 7/5 66 5e-13 5e-10 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min 6.54662e-10  lambda_max 5.43823  (88s)
+31/20 2000 7/5 66 5e-12 5e-10 3e-12 156 15 13   LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min 5.72656e-10  lambda_max 5.43823  (87s)
+25/16 2000 7/5 66 5e-12 5e-10 3e-12 156 15 13   LT 25/16 NP 2000 eps 7/5 kappa 66: scaled lambda_min 5.24525e-11  lambda_max 5.66692  (86s)
+25/16 2000 7/5 66 5e-13 5e-10 3e-12 156 15 13   LT 25/16 NP 2000 eps 7/5 kappa 66: scaled lambda_min 1.63642e-10  lambda_max 5.66692  (83s)
+25/16 2500 7/5 66 5e-13 5e-10 3e-12 156 15 13   LT 25/16 NP 2500 eps 7/5 kappa 66: scaled lambda_min 3.84384e-10  lambda_max 5.6696  (86s)
+# LDL check on the 31/20 / 5e-12 pickle: rescale_pkl.py, cert43.py 80, check_cert_pkl.py
+-- q 80  eps 346149528096635  eta 111797453723395  ok True  B bits 41  base 2^101  (97.8s)
+q 80  eps 346149528096635  eta 111797453723395  min dd 0  eta < eps: True
+
+# Trace mirror: trace_cells_k.py of ../20261110_window_l32_feasibility_v1/, arguments LT 156 1.65 0 150,30,6,3
+LT=49/32 K=156 W=2.9420 hK=640.12 tb0=1.423e-04 tb1=6.580e-04 Den=0.4935
+m=1.65 t*=620.1 cells=3123  segments 0.5267 0.3034 0.5973 1.4466  T=2.8741  gap=1.1926  kappa_max=72.09
+LT=31/20 K=156 W=2.9420 hK=632.37 tb0=1.464e-04 tb1=6.897e-04 Den=0.5191
+m=1.65 t*=620.1 cells=3123  segments 0.5330 0.3051 0.6111 1.4910  T=2.9402  gap=1.1821  kappa_max=72.33

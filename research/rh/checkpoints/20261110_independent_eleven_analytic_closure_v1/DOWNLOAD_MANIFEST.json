@@ -1,0 +1,10 @@
+{
+  "file": "AEGIS_PR92_Independent_Eleven_Kernel_20261110.zip",
+  "sha256": "014879d4bc7dc3e114666a9eb05c91d2f3ae87ff992793bc002a0109eaec5d6f",
+  "size_bytes": 1018998,
+  "entries": 320,
+  "source_count": 186,
+  "fresh_compiled": 24,
+  "verified_checkpoint_imports": 162,
+  "rh_proven": false
+}

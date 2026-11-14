@@ -1,0 +1,253 @@
+{
+  "scope": "targeted source-body review, not exhaustive corpus semantics",
+  "sources": [
+    {
+      "blob": "caf80500f6347da25e8038cdce708275fc041951",
+      "sha256": "40e7d576276d313559cb010f1b3ad960819716e9dc401782b9959b737ed867d2",
+      "declaration": "globalization_limit_nonneg",
+      "namespace": [
+        "AEGIS.RHGlobalizationChainV13"
+      ],
+      "exact_source_header": "globalization_limit_nonneg\n    {\u03b1 : Type*} (Q : \u2115 \u2192 \u03b1 \u2192 \u211d) (Qlim : \u03b1 \u2192 \u211d) (eps : \u2115 \u2192 \u211d)\n    (hconv : \u2200 f, Tendsto (fun n => Q n f) atTop (\ud835\udcdd (Qlim f)))\n    (heps : Tendsto eps atTop (\ud835\udcdd 0))\n    (hbound : \u2200 n f, -(eps n) \u2264 Q n f) :\n    \u2200 f, 0 \u2264 Qlim f ",
+      "example_provenance": {
+        "commit": "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "path": "AEGISOverlay/RHGlobalizationChainV13.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:integration/rh-k3-source-graft-20261024"
+      },
+      "role": "existing abstract limit proof",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "caf80500f6347da25e8038cdce708275fc041951",
+      "sha256": "40e7d576276d313559cb010f1b3ad960819716e9dc401782b9959b737ed867d2",
+      "declaration": "uniform_lower_bound_collapses",
+      "namespace": [
+        "AEGIS.RHGlobalizationChainV13"
+      ],
+      "exact_source_header": "uniform_lower_bound_collapses\n    {\u03b1 : Type*} (Q : \u03b1 \u2192 \u211d) (smul : \u211d \u2192 \u03b1 \u2192 \u03b1)\n    (hhom : \u2200 t f, Q (smul t f) = t ^ 2 * Q f)\n    (\u03b5 : \u211d) (hb : \u2200 f, -\u03b5 \u2264 Q f) :\n    \u2200 f, 0 \u2264 Q f ",
+      "example_provenance": {
+        "commit": "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "path": "AEGISOverlay/RHGlobalizationChainV13.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:integration/rh-k3-source-graft-20261024"
+      },
+      "role": "existing quadratic scaling proof",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "e5425812f471d6838f59091573e5a83e967210da",
+      "sha256": "1357a275c165607b897073b2d95170de563ddde73f79bcbd4d6e023880579cce",
+      "declaration": "every_moment_zero_packet_actual_fine_gram_with_support",
+      "namespace": [
+        "AEGIS.RHActualUniversalFineGramV1"
+      ],
+      "exact_source_header": "every_moment_zero_packet_actual_fine_gram_with_support\n    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) :\n    \u2203 (n : \u2115) (gs : Fin (n + 1) \u2192 WeilCompactSmoothGV1)\n      (center : Fin (n + 1) \u2192 \u211d),\n      (\u2200 i, WeilMomentConditionsV1 (gs i)) \u2227\n      (\u2200 i, (5671 / 3200 : \u211d) * energy (gs i).1 \u2264\n        -(B (gs i) (gs i)).re) \u2227\n      (\u2200 i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt\n        (gs i) (center i)) \u2227\n      g = packetSum (fun _ => (1 : \u2102)) gs \u2227\n      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re =\n        (\u2211 i, \u2211 j, B (gs i) (gs j)).re ",
+      "example_provenance": {
+        "commit": "aacdd511877e3e725dbee05b1167ee38b681ab31",
+        "path": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:research/rh-actual-proof-assembly-20261014"
+      },
+      "role": "unconditional localization and diagonal construction",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "e5425812f471d6838f59091573e5a83e967210da",
+      "sha256": "1357a275c165607b897073b2d95170de563ddde73f79bcbd4d6e023880579cce",
+      "declaration": "riemannHypothesis_of_uniform_actual_fine_mixed_budget",
+      "namespace": [
+        "AEGIS.RHActualUniversalFineGramV1"
+      ],
+      "exact_source_header": "riemannHypothesis_of_uniform_actual_fine_mixed_budget\n    (hbudget :\n      \u2200 (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g \u2192\n        \u2200 (n : \u2115) (gs : Fin (n + 1) \u2192 WeilCompactSmoothGV1),\n          (\u2200 i, (5671 / 3200 : \u211d) * energy (gs i).1 \u2264\n            -(B (gs i) (gs i)).re) \u2192\n          g = packetSum (fun _ => (1 : \u2102)) gs \u2192\n          AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs \u2264\n            (5671 / 3200 : \u211d) * (\u2211 i, energy (gs i).1)) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "aacdd511877e3e725dbee05b1167ee38b681ab31",
+        "path": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:research/rh-actual-proof-assembly-20261014"
+      },
+      "role": "consumer; its uniform all-decompositions premise is falsified separately",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "d9553d6d9e9254c78927dec96dff562b88e5b4b0",
+      "sha256": "e2825c34c52e44158f09c1972af45e8eb63120c2792223488c7f16b3bcd90f86",
+      "declaration": "not_uniformFineMixedBudget",
+      "namespace": [
+        "AEGIS.RHUniformBudgetObstructionV1"
+      ],
+      "exact_source_header": "not_uniformFineMixedBudget : \u00ac UniformFineMixedBudget ",
+      "example_provenance": {
+        "commit": "f8cb6544e9451910fbf1ed5fa71e76a5fa1b747f",
+        "path": "AEGISOverlay/RHUniformBudgetObstructionV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:fix/rh-live-evidence-provenance-20261024"
+      },
+      "role": "existing counterexample; keep distinct from existential budget",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "44bcd22b387d5e9fe5559a31618a63130a09da9d",
+      "sha256": "97b618cab0c6fdda15c62443c80b6925ab051a994a0af00c9f44c7571a1566a9",
+      "declaration": "riemannHypothesis_of_optimized_actual_row_producer",
+      "namespace": [
+        "AEGIS.RHOptimizedSchurGlobalJoinV1"
+      ],
+      "exact_source_header": "riemannHypothesis_of_optimized_actual_row_producer\n    (hselect :\n      \u2200 (g : WeilCompactSmoothGV1)\n        (_hm : WeilMomentConditionsV1 g)\n        (n : \u2115)\n        (gs : Fin (n + 1) \u2192 WeilCompactSmoothGV1)\n        (center : Fin (n + 1) \u2192 \u211d),\n        (\u2200 i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt\n          (gs i) (center i)) \u2192\n        (\u2200 i, (5671 / 3200 : \u211d) * energy (gs i).1 \u2264\n          -(B (gs i) (gs i)).re) \u2192\n        g = packetSum (fun _ => (1 : \u2102)) gs \u2192\n        \u2203 (m : \u2115) (selected : Fin (m + 1) \u2192 WeilCompactSmoothGV1),\n          g = packetSum (fun _ => (1 : \u2102)) selected \u2227\n          (\u2200 i, (5671 / 3200 : \u211d) * energy (selected i).1 \u2264\n            -(B (selected i) (selected i)).re) \u2227\n          \u2203 (c : Fin (m + 1) \u2192 Fin (m + 1) \u2192 \u211d)\n            (w : Fin (m + 1) \u2192 \u211d),\n            (\u2200 i j, 0 \u2264 c i j) \u2227\n            (\u2200 i, c i i = 0) \u2227\n            (\u2200 i j, c i j = c j i) \u2227\n            (\u2200 i, 0 < w i) \u2227\n            (\u2200 i j, i \u2260 j \u2192\n              \u2016B (selected i) (selected j)\u2016 \u2264 c i j *\n                (Real.sqrt (energy (selected i).1) *\n                  Real.sqrt (energy (selected j).1))) \u2227\n            (\u2200 i, \u2211 j, c i j * (w j / w i) \u2264\n              (46688 / 65536 : \u211d))) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "path": "AEGISOverlay/RHOptimizedSchurGlobalJoinV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:integration/rh-k3-source-graft-20261024"
+      },
+      "role": "conditional selected-reconstruction consumer",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "b7b69edd3ab1c2e1857849fbe044060a34389324",
+      "sha256": "18a27efba55c8897dc89bf4cf20a7affc2052e47098bd6163e654467e905b21b",
+      "declaration": "riemannHypothesis_of_canonical_resonance_producer",
+      "namespace": [
+        "AEGIS.RHPrimeFreeRecompositionJoinV1"
+      ],
+      "exact_source_header": "riemannHypothesis_of_canonical_resonance_producer\n    (hresidual :\n      \u2200 (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g \u2192\n        \u2203 (n : \u2115) (gs : Fin (n + 1) \u2192 WeilCompactSmoothGV1)\n          (center : Fin (n + 1) \u2192 \u211d),\n          (\u2200 i, WeilMomentConditionsV1 (gs i)) \u2227\n          (\u2200 i, (5671 / 3200 : \u211d) * energy (gs i).1 \u2264\n            -(B (gs i) (gs i)).re) \u2227\n          (\u2200 i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt\n            (gs i) (center i)) \u2227\n          g = packetSum (fun _ => (1 : \u2102)) gs \u2227\n          \u2203 residual : Fin (n + 1) \u2192 Fin (n + 1) \u2192 \u211d,\n            (\u2200 i j, residual i j = residual j i) \u2227\n            (\u2200 i j, i \u2260 j \u2192\n              \u00ac FineLogFreeGap |center j - center i| \u2192\n              (B (gs i) (gs j)).re \u2264\n                residual i j * (energy (gs i).1 + energy (gs j).1)) \u2227\n            (\u2200 i, (\u2211 j \u2208\n              (Finset.univ : Finset (Fin (n + 1))).erase i,\n                combinedFineCost center residual i j) \u2264\n                  (57430 / 65536 : \u211d))) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "path": "AEGISOverlay/RHPrimeFreeRecompositionJoinV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:integration/rh-k3-source-graft-20261024"
+      },
+      "role": "conditional resonance-row consumer",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "5d5175e588bea6c4aadebc77526973c334322493",
+      "sha256": "b10d63e95c7be36f6d26e71c53e77462a3ec222861e377475ee8c56df958c6cb",
+      "declaration": "riemannHypothesis_of_actual_global_signed_weil",
+      "namespace": [
+        "AEGIS.RHAssemblyV1"
+      ],
+      "exact_source_header": "riemannHypothesis_of_actual_global_signed_weil\n    (hcert : ActualGlobalSignedWeilBudget) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "path": "AEGISOverlay/AEGIS_RH_Unconditional.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:integration/rh-k3-source-graft-20261024"
+      },
+      "role": "conditional actual signed-budget consumer",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "b69b119d99a2a703c8a7068497179f61187ffbda",
+      "sha256": "4668f1bda3ba9dd79af76a803c2084c8dddad0397cbb28a6018b10d2cb4f8da0",
+      "declaration": "final_sign_of_zero_shift_component_dominance_v1",
+      "namespace": [
+        "AEGIS.RHTranslatedKernelDominanceV1"
+      ],
+      "exact_source_header": "final_sign_of_zero_shift_component_dominance_v1\n    (h : ZeroShiftComponentDominanceV1) :\n    AEGIS.RHFinalClosureV1.FinalSignResidualV1 ",
+      "example_provenance": {
+        "commit": "d5fe8333bfb39c1cf9f62b4277ca76a23d94d468",
+        "path": "sovereign-omega-v2/formal/bridges/lean/RHTranslatedKernelDominanceV1.lean",
+        "repository": "Aegis-Omega/AEGIS-OMEGA",
+        "ref": "branch:research/rh-eleven-block-lean-sos-v1"
+      },
+      "role": "conditional actual RKHS component consumer",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "3fac46ae976087f75248662af12966dd04ea6770",
+      "sha256": "34276882e3695562783d7b3a0d4d43ea9926b6b1609c49bc02a8ea0965ecf8c9",
+      "declaration": "finiteDilationMultiplier_ne_zero_of_strict_strip_v10",
+      "namespace": [
+        "AEGIS.WeilFiniteDilationFilterV10"
+      ],
+      "exact_source_header": "finiteDilationMultiplier_ne_zero_of_strict_strip_v10\n    (s : \u2102) (hs0 : 0 < s.re) (hs1 : s.re < 1) :\n    finiteDilationMultiplierV10 s \u2260 0 ",
+      "example_provenance": {
+        "commit": "f081f2ffccbb8e25a855c04211f6e97bc9f94b28",
+        "path": "AegisRH/PR606/Source/WeilFiniteDilationFilterV10.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-actual-krein-factor-join-v1"
+      },
+      "role": "existing nonannihilation proof; do not reprove",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "455dc145b3369806d1eb29047aa8f9ec5ff5c55d",
+      "sha256": "93a1b54858be613b56ee3a2cb95c8d17efe91320e8fba334d7bc550068cb854b",
+      "declaration": "riemannHypothesis_of_window_schur_families",
+      "namespace": [
+        "AEGIS.RHFeshbachWeilClosureV2"
+      ],
+      "exact_source_header": "riemannHypothesis_of_window_schur_families\n    (h : \u2200 n : \u2115, 0 < n \u2192\n      \u2200 g : WeilCompactSmoothGV1,\n        WeilMomentConditionsV1 g \u2192\n        AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g\n          ((n : \u211d) * Real.pi) \u2192\n        PacketSchurFamily g) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "e086507cc17969042586d58e2154134321dadcf0",
+        "path": "AEGISOverlay/RHFeshbachWeilClosureV2.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-trigram-source-recovery-20261012"
+      },
+      "role": "consumer with unsupplied all-window Schur families",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "e4904cdb0ddc1b7001f587331b3cac4f36bf2a37",
+      "sha256": "098ae598246f9c8361aca40980c3d18ed7d9e62fce559c07afd0d11ed9e19150",
+      "declaration": "riemannHypothesis_of_above_693_over_2000_v1",
+      "namespace": [
+        "AEGIS.RHSmallWindowCanonicalJoinV1"
+      ],
+      "exact_source_header": "riemannHypothesis_of_above_693_over_2000_v1\n    (hLarge : \u2200 L : \u211d, (693 / 2000 : \u211d) < L \u2192 WindowArithmeticNonpositiveV1 L) :\n    RiemannHypothesis ",
+      "example_provenance": {
+        "commit": "f081f2ffccbb8e25a855c04211f6e97bc9f94b28",
+        "path": "AegisRH/SmallWindow/RHSmallWindowCanonicalJoinV1.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-actual-krein-factor-join-v1"
+      },
+      "role": "consumer with explicit large-window premise",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    },
+    {
+      "blob": "86ad3eff6321de1d97223a36e515f2bf40f95b09",
+      "sha256": "16fafdf8745f6ccd6745725df725e4745cb617e90ef3f4ebe11ba7474ff07a53",
+      "declaration": "restricted_weil_criterion_v13",
+      "namespace": [
+        "AEGIS.RHRestrictedWeilCriterionV13"
+      ],
+      "exact_source_header": "restricted_weil_criterion_v13 :\n    RestrictedWeilCriterionKernelBridgeV10 ",
+      "example_provenance": {
+        "commit": "f081f2ffccbb8e25a855c04211f6e97bc9f94b28",
+        "path": "AegisRH/PR606/RHRestrictedWeilCriterionV13.lean",
+        "repository": "Aegis-Omega/formal-conjectures",
+        "ref": "branch:proof/rh-actual-krein-factor-join-v1"
+      },
+      "role": "proof of criterion implication, not its antecedent",
+      "source_body_reviewed": true,
+      "fresh_kernel_replay": "NOT_RUN",
+      "transitive_axiom_audit": "NOT_RUN"
+    }
+  ],
+  "rh_proven": false
+}

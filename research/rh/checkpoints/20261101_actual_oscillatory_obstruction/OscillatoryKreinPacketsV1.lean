@@ -1,0 +1,81 @@
+/-
+Copyright 2026 The Formal Conjectures Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-/
+import KreinLogScaleTransportV1
+import Mathlib.Tactic
+
+/-! Construct the two actual moment-zero log-coordinate packets used by
+the oscillatory compression analysis. This file proves the moment and
+support statements, not the asymptotic Weil quadratic-form inequality. -/
+
+open Set MeasureTheory
+open scoped ContDiff
+set_option autoImplicit false
+noncomputable section
+
+namespace AEGIS.OscillatoryKreinPacketsV1
+open AEGIS.RHLocalKreinPartitionV1 AEGIS.KreinLogScaleTransportV1
+
+def oscillatoryFactor (φ : ℝ → ℂ) (T : ℝ) (x : ℝ) : ℂ :=
+  φ x * (Real.cos (T * x) : ℂ)
+
+theorem oscillatoryFactor_smooth (φ : ℝ → ℂ) (hφ : ContDiff ℝ ∞ φ) (T : ℝ) :
+    ContDiff ℝ ∞ (oscillatoryFactor φ T) := by
+  unfold oscillatoryFactor
+  exact hφ.mul (Complex.ofRealCLM.contDiff.comp
+    (Real.contDiff_cos.comp (contDiff_const.mul contDiff_id)))
+
+theorem oscillatoryFactor_compact (φ : ℝ → ℂ) (hc : HasCompactSupport φ) (T : ℝ) :
+    HasCompactSupport (oscillatoryFactor φ T) := by
+  change HasCompactSupport (φ * fun x : ℝ => (Real.cos (T * x) : ℂ))
+  exact hc.mul_right
+
+/-- Both source and corrected scaled packets satisfy the actual two moments. -/
+theorem oscillatory_source_and_scaled_moments (φ : ℝ → ℂ)
+    (hφ : ContDiff ℝ ∞ φ) (hc : HasCompactSupport φ) (T s : ℝ) (hs : s ≠ 0) :
+    (let G := kreinAtom (oscillatoryFactor φ T)
+     (∫ x : ℝ, (Real.exp (-x / 2) : ℂ) * G x) = 0 ∧
+       (∫ x : ℝ, (Real.exp (x / 2) : ℂ) * G x) = 0) ∧
+    (let Gs := kreinAtom (logScale s (oscillatoryFactor φ T))
+     (∫ x : ℝ, (Real.exp (-x / 2) : ℂ) * Gs x) = 0 ∧
+       (∫ x : ℝ, (Real.exp (x / 2) : ℂ) * Gs x) = 0) := by
+  have hF := oscillatoryFactor_smooth φ hφ T
+  have hC := oscillatoryFactor_compact φ hc T
+  constructor
+  · exact kreinAtom_moments _ hF hC
+  · exact kreinAtom_moments _ (hF.comp (contDiff_const.mul contDiff_id))
+      (hC.comp_homeomorph (Homeomorph.mulLeft₀ s hs))
+
+/-- Applying the moment-killing differential operator creates no new support. -/
+theorem oscillatory_source_support (φ : ℝ → ℂ) (T : ℝ) :
+    tsupport (kreinAtom (oscillatoryFactor φ T)) ⊆ tsupport φ := by
+  apply (kreinAtom_support _).trans
+  exact tsupport_mul_subset_left
+
+/-- Compression also introduces no support outside the scaled original factor. -/
+theorem oscillatory_scaled_support (φ : ℝ → ℂ) (T s : ℝ) :
+    tsupport (kreinAtom (logScale s (oscillatoryFactor φ T))) ⊆
+      tsupport (logScale s φ) := by
+  apply (kreinAtom_support _).trans
+  change tsupport ((logScale s φ) * (fun x : ℝ => (Real.cos (T * (s * x)) : ℂ))) ⊆ _
+  exact tsupport_mul_subset_left
+
+end AEGIS.OscillatoryKreinPacketsV1
+
+#print axioms AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_smooth
+#print axioms AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_compact
+#print axioms AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_and_scaled_moments
+#print axioms AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_support
+#print axioms AEGIS.OscillatoryKreinPacketsV1.oscillatory_scaled_support

@@ -1,0 +1,305 @@
+name: RH CvS windows L = 6/5, 4/3 and 11/8 from source
+
+# Compiles the whole actual-row chain behind window_L65 from source in one job: the Krein ring
+# closure, the source row bridge, the full row table, the actual inputs, the 141-moment join and
+# the K3 trace certificate. The same DAG also carries window_L43 (2r <= 4/3) and window_L118
+# (2r <= 11/8): the tau chains, the relative row certificates and their exhaustion joins. Nothing
+# is restored from earlier runs, so it does not depend on expired artifacts. The AEGIS Math core
+# root (research/rh/aegis_math) is compiled in the same DAG. Not RH.
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/rh-cvs-window-l65-source.yml
+      - research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/*.py
+      - research/rh/checkpoints/20261020_row_budget_bridge/CvSWindowL65V1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/RHWindowL65ExhaustionV1.lean
+      - research/rh/checkpoints/20261020_row_budget_bridge/CvSActualMomentWindowJoinV1.lean
+      - research/rh/checkpoints/20261026_window_l43/*.lean
+      - research/rh/checkpoints/20261031_window_l118/*.lean
+      - research/rh/aegis_math/*.lean
+      - research/rh/moment_killer_v1/*.lean
+      - AEGISOverlay/RHWidthQuantifierObstructionV1.lean
+      - AEGISOverlay/RHEulerOperatorObstructionV1.lean
+      - research/rh/feshbach_lean_v1/CvS*L118*.lean
+      - research/rh/feshbach_lean_v1/CvSRelRow*.lean
+      - research/rh/feshbach_lean_v1/tools/gen_rr43.py
+      - research/rh/feshbach_lean_v1/tools/cert43.py
+      - research/rh/feshbach_lean_v1/tools/emit_rr43.py
+      - research/rh/feshbach_lean_v1/tools/boxes43.py
+      - research/rh/feshbach_lean_v1/tools/gen_rr118.py
+      - research/rh/feshbach_lean_v1/tools/emit_rr118.py
+      - research/rh/feshbach_lean_v1/tools/boxes118.py
+  workflow_dispatch:
+
+concurrency:
+  group: rh-cvs-window-l65-source-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  LI_CRITERION_SHA: 35df682f3b709ffe5fbcfdd452dfa964bd622b87
+  LI_CRITERION_ORIGINAL_MATHLIB_SHA: de5ce8a9a66a4aa68a9bdbb35b63a06d34d9ca11
+  FACTORIZATION_SOURCE_BLOB: 10d38a54580ff72d698a30be64fe1c3c44f862a2
+
+jobs:
+  window-l65-source:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 340
+    steps:
+      - name: Checkout exact head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Bind pins
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          elan_archive="$RUNNER_TEMP/elan-v1.4.2-x86_64-unknown-linux-gnu.tar.gz"
+          curl --fail --silent --show-error --location \
+            --retry 4 --retry-all-errors --retry-delay 5 \
+            --connect-timeout 20 --max-time 180 \
+            --output "$elan_archive" \
+            https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz
+          test -s "$elan_archive"
+          tar -tzf "$elan_archive" >/dev/null
+          tar -xzf "$elan_archive"
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      # Same provider recipe as rh-cvs-actual-row-replay.yml.
+      - name: Checkout immutable PR51 source for the pinned provider recipe
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: e279d5765b2dc0cb8b4ec4f62b8db96b4dc69121
+          path: .baseline
+          persist-credentials: false
+      - name: Checkout exact external provider
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: nicholasbulka/li-criterion-rh-equivalence-lean
+          ref: ${{ env.LI_CRITERION_SHA }}
+          path: .li-provider
+          persist-credentials: false
+      - name: Restore pinned provider build
+        uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .li-provider/.lake/build
+          key: rh-li-provider-v1-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ env.LI_CRITERION_SHA }}-${{ env.MATHLIB_SHA }}-${{ env.FACTORIZATION_SOURCE_BLOB }}
+      - name: Build pinned LiCriterion/Hadamard provider with the PR53 recipe
+        run: python3 research/rh/m8_kernel_v1/replay.py provider
+
+      - name: Checkout pinned AEGIS V13 bridge source for actual fine Gram join
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Aegis-Omega/AEGIS-OMEGA
+          ref: 2c3d041b633147ec97c7ef753aa9d157a47bb9f5
+          path: .aegis
+          fetch-depth: 1
+          persist-credentials: false
+
+      # The two generated modules of the L = 4/3 row certificate are not committed: they are
+      # produced here from the committed tau and diagonal boxes (untrusted generators, pinned
+      # mpmath) and every table in them is rechecked by the kernel.
+      - name: Generate the L = 4/3 row data from the committed boxes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv "$RUNNER_TEMP/rr43venv"
+          PY="$RUNNER_TEMP/rr43venv/bin/python"
+          "$PY" -m pip install --quiet mpmath==1.3.0
+          T="$GITHUB_WORKSPACE/research/rh/feshbach_lean_v1/tools"
+          W="$RUNNER_TEMP/rr43"
+          mkdir -p "$W/out"
+          ( cd "$W" && "$PY" "$T/gen_rr43.py" && "$PY" "$T/cert43.py" 64 && "$PY" "$T/emit_rr43.py" "$W/out" )
+          for m in CvSRelRowDataL43V1 CvSRelRowCertL43V1; do
+            test ! -e "research/rh/feshbach_lean_v1/$m.lean"
+            cp "$W/out/$m.lean" "research/rh/feshbach_lean_v1/$m.lean"
+          done
+          # The local run that produced the proofs generated the same bytes.
+          sha256sum -c - <<'SUMS'
+          b0563dfac98d4acfec9f5c4d6d8f8d49723bbb74eff7f257def55548805c2401  research/rh/feshbach_lean_v1/CvSRelRowDataL43V1.lean
+          50603b6eb3463eaf848110be56c553080d4a4caaa9ca2a11ff3346916e5ff7df  research/rh/feshbach_lean_v1/CvSRelRowCertL43V1.lean
+          SUMS
+
+      # The same for L = 11/8 (NP = 250, kappa = 58); cert43.py is shared.
+      - name: Generate the L = 11/8 row data from the committed boxes
+        shell: bash
+        run: |
+          set -euo pipefail
+          PY="$RUNNER_TEMP/rr43venv/bin/python"
+          T="$GITHUB_WORKSPACE/research/rh/feshbach_lean_v1/tools"
+          W="$RUNNER_TEMP/rr118"
+          mkdir -p "$W/out"
+          ( cd "$W" && "$PY" "$T/gen_rr118.py" && "$PY" "$T/cert43.py" 64 && "$PY" "$T/emit_rr118.py" "$W/out" )
+          for m in CvSRelRowDataL118V1 CvSRelRowCertL118V1; do
+            test ! -e "research/rh/feshbach_lean_v1/$m.lean"
+            cp "$W/out/$m.lean" "research/rh/feshbach_lean_v1/$m.lean"
+          done
+          sha256sum -c - <<'SUMS'
+          6fac652b2cb22b853854aebd1c76b76beee10b6673a9d850d3e84ddfd21c6ebf  research/rh/feshbach_lean_v1/CvSRelRowDataL118V1.lean
+          b65d52e0b9a39a515969a7f006b8086f57aaba5f625794563cc492f83ea8555c  research/rh/feshbach_lean_v1/CvSRelRowCertL118V1.lean
+          SUMS
+
+      - name: Resolve the source DAG of window_L65, window_L43 and window_L118
+        shell: bash
+        run: |
+          set -euo pipefail
+          B=research/rh/checkpoints/20261020_row_budget_bridge
+          W=research/rh/checkpoints/20261026_window_l43
+          W2=research/rh/checkpoints/20261031_window_l118
+          if grep -n -E '\bsorry\b|\badmit\b|^axiom ' "$B/CvSWindowL65V1.lean" "$B/RHWindowL65ExhaustionV1.lean" \
+               "$W"/*.lean "$W2"/*.lean research/rh/feshbach_lean_v1/CvSRelRow*.lean \
+               research/rh/feshbach_lean_v1/CvS*L118*.lean research/rh/aegis_math/*.lean; then exit 1; fi
+          # Each exhaustion join imports its window, so the DAG contains both window chains.
+          python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1 \
+            RHWindowL118ExhaustionV1 RHWindowL118ActualFineGramJoinV1 AegisMathCoreV1 \
+            CvSTraceIntegralL118V1 CvSTauFarL118V1
+
+      - name: Compile every module from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -u research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/build.py \
+            "$GITHUB_WORKSPACE/.lake/build/lib/lean" 3 2>&1 | tee window-l65-build.log
+
+      - name: Kernel-check generated L32 trace (PR92 exact head only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 92
+        shell: bash
+        env:
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_HEAD"
+          C="$GITHUB_WORKSPACE/research/rh/checkpoints/20261110_window_l32_trace_port_v1"
+          OUT="$GITHUB_WORKSPACE/l32-kernel"
+          mkdir -p "$OUT/lib"
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceDistV1.lean)" = 96484b41ab9712fec4d4118848806e9b808a40ed
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceCellL118V1.lean)" = 5e8bfe4f2866dae1f33307f996eb9180560b77ce
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceIntegralL118V1.lean)" = 5963e2c0ded7b1c0f943eec85a449cfc14a1311c
+          test "$(git rev-parse HEAD:research/rh/checkpoints/20261031_window_l118/gen_cert118.py)" = 99cc4b4f628beedc22b407d995f94481291fc66f
+          python3 - "$C/cert32_totals.json" <<'PY'
+          import json,sys
+          v=json.load(open(sys.argv[1]))
+          assert len(v)==73 and all(type(x) is int and x>=0 for x in v)
+          assert sum(v)==296053 and sum(v)<=300000
+          print('L32_RATIONAL_BUDGET',sum(v),'/100000')
+          PY
+          python3 "$C/port_trace_l32.py" "$GITHUB_WORKSPACE" "$OUT"
+          python3 "$C/make_gen_cert32.py" "$GITHUB_WORKSPACE/research/rh/checkpoints/20261031_window_l118/gen_cert118.py" > "$OUT/gen_cert32.py"
+          cp "$C/CvSExpL32V1.lean" "$C/CvSTraceM4SlackV1.lean" "$OUT/"
+          ( cd "$OUT"; sha256sum -c - <<'SHAS'
+          c1e790370667117b59b4aea45c64ee41b968ce12193bf00a57a39805c0ff253d  CvSTraceDistK150V1.lean
+          90c4075792df06c14935e82c27c90071b1259b96e6408ab67ddb4501d3628b36  CvSTraceCellL32V1.lean
+          e95afa4a5ec479b3ac8c1c09d257314ff25ef43b4ba22c8bb869e1e07ef8d47a  CvSTraceIntegralL32V1.lean
+          411f0949d64de7c6c37261e2afd2b84e9ad8e657d58fee4a37c7b5755e089bf4  gen_cert32.py
+          80cfe37c490616cad438962cda767ffa5630fb1552dabd3cd5b062c122fd0f22  CvSExpL32V1.lean
+          788c314430ba1e5505edf8422749dc99d722884509e9cddbda550735682d4c75  CvSTraceM4SlackV1.lean
+          SHAS
+          )
+          python3 "$OUT/gen_cert32.py" "$OUT/CvSTraceCertL32V1.lean" "$C/cert32_totals.json"
+          python3 - "$OUT/CvSTraceCertL32V1.lean" "$OUT" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          src, out = Path(sys.argv[1]), Path(sys.argv[2])
+          s = src.read_text()
+          ns = 'AEGIS.CvSTraceCertL32V1'
+          assert s.count('namespace ' + ns) == s.count('end ' + ns) == 1
+          assert 'import CvSTraceIntegralL32V1' in s
+          assert 'theorem trace_premises_L32' in s
+          assert not re.search(r'(?m)^[ \t]*(sorry|admit|native_decide)\b|:=\s*(?:by\s*)?(?:sorry|admit|native_decide)\b', s)
+          a, b, c = (s.index(t) for t in ('theorem K0_ok ', 'theorem c0_ok ', 'theorem all_app '))
+          assert a < b < c
+          head, prefix, body, tail = s[:a], s[a:b], s[b:c], s[c:]
+          nsp = head.index('namespace ' + ns) + len('namespace ' + ns)
+          opens = head[nsp:head.index('def nsqrtAux', nsp)]
+          starts = list(re.finditer(r'(?m)^theorem c(\d+)_ok :', body))
+          assert [int(x[1]) for x in starts] == list(range(73))
+          parts = [body[m.start():starts[i+1].start() if i+1 < 73 else len(body)].strip()
+                   for i, m in enumerate(starts)]
+          assert all(t.count('decide +kernel') == 1 and t.count('theorem ') == 1 for t in parts)
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'CvSTraceCertL32BaseV1.lean').write_text(head + '\nend ' + ns + '\n')
+          env = '\nopen MeasureTheory\nnoncomputable section\nnamespace ' + ns + opens + '\nset_option maxRecDepth 100000\n'
+          groups = ((0,11),(12,23),(24,35),(36,45),(46,54),(55,63),(64,72))
+          for i,(lo,hi) in enumerate(groups):
+              (out / f'CvSTraceCertL32Chunk{i}V1.lean').write_text(
+                  'import CvSTraceCertL32BaseV1\n' + env + '\n\n'.join(parts[lo:hi+1]) +
+                  '\nend ' + ns + '\n#print axioms ' + ns + f'.c{lo}_ok\n')
+          final = 'import CvSTraceCertL32BaseV1\n' + ''.join(
+              f'import CvSTraceCertL32Chunk{i}V1\n' for i in range(len(groups))) + env + prefix + tail
+          assert final.count('theorem trace_premises_L32') == 1
+          (out / 'CvSTraceCertL32FinalV1.lean').write_text(final)
+          print('L32_SPLIT_READY', len(starts), 'chunks', len(groups), 'groups; kernel check required')
+          PY
+          export LEAN_PATH="$OUT/lib:$GITHUB_WORKSPACE/.lake/ringout:$GITHUB_WORKSPACE/.lake/build/lib/lean:$GITHUB_WORKSPACE/.li-provider/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
+          for m in CvSExpL32V1 CvSTraceM4SlackV1 CvSTraceDistK150V1 CvSTraceCellL32V1 CvSTraceIntegralL32V1 CvSTraceCertL32BaseV1 CvSTraceCertL32Chunk0V1 CvSTraceCertL32Chunk1V1 CvSTraceCertL32Chunk2V1 CvSTraceCertL32Chunk3V1 CvSTraceCertL32Chunk4V1 CvSTraceCertL32Chunk5V1 CvSTraceCertL32Chunk6V1 CvSTraceCertL32FinalV1; do
+            echo "L32_KERNEL_START $m"
+            timeout -k 30s 1200s lean --trust=0 -DwarningAsError=true -DmaxSynthPendingDepth=3 -DautoImplicit=false -o "$OUT/lib/$m.olean" "$OUT/$m.lean" 2>&1 | tee "$OUT/$m.log"
+            echo "L32_KERNEL_PASS $m"
+          done
+          python3 - "$OUT" "$SOURCE_HEAD" <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,sys
+          out,head=Path(sys.argv[1]),sys.argv[2]
+          files=sorted(out.glob('lib/*.olean'))
+          assert len(files)==14, f"Expected 14 olean modules, got {len(files)}"
+          permitted={'propext','Classical.choice','Quot.sound'}
+          for log in out.glob('*.log'):
+              txt=log.read_text()
+              assert 'error:' not in txt and 'sorryAx' not in txt, log
+              for group in re.findall(r'depends on axioms:\s*\[([^\]]*)\]',txt):
+                  actual={z.strip() for z in group.split(',') if z.strip()}
+                  assert actual <= permitted, (str(log),actual-permitted)
+          assert 'trace_premises_L32' in (out/'CvSTraceCertL32FinalV1.log').read_text()
+          receipt={'schema':'aegis.rh.l32.strict_kernel.v1','source_head':head,
+                   'module_count':len(files),'chunk_count':73,'cells':3123,
+                   'rational_trace_bound':'296053/100000',
+                   'strict_lean_replay':'PASS','canonical_RH':'OPEN',
+                   'olean_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}
+          (out/'L32_KERNEL_RECEIPT.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
+          print('L32_KERNEL_ALL_PASS',len(files))
+          PY
+      - name: Audit axioms of every module
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/audit.py
+
+      - name: Upload receipt and logs
+        if: always()
+        continue-on-error: true
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: window-l65-source-${{ github.sha }}
+          retention-days: 7
+          include-hidden-files: true
+          if-no-files-found: warn
+          path: |
+            WINDOW_L65_SOURCE_RECEIPT.json
+            window-l65-build.log
+            .lake/real_plan.json
+            .lake/real_status.json
+            .lake/reallogs/*.log
+            l32-kernel/*.log
+            l32-kernel/L32_KERNEL_RECEIPT.json

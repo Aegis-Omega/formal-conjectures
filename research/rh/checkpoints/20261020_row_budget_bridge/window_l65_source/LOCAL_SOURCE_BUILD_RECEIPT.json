@@ -1,0 +1,53 @@
+{
+ "schema": "aegis.rh.window_l65.local_source_build.v1",
+ "built_from_commit": "bd12c0cd5d871e0b8977f53b771894e4de5a1a15",
+ "local_source_edit": "CvSActualMomentWindowJoinV1: removed the unimported namespace AEGIS.CvSWindowL12V1 from one open command. The K1 open line was already present at this commit. The join pushed here has the same code.",
+ "lean": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+ "mathlib": "0df444a360eaa60ab8c11dca51a86af692955474",
+ "modules_compiled_from_source": 1051,
+ "modules_passed": 1051,
+ "binary_reuse": "none",
+ "axiom_roots_audited": 3684,
+ "unexpected_axioms": [],
+ "sorry_modules": [],
+ "required_roots": {
+  "AEGIS.CvSWindowL65V1.window_L65": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSTraceCertL65V1.trace_premises_L65": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSActualMomentWindowJoinV1.window_of_actual_rows_moment": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSActualRowConsumerV1.hfin": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSActualRowConsumerV1.hB": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSActualGramWindowV1.window_of_actual_rows": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ],
+  "AEGIS.CvSActualLiteralInputsV1.actual_budgetEnergy_margin": [
+   "Classical.choice",
+   "Quot.sound",
+   "propext"
+  ]
+ },
+ "source_list_sha256": "1d19b7203f54412bdd35feecc02c717f5bd32b44639b2aefdc7ae4179ad73454",
+ "status": "PASS",
+ "note": "Local 4-core run with research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/{plan,build,audit}.py. The workflow rh-cvs-window-l65-source.yml repeats it on the PR head. One fixed window (2r <= 6/5); not RH."
+}

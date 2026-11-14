@@ -1,0 +1,74 @@
+# Where the window route stands (2026-11-13)
+
+Evidence kinds: `lean_kernel` (local) for the lab windows; `literature` and `external_claim` for the
+papers below (2026 preprints are `external_claim`; nothing here is promoted). **RH remains OPEN.**
+
+## The lab's windows
+
+`RiemannHypothesis ↔ ∀ L > L₀, WindowArithmeticNonpositiveV1 L` (Mathlib's statement, through
+`V13Scratch.final_sign_iff_rh_v13` and `WeilWindowExhaustionV1`), where the window predicate is the
+Weil (Bombieri) sign inequality for compact-smooth packets with two moment conditions whose
+log-lifted support lies in `[−L, L]`; the autocorrelation then lives in `[−2L, 2L]` and only prime
+powers with `log n < 2L` enter.
+
+| frontier `L₀` | window `2r ≤ 2L₀` | prime powers | status |
+|---|---|---|---|
+| `11/16 = 0.6875` | `11/8` | 2, 3 | lab, earlier |
+| `3/4` | `3/2` | 2, 3, 4 | `../20261112_window_l32_v1/` |
+| `49/64 ≈ 0.766` | `49/32` | 2, 3, 4 | `../20261112_window_l4932_v1/` (default trust and `--trust=0`) |
+| `31/40 = 0.775` | `31/20` | 2, 3, 4 | `../20261112_window_l3120_v1/` (default trust and `--trust=0`) |
+| `39/50 = 0.78` | `39/25` | 2, 3, 4 | `../20261113_window_l3925_v1/` (default trust; `--trust=0` running) |
+
+## The lab's interval-arithmetic certificates (not Lean)
+
+`../../aegis_source_0c1477f/research/feshbach_arb_v2/` (Krein LP + Feshbach, Arb; status
+`INTERVAL_CERTIFIED_NOT_LEAN`): `Q(G) ≥ μ‖G‖²` for every moment-zero `G` in `L²[0, ℓ]`, with
+`ℓ = 1.2, 1.3, 1.4, 1.6, 1.8` and `μ = 5·10⁻⁵, 2.1·10⁻⁶, 5·10⁻⁸, 4.5·10⁻¹², 4·10⁻¹⁷` (prime powers up to
+5 at `ℓ = 1.8`). Here `ℓ` is the support length, so `ℓ = 2L₀`: these reach `L₀ = 0.9`, beyond the
+Lean frontier `0.78` and beyond Zhu's `0.8` below, but for the moment-zero (pole-free) class, which
+the receipts mark as not directly comparable with Zhu's full form. Their unformalised steps (listed in
+each `RECEIPT.json`): the CvS matrix as the restricted Weil form, the hat Krein pairing, the Feshbach
+inequality and the high-order tail bound; the `ℓ = 1.6` run uses `NP = 16000` rows.
+
+## Literature in the same normalization
+
+* Yoshida (1992) and Connes–Consani (2021): positivity for `2L ≤ log 2` (no prime term).
+* Zhu, arXiv:2608.24827 v2 (Sep 2026, preprint): certified interval-arithmetic positivity
+  `Q(f) ≥ 8.9·10⁻¹⁸ ‖f‖²` for `supp f ⊆ [−0.8, 0.8]` (autocorrelation support 1.6), complex tests
+  included; a two-sided enclosure `8.9·10⁻¹⁸ ≤ λ*(0.8) ≤ 2.27·10⁻¹⁷`; certified upper bounds for the
+  window floor `λ*(L)` down to `3.2·10⁻²⁸³` at `L = 2`, fitted by
+  `−ln λ*(L) ≃ 2π² N(T*)/ln N(T*)`, `T* = 2πe^{2L}` (doubly exponential decay); and a barrier theorem:
+  certificates that bound the prime comb pointwise need frequencies up to `2π·exp(A_L)` with
+  `A_L ~ 4e^L`, so their size grows doubly exponentially. An earlier support-2.38 claim is retracted
+  there.
+* Liu, "Certified Weil positivity beyond the unit window" (Sep 2026, preprint): computer-assisted
+  bounds `2⁻¹⁵¹` at half-width 1 and `2⁻⁴⁹¹⁶²` at half-width `17/16` (prime power 8 included); no
+  proof-assistant treatment.
+
+## Reading
+
+1. The lab's formal frontier (0.78) is below its own interval certificates (0.9,
+   moment-zero class) and below the papers (0.8 by interval arithmetic; 1.0625 claimed). What the lab
+   adds is the Lean kernel check of a complete chain to Mathlib's `RiemannHypothesis`; neither paper
+   has one. Bringing the `ℓ = 1.6` and `1.8` Arb certificates into Lean is the largest formal step
+   available (to `L₀ = 0.9`).
+2. The window floor `λ*(L)` collapses doubly exponentially in `L`, and every certificate must
+   resolve it; the lab's own data agree in kind (the row certificate needed `NP = 250` at `L = 0.69`,
+   `900` at `0.75`, `2000` at `0.775` and `0.78`, and tighter `τ` boxes at each step; mirror runs in
+   `../20261112_window_l3120_v1/FEASIBILITY_3120.log` and `../20261113_window_l3925_v1/FEASIBILITY_3925.log`).
+3. No sequence of window certificates proves RH: the windows are infinitely many and their cost
+   grows faster than any exponential. By Zhu's barrier theorem, going past pointwise envelopes needs
+   an arithmetic statement (no near-alignment of the phases `t log p`), which is open and of the same
+   strength as zero-density information.
+
+## Next steps that keep their value
+
+* Finish the 39/25 `--trust=0` receipt (31/20 is done at both trust levels); stop extending this route there.
+* The exact Gram tail of `../../feshbach_lean_v1/CvSGramTailV1.lean` also shortens the lab's Arb Feshbach
+  certificates (`../20261113_pr_survey_v1/`: 3000 rows instead of 16000 at support 1.6).
+* Formalize Zhu's one-stroke reduction (frequency split plus one Legendre block) in Lean. At
+  `L = 0.8` it needs a 200×200 block at 50 digits, far smaller than the lab's row certificate,
+  and would give a kernel-checked match of the best certified range. It would not prove RH.
+* The arithmetic question behind the barrier (quantitative non-alignment of `t log p` on bands of
+  width about `1/L`) is the only lever that changes the growth law. It is a research problem, not a
+  computation.

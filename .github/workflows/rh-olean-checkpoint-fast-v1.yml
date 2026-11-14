@@ -1,0 +1,89 @@
+# Copyright 2026 The Formal Conjectures Authors.
+# SPDX-License-Identifier: Apache-2.0
+name: RH OLEAN checkpoint integrity (fast)
+
+# Fast validation only. This does not stand in for Lean kernel compilation.
+# Push coverage intentionally includes the existing PR #92 branch, because
+# GitHub's PR-only checks have not been returned for recent exact heads.
+on:
+  push:
+    branches:
+      - 'fix/rh-live-evidence-provenance-20261024'
+    paths:
+      - 'scripts/rh_restore_source_bound_oleans.py'
+      - 'scripts/test_rh_restore_source_bound_oleans.py'
+      - 'scripts/test_rh_consolidated_olean_checkpoint.py'
+      - 'scripts/rh_verify_olean_recovery.py'
+      - 'scripts/test_rh_verify_olean_recovery.py'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
+      - 'research/rh/consolidated_v1/build.py'
+      - '.github/workflows/rh-olean-checkpoint-fast-v1.yml'
+  pull_request:
+    paths:
+      - 'scripts/rh_restore_source_bound_oleans.py'
+      - 'scripts/test_rh_restore_source_bound_oleans.py'
+      - 'scripts/test_rh_consolidated_olean_checkpoint.py'
+      - 'scripts/rh_verify_olean_recovery.py'
+      - 'scripts/test_rh_verify_olean_recovery.py'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
+      - 'research/rh/consolidated_v1/build.py'
+      - '.github/workflows/rh-olean-checkpoint-fast-v1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-olean-checkpoint-fast-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  checkpoint-integrity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact candidate head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Verify exact source and Python syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
+          python3 --version
+          python3 -m py_compile \
+            scripts/rh_restore_source_bound_oleans.py \
+            scripts/test_rh_restore_source_bound_oleans.py \
+            scripts/test_rh_consolidated_olean_checkpoint.py \
+            scripts/rh_verify_olean_recovery.py \
+            scripts/test_rh_verify_olean_recovery.py \
+            research/rh/consolidated_v1/build.py
+          bash -n scripts/rh_pr63_proved_window_prebuild.sh
+
+      - name: Run checkpoint corruption and transitive DAG regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p evidence-olean-checkpoint
+          python3 -m unittest discover -s scripts \
+            -p 'test_rh_*olean*.py' -v \
+            2>&1 | tee evidence-olean-checkpoint/tests.log
+          printf 'exact_head=%s\n' "$(git rev-parse HEAD)" \
+            > evidence-olean-checkpoint/head.txt
+          printf '%s\n' 'STATUS=VERIFIED_CHECKPOINT_LOGIC_ONLY' \
+            'LEAN_KERNEL_REPLAY=NOT_ASSESSED' \
+            'UNCONDITIONAL_RH=NOT_ASSESSED' \
+            > evidence-olean-checkpoint/status.txt
+
+      - name: Publish small exact-head receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-olean-checkpoint-fast-${{ github.run_id }}
+          path: evidence-olean-checkpoint/
+          if-no-files-found: warn
+          retention-days: 7

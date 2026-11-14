@@ -1,0 +1,50 @@
+{
+  "scope": "all payload files except this manifest and the out-of-band ZIP/receipt",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2112,
+      "sha256": "972b62bc61340cbc8c35212e661abe6642b7bdac9b16ed56ac203f26f274e7e5"
+    },
+    {
+      "path": "RH_FINAL_EVIDENCE.json",
+      "bytes": 2178,
+      "sha256": "3ddcd4dd4093408318985418e849ca77d89b47f4dfbb1d22f12dc2b98cd5f48d"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 6267,
+      "sha256": "3b88b2e30e72e86fc797d1d3724c8c2c2c780231d396a8989e28eb3cec005c49"
+    },
+    {
+      "path": "coq_composition/SCOPED_READY_PRODUCER_RESULT.md",
+      "bytes": 5345,
+      "sha256": "efd1e6eb1b7725881e6a0a90073242350f2604685fb2192e35435a09e78307d6"
+    },
+    {
+      "path": "direct_eleven/DIRECT_EXISTING_SOURCE_COMPOSITION.md",
+      "bytes": 9436,
+      "sha256": "f83a490f1faf8431426adfa219b6739a32e428f95a7a431facb5b1bdb58ccc44"
+    },
+    {
+      "path": "direct_eleven/INDEPENDENT_DIRECT_ELEVEN_REVIEW.md",
+      "bytes": 6776,
+      "sha256": "544f2555202eee4928ead215f0619e8fc57a657f6060c9ee27259e3c8c85e014"
+    },
+    {
+      "path": "signed_sectors/ACTUAL_LOG3_INDEPENDENT_SHAPES.md",
+      "bytes": 12830,
+      "sha256": "9511779bad0812e381e9f9e08605241bc9a5f07ae48bd175d7a95db8134eb133"
+    },
+    {
+      "path": "signed_sectors/SIGNED_SECTOR_COMPOSITION.md",
+      "bytes": 10672,
+      "sha256": "256eddb8791729e008af001d5fdd844717e6cdcc433a2d9fed9b2714302703ec"
+    },
+    {
+      "path": "signed_sectors/SOURCE_REUSE_MANIFEST.json",
+      "bytes": 4655,
+      "sha256": "40644d4fe46f74a78843c6c7ef6db3d71053aecc08a15bfb520a37b25176e15a"
+    }
+  ]
+}

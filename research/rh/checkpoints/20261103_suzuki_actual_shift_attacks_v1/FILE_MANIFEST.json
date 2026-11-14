@@ -1,0 +1,106 @@
+{
+  "schema": "AEGIS_SUZUKI_ACTUAL_SHIFT_ATTACK_FILES_V1",
+  "scope": "all payload files except this manifest and the out-of-band archive/receipt",
+  "files": [
+    {
+      "path": "CHECKPOINT_DELTA.md",
+      "bytes": 1575,
+      "sha256": "4209910125f764e2c6552fd60e79703d9120e8eaa0cffbee021baebc3fa6c08c"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3704,
+      "sha256": "1456ecb51e3c69d7bf0beb68463c0983ce587b62f7f244c8deae8ea14ab62bd7"
+    },
+    {
+      "path": "RH_FINAL_EVIDENCE.json",
+      "bytes": 2416,
+      "sha256": "a9e4288850f206cc1de089518a08c1a5b3bb24c36e309aca035dc844b50a7af4"
+    },
+    {
+      "path": "RH_PROOF_GRAPH_DELTA.json",
+      "bytes": 2933,
+      "sha256": "444afb7dcd38c878bf2bf632c6c9364b6b0e638f55fa8c8309b1b3e239f2b3e6"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 1446,
+      "sha256": "e93565fcd93addb3d0daa8886969bb0618020f1305156e0be22a6cc295389d83"
+    },
+    {
+      "path": "omega_attack/DELEGATED_RESOLVENT_REVIEW_RECORD.json",
+      "bytes": 1758,
+      "sha256": "24a4dc66d6a17cd4ec42aecec31ef50a2917a058dde8bcfe4422a20ad7d81bf3"
+    },
+    {
+      "path": "omega_attack/INDEPENDENT_INVERSE_REVIEW.md",
+      "bytes": 7253,
+      "sha256": "6a579b041b02c35b338f8423bbcaa9fb6f18437b2e670bede9dd7162651ea873"
+    },
+    {
+      "path": "omega_attack/OMEGA_ATTACK_SOURCE_MANIFEST.json",
+      "bytes": 3874,
+      "sha256": "3cca8bc6c00ede057798a29fc53d2084d9f2e55aeba4bc94d71945083af7d192"
+    },
+    {
+      "path": "omega_attack/OMEGA_VARIATION_ATTACK.md",
+      "bytes": 8337,
+      "sha256": "51a4eb5db00572af9b0935ca33632ea1c88df5244c5808a11473f163852e6e29"
+    },
+    {
+      "path": "omega_attack/OMEGA_VARIATION_RECEIPT.json",
+      "bytes": 5374,
+      "sha256": "76bf5784a9a263c40f531675861b42729fb177c8f4638f22f5e1176d4bc57b7d"
+    },
+    {
+      "path": "omega_attack/OMEGA_VARIATION_ROOT_REPLAY_384.json",
+      "bytes": 6640,
+      "sha256": "c847ebea760605ee71d8c54bbf7dc2644d12d33f2c20146739c044e7be9927b7"
+    },
+    {
+      "path": "omega_attack/OMEGA_VARIATION_RUN.log",
+      "bytes": 5374,
+      "sha256": "76bf5784a9a263c40f531675861b42729fb177c8f4638f22f5e1176d4bc57b7d"
+    },
+    {
+      "path": "omega_attack/RECENT_HISTORY_INVERSE_OBSTRUCTION.md",
+      "bytes": 4532,
+      "sha256": "67a0b91cf38e050857904bf6e7e7e3e9d89d9ff41a60ad47f0d1697b76026115"
+    },
+    {
+      "path": "omega_attack/UNIFORM_RECENT_HISTORY_OBSTRUCTION.md",
+      "bytes": 4699,
+      "sha256": "607c5d075038e7dc6903781dec35403cf8aab178401cb1e98ba71e77a977d4df"
+    },
+    {
+      "path": "omega_attack/omega_variation_enclosure_v1.py",
+      "bytes": 4730,
+      "sha256": "6bdc4560592ce87002dee0205334ab04c57556371c3b79c9fd3bf75dc96e7029"
+    },
+    {
+      "path": "resolvent_attack/INDEPENDENT_OMEGA_REVIEW.md",
+      "bytes": 3981,
+      "sha256": "9381a4dc5729d98b03fdada20fdfbccfb09d8c066c6786caca8f34b3da3b6c3c"
+    },
+    {
+      "path": "resolvent_attack/INDEPENDENT_RECENT_HISTORY_REVIEW.md",
+      "bytes": 2995,
+      "sha256": "f429ab073927a2cf7df22b1bdf1375a792dd2f221d1844992b929a5e60918514"
+    },
+    {
+      "path": "resolvent_attack/RESOLVENT_ATTACK_RECEIPT.json",
+      "bytes": 1438,
+      "sha256": "714eb30b1c47a493ea1e8738204c27286c21e5298ee04b6b96d6d0591a6f302a"
+    },
+    {
+      "path": "resolvent_attack/RESOLVENT_SAFE_REGION_ATTACK.md",
+      "bytes": 13359,
+      "sha256": "a125ed10b3e735962d4618fc2f551952835c062204becdbb8bd60796bb6c0194"
+    },
+    {
+      "path": "resolvent_attack/ROOT_INDEPENDENT_REVIEW.md",
+      "bytes": 5100,
+      "sha256": "2a6497d27d20c271ce8c5a3aa8e730b719a60b7585482c4a6730c712cbe9510d"
+    }
+  ]
+}

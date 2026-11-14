@@ -1,0 +1,41 @@
+{
+  "repository": "Aegis-Omega/formal-conjectures",
+  "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "lean_version": "4.33.1",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "sources": [
+    {
+      "path": "AEGISOverlay/RHActualElevenLatticeV1.lean",
+      "git_blob": "97a98db382e433488ed20f7df0980f41b20e4cbc",
+      "bytes": 20137,
+      "sha256": "123fc514966112dbacdad41b403ffad8ff6f1764c9597c2c3fd983138a940413"
+    },
+    {
+      "path": "AEGISOverlay/RHWeightedSchurV1.lean",
+      "git_blob": "1860b9a94d1fd5dec368283c6c914effab053cc3",
+      "bytes": 8434,
+      "sha256": "ec96c0da168181203449816efa3f339559c7feef789958e3ca64d03b59fb8cf8"
+    },
+    {
+      "path": "AEGISOverlay/RHActualMixedDefectV1.lean",
+      "git_blob": "f3d1ccf81ba8c9fbefc41886ddf163db10656148",
+      "bytes": 90232,
+      "sha256": "34557b25d8580c9c47691af90eec3b265084cb03e33155ac5d959b7107476fd9"
+    },
+    {
+      "path": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+      "git_blob": "a09243144d5116b75f3274dcf990697f261f51fd",
+      "bytes": 50226,
+      "sha256": "1db180efd9073288fb0ffb71193a1f29a30c04bc9b8340b9245b65d826175d34"
+    },
+    {
+      "path": "research/rh/aegis_source_4d7578e/lean/WeilMixedAlgebraV2.lean.src",
+      "git_blob": "0478a41a967df5340a931f4452f1105078edff16",
+      "bytes": 10401,
+      "sha256": "6259d769cb0f529f62a4ed8fa8446e256883bbb0464976436e921bd40be37c00"
+    }
+  ],
+  "previous_polarization_argument": "research/rh/checkpoints/20261103_independent_packet_shapes_v1/INDEPENDENT_SHAPES_COMPOSITION.md",
+  "new_weight_optimization": false,
+  "global_criterion_reproved": false
+}

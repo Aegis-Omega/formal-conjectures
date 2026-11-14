@@ -1,0 +1,85 @@
+{
+  "rh_proven": false,
+  "final_theorem": null,
+  "exact_head": "80e0f5b4bf3b6ade35a4a597a654a6502b84aeff",
+  "mathematical_source_base": "f8cb6544e9451910fbf1ed5fa71e76a5fa1b747f",
+  "lean_version": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "canonical_target": "_root_.RiemannHypothesis",
+  "external_declaration": "RiemannHypothesis.riemannHypothesis",
+  "external_target_blob": "5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542",
+  "external_placeholder_body_used": false,
+  "axioms": null,
+  "axiom_scope": "No final RH theorem exists to audit. Eight new INTEGER endpoints checked with empty axiom sets; this does not cover analytic theorem.",
+  "kernel_checked_integer_endpoints": 8,
+  "integer_endpoint_axioms": [],
+  "analytic_theorem_kernel_status": "PORT_PENDING",
+  "full_final_dependency_rebuild": "NOT_RUN",
+  "runtime_issue": "Mathlib cache proxy403; stopped; no cache-policy bypass. Pinned coreLean installed and used successfully.",
+  "open_obligations": [
+    "For every integer R>=1, with a=8R*3^R,T=3^(a+8),A0=R*(T+1),B0=2R*T*3^R,J=max(2,3A0,B0*(a+9)), let L_R be the balanced actual CvS low space of dimension2J-2 and V_R the kernel of M[+/-1/2,k],0<=k<J, in the logarithmic form domain supported[-R,R]. Prove for EVERY v in L_R: Q(v)>=sup_{0!=V in V_R}|B_Q(v,V)|^2/Q(V), with the complete actual von Mangoldt prime-power and Archimedean form. Both parity blocks must be covered."
+  ],
+  "formal_followups_separate_from_math": [
+    "port new moment/form-domain/Hermite/source adapters",
+    "rebuild full actual analytic closure and audit its axioms once complete"
+  ],
+  "certificate_hashes": [
+    "4eccbe4e4524bf7bd10d378ab70fb50d58171b0d5f003daa5e21b16e56c380f8",
+    "5ca3b7b33801a0399ac859360a205564a38f2a4e3cf0495737e1e38992a77cc5"
+  ],
+  "independent_replays": [
+    {
+      "file": "/workspace/aegis-nov2-independent/HighMomentKernelReplay/INDEPENDENT_REPLAY_RECEIPT.json",
+      "scope": "six integer endpoints; freshdirectory --trust=0 and leanchecker --fresh; same machine separate process",
+      "status": "PASS"
+    },
+    {
+      "file": "/workspace/aegis-nov2-independent/HighMomentKernelReplay/SYMMETRIC142_CONFIRMED_RECEIPT.json",
+      "scope": "fresh source compile by separate agent; leanchecker --fresh targeted replay explicitly confirmed by root; same machine",
+      "status": "PASS"
+    }
+  ],
+  "remote_changes": [],
+  "prior_checkpoints_modified": false,
+  "not_claimed": [
+    "RH proof",
+    "all corpus semantically audited",
+    "numerical minima are global lower bounds",
+    "all-radius complement is all-radius sign"
+  ],
+  "new_source_compositions": [
+    "correct exponential-moment sinc carrier -> existing CvSAtomInversionV1.atom_sum -> actual139 family at K70",
+    "exact prime-cutoff stabilization on fixed compact support; rigorous inactive-prime frequency-tail bound"
+  ],
+  "recovered_existing_levy_source": {
+    "repo": "Aegis-Omega/AEGIS-OMEGA",
+    "commit": "5ffb5e2b969cd3873160696d88ea593ac28f77e3",
+    "blob": "5729678b1a0293b453ae72c73703890c19d61940",
+    "status": "SOURCE_BODY_READ_DIAGNOSTIC_ONLY"
+  },
+  "new_falsifiers": [
+    "one-evaluation sinc constraint is not the two actual Mellin moments",
+    "full pole-free form negative on box without moments",
+    "actual finite-cutoff Levy jump measure not log-concave",
+    "positive jump energies retain adverse scalar term"
+  ],
+  "recovered_artifact_download": {
+    "id": 13084712793,
+    "status": "PROXY_403_NOT_DOWNLOADED",
+    "run_head": "fe117ae12374199b9102ea0c58e0689bab585a75",
+    "artifact_label_head": "1d7b280786ab9491142627517b6f8fb1570f1ca3",
+    "effective_source_pin_not_established_from_artifact": true
+  },
+  "head_scope": "observed publication parent; selected mathematical source remains pinned separately",
+  "S1_source_head": "d7e6bc7602ccfe4bf5fb094ab595b36eb532d8d5",
+  "new_actual_convergence_producer": {
+    "file": "ACTUAL_CVS_CONVERGENCE_PRODUCER.md",
+    "status": "ORDINARY_PROOF_PRIMARY_RECONSTRUCTION",
+    "projection": "linear compactD0inverse,windowR,degree3^(R^2),actualCvSatoms",
+    "prime_growth_paid": true,
+    "kernel_status": "PORT_PENDING",
+    "independent_agent_review": "NOT_RUN"
+  },
+  "publication_metadata": "Snapshot prepared under explicit user push authorization. Published commit is the Git commit containing this file; frozen inner receipts retain earlier scope."
+}

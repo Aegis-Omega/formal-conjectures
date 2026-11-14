@@ -1,0 +1,1969 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AEGIS Ω Repository Census v1.1",
+  "description": "Source, kernel, mathematical, temporal, and authority evidence, explicitly not an RH admission artifact.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "version",
+    "generated_at",
+    "repository",
+    "exact_head_sha",
+    "census_policy",
+    "preservation_policy",
+    "bitemporal_metadata",
+    "authority_lineage",
+    "semantic_ancestry",
+    "sources",
+    "git_inventory",
+    "source_inventory",
+    "kernel_inventory",
+    "theorem_inventory",
+    "rh_inventory",
+    "math_frontier",
+    "authority_inventory",
+    "summary"
+  ],
+  "properties": {
+    "schema": {
+      "const": "aegis.rh.repository-census"
+    },
+    "version": {
+      "const": "1.1.0"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "repository": {
+      "type": "object",
+      "required": [
+        "full_name",
+        "repository_id"
+      ],
+      "properties": {
+        "full_name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "exact_head_sha": {
+      "$ref": "#/definitions/GitSha"
+    },
+    "census_policy": {
+      "$ref": "#/definitions/CensusPolicy"
+    },
+    "preservation_policy": {
+      "$ref": "#/definitions/PreservationPolicy"
+    },
+    "bitemporal_metadata": {
+      "$ref": "#/definitions/BitemporalMetadata"
+    },
+    "authority_lineage": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AuthorityLineage"
+      }
+    },
+    "semantic_ancestry": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/SemanticAncestry"
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ArtifactSource"
+      }
+    },
+    "git_inventory": {
+      "$ref": "#/definitions/GitInventory"
+    },
+    "source_inventory": {
+      "$ref": "#/definitions/SourceInventory"
+    },
+    "kernel_inventory": {
+      "$ref": "#/definitions/KernelInventory"
+    },
+    "theorem_inventory": {
+      "$ref": "#/definitions/TheoremInventory"
+    },
+    "rh_inventory": {
+      "$ref": "#/definitions/RHInventory"
+    },
+    "math_frontier": {
+      "$ref": "#/definitions/MathFrontier"
+    },
+    "authority_inventory": {
+      "$ref": "#/definitions/AuthorityInventory"
+    },
+    "summary": {
+      "$ref": "#/definitions/Summary"
+    }
+  },
+  "definitions": {
+    "GitSha": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "Sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "NullableCount": {
+      "type": [
+        "integer",
+        "null"
+      ],
+      "minimum": 0,
+      "description": "null means unknown, never estimate from missing evidence."
+    },
+    "EpistemicStatus": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "OPEN",
+        "UNKNOWN",
+        "FAILED",
+        "QUEUED"
+      ]
+    },
+    "TemporalStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "SUPERSEDED",
+        "QUESTIONED",
+        "REVOKED",
+        "UNKNOWN"
+      ]
+    },
+    "ScopeState": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "PARTIAL",
+        "NOT_ASSESSED",
+        "UNKNOWN"
+      ]
+    },
+    "BitemporalMetadata": {
+      "type": "object",
+      "required": [
+        "normative_effect_at",
+        "known_to_evaluator_at",
+        "forensically_admissible_at",
+        "temporal_status",
+        "statement_as_recorded"
+      ],
+      "properties": {
+        "normative_effect_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "known_to_evaluator_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "forensically_admissible_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "temporal_status": {
+          "$ref": "#/definitions/TemporalStatus"
+        },
+        "statement_as_recorded": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "revision_of": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArtifactReference": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "repository",
+        "exact_head_sha",
+        "path",
+        "content_sha256",
+        "evidence_role",
+        "verification_status"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "exact_head_sha": {
+          "$ref": "#/definitions/GitSha"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "git_blob_sha1": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/GitSha"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "content_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "immutable_uri": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "content_kind": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_role": {
+          "type": "string",
+          "enum": [
+            "SOURCE",
+            "KERNEL",
+            "GIT",
+            "MATH",
+            "AUTHORITY",
+            "RH_EVIDENCE_PASSPORT",
+            "CENSUS",
+            "OTHER"
+          ]
+        },
+        "verification_status": {
+          "$ref": "#/definitions/EpistemicStatus"
+        },
+        "bitemporal_metadata": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BitemporalMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ArtifactSource": {
+      "type": "object",
+      "required": [
+        "source_id",
+        "reference",
+        "source_kind",
+        "claims_supported",
+        "time_basis"
+      ],
+      "properties": {
+        "source_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reference": {
+          "$ref": "#/definitions/ArtifactReference"
+        },
+        "source_kind": {
+          "type": "string",
+          "enum": [
+            "GIT_TREE",
+            "GIT_PR",
+            "GIT_REF",
+            "LEAN_ENVIRONMENT",
+            "LEAN_AXIOM_AUDIT",
+            "CI_LOG",
+            "MANIFEST",
+            "MATHEMATICAL_NOTE",
+            "EVIDENCE_PASSPORT",
+            "OTHER"
+          ]
+        },
+        "claims_supported": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "time_basis": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BitemporalMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Supersession": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "kind"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "SUPERSEDES_EXECUTION",
+            "SUPERSEDES_CLAIM",
+            "SUPERSEDES_REPRESENTATION",
+            "SUPERSEDES_AUTHORITY"
+          ]
+        },
+        "reason": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "evidence_reference": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthorityLineage": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "current_authority",
+        "authority_source",
+        "supersedes",
+        "superseded_by",
+        "temporal",
+        "authority_scope"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_authority": {
+          "type": "boolean"
+        },
+        "authority_source": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "supersedes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Supersession"
+          }
+        },
+        "superseded_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "temporal": {
+          "$ref": "#/definitions/BitemporalMetadata"
+        },
+        "authority_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "admission_eligibility": {
+          "type": "string",
+          "enum": [
+            "ELIGIBLE",
+            "HOLD",
+            "UNKNOWN"
+          ]
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorityDecision"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthorityDecision": {
+      "type": "object",
+      "required": [
+        "decision_id",
+        "status",
+        "decided_at",
+        "evidence",
+        "scope"
+      ],
+      "properties": {
+        "decision_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "OPEN",
+            "UNKNOWN",
+            "HOLD",
+            "REVOKED"
+          ]
+        },
+        "decided_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        },
+        "scope": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "SemanticAncestry": {
+      "type": "object",
+      "required": [
+        "artifact_id",
+        "semantic_parents",
+        "semantic_children",
+        "responds_to",
+        "preserves_temporal_voice",
+        "evidentiary_contribution",
+        "temporal"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "semantic_parents": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "semantic_children": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "responds_to": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "preserves_temporal_voice": {
+          "const": true
+        },
+        "evidentiary_contribution": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temporal": {
+          "$ref": "#/definitions/BitemporalMetadata"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CensusPolicy": {
+      "type": "object",
+      "required": [
+        "unknown_counts_must_be_null",
+        "estimates_forbidden",
+        "source_facts_separate_from_kernel_facts",
+        "kernel_facts_separate_from_rh_verdict",
+        "rh_admission_source",
+        "scope"
+      ],
+      "properties": {
+        "unknown_counts_must_be_null": {
+          "const": true
+        },
+        "estimates_forbidden": {
+          "const": true
+        },
+        "source_facts_separate_from_kernel_facts": {
+          "const": true
+        },
+        "kernel_facts_separate_from_rh_verdict": {
+          "const": true
+        },
+        "rh_admission_source": {
+          "const": "RH_EVIDENCE_PASSPORT"
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "SOURCE_ONLY",
+            "PARTIAL_KERNEL",
+            "KERNEL_VERIFIED"
+          ]
+        },
+        "declared_exclusions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence_window": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BitemporalMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "PreservationPolicy": {
+      "type": "object",
+      "required": [
+        "preserve_temporal_voice",
+        "preserve_semantic_ancestry",
+        "preserve_evidentiary_contribution",
+        "authority_change_does_not_delete_history",
+        "immutable_source_receipts",
+        "no_unproven_admission"
+      ],
+      "properties": {
+        "preserve_temporal_voice": {
+          "const": true
+        },
+        "preserve_semantic_ancestry": {
+          "const": true
+        },
+        "preserve_evidentiary_contribution": {
+          "const": true
+        },
+        "authority_change_does_not_delete_history": {
+          "const": true
+        },
+        "immutable_source_receipts": {
+          "const": true
+        },
+        "no_unproven_admission": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "GitCommit": {
+      "type": "object",
+      "required": [
+        "sha",
+        "parents",
+        "repository",
+        "observed_at"
+      ],
+      "properties": {
+        "sha": {
+          "$ref": "#/definitions/GitSha"
+        },
+        "parents": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitSha"
+          }
+        },
+        "repository": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "proof_relevance": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "GitBranch": {
+      "type": "object",
+      "required": [
+        "name",
+        "head_sha",
+        "observed_at",
+        "active"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "head_sha": {
+          "$ref": "#/definitions/GitSha"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "active": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "GitInventory": {
+      "type": "object",
+      "required": [
+        "coverage",
+        "total_commits",
+        "total_prs",
+        "total_branches",
+        "total_source_trees",
+        "commits",
+        "branches",
+        "source_graph"
+      ],
+      "properties": {
+        "coverage": {
+          "$ref": "#/definitions/ScopeState"
+        },
+        "total_commits": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_prs": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_branches": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_source_trees": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "commits": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitCommit"
+          }
+        },
+        "branches": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GitBranch"
+          }
+        },
+        "source_graph": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "historical_commit_census_complete": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "ModuleRecord": {
+      "type": "object",
+      "required": [
+        "path",
+        "source_sha256",
+        "git_blob_sha1",
+        "imports",
+        "declaration_occurrences",
+        "provenance"
+      ],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_sha256": {
+          "$ref": "#/definitions/Sha256"
+        },
+        "git_blob_sha1": {
+          "$ref": "#/definitions/GitSha"
+        },
+        "imports": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "declaration_occurrences": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "TRACKED_SOURCE",
+            "RECOVERED_SOURCE",
+            "ARCHIVED_SOURCE",
+            "UNKNOWN"
+          ]
+        },
+        "namespace_candidate": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bitemporal_metadata": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BitemporalMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceDeclaration": {
+      "type": "object",
+      "required": [
+        "source_local_name",
+        "kind",
+        "module_path",
+        "line",
+        "verification"
+      ],
+      "properties": {
+        "source_local_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module_path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "verification": {
+          "const": "SOURCE_SYNTAX_ONLY"
+        },
+        "declared_axioms": {
+          "type": "null"
+        },
+        "formal_dependencies": {
+          "type": "null"
+        },
+        "body_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceInventory": {
+      "type": "object",
+      "required": [
+        "coverage",
+        "total_modules",
+        "source_declaration_occurrences",
+        "source_theorem_occurrences",
+        "source_axiom_occurrences",
+        "modules",
+        "declarations"
+      ],
+      "properties": {
+        "coverage": {
+          "$ref": "#/definitions/ScopeState"
+        },
+        "total_modules": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "source_declaration_occurrences": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "source_theorem_occurrences": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "source_axiom_occurrences": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "rh_related_source_occurrences": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "modules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModuleRecord"
+          }
+        },
+        "declarations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SourceDeclaration"
+          }
+        },
+        "source_only": {
+          "const": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "KernelDeclaration": {
+      "type": "object",
+      "required": [
+        "identifier",
+        "module",
+        "kind",
+        "type_expr",
+        "axioms",
+        "direct_dependencies",
+        "has_body",
+        "kernel_status",
+        "artifact"
+      ],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type_expr": {
+          "type": "string",
+          "minLength": 1
+        },
+        "axioms": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "direct_dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "has_body": {
+          "type": "boolean"
+        },
+        "kernel_status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "FAILED",
+            "UNKNOWN"
+          ]
+        },
+        "artifact": {
+          "$ref": "#/definitions/ArtifactReference"
+        },
+        "type_defeq_riemann_hypothesis": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "theorem_statement_sha256": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Sha256"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "no_sorry_ax": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "KernelInventory": {
+      "type": "object",
+      "required": [
+        "coverage",
+        "total_declarations",
+        "total_theorems",
+        "total_axioms",
+        "declarations",
+        "environment_receipt",
+        "lean_version",
+        "mathlib_sha",
+        "exact_replay_head"
+      ],
+      "properties": {
+        "coverage": {
+          "$ref": "#/definitions/ScopeState"
+        },
+        "total_declarations": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_theorems": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_axioms": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "declarations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KernelDeclaration"
+          }
+        },
+        "environment_receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "lean_version": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mathlib_sha": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/GitSha"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "exact_replay_head": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/GitSha"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "inference_limit": {
+          "const": "KERNEL_RESULTS_REQUIRE_EXACT_REPLAY"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TheoremRecord": {
+      "type": "object",
+      "required": [
+        "identifier",
+        "module",
+        "statement",
+        "proof_status",
+        "dependency_identifiers",
+        "evidence"
+      ],
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "proof_status": {
+          "$ref": "#/definitions/EpistemicStatus"
+        },
+        "dependency_identifiers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        },
+        "axioms": {
+          "anyOf": [
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "proved_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "math_statement_equivalence_verified": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TheoremInventory": {
+      "type": "object",
+      "required": [
+        "coverage",
+        "total_theorems",
+        "theorems",
+        "kernel_verified_theorems"
+      ],
+      "properties": {
+        "coverage": {
+          "$ref": "#/definitions/ScopeState"
+        },
+        "total_theorems": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "theorems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TheoremRecord"
+          }
+        },
+        "kernel_verified_theorems": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "cross_repo_equivalences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TheoremRelation"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "TheoremRelation": {
+      "type": "object",
+      "required": [
+        "from_declaration",
+        "to_declaration",
+        "relation",
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "from_declaration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to_declaration": {
+          "type": "string",
+          "minLength": 1
+        },
+        "relation": {
+          "type": "string",
+          "enum": [
+            "IMPLIES",
+            "EQUIVALENT",
+            "DEPENDS_ON",
+            "CONTRADICTS",
+            "SPECIALIZES",
+            "GENERALIZES"
+          ]
+        },
+        "status": {
+          "$ref": "#/definitions/EpistemicStatus"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RHPath": {
+      "type": "object",
+      "required": [
+        "path_id",
+        "temporal_status",
+        "proof_status",
+        "canonical_target",
+        "declared_endpoints",
+        "assumptions",
+        "blocks",
+        "sources",
+        "authority_ref"
+      ],
+      "properties": {
+        "path_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "temporal_status": {
+          "$ref": "#/definitions/TemporalStatus"
+        },
+        "proof_status": {
+          "$ref": "#/definitions/EpistemicStatus"
+        },
+        "canonical_target": {
+          "const": "_root_.RiemannHypothesis"
+        },
+        "declared_endpoints": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "blocks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        },
+        "authority_ref": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "superseded_by": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scientific_limitation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "bitemporal_metadata": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/BitemporalMetadata"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "RHAdmission": {
+      "type": "object",
+      "required": [
+        "status",
+        "verified_at",
+        "evidence_passport_id",
+        "verified_predicates"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "VERIFIED",
+            "OPEN",
+            "UNKNOWN",
+            "HOLD"
+          ]
+        },
+        "verified_at": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "evidence_passport_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verified_predicates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "EXACT_HEAD",
+              "LEAN_KERNEL",
+              "NO_SORRY_AX",
+              "CANONICAL_TYPE",
+              "ALLOWED_AXIOMS",
+              "DEPENDENCY_CLOSURE",
+              "PASSPORT_ATTESTED"
+            ]
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "RHInventory": {
+      "type": "object",
+      "required": [
+        "paths",
+        "closed_canonical_rh_declarations",
+        "RH_PROVEN_UNCONDITIONALLY",
+        "rh_evidence_passport",
+        "canonical_admission"
+      ],
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RHPath"
+          }
+        },
+        "closed_canonical_rh_declarations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KernelDeclaration"
+          }
+        },
+        "RH_PROVEN_UNCONDITIONALLY": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "rh_evidence_passport": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "canonical_admission": {
+          "$ref": "#/definitions/RHAdmission"
+        },
+        "current_rh_status": {
+          "type": "string",
+          "enum": [
+            "NOT_ASSESSED",
+            "OPEN",
+            "VERIFIED",
+            "UNKNOWN"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MathObligation": {
+      "type": "object",
+      "required": [
+        "obligation_id",
+        "statement",
+        "status",
+        "blocked_by",
+        "sources",
+        "discharge_receipt",
+        "temporal"
+      ],
+      "properties": {
+        "obligation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "$ref": "#/definitions/EpistemicStatus"
+        },
+        "blocked_by": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        },
+        "discharge_receipt": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "temporal": {
+          "$ref": "#/definitions/BitemporalMetadata"
+        },
+        "route_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "counterexample_status": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "CANDIDATE",
+            "VERIFIED",
+            "UNKNOWN"
+          ]
+        },
+        "exact_lean_goal": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "MathFrontier": {
+      "type": "object",
+      "required": [
+        "open_obligations",
+        "closed_obligations",
+        "unknown_obligations",
+        "scope"
+      ],
+      "properties": {
+        "open_obligations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MathObligation"
+          }
+        },
+        "closed_obligations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MathObligation"
+          }
+        },
+        "unknown_obligations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MathObligation"
+          }
+        },
+        "scope": {
+          "type": "string",
+          "enum": [
+            "SELECTED_ROUTES_ONLY",
+            "DECLARED_CLOSURE",
+            "UNKNOWN"
+          ]
+        },
+        "frontier_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactReference"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthorityInventory": {
+      "type": "object",
+      "required": [
+        "artifacts",
+        "decisions",
+        "is_census_authority",
+        "rh_admission_authority"
+      ],
+      "properties": {
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorityLineage"
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorityDecision"
+          }
+        },
+        "is_census_authority": {
+          "const": false
+        },
+        "rh_admission_authority": {
+          "const": "RH_EVIDENCE_PASSPORT"
+        },
+        "authority_register": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ArtifactReference"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "Summary": {
+      "type": "object",
+      "required": [
+        "total_modules",
+        "total_declarations",
+        "total_theorems",
+        "total_axioms",
+        "total_rh_related_declarations",
+        "active_rh_paths",
+        "questioned_rh_paths",
+        "superseded_rh_paths",
+        "open_obligations",
+        "closed_obligations",
+        "current_rh_status",
+        "census_completeness"
+      ],
+      "properties": {
+        "total_modules": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_declarations": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_theorems": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_axioms": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "total_rh_related_declarations": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "active_rh_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "questioned_rh_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "superseded_rh_paths": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "open_obligations": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "closed_obligations": {
+          "$ref": "#/definitions/NullableCount"
+        },
+        "current_rh_status": {
+          "type": "string",
+          "enum": [
+            "NOT_ASSESSED",
+            "OPEN",
+            "VERIFIED",
+            "UNKNOWN"
+          ]
+        },
+        "census_completeness": {
+          "$ref": "#/definitions/ScopeState"
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "non_proof_statement": {
+          "const": "CENSUS_IS_NOT_RH_ADMISSION"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "$defs": {
+    "GitSha": {
+      "$ref": "#/definitions/GitSha"
+    },
+    "Sha256": {
+      "$ref": "#/definitions/Sha256"
+    },
+    "NullableCount": {
+      "$ref": "#/definitions/NullableCount"
+    },
+    "EpistemicStatus": {
+      "$ref": "#/definitions/EpistemicStatus"
+    },
+    "TemporalStatus": {
+      "$ref": "#/definitions/TemporalStatus"
+    },
+    "ScopeState": {
+      "$ref": "#/definitions/ScopeState"
+    },
+    "BitemporalMetadata": {
+      "$ref": "#/definitions/BitemporalMetadata"
+    },
+    "ArtifactReference": {
+      "$ref": "#/definitions/ArtifactReference"
+    },
+    "ArtifactSource": {
+      "$ref": "#/definitions/ArtifactSource"
+    },
+    "Supersession": {
+      "$ref": "#/definitions/Supersession"
+    },
+    "AuthorityLineage": {
+      "$ref": "#/definitions/AuthorityLineage"
+    },
+    "AuthorityDecision": {
+      "$ref": "#/definitions/AuthorityDecision"
+    },
+    "SemanticAncestry": {
+      "$ref": "#/definitions/SemanticAncestry"
+    },
+    "CensusPolicy": {
+      "$ref": "#/definitions/CensusPolicy"
+    },
+    "PreservationPolicy": {
+      "$ref": "#/definitions/PreservationPolicy"
+    },
+    "GitCommit": {
+      "$ref": "#/definitions/GitCommit"
+    },
+    "GitBranch": {
+      "$ref": "#/definitions/GitBranch"
+    },
+    "GitInventory": {
+      "$ref": "#/definitions/GitInventory"
+    },
+    "ModuleRecord": {
+      "$ref": "#/definitions/ModuleRecord"
+    },
+    "SourceDeclaration": {
+      "$ref": "#/definitions/SourceDeclaration"
+    },
+    "SourceInventory": {
+      "$ref": "#/definitions/SourceInventory"
+    },
+    "KernelDeclaration": {
+      "$ref": "#/definitions/KernelDeclaration"
+    },
+    "KernelInventory": {
+      "$ref": "#/definitions/KernelInventory"
+    },
+    "TheoremRecord": {
+      "$ref": "#/definitions/TheoremRecord"
+    },
+    "TheoremInventory": {
+      "$ref": "#/definitions/TheoremInventory"
+    },
+    "TheoremRelation": {
+      "$ref": "#/definitions/TheoremRelation"
+    },
+    "RHPath": {
+      "$ref": "#/definitions/RHPath"
+    },
+    "RHAdmission": {
+      "$ref": "#/definitions/RHAdmission"
+    },
+    "RHInventory": {
+      "$ref": "#/definitions/RHInventory"
+    },
+    "MathObligation": {
+      "$ref": "#/definitions/MathObligation"
+    },
+    "MathFrontier": {
+      "$ref": "#/definitions/MathFrontier"
+    },
+    "AuthorityInventory": {
+      "$ref": "#/definitions/AuthorityInventory"
+    },
+    "Summary": {
+      "$ref": "#/definitions/Summary"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "rh_inventory": {
+            "properties": {
+              "RH_PROVEN_UNCONDITIONALLY": {
+                "const": true
+              }
+            },
+            "required": [
+              "RH_PROVEN_UNCONDITIONALLY"
+            ]
+          }
+        },
+        "required": [
+          "rh_inventory"
+        ]
+      },
+      "then": {
+        "properties": {
+          "rh_inventory": {
+            "properties": {
+              "closed_canonical_rh_declarations": {
+                "type": "array",
+                "minItems": 1
+              },
+              "rh_evidence_passport": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/ArtifactReference"
+                  },
+                  {
+                    "properties": {
+                      "evidence_role": {
+                        "const": "RH_EVIDENCE_PASSPORT"
+                      },
+                      "verification_status": {
+                        "const": "VERIFIED"
+                      }
+                    }
+                  }
+                ]
+              },
+              "canonical_admission": {
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/RHAdmission"
+                  },
+                  {
+                    "properties": {
+                      "status": {
+                        "const": "VERIFIED"
+                      },
+                      "verified_at": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "verified_predicates": {
+                        "type": "array",
+                        "uniqueItems": true,
+                        "minItems": 7,
+                        "items": {
+                          "type": "string",
+                          "enum": [
+                            "EXACT_HEAD",
+                            "LEAN_KERNEL",
+                            "NO_SORRY_AX",
+                            "CANONICAL_TYPE",
+                            "ALLOWED_AXIOMS",
+                            "DEPENDENCY_CLOSURE",
+                            "PASSPORT_ATTESTED"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "census_policy": {
+            "properties": {
+              "scope": {
+                "const": "SOURCE_ONLY"
+              }
+            },
+            "required": [
+              "scope"
+            ]
+          }
+        },
+        "required": [
+          "census_policy"
+        ]
+      },
+      "then": {
+        "properties": {
+          "kernel_inventory": {
+            "properties": {
+              "coverage": {
+                "const": "NOT_ASSESSED"
+              },
+              "total_declarations": {
+                "type": "null"
+              },
+              "total_theorems": {
+                "type": "null"
+              },
+              "total_axioms": {
+                "type": "null"
+              },
+              "declarations": {
+                "maxItems": 0
+              }
+            }
+          },
+          "theorem_inventory": {
+            "properties": {
+              "total_theorems": {
+                "type": "null"
+              },
+              "kernel_verified_theorems": {
+                "type": "null"
+              }
+            }
+          },
+          "rh_inventory": {
+            "properties": {
+              "RH_PROVEN_UNCONDITIONALLY": {
+                "type": "null"
+              }
+            }
+          },
+          "summary": {
+            "properties": {
+              "total_declarations": {
+                "type": "null"
+              },
+              "total_theorems": {
+                "type": "null"
+              },
+              "total_axioms": {
+                "type": "null"
+              },
+              "total_rh_related_declarations": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

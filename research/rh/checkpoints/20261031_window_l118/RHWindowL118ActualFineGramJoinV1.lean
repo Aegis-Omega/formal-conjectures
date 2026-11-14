@@ -1,0 +1,219 @@
+/-
+Copyright 2026 The Formal Conjectures Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-/
+
+import RHWindowL118ExhaustionV1
+import AEGISOverlay.RHActualUniversalFineGramV1
+import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import AEGISOverlay.RHKreinMultiplicativeTransportV1
+import AEGISOverlay.RHPrimeFreeRecompositionJoinV1
+
+/-!
+# AEGIS Ω: certified 11/8 window → actual finite Weil Gram signed budget
+
+Reuses the existing unconditional L118 window certificate, actual finite fine
+Gram decomposition, and exact signed-defect identity. Every real Weil mixed
+entry is preserved, including prime-resonant pairs. The theorem is local:
+its source packet must lie in a symmetric log window of half-width ≤ 11/16.
+No universal-width positivity or unconditional RH is claimed.
+-/
+
+open Finset
+open scoped ContDiff BigOperators
+set_option autoImplicit false
+noncomputable section
+
+namespace AEGIS.RHWindowL118ActualFineGramJoinV1
+
+open AEGIS.WeilMixedAlgebraV2
+open AEGIS.WeilDisjointEnergyV2
+open AEGIS.RHGramExpansionV13
+
+/-- A genuine fine Gram reconstruction whose entire signed off-diagonal
+defect is paid by the previously certified window sign. This strengthens
+the older 693/2000 alignment to the already proved 11/16 half-width. -/
+theorem actual_signed_fine_gram_on_l118_window
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : L ≤ 11 / 16)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, hgram⟩ :=
+    AEGIS.RHActualUniversalFineGramV1.every_moment_zero_packet_actual_fine_gram_with_support
+      g hm
+  have hwindow :
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
+    AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths hL g hm hw
+  have hfull :
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 := by
+    calc
+      (B (packetSum (fun _ => (1 : ℂ)) gs)
+         (packetSum (fun _ => (1 : ℂ)) gs)).re =
+          (∑ i, ∑ j, B (gs i) (gs j)).re := by
+            rw [B_packetSum]
+            simp
+      _ = (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re :=
+        hgram.symm
+      _ ≤ 0 := hwindow
+  have hbudget :=
+    (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
+      gs).mpr hfull
+  exact ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, hbudget⟩
+
+
+/-! ## Cross-carrier fusion: all finite Weil decompositions, and every Krein cutoff
+
+The original CvS L118 theorem concerns the actual source packet `g`.
+These two statements carry its sign to two distinct existing exact carriers
+without swapping source packets or omitting any signed mixed term.
+-/
+
+/-- For a fixed packet in the proved window, the genuine total signed mixed
+budget holds for EVERY exact finite Weil reconstruction of that same packet.
+No diagonal, pairwise bound, row sum, or partition-selection hypothesis. -/
+theorem every_actual_finite_gram_sharp_signed_budget_on_l118_window
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : L ≤ 11 / 16)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L)
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (hg : g = packetSum (fun _ => (1 : ℂ)) gs) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      -(∑ i, (B (gs i) (gs i)).re) := by
+  have hwindow :
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
+    AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths hL g hm hw
+  apply (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
+    gs).mpr
+  rw [← hg]
+  change (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0
+  exact hwindow
+
+/-- The same CvS window sign also pays the exact B(u,u)+2B(u,v)+B(v,v)
+signed budget for the existing *actual* two-atom Krein reconstruction,
+for EVERY smooth cutoff χ. Both atoms have the real Weil zero moments. -/
+theorem actual_krein_two_block_signed_budget_on_l118_window
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : L ≤ 11 / 16)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L)
+    (χ : ℝ → ℂ) (hχ : ContDiff ℝ ∞ χ) :
+    ∃ u v : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 u ∧
+      WeilMomentConditionsV1 v ∧
+      g = AEGIS.WeilMixedAlgebraV2.addPacket u v ∧
+      0 ≤ -(B u u).re + 2 * (-(B u v).re) + -(B v v).re := by
+  obtain ⟨u, v, hu, hv, hsum, hzero⟩ :=
+    AEGIS.RHKreinMultiplicativeTransportV1.every_packet_actual_two_block_zero_quadratic
+      g hm χ hχ
+  have hwindow :
+      (WeilExplicitRightSideV1 (WeilAutocorrelationV1 g)).re ≤ 0 :=
+    AEGIS.RHWindowL118ExhaustionV1.window_le_eleven_sixteenths hL g hm hw
+  have hzero_nonnegative :
+      0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re :=
+    (AEGIS.WeilAutocorrelationExplicitFormulaV10.autocorrelation_arithmetic_nonpositive_iff_zero_nonnegative_v10
+      g hm).mp hwindow
+  refine ⟨u, v, hu, hv, hsum, ?_⟩
+  rw [hzero] at hzero_nonnegative
+  exact hzero_nonnegative
+
+
+/-- Combined genuine Weil receipt for the SAME source in an L118 window:
+construct fine actual moment-zero packets, certify all available log-prime-free
+pair estimates, AND pay the full signed mixed defect including resonances.
+The first two certificates alone do not prove the last one globally. -/
+theorem actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g)
+    (L : ℝ) (hL : L ≤ 11 / 16)
+    (hw : AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L) :
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∀ i j,
+        AEGIS.RHPrimeFreeRecompositionJoinV1.FineLogFreeGap
+          |center j - center i| →
+        ‖B (gs i) (gs j)‖ ≤
+          (676 / 65536 : ℝ) *
+            (energy (gs i).1 + energy (gs j).1)) ∧
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, _hgram, hfree⟩ :=
+    AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_gram_with_log_free_pairs
+      g hm
+  refine ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, hfree, ?_⟩
+  exact every_actual_finite_gram_sharp_signed_budget_on_l118_window
+    g hm L hL hw gs hpacket
+
+
+/-! ## The exact residual signed-budget interface to the canonical RH theorem
+
+The full L118 sign is already proved, so ONLY packets with a larger source
+window need a signed certificate. This is a precise compatibility interface
+between the actual CvS/Krein/Gram consumers and the canonical V13 RH target.
+The equivalence does not manufacture the as-yet-unproved large-window
+certificate: any stronger claim would be circular.
+-/
+
+/-- Canonical RH is equivalent to constructing ONE source-exact finite
+signed Weil Gram certificate for every moment-zero packet in every
+log-window of half-width above 11/16. The smaller windows are discharged
+by the already-compiled CvS L118 theorem, so this consumes no arbitrary
+partition, pairwise absolute-row bounds, or artificial uniform coercivity. -/
+theorem rh_iff_remaining_windows_actual_sharp_signed_budget :
+    RiemannHypothesis ↔
+      ∀ (L : ℝ), 11 / 16 < L →
+        ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+          AEGIS.WeilWindowExhaustionV1.LogWindowContainsV1 g L →
+          ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+            g = packetSum (fun _ => (1 : ℂ)) gs ∧
+            AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+              -(∑ i, (B (gs i) (gs i)).re) := by
+  constructor
+  · intro hRH L _ g hm _
+    exact (AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget.mp
+      hRH) g hm
+  · intro hcert
+    apply AEGIS.RHWindowL118ExhaustionV1.rh_iff_windows_above_eleven_sixteenths.mpr
+    intro L hL g hm hw
+    obtain ⟨n, gs, hpacket, hbudget⟩ := hcert L hL g hm hw
+    have hsign :
+        (B (packetSum (fun _ => (1 : ℂ)) gs)
+           (packetSum (fun _ => (1 : ℂ)) gs)).re ≤ 0 :=
+      (AEGIS.RHOptimizedSchurGlobalJoinV1.actual_signed_defect_iff_packet_nonpositive
+        gs).mp hbudget
+    change (B g g).re ≤ 0
+    rw [hpacket]
+    exact hsign
+
+end AEGIS.RHWindowL118ActualFineGramJoinV1
+
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_signed_fine_gram_on_l118_window
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.rh_iff_remaining_windows_actual_sharp_signed_budget
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.every_actual_finite_gram_sharp_signed_budget_on_l118_window
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_krein_two_block_signed_budget_on_l118_window
+#print axioms AEGIS.RHWindowL118ActualFineGramJoinV1.actual_fine_log_free_pairs_and_complete_signed_budget_on_l118_window

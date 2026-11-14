@@ -1,0 +1,80 @@
+{
+  "status": "ORDINARY_POINTWISE_TRANSPORT_OBSTRUCTION_WITH_EXACT_SCALAR_CHECKS",
+  "checkpoint": "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101",
+  "local_repo_HEAD_at_receipt": "309ca3fa117fa499761f58f64ac371ccd1ff2f63",
+  "VERIFIED": {
+    "ordinary_statement": "For every fixed finite M and s>1, no constant amplitude c can satisfy |c|^2 F_s(u) S_M(su)<=S_M(u) for every real u.",
+    "explicit_actual_symbol_parameters": {
+      "s": 2,
+      "M": 3,
+      "u": "2^64",
+      "defect_lower_bound": "873/25"
+    },
+    "execution": {
+      "command": [
+        "python",
+        "-B",
+        "-O",
+        "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101/check_tail_obstruction.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.08554753799990067,
+      "script_sha256": "43516416be52127f5923599e06d77384915fecf5d25b393b9c923171e4d980ec"
+    },
+    "all_prime_power_terms_retained": true,
+    "rational_backend_reused": true,
+    "negative_controls_rejected": 3,
+    "ordinary_topological_strengthening": {
+      "statement": "For every fixed finite M and s>1, there exists u>0 with S_M(u)<0<=S_M(su); hence no everywhere nonnegative w can satisfy w(u) S_M(su)<=S_M(u) everywhere.",
+      "argument": "Continuity and S_M(0)<0 give a positive negative-symbol seed; eventual positivity and geometric iteration give the first sign-crossing step.",
+      "formalization_kind": "Ordinary proof in DEFECT_TAIL.md, not Lean; not established by finite scalar testing.",
+      "assumptions": [
+        "exact fixed-finite-M ScertM symbol",
+        "s>1",
+        "continuity on the quarter line",
+        "source-series eventual positivity"
+      ],
+      "does_not_establish": "An actual admissible-packet weighted-integral or fullQ counterexample."
+    }
+  },
+  "OPEN": [
+    "Kernel proof of the sum-integral digamma estimate and the actual full-form spectral defect.",
+    "The weaker density-weighted integral sign question for actual admissible packets."
+  ],
+  "UNKNOWN": [
+    "Historical novelty."
+  ],
+  "canonical_RH_closed": false,
+  "actual_fullQ_counterexample_claimed": false,
+  "new_independent_certificate_engine": false,
+  "files": {
+    "DEFECT_TAIL.md": "4179fac74038eb90dbb585edc7a65a8d72bb51ec6b322e2d90d4572c5eee0ab6",
+    "NormalizationConflictV1.pre-header.lean.txt": "b5420d95c40a55c661aa51642db80bacf7ad1a0bc342e8ebeb6098998dfedd9e",
+    "DEFECT_TAIL.md.before-topological-strengthening.txt": "76d1781a3651489bfe8c9dc59191d4822af08fd7516ba2106b96f90e4552fbed",
+    "EXECUTION.log": "c11891bd8828b4b3bf666376d3e78830459fdd48c3cd8a42e3c6c41e59e50b0b",
+    "LEAN_EXECUTION.log": "ad407f7d7982b04a11377ee73af2802298b4b4232691b0aeaeed9c9d1482f636",
+    "NormalizationConflictV1.lean": "530a675f86eaf9f3fe8c1a00a3d1ab31059fd1f0f1cf445759b5c722d0c97fd1",
+    "FINAL_RECEIPT.sha256.before-topological-strengthening.txt": "dd5d7a2dbeefdbaf0b4f0f0bd243a362a02e32cd482bec7a6dcaafb065331821",
+    "RESULT.json": "292f5b219d0d6ea5c5669a293092c897f5a9075317155f2204c9d34d07551235",
+    "FINAL_RECEIPT.json.before-topological-strengthening.txt": "da37d7ad415f1f966fbb26c14e4717fc23567cfacab6e30b4c7d1f33e577885d",
+    "check_tail_obstruction.py": "43516416be52127f5923599e06d77384915fecf5d25b393b9c923171e4d980ec",
+    "LEAN_EXECUTION.json": "bd2d613c1d663dd198d25e769b43fbaf8836f18db105c95ee10812dfe541d198",
+    "EXECUTION.json": "a2a29e49271625b1e46e01eede70be8b723a6b82aef2eaf845e9d2fbe657a1a8"
+  },
+  "scalar_Lean_execution": {
+    "command": [
+      "/home/agent/.elan/toolchains/leanprover--lean4---v4.33.1/bin/lean",
+      "-M5632",
+      "-j1",
+      "-DwarningAsError=true",
+      "-o",
+      "/tmp/aegis-rh-defect-tail-20261101/build/NormalizationConflictV1.olean",
+      "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101/NormalizationConflictV1.lean"
+    ],
+    "exit_code": 0,
+    "seconds": 2.4738595480002914,
+    "source_sha256": "530a675f86eaf9f3fe8c1a00a3d1ab31059fd1f0f1cf445759b5c722d0c97fd1",
+    "scope": "Only scalar incompatibility of necessary low- and high-frequency bounds; analytic symbol connection is not formalized."
+  },
+  "scalar_Lean_scope": "Only incompatibility of the necessary zero/tail scalar inequalities; not the digamma or topological theorem."
+}

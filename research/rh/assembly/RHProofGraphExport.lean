@@ -25,6 +25,7 @@ import AEGISOverlay.RHArchRow29V1
 import AEGISOverlay.RHScaleRowCompositionV1
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import AEGISOverlay.RHKreinMultiplicativeTransportV1
+import AEGISOverlay.RHKreinFeshbachFinalAssemblyV1
 import AEGISOverlay.RHTimeSliceWeilV1
 import AEGISOverlay.RHLogThreeSignedPrimeProducerV1
 import AEGISOverlay.RHFourLogThreeActualPrimeV1
@@ -101,6 +102,20 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_two_actual_weil_packets",
     "AEGIS.RHKreinMultiplicativeTransportV1.every_packet_actual_two_block_zero_quadratic",
     "AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition",
+    "AEGIS.RHKreinMultiplicativeTransportV1.SelectedKreinFeshbachProducerV2",
+    "AEGIS.RHKreinMultiplicativeTransportV1.universal_of_selected_krein_feshbach_producer_v2",
+    "AEGIS.RHKreinMultiplicativeTransportV1.riemannHypothesis_of_selected_krein_feshbach_producer_v2",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.UniversalKreinTwoBlockSignedBudgetV1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.UniversalKreinFeshbachProducerV1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.SelectedKreinFeshbachProducerV2",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.universal_of_krein_signed_budget_v1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.universal_of_krein_feshbach_producer_v1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.selected_krein_feshbach_of_universal_v2",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.universal_of_selected_krein_feshbach_producer_v2",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.riemannHypothesis_of_selected_krein_feshbach_producer_v2",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.riemannHypothesis_of_krein_feshbach_producer_v1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.riemannHypothesis_of_existing_abel_prime_chain_v1",
+    "AEGIS.RHKreinFeshbachFinalAssemblyV1.actual_fine_signed_gram_of_abel_prime_v1",
     "AEGIS.RHActualMixedDefectV1.fine_cluster_nine_exact_counterpart",
     "AEGIS.RHActualMixedDefectV1.fine_cluster_nine_mixed_defect_opposite",
     "AEGIS.RHTimeSliceWeilV1.fsTwoThreeShiftGroup_dense",

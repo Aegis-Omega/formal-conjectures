@@ -1,0 +1,7 @@
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_smooth' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_and_scaled_moments' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_support' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_scaled_support' depends on axioms: [propext, Classical.choice, Quot.sound]

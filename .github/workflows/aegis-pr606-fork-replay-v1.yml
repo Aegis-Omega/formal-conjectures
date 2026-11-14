@@ -11,11 +11,13 @@ on:
       - 'proof/rh-deepmind-target-direct-replay-v2'
     paths:
       - 'AegisRH/PR606/**'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'FormalConjectures/Millennium/RiemannHypothesis.lean'
       - '.github/workflows/aegis-pr606-fork-replay-v1.yml'
   pull_request:
     paths:
       - 'AegisRH/PR606/**'
+      - 'scripts/rh_pr63_proved_window_prebuild.sh'
       - 'FormalConjectures/Millennium/RiemannHypothesis.lean'
       - '.github/workflows/aegis-pr606-fork-replay-v1.yml'
   workflow_dispatch:
@@ -77,6 +79,28 @@ jobs:
           test "$(git -C .aegis-base rev-parse HEAD)" = "$AEGIS_BASE_SHA"
           test "$(git -C .li rev-parse HEAD)" = "$LI_PROVIDER_SHA"
           test "$(git -C .li hash-object Hadamard/General/Factorization.lean)" = "$LI_FACTORIZATION_BLOB"
+          # Both PR606 stages must select the same source-locked two-point theorem.
+          test "$(git hash-object AegisRH/PR606/Compat/WeilZeroTwoPointV11.lean)" = "416eb252794a2b0b550c796330a08a946aeabed4"
+          grep -F 'if n == "WeilZeroTwoPointV11":' scripts/rh_pr63_proved_window_prebuild.sh
+          # Source-bound regression: the fork must not recover pre-repair
+          # Laplace, final-sign, translation or target-witness code.
+          # Check the staged bytes AND immutable exact-head Git tree blobs.
+          for entry in \
+            'AegisRH/PR606/RHZeroKernelLaplaceAnalyticV12.lean:8afab69e4b59a1520f73b2ad1c4c349251a4b254' \
+            'AegisRH/PR606/WeilRHImpliesFinalSignV11.lean:9f32e58018dfb4573417ca0f0919e91456b13b5d' \
+            'AegisRH/PR606/Compat/WeilTranslatedKernelBoundV11.lean:bb1ad7d5e8749c1641078369eeadd0ba6a2af465' \
+            'AegisRH/PR606/Compat/RestrictedWeilCriterionTargetWitnessV11.lean:c17f771e2622d7917413ff35bbe2afe82f9b4e97'; do
+            file="${entry%%:*}"
+            expected_blob="${entry##*:}"
+            test -s "$file"
+            observed_blob="$(git hash-object "$file")"
+            tree_blob="$(git rev-parse "HEAD:$file")"
+            if [[ "$observed_blob" != "$expected_blob" || "$tree_blob" != "$expected_blob" ]]; then
+              echo "::error::RH_PR606_SOURCE_IDENTITY_MISMATCH:$file" >&2
+              exit 1
+            fi
+            echo "RH_PR606_SOURCE_BOUND_PASS:$file:$expected_blob"
+          done
           python3 - <<'PY'
           import json, os
           m=json.load(open('AegisRH/PR606/PORT_MANIFEST.json'))
@@ -90,7 +114,15 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          elan_archive="$RUNNER_TEMP/elan-v1.4.2-x86_64-unknown-linux-gnu.tar.gz"
+          curl --fail --silent --show-error --location \
+            --retry 4 --retry-all-errors --retry-delay 5 \
+            --connect-timeout 20 --max-time 180 \
+            --output "$elan_archive" \
+            https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz
+          test -s "$elan_archive"
+          tar -tzf "$elan_archive" >/dev/null
+          tar -xzf "$elan_archive"
           ./elan-init -y --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
           export PATH="$HOME/.elan/bin:$PATH"
@@ -161,22 +193,40 @@ jobs:
           BASE="$GITHUB_WORKSPACE/.aegis-base/sovereign-omega-v2/formal/bridges/lean"
           SRC="$GITHUB_WORKSPACE/AegisRH/PR606/Source"
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           mkdir -p "$OUT"
 
-          python3 - "$BASE" "$SRC" "$COMPAT" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
-          import pathlib, sys
+          python3 - "$BASE" "$SRC" "$COMPAT" "$LOCAL" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
+          import pathlib, subprocess, sys
           base=pathlib.Path(sys.argv[1])
           src=pathlib.Path(sys.argv[2])
           compat=pathlib.Path(sys.argv[3])
-          out=pathlib.Path(sys.argv[4])
+          local=pathlib.Path(sys.argv[4])
+          out=pathlib.Path(sys.argv[5])
 
+          # Select and cryptographically bind the two PR92 repaired modules.
+          repaired={'WeilRHImpliesFinalSignV11', 'RHZeroKernelLaplaceAnalyticV12'}
+          local_mods={m:local/(m+'.lean') for m in repaired}
+          for m,p in local_mods.items():
+            if not p.is_file():
+              raise SystemExit('PR606_LOCAL_REPAIR_SOURCE_MISSING:'+m)
+            observed=subprocess.check_output(
+              ['git', 'hash-object', str(p)], text=True).strip()
+            expected=subprocess.check_output(
+              ['git', 'rev-parse',
+               'HEAD:'+p.relative_to(pathlib.Path.cwd()).as_posix()],
+              text=True).strip()
+            if observed != expected:
+              raise SystemExit('PR606_LOCAL_REPAIR_EXACT_HEAD_MISMATCH:'+m)
+            print('PR606_LOCAL_REPAIR_EXACT_HEAD_PASS', m, observed)
           base_mods={p.stem:p for p in base.glob('*.lean')}
           src_mods={p.stem:p for p in src.glob('*.lean')}
           compat_mods={p.stem:p for p in compat.glob('*.lean')}
-          mods=set(base_mods)|set(src_mods)|set(compat_mods)
+          mods=set(base_mods)|set(src_mods)|set(compat_mods)|set(local_mods)
 
           def selected(m):
+            if m in local_mods: return local_mods[m]
             if m in compat_mods: return compat_mods[m]
             if m in src_mods: return src_mods[m]
             if m in base_mods: return base_mods[m]
@@ -208,7 +258,7 @@ jobs:
           print('PR606_IMPORTED_MODULES',len(src_mods))
           print('PR606_FULL_CLOSURE_COUNT',len(order))
           print('\n'.join(
-            ('COMPAT  ' if m in compat_mods else 'PR606   ' if m in src_mods else 'BASE580 ')+m
+            ('LOCAL_REPAIR ' if m in local_mods else 'COMPAT  ' if m in compat_mods else 'PR606   ' if m in src_mods else 'BASE580 ')+m
             for m in order
           ))
           PY
@@ -218,9 +268,9 @@ jobs:
         uses: actions/cache/restore@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: .lake/aegis-pr606
-          key: pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
+          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
           restore-keys: |
-            pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-
+            pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-
 
       - name: Compile full #606 fork closure
         shell: bash
@@ -231,8 +281,12 @@ jobs:
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           BASE_LEAN_PATH="$GITHUB_WORKSPACE/.li/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
-          export LEAN_PATH="$OUT:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
+          export LEAN_PATH="$OUT:$LOCAL:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
 
+          # The first dirty module invalidates every following module conservatively.
+          # An .olean without a matching SHA-256 sidecar is never reused.
+          rm -f "$OUT/olean-source-checkpoint-v1.json"
           dirty=0
           while IFS= read -r MOD; do
             [ -z "$MOD" ] && continue
@@ -240,29 +294,73 @@ jobs:
             KIND="BASE580"
             if [ -f "$SRC/$MOD.lean" ]; then FILE="$SRC/$MOD.lean"; KIND="PR606"; fi
             if [ -f "$COMPAT/$MOD.lean" ]; then FILE="$COMPAT/$MOD.lean"; KIND="COMPAT"; fi
+            if [ "$MOD" = "WeilRHImpliesFinalSignV11" ] || [ "$MOD" = "RHZeroKernelLaplaceAnalyticV12" ]; then
+              FILE="$LOCAL/$MOD.lean"; KIND="LOCAL_REPAIR"
+              test -s "$FILE" || { echo "PR606_LOCAL_REPAIR_SOURCE_MISSING:$MOD" >&2; exit 1; }
+            fi
             FILE_SHA="$(sha256sum "$FILE" | awk '{print $1}')"
             STAMP="$OUT/$MOD.source.sha256"
-            if [ "$dirty" -eq 0 ] && [ -f "$OUT/$MOD.olean" ] && [ -f "$STAMP" ] && [ "$(cat "$STAMP")" = "$FILE_SHA" ]; then
-              echo "=== $KIND $MOD (CACHED) ==="
+            OLEAN_STAMP="$OUT/$MOD.olean.sha256"
+            if [ "$dirty" -eq 0 ] && [ -s "$OUT/$MOD.olean" ] && [ -f "$STAMP" ] && [ -f "$OLEAN_STAMP" ] && [ "$(cat "$STAMP")" = "$FILE_SHA" ] && [ "$(sha256sum "$OUT/$MOD.olean" | cut -d ' ' -f 1)" = "$(cat "$OLEAN_STAMP")" ]; then
+              echo "=== $KIND $MOD (SOURCE_AND_OLEAN_SHA_VERIFIED) ==="
               continue
             fi
             dirty=1
             echo "=== $KIND $MOD ==="
-            if lean -o "$OUT/$MOD.olean" "$FILE"; then
+            rm -f "$OUT/$MOD.olean" "$STAMP" "$OLEAN_STAMP"
+            if lean -o "$OUT/$MOD.olean" "$FILE" && [ -s "$OUT/$MOD.olean" ]; then
               printf '%s\n' "$FILE_SHA" > "$STAMP"
+              sha256sum "$OUT/$MOD.olean" | awk '{print $1}' > "$OLEAN_STAMP"
             else
-              rm -f "$OUT/$MOD.olean" "$STAMP"
+              rm -f "$OUT/$MOD.olean" "$STAMP" "$OLEAN_STAMP"
               exit 1
             fi
           done < "$GITHUB_WORKSPACE/.pr606-order.txt"
 
-      - name: Save incremental PR606 fork closure cache
-        if: always()
-        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
-        with:
-          path: .lake/aegis-pr606
-          key: pr606-fork-v2-${{ runner.os }}-${{ runner.arch }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
-
+          # Source-bound checkpoint for EVERY module in the compiled fork DAG.
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ['GITHUB_WORKSPACE'])
+          out = root / '.lake/aegis-pr606'
+          base = root / '.aegis-base/sovereign-omega-v2/formal/bridges/lean'
+          src = root / 'AegisRH/PR606/Source'
+          compat = root / 'AegisRH/PR606/Compat'
+          local = root / 'AegisRH/PR606'
+          repaired = {'WeilRHImpliesFinalSignV11', 'RHZeroKernelLaplaceAnalyticV12'}
+          rows = []
+          for module in (root / '.pr606-order.txt').read_text().splitlines():
+              # Source-bound .olean evidence must match the planner and compiler.
+              candidates = ((local,) if module in repaired else ()) + (compat, src, base)
+              source = next((p / (module + '.lean') for p in candidates if (p / (module + '.lean')).is_file()), None)
+              if source is None:
+                  raise SystemExit('PR606_CHECKPOINT_SOURCE_MISSING:' + module)
+              olean = out / (module + '.olean')
+              sstamp = out / (module + '.source.sha256')
+              ostamp = out / (module + '.olean.sha256')
+              if not all(p.is_file() for p in (source, olean, sstamp, ostamp)) or not olean.stat().st_size:
+                  raise SystemExit('PR606_CHECKPOINT_MISSING:' + module)
+              ssh = hashlib.sha256(source.read_bytes()).hexdigest()
+              with olean.open('rb') as binary:
+                  osh = hashlib.file_digest(binary, 'sha256').hexdigest()
+              if ssh != sstamp.read_text().strip() or osh != ostamp.read_text().strip():
+                  raise SystemExit('PR606_CHECKPOINT_HASH_DRIFT:' + module)
+              blob = subprocess.check_output(['git', 'hash-object', str(source)], text=True).strip()
+              rows.append({'module':module, 'source':str(source.relative_to(root)), 'source_sha256':ssh,
+                  'source_git_blob':blob, 'olean':str(olean.relative_to(root)), 'olean_sha256':osh})
+          if not rows or len({r['module'] for r in rows}) != len(rows):
+              raise SystemExit('PR606_CHECKPOINT_INCOMPLETE')
+          receipt = {'schema':'aegis.rh.pr606_olean_checkpoint.v1',
+              'head':subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
+              'lean_toolchain':(root/'lean-toolchain').read_text().strip(),
+              'mathlib_sha':os.environ['MATHLIB_SHA'],
+              'aegis_base_sha':os.environ['AEGIS_BASE_SHA'],
+              'aegis_head_sha':os.environ['AEGIS_HEAD_SHA'],
+              'li_provider_sha':os.environ['LI_PROVIDER_SHA'],
+              'module_count':len(rows), 'modules':rows,
+              'rh_unconditional':None, 'axiom_admission':'NOT_ASSESSED_BY_OLEAN_CHECKPOINT'}
+          (out/'olean-source-checkpoint-v1.json').write_text(json.dumps(receipt,indent=2)+'\n')
+          print('PR606_ALL_CLOSURE_OLEANS_CHECKPOINTED',len(rows))
+          PY
       - name: Compile upstream #606 spec
         shell: bash
         run: |
@@ -362,3 +460,21 @@ jobs:
         shell: bash
         run: |
           printf '%s\n'             "UPSTREAM_PR=606"             "UPSTREAM_BASE=$AEGIS_BASE_SHA"             "UPSTREAM_HEAD=$AEGIS_HEAD_SHA"             "PORT=FORMAL_CONJECTURES_FORK"             "SOURCE_BYTES_PRESERVED=FALSE"             "SOURCE_PROVENANCE=AEGIS_PR606_589adf_WITH_EXPLICIT_FORK_COMPAT_PATCHES"             "COMPATIBILITY_REPAIRS=SOURCE_BOUND_REVIEWABLE"             "RH_PROMOTION=NOT_IMPLIED_BY_PORT"             "AUTHORITY_EFFECT=NONE"
+
+      - name: Save incremental PR606 fork closure cache
+        if: always()
+        uses: actions/cache/save@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .lake/aegis-pr606
+          key: pr606-fork-v3-${{ runner.os }}-${{ runner.arch }}-${{ hashFiles('lean-toolchain') }}-${{ env.AEGIS_HEAD_SHA }}-${{ env.LI_PROVIDER_SHA }}-${{ env.MATHLIB_SHA }}-${{ github.event.pull_request.head.sha || github.sha }}
+
+      - name: Preserve source-bound OLEAN checkpoint receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rh-pr606-olean-checkpoints-${{ github.run_id }}
+          path: |
+            .lake/aegis-pr606/olean-source-checkpoint-v1.json
+            .lake/aegis-pr606/rh-proved-window-checkpoint-v1.json
+          if-no-files-found: warn
+          retention-days: 3

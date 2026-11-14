@@ -1,0 +1,11 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "-O",
+    "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101/check_tail_obstruction.py"
+  ],
+  "exit_code": 0,
+  "seconds": 0.08554753799990067,
+  "script_sha256": "43516416be52127f5923599e06d77384915fecf5d25b393b9c923171e4d980ec"
+}

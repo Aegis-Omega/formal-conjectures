@@ -1,0 +1,38 @@
+{
+  "schema": "AEGIS_TARGETED_HISTORICAL_PRODUCER_REVIEW_V1",
+  "rh_proven": false,
+  "new_math_theorems": 0,
+  "historical_source_bodies": 1260,
+  "source_bytes": 17334750,
+  "body_Git_blob_checks": "PASS",
+  "manifest_sha256": "ac32003311171c267481df70d865e1676def0dd6b2d3dee183ad3b6d39f4359a",
+  "compressed_manifest_sha256": "20e27bbd40be413b16e77e89298b9d3f73f437396554216514afd5c1f6815291",
+  "compressed_manifest_bytes": 98436,
+  "whole_semantic_review_complete": false,
+  "fresh_kernel_replay": "NOT_RUN",
+  "source_code_executed": false,
+  "earlier_checkpoints_unchanged": true,
+  "current_heads_fetched": {
+    "formal-conjectures": 101,
+    "AEGIS-OMEGA": 674
+  },
+  "targeted_composition": {
+    "consumer": "RHCvSActualWeilInteropV1.actual_signed_budget_of_zero_side",
+    "required_input": "actual zero-side nonnegativity for the SAME packet g",
+    "recovered_producer": "RHCvSCofinalActualWeilJoinV1.certified_actual_cvs_lowblock_nonneg",
+    "producer_scope": "M>=3 and every vector v:Fin139->Complex at fixed length6/5; complete source congruence used",
+    "attempt": "follow historical actual_signed_budget_of_exact_projectedQ and universal cofinal adapters",
+    "remaining_input": "source-to-same-packet equality or certified scalar convergence; displayed as htransfer/happrox in inspected bodies",
+    "status": "COMPOSITION_NOT_CLOSED_BY_THIS_TARGETED_REVIEW",
+    "unreviewed_sources_not_excluded": true
+  },
+  "do_not_reprove": [
+    "weighted_gram_variable_energy",
+    "actual_optimized_weighted_schur_unequal_energy_from_fine_diagonals",
+    "actual_signed_defect_iff_packet_nonpositive",
+    "actual_signed_budget_of_zero_side",
+    "globalization_limit_nonneg",
+    "certified_actual_cvs_lowblock_nonneg"
+  ],
+  "interpretation": "1260 additional Git source bodies, not 1260 new mathematical results; includes earlier versions and previously saved local content"
+}

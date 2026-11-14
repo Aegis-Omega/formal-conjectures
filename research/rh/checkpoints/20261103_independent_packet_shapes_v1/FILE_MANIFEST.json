@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "path": "ALGEBRA_REPLAY.json",
+      "bytes": 417,
+      "sha256": "6c20036020ab6351f12a172f6c8497351a95a257a59fb3fe28f1bcec891f96f5"
+    },
+    {
+      "path": "EVIDENCE.json",
+      "bytes": 1515,
+      "sha256": "90514c0a61a7c29d0419b28e7925fd10047d45b8a24b5bde674d049442fdbd97"
+    },
+    {
+      "path": "INDEPENDENT_SHAPES_COMPOSITION.md",
+      "bytes": 9199,
+      "sha256": "02dd0c1f629ce6e94a3077a37a020d94f97979b5381d9d290c60343696c4f865"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 2471,
+      "sha256": "8b072018987e6e361a70b7288cd01985f18f39ad24bb4e2ccd1a115ba61618ef"
+    },
+    {
+      "path": "verify_composition_algebra.py",
+      "bytes": 1450,
+      "sha256": "e504ec301bce929d11f6ab06430fcdd0b7a7f8834037a3754b121755f70a1c73"
+    }
+  ],
+  "self_excluded": true
+}

@@ -1,0 +1,36 @@
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.58e-08 epsT 3.53e-14 K' 1.2459e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min 4.32945e-7  lambda_max 3.94294  (9s)
+-- rho 1.00e-08 rhoH 3.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.25e-07 epsT 3.53e-14 K' 1.3553e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min 4.04823e-7  lambda_max 3.94294  (9s)
+-- rho 3.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 4.890e-08 epsIn 1.90e-10 epsOut 2.20e-08 epsT 3.18e-13 K' 2.7605e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min 4.28727e-8  lambda_max 3.94294  (9s)
+-- rho 2.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 3.543e-08 epsIn 1.00e-10 epsOut 1.88e-08 epsT 1.41e-13 K' 1.9322e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 54: scaled lambda_min 4.14372e-9  lambda_max 4.0774  (8s)
+-- rho 2.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 3.543e-08 epsIn 1.00e-10 epsOut 1.88e-08 epsT 1.41e-13 K' 2.0739e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 58: scaled lambda_min 4.49698e-7  lambda_max 4.08364  (9s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.51e-08 epsT 5.11e-14 K' 1.2892e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 7/10 kappa 58: scaled lambda_min 4.98641e-7  lambda_max 4.08369  (8s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 3.00e-09 RE 1.647e-08 epsIn 2.24e-11 epsOut 1.58e-08 epsT 3.53e-14 K' 9.3788e-07  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min 5.12032e-7  lambda_max 3.94294  (9s)
+-- rho 1.00e-08 rhoH 2.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 5.66e-08 epsT 3.87e-14 K' 1.2867e-06  max|tau|>70 11.90
+LT 11/8 NP 280 eps 1/2 kappa 56: scaled lambda_min 9.69674e-8  lambda_max 3.94272  (9s)
+-- rho 1.00e-08 rhoH 3.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.20e-07 epsT 5.11e-14 K' 1.3942e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 7/10 kappa 58: scaled lambda_min 4.98463e-7  lambda_max 4.08369  (9s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.51e-08 epsT 5.11e-14 K' 1.2453e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 7/10 kappa 56: scaled lambda_min 2.66641e-7  lambda_max 3.94301  (9s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.43e-08 epsT 7.08e-14 K' 1.3323e-06  max|tau|>70 11.90
+LT 11/8 NP 200 eps 7/10 kappa 60: scaled lambda_min -1.06981e-7  lambda_max 4.22418  (8s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.43e-08 epsT 7.08e-14 K' 1.3762e-06  max|tau|>70 11.90
+LT 11/8 NP 200 eps 7/10 kappa 62: scaled lambda_min 1.46376e-7  lambda_max 4.04113  (8s)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.51e-08 epsT 4.51e-14 K' 1.2892e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 1/2 kappa 58: scaled lambda_min -2.98069e-7  lambda_max 4.08313  (9s)
+-- rho 1.50e-08 rhoH 2.00e-07 rhoD 8.50e-09 RE 2.870e-08 epsIn 6.61e-11 epsOut 5.78e-08 epsT 1.15e-13 K' 1.7224e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 7/10 kappa 58: scaled lambda_min 4.97905e-7  lambda_max 4.08369  (9s)
+-- rho 1.00e-07 rhoH 7.30e-08 rhoD 8.50e-09 RE 1.391e-07 epsIn 1.53e-09 epsOut 3.32e-08 epsT 6.66e-12 K' 7.2668e-06  max|tau|>70 11.87
+LT 4/3 NP 200 eps 7/10 kappa 52: scaled lambda_min 7.49542e-7  lambda_max 4.19241  (8s)
+-- rho 2.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 3.543e-08 epsIn 1.00e-10 epsOut 1.88e-08 epsT 1.41e-13 K' 2.0030e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min 2.3817e-7  lambda_max 3.94294  (9s)
+-- rho 5.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 7.583e-08 epsIn 4.55e-10 epsOut 2.93e-08 epsT 8.83e-13 K' 4.2762e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min -3.4901e-7  lambda_max 3.94294  (9s)
+-- rho 1.00e-07 rhoH 1.00e-07 rhoD 8.50e-09 RE 1.432e-07 epsIn 1.62e-09 epsOut 5.21e-08 epsT 3.53e-12 K' 8.0706e-06  max|tau|>70 11.90
+LT 11/8 NP 300 eps 1/2 kappa 56: scaled lambda_min -1.33434e-6  lambda_max 3.94294  (9s)

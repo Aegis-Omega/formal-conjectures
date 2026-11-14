@@ -1,0 +1,101 @@
+{
+  "schema": "AEGIS_SUZUKI_OMEGA_ATTACK_SOURCE_MANIFEST_V1",
+  "primary_source": {
+    "author": "Masatoshi Suzuki",
+    "title": "Aspects of the screw function corresponding to the Riemann zeta-function",
+    "arxiv": "2206.03682v4",
+    "url": "https://arxiv.org/pdf/2206.03682v4",
+    "pdf_sha256": "eabccec3c2bfee2eb12077181b564e508270f80698f4a8c64ccf105b30119f41",
+    "sections_used": [
+      "(1.1)",
+      "Theorem 1.1(1),(3)",
+      "Section 11, (11.1),(11.2) and shift composition"
+    ],
+    "raw_pdf_included": false
+  },
+  "claims": {
+    "ordinary_analytic_proof": [
+      "exact omega generator and arithmetic variation",
+      "actual local counterexample to nonpositive omega variation",
+      "first prime-power jump formula",
+      "actual recent-history inverse bound eventually negative for every shift, uniformly for all shifts>=1/2"
+    ],
+    "rigorous_numerics": "Finite actual omega=1/2 derivative/slope enclosures only; explicit Lerch tail and Arb outward rounding.",
+    "remaining_signed_bound": "Full inverse Volterra residual (R) or (S+) in INDEPENDENT_INVERSE_REVIEW.md is unproved.",
+    "analytic_lean_replay": "NOT_RUN",
+    "rh_proven": false
+  },
+  "numerical_executions": [
+    {
+      "receipt": "OMEGA_VARIATION_RECEIPT.json",
+      "precision_bits": 256,
+      "executor": "analytic_audit",
+      "exit_code": 0
+    },
+    {
+      "receipt": "OMEGA_VARIATION_ROOT_REPLAY_384.json",
+      "precision_bits": 384,
+      "executor": "root",
+      "execution_scope": "separate execution of same checker; not an independent interval foundation"
+    }
+  ],
+  "runtime": {
+    "dependency": "python-flint==0.9.0",
+    "existing_local_module_path": "/workspace/aegis-nov2-runtime/arb-python",
+    "initial_default_python_import": "ModuleNotFoundError: flint; resolved by the existing local PYTHONPATH",
+    "network_or_install_required_for_recorded_runs": false
+  },
+  "files": [
+    {
+      "path": "OMEGA_VARIATION_ATTACK.md",
+      "bytes": 8337,
+      "sha256": "51a4eb5db00572af9b0935ca33632ea1c88df5244c5808a11473f163852e6e29"
+    },
+    {
+      "path": "omega_variation_enclosure_v1.py",
+      "bytes": 4730,
+      "sha256": "6bdc4560592ce87002dee0205334ab04c57556371c3b79c9fd3bf75dc96e7029"
+    },
+    {
+      "path": "OMEGA_VARIATION_RECEIPT.json",
+      "bytes": 5374,
+      "sha256": "76bf5784a9a263c40f531675861b42729fb177c8f4638f22f5e1176d4bc57b7d"
+    },
+    {
+      "path": "OMEGA_VARIATION_RUN.log",
+      "bytes": 5374,
+      "sha256": "76bf5784a9a263c40f531675861b42729fb177c8f4638f22f5e1176d4bc57b7d"
+    },
+    {
+      "path": "OMEGA_VARIATION_ROOT_REPLAY_384.json",
+      "bytes": 6640,
+      "sha256": "c847ebea760605ee71d8c54bbf7dc2644d12d33f2c20146739c044e7be9927b7"
+    },
+    {
+      "path": "RECENT_HISTORY_INVERSE_OBSTRUCTION.md",
+      "bytes": 4532,
+      "sha256": "67a0b91cf38e050857904bf6e7e7e3e9d89d9ff41a60ad47f0d1697b76026115"
+    },
+    {
+      "path": "UNIFORM_RECENT_HISTORY_OBSTRUCTION.md",
+      "bytes": 4699,
+      "sha256": "607c5d075038e7dc6903781dec35403cf8aab178401cb1e98ba71e77a977d4df"
+    },
+    {
+      "path": "INDEPENDENT_INVERSE_REVIEW.md",
+      "bytes": 7253,
+      "sha256": "6a579b041b02c35b338f8423bbcaa9fb6f18437b2e670bede9dd7162651ea873"
+    },
+    {
+      "path": "DELEGATED_RESOLVENT_REVIEW_RECORD.json",
+      "bytes": 1758,
+      "sha256": "24a4dc66d6a17cd4ec42aecec31ef50a2917a058dde8bcfe4422a20ad7d81bf3"
+    }
+  ],
+  "scope": "Additive local audit artifact manifest. Raw primary PDFs and private handoffs are excluded. Regenerate hashes if any listed source is changed.",
+  "separate_agent_review": {
+    "actual_agent_id": "/root/analytic_audit/resolvent_limit_check",
+    "record": "DELEGATED_RESOLVENT_REVIEW_RECORD.json",
+    "record_scope": "normalized transcript of actual completed collaboration task; not signed execution evidence or independent foundations"
+  }
+}

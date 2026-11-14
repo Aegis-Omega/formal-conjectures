@@ -1,0 +1,38 @@
+{
+  "schema": "AEGIS_ORIGINAL_ARB_REPLAY_V1",
+  "seconds": 6.174537348997546,
+  "python_flint": "0.9.0",
+  "arb_precision": 800,
+  "source_identities": [
+    {
+      "file": "certify.py",
+      "sha256": "facfaa4990b6b0339adee5c291ddf4278ad5af67ddfaf2afedc6717c5e569cc9",
+      "git_blob": "35087597b9f1be6ec5de922383960ae8b5725a3f"
+    },
+    {
+      "file": "qwhp.py",
+      "sha256": "be519c5118e4c84e02178fc841e720574032f0881a51504a6b1eef234cbb8ff4",
+      "git_blob": "ca36a73b8a8fa8078a1b7d7a0e3736d1b05b94fa"
+    }
+  ],
+  "inputs": {
+    "a": "3/4",
+    "K": 40
+  },
+  "quotient_ball": "[7.678460751097371600210337724920397075192489352390066880375306717904326e-10 +/- 3.83e-80]",
+  "original_formatted_upper": "7.67846e-10",
+  "formatted_upper_below_trial_ball": true,
+  "exact_potential_and_moments_checked": true,
+  "exact_norm_squared": [
+    "8603726158853375438559023761472268749999999999999999999999977268956178738857136657634549058220881606568177958380400118784476503259668390553524391701472633",
+    "8603726158853375438559023761472268750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "finite_prime_indices": [
+    2,
+    3,
+    4
+  ],
+  "independent_direct_evaluation": "PENDING",
+  "lean_kernel_run": false,
+  "rh_proven": false
+}

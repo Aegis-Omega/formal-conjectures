@@ -1,0 +1,252 @@
+{
+  "schema": "AEGIS_CAUSAL_DELTA_NOV2_V1",
+  "scope": "reviewed subgraph only; frozen prior graph preserved",
+  "source_pins": [
+    "f8cb6544e9451910fbf1ed5fa71e76a5fa1b747f",
+    "d7e6bc7602ccfe4bf5fb094ab595b36eb532d8d5"
+  ],
+  "nodes": [
+    {
+      "id": "CanonicalRH",
+      "statement": "_root_.RiemannHypothesis",
+      "status": "TARGET_UNPROVED",
+      "axioms": "NOT_AUDITED_NO_OWN_TERM"
+    },
+    {
+      "id": "SmoothActualFormIdentity",
+      "source": "CvSFeshbachWindowV1.zero_quadratic_eq_energy",
+      "status": "SOURCE_BODY_READ",
+      "premises": "smooth legal packet, exact support and prime cutoff",
+      "kernel": "NOT_FRESHLY_REPLAYED"
+    },
+    {
+      "id": "ExistingSmoothL43",
+      "source": "SourceCrosscheck/CvSWindowL43V1.lean",
+      "blob": "ad354cb73a86952dc7bed0a04dbce285b5feb103",
+      "status": "SOURCE_BODY_READ",
+      "quantifiers": "every smooth legal packet, full width<=4/3",
+      "kernel": "NOT_FRESHLY_REPLAYED"
+    },
+    {
+      "id": "ExistingL118Frontier",
+      "source": "LiveHead/source/research/rh/checkpoints/20261031_window_l118/RHWindowL118ExhaustionV1.lean",
+      "blob": "8c80352c1e1c3ab43fc064ca002602d85b098805",
+      "status": "SOURCE_BODY_READ_AND_HISTORICAL_RUN_METADATA_RECOVERED",
+      "quantifiers": "all WindowArithmeticNonpositiveV1 L for L<=11/16; this L is half-width",
+      "historical_run_head": "fe117ae12374199b9102ea0c58e0689bab585a75",
+      "historical_run": 41285866006,
+      "fresh_replay": false
+    },
+    {
+      "id": "RoughLocalSignAndExactSchur",
+      "statement": "Q>=0 on X([0,6/5]) with two moments; exact local low/high Schur budget",
+      "status": "ORDINARY_PROOF_INDEPENDENTLY_REVIEWED",
+      "transport": "mollification preserves moments; support margin<4/3; weighted Fourier dominated convergence",
+      "formal": "PORT_PENDING"
+    },
+    {
+      "id": "Actual139MomentDecomposition",
+      "status": "ORDINARY_PROOF_INDEPENDENTLY_REVIEWED",
+      "statement": "actual139 CvS atom span plus141-moment oblique complement; NOT the orthogonal source residual"
+    },
+    {
+      "id": "BalancedActual140Decomposition",
+      "status": "ORDINARY_PROOF_REVIEWED",
+      "statement": "actual139 atoms plus one odd70 atom; reflection-invariant low/high decomposition with142 moments; parity70/70",
+      "zero_case": "universal non-strict coercivity, strict only for nonzero residual",
+      "general_version": "every N>=0:actual2N+1 atoms plusoneoddN+1 direction; balanced2N+4 weightedmoments, correctiondim2N+2"
+    },
+    {
+      "id": "HermiteLowMass",
+      "status": "ORDINARY_PROOF_INDEPENDENTLY_REVIEWED",
+      "statement": "epsilon_n=(2RT/pi)*exp(R)*[R^2(T^2+1/4)]^n/(n!)^2 bounds ALL low Fourier mass",
+      "scope": "compact L2 plus exact weighted moments"
+    },
+    {
+      "id": "IntegerConstants141",
+      "status": "KERNEL_VERIFIED",
+      "source": "HighMomentExactConstants.lean",
+      "source_sha256": "4eccbe4e4524bf7bd10d378ab70fb50d58171b0d5f003daa5e21b16e56c380f8",
+      "endpoint_count": 6,
+      "axioms": [],
+      "scope": "integer arithmetic only; not analytic theorem"
+    },
+    {
+      "id": "IntegerConstants142",
+      "status": "KERNEL_VERIFIED",
+      "source": "HighMomentSymmetric142.lean",
+      "source_sha256": "5ca3b7b33801a0399ac859360a205564a38f2a4e3cf0495737e1e38992a77cc5",
+      "endpoint_count": 2,
+      "axioms": [],
+      "scope": "integer arithmetic only; not analytic theorem"
+    },
+    {
+      "id": "BalancedComplementL65",
+      "status": "ORDINARY_PROOF_REVIEWED_WITH_KERNEL_INTEGER_COMPONENT",
+      "statement": "Q(V)>=8/25 ||V||^2 on142-moment complement, full width6/5",
+      "formal": "ANALYTIC_PORT_PENDING"
+    },
+    {
+      "id": "ExplicitAllIntegerRadiusComplement",
+      "status": "ORDINARY_PROOF_REVIEWED",
+      "statement": "explicitJ_R produces Q(V)>=2||V||^2 on2J_R-moment kernel for EVERY integerR>=1; actual2J_R-2 correction",
+      "formal": "PORT_PENDING",
+      "caution": "neither a fixed dimension nor full-class coercivity"
+    },
+    {
+      "id": "EndpointAndMixedGramTail",
+      "status": "ORDINARY_PROOF_INDEPENDENTLY_REVIEWED",
+      "statement": "source-exact physical operator incl endpointlogs/prime shifts; finite-difference basis; ALL mixed Fourier tails bounded",
+      "formal": "PORT_PENDING"
+    },
+    {
+      "id": "FiniteGeometryShrinkingGram",
+      "status": "ORDINARY_PROOF_INDEPENDENTLY_REVIEWED",
+      "statement": "each fixed finite center geometry has a shape/phase-uniform positive shrinking-window threshold",
+      "scope": "forall finitegeometry existswidth; NOT one width for allgeometry"
+    },
+    {
+      "id": "LambdaS1Laboratory",
+      "status": "NUMERICAL_ONLY",
+      "source_pin": "d7e6bc7602ccfe4bf5fb094ab595b36eb532d8d5",
+      "source": "LambdaLabAudit",
+      "observations": "selectedN20 replay matches reference; N12/20 convergence claim falsified at a=.5",
+      "proof_effect": "NONE_ON_GLOBAL_SIGN"
+    },
+    {
+      "id": "GlobalSignedSchurProducer",
+      "status": "OPEN",
+      "statement": "For every integer R>=1, with a=8R*3^R,T=3^(a+8),A0=R*(T+1),B0=2R*T*3^R,J=max(2,3A0,B0*(a+9)), let L_R be the balanced actual CvS low space of dimension2J-2 and V_R the kernel of M[+/-1/2,k],0<=k<J, in the logarithmic form domain supported[-R,R]. Prove for EVERY v in L_R: Q(v)>=sup_{0!=V in V_R}|B_Q(v,V)|^2/Q(V), with the complete actual von Mangoldt prime-power and Archimedean form. Both parity blocks must be covered.",
+      "kind": "MATHEMATICAL_GLOBAL_SIGN",
+      "not_discharged_by": [
+        "positive complement",
+        "finite Ritz minima",
+        "local positivity",
+        "parity separation",
+        "generic symmetry"
+      ]
+    },
+    {
+      "id": "FullWeilPositivity",
+      "status": "NOT_PRODUCED",
+      "quantifiers": "every smooth compact legal packet with BOTH moments and arbitrary support"
+    },
+    {
+      "id": "RecoveredLevyDecomposition",
+      "status": "EXISTING_SOURCE_REUSED",
+      "blob": "5729678b1a0293b453ae72c73703890c19d61940",
+      "source": "JumpSource/weil_levy_gap_probe.py",
+      "scope": "finite-cutoff normalizedsymbol positiveLevyexponent PLUS adverse scalar; numericalprobe NOT gap proof"
+    },
+    {
+      "id": "SincMomentCarrier",
+      "status": "ORDINARY_PROOF_PRIMARY_REVIEW_ONLY",
+      "source": "JumpSource/CONSTRAINT_TRANSPORT_AUDIT.md",
+      "statement": "exact M_sigma(h_k)=(-1)^k sinh(sigma r)/(sigma r+ikpi); oldoneconstraint is H(0)=0, different carrier"
+    },
+    {
+      "id": "SincCvSComposition",
+      "status": "ORDINARY_SOURCE_COMPOSITION_PRIMARY_REVIEW_ONLY",
+      "source": "JumpSource/SINC_CVS_COMPOSITION.md",
+      "reused_source": "AEGIS.CvSAtomInversionV1.atom_sum",
+      "statement": "correctly constrained2K+1 sincspace equalsactual2K-1 CvSatomspan viaexplicitbeta/alpha"
+    },
+    {
+      "id": "PrimeCutoffStabilization",
+      "status": "ORDINARY_PROOF_PRIMARY_REVIEW_ONLY",
+      "statement": "samecompactcarrier full formstabilizesafterprimecutoff coverssupport; frequencytruncation canproduceinactiveprimecontamination",
+      "source": "JumpSource/SINC_CVS_COMPOSITION.md"
+    },
+    {
+      "id": "ScalarGroundStateShortcut",
+      "status": "FALSIFIED_ON_LARGER_DOMAIN",
+      "source": "SIGNED_JUMP_ATTACK.md section2",
+      "counterexample": "box[-1/4,1/4], fullpole-freeQ0<0; moments notsatisfied; notRHcounterexample"
+    },
+    {
+      "id": "ActualJumpMeasureLogConcavity",
+      "status": "FALSIFIED",
+      "source": "SIGNED_JUMP_ATTACK.md section4",
+      "counterexample": "isolated log2atom pluspositivecontinuousdensity violatesmidpointlogconcavity"
+    },
+    {
+      "id": "ActualExpandingCvSConvergence",
+      "status": "ORDINARY_PROOF_PRIMARY_RECONSTRUCTION",
+      "source": "ACTUAL_CVS_CONVERGENCE_PRODUCER.md",
+      "quantifiers": "forall actualsmoothlegalH, Q(P_R H)->Q(H),Rinteger->infinity; P_R linearfiniteactualCvSprojection",
+      "prime_growth_error": "C_H R^9 exp(R) 3^(-4R^2)->0",
+      "not_supplied": "sign of finiteQR_R; not fixed139 scalar approximation",
+      "formal": "PORT_PENDING"
+    }
+  ],
+  "edges": [
+    {
+      "from": [
+        "ExistingSmoothL43",
+        "SmoothActualFormIdentity"
+      ],
+      "to": "RoughLocalSignAndExactSchur",
+      "kind": "UNCONDITIONAL_ORDINARY_COMPOSITION",
+      "formal": "PORT_PENDING"
+    },
+    {
+      "from": [
+        "HermiteLowMass",
+        "IntegerConstants141",
+        "IntegerConstants142"
+      ],
+      "to": "BalancedComplementL65",
+      "kind": "UNCONDITIONAL_ORDINARY_WITH_KERNEL_INTEGER_COMPONENT",
+      "missing_formal_links": "Hermite/digamma/log/gamma/prime interpretations remain ordinary"
+    },
+    {
+      "from": [
+        "HermiteLowMass",
+        "BalancedActual140Decomposition"
+      ],
+      "to": "ExplicitAllIntegerRadiusComplement",
+      "kind": "UNCONDITIONAL_ORDINARY_WITH_EXPLICIT_SELECTOR"
+    },
+    {
+      "from": [
+        "SincMomentCarrier"
+      ],
+      "to": "SincCvSComposition",
+      "kind": "EXISTING_FINITE_ATOM_INVERSION_COMPOSED_ORDINARILY",
+      "formal": "PORT_PENDING"
+    }
+  ],
+  "rh_proven": false,
+  "conditional_composition_templates": [
+    {
+      "from": [
+        "ExplicitAllIntegerRadiusComplement",
+        "EndpointAndMixedGramTail",
+        "GlobalSignedSchurProducer"
+      ],
+      "to": "FullWeilPositivity",
+      "kind": "CONDITIONAL_FESHBACH_COMPOSITION",
+      "open_input": "GlobalSignedSchurProducer"
+    },
+    {
+      "from": [
+        "FullWeilPositivity"
+      ],
+      "to": "CanonicalRH",
+      "kind": "EXISTING_SOURCE_CONDITIONAL_CRITERION",
+      "input_not_produced": true
+    }
+  ],
+  "rejected_or_insufficient_arrows": [
+    {
+      "from": [
+        "RecoveredLevyDecomposition",
+        "PrimeCutoffStabilization"
+      ],
+      "to": "GlobalSignedSchurProducer",
+      "kind": "DOES_NOT_DISCHARGE_OPEN_GAP",
+      "explanation": "positivejumpenergy muststillpay adverse scalar onactualtwomomentcarrier; no positivityarrow"
+    }
+  ],
+  "readme": "edges contain established source/ordinary mathematical compositions only. Conditional templates are NOT closed producers; no proven causal path reaches RH."
+}

@@ -1,0 +1,19 @@
+plan modules 1019 by origin {'actual-zip': 431, 'closure': 70, 'full-extra': 2, 'full-zip': 442, 'pr606': 5, 'pr606-compat': 12, 'pr606-source': 9, 'script': 2, 'small-window': 1, 'wf': 45}
+same-name pairs (compiled source, tree copy): {'identical': 172, 'header/import only': 30, 'body differs': 33}
+modules compiled from a source whose body differs from a same-name tree copy: 16
+  RHZeroKernelLaplaceAnalyticV12 | compiled AegisRH/PR606/Compat/RHZeroKernelLaplaceAnalyticV12.lean | differs from AegisRH/PR606/RHZeroKernelLaplaceAnalyticV12.lean, AegisRH/PR606/Source/RHZeroKernelLaplaceAnalyticV12.lean
+  RHZeroKernelLaplaceV12 | compiled AegisRH/PR606/Compat/RHZeroKernelLaplaceV12.lean | differs from AegisRH/PR606/RHZeroKernelLaplaceV12.lean, AegisRH/PR606/Source/RHZeroKernelLaplaceV12.lean
+  RestrictedWeilCriterionPoleIsolationV10 | compiled AegisRH/PR606/Compat/RestrictedWeilCriterionPoleIsolationV10.lean | differs from AegisRH/Overlay/RestrictedWeilCriterionPoleIsolationV10.lean, AegisRH/PR606/RestrictedWeilCriterionPoleIsolationV10.lean, AegisRH/PR606/Source/RestrictedWeilCriterionPoleIsolationV10.lean
+  RestrictedWeilCriterionResidueWitnessV11 | compiled AegisRH/PR606/Compat/RestrictedWeilCriterionResidueWitnessV11.lean | differs from AegisRH/PR606/RestrictedWeilCriterionResidueWitnessV11.lean, AegisRH/PR606/Source/RestrictedWeilCriterionResidueWitnessV11.lean
+  RestrictedWeilCriterionTargetWitnessV11 | compiled AegisRH/PR606/Compat/RestrictedWeilCriterionTargetWitnessV11.lean | differs from AegisRH/PR606/Source/RestrictedWeilCriterionTargetWitnessV11.lean
+  WeilAutocorrelationMellinFactorV10 | compiled AegisRH/PR606/Compat/WeilAutocorrelationMellinFactorV10.lean | differs from AegisRH/PR606/Source/WeilAutocorrelationMellinFactorV10.lean, AegisRH/PR606/WeilAutocorrelationMellinFactorV10.lean
+  WeilFixedLineCompletedGammaV10 | compiled .lake/ringstage/WeilFixedLineCompletedGammaV10.lean | differs from AegisRH/PR606/Source/WeilFixedLineCompletedGammaV10.lean, AegisRH/PR606/WeilFixedLineCompletedGammaV10.lean
+  WeilFixedLineGammaAssemblyV10 | compiled .lake/ringstage/WeilFixedLineGammaAssemblyV10.lean | differs from AegisRH/PR606/Source/WeilFixedLineGammaAssemblyV10.lean, AegisRH/PR606/WeilFixedLineGammaAssemblyV10.lean
+  WeilFixedLineGammaFubiniV10 | compiled .lake/ringstage/WeilFixedLineGammaFubiniV10.lean | differs from AegisRH/PR606/Source/WeilFixedLineGammaFubiniV10.lean, AegisRH/PR606/WeilFixedLineGammaFubiniV10.lean
+  WeilFixedLineGammaXSpaceV10 | compiled .lake/ringstage/WeilFixedLineGammaXSpaceV10.lean | differs from AegisRH/PR606/Source/WeilFixedLineGammaXSpaceV10.lean, AegisRH/PR606/WeilFixedLineGammaXSpaceV10.lean
+  WeilLogAutocorrelationV10 | compiled AegisRH/PR606/Compat/WeilLogAutocorrelationV10.lean | differs from AegisRH/PR606/Source/WeilLogAutocorrelationV10.lean, AegisRH/PR606/WeilLogAutocorrelationV10.lean
+  WeilLogLiftCompactSupportV10 | compiled AegisRH/PR606/Compat/WeilLogLiftCompactSupportV10.lean | differs from AegisRH/PR606/Source/WeilLogLiftCompactSupportV10.lean, AegisRH/PR606/WeilLogLiftCompactSupportV10.lean
+  WeilRHImpliesFinalSignV11 | compiled AegisRH/PR606/Compat/WeilRHImpliesFinalSignV11.lean | differs from AegisRH/Overlay/WeilRHImpliesFinalSignV11.lean, AegisRH/PR606/Source/WeilRHImpliesFinalSignV11.lean, AegisRH/PR606/WeilRHImpliesFinalSignV11.lean
+  WeilZeroKernelHermitianV11 | compiled AegisRH/PR606/Compat/WeilZeroKernelHermitianV11.lean | differs from AegisRH/PR606/Source/WeilZeroKernelHermitianV11.lean, AegisRH/PR606/WeilZeroKernelHermitianV11.lean
+  WeilZeroTranslationV11 | compiled AegisRH/PR606/Compat/WeilZeroTranslationV11.lean | differs from AegisRH/PR606/Source/WeilZeroTranslationV11.lean, AegisRH/PR606/WeilZeroTranslationV11.lean
+  WeilZeroTwoPointV11 | compiled AegisRH/PR606/Compat/WeilZeroTwoPointV11.lean | differs from AegisRH/PR606/Source/WeilZeroTwoPointV11.lean, AegisRH/PR606/WeilZeroTwoPointV11.lean

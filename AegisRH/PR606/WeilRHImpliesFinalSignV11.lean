@@ -54,8 +54,9 @@ AUTHORITY_EFFECT = NONE.
 The reverse implication is not asserted in this file.
 -/
 
-open Set Filter Topology Complex MeasureTheory
-open scoped BigOperators FourierTransform Convolution ContDiff
+open Set Filter Topology Complex MeasureTheory Convolution ContinuousLinearMap
+open AEGIS.RHFinalClosureV1
+open scoped BigOperators FourierTransform Convolution ContDiff ComplexConjugate
 
 set_option autoImplicit false
 noncomputable section
@@ -77,7 +78,10 @@ private theorem critical_log_profile_continuous_v11
     (g : WeilCompactSmoothGV1) :
     Continuous (CriticalLogProfileV11 g) := by
   unfold CriticalLogProfileV11 logLift
-  fun_prop
+  have hg : Continuous (fun t : ℝ => g.1 (Real.exp t)) :=
+    g.2.1.continuous.comp Real.continuous_exp
+  exact (Complex.continuous_ofReal.comp
+    (Real.continuous_exp.comp (continuous_id.div_const 2))).mul hg
 
 private theorem critical_log_profile_hasCompactSupport_v11
     (g : WeilCompactSmoothGV1) :
@@ -141,9 +145,28 @@ theorem critical_mellin_profile_eq_log_reflection_v11
       CriticalLogProfileV11 g (-u) := by
   unfold MellinWeightedLogProfileV1 MellinComplexWeightV1
     MellinWeightV1 MellinLogProfileV1 CriticalLogProfileV11 logLift
+  have he : -(1 / 2 : ℝ) * u = (-u) / 2 := by ring
+  rw [he]
   simp [Complex.real_smul]
-  congr 2
-  ring
+
+/-- Whole-line exponential substitution for complex test functions, by the
+one-dimensional Jacobian formula at the pinned Mathlib version. -/
+private theorem integral_comp_exp_v11 (f : ℝ → ℂ) :
+    (∫ t : ℝ, Real.exp t • f (Real.exp t)) =
+      ∫ y in Ioi (0 : ℝ), f y := by
+  have hcov :=
+    MeasureTheory.integral_image_eq_integral_abs_deriv_smul
+      (f := Real.exp)
+      (f' := Real.exp)
+      (s := Set.univ)
+      MeasurableSet.univ
+      (fun x _ => (Real.hasDerivAt_exp x).hasDerivWithinAt)
+      (Set.injOn_of_injective Real.exp_injective)
+      f
+  have himage : Real.exp '' Set.univ = Ioi (0 : ℝ) := by
+    rw [Set.image_univ, Real.range_exp]
+  rw [himage] at hcov
+  simpa [abs_of_pos (Real.exp_pos _)] using hcov.symm
 
 /-- Multiplicative autocorrelation becomes ordinary additive correlation after
 the unitary logarithmic lift. -/
@@ -157,9 +180,9 @@ theorem autocorrelation_critical_profile_convolution_v11
     MellinWeightV1 MellinLogProfileV1 WeilAutocorrelationV1
   simp only [Complex.real_smul]
   have hExp :=
-    integral_comp_exp
+    integral_comp_exp_v11
       (fun y : ℝ =>
-        g.1 (Real.exp (-u) * y) * conj (g.1 y))
+        g.1 (Real.exp (-u) * y) * star (g.1 y))
   rw [← hExp]
   rw [← integral_const_mul]
   have hneg :=
@@ -172,12 +195,38 @@ theorem autocorrelation_critical_profile_convolution_v11
   rw [← hneg]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall (fun t => by
+    have harg :
+        Real.exp (-u) * Real.exp t = Real.exp (-u + t) := by
+      rw [← Real.exp_add]
+    have hcoef :
+        Real.exp (-u / 2) * Real.exp t =
+          Real.exp (t / 2) * Real.exp ((-u + t) / 2) := by
+      rw [← Real.exp_add, ← Real.exp_add]
+      congr 1
+      ring
+    have hcoefC :
+        (Real.exp (-u / 2) : ℂ) * (Real.exp t : ℂ) =
+          (Real.exp (t / 2) : ℂ) *
+            (Real.exp ((-u + t) / 2) : ℂ) := by
+      exact_mod_cast hcoef
     unfold CriticalLogAdjointV11 CriticalLogProfileV11 logLift
-    simp [Complex.real_smul]
-    rw [← Real.exp_add]
-    congr 1
-    · ring_nf
-    · congr 2 <;> ring)
+    simp only [neg_neg, Complex.real_smul, map_mul, Complex.conj_ofReal]
+    rw [harg]
+    rw [show -u - -t = -u + t by ring]
+    simp only [ContinuousLinearMap.mul_apply', Complex.star_def, mul_one]
+    rw [show -(1 / 2 : ℝ) * u = -u / 2 by ring]
+    calc
+      (Real.exp (-u / 2) : ℂ) *
+          ((Real.exp t : ℂ) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))))
+        = ((Real.exp (-u / 2) : ℂ) * (Real.exp t : ℂ)) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))) := by ring
+      _ = ((Real.exp (t / 2) : ℂ) *
+            (Real.exp ((-u + t) / 2) : ℂ)) *
+            (g.1 (Real.exp (-u + t)) * star (g.1 (Real.exp t))) := by rw [hcoefC]
+      _ = _ := by
+        simp only [starRingEnd_apply]
+        ring)
 
 /-- Fourier transform of the reflected-conjugate profile. -/
 theorem fourier_critical_adjoint_v11
@@ -189,15 +238,29 @@ theorem fourier_critical_adjoint_v11
     (Measure.measurePreserving_neg (volume : Measure ℝ)).integral_comp
       (Homeomorph.neg ℝ).measurableEmbedding
       (fun t : ℝ =>
-        Complex.exp ((↑(-2 * Real.pi * t * ξ) * I)) *
+        Complex.exp ((↑(-2 * Real.pi * inner ℝ t ξ) * I)) •
           CriticalLogAdjointV11 g t)
   rw [← hneg]
   apply integral_congr_ae
   exact Filter.Eventually.of_forall (fun t => by
-    unfold CriticalLogAdjointV11
-    simp [map_mul, Complex.exp_conj]
-    congr 1
-    ring)
+    have hphase :
+        Complex.exp
+          (((-2 * Real.pi * inner ℝ (-t) ξ : ℝ) : ℂ) * I) =
+        conj (Complex.exp
+          (((-2 * Real.pi * inner ℝ t ξ : ℝ) : ℂ) * I)) := by
+      rw [← Complex.exp_conj]
+      apply congrArg Complex.exp
+      apply Complex.ext <;>
+        simp [Complex.mul_re, Complex.mul_im, inner_neg_left] <;> ring
+    change
+      Complex.exp
+        (((-2 * Real.pi * inner ℝ (-t) ξ : ℝ) : ℂ) * I) •
+          CriticalLogAdjointV11 g (-t) =
+        conj (Complex.exp
+          (((-2 * Real.pi * inner ℝ t ξ : ℝ) : ℂ) * I) •
+          CriticalLogProfileV11 g t)
+    rw [hphase]
+    simp [CriticalLogAdjointV11, map_mul])
 
 /-- Critical-line Mellin transform as Fourier transform of the reflected
 positive log profile. -/
@@ -207,12 +270,21 @@ theorem mellin_critical_eq_fourier_log_v11
       𝓕 (fun u : ℝ => CriticalLogProfileV11 g (-u))
         (γ / (2 * Real.pi)) := by
   rw [mellin_eq_fourier]
-  simp only [add_re, ofReal_re, mul_re, I_re, I_im, ofReal_im,
-    zero_mul, sub_zero, add_im, mul_im, one_mul, zero_add]
+  have hre :
+      ((((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I).re) = (1 / 2 : ℝ) := by
+    simp
+  have him :
+      ((((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I).im) = γ := by
+    simp
+  rw [hre, him]
   apply congrArg (fun F : ℝ → ℂ =>
     𝓕 F (γ / (2 * Real.pi)))
   funext u
-  rw [critical_mellin_profile_eq_log_reflection_v11]
+  change
+    Real.exp (-(1 / 2 : ℝ) * u) • g.1 (Real.exp (-u)) =
+      ((Real.exp ((-u) / 2) : ℝ) : ℂ) * g.1 (Real.exp (-u))
+  rw [show -(1 / 2 : ℝ) * u = (-u) / 2 by ring]
+  simp [Complex.real_smul]
 
 /-- The critical-line Mellin transform of the actual multiplicative
 autocorrelation is a modulus square. -/
@@ -239,7 +311,11 @@ theorem autocorrelation_mellin_critical_normSq_v11
     change CriticalLogProfileV11 A (-u) =
       (Hstar ⋆[mul ℂ ℂ] H) (-u)
     rw [← hw]
-    simpa [A, H, Hstar] using hc
+    change
+      MellinWeightedLogProfileV1 (WeilAutocorrelationV1 g) (1 / 2) u =
+        ((CriticalLogAdjointV11 g) ⋆[mul ℂ ℂ]
+          (CriticalLogProfileV11 g)) (-u)
+    exact hc
 
   rw [hprof] at hmA
   have hconv :=
@@ -271,6 +347,10 @@ theorem autocorrelation_mellin_critical_normSq_v11
     rw [hadj] at hc
     exact hc
 
+  change
+    mellin A.1 (((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I) =
+      (Complex.normSq
+        (mellin g.1 (((1 / 2 : ℝ) : ℂ) + (γ : ℂ) * I)) : ℂ)
   rw [hmA]
   have hmAneg :
       𝓕 (fun u : ℝ => (Hstar ⋆[mul ℂ ℂ] H) (-u)) ξ =
@@ -286,9 +366,8 @@ theorem autocorrelation_mellin_critical_normSq_v11
   have hmul :=
     Complex.mul_conj (𝓕 H (-ξ))
   apply Complex.ext
-  · simp [Complex.normSq_apply]
-    ring
-  · simp
+  · simp [Complex.normSq_apply] <;> ring
+  · simp <;> ring
 
 /-- Under RH, every canonical zero summand of the autocorrelation has
 nonnegative real part. -/
@@ -314,8 +393,23 @@ theorem rh_zero_summand_nonnegative_v11
     · simp
   unfold WeilZeroIndexSummandV1
   rw [hrho, autocorrelation_mellin_critical_normSq_v11 g rho.1.im]
-  simp [Complex.normSq_apply]
-  positivity
+  have hcoeff :
+      0 ≤ (analyticOrderNatAt riemannZeta
+        (((1 / 2 : ℝ) : ℂ) + (rho.1.im : ℂ) * I) : ℝ) :=
+    Nat.cast_nonneg _
+  have hsq :
+      0 ≤ Complex.normSq
+        (mellin g.1 (((1 / 2 : ℝ) : ℂ) +
+          (rho.1.im : ℂ) * I)) :=
+    Complex.normSq_nonneg _
+  have hproduct :
+      0 ≤ (analyticOrderNatAt riemannZeta
+        (((1 / 2 : ℝ) : ℂ) + (rho.1.im : ℂ) * I) : ℝ) *
+        Complex.normSq
+          (mellin g.1 (((1 / 2 : ℝ) : ℂ) +
+            (rho.1.im : ℂ) * I)) :=
+    mul_nonneg hcoeff hsq
+  simpa [Complex.mul_re] using hproduct
 
 /-- RH makes the entire canonical autocorrelation zero quadratic nonnegative. -/
 theorem rh_zero_quadratic_nonnegative_v11
@@ -327,6 +421,9 @@ theorem rh_zero_quadratic_nonnegative_v11
   have hsum :=
     weil_compact_smooth_zero_summable_v1
       (WeilAutocorrelationCompactSmoothV1 g)
+  change Summable
+    (fun rho : RiemannNontrivialZeroIndexV2 =>
+      WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho) at hsum
   rw [Complex.re_tsum hsum]
   exact tsum_nonneg (fun rho => rh_zero_summand_nonnegative_v11 hRH g rho)
 

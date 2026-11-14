@@ -1,0 +1,54 @@
+{
+  "schema": "AEGIS_CURRENT_SOURCE_REPLAY_V1",
+  "date": "2026-11-14",
+  "lean_file": "WeightedIndependentShapeArithmetic.lean",
+  "bytes": 3278,
+  "sha256": "dd1161b5575d3436633e67519402535e825238d1b26d37cb5b70b44b7c13a4c0",
+  "historical_receipts": [
+    "EXACT_SOURCE_REUSE_RECEIPT.json",
+    "ARITHMETIC_KERNEL_RECEIPT.json",
+    "FILE_MANIFEST.json",
+    "fresh_a/",
+    "fresh_b/"
+  ],
+  "historical_source_bytes": 2130,
+  "historical_source_sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268",
+  "historical_source_archive": "AEGIS_WEIGHTED_SHAPES_HCROSS_SOURCE_REUSE_V1.zip (member WeightedIndependentShapeArithmetic.lean, the historical bytes)",
+  "relation": "The committed file is the Apache licence header (a comment) followed by the historical bytes with two added declarations, exact_direct_independent_margin and positive_direct_independent_margin (5671 * 355 = 25289 * 32 + 1203957 and 0 < 1203957), their comment and their two #print axioms lines. The historical receipts and logs bind the archived bytes and are kept unchanged; this receipt binds the committed file.",
+  "lean_version": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "lean_trust": 0,
+  "warning_as_error": true,
+  "commands": [
+    "lean --trust=0 -DwarningAsError=true -o WeightedIndependentShapeArithmetic.olean WeightedIndependentShapeArithmetic.lean",
+    "LEAN_PATH=\"$PWD\" leanchecker --fresh -v WeightedIndependentShapeArithmetic"
+  ],
+  "lean_exit_code": 0,
+  "leanchecker_fresh": "PASS",
+  "leanchecker_exit_code": 0,
+  "axioms": {
+    "AEGIS.WeightedIndependentShapeArithmetic.exact_row_ledger": [
+      "propext"
+    ],
+    "AEGIS.WeightedIndependentShapeArithmetic.positive_weights": [
+      "propext"
+    ],
+    "AEGIS.WeightedIndependentShapeArithmetic.all_eleven_weighted_rows": [
+      "propext"
+    ],
+    "AEGIS.WeightedIndependentShapeArithmetic.maximum_attained": [
+      "propext"
+    ],
+    "AEGIS.WeightedIndependentShapeArithmetic.exact_margin": [],
+    "AEGIS.WeightedIndependentShapeArithmetic.positive_margin": [],
+    "AEGIS.WeightedIndependentShapeArithmetic.exact_direct_independent_margin": [],
+    "AEGIS.WeightedIndependentShapeArithmetic.positive_direct_independent_margin": [],
+    "AEGIS.WeightedIndependentShapeArithmetic.improves_previous_weights": []
+  },
+  "logs": {
+    "current_source_replay/LEAN_TRUST0.log": "aa732800aa177d116c1da7a30d43cf91369035b029ec46e3ac1d5b5ecb872d9a",
+    "current_source_replay/LEANCHECKER_FRESH.log": "8717f590ea82cd1838b5020def722d846b721ef70e4ba490752e5e3fb3cc4212"
+  },
+  "scope": "integer arithmetic only; no analytic estimate, no Weil positivity, no RH",
+  "rh_proven": false
+}
