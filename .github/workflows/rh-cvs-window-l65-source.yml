@@ -171,7 +171,8 @@ jobs:
                research/rh/feshbach_lean_v1/CvS*L118*.lean research/rh/aegis_math/*.lean; then exit 1; fi
           # Each exhaustion join imports its window, so the DAG contains both window chains.
           python3 "$B/window_l65_source/plan.py" RHWindowL65ExhaustionV1 RHWindowL43ExhaustionV1 \
-            RHWindowL118ExhaustionV1 RHWindowL118ActualFineGramJoinV1 AegisMathCoreV1
+            RHWindowL118ExhaustionV1 RHWindowL118ActualFineGramJoinV1 AegisMathCoreV1 \
+            CvSTraceIntegralL118V1 CvSTauFarL118V1
 
       - name: Compile every module from source
         shell: bash
@@ -180,6 +181,104 @@ jobs:
           python3 -u research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/build.py \
             "$GITHUB_WORKSPACE/.lake/build/lib/lean" 3 2>&1 | tee window-l65-build.log
 
+      - name: Kernel-check generated L32 trace (PR92 exact head only)
+        if: github.event_name == 'pull_request' && github.event.pull_request.number == 92
+        shell: bash
+        env:
+          SOURCE_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_HEAD"
+          C="$GITHUB_WORKSPACE/research/rh/checkpoints/20261110_window_l32_trace_port_v1"
+          OUT="$GITHUB_WORKSPACE/l32-kernel"
+          mkdir -p "$OUT/lib"
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceDistV1.lean)" = 96484b41ab9712fec4d4118848806e9b808a40ed
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceCellL118V1.lean)" = 5e8bfe4f2866dae1f33307f996eb9180560b77ce
+          test "$(git rev-parse HEAD:research/rh/feshbach_lean_v1/CvSTraceIntegralL118V1.lean)" = 5963e2c0ded7b1c0f943eec85a449cfc14a1311c
+          test "$(git rev-parse HEAD:research/rh/checkpoints/20261031_window_l118/gen_cert118.py)" = 99cc4b4f628beedc22b407d995f94481291fc66f
+          python3 - "$C/cert32_totals.json" <<'PY'
+          import json,sys
+          v=json.load(open(sys.argv[1]))
+          assert len(v)==73 and all(type(x) is int and x>=0 for x in v)
+          assert sum(v)==296053 and sum(v)<=300000
+          print('L32_RATIONAL_BUDGET',sum(v),'/100000')
+          PY
+          python3 "$C/port_trace_l32.py" "$GITHUB_WORKSPACE" "$OUT"
+          python3 "$C/make_gen_cert32.py" "$GITHUB_WORKSPACE/research/rh/checkpoints/20261031_window_l118/gen_cert118.py" > "$OUT/gen_cert32.py"
+          cp "$C/CvSExpL32V1.lean" "$C/CvSTraceM4SlackV1.lean" "$OUT/"
+          ( cd "$OUT"; sha256sum -c - <<'SHAS'
+          c1e790370667117b59b4aea45c64ee41b968ce12193bf00a57a39805c0ff253d  CvSTraceDistK150V1.lean
+          90c4075792df06c14935e82c27c90071b1259b96e6408ab67ddb4501d3628b36  CvSTraceCellL32V1.lean
+          e95afa4a5ec479b3ac8c1c09d257314ff25ef43b4ba22c8bb869e1e07ef8d47a  CvSTraceIntegralL32V1.lean
+          411f0949d64de7c6c37261e2afd2b84e9ad8e657d58fee4a37c7b5755e089bf4  gen_cert32.py
+          80cfe37c490616cad438962cda767ffa5630fb1552dabd3cd5b062c122fd0f22  CvSExpL32V1.lean
+          788c314430ba1e5505edf8422749dc99d722884509e9cddbda550735682d4c75  CvSTraceM4SlackV1.lean
+          SHAS
+          )
+          python3 "$OUT/gen_cert32.py" "$OUT/CvSTraceCertL32V1.lean" "$C/cert32_totals.json"
+          python3 - "$OUT/CvSTraceCertL32V1.lean" "$OUT" <<'PY'
+          from pathlib import Path
+          import re
+          import sys
+          src, out = Path(sys.argv[1]), Path(sys.argv[2])
+          s = src.read_text()
+          ns = 'AEGIS.CvSTraceCertL32V1'
+          assert s.count('namespace ' + ns) == s.count('end ' + ns) == 1
+          assert 'import CvSTraceIntegralL32V1' in s
+          assert 'theorem trace_premises_L32' in s
+          assert not re.search(r'(?m)^[ \t]*(sorry|admit|native_decide)\b|:=\s*(?:by\s*)?(?:sorry|admit|native_decide)\b', s)
+          a, b, c = (s.index(t) for t in ('theorem K0_ok ', 'theorem c0_ok ', 'theorem all_app '))
+          assert a < b < c
+          head, prefix, body, tail = s[:a], s[a:b], s[b:c], s[c:]
+          nsp = head.index('namespace ' + ns) + len('namespace ' + ns)
+          opens = head[nsp:head.index('def nsqrtAux', nsp)]
+          starts = list(re.finditer(r'(?m)^theorem c(\d+)_ok :', body))
+          assert [int(x[1]) for x in starts] == list(range(73))
+          parts = [body[m.start():starts[i+1].start() if i+1 < 73 else len(body)].strip()
+                   for i, m in enumerate(starts)]
+          assert all(t.count('decide +kernel') == 1 and t.count('theorem ') == 1 for t in parts)
+          out.mkdir(parents=True, exist_ok=True)
+          (out / 'CvSTraceCertL32BaseV1.lean').write_text(head + '\nend ' + ns + '\n')
+          env = '\nopen MeasureTheory\nnoncomputable section\nnamespace ' + ns + opens + '\nset_option maxRecDepth 100000\n'
+          groups = ((0,11),(12,23),(24,35),(36,45),(46,54),(55,63),(64,72))
+          for i,(lo,hi) in enumerate(groups):
+              (out / f'CvSTraceCertL32Chunk{i}V1.lean').write_text(
+                  'import CvSTraceCertL32BaseV1\n' + env + '\n\n'.join(parts[lo:hi+1]) +
+                  '\nend ' + ns + '\n#print axioms ' + ns + f'.c{lo}_ok\n')
+          final = 'import CvSTraceCertL32BaseV1\n' + ''.join(
+              f'import CvSTraceCertL32Chunk{i}V1\n' for i in range(len(groups))) + env + prefix + tail
+          assert final.count('theorem trace_premises_L32') == 1
+          (out / 'CvSTraceCertL32FinalV1.lean').write_text(final)
+          print('L32_SPLIT_READY', len(starts), 'chunks', len(groups), 'groups; kernel check required')
+          PY
+          export LEAN_PATH="$OUT/lib:$GITHUB_WORKSPACE/.lake/ringout:$GITHUB_WORKSPACE/.lake/build/lib/lean:$GITHUB_WORKSPACE/.li-provider/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
+          for m in CvSExpL32V1 CvSTraceM4SlackV1 CvSTraceDistK150V1 CvSTraceCellL32V1 CvSTraceIntegralL32V1 CvSTraceCertL32BaseV1 CvSTraceCertL32Chunk0V1 CvSTraceCertL32Chunk1V1 CvSTraceCertL32Chunk2V1 CvSTraceCertL32Chunk3V1 CvSTraceCertL32Chunk4V1 CvSTraceCertL32Chunk5V1 CvSTraceCertL32Chunk6V1 CvSTraceCertL32FinalV1; do
+            echo "L32_KERNEL_START $m"
+            timeout -k 30s 1200s lean --trust=0 -DwarningAsError=true -DmaxSynthPendingDepth=3 -DautoImplicit=false -o "$OUT/lib/$m.olean" "$OUT/$m.lean" 2>&1 | tee "$OUT/$m.log"
+            echo "L32_KERNEL_PASS $m"
+          done
+          python3 - "$OUT" "$SOURCE_HEAD" <<'PY'
+          from pathlib import Path
+          import hashlib,json,re,sys
+          out,head=Path(sys.argv[1]),sys.argv[2]
+          files=sorted(out.glob('lib/*.olean'))
+          assert len(files)==14, f"Expected 14 olean modules, got {len(files)}"
+          permitted={'propext','Classical.choice','Quot.sound'}
+          for log in out.glob('*.log'):
+              txt=log.read_text()
+              assert 'error:' not in txt and 'sorryAx' not in txt, log
+              for group in re.findall(r'depends on axioms:\s*\[([^\]]*)\]',txt):
+                  actual={z.strip() for z in group.split(',') if z.strip()}
+                  assert actual <= permitted, (str(log),actual-permitted)
+          assert 'trace_premises_L32' in (out/'CvSTraceCertL32FinalV1.log').read_text()
+          receipt={'schema':'aegis.rh.l32.strict_kernel.v1','source_head':head,
+                   'module_count':len(files),'chunk_count':73,'cells':3123,
+                   'rational_trace_bound':'296053/100000',
+                   'strict_lean_replay':'PASS','canonical_RH':'OPEN',
+                   'olean_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in files}}
+          (out/'L32_KERNEL_RECEIPT.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
+          print('L32_KERNEL_ALL_PASS',len(files))
+          PY
       - name: Audit axioms of every module
         if: always()
         shell: bash
@@ -202,3 +301,5 @@ jobs:
             .lake/real_plan.json
             .lake/real_status.json
             .lake/reallogs/*.log
+            l32-kernel/*.log
+            l32-kernel/L32_KERNEL_RECEIPT.json

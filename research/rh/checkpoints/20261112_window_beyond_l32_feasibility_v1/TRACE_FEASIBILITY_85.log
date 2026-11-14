@@ -1,0 +1,44 @@
+# trace_cells_k.py (float mirror, no outward rounding). Arguments: LT K m-list 0 D1,D2,D3,D4
+# calibration 3/2 150 lab layout
+LT=3/2 K=150 W=2.9420 hK=628.32 tb0=1.410e-04 tb1=6.321e-04 Den=0.4529
+m=1.65 t*=620.1 cells=3123  segments 0.5371 0.3117 0.6109 1.5004  T=2.9602  gap=1.1789  kappa_max=69.81
+# lab layout
+LT=8/5 K=160 W=2.9420 hK=628.32 tb0=1.536e-04 tb1=7.609e-04 Den=0.5926
+m=1.60 t*=589.8 cells=3030  segments 0.5321 0.2972 0.6070 1.3459  T=2.7822  gap=1.1572  kappa_max=73.09
+m=1.65 t*=620.1 cells=3123  segments 0.5364 0.3008 0.6196 1.5350  T=2.9918  gap=1.1738  kappa_max=74.15
+Traceback (most recent call last):
+  File "/home/user/formal-conjectures/research/rh/checkpoints/20261110_window_l32_feasibility_v1/trace_cells_k.py", line 72, in <module>
+    assert top < h * K, 'slack passes the atom range: t*=%.1f, hK=%.1f' % (tstar, h * K)
+           ^^^^^^^^^^^
+AssertionError: slack passes the atom range: t*=651.9, hK=628.3
+LT=8/5 K=175 W=2.9420 hK=687.22 tb0=1.405e-04 tb1=6.957e-04 Den=0.5928
+m=1.60 t*=589.8 cells=3030  segments 0.4859 0.2712 0.5532 1.1520  T=2.4623  gap=1.2081  kappa_max=76.31
+m=1.65 t*=620.1 cells=3123  segments 0.4899 0.2745 0.5647 1.2775  T=2.6065  gap=1.2352  kappa_max=78.02
+m=1.70 t*=651.9 cells=3216  segments 0.4938 0.2778 0.5761 1.4284  T=2.7761  gap=1.2582  kappa_max=79.47
+LT=8/5 K=200 W=2.9420 hK=785.40 tb0=1.229e-04 tb1=6.087e-04 Den=0.5931
+m=1.60 t*=589.8 cells=3030  segments 0.4245 0.2368 0.4820 0.9488  T=2.0922  gap=1.2670  kappa_max=80.03
+m=1.65 t*=620.1 cells=3123  segments 0.4280 0.2397 0.4920 1.0399  T=2.1996  gap=1.2999  kappa_max=82.11
+m=1.70 t*=651.9 cells=3216  segments 0.4314 0.2425 0.5020 1.1415  T=2.3175  gap=1.3312  kappa_max=84.08
+# finer above t=20
+LT=8/5 K=160 W=2.9420 hK=628.32 tb0=1.536e-04 tb1=7.609e-04 Den=0.5926
+m=1.65 t*=620.1 cells=8292  segments 0.5364 0.3008 0.5488 1.1290  T=2.5150  gap=1.2497  kappa_max=78.94
+Traceback (most recent call last):
+  File "/home/user/formal-conjectures/research/rh/checkpoints/20261110_window_l32_feasibility_v1/trace_cells_k.py", line 72, in <module>
+    assert top < h * K, 'slack passes the atom range: t*=%.1f, hK=%.1f' % (tstar, h * K)
+           ^^^^^^^^^^^
+AssertionError: slack passes the atom range: t*=651.9, hK=628.3
+LT=8/5 K=175 W=2.9420 hK=687.22 tb0=1.405e-04 tb1=6.957e-04 Den=0.5928
+m=1.65 t*=620.1 cells=8292  segments 0.4899 0.2745 0.5001 0.9396  T=2.2041  gap=1.2992  kappa_max=82.06
+m=1.70 t*=651.9 cells=8664  segments 0.4938 0.2778 0.5103 1.0508  T=2.3327  gap=1.3287  kappa_max=83.93
+m=1.75 t*=685.3 cells=9072  segments 0.4977 0.2811 0.5204 1.2062  T=2.5054  gap=1.3512  kappa_max=85.35
+LT=8/5 K=200 W=2.9420 hK=785.40 tb0=1.229e-04 tb1=6.087e-04 Den=0.5931
+m=1.65 t*=620.1 cells=8292  segments 0.4280 0.2397 0.4357 0.7647  T=1.8681  gap=1.3527  kappa_max=85.44
+m=1.70 t*=651.9 cells=8664  segments 0.4314 0.2425 0.4446 0.8396  T=1.9581  gap=1.3884  kappa_max=87.70
+m=1.75 t*=685.3 cells=9072  segments 0.4349 0.2454 0.4535 0.9244  T=2.0582  gap=1.4224  kappa_max=89.85
+
+# window 49/32
+LT=49/32 K=156 W=2.9420 hK=640.12 tb0=1.423e-04 tb1=6.580e-04 Den=0.4935
+m=1.60 t*=589.8 cells=3030  segments 0.5225 0.2998 0.5852 1.2822  T=2.6896  gap=1.1719  kappa_max=70.85
+m=1.65 t*=620.1 cells=3123  segments 0.5267 0.3034 0.5973 1.4466  T=2.8741  gap=1.1926  kappa_max=72.09
+LT=49/32 K=160 W=2.9420 hK=656.53 tb0=1.388e-04 tb1=6.416e-04 Den=0.4936
+m=1.65 t*=620.1 cells=3123  segments 0.5134 0.2957 0.5818 1.3713  T=2.7622  gap=1.2104  kappa_max=73.17

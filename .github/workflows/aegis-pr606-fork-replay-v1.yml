@@ -82,6 +82,25 @@ jobs:
           # Both PR606 stages must select the same source-locked two-point theorem.
           test "$(git hash-object AegisRH/PR606/Compat/WeilZeroTwoPointV11.lean)" = "416eb252794a2b0b550c796330a08a946aeabed4"
           grep -F 'if n == "WeilZeroTwoPointV11":' scripts/rh_pr63_proved_window_prebuild.sh
+          # Source-bound regression: the fork must not recover pre-repair
+          # Laplace, final-sign, translation or target-witness code.
+          # Check the staged bytes AND immutable exact-head Git tree blobs.
+          for entry in \
+            'AegisRH/PR606/RHZeroKernelLaplaceAnalyticV12.lean:8afab69e4b59a1520f73b2ad1c4c349251a4b254' \
+            'AegisRH/PR606/WeilRHImpliesFinalSignV11.lean:9f32e58018dfb4573417ca0f0919e91456b13b5d' \
+            'AegisRH/PR606/Compat/WeilTranslatedKernelBoundV11.lean:bb1ad7d5e8749c1641078369eeadd0ba6a2af465' \
+            'AegisRH/PR606/Compat/RestrictedWeilCriterionTargetWitnessV11.lean:c17f771e2622d7917413ff35bbe2afe82f9b4e97'; do
+            file="${entry%%:*}"
+            expected_blob="${entry##*:}"
+            test -s "$file"
+            observed_blob="$(git hash-object "$file")"
+            tree_blob="$(git rev-parse "HEAD:$file")"
+            if [[ "$observed_blob" != "$expected_blob" || "$tree_blob" != "$expected_blob" ]]; then
+              echo "::error::RH_PR606_SOURCE_IDENTITY_MISMATCH:$file" >&2
+              exit 1
+            fi
+            echo "RH_PR606_SOURCE_BOUND_PASS:$file:$expected_blob"
+          done
           python3 - <<'PY'
           import json, os
           m=json.load(open('AegisRH/PR606/PORT_MANIFEST.json'))
@@ -174,22 +193,40 @@ jobs:
           BASE="$GITHUB_WORKSPACE/.aegis-base/sovereign-omega-v2/formal/bridges/lean"
           SRC="$GITHUB_WORKSPACE/AegisRH/PR606/Source"
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           mkdir -p "$OUT"
 
-          python3 - "$BASE" "$SRC" "$COMPAT" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
-          import pathlib, sys
+          python3 - "$BASE" "$SRC" "$COMPAT" "$LOCAL" "$GITHUB_WORKSPACE/.pr606-order.txt" <<'PY'
+          import pathlib, subprocess, sys
           base=pathlib.Path(sys.argv[1])
           src=pathlib.Path(sys.argv[2])
           compat=pathlib.Path(sys.argv[3])
-          out=pathlib.Path(sys.argv[4])
+          local=pathlib.Path(sys.argv[4])
+          out=pathlib.Path(sys.argv[5])
 
+          # Select and cryptographically bind the two PR92 repaired modules.
+          repaired={'WeilRHImpliesFinalSignV11', 'RHZeroKernelLaplaceAnalyticV12'}
+          local_mods={m:local/(m+'.lean') for m in repaired}
+          for m,p in local_mods.items():
+            if not p.is_file():
+              raise SystemExit('PR606_LOCAL_REPAIR_SOURCE_MISSING:'+m)
+            observed=subprocess.check_output(
+              ['git', 'hash-object', str(p)], text=True).strip()
+            expected=subprocess.check_output(
+              ['git', 'rev-parse',
+               'HEAD:'+p.relative_to(pathlib.Path.cwd()).as_posix()],
+              text=True).strip()
+            if observed != expected:
+              raise SystemExit('PR606_LOCAL_REPAIR_EXACT_HEAD_MISMATCH:'+m)
+            print('PR606_LOCAL_REPAIR_EXACT_HEAD_PASS', m, observed)
           base_mods={p.stem:p for p in base.glob('*.lean')}
           src_mods={p.stem:p for p in src.glob('*.lean')}
           compat_mods={p.stem:p for p in compat.glob('*.lean')}
-          mods=set(base_mods)|set(src_mods)|set(compat_mods)
+          mods=set(base_mods)|set(src_mods)|set(compat_mods)|set(local_mods)
 
           def selected(m):
+            if m in local_mods: return local_mods[m]
             if m in compat_mods: return compat_mods[m]
             if m in src_mods: return src_mods[m]
             if m in base_mods: return base_mods[m]
@@ -221,7 +258,7 @@ jobs:
           print('PR606_IMPORTED_MODULES',len(src_mods))
           print('PR606_FULL_CLOSURE_COUNT',len(order))
           print('\n'.join(
-            ('COMPAT  ' if m in compat_mods else 'PR606   ' if m in src_mods else 'BASE580 ')+m
+            ('LOCAL_REPAIR ' if m in local_mods else 'COMPAT  ' if m in compat_mods else 'PR606   ' if m in src_mods else 'BASE580 ')+m
             for m in order
           ))
           PY
@@ -244,7 +281,8 @@ jobs:
           COMPAT="$GITHUB_WORKSPACE/AegisRH/PR606/Compat"
           OUT="$GITHUB_WORKSPACE/.lake/aegis-pr606"
           BASE_LEAN_PATH="$GITHUB_WORKSPACE/.li/.lake/build/lib/lean:$(lake env printenv LEAN_PATH)"
-          export LEAN_PATH="$OUT:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
+          LOCAL="$GITHUB_WORKSPACE/AegisRH/PR606"
+          export LEAN_PATH="$OUT:$LOCAL:$COMPAT:$SRC:$BASE:$BASE_LEAN_PATH"
 
           # The first dirty module invalidates every following module conservatively.
           # An .olean without a matching SHA-256 sidecar is never reused.
@@ -256,6 +294,10 @@ jobs:
             KIND="BASE580"
             if [ -f "$SRC/$MOD.lean" ]; then FILE="$SRC/$MOD.lean"; KIND="PR606"; fi
             if [ -f "$COMPAT/$MOD.lean" ]; then FILE="$COMPAT/$MOD.lean"; KIND="COMPAT"; fi
+            if [ "$MOD" = "WeilRHImpliesFinalSignV11" ] || [ "$MOD" = "RHZeroKernelLaplaceAnalyticV12" ]; then
+              FILE="$LOCAL/$MOD.lean"; KIND="LOCAL_REPAIR"
+              test -s "$FILE" || { echo "PR606_LOCAL_REPAIR_SOURCE_MISSING:$MOD" >&2; exit 1; }
+            fi
             FILE_SHA="$(sha256sum "$FILE" | awk '{print $1}')"
             STAMP="$OUT/$MOD.source.sha256"
             OLEAN_STAMP="$OUT/$MOD.olean.sha256"
@@ -283,9 +325,13 @@ jobs:
           base = root / '.aegis-base/sovereign-omega-v2/formal/bridges/lean'
           src = root / 'AegisRH/PR606/Source'
           compat = root / 'AegisRH/PR606/Compat'
+          local = root / 'AegisRH/PR606'
+          repaired = {'WeilRHImpliesFinalSignV11', 'RHZeroKernelLaplaceAnalyticV12'}
           rows = []
           for module in (root / '.pr606-order.txt').read_text().splitlines():
-              source = next((p / (module + '.lean') for p in (compat, src, base) if (p / (module + '.lean')).is_file()), None)
+              # Source-bound .olean evidence must match the planner and compiler.
+              candidates = ((local,) if module in repaired else ()) + (compat, src, base)
+              source = next((p / (module + '.lean') for p in candidates if (p / (module + '.lean')).is_file()), None)
               if source is None:
                   raise SystemExit('PR606_CHECKPOINT_SOURCE_MISSING:' + module)
               olean = out / (module + '.olean')

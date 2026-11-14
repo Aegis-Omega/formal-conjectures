@@ -1,0 +1,33 @@
+threshold 0.3:
+  eigenvalue 3: l = 1.171   l_1 = 0.811 (gamma = 14.13)   diff +0.360
+  eigenvalue 4: l = 1.303   l_2 = 1.208 (gamma = 21.02)   diff +0.095
+  eigenvalue 5: l = 1.431   l_3 = 1.381 (gamma = 25.01)   diff +0.050
+  eigenvalue 6: l = 1.546   l_4 = 1.577 (gamma = 30.42)   diff -0.031
+  eigenvalue 7: l = 1.656   l_5 = 1.657 (gamma = 32.94)   diff -0.001
+  eigenvalue 8: l = 1.742   l_6 = 1.789 (gamma = 37.59)   diff -0.046
+  eigenvalue 9: l = 1.821   l_7 = 1.874 (gamma = 40.92)   diff -0.053
+  eigenvalue 10: l = 1.905   l_8 = 1.931 (gamma = 43.33)   diff -0.026
+  eigenvalue 11: l = 1.976   l_9 = 2.033 (gamma = 48.01)   diff -0.057
+  eigenvalue 12: l = 2.041   l_10 = 2.070 (gamma = 49.77)   diff -0.029
+threshold 0.1:
+  eigenvalue 3: l = 1.237   l_1 = 0.811 (gamma = 14.13)   diff +0.426
+  eigenvalue 4: l = 1.370   l_2 = 1.208 (gamma = 21.02)   diff +0.162
+  eigenvalue 5: l = 1.490   l_3 = 1.381 (gamma = 25.01)   diff +0.109
+  eigenvalue 6: l = 1.600   l_4 = 1.577 (gamma = 30.42)   diff +0.023
+  eigenvalue 7: l = 1.701   l_5 = 1.657 (gamma = 32.94)   diff +0.044
+  eigenvalue 8: l = 1.789   l_6 = 1.789 (gamma = 37.59)   diff -0.000
+  eigenvalue 9: l = 1.863   l_7 = 1.874 (gamma = 40.92)   diff -0.011
+  eigenvalue 10: l = 1.943   l_8 = 1.931 (gamma = 43.33)   diff +0.012
+  eigenvalue 11: l = 2.014   l_9 = 2.033 (gamma = 48.01)   diff -0.019
+  eigenvalue 12: l = 2.080   l_10 = 2.070 (gamma = 49.77)   diff +0.011
+threshold 0.03:
+  eigenvalue 3: l = 1.295   l_1 = 0.811 (gamma = 14.13)   diff +0.484
+  eigenvalue 4: l = 1.416   l_2 = 1.208 (gamma = 21.02)   diff +0.209
+  eigenvalue 5: l = 1.539   l_3 = 1.381 (gamma = 25.01)   diff +0.157
+  eigenvalue 6: l = 1.633   l_4 = 1.577 (gamma = 30.42)   diff +0.056
+  eigenvalue 7: l = 1.740   l_5 = 1.657 (gamma = 32.94)   diff +0.083
+  eigenvalue 8: l = 1.824   l_6 = 1.789 (gamma = 37.59)   diff +0.035
+  eigenvalue 9: l = 1.898   l_7 = 1.874 (gamma = 40.92)   diff +0.024
+  eigenvalue 10: l = 1.969   l_8 = 1.931 (gamma = 43.33)   diff +0.038
+  eigenvalue 11: l = 2.045   l_9 = 2.033 (gamma = 48.01)   diff +0.011
+  eigenvalue 12: no crossing

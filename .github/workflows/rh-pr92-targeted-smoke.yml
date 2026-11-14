@@ -30,14 +30,14 @@ concurrency:
 
 jobs:
   source-imports:
-    if: github.event_name == 'pull_request' && github.event.pull_request.number == 92
+    if: (github.event_name == 'pull_request' && github.event.pull_request.number == 92) || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/fix/rh-live-evidence-provenance-20261024')
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - name: Checkout exact PR source head
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
           persist-credentials: false
 
@@ -45,7 +45,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha || github.sha }}"
           test "$(cat lean-toolchain)" = "leanprover/lean4:v4.33.1"
           grep -F '0df444a360eaa60ab8c11dca51a86af692955474' lake-manifest.json
 
@@ -70,7 +70,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source/targeted_smoke.py \
-            --head "${{ github.event.pull_request.head.sha }}"
+            --head "${{ github.event.pull_request.head.sha || github.sha }}"
           cat .lake/RH_PR92_TARGETED_SMOKE_RECEIPT.json
 
       - name: Report failure diagnostics without waiving gates

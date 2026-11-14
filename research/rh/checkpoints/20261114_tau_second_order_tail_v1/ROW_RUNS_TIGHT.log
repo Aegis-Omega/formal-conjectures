@@ -1,0 +1,6 @@
+## 13/8 4000 7/5 63 5e-14 5e-14 3e-14 360 19 13
+-- rho 5.33e-14 rhoH 5.33e-14 rhoD 3.20e-14 RE 1.454e-13 epsIn 1.00e-13 epsOut 1.54e-19 epsT 7.24e-25 K' 9.2627e-12  max|tau|>70 18.00
+LT 13/8 NP 4000 eps 7/5 kappa 63: scaled lambda_min -1.22651e-10  lambda_max 6.11722  (948s)
+## 13/8 8000 7/5 63 5e-14 5e-14 3e-14 360 19 13
+-- rho 5.33e-14 rhoH 5.33e-14 rhoD 3.20e-14 RE 1.454e-13 epsIn 1.00e-13 epsOut 1.67e-19 epsT 3.45e-25 K' 9.2627e-12  max|tau|>70 18.00
+LT 13/8 NP 8000 eps 7/5 kappa 63: scaled lambda_min 2.67289e-11  lambda_max 6.12313  (968s)
