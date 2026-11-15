@@ -1,4 +1,4 @@
-# OPTIMUS V7 (H64 contractive Weil packets): Lean receipt, 2026-11-15
+# OPTIMUS V7 / V7.1 (H64 contractive Weil packets): Lean receipt, 2026-11-15
 
 Kernel-checked formalization of the V7 manuscript (`PROOF_V7.md`, OPTIMUS V7 package of 2026-11-15) on the
 actual repository functional `B a b = WeilExplicitRightSideV1 (mixed a b)` (`WeilMixedAlgebraV2`).
@@ -9,6 +9,10 @@ with logarithmic support `[c x − 1/4096, c x + 1/4096]`, `c (a, b) = ∓ log 2
 
     (1475/6144) Σ ‖z x‖² ≤ Re Σ_{x,y} z x · (−B (g x) (g y)) · conj (z y).
 
+**V7.1** — `AEGIS.WeilH64SharpV71.h64_coercive_sharp`: the same statement with `7/6`
+(kernel identity `w(u) = 1/(4 sinh(u/2)) + 1/(4 cosh(u/2))`, `w ≤ 1/4 + 1/(2u)`, `γ < H₃₂ − 5 log 2`,
+`log π < 23/20`); `h64_sharp_nonvacuous` on the moment-zero witnesses.
+
 | Module | Content |
 |---|---|
 | `WeilH64ElementaryV7` | Hermitian Gershgorin; `w(u) ≤ 1 + 1/(2u)`; `log 1023 < 7`; `log 2/√2 < 1/2`; diagonal constant; margin |
@@ -17,19 +21,20 @@ with logarithmic support `[c x − 1/4096, c x + 1/4096]`, `c (a, b) = ∓ log 2
 | `WeilH64PrimeV7` | prime window: only `m = 2` survives, `‖·‖ ≤ (log 2/√2)·E`; `‖B‖ ≤ ‖prime‖ + ‖Arch‖` |
 | `WeilH64AssemblyV7` | 64 centres, entry bounds, row budget (telescoping product checked by `decide +kernel`), `h64_coercive` |
 | `WeilH64WitnessV7` | V7 §4: `pkt c = k · mulPacket (momentKiller ψ)`, energy 1, both moments zero; `h64_nonvacuous` |
+| `WeilH64SharpV71` | V7.1: sharp kernel, entries `R + ½ log` and `5R`, diagonal `15 log 2 − H₃₂ − 23/20 − 2R − 1/4095`; `h64_coercive_sharp` (`7/6`) |
 
 Built on the existing lane V21–V31 (`WeilWidthArchIntegralV27`, `WeilSeparatedArchBridgeV31`,
 `WeilThreeBlockPrimeEvaluationV30`, …) by module name, as the other `AegisRH/PR606` files.
 
 **Replay** (Lean 4.33.1, Mathlib of this repository's lake packages, dependencies from compiled oleans):
-default trust and `--trust=0`, all six modules exit 0, 0 errors, 0 warnings, no `sorry`.
+default trust and `--trust=0`, all seven modules exit 0, 0 errors, 0 warnings, no `sorry`.
 Every `#print axioms` line reads `[propext, Classical.choice, Quot.sound]`.
 
 **Non-emptiness.** `AEGIS.WeilH64WitnessV7.h64_nonvacuous` exhibits 64 packets (smooth, compact support in
 `Ioi 0`, log-radius `1/4096` at the V7 centres, energy `1`, `WeilMomentConditionsV1`) and applies `h64_coercive`
 to them, so the bound holds on a genuine 64-dimensional space of moment-zero test packets.
 
-**Scope.** `--trust=0` re-checks the declarations of these six files; imported oleans (V21–V31,
+**Scope.** `--trust=0` re-checks the declarations of these seven files; imported oleans (V21–V31,
 `WeilLogTransportCanonicalV1`, Mathlib) are loaded as compiled and were not re-elaborated here.
 Finite-dimensional coercivity of the restricted Weil form only: not RH, and not Weil positivity on any
 function space.
@@ -42,3 +47,4 @@ function space.
 | `193c59be2db7ba6b008a22915eebaefb03cd8ebb30dc54fb3630d6bba09dcecc` | `WeilH64PrimeV7.lean` |
 | `23037034b74480b0073aa10fcff0081d074e08fbb8dd16875d4551d510620912` | `WeilH64AssemblyV7.lean` |
 | `b13871fc2a0a2ad1204fa10c16f2a70436125778cce8ab7ef55d49a86185f463` | `WeilH64WitnessV7.lean` |
+| `757f7574829ba9c7d75dcd3ccbc3c2f49b73abdfc224787c77af93fe5ef7239a` | `WeilH64SharpV71.lean` |
