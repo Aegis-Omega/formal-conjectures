@@ -35,7 +35,23 @@ was compiled in dependency order (`coqc -R <dir> <name>`), from a copy outside t
 - The last of these is an implication: global positivity follows from the hypothesis
   `GlobalizationReadyV1`, that is, convergence, `ε → 0` and lower bounds for the actual form. Proving
   that hypothesis is the open part.
-- The Coq module `HolonCvSPivotRankTwoV1.v` (HOLON V5) was not available here and is not checked. Its
-  algebra is the content of the Lean module above.
+
+## Coq: `HolonCvSPivotRankTwoV1.v` (HOLON V5), kernel-checked
+
+The file here is the text of the module as received in chat. Its sha256 is
+`1e3ed9d7eb20a4abb38f3a85d2d0c86d2e8a77dd7979078c5c3e2b71096c5826`. The archive value reported with it,
+`4f50cce1…`, could not be reproduced from the chat text, probably because the whitespace differs.
+
+It is a standalone `QArith` module, without CoRN.
+- `coqc` (Coq 8.18.0): exit 0, 0.8 s.
+- `coqchk HolonCvSPivotRankTwoV1.vo`: "Modules were successfully checked".
+- `Print Assumptions` gives "Closed under the global context" (no axioms) for all 11 theorems:
+  - `real_numerator_factor`, `imaginary_numerator_zero`, `positive_half_real_zero`,
+    `negative_half_real_zero`;
+  - `adjugate_00`, `adjugate_01`, `adjugate_10`, `adjugate_11`;
+  - `cross_terms_factor`, `lagrange_minors`, `gram_determinant_sos`.
+- Its cleared moment identity is 4× the Lean `pivot_cleared`, with `x = ω²`, `v₀ = m − 1`,
+  `v₁ = −m(1 + 4x)` and `denom = 1 + 4m²x`. Its Lagrange sum of squares gives `det(1 + UUᵀ) ≥ 1`
+  (Lean: `one_le_det`). These are two independent kernels on the same algebra.
 
 Not RH.
