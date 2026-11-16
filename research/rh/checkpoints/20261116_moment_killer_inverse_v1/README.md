@@ -47,3 +47,33 @@ limited by the coupling of the blocks, not by the norms of the pieces.
   H64 span (width about 0.724).
 - The open part is the windows `L > 13/16`.
 - The 192-block model of V2 uses hypothetical inter-block entries. Not RH.
+
+## Follow-up: closed-form pivots and Woodbury for the 9/5 Arb blocks
+
+This concerns `aegis_source_0c1477f/research/feshbach_arb_v2/feshbach_blocks_arb.py`, which builds a
+moment-zero basis on modes `|m| ≤ N`.
+- Construction in the source: the constraints are `Σ_m u_m μ_s(m) = 0` for `s = ±1/2`, and the pivots are
+  `[0, 1]`. The matrix `Z` is the identity on the other `k = 2N − 1` modes and has two pivot rows `U`.
+- Hence `G11 = ZᴴZ = I + UᴴU`, and the source computes `G11.inv()` inside
+  `C_B = Zᴴ(RR + Tail + Ib)Z − A11 G11⁻¹ A11`.
+
+Checks (`check_woodbury.py`, `check_woodbury_arb.py`):
+- **Real rational pivots.** The factor `e^{sL} − 1` cancels row-wise, which gives (sympy, exact), with
+  `κ = (2π/L)²`:
+  - `U₀(m) = (m − 1)(1/4)/(1/4 + κm²)`
+  - `U₁(m) = −m(1/4 + κ)/(1/4 + κm²)`
+
+  At `L = 9/5`, `N = 400` the Arb enclosures of the closed forms overlap the source's pivots for all 799
+  modes (precision 200).
+- **Woodbury.** `G11⁻¹ = I − Uᵀ(I₂ + UUᵀ)⁻¹U` holds; the float residual is `1.9·10⁻¹⁵`.
+  - `eig(G11) ∈ [1, 3.333]`, so `‖G11⁻¹‖ ≤ 1` and `I₂ + UUᵀ ⪰ I₂`.
+  - In Arb (precision 200), the direct `G11.inv()` takes 13.4 s, against 0.3 s for Woodbury. The enclosures
+    overlap, and the Woodbury radii are 3× smaller (`1.0·10⁻⁵⁸` against `3.3·10⁻⁵⁸`).
+
+Scope. Woodbury removes the 799×799 inversion and makes `G11` and `G11⁻¹` explicit, through π only via `κ`.
+The dominant costs remain:
+- `RᵀR` (32001 × 801);
+- `A11 G11⁻¹ A11 = A11² − (A11Uᵀ)(I₂ + UUᵀ)⁻¹(UA11)`, which still contains `A11²`;
+- the Schur `LDLᵀ` at `k = 799`.
+
+The full Arb verifier has not been re-run with Woodbury. Not RH.
