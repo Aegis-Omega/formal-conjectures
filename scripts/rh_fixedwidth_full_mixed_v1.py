@@ -13,7 +13,7 @@ Assumptions preserved from V31:
 
 For the constructed g, B(T_0 g,T_(7log2)g) has
   Re prime < -E/13, center = 0, |Arch| <= E/100,
-hence Re B < -(87/1300) E.
+hence Re B < -(91/900) E.
 
 NOT a proof of all-window Weil sign, a PSD Gram, or RH.
 The combined theorem still needs Lean kernel replay.
@@ -21,7 +21,7 @@ The combined theorem still needs Lean kernel replay.
 from fractions import Fraction as Q
 from rh_fixedwidth_prime_sign_v1 import smooth_transfer
 
-PRIME_STRICT = Q(1, 13)
+PRIME_STRICT = Q(1, 9)
 ARCH_MAX = Q(1, 100)
 TOTAL_STRICT = PRIME_STRICT - ARCH_MAX
 
@@ -32,9 +32,9 @@ def actual_full_mixed_bound():
     assert prime_margin > PRIME_STRICT
     assert [n for n, p, a, z in terms] == [125, 127, 128, 131]
     assert Q(1, 68) + Q(1, 100000) < Q(1, 64)
-    assert TOTAL_STRICT == Q(87, 1300)
+    assert TOTAL_STRICT == Q(91, 900)
     return {
-        "claim": "Exists smooth compact moment-zero g with Re B(g,T_(7log2)g) < -(87/1300)*energy(g)",
+        "claim": "Exists smooth compact moment-zero g with Re B(g,T_(7log2)g) < -(91/900)*energy(g)",
         "prime_margin": str(PRIME_STRICT),
         "arch_max": str(ARCH_MAX),
         "full_strict_margin": str(TOTAL_STRICT),
