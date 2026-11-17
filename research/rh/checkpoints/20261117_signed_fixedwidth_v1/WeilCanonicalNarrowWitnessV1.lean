@@ -115,7 +115,7 @@ theorem gHalf_ne_zero : gHalf.1 ≠ 0 := by
   apply phiHalf_ne_zero
   funext t
   have hh := congrFun h (Real.exp t)
-  have hc : ((mulPacket phiHalf (Real.exp t) : ℝ) : ℂ) = 0 := hh
+  have hc : ((AEGIS.WeilLogTransportCanonicalV1.mulPacket phiHalf (Real.exp t) : ℝ) : ℂ) = 0 := hh
   rw [AEGIS.WeilLogTransportCanonicalV1.mulPacket_of_pos (Real.exp_pos t),
       Real.log_exp] at hc
   exact_mod_cast hc
