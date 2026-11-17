@@ -5,6 +5,7 @@ on:
     paths:
       - '.github/workflows/rh-canonical-moment-killer-transport-v1.yml'
       - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalMomentKillerPacketV1.lean'
+      - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilSpectralMomentConjugationV1.lean'
 
 permissions:
   contents: read
@@ -73,7 +74,7 @@ jobs:
           M=research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalMomentKillerPacketV1.lean
           if grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)|^axiom ' "$M"; then exit 1; fi
           export LEAN_PATH="$(pwd)/.lake/ringout:$(lake env printenv LEAN_PATH)"
-          lean --trust=0 -DwarningAsError=true -o "$RUNNER_TEMP/WeilCanonicalMomentKillerPacketV1.olean" "$M" > "$RUNNER_TEMP/moment-packet.log" 2>&1 || {
+          lean --trust=0 -DwarningAsError=true -o "$(pwd)/.lake/ringout/WeilCanonicalMomentKillerPacketV1.olean" "$M" > "$RUNNER_TEMP/moment-packet.log" 2>&1 || {
             cat "$RUNNER_TEMP/moment-packet.log"
             exit 1
           }
@@ -96,4 +97,37 @@ jobs:
               if not actual.issubset(allowed):
                   raise SystemExit("EXTRA_AXIOMS "+full+" "+str(actual))
           print("AEGIS_CANONICAL_MOMENT_PACKET_KERNEL_T0_PASS",len(names))
+          PY
+
+      - name: Kernel-check exact exponential spectral conjugation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          M=research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilSpectralMomentConjugationV1.lean
+          if grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)|^axiom ' "$M"; then exit 1; fi
+          export LEAN_PATH="$(pwd)/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          lean --trust=0 -DwarningAsError=true -o "$(pwd)/.lake/ringout/WeilSpectralMomentConjugationV1.olean" "$M" > "$RUNNER_TEMP/spectral-conjugation.log" 2>&1 || {
+            cat "$RUNNER_TEMP/spectral-conjugation.log"
+            exit 1
+          }
+          cat "$RUNNER_TEMP/spectral-conjugation.log"
+          python3 - <<'PY'
+          import os,re
+          log=open(os.environ["RUNNER_TEMP"]+"/spectral-conjugation.log").read()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          names=["momentKiller_weightedPotential","canonicalSpectralPacket_logLift",
+                 "canonicalSpectralPacket_moments"]
+          for name in names:
+              full="AEGIS.WeilSpectralMomentConjugationV1."+name
+              match=re.search("'"+re.escape(full)+"' depends on axioms: \\[([^\\]]*)\\]",log)
+              if match:
+                  actual={x.strip() for x in match.group(1).split(",") if x.strip()}
+              elif "'"+full+"' does not depend on any axioms" in log:
+                  actual=set()
+              else:
+                  raise SystemExit("MISSING_AXIOM_RECEIPT "+full)
+              if not actual.issubset(allowed):
+                  raise SystemExit("EXTRA_AXIOMS "+full+" "+str(actual))
+          print("AEGIS_SPECTRAL_MOMENT_CONJUGATION_KERNEL_T0_PASS",len(names))
           PY
