@@ -64,8 +64,16 @@ class CertifiedPrimeRow(unittest.TestCase):
         self.assertLess(F/E,Q(500**2))
     def test_strict_smooth_transfer(self):
         signed,E,F,margin,p=smooth_transfer()
-        self.assertGreater(margin,Q(1,13))
-        self.assertEqual(margin,Q(35980,444411))
+        self.assertGreater(margin,Q(1,9))
+        self.assertEqual(margin,Q(25113,224450))
+    def test_total_actual_prime_weight_bound(self):
+        weights=sum((log_n(p)*invsqrt_n(n) for n,p,a in PRIME_POWERS),I.pt(0))
+        self.assertLess(weights.b,Q(11,10))
+        self.assertGreater(weights.a,Q(1))
+    def test_sharp_smooth_margin(self):
+        out=verify()
+        self.assertEqual(out['prime_weight_upper_exact'],'11/10')
+        self.assertIn('(1/9)',out['strict_smooth_prime_result'])
     def test_unsafe_interval_division_rejected(self):
         with self.assertRaises(AssertionError):I(Q(-1),Q(1)).inv()
     def test_log_interval_orientation(self):
