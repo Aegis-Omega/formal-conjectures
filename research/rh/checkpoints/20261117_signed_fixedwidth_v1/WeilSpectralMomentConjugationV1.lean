@@ -56,7 +56,7 @@ private theorem exp_neg_half_hasDerivAt (t : ℝ) :
   have hlin : HasDerivAt (fun u : ℝ => -u / 2) (-1 / 2) t := by
     simpa only [] using (hasDerivAt_neg t).div_const 2
   have h := (Real.hasDerivAt_exp (-t / 2)).comp t hlin
-  simpa [div_eq_mul_inv] using h
+  simpa only [Function.comp_def, div_eq_mul_inv, neg_mul] using h
 
 theorem weightedPotential_contDiff (P : ℝ → ℝ)
     (hP : ContDiff ℝ ∞ P) :
