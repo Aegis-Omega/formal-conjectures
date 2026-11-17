@@ -1,0 +1,99 @@
+name: RH canonical moment-killer packet transport
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rh-canonical-moment-killer-transport-v1.yml'
+      - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalMomentKillerPacketV1.lean'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-canonical-moment-killer-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+
+jobs:
+  transport:
+    if: github.event.pull_request.number == 92
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout exact PR source
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Check pins and clean HEAD
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+          git diff --exit-code
+          git diff --cached --exit-code
+
+      - name: Install Lean and exact Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+
+      - name: Compile existing canonical import DAG from original sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          BASE=research/rh/checkpoints/20261020_row_budget_bridge/window_l65_source
+          python3 "$BASE/plan.py" WeilThreeBlockTranslatedPacketsV22 WeilLogTransportCanonicalV1
+          python3 -u "$BASE/build.py" "$(pwd)/.lake/build/lib/lean" 1 || {
+            cat .lake/real_status.json || true
+            for f in .lake/reallogs/*.log; do tail -n 30 "$f"; done
+            exit 1
+          }
+
+      - name: Kernel-check new composition and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          M=research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalMomentKillerPacketV1.lean
+          if grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)|^axiom ' "$M"; then exit 1; fi
+          export LEAN_PATH="$(pwd)/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          lean --trust=0 -DwarningAsError=true -o "$RUNNER_TEMP/WeilCanonicalMomentKillerPacketV1.olean" "$M" > "$RUNNER_TEMP/moment-packet.log" 2>&1 || {
+            cat "$RUNNER_TEMP/moment-packet.log"
+            exit 1
+          }
+          cat "$RUNNER_TEMP/moment-packet.log"
+          python3 - <<'PY'
+          import os,re
+          log=open(os.environ["RUNNER_TEMP"]+"/moment-packet.log").read()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          names=["canonicalPacket_moments","canonicalPacket_logSupportIn",
+                 "canonicalMomentKiller_moments","canonicalMomentKiller_width"]
+          for name in names:
+              full="AEGIS.WeilCanonicalMomentKillerPacketV1."+name
+              match=re.search("'"+re.escape(full)+"' depends on axioms: \\[([^\\]]*)\\]",log)
+              if match:
+                  actual={x.strip() for x in match.group(1).split(",") if x.strip()}
+              elif "'"+full+"' does not depend on any axioms" in log:
+                  actual=set()
+              else:
+                  raise SystemExit("MISSING_AXIOM_RECEIPT "+full)
+              if not actual.issubset(allowed):
+                  raise SystemExit("EXTRA_AXIOMS "+full+" "+str(actual))
+          print("AEGIS_CANONICAL_MOMENT_PACKET_KERNEL_T0_PASS",len(names))
+          PY
