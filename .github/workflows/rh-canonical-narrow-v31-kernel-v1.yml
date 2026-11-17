@@ -6,6 +6,7 @@ on:
       - '.github/workflows/rh-canonical-narrow-v31-kernel-v1.yml'
       - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalNarrowWitnessV1.lean'
       - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilCanonicalMomentKillerPacketV1.lean'
+      - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilSignedPrimeKernelV1.lean'
 
 permissions:
   contents: read
@@ -98,4 +99,47 @@ jobs:
               if not actual.issubset(allowed):
                   raise SystemExit("EXTRA_AXIOMS "+full+" "+str(actual))
           print("AEGIS_NARROW_CANONICAL_V31_KERNEL_T0_PASS",len(names))
+          PY
+
+      - name: Replay existing exact signed-prime identity in the Lean kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          M=research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilSignedPrimeKernelV1.lean
+          SOURCE=research/rh/assembly/exact-source-inputs/WeilSignedPrimeKernelV1.lean.txt
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("research/rh/checkpoints/20261117_signed_fixedwidth_v1/WeilSignedPrimeKernelV1.lean").read_bytes()
+          b=Path("research/rh/assembly/exact-source-inputs/WeilSignedPrimeKernelV1.lean.txt").read_bytes()
+          if not p.endswith(b):
+              raise SystemExit("EXACT_SOURCE_COPY_MISMATCH")
+          print("SIGNED_PRIME_EXACT_SOURCE_BYTES_PASS",len(b))
+          PY
+          if grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)|^axiom ' "$M"; then exit 1; fi
+          export LEAN_PATH="$(pwd)/.lake/ringout:$(lake env printenv LEAN_PATH)"
+          lean --trust=0 -DwarningAsError=true -o "$(pwd)/.lake/ringout/WeilSignedPrimeKernelV1.olean" "$M" > "$RUNNER_TEMP/signed-prime-kernel.log" 2>&1 || {
+            cat "$RUNNER_TEMP/signed-prime-kernel.log"
+            exit 1
+          }
+          cat "$RUNNER_TEMP/signed-prime-kernel.log"
+          python3 - <<'PY'
+          import os,re
+          log=open(os.environ["RUNNER_TEMP"]+"/signed-prime-kernel.log").read()
+          allowed={"propext","Classical.choice","Quot.sound"}
+          names=["mixed_translate_exp_eq_v1","prime_term_translate_eq_signed_correlation_v1",
+                 "signed_prime_samples_summable_v1","prime_sum_translate_eq_signed_correlation_v1",
+                 "continuum_prime_main_term_zero_v1"]
+          for name in names:
+              full="AEGIS.WeilSignedPrimeKernelV1."+name
+              m=re.search("'"+re.escape(full)+"' depends on axioms: \\[([^\\]]*)\\]",log)
+              if m:
+                  got={x.strip() for x in m.group(1).split(",") if x.strip()}
+              elif "'"+full+"' does not depend on any axioms" in log:
+                  got=set()
+              else:
+                  raise SystemExit("MISSING_AXIOM_RECEIPT "+full)
+              if not got.issubset(allowed):
+                  raise SystemExit("UNEXPECTED_AXIOMS "+full+" "+str(got))
+          print("AEGIS_SIGNED_PRIME_SOURCE_KERNEL_T0_PASS",len(names))
           PY
