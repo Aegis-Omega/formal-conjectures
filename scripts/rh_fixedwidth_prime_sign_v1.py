@@ -215,16 +215,21 @@ def smooth_transfer():
     # For 2<=p<=131, log(p)<5 (e^5 > 131 by positive Taylor terms)
     assert sum((Q(5**j,factorial(j)) for j in range(9)),Q(0))>131
     assert 125>11**2
-    max_prime_weights=Q(20,11)
+    # Bound all actual von Mangoldt / sqrt(n) weights by exact-rational
+    # log and sqrt enclosures. No manually supplied unbound constant.
+    weight_sum=sum((log_n(p)*invsqrt_n(n) for n,p,_,_ in parts), I.pt(0))
+    weight_upper=Q(11,10)
+    assert weight_sum.b < weight_upper, 'UNPROVED_PRIME_WEIGHT_BUDGET'
+    source_signed_lower=Q(124036,1000000)
+    assert signed.b < -source_signed_lower, 'SOURCE_SIGN_WITNESS_MISSING'
     relative_error=Q(1,200)
-    signed_change=max_prime_weights*(2*relative_error+relative_error**2)
-    assert signed_change==Q(401,22000)
-    gap=Q(1,10)-signed_change
-    # smooth h_e retains exact weighted moments, error is uniform in s:
-    # |C_e(s)-C(s)|<=delta*(2||h||+delta) by Cauchy-Schwarz.
-    assert gap==Q(1799,22000)>0
+    signed_change=weight_upper*(2*relative_error+relative_error**2)
+    assert signed_change==Q(4411,400000)
+    gap=source_signed_lower-signed_change
+    assert gap==Q(226017,2000000)>0
+    # E_mollified <= (1+delta)^2*E_original.
     relative_gap=gap/(1+relative_error)**2
-    assert relative_gap==Q(35980,444411)>Q(1,13)
+    assert relative_gap==Q(25113,224450)>Q(1,9)
     return signed,E,F,relative_gap,parts
 
 
@@ -246,8 +251,9 @@ def verify():
       'spline_correlation_energy':str(E),
       'signed_prime_row_over_E_strict_rational_bracket': ['-124038/1000000','-124036/1000000'],
       'bounded_smoothing_F_over_E':'<250000',
-      'strict_smooth_prime_result':'prime_sum_real < -(1/13)*smooth_packet_energy',
+      'strict_smooth_prime_result':'prime_sum_real < -(1/9)*smooth_packet_energy',
       'smooth_sign_margin':str(gap),
+      'prime_weight_upper_exact':'11/10',
       'negative_control':'dropping non-2^7 prime powers changes signed value from negative to positive',
       'status':'MATHEMATICAL_CERTIFICATE_NOT_KERNEL_PROOF',
       'RH':'OPEN'
