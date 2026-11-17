@@ -54,7 +54,7 @@ private theorem exp_neg_half_hasDerivAt (t : ℝ) :
     HasDerivAt (fun u : ℝ => Real.exp (-u / 2))
       (-Real.exp (-t / 2) / 2) t := by
   have hlin : HasDerivAt (fun u : ℝ => -u / 2) (-1 / 2) t := by
-    convert (hasDerivAt_neg t).div_const 2 using 1 <;> ring
+    simpa only [] using (hasDerivAt_neg t).div_const 2
   have h := (Real.hasDerivAt_exp (-t / 2)).comp t hlin
   convert h using 1 <;> ring
 
@@ -96,7 +96,12 @@ theorem weightedPotential_second_deriv (P : ℝ → ℝ)
     funext u
     exact weightedPotential_deriv P hP u
   rw [hfun]
-  rw [hd.deriv]
+  have hderiv :
+      deriv (fun u : ℝ => Real.exp (-u / 2) * (deriv P u - P u / 2)) t =
+        (-Real.exp (-t / 2) / 2) * (deriv P t - P t / 2) +
+        Real.exp (-t / 2) * (deriv (deriv P) t - deriv P t / 2) := by
+    simpa only [Pi.mul_apply] using hd.deriv
+  rw [hderiv]
   ring
 
 /-- Conjugation exact: D^2 + D is P'' - P/4 after weighting. -/
