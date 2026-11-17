@@ -56,7 +56,7 @@ private theorem exp_neg_half_hasDerivAt (t : ℝ) :
   have hlin : HasDerivAt (fun u : ℝ => -u / 2) (-1 / 2) t := by
     simpa only [] using (hasDerivAt_neg t).div_const 2
   have h := (Real.hasDerivAt_exp (-t / 2)).comp t hlin
-  convert h using 1 <;> ring
+  simpa [div_eq_mul_inv] using h
 
 theorem weightedPotential_contDiff (P : ℝ → ℝ)
     (hP : ContDiff ℝ ∞ P) :
@@ -100,7 +100,8 @@ theorem weightedPotential_second_deriv (P : ℝ → ℝ)
       deriv (fun u : ℝ => Real.exp (-u / 2) * (deriv P u - P u / 2)) t =
         (-Real.exp (-t / 2) / 2) * (deriv P t - P t / 2) +
         Real.exp (-t / 2) * (deriv (deriv P) t - deriv P t / 2) := by
-    simpa only [Pi.mul_apply] using hd.deriv
+    change HasDerivAt (fun u : ℝ => Real.exp (-u / 2) * (deriv P u - P u / 2)) _ t at hd
+    exact hd.deriv
   rw [hderiv]
   ring
 
