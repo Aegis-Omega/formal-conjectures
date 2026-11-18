@@ -195,9 +195,10 @@ theorem gNarrow_ne_zero : gNarrow.1 ≠ 0 := by
 theorem logLift_gNarrow_apply (t : ℝ) :
     logLift gNarrow.1 t =
       (Real.exp (t / 2) : ℂ) * (phiNarrow t : ℂ) := by
-  unfold logLift gNarrow narrowPacketFn narrowRealPacket
+  change (Real.exp (t / 2) : ℂ) *
+      ((mulPacket phiNarrow (Real.exp t) : ℝ) : ℂ) =
+      (Real.exp (t / 2) : ℂ) * (phiNarrow t : ℂ)
   rw [mulPacket_of_pos (Real.exp_pos t), Real.log_exp]
-  rfl
 
 /-- The actual later log-lift support predicate, not merely x-space support. -/
 theorem gNarrow_logLift_support :
