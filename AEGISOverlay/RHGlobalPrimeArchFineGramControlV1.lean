@@ -50,13 +50,13 @@ theorem global_arch_prime_lower_bound_of_actual_fine_gram
       (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) -
         AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
         (1 / (4 * Real.pi)) *
-          ∫ t : ℝ, archSymbol t * criticalSpectralMass g t -
+          (∫ t : ℝ, archSymbol t * criticalSpectralMass g t) -
         (WeilPrimeSumV1 (WeilAutocorrelationV1 g)).re := by
   obtain ⟨n, gs, hmom, hpacket, hbound⟩ :=
     AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound g hm
   refine ⟨n, gs, hmom, hpacket, ?_⟩
   rw [actual_arithmetic_real_eq_prime_sub_archSymbol] at hbound
-  convert hbound using 1 <;> ring
+  simpa only [neg_sub] using hbound
 
 /-- Equivalent prime-side formulation. The real mixed Weil defect is retained
 rather than replaced by its absolute value or an unjustified sign. -/
@@ -67,7 +67,7 @@ theorem global_prime_arch_with_signed_error
       g = packetSum (fun _ => (1 : ℂ)) gs ∧
       (WeilPrimeSumV1 (WeilAutocorrelationV1 g)).re ≤
         (1 / (4 * Real.pi)) *
-          ∫ t : ℝ, archSymbol t * criticalSpectralMass g t +
+          (∫ t : ℝ, archSymbol t * criticalSpectralMass g t) +
         AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs -
         (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) := by
   obtain ⟨n, gs, hmom, hpacket, hlower⟩ :=
