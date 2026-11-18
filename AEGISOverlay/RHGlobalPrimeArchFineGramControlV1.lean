@@ -56,7 +56,7 @@ theorem global_arch_prime_lower_bound_of_actual_fine_gram
     AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound g hm
   refine ⟨n, gs, hmom, hpacket, ?_⟩
   rw [actual_arithmetic_real_eq_prime_sub_archSymbol] at hbound
-  simpa only [neg_sub] using hbound
+  convert hbound using 1 <;> ring
 
 /-- Equivalent prime-side formulation. The real mixed Weil defect is retained
 rather than replaced by its absolute value or an unjustified sign. -/
@@ -73,10 +73,14 @@ theorem global_prime_arch_with_signed_error
   obtain ⟨n, gs, hmom, hpacket, hlower⟩ :=
     global_arch_prime_lower_bound_of_actual_fine_gram g hm
   refine ⟨n, gs, hmom, hpacket, ?_⟩
-  have rearrange (p a e d : ℝ) (h : e - d ≤ a - p) :
-      p ≤ a + d - e := by
-    linarith only [h]
-  exact rearrange _ _ _ _ hlower
+  let p : ℝ := (WeilPrimeSumV1 (WeilAutocorrelationV1 g)).re
+  let a : ℝ := (1 / (4 * Real.pi)) *
+    ∫ t : ℝ, archSymbol t * criticalSpectralMass g t
+  let e : ℝ := (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)
+  let d : ℝ := AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs
+  change p ≤ a + d - e
+  change e - d ≤ a - p at hlower
+  linarith only [hlower]
 
 end AEGIS.RHGlobalPrimeArchFineGramControlV1
 
