@@ -16,6 +16,7 @@ limitations under the License.
 import RHFeshbachWeilClosureV2
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import AEGISOverlay.RHFourLogThreeWeightedRHBridgeV1
+import AEGISOverlay.RHGlobalPrimeArchFrontierV1
 
 /-!
 Construction candidate on the existing certified narrow-window class.
@@ -121,9 +122,35 @@ theorem riemannHypothesis_of_actual_global_signed_weil
     RiemannHypothesis := by
   exact actual_global_signed_weil_iff_RiemannHypothesis.mp hcert
 
+/-- The global signed Weil budget and the original prime/Arch domination
+are equivalent proof obligations on the same class of moment-zero packets.
+Neither direction manufactures an unconditional certificate. -/
+theorem actual_global_signed_weil_iff_prime_arch :
+    ActualGlobalSignedWeilBudget ↔
+      AEGIS.RHGlobalPrimeArchFrontierV1.GlobalPrimeArchDomination := by
+  constructor
+  · intro hbudget
+    apply AEGIS.RHGlobalPrimeArchFrontierV1.global_prime_arch_iff_universal.mpr
+    exact AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13
+      (actual_global_signed_weil_iff_RiemannHypothesis.mp hbudget)
+  · intro hglobal
+    apply actual_global_signed_weil_iff_RiemannHypothesis.mpr
+    exact AEGIS.RHGlobalPrimeArchFrontierV1.riemannHypothesis_of_global_prime_arch
+      hglobal
+
+/-- Same global proof obligation expressed in the Mathlib-facing Weil
+quadratic language. This is an equivalence, not a proof of either side. -/
+theorem actual_global_signed_weil_iff_universal :
+    ActualGlobalSignedWeilBudget ↔
+      AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10 :=
+  actual_global_signed_weil_iff_prime_arch.trans
+    AEGIS.RHGlobalPrimeArchFrontierV1.global_prime_arch_iff_universal
+
 end AEGIS.RHAssemblyV1
 
 #print axioms AEGIS.RHAssemblyV1.narrow_window_schur_family
 #print axioms AEGIS.RHAssemblyV1.narrow_window_schur_norm_family
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_RiemannHypothesis
 #print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_actual_global_signed_weil
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_prime_arch
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal
