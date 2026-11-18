@@ -56,7 +56,7 @@ theorem global_arch_prime_lower_bound_of_actual_fine_gram
     AEGIS.RHActualUniversalFineGramV1.every_packet_actual_fine_mixed_defect_lower_bound g hm
   refine ⟨n, gs, hmom, hpacket, ?_⟩
   rw [actual_arithmetic_real_eq_prime_sub_archSymbol] at hbound
-  linarith
+  simpa only [neg_sub] using hbound
 
 /-- Equivalent prime-side formulation. The real mixed Weil defect is retained
 rather than replaced by its absolute value or an unjustified sign. -/
@@ -73,7 +73,10 @@ theorem global_prime_arch_with_signed_error
   obtain ⟨n, gs, hmom, hpacket, hlower⟩ :=
     global_arch_prime_lower_bound_of_actual_fine_gram g hm
   refine ⟨n, gs, hmom, hpacket, ?_⟩
-  linarith
+  have rearrange (p a e d : ℝ) (h : e - d ≤ a - p) :
+      p ≤ a + d - e := by
+    linarith only [h]
+  exact rearrange _ _ _ _ hlower
 
 end AEGIS.RHGlobalPrimeArchFineGramControlV1
 
