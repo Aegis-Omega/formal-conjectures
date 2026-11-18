@@ -34,7 +34,7 @@ WeilCompactSmoothGV1 and WeilMomentConditionsV1; it does not restate them.
 No Weil sign or RH conclusion is asserted by this module.
 -/
 
-open Set MeasureTheory Filter
+open Set MeasureTheory Filter Metric
 open scoped ContDiff Topology
 
 set_option autoImplicit false
@@ -75,7 +75,7 @@ theorem psiNarrow_at_zero : psiNarrow 0 = 1 :=
   narrowBump.one_of_mem_closedBall (by simp [Metric.mem_closedBall, narrowBump])
 
 /-- The moment killer does not enlarge support, so the output lies strictly
-inside the later +/-1/64 log packet window. -/
+inside the later plus-or-minus 1/64 log packet window. -/
 theorem phiNarrow_tsupport_Icc :
     tsupport phiNarrow ⊆ Icc (-(1 / 64) : ℝ) (1 / 64) := by
   refine (tsupport_momentKiller_subset psiNarrow).trans ?_
