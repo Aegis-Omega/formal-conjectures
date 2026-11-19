@@ -146,6 +146,46 @@ theorem actual_global_signed_weil_iff_universal :
   actual_global_signed_weil_iff_prime_arch.trans
     AEGIS.RHGlobalPrimeArchFrontierV1.global_prime_arch_iff_universal
 
+
+/-- A source-specific finite decomposition with the actual off-diagonal
+Weil defect bounded by its already certified diagonal energy reserve.
+This is a remaining analytic hypothesis, not a supplied certificate. -/
+def SelectedActualFineMixedBudget : Prop :=
+  ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)
+
+/-- Non-circular IF -> THEN: summing the actual diagonal reserves turns a
+selected fine mixed budget into the canonical signed budget. No RH premise. -/
+theorem actual_global_signed_weil_of_selected_actual_fine_mixed_budget
+    (hcert : SelectedActualFineMixedBudget) :
+    ActualGlobalSignedWeilBudget := by
+  intro g hm
+  obtain ⟨n, gs, hpacket, hd, hmixed⟩ := hcert g hm
+  refine ⟨n, gs, hpacket, ?_⟩
+  have hs :
+      (∑ i, (5671 / 3200 : ℝ) * energy (gs i).1) ≤
+        ∑ i, -(B (gs i) (gs i)).re :=
+    Finset.sum_le_sum (fun i _ => hd i)
+  have hdiag :
+      (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+    rw [Finset.mul_sum]
+    simpa only [Finset.sum_neg_distrib] using hs
+  exact hmixed.trans hdiag
+
+/-- Terminal implication with an explicit, source-bound input.
+The selected fine budget must be produced independently. -/
+theorem riemannHypothesis_of_selected_actual_fine_mixed_budget
+    (hcert : SelectedActualFineMixedBudget) :
+    RiemannHypothesis :=
+  riemannHypothesis_of_actual_global_signed_weil
+    (actual_global_signed_weil_of_selected_actual_fine_mixed_budget hcert)
+
 end AEGIS.RHAssemblyV1
 
 #print axioms AEGIS.RHAssemblyV1.narrow_window_schur_family
@@ -154,3 +194,5 @@ end AEGIS.RHAssemblyV1
 #print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_actual_global_signed_weil
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_prime_arch
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget

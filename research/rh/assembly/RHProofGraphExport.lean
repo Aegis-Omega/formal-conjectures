@@ -21,6 +21,7 @@ import AEGISOverlay.RHActualMixedDefectV1
 import AEGISOverlay.RHActualElevenLatticeV1
 import RHFourBlockConcreteV3
 import AEGISOverlay.RHActualUniversalFineGramV1
+import AEGISOverlay.RHGlobalPrimeArchFineGramControlV1
 import AEGISOverlay.RHArchRow29V1
 import AEGISOverlay.RHScaleRowCompositionV1
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
@@ -54,6 +55,13 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate",
     "AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp",
     "AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget",
+    "AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_prime_arch",
+    "AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal",
+    "AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget",
+    "AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget",
+    "AEGIS.RHGlobalPrimeArchFineGramControlV1.global_arch_prime_lower_bound_of_actual_fine_gram",
+    "AEGIS.RHGlobalPrimeArchFineGramControlV1.global_prime_arch_with_signed_error",
+    "AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_implies_signed_budget",
     "AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt",
     "AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer",
     "AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate",
@@ -263,6 +271,13 @@ elab "#export_rh_proof_graph" : command => do
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_source_signed_row_certificate
 #print axioms AEGIS.RHFourLogThreeActualPrimeV1.actual_four_log_three_signed_gram_sharp
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.rh_iff_one_actual_sharp_signed_budget
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_prime_arch
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHGlobalPrimeArchFineGramControlV1.global_arch_prime_lower_bound_of_actual_fine_gram
+#print axioms AEGIS.RHGlobalPrimeArchFineGramControlV1.global_prime_arch_with_signed_error
+#print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_implies_signed_budget
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.every_packet_actual_fine_multiscale_receipt
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.riemannHypothesis_of_canonical_resonance_producer
 #print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_signed_two_block_schur_certificate
