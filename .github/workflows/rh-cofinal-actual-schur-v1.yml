@@ -373,6 +373,12 @@ jobs:
               # Compile the bare alias as a declaration-free shim.
               if m == "RHGlobalPrimeArchFrontierV1":
                   return pathlib.Path("research/rh/assembly/GlobalPrimeArchFrontierAdapter.lean")
+              if m == "AEGISOverlay.RHCofinalSchurAdapterV1":
+                  return pathlib.Path("research/rh/assembly/CofinalSchurAliasAdapter.lean")
+              if m == "RHFiniteActualGramJoinV1":
+                  return pathlib.Path("research/rh/assembly/FiniteActualGramAliasAdapter.lean")
+              if m == "RHSignedPrimeIntervalExtensionV8":
+                  return pathlib.Path("research/rh/assembly/SignedPrimeIntervalAliasAdapter.lean")
               if m.startswith("AEGISOverlay."):
                   p=pathlib.Path(m.replace(".","/")+".lean")
                   if p.is_file(): return p
@@ -461,6 +467,16 @@ jobs:
               for d in ids: visit(d)
               active.remove(m); seen.add(m); order.append(m)
           for m in targets: visit(m)
+          # Fail early if distinct import names still elaborate the same
+          # declaration-bearing source under multiple Lean module names.
+          source_aliases={}
+          for module, source_path in paths.items():
+              source_aliases.setdefault(source_path,[]).append(module)
+          for source_path, aliases in source_aliases.items():
+              if (len(aliases)>1 and
+                      source_path != "research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean"):
+                  raise RuntimeError("DUPLICATE_DECLARATION_SOURCE_ALIASES "+
+                                     source_path+" "+",".join(sorted(aliases)))
           # The historical PR88 replay tried to compile the cell consumer
           # without the actual AEGISOverlay.RHKreinM8AnalyticV1 dependency.
           # Check this path BEFORE any large Lean compilation; never treat
