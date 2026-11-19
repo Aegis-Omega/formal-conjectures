@@ -14,4 +14,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -/
 
-import RHCofinalSchurAdapterV1
+import AEGISOverlay.RHCofinalSchurAdapterV1
+
+#print axioms AEGIS.RHCofinalSchurAdapterV1.cofinal_certificate_of_packet_schur
+#print axioms AEGIS.RHCofinalSchurAdapterV1.every_packet_certificate_of_schur_norm_families
+#print axioms AEGIS.RHCofinalSchurAdapterV1.riemannHypothesis_of_schur_norm_families

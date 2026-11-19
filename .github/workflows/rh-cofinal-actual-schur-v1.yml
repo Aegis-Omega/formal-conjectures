@@ -373,7 +373,7 @@ jobs:
               # Compile the bare alias as a declaration-free shim.
               if m == "RHGlobalPrimeArchFrontierV1":
                   return pathlib.Path("research/rh/assembly/GlobalPrimeArchFrontierAdapter.lean")
-              if m == "AEGISOverlay.RHCofinalSchurAdapterV1":
+              if m == "RHCofinalSchurAdapterV1":
                   return pathlib.Path("research/rh/assembly/CofinalSchurAliasAdapter.lean")
               if m == "RHFiniteActualGramJoinV1":
                   return pathlib.Path("research/rh/assembly/FiniteActualGramAliasAdapter.lean")
