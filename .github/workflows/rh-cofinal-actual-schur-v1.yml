@@ -369,6 +369,10 @@ jobs:
               if m in ("RHKreinExplicitCorrectionV1",
                        "AEGISOverlay.RHKreinCorrectionSymbolV1"):
                   return pathlib.Path("research/rh/m8_kernel_v1/CorrectionSymbolAdapter.lean")
+              # Duplicate declaration source has a canonical overlay module.
+              # Compile the bare alias as a declaration-free shim.
+              if m == "RHGlobalPrimeArchFrontierV1":
+                  return pathlib.Path("research/rh/assembly/GlobalPrimeArchFrontierAdapter.lean")
               if m.startswith("AEGISOverlay."):
                   p=pathlib.Path(m.replace(".","/")+".lean")
                   if p.is_file(): return p
