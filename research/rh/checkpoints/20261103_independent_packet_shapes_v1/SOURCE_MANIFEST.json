@@ -1,0 +1,62 @@
+{
+  "sources": [
+    {
+      "blob": "97a98db382e433488ed20f7df0980f41b20e4cbc",
+      "sha256": "123fc514966112dbacdad41b403ffad8ff6f1764c9597c2c3fd983138a940413",
+      "bytes": 20137,
+      "provenance": [
+        "Aegis-Omega/formal-conjectures",
+        "branch:integration/rh-k3-source-graft-20261024",
+        "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "AEGISOverlay/RHActualElevenLatticeV1.lean"
+      ]
+    },
+    {
+      "blob": "7175f243640df980d9c2effc610cbb6748ffc29b",
+      "sha256": "6508cfb2f75f1bc2902f7fde52e062d859b4adb7aa785a6c8a25a679ca5626f0",
+      "bytes": 33322,
+      "provenance": [
+        "Aegis-Omega/formal-conjectures",
+        "branch:integration/rh-k3-source-graft-20261024",
+        "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "research/rh/aegis_pr721_fb983fd/lean/RHRationalNinePacketPrimeWindowV1.lean.src"
+      ]
+    },
+    {
+      "blob": "f3d1ccf81ba8c9fbefc41886ddf163db10656148",
+      "sha256": "34557b25d8580c9c47691af90eec3b265084cb03e33155ac5d959b7107476fd9",
+      "bytes": 90232,
+      "provenance": [
+        "Aegis-Omega/formal-conjectures",
+        "branch:integration/rh-k3-source-graft-20261024",
+        "33b17a5b56efe8bfa9bbab616d2f2866e7c67c50",
+        "AEGISOverlay/RHActualMixedDefectV1.lean"
+      ]
+    },
+    {
+      "blob": "25c7ab611a71ea17ad71ca6f46c3ba57becdf8d3",
+      "sha256": "1d59a017dbb4c7fcfc2c5d8b8e67eee4511eff7857cea79a971a67281126679f",
+      "bytes": 28824,
+      "provenance": [
+        "Aegis-Omega/AEGIS-OMEGA",
+        "branch:proof/rh-localization-defect-v1",
+        "c120728c970e8f05f60cb6018d8186d83032794f",
+        "sovereign-omega-v2/formal/proofs/WeilLocalizationDefectV1.md"
+      ]
+    },
+    {
+      "blob": "e5425812f471d6838f59091573e5a83e967210da",
+      "sha256": "1357a275c165607b897073b2d95170de563ddde73f79bcbd4d6e023880579cce",
+      "bytes": 48727,
+      "provenance": [
+        "Aegis-Omega/formal-conjectures",
+        "branch:research/rh-actual-proof-assembly-20261014",
+        "aacdd511877e3e725dbee05b1167ee38b681ab31",
+        "AEGISOverlay/RHActualUniversalFineGramV1.lean"
+      ]
+    }
+  ],
+  "scope": "four-phase non-Hermitian polarization composed with existing actual eleven-lattice uniform same-mother estimates; no RH theorem",
+  "novelty": "NOT_CLAIMED; targeted search checked existing common-window and distinct-packet sources; no exhaustive semantic nonduplication audit",
+  "source_basis_kernel_replay": "NOT_FRESHLY_REPLAYED"
+}

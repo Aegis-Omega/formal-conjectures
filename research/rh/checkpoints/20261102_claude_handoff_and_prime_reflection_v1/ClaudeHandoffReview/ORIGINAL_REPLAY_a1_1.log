@@ -1,0 +1,45 @@
+a=1/1 K=40 primes=[2, 3, 4, 5, 7]
+moments of v (must contain 0): [+/- 5.28e-234] [+/- 5.28e-234]
+numerical min (float): 1.9360858e-18
+CERTIFIED QW(v)/||v||^2 = [1.93608583536e-18 +/- 9.68e-31]
+CERTIFIED_UPPER_BOUND lambda0_a <= 1.93609e-18
+{
+  "schema": "AEGIS_ORIGINAL_ARB_REPLAY_V1",
+  "seconds": 8.424581710991333,
+  "python_flint": "0.9.0",
+  "arb_precision": 800,
+  "source_identities": [
+    {
+      "file": "certify.py",
+      "sha256": "facfaa4990b6b0339adee5c291ddf4278ad5af67ddfaf2afedc6717c5e569cc9",
+      "git_blob": "35087597b9f1be6ec5de922383960ae8b5725a3f"
+    },
+    {
+      "file": "qwhp.py",
+      "sha256": "be519c5118e4c84e02178fc841e720574032f0881a51504a6b1eef234cbb8ff4",
+      "git_blob": "ca36a73b8a8fa8078a1b7d7a0e3736d1b05b94fa"
+    }
+  ],
+  "inputs": {
+    "a": "1/1",
+    "K": 40
+  },
+  "quotient_ball": "[1.936085835359032494238089545219753914946569422879144555252371308399730e-18 +/- 2.91e-88]",
+  "original_formatted_upper": "1.93609e-18",
+  "formatted_upper_below_trial_ball": false,
+  "exact_potential_and_moments_checked": true,
+  "exact_norm_squared": [
+    "245532485879920534396369097517187500000000000000000000000003364681978464994525481747061214994263183861223450304651748396139918700943868122967006050037",
+    "245532485879920534396369097517187500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+  ],
+  "finite_prime_indices": [
+    2,
+    3,
+    4,
+    5,
+    7
+  ],
+  "independent_direct_evaluation": "PENDING",
+  "lean_kernel_run": false,
+  "rh_proven": false
+}

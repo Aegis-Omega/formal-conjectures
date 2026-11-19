@@ -1,0 +1,9 @@
+LT=11/8 K=70 atoms=139 primes<=3 W=2.2488  max|tau|>K: 11.90  Q(unit atoms) eig min 3.263e-07 max 1.376e+01
+Rayleigh quotient -B(g,g)/||g||^2 of the near-kernel packet: 1.642e-07 (next 1.786e-05)
+2cLF=0.020630 theta=0.009883 const=0.02149  A=[0.170,0.260] B=[0.760,0.845]  ||g 1_A|| ||g 1_B|| / ||g||^2 = 0.0723
+hresidual would force -B(g,g)/||g||^2 >= 1.554e-03 ; model value 1.642e-07 ; factor 9463
+
+LT=1 K=50 atoms=99 primes<=2 W=0.9803  max|tau|>K: 8.01  Q(unit atoms) eig min 4.244e-05 max 9.840e+00
+Rayleigh quotient -B(g,g)/||g||^2 of the near-kernel packet: 1.191e-02 (next 1.969e-01)
+2cLF=0.020630 theta=0.009883 const=0.02149  A=[0.315,0.405] B=[0.905,0.990]  ||g 1_A|| ||g 1_B|| / ||g||^2 = 0.0670
+hresidual would force -B(g,g)/||g||^2 >= 1.439e-03 ; model value 1.191e-02 ; factor 0

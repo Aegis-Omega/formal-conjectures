@@ -69,10 +69,17 @@ def tracked_source(root: Path, record: dict, identifier: str) -> tuple[str, int]
     rel = Path(path)
     if rel.is_absolute() or ".." in rel.parts or not (root / rel).is_file():
         return None
-    git = subprocess.run(
-        ["git", "cat-file", "-e", f"HEAD:{rel.as_posix()}"],
-        cwd=root, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    if git.returncode != 0 or sha256(root / rel) != record.get("sha256"):
+    # A manifest hash alone is not evidence that the working source came
+    # from the recorded HEAD. Bind the actual bytes to the committed blob.
+    committed_blob = subprocess.run(
+        ["git", "rev-parse", "--verify", f"HEAD:{rel.as_posix()}"],
+        cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    working_blob = subprocess.run(
+        ["git", "hash-object", "--", rel.as_posix()],
+        cwd=root, text=True, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    if (committed_blob.returncode != 0 or working_blob.returncode != 0
+            or committed_blob.stdout.strip() != working_blob.stdout.strip()
+            or sha256(root / rel) != record.get("sha256")):
         return None
     name = identifier.rsplit(".", 1)[-1]
     pattern = re.compile(r"^\s*(?:(?:noncomputable|private|protected)\s+)*"
@@ -94,6 +101,9 @@ def main() -> int:
 
     head = subprocess.check_output(
         ["git", "rev-parse", "HEAD"], cwd=root, text=True).strip()
+    active_repo = os.environ.get("GITHUB_REPOSITORY")
+    if not active_repo or active_repo.count("/") != 1:
+        raise RuntimeError("GITHUB_REPOSITORY_NOT_PROVIDED")
     manifest = json.loads(manifest_path.read_text())
     census = json.loads(graph_path.read_text())
     if census.get("defeq_target_type") != "RiemannHypothesis":
@@ -125,7 +135,7 @@ def main() -> int:
     declaration = None
     receipt = {
         "schema": "aegis.rh.official-submission-checkpoint.v1",
-        "repository": "tarikskalic33/formal-conjectures",
+        "repository": active_repo,
         "exact_head": head,
         "target": "_root_.RiemannHypothesis",
         "upstream_repository": DEEP_MIND_REPOSITORY,
@@ -177,7 +187,8 @@ def main() -> int:
             "probe_log_sha256": sha256(out / "RHOfficialExactTypeProbe.log"),
         })
         template = (root / "research/rh/assembly/upstream-formal-proof.patch.in").read_text()
-        patch = template.replace("FINAL_VERIFIED_SHA", head).replace(
+        # the link names the repository of the verified commit (GITHUB_REPOSITORY), not a fixed one
+        patch = template.replace("FINAL_REPOSITORY", active_repo).replace("FINAL_VERIFIED_SHA", head).replace(
             "FINAL_PROOF_PATH", source_path).replace("FINAL_DECLARATION_LINE", str(line))
         if ("FINAL_" in patch
                 or "category research solved" not in patch

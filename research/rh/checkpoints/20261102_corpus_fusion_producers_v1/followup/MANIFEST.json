@@ -1,0 +1,98 @@
+{
+  "schema": "AEGIS_FOLLOWUP_MANIFEST_V1",
+  "payload_commit": "bbd47b4ea64cfb9ce06862b0feccaf7a58d98fe5",
+  "files": [
+    {
+      "path": "PUBLISH_RECEIPT.json",
+      "sha256": "0f4bef6b371e25055ffb87efa4a9db17ac3a197454d08a42b560ced0a649c68c",
+      "git_blob": "36d447a7d66afdd28f294580835eef7e1aed463b",
+      "bytes": 1243
+    },
+    {
+      "path": "followup/CHECKPOINT.md",
+      "sha256": "118e99e5c99a9b2e7a9724e3ca88d7750da27b2fec27d1dcef00d99e30a0ecc8",
+      "git_blob": "2b5bfc4211d01d94360acee6618551d45bb21ffb",
+      "bytes": 2774
+    },
+    {
+      "path": "followup/PRIME_LEVY_LIMIT_FALSIFIER.md",
+      "sha256": "31fb813652fafe17b554a2d11e3a014658850f9336e8bf21d561cc89d2de6f37",
+      "git_blob": "7c9d6247bddeff8e00917ef2df16a3a669a313ba",
+      "bytes": 6298
+    },
+    {
+      "path": "followup/PR523Source/EXPECTED_SOURCE_IDENTITIES.json",
+      "sha256": "d7861cfbe5873af6646f32f64b7b33d9971aa5da967493675afd39232071f46a",
+      "git_blob": "138cbaf0e3a1bcd28e747770ca5cf942b3046000",
+      "bytes": 2629
+    },
+    {
+      "path": "followup/PR523Source/PR499_PR523_REUSE_AUDIT.md",
+      "sha256": "002a61b8c82664ac75aaa6660d4e77f6b3f0d682edcd91578fd7b753607f1412",
+      "git_blob": "9cd846a58f94af83a53946be99b0dba0d1c96aa3",
+      "bytes": 3939
+    },
+    {
+      "path": "followup/PR523Source/SOURCE_MANIFEST.json",
+      "sha256": "1907a60b108cf0f87386dd39fe72df8722307efe3639d7b21059019683166433",
+      "git_blob": "b434eb81ff354abdf89de1ac49fe076b7f2a3dbf",
+      "bytes": 3818
+    },
+    {
+      "path": "followup/PR523Source/WeilArchFiniteQuadraticV1.lean",
+      "sha256": "98dc811d4dbec57a9e06c9a2f82fad95c2dac0dd8425cfe75b10cd16d5a69a71",
+      "git_blob": "4f8ba8db61b696465a4b80a9a3006ce94245d42c",
+      "bytes": 927
+    },
+    {
+      "path": "followup/PR523Source/WeilArchSineKernelIntegerV1.lean",
+      "sha256": "9b7fa37a55a9c5867a91b6a090f08ee07c282ae9d4858b8e35f2e48bd30623be",
+      "git_blob": "7f16181960884f1a2254bc409f30b26158c0a59e",
+      "bytes": 24348
+    },
+    {
+      "path": "followup/PR523Source/WeilArchSineKernelV1.lean",
+      "sha256": "9a74deb7f2c5b1cdc5a7e4a8b4a17b4c8a37304d18a1da2562587337e7d9c3cd",
+      "git_blob": "cab69e4ec0e921977a25dfb79cdee7e4467839ff",
+      "bytes": 3992
+    },
+    {
+      "path": "followup/PR523Source/WeilArchTailIntegralV1.lean",
+      "sha256": "adf55c8cc4a99f3f296ffb5ec884191c21f7692d8312f58f18e005adb230cb1d",
+      "git_blob": "ec35e6d8bbf7d3b1f175691f35164529542eeba3",
+      "bytes": 2077
+    },
+    {
+      "path": "followup/PR523Source/WeilArchTailWeightSignV1.lean",
+      "sha256": "5c32e930e1755672f1a90e3637f2465ca0e54a21b3336057678760934b43a1ac",
+      "git_blob": "c170eeaea67a8c6e3375bd08b94b2cb68a277437",
+      "bytes": 4058
+    },
+    {
+      "path": "followup/PR523Source/WeilArchWeightDigammaSignV1.lean",
+      "sha256": "d4b32949c18bc508fb0bb7d7a9bbf0648a699664c699d7e4cc9a5c12153cba42",
+      "git_blob": "35ba7019c86347eac6e4ee4efa6b35d396bc431b",
+      "bytes": 4007
+    },
+    {
+      "path": "followup/PR523Source/WeilArchWeightRealSignV1.lean",
+      "sha256": "c9cd35fcd9b6faedcfa18a63a4574b7bcfbd1202221ceb17ed997bd1bf696239",
+      "git_blob": "c34770331820fd775d8dcca278e55430028fcc86",
+      "bytes": 5349
+    },
+    {
+      "path": "followup/PR523Source/WeilFiniteSourceCalculusV1.lean",
+      "sha256": "ead5c9d300074b9028d00020763343ed08cf25fd903b3193e790a86b6762924b",
+      "git_blob": "8098853100b7bdd7410e03f2347e7b40c3e94516",
+      "bytes": 18492
+    },
+    {
+      "path": "followup/PR523Source/WeilFiniteSourceCalculusV1Spec.lean",
+      "sha256": "0b269fad84dd3d717ec7f2a088a35babd5dfdd8f79962825271559312f6de310",
+      "git_blob": "3009718be8e712d310039b2da7c963fb2c542296",
+      "bytes": 2810
+    }
+  ],
+  "proof_status": "ordinary primary-agent derivations and recovered exact-source proofs; no fresh analytic kernel claim",
+  "rh_proven": false
+}

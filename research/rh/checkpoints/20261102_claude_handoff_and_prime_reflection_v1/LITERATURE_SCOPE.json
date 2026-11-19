@@ -1,0 +1,22 @@
+{
+  "sources": [
+    {
+      "url": "https://arxiv.org/html/2610.32704",
+      "title": "Spectral convergence associated with Weil\u2019s quadratic form",
+      "checked_results": [
+        "Theorem 1.1 explicitly assumes RH",
+        "Theorem 1.2 explicitly assumes RH"
+      ],
+      "usable_as_unconditional_global_sign": false
+    },
+    {
+      "url": "https://arxiv.org/html/2511.22755",
+      "title": "Zeta Spectral Triples",
+      "checked_result": "Theorem 1.1 has simple-even hypotheses; global determinant convergence is not supplied by finite self-adjointness",
+      "usable_as_unconditional_global_sign": false
+    }
+  ],
+  "primary_extraction_sha256": "9b3b14de965bf801e0ca1590bdaaf196f9c9405a4f0782a88e60ecd35399b014",
+  "full_extract_republished": false,
+  "rh_proven": false
+}

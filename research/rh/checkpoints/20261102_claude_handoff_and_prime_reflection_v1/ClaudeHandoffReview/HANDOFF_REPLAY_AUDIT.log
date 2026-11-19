@@ -1,0 +1,91 @@
+{
+  "schema": "AEGIS_CLAUDE_HANDOFF_REPLAY_AUDIT_V1",
+  "checker_sha256": "35c18b6ef38f0a9ec03a55f8320844ed007b94490d619abf1606502e2c14806b",
+  "exact_trial_upper_bounds": [
+    {
+      "a": [
+        "3",
+        "4"
+      ],
+      "witness_sha256": "f4ed0ef9f8aa5a2a71a498b3489c3701cedb606725ab94f61092dd63e7b045af",
+      "direct_receipt_sha256": "3cb2f3390d297696ca05d13c4a3a3e5862cdbee2a6b98944030ccc7d59373fdd",
+      "conservative_upper": [
+        "77",
+        "100000000000"
+      ],
+      "exact_directed_upper": [
+        "15356921502194743200420675449840794150384978704780133760750613435808653",
+        "20000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "quotient_ball": "[7.6784607510973716002103377249203970751924893523900668803753067179043263826620143e-10 +/- 1.76e-90]",
+      "implementations_overlap": true,
+      "original_decimal_below_selected_trial": true
+    },
+    {
+      "a": [
+        "1",
+        "1"
+      ],
+      "witness_sha256": "07e9d3032cb3b68102d09b945fc0db7a49fcb14dc760f9a444b7796eb1aa3d61",
+      "direct_receipt_sha256": "150ebba82d4ef8434112dae99ab9c3ba4a3ece10d634d2228222d056c894c61d",
+      "conservative_upper": [
+        "1",
+        "500000000000000000"
+      ],
+      "exact_directed_upper": [
+        "48402145883975812355952238630493847873664235571978613881309283",
+        "25000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "quotient_ball": "[1.9360858353590324942380895452197539149465694228791445552523713083997302903544675e-18 +/- 2.97e-98]",
+      "implementations_overlap": true,
+      "original_decimal_below_selected_trial": false
+    },
+    {
+      "a": [
+        "5",
+        "4"
+      ],
+      "witness_sha256": "4b253bf6fe2c73fbe14020de8fd0616419dedf3011054e30ae3a16afd9b3444b",
+      "direct_receipt_sha256": "a334e46c0f8fcdb3531d30167e7f6de290a8d1a63673a471c0eefd6abd3165c5",
+      "conservative_upper": [
+        "1",
+        "20000000000000000000000"
+      ],
+      "exact_directed_upper": [
+        "2492743842573402958132206414255849907209935064933257019961",
+        "50000000000000000000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "quotient_ball": "[4.9854876851468059162644128285116998144198701298665140399207561896886578125798510e-23 +/- 3.47e-103]",
+      "implementations_overlap": true,
+      "original_decimal_below_selected_trial": false
+    },
+    {
+      "a": [
+        "3",
+        "2"
+      ],
+      "witness_sha256": "1eff0c7feae9c9ce276f42a8c7cae5e85e3e4934d1488818d0a3dc3208f5820f",
+      "direct_receipt_sha256": "5b99c1c05329219fe10b3255133113950329d9926f3bd1f8812bb6343834a7b3",
+      "conservative_upper": [
+        "43",
+        "1000000000000000000000000000"
+      ],
+      "exact_directed_upper": [
+        "2638489222076498556708166721792338557921230141523267",
+        "62500000000000000000000000000000000000000000000000000000000000000000000000000"
+      ],
+      "quotient_ball": "[4.2215827553223976907330667548677416926739682264372271984732456364733123463603690e-26 +/- 1.99e-106]",
+      "implementations_overlap": true,
+      "original_decimal_below_selected_trial": true
+    }
+  ],
+  "negative_input_cases_passed": 14,
+  "implementation_diversity": true,
+  "independent_formal_kernel": false,
+  "certificate_library": "python-flint 0.9.0 / Arb",
+  "analytic_soundness": "ordinary manuscript DIRECT_WITNESS_SOUNDNESS.md",
+  "proof_scope": "upper bounds only; no lower bound for the global infimum",
+  "lean_analytic_replay": false,
+  "final_RH_theorem": null,
+  "rh_proven": false
+}

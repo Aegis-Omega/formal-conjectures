@@ -1,0 +1,26 @@
+{
+  "checker_sha256": "1deb6ca1b8ef1dc86b8ed9aa4c6dffd97d9b55c301f2d2c70fbc752bf7b337fd",
+  "cases": [
+    {
+      "case": "modified source PDF",
+      "python_optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "rejected": true
+    },
+    {
+      "case": "modified source PDF",
+      "python_optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "rejected": true
+    },
+    {
+      "case": "existing receipt",
+      "returncode": 1,
+      "bytes_preserved": true,
+      "rejected": true
+    }
+  ],
+  "rh_proven": false
+}

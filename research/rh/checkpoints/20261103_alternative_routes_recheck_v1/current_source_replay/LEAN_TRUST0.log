@@ -1,0 +1,7 @@
+theorem AEGIS.LiQuartetArithmetic.sixth_numerator_exact_and_negative : AEGIS.LiQuartetArithmetic.sixthNumerator =
+    -309804177801344 ∧
+  AEGIS.LiQuartetArithmetic.sixthNumerator < 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'AEGIS.LiQuartetArithmetic.gaussian_sixth_exact' does not depend on any axioms
+'AEGIS.LiQuartetArithmetic.denominator_exact_and_positive' does not depend on any axioms
+'AEGIS.LiQuartetArithmetic.sixth_numerator_exact_and_negative' does not depend on any axioms

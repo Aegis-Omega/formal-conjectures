@@ -1,0 +1,231 @@
+{
+ "schema": "AEGIS_HOLON_V6_CLAUDE_REPLY_RECEIPT_V1",
+ "tag": "AEGIS-HOLON-V6-CLAUDE-REPLY",
+ "pr92_comment": 6907501295,
+ "branch_head_tested": "b0ec94321a429a9e86606b763275570979148dc3",
+ "inputs": {
+  "feshbach_blocks_arb.py_git_blob": "22e6048ed1c74b500b6c8ad23a3f9a4a72d71d77",
+  "cvs_entries.py_git_blob": "d34e81c7b905bbcab1061e203ef937b1ad90ac32",
+  "schur_arb.py_git_blob": "60f44fee601c00677dbc2fd868baf583430f027b",
+  "v3_candidate_sha256": "721f1ce0066a6ff873514a58a841d2d0d33651d1bd68a6f40387b3d280cf4c16",
+  "v6_candidate_sha256": "ac0b4be3ece76fae67924a0293123ab1acff1d90ff0d840af08886055c0ab283",
+  "v6_zip_sha256": "4d5e3a0b98ec59b1ef8dbb06803be94c8c14066bf90b3236813bb965545413a8"
+ },
+ "v6_verdict": "PASS: no error; ball overlap 0 non-overlapping entries vs original for A11, G11, CB (k = 79, 199)",
+ "v6_bundle": {
+  "VERIFY_BUNDLE": "PASS 18/18",
+  "patch_source": "reproduces v6 sha256",
+  "verify_rank2_v6_exact_k_3_5_7_11": "PASS, equal to V6_RECEIPT executed_exact"
+ },
+ "files_sha256": {
+  "CvSPivotCongruenceV1.lean": "13bc82151614e170df6c1ab80247c88ddc38290daf61724e15349a1f53f4a17e",
+  "README.md": "89336a10e3f690e14d5de677ed1109beb01084b5dcc409c0999ccc1088477777",
+  "compare_blocks.py": "abe95e982190924c68f2a4c601e6c544c1ebee20612e0613d2c39b7c82b13b39",
+  "feshbach_blocks_arb_candidate_v7.py": "93949d45f3a7e054155f8a69a3ceef9592cb3d77fb5a0df029d488fe62e62dad",
+  "time_blocks.py": "01ae0362ffb521ba494516aea3e95bfddd0505bda6be344dbd4e599b8f1fbf08"
+ },
+ "lean": {
+  "module": "CvSPivotCongruenceV1.lean",
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "trust": "default",
+  "exit": 0,
+  "axioms": {
+   "congruence": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "gram_det_pos": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "perp_a": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "perp_b": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ],
+   "cb_eq": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+   ]
+  }
+ },
+ "runs": [
+  {
+   "run": "L1.2 certificate, v7",
+   "args": "1.2 100 10000",
+   "env": "TAIL_ORDER=1 TAIL_WEIGHTS=uniform RITZ=1",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "a6d95aab72efa3881f42a959a377e4808643b7687a01d8a3d26f873aaeff6dda",
+   "schur": [
+    "mu=5e-5: POSITIVE DEFINITE, min Cholesky pivot [0.0062166914822106431406259793324756391091215608057368 +/- 2.11e-53]  (||J|| <= 0)",
+    "mu=6e-5: FAILED at pivot 121: [-0.59162719541072237327173152842109350945592686 +/- 2.54e-45]  (||J|| <= 0)"
+   ],
+   "blocks_seconds": 23,
+   "c_inf": "1.92058314848",
+   "receipt_outcome": "mu 5e-5 PD, 6e-5 FAILED (L1.2/RECEIPT.json)"
+  },
+  {
+   "run": "L1.2 NP3000, orig",
+   "args": "1.2 100 3000",
+   "env": "TAIL_ORDER=1 TAIL_WEIGHTS=uniform",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "f5b659748119d2d0200e11472a7fd3fbbee81806d7bac37ab0e2839f3e1585e7",
+   "schur": [
+    "mu=1e-5: FAILED at pivot 101: [-0.05180285173034941214798104309808325507845161977 +/- 5.36e-48]  (||J|| <= [1.833988384993401054129129203282",
+    "mu=3e-5: FAILED at pivot 101: [-0.06144016297772375485887052937698066815784205930 +/- 3.32e-48]  (||J|| <= [1.834007483909572494007266910718",
+    "mu=4e-5: FAILED at pivot 101: [-0.06667970541821118734541033823024366789440045900 +/- 4.30e-48]  (||J|| <= [1.834017031819683163578376764784",
+    "mu=5e-5: FAILED at pivot 101: [-0.07223523227223087404352181876593745196979490071 +/- 4.64e-48]  (||J|| <= [1.834026582825743933885404618154"
+   ]
+  },
+  {
+   "run": "L1.2 NP3000, v3",
+   "args": "1.2 100 3000",
+   "env": "TAIL_ORDER=1 TAIL_WEIGHTS=uniform",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "4570cb3d86e80f51064dd82960416b71918ec860937ed82a79ad7d429b951ce4",
+   "schur": [
+    "mu=1e-5: FAILED at pivot 101: [-0.0518028517303494121479810430980832550784516197613 +/- 9.60e-50]  (||J|| <= 0)",
+    "mu=3e-5: FAILED at pivot 101: [-0.0614401629777237548588705293769806681578420592928 +/- 8.30e-50]  (||J|| <= 0)",
+    "mu=4e-5: FAILED at pivot 101: [-0.066679705418211187345410338230243667894400458991 +/- 5.18e-49]  (||J|| <= 0)",
+    "mu=5e-5: FAILED at pivot 101: [-0.0722352322722308740435218187659374519697949007030 +/- 9.69e-50]  (||J|| <= 0)"
+   ]
+  },
+  {
+   "run": "L1.2 NP3000, v6",
+   "args": "1.2 100 3000",
+   "env": "TAIL_ORDER=1 TAIL_WEIGHTS=uniform",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "e8ea189f8d969b9fb90287035874eea125251667e7d1f390ce8c98cb669e4a21",
+   "schur": [
+    "mu=1e-5: FAILED at pivot 101: [-0.0518028517303494121479810430980832550784516197613 +/- 9.60e-50]  (||J|| <= 0)",
+    "mu=3e-5: FAILED at pivot 101: [-0.0614401629777237548588705293769806681578420592928 +/- 8.30e-50]  (||J|| <= 0)",
+    "mu=4e-5: FAILED at pivot 101: [-0.066679705418211187345410338230243667894400458991 +/- 5.18e-49]  (||J|| <= 0)",
+    "mu=5e-5: FAILED at pivot 101: [-0.0722352322722308740435218187659374519697949007030 +/- 9.69e-50]  (||J|| <= 0)"
+   ]
+  },
+  {
+   "run": "L1.2 NP3000, v7",
+   "args": "1.2 100 3000",
+   "env": "TAIL_ORDER=1 TAIL_WEIGHTS=uniform RITZ=1",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "edf541526bf8f91ac415c161fff1905c806a6824473bf1649b29adc464d69cf2",
+   "schur": [
+    "mu=1e-5: FAILED at pivot 101: [-0.0518028517303494121479810430980832550784516197613 +/- 5.20e-50]  (||J|| <= 0)",
+    "mu=5e-5: FAILED at pivot 101: [-0.0722352322722308740435218187659374519697949007030 +/- 4.74e-50]  (||J|| <= 0)"
+   ],
+   "ball_comparison_vs_orig": [
+    "L identical [1.20000000000000000000000000000000000000000000000000000000 +/- 2.56e-58]",
+    "N identical 100",
+    "NP identical 3000",
+    "tail_order identical 1",
+    "tail_weights identical ['1/5', '1/5', '1/5', '1/5', '1/5']",
+    "K2 all overlap ['[2.469179768213902633103', '[2.469179768213902633103']",
+    "Amax all overlap ['[1.900792239834500825118', '[1.900792239834500825118']",
+    "Eco all overlap ['[0.000531542964015159768', '[0.000531542964015159768']",
+    "orig k=199 A11: nonoverlap=0 maxrad=5.10e-54 | G11: nonoverlap=0 maxrad=6.63e-56 | CB: nonoverlap=0 maxrad=6.45e-52",
+    "p12f k=199 A11: nonoverlap=0 maxrad=5.10e-54 | G11: nonoverlap=0 maxrad=7.62e-57 | CB: nonoverlap=0 maxrad=7.60e-55"
+   ]
+  },
+  {
+   "run": "L1.8 production, v7, float64 mixed weights",
+   "args": "1.8 400 16000",
+   "env": "TAIL_ORDER=8 TAIL_WEIGHTS=mixed RITZ=1",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "19dc7d70794b3e9a4f30c91e5da7af224b79d516fa1f0039a1b116b7d97d7a1f",
+   "schur": [
+    "mu=4e-17: POSITIVE DEFINITE, min Cholesky pivot [6.324231127083028840328785142337643266648699e-8 +/- 6.94e-51]  (||J|| <= 0)",
+    "mu=4.2e-17: FAILED at pivot 479: [-7.256739783328384 +/- 5.35e-16]  (||J|| <= 0)"
+   ],
+   "blocks_seconds": 222,
+   "schur_cap_MB": 1900,
+   "c_inf": "0.97991957971",
+   "schur_extra": [
+    "mu=4.1e-17: FAILED at pivot 572: [-4.46671729234925 +/- 1.34e-15]"
+   ],
+   "diagnostics": [
+    "ritz lam1 [4.53361503180e-17 +/- 4.33e-29] float64 eigh lam1 6.176535099644439e-16",
+    "C_B(u1) [3.07516375221e-18 +/- 1.74e-30]  lam1 - C_B(u1)/0.98 [4.2198228e-17 +/- 1.22e-25]",
+    "  part Rout [2.144055480e-18 +/- 3.04e-28]",
+    "  part Tail [9.311082406e-19 +/- 8.1e-31]",
+    "  part Eco*G11 [3.130944774e-26 +/- 3.74e-36]",
+    "  part inband_rank2 [1.974015427e-33 +/- 3.00e-43]"
+   ],
+   "receipt_outcome": "mu 4e-17 PD (min pivot 6.32121e-8), 4.2e-17 FAILED (L1.8/RECEIPT.json)"
+  },
+  {
+   "run": "L1.8 production, v7, mixed weights from the working-precision Ritz vector",
+   "args": "1.8 400 16000",
+   "env": "TAIL_ORDER=8 TAIL_WEIGHTS=mixed RITZ=weights",
+   "python_flint": "0.9.0",
+   "address_space_cap_MB": 1300,
+   "blocks_json_sha256": "ea7e1ab88d0938485cc32e49ffb78afc1ab3172713918c5b61bdca420f7c6e76",
+   "schur": [
+    "mu=4.2e-17: FAILED at pivot 407: [-0.00541575952593108215280918678 +/- 1.08e-30]  (||J|| <= 0)",
+    "mu=4.3e-17: FAILED at pivot 407: [-0.00541804055121968426367996348 +/- 1.66e-30]  (||J|| <= 0)"
+   ],
+   "blocks_seconds": 212,
+   "schur_cap_MB": 1900,
+   "c_inf": "0.97991957971",
+   "schur_extra": [
+    "mu=4.1e-17: FAILED at pivot 407: [-0.00541347886333839142328312232 +/- 3.37e-30]",
+    "mu=4e-17: FAILED at pivot 407: [-0.00541119856335430296788216038 +/- 4.71e-30]",
+    "mu=3e-17: FAILED at pivot 407: [-0.00538841548779856203106923522 +/- 5.32e-30]",
+    "mu=1e-17: FAILED at pivot 407: [-0.00534295774492258211379159031 +/- 4.83e-30]"
+   ],
+   "diagnostics": [
+    "ritz lam1 [4.53361503180e-17 +/- 4.33e-29] float64 eigh lam1 6.176535099644439e-16",
+    "C_B(u1) [2.55224226912e-18 +/- 4.34e-30]  lam1 - C_B(u1)/0.98 [4.2731821e-17 +/- 4.72e-25]",
+    "  part Rout [2.144055480e-18 +/- 3.04e-28]",
+    "  part Tail [4.081867575e-19 +/- 2.51e-29]",
+    "  part Eco*G11 [3.128755212e-26 +/- 4.93e-36]",
+    "  part inband_rank2 [1.974015427e-33 +/- 3.00e-43]"
+   ]
+  }
+ ],
+ "timing": {
+  "L1.8 N40 NP400 order8 uniform (flint 0.8.0), total s": {
+   "orig": 4.1,
+   "v3": 2.09,
+   "v6": 1.97,
+   "v7": 0.68
+  },
+  "L1.2 N100 NP3000 order1 uniform, total s": {
+   "orig": 25.9,
+   "v3": 20.7,
+   "v6": 21.7,
+   "v7": 7.0
+  },
+  "L1.8 N200 NP1000 order8 uniform, total s": {
+   "orig": 45.8,
+   "v6": 27.4,
+   "v7": 8.3
+  },
+  "L1.8 N200 v6 stages s": {
+   "rows": 15.71,
+   "RR": 2.93,
+   "Woodbury": 0.75,
+   "rank-two congruence": 0.29
+  },
+  "L1.8 N400 NP1000 order1 uniform, total s": {
+   "v6": "MemoryError at 1.3 GB after 46 s",
+   "v7": 20.4
+  }
+ },
+ "mu_ceiling_L1.8_N400": "lambda1 - Rout(u1)/c_inf = [4.31482e-17 +/- 4.10e-23] (this Schur certificate, N = 400, c_inf 0.97992; any NP, any valid tail bound)",
+ "rh_proven": false,
+ "status": "INTERVAL_CERTIFIED_NOT_LEAN for the block inequalities; lean_kernel (local) for the identities"
+}

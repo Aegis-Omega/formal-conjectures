@@ -1,0 +1,139 @@
+{
+  "schema": "AEGIS_WEIGHTED_SHAPE_ARITHMETIC_KERNEL_RECEIPT_V1",
+  "lean_version": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+  "source_commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "replays": [
+    {
+      "directory": "fresh_a",
+      "source_sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-DwarningAsError=true",
+        "-o",
+        "WeightedIndependentShapeArithmetic.olean",
+        "WeightedIndependentShapeArithmetic.lean"
+      ],
+      "compile_exit_code": 0,
+      "axiom_declarations": 7,
+      "axiom_audit": [
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.exact_row_ledger",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.positive_weights",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.all_eleven_weighted_rows",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.maximum_attained",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.exact_margin",
+          "axioms": []
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.positive_margin",
+          "axioms": []
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.improves_previous_weights",
+          "axioms": []
+        }
+      ],
+      "axioms_union": [
+        "propext"
+      ],
+      "leanchecker_command": [
+        "leanchecker",
+        "--fresh",
+        "-v",
+        "WeightedIndependentShapeArithmetic"
+      ],
+      "leanchecker_exit_code": 0,
+      "olean_sha256": "f1b2ced4c30671f85db2f46f4d32a9f426aa355803d76b3aff69347c73bdfba7"
+    },
+    {
+      "directory": "fresh_b",
+      "source_sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268",
+      "command": [
+        "lean",
+        "--trust=0",
+        "-DwarningAsError=true",
+        "-o",
+        "WeightedIndependentShapeArithmetic.olean",
+        "WeightedIndependentShapeArithmetic.lean"
+      ],
+      "compile_exit_code": 0,
+      "axiom_declarations": 7,
+      "axiom_audit": [
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.exact_row_ledger",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.positive_weights",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.all_eleven_weighted_rows",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.maximum_attained",
+          "axioms": [
+            "propext"
+          ]
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.exact_margin",
+          "axioms": []
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.positive_margin",
+          "axioms": []
+        },
+        {
+          "declaration": "AEGIS.WeightedIndependentShapeArithmetic.improves_previous_weights",
+          "axioms": []
+        }
+      ],
+      "axioms_union": [
+        "propext"
+      ],
+      "leanchecker_command": [
+        "leanchecker",
+        "--fresh",
+        "-v",
+        "WeightedIndependentShapeArithmetic"
+      ],
+      "leanchecker_exit_code": 0,
+      "olean_sha256": "f1b2ced4c30671f85db2f46f4d32a9f426aa355803d76b3aff69347c73bdfba7"
+    }
+  ],
+  "independent_agent": false,
+  "same_source_two_clean_compiles": true,
+  "proof_scope": "Integer row/margin facts only. No analytic Lean closure or RH proof is certified.",
+  "analytic_lean_replay": "NOT_RUN_MATHLIB_CLOSURE_UNAVAILABLE",
+  "rh_proven": false,
+  "initial_driver_failure": "An overly strict initial driver expected no logical axioms. Actual list-based arithmetic declarations use propext, which is permitted. The proof source was not changed; the axiom ledger now records it explicitly."
+}

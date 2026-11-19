@@ -16,6 +16,8 @@ limitations under the License.
 import RHFeshbachWeilClosureV2
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
 import AEGISOverlay.RHFourLogThreeWeightedRHBridgeV1
+import AEGISOverlay.RHGlobalPrimeArchFrontierV1
+import AEGISOverlay.RHPrimeFreeRecompositionJoinV1
 
 /-!
 Construction candidate on the existing certified narrow-window class.
@@ -121,9 +123,126 @@ theorem riemannHypothesis_of_actual_global_signed_weil
     RiemannHypothesis := by
   exact actual_global_signed_weil_iff_RiemannHypothesis.mp hcert
 
+/-- The global signed Weil budget and the original prime/Arch domination
+are equivalent proof obligations on the same class of moment-zero packets.
+Neither direction manufactures an unconditional certificate. -/
+theorem actual_global_signed_weil_iff_prime_arch :
+    ActualGlobalSignedWeilBudget ↔
+      AEGIS.RHGlobalPrimeArchFrontierV1.GlobalPrimeArchDomination := by
+  constructor
+  · intro hbudget
+    apply AEGIS.RHGlobalPrimeArchFrontierV1.global_prime_arch_iff_universal.mpr
+    exact AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13
+      (actual_global_signed_weil_iff_RiemannHypothesis.mp hbudget)
+  · intro hglobal
+    apply actual_global_signed_weil_iff_RiemannHypothesis.mpr
+    exact AEGIS.RHGlobalPrimeArchFrontierV1.riemannHypothesis_of_global_prime_arch
+      hglobal
+
+/-- Same global proof obligation expressed in the Mathlib-facing Weil
+quadratic language. This is an equivalence, not a proof of either side. -/
+theorem actual_global_signed_weil_iff_universal :
+    ActualGlobalSignedWeilBudget ↔
+      AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10 :=
+  actual_global_signed_weil_iff_prime_arch.trans
+    AEGIS.RHGlobalPrimeArchFrontierV1.global_prime_arch_iff_universal
+
+
+/-- A source-specific finite decomposition with the actual off-diagonal
+Weil defect bounded by its already certified diagonal energy reserve.
+This is a remaining analytic hypothesis, not a supplied certificate. -/
+def SelectedActualFineMixedBudget : Prop :=
+  ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1),
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+        (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1)
+
+/-- Non-circular IF -> THEN: summing the actual diagonal reserves turns a
+selected fine mixed budget into the canonical signed budget. No RH premise. -/
+theorem actual_global_signed_weil_of_selected_actual_fine_mixed_budget
+    (hcert : SelectedActualFineMixedBudget) :
+    ActualGlobalSignedWeilBudget := by
+  intro g hm
+  obtain ⟨n, gs, hpacket, hd, hmixed⟩ := hcert g hm
+  refine ⟨n, gs, hpacket, ?_⟩
+  have hs :
+      (∑ i, (5671 / 3200 : ℝ) * energy (gs i).1) ≤
+        ∑ i, -(B (gs i) (gs i)).re :=
+    Finset.sum_le_sum (fun i _ => hd i)
+  have hdiag :
+      (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) ≤
+        -(∑ i, (B (gs i) (gs i)).re) := by
+    rw [Finset.mul_sum]
+    simpa only [Finset.sum_neg_distrib] using hs
+  exact hmixed.trans hdiag
+
+/-- Terminal implication with an explicit, source-bound input.
+The selected fine budget must be produced independently. -/
+theorem riemannHypothesis_of_selected_actual_fine_mixed_budget
+    (hcert : SelectedActualFineMixedBudget) :
+    RiemannHypothesis :=
+  riemannHypothesis_of_actual_global_signed_weil
+    (actual_global_signed_weil_of_selected_actual_fine_mixed_budget hcert)
+
+
+/-- The source-specific resonant-row producer from the canonical
+prime-free recomposition lane. Each input may select its own partition.
+The resonant bounds and row budgets must be supplied independently. -/
+def UniversalActualResonanceRowCertificate : Prop :=
+  ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+    ∃ (n : ℕ) (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+      (center : Fin (n + 1) → ℝ),
+      (∀ i, WeilMomentConditionsV1 (gs i)) ∧
+      (∀ i, (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (gs i) (gs i)).re) ∧
+      (∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+        (gs i) (center i)) ∧
+      g = packetSum (fun _ => (1 : ℂ)) gs ∧
+      ∃ residual : Fin (n + 1) → Fin (n + 1) → ℝ,
+        (∀ i j, residual i j = residual j i) ∧
+        (∀ i j, i ≠ j →
+          ¬ AEGIS.RHPrimeFreeRecompositionJoinV1.FineLogFreeGap
+            |center j - center i| →
+          (B (gs i) (gs j)).re ≤
+            residual i j * (energy (gs i).1 + energy (gs j).1)) ∧
+        (∀ i, (∑ j ∈
+          (Finset.univ : Finset (Fin (n + 1))).erase i,
+            AEGIS.RHPrimeFreeRecompositionJoinV1.combinedFineCost
+              center residual i j) ≤
+            (57430 / 65536 : ℝ))
+
+/-- Independent resonant-row estimates imply the selected actual fine budget
+through genuine Weil entries and a checked rational row margin. -/
+theorem selected_actual_fine_mixed_budget_of_resonance_rows
+    (hcert : UniversalActualResonanceRowCertificate) :
+    SelectedActualFineMixedBudget := by
+  intro g hm
+  obtain ⟨n, gs, center, hmom, hdiag, hwidth, hpacket, residual,
+    hsym, hres, hrow⟩ := hcert g hm
+  refine ⟨n, gs, hpacket, hdiag, ?_⟩
+  exact AEGIS.RHPrimeFreeRecompositionJoinV1.actual_fine_mixed_budget_of_resonance_row
+    gs center hmom hwidth residual hsym hres hrow
+
+/-- Full non-circular conditional chain from resonant rows through the actual
+signed mixed budget to the canonical Mathlib RH target. -/
+theorem riemannHypothesis_of_resonance_rows_via_signed_budget
+    (hcert : UniversalActualResonanceRowCertificate) :
+    RiemannHypothesis :=
+  riemannHypothesis_of_selected_actual_fine_mixed_budget
+    (selected_actual_fine_mixed_budget_of_resonance_rows hcert)
+
 end AEGIS.RHAssemblyV1
 
 #print axioms AEGIS.RHAssemblyV1.narrow_window_schur_family
 #print axioms AEGIS.RHAssemblyV1.narrow_window_schur_norm_family
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_RiemannHypothesis
 #print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_actual_global_signed_weil
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_prime_arch
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal
+#print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHAssemblyV1.selected_actual_fine_mixed_budget_of_resonance_rows
+#print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_resonance_rows_via_signed_budget

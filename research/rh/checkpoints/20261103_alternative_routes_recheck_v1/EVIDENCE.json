@@ -1,0 +1,16 @@
+{
+  "schema": "AEGIS_ALTERNATIVE_ROUTE_RECHECK_V1",
+  "rh_proven": false,
+  "final_theorem": null,
+  "novelty": "NOT_CLAIMED",
+  "prior_coverage": "USER_REPORTS_REPEATED_COVERAGE; FULL_SEMANTIC_DEDUPLICATION_NOT_COMPLETED",
+  "schur_is_universal_bottleneck": false,
+  "existing_Li_Hadamard_theorems": "SOURCE_READ_AND_REUSED; NO_FRESH_FULL_PROVIDER_REPLAY",
+  "exact_polynomial_counterexample": "TWO_EXACT_RATIONAL_IMPLEMENTATIONS_AGREE",
+  "integer_kernel_endpoints": 3,
+  "integer_axioms": [],
+  "analytic_identifications_kernel_verified": false,
+  "positive_Mellin_and_Euler_manuscripts": "WRITTEN_ARGUMENTS; INDEPENDENT_ANALYTIC_REVIEW_NOT_RUN",
+  "Suzuki_source_composition": "NEXT_FOCUS; NOT_COMPLETED_HERE",
+  "background_work_promised": false
+}

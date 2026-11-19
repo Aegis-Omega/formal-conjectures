@@ -1,0 +1,38 @@
+# python3 kappa.py 4 3 NP 13   (float model, NP = 150, 200, 250)
+NP=150
+Q_CvS eig min 3.913e-04 max 4.714e+10
+rows only kappa 21.28
+NP=150 TF=13.0 eps=0.5 kappa 70.25 -> gap needed 1.3346
+NP=150 TF=13.0 eps=0.7 kappa 58.41 -> gap needed 1.1096
+NP=150 TF=13.0 eps=1 kappa 57.02 -> gap needed 1.0833
+NP=150 TF=13.0 eps=1.4 kappa 64.14 -> gap needed 1.2186
+NP=150 TF=13.0 eps=2 kappa 74.96 -> gap needed 1.4240
+NP=200
+Q_CvS eig min 3.913e-04 max 4.714e+10
+rows only kappa 24.66
+NP=200 TF=13.0 eps=0.5 kappa 55.74 -> gap needed 1.0590
+NP=200 TF=13.0 eps=0.7 kappa 47.19 -> gap needed 0.8965
+NP=200 TF=13.0 eps=1 kappa 51.14 -> gap needed 0.9715
+NP=200 TF=13.0 eps=1.4 kappa 56.47 -> gap needed 1.0728
+NP=200 TF=13.0 eps=2 kappa 64.54 -> gap needed 1.2261
+NP=250
+Q_CvS eig min 3.913e-04 max 4.714e+10
+rows only kappa 26.84
+NP=250 TF=13.0 eps=0.5 kappa 47.16 -> gap needed 0.8960
+NP=250 TF=13.0 eps=0.7 kappa 44.74 -> gap needed 0.8500
+NP=250 TF=13.0 eps=1 kappa 47.91 -> gap needed 0.9101
+NP=250 TF=13.0 eps=1.4 kappa 52.17 -> gap needed 0.9911
+NP=250 TF=13.0 eps=2 kappa 58.60 -> gap needed 1.1132
+
+# python3 validate_rows_gram_lt.py 4/3 200 7/10 48 0.0000003
+LT = 4/3: max |tau_k| for 70 < k <= NP: 11.869
+rows: 260 outside, built B_rows
+Gram tail built: |G|_1 = 1.4901e+00, tau box radius rho <= 1.000e-25
+pivot 83 <= 0: -261618252.9
+RESULT: FAIL
+
+# python3 validate_rows_gram_lt.py 4/3 200 EPS KAPPA DG
+eps=7/10 kappa=48 dG=0: all 139 LDL pivots > 0; min pivot 4.20207, max pivot 1.0212e+12 RESULT: PASS  NP = 200  eps = 7/10  kappa* = 48  robust |dG| <= 0.0  ->  needs Schur gap >= 0.911891 
+eps=7/10 kappa=52 dG=0.0000003: all 139 LDL pivots > 0; min pivot 4.76643, max pivot 1.10703e+12 RESULT: PASS  NP = 200  eps = 7/10  kappa* = 52  robust |dG| <= 3e-07  ->  needs Schur gap >= 0.987882 
+eps=7/10 kappa=54 dG=0.0000003: all 139 LDL pivots > 0; min pivot 5.11546, max pivot 1.15e+12 RESULT: PASS  NP = 200  eps = 7/10  kappa* = 54  robust |dG| <= 3e-07  ->  needs Schur gap >= 1.02588 
+eps=1/2 kappa=54 dG=0.0000003: pivot 74 <= 0: -15780.65672 RESULT: FAIL

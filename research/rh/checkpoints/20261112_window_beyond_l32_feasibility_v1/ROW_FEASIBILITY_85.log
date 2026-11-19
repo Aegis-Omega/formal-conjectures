@@ -1,0 +1,126 @@
+# gen_rr_k.py (exact mirror, ../20261110_window_l32_feasibility_v1/make_gen_rr_k.py applied to ../20261031_window_l118/gen_rr_lt.py).
+# Arguments: LT NP EPS KAPPA RHO_LOW RHO_HIGH RHO_DIAG KK TF SLACK_EXP. Last two lines of each run.
+
+## rr_1000_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.24e-14 epsT 1.00e-22 K' 8.7467e-11  max|tau|>70 13.45
+LT 8/5 NP 1000 eps 1 kappa 66: scaled lambda_min -6.20457e-9  lambda_max 6.83651  (88s)
+
+## rr_1000_2_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.24e-14 epsT 1.51e-22 K' 9.5417e-11  max|tau|>70 13.45
+LT 8/5 NP 1000 eps 2 kappa 72: scaled lambda_min -7.16996e-9  lambda_max 6.16141  (84s)
+
+## rr_1000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.24e-14 epsT 1.20e-22 K' 9.5417e-11  max|tau|>70 13.45
+LT 8/5 NP 1000 eps 7/5 kappa 72: scaled lambda_min -3.97876e-9  lambda_max 6.15956  (82s)
+
+## rr_1200_1_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.28e-14 epsT 8.11e-23 K' 9.5418e-11  max|tau|>70 13.45
+LT 8/5 NP 1200 eps 1 kappa 72: scaled lambda_min -2.6076e-9  lambda_max 6.15972  (83s)
+
+## rr_1500_1_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.32e-14 epsT 6.29e-23 K' 9.5418e-11  max|tau|>70 13.45
+LT 8/5 NP 1500 eps 1 kappa 72: scaled lambda_min -1.28656e-9  lambda_max 6.16235  (83s)
+
+## rr_900_1_60.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.22e-14 epsT 1.14e-22 K' 7.9516e-11  max|tau|>70 13.45
+LT 8/5 NP 900 eps 1 kappa 60: scaled lambda_min -1.42749e-8  lambda_max 6.165  (85s)
+
+## rr_900_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.22e-14 epsT 1.14e-22 K' 8.7467e-11  max|tau|>70 13.45
+LT 8/5 NP 900 eps 1 kappa 66: scaled lambda_min -8.55472e-9  lambda_max 6.83247  (84s)
+
+## rr_900_1_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.22e-14 epsT 1.14e-22 K' 9.5417e-11  max|tau|>70 13.45
+LT 8/5 NP 900 eps 1 kappa 72: scaled lambda_min -6.31304e-9  lambda_max 6.15536  (86s)
+
+## rr_K160_1500_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.32e-14 epsT 7.55e-23 K' 9.5418e-11  max|tau|>70 13.45
+LT 8/5 NP 1500 eps 7/5 kappa 72: scaled lambda_min -1.10854e-9  lambda_max 6.16399  (84s)
+
+## rr_K160_1500_7_5_74.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.32e-14 epsT 7.55e-23 K' 9.8068e-11  max|tau|>70 13.45
+LT 8/5 NP 1500 eps 7/5 kappa 74: scaled lambda_min -1.08068e-9  lambda_max 5.04315  (83s)
+
+## rr_K160_2000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.38e-14 epsT 5.50e-23 K' 9.5419e-11  max|tau|>70 13.45
+LT 8/5 NP 2000 eps 7/5 kappa 72: scaled lambda_min -4.08545e-10  lambda_max 6.1662  (86s)
+
+## rr_K160_3000_2_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.45e-14 epsT 4.45e-23 K' 9.5419e-11  max|tau|>70 13.45
+LT 8/5 NP 3000 eps 2 kappa 72: scaled lambda_min -3.2186e-11  lambda_max 6.16904  (90s)
+
+## rr_K160_3000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.45e-14 epsT 3.56e-23 K' 9.5419e-11  max|tau|>70 13.45
+LT 8/5 NP 3000 eps 7/5 kappa 72: scaled lambda_min -4.8082e-11  lambda_max 6.16842  (87s)
+
+## rr_K160_4000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.50e-14 epsT 2.64e-23 K' 9.5420e-11  max|tau|>70 13.45
+LT 8/5 NP 4000 eps 7/5 kappa 72: scaled lambda_min 4.01434e-11  lambda_max 6.16953  (93s)
+
+## rr_K175_1000_1_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.340e-12 epsIn 1.00e-15 epsOut 1.36e-14 epsT 1.12e-22 K' 9.6467e-11  max|tau|>70 13.45
+LT 8/5 NP 1000 eps 1 kappa 72: scaled lambda_min -4.57383e-9  lambda_max 6.15792  (105s)
+
+## rr_K175_2000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.340e-12 epsIn 1.00e-15 epsOut 1.51e-14 epsT 6.06e-23 K' 9.6468e-11  max|tau|>70 13.45
+LT 8/5 NP 2000 eps 7/5 kappa 72: scaled lambda_min -4.06509e-10  lambda_max 6.16703  (111s)
+
+## rr_L25_16_K156_T15_900_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.01e-13 RE 1.298e-12 epsIn 1.00e-15 epsOut 1.14e-14 epsT 1.05e-22 K' 8.5657e-11  max|tau|>70 13.43
+LT 25/16 NP 900 eps 1 kappa 66: scaled lambda_min -4.9723e-9  lambda_max 5.6451  (78s)
+
+## rr_L31_20_K156_T15_1200_7_5_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.292e-12 epsIn 1.00e-15 epsOut 1.17e-14 epsT 8.87e-23 K' 8.5302e-11  max|tau|>70 13.46
+LT 31/20 NP 1200 eps 7/5 kappa 66: scaled lambda_min -5.14216e-10  lambda_max 5.42816  (78s)
+
+## rr_L31_20_K156_T15_2000_7_5_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.292e-12 epsIn 1.00e-15 epsOut 1.26e-14 epsT 5.02e-23 K' 8.5303e-11  max|tau|>70 13.46
+LT 31/20 NP 2000 eps 7/5 kappa 66: scaled lambda_min 6.8165e-10  lambda_max 5.43823  (85s)
+
+## rr_L31_20_K156_T15_900_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.292e-12 epsIn 1.00e-15 epsOut 1.12e-14 epsT 1.04e-22 K' 8.5301e-11  max|tau|>70 13.43
+LT 31/20 NP 900 eps 1 kappa 66: scaled lambda_min -3.14097e-9  lambda_max 5.4136  (79s)
+
+## rr_L3_2_K156_T15_900_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.264e-12 epsIn 1.00e-15 epsOut 1.05e-14 epsT 9.71e-23 K' 8.3408e-11  max|tau|>70 13.43
+LT 3/2 NP 900 eps 1 kappa 66: scaled lambda_min 8.87543e-9  lambda_max 5.72786  (78s)
+
+## rr_L49_32_K156_T15_1200_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.281e-12 epsIn 1.00e-15 epsOut 1.14e-14 epsT 7.21e-23 K' 8.4591e-11  max|tau|>70 13.48
+LT 49/32 NP 1200 eps 1 kappa 66: scaled lambda_min 1.39162e-9  lambda_max 5.74427  (81s)
+
+## rr_L49_32_K156_T15_1200_7_5_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.281e-12 epsIn 1.00e-15 epsOut 1.14e-14 epsT 8.66e-23 K' 8.4591e-11  max|tau|>70 13.48
+LT 49/32 NP 1200 eps 7/5 kappa 66: scaled lambda_min 1.74145e-9  lambda_max 5.748  (77s)
+
+## rr_L49_32_K156_T15_1200_7_5_70.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.281e-12 epsIn 1.00e-15 epsOut 1.14e-14 epsT 8.66e-23 K' 8.9717e-11  max|tau|>70 13.48
+LT 49/32 NP 1200 eps 7/5 kappa 70: scaled lambda_min 2.00625e-9  lambda_max 6.11482  (78s)
+
+## rr_L49_32_K156_T15_1500_7_5_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.281e-12 epsIn 1.00e-15 epsOut 1.18e-14 epsT 6.72e-23 K' 8.4592e-11  max|tau|>70 13.48
+LT 49/32 NP 1500 eps 7/5 kappa 66: scaled lambda_min 2.74718e-9  lambda_max 5.75202  (84s)
+
+## rr_L49_32_K156_T15_900_1_66.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.281e-12 epsIn 1.00e-15 epsOut 1.09e-14 epsT 1.01e-22 K' 8.4591e-11  max|tau|>70 13.48
+LT 49/32 NP 900 eps 1 kappa 66: scaled lambda_min -1.82727e-9  lambda_max 5.73634  (77s)
+
+## rr_L8_5_K160_T14_2000_7_5_72.log
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.325e-12 epsIn 1.00e-15 epsOut 1.38e-14 epsT 5.50e-23 K' 9.5419e-11  max|tau|>70 13.45
+LT 8/5 NP 2000 eps 7/5 kappa 72: scaled lambda_min -3.46061e-10  lambda_max 6.16716  (88s)
+
+## rrb_L49_32_1200_7_5_70.log
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.274e-10 epsIn 1.01e-13 epsOut 1.36e-12 epsT 8.57e-19 K' 8.9166e-09  max|tau|>70 13.48
+LT 49/32 NP 1200 eps 7/5 kappa 70: scaled lambda_min 1.25583e-10  lambda_max 6.11482  (82s)
+
+## rrb_L49_32_1500_7_5_66.log
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.274e-10 epsIn 1.01e-13 epsOut 1.40e-12 epsT 6.65e-19 K' 8.4072e-09  max|tau|>70 13.48
+LT 49/32 NP 1500 eps 7/5 kappa 66: scaled lambda_min 9.7403e-10  lambda_max 5.75202  (84s)
+
+## rrb_L49_32_2000_7_5_66.log
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.274e-10 epsIn 1.01e-13 epsOut 1.46e-12 epsT 4.85e-19 K' 8.4073e-09  max|tau|>70 13.48
+LT 49/32 NP 2000 eps 7/5 kappa 66: scaled lambda_min 1.59997e-9  lambda_max 5.75606  (84s)
+
+## rrb_L49_32_2000_7_5_70.log
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.274e-10 epsIn 1.01e-13 epsOut 1.46e-12 epsT 4.85e-19 K' 8.9167e-09  max|tau|>70 13.48
+LT 49/32 NP 2000 eps 7/5 kappa 70: scaled lambda_min 1.7532e-9  lambda_max 6.12289  (84s)

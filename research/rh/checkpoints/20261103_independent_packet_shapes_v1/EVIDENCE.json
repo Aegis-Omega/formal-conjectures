@@ -1,0 +1,28 @@
+{
+  "schema": "AEGIS_INDEPENDENT_PACKET_SHAPES_COMPOSITION_V1",
+  "rh_proven": false,
+  "new_RH_equivalence": false,
+  "novelty": "NOT_CLAIMED",
+  "mathematical_result": {
+    "statement": "For arbitrary eleven independently shaped legal common-fine-window mothers h_i and arbitrary complex z_i: -Re B(sum z_i T_i h_i,sum z_i T_i h_i) >= (2339/118400) sum |z_i|^2 E(h_i), T_i=T_(i log(33/16)).",
+    "status": "ORDINARY_PROOF_COMPOSED_FROM_RECOVERED_SOURCE_THEOREMS",
+    "analytic_inputs": "existing source uniform same-mother bounds, diagonal bound, sesquilinearity, translation isometry and exact finite Gram expansion",
+    "fresh_transitive_analytic_replay": false,
+    "independent_person_review": "NOT_RUN",
+    "lean_port": "PENDING"
+  },
+  "algebra_replay": "SYMBOLIC_EXACT_IDENTITIES_AND_RATIONAL_CONSTANTS_ONLY",
+  "attempted_global_composition": {
+    "input": "existing exact arbitrary-packet legal localization",
+    "output": "arbitrary centers do not meet the eleven-lattice geometry",
+    "universal_eleven_reconstruction": "FALSIFIED_BY_LEGAL_H_CONSTANT_ON_UNIT_INTERVAL_AND_TOTAL_WINDOW_MEASURE_11_OVER_128",
+    "other_reconstructions_not_excluded": true
+  },
+  "proof_search_scope": {
+    "sources": "recovered 941-tip index and selected source bodies, plus preserved earlier checkpoints",
+    "whole_corpus_semantic_review": false,
+    "unreviewed_old_proofs_not_excluded": true
+  },
+  "canonical_final_RH_theorem": null,
+  "source_parent_commit": "a0fcbf2dabc5658f3f4af34a020024f12a0ee6c8"
+}

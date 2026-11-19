@@ -1,0 +1,110 @@
+{
+  "rh_proven": false,
+  "audit_level": "source body review, not Lean kernel replay",
+  "history_scope": {
+    "lean_bodies": 804,
+    "distinct_paths": 291,
+    "manifest": "/workspace/aegis-nov3-history-intake/HISTORY_INTAKE_MANIFEST.json"
+  },
+  "argument_sources": [
+    {
+      "repository": "formal-conjectures",
+      "blob": "14b9403acf5e6c64e4a3da9f80cbe972db949e9c",
+      "path": "AEGISOverlay/RHFourLogThreeActualPrimeV1.lean",
+      "bytes": 31202,
+      "sha256": "3ee39272078ad4f5a158d279a2f3aae714d9fe96595d854b0a18f365224f8dc9",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/14b9403acf5e6c64e4a3da9f80cbe972db949e9c.lean",
+      "sha256_rechecked": "3ee39272078ad4f5a158d279a2f3aae714d9fe96595d854b0a18f365224f8dc9"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "edb1e53d381897a5458792c3c20f1954384d54da",
+      "path": "AEGISOverlay/RHBaguaRotatingTwoPairMellinV1.lean",
+      "bytes": 17214,
+      "sha256": "5933ba3926b02de8ef2030b4a7c7e84200dbf9e3af91e0555fc89410ddcb6b71",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/edb1e53d381897a5458792c3c20f1954384d54da.lean",
+      "sha256_rechecked": "5933ba3926b02de8ef2030b4a7c7e84200dbf9e3af91e0555fc89410ddcb6b71"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "b333aacb298fd1908e946b608d4e17d9cb4cca60",
+      "path": "AEGISOverlay/RHKreinMultiplicativeTransportV1.lean",
+      "bytes": 15661,
+      "sha256": "ef3ccdd18b09c74cc0cb5f263c4a69bd84e50a838c13cfb920c68c6fb2190a88",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/b333aacb298fd1908e946b608d4e17d9cb4cca60.lean",
+      "sha256_rechecked": "ef3ccdd18b09c74cc0cb5f263c4a69bd84e50a838c13cfb920c68c6fb2190a88"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "1a5cb42b8a37f037ac0eeb1cd281653b0dbf0f37",
+      "path": "AEGISOverlay/RHLocalKreinPartitionV1.lean",
+      "bytes": 15977,
+      "sha256": "02bdc0cdaf94d840dbc3c1a110d95f340eb3efab7a45e80a9f8a267414ca94d9",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/1a5cb42b8a37f037ac0eeb1cd281653b0dbf0f37.lean",
+      "sha256_rechecked": "02bdc0cdaf94d840dbc3c1a110d95f340eb3efab7a45e80a9f8a267414ca94d9"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "65f36e375b7745bda76e7679c78771fb9f080e0c",
+      "path": "AEGISOverlay/RHLogThreeSignedPrimeProducerV1.lean",
+      "bytes": 7149,
+      "sha256": "fc739a9a44378110ce43cbbb5402eb110fb36c4e687a5d5e6a59580a912becb7",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/65f36e375b7745bda76e7679c78771fb9f080e0c.lean",
+      "sha256_rechecked": "fc739a9a44378110ce43cbbb5402eb110fb36c4e687a5d5e6a59580a912becb7"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "65d2163724a5ac23d4aed62c33ea7bebc8670034",
+      "path": "AEGISOverlay/RHPrimeFreeRecompositionJoinV1.lean",
+      "bytes": 13746,
+      "sha256": "fbbc9014a60d855ac20d26c10f3332d05fc2242658085d2e811f0e75ed2a8dd3",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/65d2163724a5ac23d4aed62c33ea7bebc8670034.lean",
+      "sha256_rechecked": "fbbc9014a60d855ac20d26c10f3332d05fc2242658085d2e811f0e75ed2a8dd3"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "a2ee122a68a934933158c018bd13aacbea4bcc3b",
+      "path": "AEGISOverlay/RHL43ActualWeightedGramV1.lean",
+      "bytes": 8652,
+      "sha256": "f08b39f238e0cf795c3223277fdab31b4c956be2be8dafbd665d46b6b50c7463",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/a2ee122a68a934933158c018bd13aacbea4bcc3b.lean",
+      "sha256_rechecked": "f08b39f238e0cf795c3223277fdab31b4c956be2be8dafbd665d46b6b50c7463"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "14795b07bbe8710caf80d99a4bce3bb6bf8932dc",
+      "path": "AEGISOverlay/RHCofinalSchurAdapterV1.lean",
+      "bytes": 9296,
+      "sha256": "88be6045517ccfbeee514e66319132ee4be6c670832ba53a105929c44dc12ebf",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/14795b07bbe8710caf80d99a4bce3bb6bf8932dc.lean",
+      "sha256_rechecked": "88be6045517ccfbeee514e66319132ee4be6c670832ba53a105929c44dc12ebf"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "674022d86e855cca0d2b52ae9932555f66537296",
+      "path": "AEGISOverlay/RHFeshbachScaledWeilV1.lean",
+      "bytes": 4197,
+      "sha256": "159786e7a18e8a00bca2e6f44087e3b9f65761a0cdc1dc6ffa3983063cb71c21",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/674022d86e855cca0d2b52ae9932555f66537296.lean",
+      "sha256_rechecked": "159786e7a18e8a00bca2e6f44087e3b9f65761a0cdc1dc6ffa3983063cb71c21"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "665722f84a710f1453dc75fdf10b519db6fe22f0",
+      "path": "AEGIS_RH_CvS_Cofinal_ActualWeil_JoinV1.lean",
+      "bytes": 12583,
+      "sha256": "28c329e0115f4726ef60a05298013d53c60118d9a1080bae88a6f3f221e9126f",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/665722f84a710f1453dc75fdf10b519db6fe22f0.lean",
+      "sha256_rechecked": "28c329e0115f4726ef60a05298013d53c60118d9a1080bae88a6f3f221e9126f"
+    },
+    {
+      "repository": "formal-conjectures",
+      "blob": "804b71f3f7a226173533088ca42ea95eee429b43",
+      "path": "AegisRH/PR606/RHRestrictedWeilCriterionV13.lean",
+      "bytes": 2385,
+      "sha256": "4de80f9a688b8ffef510f29e5146c232e4a3f9c0cddcb024d469cf4ae2dd02f5",
+      "local_file": "/workspace/aegis-nov3-history-intake/source/804b71f3f7a226173533088ca42ea95eee429b43.lean",
+      "sha256_rechecked": "4de80f9a688b8ffef510f29e5146c232e4a3f9c0cddcb024d469cf4ae2dd02f5"
+    }
+  ]
+}

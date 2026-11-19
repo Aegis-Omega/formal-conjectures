@@ -699,7 +699,7 @@ jobs:
           set -euo pipefail
           mkdir -p evidence-fusion .lake/build/lib/lean/FormalConjecturesUtil
           # Rebound without editing the exact PR7 mathematical source.
-          test "$(git hash-object FormalConjecturesUtil/FixedWindowLimitBridge.lean)" = d0e7cf92dabcfa8e1a7559284d66df79617551f4
+          test "$(git hash-object FormalConjecturesUtil/FixedWindowLimitBridge.lean)" = 42fe61ac6d2699eda9f01df3c1a5a8fde22207bc
           test "$(git hash-object research/rh/krein_ring_v1/RHFeshbachCoreV1.lean)" = 621f2b2815843663da7c73dcbfcc7b69cf8e2ddb
           lake env lean -o .lake/build/lib/lean/FormalConjecturesUtil/FixedWindowLimitBridge.olean FormalConjecturesUtil/FixedWindowLimitBridge.lean 2>&1 | tee evidence-fusion/FixedWindowLimitBridge.log
           cp research/rh/krein_ring_v1/RHFeshbachCoreV1.lean RHFeshbachCoreV1.lean

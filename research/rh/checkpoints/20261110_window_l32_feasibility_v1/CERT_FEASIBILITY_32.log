@@ -1,0 +1,29 @@
+# gen_rr_k.py, exact mirror. Arguments: LT NP EPS KAPPA RHO_LOW RHO_HIGH RHO_DIAG KK TF SLACK_EXP
+# calibration on the proved window (11/8 250 7/10 58 1e-8 1e-7 8.5e-9 70 13)
+-- rho 1.00e-08 rhoH 1.00e-07 rhoD 8.50e-09 RE 2.197e-08 epsIn 3.91e-11 epsOut 1.51e-08 epsT 5.11e-14 K' 1.2892e-06  max|tau|>70 11.90
+LT 11/8 NP 250 eps 7/10 kappa 58: scaled lambda_min 4.98641e-7  lambda_max 4.08369  (8s)
+
+# window 3/2, KK = 150, TF = 14, boxes 5e-11 5e-10 4e-11, default slack
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.250e-10 epsIn 1.00e-12 epsOut 1.07e-12 epsT 1.47e-18 K' 7.0011e-09  max|tau|>70 13.29
+LT 3/2 NP 500 eps 1/2 kappa 56: scaled lambda_min -4.43148e-8  lambda_max 5.79304  (63s)
+-- rho 5.00e-11 rhoH 5.00e-10 rhoD 4.00e-11 RE 1.250e-10 epsIn 1.00e-12 epsOut 1.07e-12 epsT 1.47e-18 K' 7.5010e-09  max|tau|>70 13.29
+LT 3/2 NP 500 eps 1/2 kappa 60: scaled lambda_min -4.15699e-8  lambda_max 6.24599  (61s)
+
+# window 3/2, KK = 150, TF = 14, boxes 5e-13 5e-11 4e-13, SLACK_EXP = 15
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.258e-12 epsIn 1.00e-15 epsOut 9.03e-15 epsT 1.49e-22 K' 7.0436e-11  max|tau|>70 13.29
+LT 3/2 NP 500 eps 1/2 kappa 56: scaled lambda_min -4.24376e-8  lambda_max 5.79304  (63s)
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.258e-12 epsIn 1.00e-15 epsOut 9.03e-15 epsT 1.49e-22 K' 7.5466e-11  max|tau|>70 13.29
+LT 3/2 NP 500 eps 1/2 kappa 60: scaled lambda_min -3.95529e-8  lambda_max 6.24599  (63s)
+-- rho 5.03e-13 rhoH 5.00e-11 rhoD 4.03e-13 RE 1.258e-12 epsIn 1.00e-15 epsOut 9.03e-15 epsT 1.49e-22 K' 8.0497e-11  max|tau|>70 13.29
+LT 3/2 NP 500 eps 1/2 kappa 64: scaled lambda_min -3.72378e-8  lambda_max 6.69622  (64s)
+LT 3/2 NP 500 eps 7/10 kappa 60: scaled lambda_min -2.72052e-8  lambda_max 6.27933  (63s)
+LT 3/2 NP 500 eps 1 kappa 60: scaled lambda_min -1.8943e-8  lambda_max 6.30454  (62s)
+LT 3/2 NP 700 eps 7/10 kappa 60: scaled lambda_min 1.83789e-10  lambda_max 6.31689  (65s)
+LT 3/2 NP 900 eps 1 kappa 60: scaled lambda_min 1.01772e-8  lambda_max 6.35211  (64s)
+LT 3/2 NP 1000 eps 1 kappa 62: scaled lambda_min 9.96358e-9  lambda_max 5.3704  (65s)
+LT 3/2 NP 1000 eps 7/5 kappa 62: scaled lambda_min 1.05581e-8  lambda_max 5.37388  (65s)
+
+# cert43.py on the last matrix (3/2 1000 7/5 62), after rescale_pkl.py
+exponents -13 4 shift 4
+-- q 80  eps 6381974865710755  eta 109437308285859  ok True  B bits 41  base 2^101  (82.5s)
+-- q 88  eps 1633785565621953385  eta 1778791743601083  ok True  B bits 45  base 2^109  (81.1s)

@@ -1,0 +1,36 @@
+{
+  "primary_sources": [
+    {
+      "source": "Masatoshi Suzuki",
+      "url": "https://export.arxiv.org/pdf/2206.03682v4.pdf",
+      "bytes": 433447,
+      "sha256": "eabccec3c2bfee2eb12077181b564e508270f80698f4a8c64ccf105b30119f41",
+      "sections_read_and_used": [
+        "Theorem 1.1(1),(3)",
+        "Section 11 equations (11.1),(11.2) and composition law"
+      ],
+      "included_in_archive": false
+    },
+    {
+      "source": "Masatoshi Suzuki",
+      "url": "https://export.arxiv.org/pdf/2606.09096v3.pdf",
+      "bytes": 491037,
+      "sha256": "75b8512f7081bd69152781c7a20f3b5dad4374fe0dfc80f3014f9223f044c81a",
+      "sections_read_and_used": [
+        "Theorem 1.5",
+        "Corollary 1.6",
+        "Sections 2.4,4.5,6.2-6.5,7.8-7.9"
+      ],
+      "included_in_archive": false
+    }
+  ],
+  "active_source_checkout": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "existing_weighted_shape_checkpoint_commit": "44b78e21321a9a96ca714e540e04ee46c84fc63e",
+  "public_branch_parent_observed": "b9dc0fd3c7301d00237065230dbcad978a14e9d6",
+  "effective_remote_AGENTS_blob": "f88a4900ae00693d6682c2c0d2a8fb8352a042b8",
+  "original_external_RH_statement_blob_previously_verified": "5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542",
+  "lean_version_available": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "mathlib_source_pin": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "no_final_RH_term_replayed": true
+}

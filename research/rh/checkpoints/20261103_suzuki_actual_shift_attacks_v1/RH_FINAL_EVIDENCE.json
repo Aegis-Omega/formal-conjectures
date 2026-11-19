@@ -1,0 +1,58 @@
+{
+  "rh_proven": false,
+  "final_theorem": null,
+  "exact_head": null,
+  "head_note": "publication commit is recorded externally to avoid self-referential source hashes",
+  "lean_version": "4.33.1",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "axioms": null,
+  "axiom_audit_status": "NO_FINAL_RH_TERM_TO_AUDIT",
+  "analytic_Lean_replay": "NOT_RUN",
+  "written_proof_reviews": [
+    "resolvent_attack/ROOT_INDEPENDENT_REVIEW.md",
+    "resolvent_attack/INDEPENDENT_OMEGA_REVIEW.md",
+    "resolvent_attack/INDEPENDENT_RECENT_HISTORY_REVIEW.md",
+    "omega_attack/INDEPENDENT_INVERSE_REVIEW.md",
+    "omega_attack/DELEGATED_RESOLVENT_REVIEW_RECORD.json"
+  ],
+  "independent_replays": [
+    {
+      "kind": "same interval checker, second execution on same environment",
+      "author_bits": 256,
+      "root_bits": 384,
+      "finite_signs": 5,
+      "first_activation_slope_signs": 2,
+      "RH_proof": false
+    }
+  ],
+  "one_selected_next_mathematical_obligation": {
+    "route": "Suzuki exact full inverse",
+    "statement": "exists T>=4, forall t>=T, exp(t/2)F_(1/2)(t)+integral_0^t exp(u/2)((t-u)/4-1)F_(1/2)(u)du>=0",
+    "scope": "actual arithmetic Psi family, with every term retained",
+    "status": "NOT_OBTAINED",
+    "why_not_the_new_results": "descending monotonicity is false; discarding positive old history gives a uniformly eventually negative lower bound; finite positive spectral shifts do not force the required zeta limit",
+    "unique_global_obstruction": false
+  },
+  "open_obligations": [
+    "The selected full signed inverse-history budget has no producer in these attempts."
+  ],
+  "complete_corpus_semantic_audit": false,
+  "all_mathematical_routes_exhausted": false,
+  "private_corpus_published": false,
+  "new_RH_equivalence_proved": false,
+  "new_written_results": [
+    {
+      "statement": "forall real a, forall 0<t<=log(rho), partial_a Psi_a(t)>0, rho>1 root of x^3-x-1",
+      "status": "WRITTEN_PROOF_INDEPENDENTLY_REVIEWED"
+    },
+    {
+      "statement": "exists T, forall a>=1/2, forall t>=T, B_a(t)<0",
+      "status": "WRITTEN_PROOF_INDEPENDENTLY_REVIEWED",
+      "object": "actual recent-history lower bound in UNIFORM_RECENT_HISTORY_OBSTRUCTION.md"
+    },
+    {
+      "statement": "exists admissible actual Suzuki shift sequence, normalized m_a tends locally uniformly to i on Im(z)>0",
+      "status": "WRITTEN_PROOF_INDEPENDENTLY_REVIEWED"
+    }
+  ]
+}

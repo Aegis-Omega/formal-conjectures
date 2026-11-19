@@ -37,6 +37,7 @@ namespace AEGIS.RHSignedPrimeIntervalExtensionV8
 
 open AEGIS.WeilPrimeAbelReductionV1
 open AEGIS.WeilPrimeDiscrepancyV1
+open AEGIS.WeilSignedKernelReductionV1
 open AEGIS.WeilPrimeDiscrepancyEstimateV1
 open AEGIS.WeilWindowExhaustionV1
 open AEGIS.WeilThreeBlockTranslatedPacketsV22
@@ -71,19 +72,29 @@ private theorem primeWeight_deriv_zero_above_cutoff_v8
     exact hUpper y hy.le
   simpa only [deriv_const] using Filter.EventuallyEq.deriv_eq hevent
 
-/-- Every sufficiently late finite Abel integral agrees with the complete
+/-- For every compact-smooth packet, every sufficiently late finite Abel integral agrees with the complete
 positive-axis Chebyshev integral by support, not by a growth hypothesis. -/
-theorem eventually_finite_chebyshev_integral_extends_v8 :
-    EventuallyChebyshevFiniteIntegralExtendsV6 := by
+theorem finite_chebyshev_integral_extends_for_packet_v8
+    (g : WeilCompactSmoothGV1) :
+    ∃ T : ℝ, ∀ (d : ℝ), T ≤ d → ∀ (N : ℕ), 1 ≤ N →
+      (∀ x : ℝ, (N : ℝ) ≤ x → PrimeWeightV1 g d x = 0) →
+      (∫ x in Ioc (1 : ℝ) (N : ℝ),
+        primeDiscrepancyKernelV1 g (d - Real.log x) *
+          (((Real.exp (-Real.log x / 2) *
+              (Chebyshev.psi x - x) : ℝ) : ℂ) / (x : ℂ))) =
+      (∫ x in Ioi (0 : ℝ),
+        primeDiscrepancyKernelV1 g (d - Real.log x) *
+          (((Real.exp (-Real.log x / 2) *
+              (Chebyshev.psi x - x) : ℝ) : ℂ) / (x : ℂ))) := by
   obtain ⟨L, _hL, hw⟩ :=
-    logLift_has_finite_window_v1 detectingPacket
-  have hw' : LogSupportIn detectingPacket (-L) L := by
+    logLift_has_finite_window_v1 g
+  have hw' : LogSupportIn g (-L) L := by
     simpa [LogWindowContainsV1, LogSupportIn] using hw
   refine ⟨2 * L + 1, ?_⟩
   intro d hd N _hN hUpper
   have hdL : 2 * L < d := by linarith
   let F : ℝ → ℂ := fun x =>
-    primeDiscrepancyKernelV1 detectingPacket (d - Real.log x) *
+    primeDiscrepancyKernelV1 g (d - Real.log x) *
       (((Real.exp (-Real.log x / 2) *
           (Chebyshev.psi x - x) : ℝ) : ℂ) / (x : ℂ))
   change (∫ x in Ioc (1 : ℝ) (N : ℝ), F x) =
@@ -95,22 +106,52 @@ theorem eventually_finite_chebyshev_integral_extends_v8 :
   filter_upwards [volume.ae_ne (1 : ℝ)] with x hxne hx
   rcases hx with ⟨hxpos, hxoutside⟩
   have hxpos' : 0 < x := hxpos
-  have hder : deriv (PrimeWeightV1 detectingPacket d) x = 0 := by
+  have hder : deriv (PrimeWeightV1 g d) x = 0 := by
     rcases lt_trichotomy x 1 with hxsmall | hxeq | hxlarge
-    · exact primeWeight_deriv_zero_below_one_v8 detectingPacket
+    · exact primeWeight_deriv_zero_below_one_v8 g
         L d x hw' hdL hxpos' hxsmall
     · exact (hxne hxeq).elim
     · have hxN : (N : ℝ) < x := by
         by_contra hn
         exact hxoutside ⟨hxlarge, le_of_not_gt hn⟩
       exact primeWeight_deriv_zero_above_cutoff_v8
-        detectingPacket d x N hUpper hxN
+        g d x N hUpper hxN
   have heq :
-      -(deriv (PrimeWeightV1 detectingPacket d) x *
+      -(deriv (PrimeWeightV1 g d) x *
           PrimeDiscrepancyV1 x) = F x :=
     neg_abel_integrand_eq_chebyshev_integrand
-      detectingPacket d x hxpos'
+      g d x hxpos'
   simpa only [hder, zero_mul, neg_zero] using heq.symm
+
+/-- Backward-compatible fixed detecting packet instance; this is not an
+additional arithmetic or prime-growth hypothesis. -/
+theorem eventually_finite_chebyshev_integral_extends_v8 :
+    EventuallyChebyshevFiniteIntegralExtendsV6 :=
+  finite_chebyshev_integral_extends_for_packet_v8 detectingPacket
+
+/-- The actual V6 Abel equality extends to the complete Chebyshev discrepancy
+integral for ANY moment-zero compact-smooth packet, not just detectingPacket.
+This does not assert any global prime-growth or Weil sign bound. -/
+theorem signed_prime_eq_full_chebyshev_for_packet_v8
+    (g : WeilCompactSmoothGV1) (hm : WeilMomentConditionsV1 g) :
+    ∃ T : ℝ, ∀ d : ℝ, T ≤ d →
+      SignedPrimeCorrelationV1 g d =
+        ∫ x in Ioi (0 : ℝ),
+          primeDiscrepancyKernelV1 g (d - Real.log x) *
+            (((Real.exp (-Real.log x / 2) *
+                (Chebyshev.psi x - x) : ℝ) : ℂ) / (x : ℂ)) := by
+  obtain ⟨L, _hL, hFinite⟩ :=
+    signed_prime_eq_finite_chebyshev_convolution g hm
+  obtain ⟨T, hExtend⟩ :=
+    finite_chebyshev_integral_extends_for_packet_v8 g
+  refine ⟨max (2 * L + 1) T, ?_⟩
+  intro d hd
+  have hdL : 2 * L < d := by
+    have h := (le_max_left (2 * L + 1) T).trans hd
+    linarith
+  have hdT : T ≤ d := (le_max_right (2 * L + 1) T).trans hd
+  obtain ⟨N, hN, hUpper, hFiniteEq⟩ := hFinite d hdL
+  exact hFiniteEq.trans (hExtend d hdT N hN hUpper)
 
 /-- Once the source-exact V6/V7 proofs replay, this is the dictionary without
 extra hypotheses. The independent prime-only growth question is not used here. -/
@@ -155,6 +196,8 @@ theorem universal_zero_quadratic_of_prime_only_growth_v8
 
 end AEGIS.RHSignedPrimeIntervalExtensionV8
 
+#print axioms AEGIS.RHSignedPrimeIntervalExtensionV8.finite_chebyshev_integral_extends_for_packet_v8
+#print axioms AEGIS.RHSignedPrimeIntervalExtensionV8.signed_prime_eq_full_chebyshev_for_packet_v8
 #print axioms AEGIS.RHSignedPrimeIntervalExtensionV8.eventually_finite_chebyshev_integral_extends_v8
 #print axioms AEGIS.RHSignedPrimeIntervalExtensionV8.eventual_signed_prime_equals_combined_v8
 #print axioms AEGIS.RHSignedPrimeIntervalExtensionV8.eventual_reflected_kernel_remainder_bounded_v8

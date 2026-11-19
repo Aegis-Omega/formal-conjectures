@@ -444,6 +444,114 @@ theorem actual_eleven_lattice_optimized_q16_coercive
   rw [B_packetSum]
   exact h
 
+
+/-! ## Independent-shape eleven-packet Gram composition
+
+Unlike `elevenAtoms` above, each index below has its own legal source
+packet and energy.  The exact scalar row certificate is the existing
+elevenCost / elevenOptimizedWeight geometry; no shared mother is assumed.
+The remaining `hcross` is the honest actual-B analytic producer, not an
+unproved assertion smuggled into the conclusion. -/
+
+def independentElevenAtoms
+    (gs : Fin 11 → WeilCompactSmoothGV1) (i : Fin 11) :
+    WeilCompactSmoothGV1 :=
+  translatePacket (gs i) (qNineShiftV1 i)
+
+def independentElevenExactCost (i j : Fin 11) : ℝ :=
+  if Nat.dist i j = 0 then 0 else elevenCost (Nat.dist i j)
+
+theorem independent_eleven_exact_cost_nonnegative (i j : Fin 11) :
+    0 ≤ independentElevenExactCost i j := by
+  unfold independentElevenExactCost
+  split_ifs
+  · exact le_rfl
+  · exact elevenCost_nonnegative _
+
+theorem independent_eleven_exact_cost_zero (i : Fin 11) :
+    independentElevenExactCost i i = 0 := by
+  simp [independentElevenExactCost]
+
+theorem independent_eleven_exact_cost_symmetric (i j : Fin 11) :
+    independentElevenExactCost i j = independentElevenExactCost j i := by
+  simp only [independentElevenExactCost, Nat.dist_comm]
+
+set_option maxHeartbeats 4000000 in
+/-- The exact, unrounded cost row for the original 427/355/24 weights.
+No Q16.16 relaxation or reduced packet count is introduced. -/
+theorem independent_eleven_exact_row (i : Fin 11) :
+    (∑ j : Fin 11,
+      independentElevenExactCost i j *
+        (elevenOptimizedWeight j / elevenOptimizedWeight i)) ≤
+      (25289 / 35500 : ℝ) := by
+  fin_cases i <;>
+    norm_num [independentElevenExactCost, elevenCost,
+      elevenOptimizedWeight, elevenOptimizedWeightUnits,
+      Fin.sum_univ_succ, Nat.dist]
+
+/-- Every translated diagonal keeps its own energy and the existing
+actual fine diagonal margin; no equality of source packets is needed. -/
+theorem independent_eleven_actual_diagonal
+    (gs : Fin 11 → WeilCompactSmoothGV1) (a : ℝ)
+    (hw : ∀ i, WidthOneOneTwentyEightAt (gs i) a) :
+    ∀ i : Fin 11,
+      (5671 / 3200 : ℝ) * energy (gs i).1 ≤
+        -(B (independentElevenAtoms gs i)
+            (independentElevenAtoms gs i)).re := by
+  intro i
+  have hs := translate_logSupportIn (gs i) (qNineShiftV1 i)
+    (a - 1 / 256) (a + 1 / 256) (hw i)
+  have hwidth : WidthOneOneTwentyEightAt
+      (independentElevenAtoms gs i) (a + qNineShiftV1 i) := by
+    change LogSupportIn (translatePacket (gs i) (qNineShiftV1 i))
+      (a + qNineShiftV1 i - 1 / 256)
+      (a + qNineShiftV1 i + 1 / 256)
+    convert hs using 1 <;> ring
+  have hd := fine_diagonal_5671_over_3200_v3
+    (independentElevenAtoms gs i) (a + qNineShiftV1 i) hwidth
+  simpa only [independentElevenAtoms, translate_energy] using hd
+
+/-- Exact full complex Gram on eleven *independent* fine shapes.
+The source-bound actual analytic cross inequalities, once supplied, feed
+the already-proved variable-energy weighted Schur consumer.  This theorem
+does NOT manufacture the gap-9/gap-10 prime estimates for independent
+shapes and does not assert unrestricted RH positivity. -/
+theorem independent_eleven_exact_coercive_of_actual_cross
+    (gs : Fin 11 → WeilCompactSmoothGV1) (a : ℝ)
+    (hw : ∀ i, WidthOneOneTwentyEightAt (gs i) a)
+    (hcross : ∀ i j : Fin 11, i ≠ j →
+      ‖B (independentElevenAtoms gs i) (independentElevenAtoms gs j)‖ ≤
+        independentElevenExactCost i j *
+          (Real.sqrt (energy (gs i).1) *
+            Real.sqrt (energy (gs j).1)))
+    (z : Fin 11 → ℂ) :
+    (WeilExplicitRightSideV1
+      (WeilAutocorrelationV1 (packetSum z (independentElevenAtoms gs)))).re ≤
+        -(1203957 / 1136000 : ℝ) *
+          ∑ i, energy (gs i).1 * ‖z i‖ ^ 2 := by
+  have he : ∀ i, 0 ≤ energy (gs i).1 :=
+    fun i => energy_nonnegative _
+  have h := AEGIS.WeightedSchur.weighted_gram_variable_energy
+    (fun i j => B (independentElevenAtoms gs i)
+      (independentElevenAtoms gs j))
+    z (fun i => energy (gs i).1)
+    independentElevenExactCost elevenOptimizedWeight
+    (5671 / 3200) (25289 / 35500)
+    he independent_eleven_exact_cost_nonnegative
+    independent_eleven_exact_cost_zero
+    independent_eleven_exact_cost_symmetric
+    elevenOptimizedWeight_positive
+    (independent_eleven_actual_diagonal gs a hw)
+    hcross independent_eleven_exact_row
+  have hmargin :
+      (5671 / 3200 : ℝ) - 25289 / 35500 =
+        1203957 / 1136000 := by norm_num
+  rw [hmargin] at h
+  change (B (packetSum z (independentElevenAtoms gs))
+    (packetSum z (independentElevenAtoms gs))).re ≤ _
+  rw [B_packetSum]
+  exact h
+
 end AEGIS.RHActualElevenLatticeV1
 
 #print axioms AEGIS.RHActualElevenLatticeV1.lattice_gap_bound
@@ -469,3 +577,6 @@ end AEGIS.RHActualElevenLatticeV1
 #print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_integer_certificate
 #print axioms AEGIS.RHActualElevenLatticeV1.eleven_optimized_row_bound
 #print axioms AEGIS.RHActualElevenLatticeV1.actual_eleven_lattice_optimized_q16_coercive
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_row
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_actual_diagonal
+#print axioms AEGIS.RHActualElevenLatticeV1.independent_eleven_exact_coercive_of_actual_cross

@@ -1,0 +1,86 @@
+{
+  "status": "EXACT_DEFECT_TAIL_SCALAR_CHECK_PASS",
+  "utc": "2026-11-01T07:45:05.434406+00:00",
+  "source_sha256": "43516416be52127f5923599e06d77384915fecf5d25b393b9c923171e4d980ec",
+  "source_bindings": [
+    {
+      "path": "/workspace/formal-conjectures/research/rh/krein_ring_v1/RHKreinZetaBridgeV3.lean",
+      "sha256": "8330f26fec67c4e9ba4129de0bae5184288aa39e2ec5e8fa438b3f31b24303f7"
+    },
+    {
+      "path": "/workspace/formal-conjectures/research/rh/feshbach_lean_v1/CvSDigammaSeriesV1.lean",
+      "sha256": "bae1cac37c1a703fd625ebe3e1643b1c6b33ae3dffe00b0e2dd2166025189f1f"
+    },
+    {
+      "path": "/workspace/formal-conjectures/AEGISOverlay/RHKreinDigammaLowerBoundV1.lean",
+      "sha256": "37577feb54ea093f81219a28498f863624aff9d2ee9ff7018d5979c4076fb219"
+    },
+    {
+      "path": "/workspace/formal-conjectures/research/rh/consolidated_v1/src/RHEulerGammaV13.lean",
+      "sha256": "1fd9391a77bef450a95f7435d1d126ffbae76a77951a560631b56f7ece9618ae"
+    },
+    {
+      "path": "/workspace/aegis-rh-next-local-20261028/signed_covariance_continuum_20261030/rational_core.py",
+      "sha256": "d9549931b55870b308259652cb7f89b68b1624e0a911f855e7c050d914f99d90"
+    }
+  ],
+  "ordinary_analytic_statement": "For every fixed finite M and s>1, no constant amplitude c can satisfy |c|^2 F_s(u) S_M(su)<=S_M(u) for every real u.",
+  "s": "2",
+  "M": 3,
+  "u": "18446744073709551616",
+  "u_description": "2^64",
+  "actual_prime_power_terms_retained": "n+1<=M, exactly as ScertM M; all bounded by their total amplitude, none removed",
+  "total_amplitude_upper_bound": "12",
+  "exact_multiplier": "29642774844752946028434172162224104410448005110145454424931969493463577770590209/3705346855594118253554271520278013051310084027171233064678056681972128439861250",
+  "certified_ordinary_defect_lower_bound_coarse": "873/25",
+  "certified_ordinary_defect_lower_bound_with_existing_rational_log": "48811529075014420647374166096747162069/519229685853482762853049632922009600",
+  "normalization_instances": [
+    {
+      "s": "11/10",
+      "zero_frequency_requires_c_squared_at_least": "11/10",
+      "tail_requires_c_squared_at_most": "1000/1331",
+      "compatible": false
+    },
+    {
+      "s": "3/2",
+      "zero_frequency_requires_c_squared_at_least": "3/2",
+      "tail_requires_c_squared_at_most": "8/27",
+      "compatible": false
+    },
+    {
+      "s": "2",
+      "zero_frequency_requires_c_squared_at_least": "2",
+      "tail_requires_c_squared_at_most": "1/8",
+      "compatible": false
+    },
+    {
+      "s": "3",
+      "zero_frequency_requires_c_squared_at_least": "3",
+      "tail_requires_c_squared_at_most": "1/27",
+      "compatible": false
+    }
+  ],
+  "identity_scale_control": "necessary lower and upper c^2 bounds both 1",
+  "negative_controls": [
+    {
+      "candidate": "unscaled pointwise defect nonpositive at all frequencies",
+      "rejected": true,
+      "reason": "strictly positive certified ordinary lower bound"
+    },
+    {
+      "candidate": "c_squared=s repairs both zero frequency and tail",
+      "rejected": true,
+      "reason": "tail coefficient is s^4-1>0"
+    },
+    {
+      "candidate": "c_squared=s^-3 repairs both zero frequency and tail",
+      "rejected": true,
+      "reason": "zero-frequency negative symbol forces c^2>=s"
+    }
+  ],
+  "new_independent_certificate_engine": false,
+  "verification_scope": "Exact rational consequences of the written ordinary analytic estimate. No numerical digamma evaluation, no Lean integral/tail proof.",
+  "new_Lean_replay": false,
+  "RH_closed": false,
+  "OPEN": "Weighted integral transport for actual packet Fourier densities; pointwise impossibility does not decide it."
+}

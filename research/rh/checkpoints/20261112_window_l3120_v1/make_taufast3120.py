@@ -1,0 +1,78 @@
+"""Write CvSTauFastL3120V1.lean from ../20261111_window_l32_tau_v1/CvSTauFastL32V1.lean (L = 3/2 -> 31/20):
+omega_k = 40 pi k / 31 (a = 40 floor(pi)_20 k, D = 31 10^20), the 1 - e^{-c_j L} tables recomputed from
+CvSExpL3120V1 (j0 = 12), the prime-part arguments 2 k log p / L = 40 k log p / 31. Every substitution is counted.
+usage: python3 make_taufast3120.py PATH/CvSTauFastL32V1.lean OUT.lean
+"""
+import re
+import sys
+from fractions import Fraction as F
+from math import floor, ceil
+
+t = open(sys.argv[1]).read()
+
+
+def rep(a, b, n):
+    global t
+    c = t.count(a)
+    assert c == n, (a, c, n)
+    t = t.replace(a, b)
+
+
+lo = F(142580914187195743784704817, 309485009821345068724781056)   # CvSExpL3120V1.e3140Lo
+hi = F(4455653568349866993272026, 9671406556917033397649408)        # CvSExpL3120V1.e3140Hi
+j0 = 12
+A = [floor(2 ** 64 * (1 - hi ** (4 * min(i, j0) + 1))) for i in range(13)]
+B = [ceil(2 ** 64 * (1 - (lo ** (4 * i + 1) if i < j0 else 0))) for i in range(13)]
+
+
+def fmt(name, v):
+    s = f'def {name} : List ℕ := ['
+    lines, cur = [], s
+    for i, x in enumerate(v):
+        piece = f'{x}' + (', ' if i < len(v) - 1 else ']')
+        if len(cur) + len(piece.rstrip()) > 100:
+            lines.append(cur.rstrip())
+            cur = '  '
+        cur += piece
+    lines.append(cur)
+    return '\n'.join(lines)
+
+
+a0 = t.index('def NEloT'); a1 = t.index('\n\n', a0)
+t = t[:a0] + fmt('NEloT', A) + t[a1:]
+b0 = t.index('def NEhiT'); b1 = t.index('\n\n', b0)
+t = t[:b0] + fmt('NEhiT', B) + t[b1:]
+
+d0 = t.index('/-!\n# `τ_k` at `L = 3/2`'); d1 = t.index('-/', d0) + 2
+t = t[:d0] + '''/-!
+# `τ_k` at `L = 31/20` for every prime cutoff `M ≥ 4`: the check with integer head sums
+
+`CvSTauFastL32V1` at `L = 31/20`: the head `Σ_{j<J} 2ω(1 − e^{−c_j L})/(c_j² + ω²)` of
+`CvSTauL3120V1.tauCheck` summed in natural numbers. With `ω ∈ [a/D, b/D]` (`a = 40⌊π⌋₂₀k`,
+`D = 31·10²⁰`), each term is `⌊8 a N_j D / ((4j+1)² D² + 4 b²)⌋ / 2⁶⁴` with
+`N_j/2⁶⁴ ≤ 1 − e^{−c_j L}` (`hLo`), and `(⌊8 b N'_j D / ((4j+1)² D² + 4 a²)⌋ + 1) / 2⁶⁴` with
+`1 − e^{−c_j L} ≤ N'_j/2⁶⁴` (`hHi`). `h_bounds` is the induction, `srcCheck_sound` the
+`CvSTauL3120V1.tauCheck_sound` argument with this head.
+
+The prime part: at `L = 31/20` the prime powers `2, 3, 4` contribute (`primeSum_eq`, from
+`CvSNodeL3120V1`), with `ppw 3 = log 2` (`CvSTraceM4SlackV1.ppw_three`). `tauF_sound` turns a
+passing check into `lo ≤ τ_k ≤ hi` for every `M ≥ 4`. Not RH.
+-/''' + t[d1:]
+
+rep('CvSTauFastL32V1', 'CvSTauFastL3120V1', 9)
+rep('CvSTauL32V1', 'CvSTauL3120V1', t.count('CvSTauL32V1'))
+rep('CvSNodeL32V1', 'CvSNodeL3120V1', t.count('CvSNodeL32V1'))
+rep('(3 / 2)', '(31 / 20)', t.count('(3 / 2)'))
+rep('L = 3/2', 'L = 31/20', t.count('L = 3/2'))
+rep('(L := 3 / 2)', '(L := 31 / 20)', 1)
+rep('4 * Real.pi * k / 3', '40 * Real.pi * k / 31', 1)
+for x in ('Real.log 2', 'Real.log 3', 'l2Lo', 'l2Hi', 'l3Lo', 'l3Hi'):
+    rep(f'8 * k * {x} / 3', f'80 * k * {x} / 31', t.count(f'8 * k * {x} / 3'))
+    rep(f'4 * k * {x} / 3', f'40 * k * {x} / 31', t.count(f'4 * k * {x} / 3'))
+rep('def Dk : ℕ := 300000000000000000000', 'def Dk : ℕ := 3100000000000000000000', 1)
+rep('def aN (k : ℕ) : ℕ := 4 * pLoN * k', 'def aN (k : ℕ) : ℕ := 40 * pLoN * k', 1)
+rep('def bN (k : ℕ) : ℕ := 4 * pHiN * k', 'def bN (k : ℕ) : ℕ := 40 * pHiN * k', 1)
+left = [l for l in t.split('\n') if re.search(r'3 / 2|3/2|/ 3\b', l) and 'omHi k' not in l and 'ω / 3' not in l]
+print('lines with / 3 left (check by hand):')
+print('\n'.join(left))
+open(sys.argv[2], 'w').write(t)

@@ -1,0 +1,106 @@
+{
+  "schema": "AEGIS_EXACT_WITNESS_NEGATIVE_REPLAY_V1",
+  "checker_sha256": "35c18b6ef38f0a9ec03a55f8320844ed007b94490d619abf1606502e2c14806b",
+  "tests": [
+    {
+      "case": "zero_trial",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: zero witness"
+    },
+    {
+      "case": "zero_trial",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: zero witness"
+    },
+    {
+      "case": "changed_differential_coefficient",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: exact differential identity fails"
+    },
+    {
+      "case": "changed_differential_coefficient",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: exact differential identity fails"
+    },
+    {
+      "case": "wrong_norm",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: exact norm mismatch"
+    },
+    {
+      "case": "wrong_norm",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: exact norm mismatch"
+    },
+    {
+      "case": "wrong_operator",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: normalization mismatch"
+    },
+    {
+      "case": "wrong_operator",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: normalization mismatch"
+    },
+    {
+      "case": "zero_denominator",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: positive denominator required"
+    },
+    {
+      "case": "zero_denominator",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: positive denominator required"
+    },
+    {
+      "case": "differentially_consistent_unclamped_potential",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: clamped endpoint conditions fail"
+    },
+    {
+      "case": "differentially_consistent_unclamped_potential",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: clamped endpoint conditions fail"
+    },
+    {
+      "case": "duplicate_schema",
+      "optimized": false,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: duplicate JSON key"
+    },
+    {
+      "case": "duplicate_schema",
+      "optimized": true,
+      "returncode": 1,
+      "receipt_created": false,
+      "error": "ValueError: duplicate JSON key"
+    }
+  ],
+  "passed": 14,
+  "rh_proven": false
+}

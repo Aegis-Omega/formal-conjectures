@@ -1,0 +1,258 @@
+{
+  "schema": "AEGIS_PUBLIC_CLAUDE_FOLLOWUP_MANIFEST_V1",
+  "source_parent": "8686704f8d90853d5e0934d28db7964420ba847b",
+  "private_archive_content_included": false,
+  "files": [
+    {
+      "path": "CHECKPOINT.md",
+      "bytes": 3312,
+      "sha256": "14ce536b3a80fe0edefbd2e25da508f4c5c8f8bab6a0133c87ff56cbbef39985"
+    },
+    {
+      "path": "CORPUS_BODY_COVERAGE.json",
+      "bytes": 353,
+      "sha256": "73d9ccb6a5b6e812aa73196b84ce93ac4c4c7ea20ddaacd042d50b804987fae0"
+    },
+    {
+      "path": "ClaudeHandoffReview/APPARENT_ENDPOINT_CENSUS.json",
+      "bytes": 8989,
+      "sha256": "f815e9adcc38fa14208b3bccf7fbc2deca52a239498b59e6040255d810571ce4"
+    },
+    {
+      "path": "ClaudeHandoffReview/CERTIFIED.txt",
+      "bytes": 896,
+      "sha256": "7fa392e1ef834a0b923cf30ce6c72530fa02423183d892171750a45022416223"
+    },
+    {
+      "path": "ClaudeHandoffReview/DIRECT_WITNESS_SOUNDNESS.md",
+      "bytes": 7280,
+      "sha256": "b65825228d8d977f54d9b953a22ad521e0107eb070145fcb72ca6463391dd81e"
+    },
+    {
+      "path": "ClaudeHandoffReview/DIRECT_WITNESS_a1_1_FINAL.log",
+      "bytes": 3331,
+      "sha256": "150ebba82d4ef8434112dae99ab9c3ba4a3ece10d634d2228222d056c894c61d"
+    },
+    {
+      "path": "ClaudeHandoffReview/DIRECT_WITNESS_a3_2_FINAL.log",
+      "bytes": 4427,
+      "sha256": "5b99c1c05329219fe10b3255133113950329d9926f3bd1f8812bb6343834a7b3"
+    },
+    {
+      "path": "ClaudeHandoffReview/DIRECT_WITNESS_a3_4_FINAL.log",
+      "bytes": 3040,
+      "sha256": "3cb2f3390d297696ca05d13c4a3a3e5862cdbee2a6b98944030ccc7d59373fdd"
+    },
+    {
+      "path": "ClaudeHandoffReview/DIRECT_WITNESS_a5_4_FINAL.log",
+      "bytes": 3804,
+      "sha256": "a334e46c0f8fcdb3531d30167e7f6de290a8d1a63673a471c0eefd6abd3165c5"
+    },
+    {
+      "path": "ClaudeHandoffReview/HANDOFF.md",
+      "bytes": 6292,
+      "sha256": "cf2be6525e100753f2509cc47f006b767d091a03fa6281840dd845e62cb33c4a"
+    },
+    {
+      "path": "ClaudeHandoffReview/HANDOFF_REPLAY_AUDIT.json",
+      "bytes": 3609,
+      "sha256": "e0564e07dfc9168fa117bd30cb2ba96847b827f7b1669f3be70e11047508531e"
+    },
+    {
+      "path": "ClaudeHandoffReview/HANDOFF_REPLAY_AUDIT.log",
+      "bytes": 3609,
+      "sha256": "e0564e07dfc9168fa117bd30cb2ba96847b827f7b1669f3be70e11047508531e"
+    },
+    {
+      "path": "ClaudeHandoffReview/ORIGINAL_REPLAY.log",
+      "bytes": 1561,
+      "sha256": "b69ca948488356deed39d33476210b93cfc71576eba0d8dc1c628d4545f5022b"
+    },
+    {
+      "path": "ClaudeHandoffReview/ORIGINAL_REPLAY_a1_1.log",
+      "bytes": 1574,
+      "sha256": "31d894af59b9b9b73d8a4a41ebefca0ed1d59f7ad0e359915a329694fa236e32"
+    },
+    {
+      "path": "ClaudeHandoffReview/ORIGINAL_REPLAY_a3_2.log",
+      "bytes": 1661,
+      "sha256": "2743b4de2facb50b51ddb1b8bd61d0018ac9339f6f18c5aae01e727a7102ed5c"
+    },
+    {
+      "path": "ClaudeHandoffReview/ORIGINAL_REPLAY_a5_4.log",
+      "bytes": 1616,
+      "sha256": "5ca81035223b8f17cf5ab11ddeaaf8c34a5cc8373b7aa4296795272280ba890d"
+    },
+    {
+      "path": "ClaudeHandoffReview/REVIEW.md",
+      "bytes": 9027,
+      "sha256": "bbce30e70cd7d36898b3de53798c07515a35b378bbc0586df3e16d4179c1e959"
+    },
+    {
+      "path": "ClaudeHandoffReview/RUNTIME_MANIFEST.json",
+      "bytes": 7216,
+      "sha256": "233a99f1ac66fe27dd906cf9fd54773db5a6ade61f0f6360ecc7c21e558e84cf"
+    },
+    {
+      "path": "ClaudeHandoffReview/SOURCE_MANIFEST.json",
+      "bytes": 1336,
+      "sha256": "fad662a44a21d8f67afde495a76ec3f567d6a81d39e6c38d7f1ae97d10d6179a"
+    },
+    {
+      "path": "ClaudeHandoffReview/adversarial_input_checks/NEGATIVE_REPLAY_RECEIPT.json",
+      "bytes": 2797,
+      "sha256": "65e6ff15acdf0a313b452e9355d54c47786a47af69c28960ab0464239fb73c73"
+    },
+    {
+      "path": "ClaudeHandoffReview/adversarial_inputs.py",
+      "bytes": 2445,
+      "sha256": "6849e3695f6f460664e3d4823c71ff6390c57c47b0aa79153cbdb175b5bfb318"
+    },
+    {
+      "path": "ClaudeHandoffReview/certify.py",
+      "bytes": 4490,
+      "sha256": "facfaa4990b6b0339adee5c291ddf4278ad5af67ddfaf2afedc6717c5e569cc9"
+    },
+    {
+      "path": "ClaudeHandoffReview/check_exact_witness.py",
+      "bytes": 7979,
+      "sha256": "35c18b6ef38f0a9ec03a55f8320844ed007b94490d619abf1606502e2c14806b"
+    },
+    {
+      "path": "ClaudeHandoffReview/qwhp.py",
+      "bytes": 4146,
+      "sha256": "be519c5118e4c84e02178fc841e720574032f0881a51504a6b1eef234cbb8ff4"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a1_1_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "bytes": 3331,
+      "sha256": "150ebba82d4ef8434112dae99ab9c3ba4a3ece10d634d2228222d056c894c61d"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a1_1_K40/EXACT_WITNESS.json",
+      "bytes": 10097,
+      "sha256": "07e9d3032cb3b68102d09b945fc0db7a49fcb14dc760f9a444b7796eb1aa3d61"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a1_1_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "bytes": 1334,
+      "sha256": "6305ba3f29c95a7d065791928c24aa0f395b41d294a715aeb3b07dfc586d0225"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_2_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "bytes": 4427,
+      "sha256": "5b99c1c05329219fe10b3255133113950329d9926f3bd1f8812bb6343834a7b3"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_2_K40/EXACT_WITNESS.json",
+      "bytes": 10117,
+      "sha256": "1eff0c7feae9c9ce276f42a8c7cae5e85e3e4934d1488818d0a3dc3208f5820f"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_2_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "bytes": 1395,
+      "sha256": "0b13e62a4b07b01ebbd05cfcc2157905c49f11d0c66c019e0759057993ea140e"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_4_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "bytes": 3040,
+      "sha256": "3cb2f3390d297696ca05d13c4a3a3e5862cdbee2a6b98944030ccc7d59373fdd"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_4_K40/EXACT_WITNESS.json",
+      "bytes": 10216,
+      "sha256": "f4ed0ef9f8aa5a2a71a498b3489c3701cedb606725ab94f61092dd63e7b045af"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a3_4_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "bytes": 1327,
+      "sha256": "688fd598cb667f751477414dd99fbde7e90a5cb13de363f97916f3cb3f3bcb8c"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a5_4_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "bytes": 3804,
+      "sha256": "a334e46c0f8fcdb3531d30167e7f6de290a8d1a63673a471c0eefd6abd3165c5"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a5_4_K40/EXACT_WITNESS.json",
+      "bytes": 10161,
+      "sha256": "4b253bf6fe2c73fbe14020de8fd0616419dedf3011054e30ae3a16afd9b3444b"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_a5_4_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "bytes": 1366,
+      "sha256": "9226072ba80212b6a6a5927b91ce20128aeeea770a73b5326b6f70e0b60b0d5b"
+    },
+    {
+      "path": "ClaudeHandoffReview/replay_original.py",
+      "bytes": 3793,
+      "sha256": "04c4d23f3f07f074d40897111f9c9fa6ccbc6c55296d4286b96f4769c70c09f1"
+    },
+    {
+      "path": "ClaudeHandoffReview/verify_replays.py",
+      "bytes": 3752,
+      "sha256": "a37eafd88ce334d6baac06e14224b3398afedcf0952e2bb61bf2c5302841d20c"
+    },
+    {
+      "path": "LITERATURE_SCOPE.json",
+      "bytes": 796,
+      "sha256": "6dc0113fa6b67a5c66a7566266c749cb60642c534f2554ce9b82f1921d847569"
+    },
+    {
+      "path": "OddSemigroupAttack/ACTUAL_PRIME_REFLECTION_OBSTRUCTION.md",
+      "bytes": 8701,
+      "sha256": "b20ccb745446304d2b96507512c589c727a35d805d469a6806d975149bdd547e"
+    },
+    {
+      "path": "OddSemigroupAttack/FOURIER_DIAGNOSTIC.json",
+      "bytes": 748,
+      "sha256": "34cd64df05d23ec8d47c9736ad7c74918644bbca4b83acc8efd4e1269872d141"
+    },
+    {
+      "path": "OddSemigroupAttack/FOURIER_DIAGNOSTIC.log",
+      "bytes": 748,
+      "sha256": "34cd64df05d23ec8d47c9736ad7c74918644bbca4b83acc8efd4e1269872d141"
+    },
+    {
+      "path": "OddSemigroupAttack/REFLECTION_RECEIPT_1000.json",
+      "bytes": 2333,
+      "sha256": "34445a320f0749664073e7f130becec0b21285b1823bbfbb0f43da9ebd1dbd30"
+    },
+    {
+      "path": "OddSemigroupAttack/REFLECTION_RECEIPT_2000.json",
+      "bytes": 2333,
+      "sha256": "213799e1277cb69e552faf651cee86d5326f93d5963d740aaa81faf520ae55d3"
+    },
+    {
+      "path": "OddSemigroupAttack/REFLECTION_REPLAY_1000.log",
+      "bytes": 2333,
+      "sha256": "34445a320f0749664073e7f130becec0b21285b1823bbfbb0f43da9ebd1dbd30"
+    },
+    {
+      "path": "OddSemigroupAttack/REFLECTION_REPLAY_2000.log",
+      "bytes": 2333,
+      "sha256": "213799e1277cb69e552faf651cee86d5326f93d5963d740aaa81faf520ae55d3"
+    },
+    {
+      "path": "OddSemigroupAttack/fourier_crosscheck.py",
+      "bytes": 2053,
+      "sha256": "0869a092b038310d3012e43e9a77fe5aaa4f997efd40f5c99dde8170dbd44f7d"
+    },
+    {
+      "path": "OddSemigroupAttack/verify_reflection_witness.py",
+      "bytes": 3843,
+      "sha256": "88615feae5babb696543407cb0b205a83d21aa83c08d766d220302bf4df6175c"
+    },
+    {
+      "path": "RH_FINAL_EVIDENCE.json",
+      "bytes": 3935,
+      "sha256": "1ebf31ad9a209061dfaf69f39cf5ed81fef6b4e55b0b205eeaf9ad5aa74a8712"
+    },
+    {
+      "path": "SOURCE_REUSE_DELTA.json",
+      "bytes": 16105,
+      "sha256": "bd6effd73c2254efc6b9ae2680e6f05de4d5d28474e5288dd041c198b70367a6"
+    }
+  ],
+  "rh_proven": false
+}

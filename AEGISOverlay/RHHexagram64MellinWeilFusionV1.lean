@@ -15,6 +15,7 @@ limitations under the License.
 -/
 
 import AEGISOverlay.RHOptimizedSchurGlobalJoinV1
+import AEGISOverlay.RHBaguaHexagramSignedChebyshevJoinV1
 import AEGISOverlay.RHTranslateSpectralObstructionV1
 import WeilPrimeLineIdentityV1
 

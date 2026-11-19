@@ -1,0 +1,146 @@
+{
+  "schema": "AEGIS_EXISTING_SOURCE_DIRECT_COMPOSITION_V1",
+  "sources": [
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHActualMixedDefectV1.lean",
+      "git_blob": "f3d1ccf81ba8c9fbefc41886ddf163db10656148",
+      "bytes": 90232,
+      "sha256": "34557b25d8580c9c47691af90eec3b265084cb03e33155ac5d959b7107476fd9",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHActualElevenLatticeV1.lean",
+      "git_blob": "97a98db382e433488ed20f7df0980f41b20e4cbc",
+      "bytes": 20137,
+      "sha256": "123fc514966112dbacdad41b403ffad8ff6f1764c9597c2c3fd983138a940413",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHWeightedSchurV1.lean",
+      "git_blob": "1860b9a94d1fd5dec368283c6c914effab053cc3",
+      "bytes": 8434,
+      "sha256": "ec96c0da168181203449816efa3f339559c7feef789958e3ca64d03b59fb8cf8",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHMixedBudgetRefinementV1.lean",
+      "git_blob": "205d3953c4a360e1c8f65779a0b179d102b85d4f",
+      "bytes": 10678,
+      "sha256": "869005fa2c1f9ca288c705924cf55323163710dc74554b03f1e3db05919a4e5a",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+      "git_blob": "a09243144d5116b75f3274dcf990697f261f51fd",
+      "bytes": 50226,
+      "sha256": "1db180efd9073288fb0ffb71193a1f29a30c04bc9b8340b9245b65d826175d34",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHBaguaActualWeilV1.lean",
+      "git_blob": "4b030efaa21cb5ed825c42d1e263886b6ad356c5",
+      "bytes": 14898,
+      "sha256": "f75367884d2ccf0c5c1ca78da50f99050cf6c1706e7ac34a5bceca594afbe4a9",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHTimeSliceWeilV1.lean",
+      "git_blob": "0281d47ab0e0a790ac5dda4819ee312ed7dec6aa",
+      "bytes": 31131,
+      "sha256": "93df87f1c58f0553f9e2b635538b86e6504aaef2e09e5dce3b4317ca7cd70546",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHLogThreeSignedPrimeProducerV1.lean",
+      "git_blob": "c4f11498abc94fd7e5b9ada587140a1bc862c822",
+      "bytes": 7179,
+      "sha256": "cce91eba3bbdb9c7762f2daea7283eac1f3afda1654adcec0ecf47dc27ece989",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AEGISOverlay/RHPrimeThreeWindowV1.lean",
+      "git_blob": "92ae90acc47ea4a8c2b8d0f62642cb8742aaeced",
+      "bytes": 11503,
+      "sha256": "47809981563dbfc8e93985837257664d9b5ad9fd1c1efb7270cd3ab70a4823bb",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AegisRH/PR606/WeilSeparatedArchBridgeV31.lean",
+      "git_blob": "9143a15eb6124b8d7461b68ebb6bd89786988294",
+      "bytes": 21038,
+      "sha256": "8c303e7fe9c14e1082cb1b3e972da6d282305100b49982f22b0fa98f5be7aa21",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "AegisRH/PR606/WeilThreeBlockCrossPrimeV28.lean",
+      "git_blob": "1da314ff47a8d1f80ef5d2c12fd1418c1c3ee842",
+      "bytes": 7799,
+      "sha256": "68bc4b84171a0f4cbc5e5d6f4a6fda7d47cdeb2201d2205fefdfdbc27d8616c7",
+      "artifact_extension": ".lean"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "research/rh/aegis_pr721_fb983fd/lean/RHRationalNinePacketPrimeWindowV1.lean.src",
+      "git_blob": "7175f243640df980d9c2effc610cbb6748ffc29b",
+      "bytes": 33322,
+      "sha256": "6508cfb2f75f1bc2902f7fde52e062d859b4adb7aa785a6c8a25a679ca5626f0",
+      "artifact_extension": ".lean.src"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "research/rh/aegis_pr721_fb983fd/lean/RHRationalGapNinePrimeBoundV1.lean.src",
+      "git_blob": "6f0ce19532bb422649d764a0bea930e3756a8c59",
+      "bytes": 17111,
+      "sha256": "507dcbd351dcfd61ede01bd61b00b9fae7d0e55c3c601da04f9e5c53a868ea07",
+      "artifact_extension": ".lean.src"
+    },
+    {
+      "repository": "Aegis-Omega/formal-conjectures",
+      "commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+      "path": "research/rh/aegis_pr721_fb983fd/lean/RHRationalGapTenPrimeBoundV1.lean.src",
+      "git_blob": "c1771ca493a3292d962b77332437c2de3a693ac2",
+      "bytes": 17489,
+      "sha256": "0c3fe01b87b54aa6e90025339698dd8bb8b527d62974428d00131776d99a2968",
+      "artifact_extension": ".lean.src"
+    }
+  ],
+  "prior_exact_row_dependency": {
+    "commit": "44b78e21321a9a96ca714e540e04ee46c84fc63e",
+    "path": "research/rh/checkpoints/20261103_weighted_independent_shapes_reuse_v1/WeightedIndependentShapeArithmetic.lean",
+    "sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268",
+    "used": [
+      "exact_row_ledger",
+      "all_eleven_weighted_rows",
+      "maximum_attained"
+    ],
+    "fresh_replay_here": false
+  },
+  "lean_version": "4.33.1",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "new_analytic_Lean_replay": "NOT_RUN",
+  "private_corpus_included": false
+}

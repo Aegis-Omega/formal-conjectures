@@ -1,0 +1,4 @@
+a=0.3: lam1=0.00757223 lam2=0.222566 gap ratio lam2/lam1=29.39  odd part of eigvec=6.89e-122
+a=0.5: lam1=9.40392e-7 lam2=0.000195034 gap ratio lam2/lam1=207.4  odd part of eigvec=3.3e-120
+a=0.6: lam1=1.65755e-9 lam2=6.05315e-7 gap ratio lam2/lam1=365.2  odd part of eigvec=4.93e-117
+a=0.6875: lam1=1.38744e-12 lam2=8.41321e-10 gap ratio lam2/lam1=606.4  odd part of eigvec=4.34e-114

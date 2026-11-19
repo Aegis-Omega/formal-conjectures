@@ -1,0 +1,77 @@
+{
+  "scope": "all recovered .lean and .lean.src bodies at the 941 baseline tips; literal canonical target; source syntax only, not elaboration",
+  "matches": [
+    {
+      "blob": "d7f8e0fb6cceb5eacfcc26ecfd11a0542b399a0d",
+      "sha256": "21025fcff4af51611e268e9755ce5da6104470748ae10cc56340c67b10e20543",
+      "name": "riemannHypothesis",
+      "line": 59,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "547abe4133077b36387bfe631d24485b5bfa55f9",
+      "sha256": "da04d7147cf508143aff1b0ac83eda5b9334ba70f3cfdc3bcf2d5989c1261f25",
+      "name": "riemannHypothesis",
+      "line": 60,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "5b1dcd5c46ab4a5f449d7d4a5c5ddce7c89c3542",
+      "sha256": "db04f2f25a73fb0fc473843227fb3a28bca6ef1808e222e2d365f97120c46f67",
+      "name": "riemannHypothesis",
+      "line": 61,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  sorry\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "d78a9351c36beb494a6bc7dcc598656f845ae110",
+      "sha256": "ba446add0417853e24c17a683318edab274c6f9f186439afde88eb0c2cdaf75c",
+      "name": "riemannHypothesis",
+      "line": 59,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "4c374397e29d957cf9de2c486a8557a32963537b",
+      "sha256": "f3ce3300780eac8bf85261b865680c4541664648ae2ebf65cfc521ef7c205179",
+      "name": "riemannHypothesis",
+      "line": 59,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  exact AEGIS.RHRestrictedWeilCriterionV13.restricted_weil_criterion_v13\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "4d4c9ffe3da39959c5935558a09702f6bfb45fe0",
+      "sha256": "d16d8ecc8c3511f4419685f53da0dbaba807a9d52731e9a06955d4cf5b878834",
+      "name": "riemannHypothesis",
+      "line": 61,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "7a7e89061703d91344b7f23531a6cc9b3bbe2b29",
+      "sha256": "49e05756fccae2eeda999a55518e8541b31bfb5ea4c4d360315f5e25773894d0",
+      "name": "riemannHypothesis",
+      "line": 33,
+      "excerpt": "/-- Exactly the official Mathlib goal; this fails Lean if an obligation remains. -/\ntheorem riemannHypothesis : _root_.RiemannHypothesis := by\n  apply AEGIS.RHFeshbachWeilClosureV2.riemannHypothesis_of_window_schur_families\n\nend AEGIS.RHOfficialTargetProbeV1\n\n#print axioms AEGIS.RHOfficialTargetProbeV1.riemannHypothesis"
+    },
+    {
+      "blob": "14ed0dd158be72b0106bf2af66efe7f71565693f",
+      "sha256": "b45f2d01d037ebb0767e0ae83c38d5ab0c8d2e2f4fce9bc357a49810b953705c",
+      "name": "riemannHypothesis",
+      "line": 60,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "293d85cbd7f89be8aeab7b43f50b2aa568998df9",
+      "sha256": "320a9dacc354d43da9129dbe8995b311fa3a06a7ce7e7e48ce90a74914f8038a",
+      "name": "riemannHypothesis",
+      "line": 63,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  apply AEGIS.RHSmallWindowCanonicalJoinV1.riemannHypothesis_of_above_693_over_2000_v1\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    },
+    {
+      "blob": "c8d38bef385eb15661c3daf7449625b66b019b2a",
+      "sha256": "ae1627d0566be23f61b6ba04f166087c03a042c52c21d5c426c5a9a286a6bca5",
+      "name": "riemannHypothesis",
+      "line": 58,
+      "excerpt": "@[category research open, AMS 11]\ntheorem riemannHypothesis : RiemannHypothesis := by\n  sorry\n\nend RiemannHypothesis\n\nnamespace GRH\n\n/-- Let $\\chi$ be a Dirichlet character, `trivialZeros` is the set of trivial zeros of the\nDirichlet $L$-function of $\\chi$ which is always a set of non-positive integers.\n- $\\chi = 1$ then the Dirichlet $L$-function is the Riemann zeta function, having trivial\n  zeroes at all negative even integers (exclude $0$).\n- $\\chi$ is odd, then the trivial zeroes are the negative odd integers.\n- $\\chi \\neq 1$ is even, then the trivial zeroes are the non-positive even integers. -/"
+    }
+  ],
+  "kernel_checked": false,
+  "rh_proven": false
+}
