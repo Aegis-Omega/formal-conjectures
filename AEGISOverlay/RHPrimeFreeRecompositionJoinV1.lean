@@ -240,6 +240,56 @@ theorem actual_source_gram_coercive_of_resonance_row
     (combinedFineCost_symm center residual hsym)
     hdiag hcross hrow
 
+
+/-- A chosen source-exact resonance row with certified signed costs pays the
+true off-diagonal Weil defect out of the existing fine diagonal reserve.
+Unlike a certificate that merely shows the total Gram sign, this proves the
+quantitative mixed-budget inequality needed by the selected-budget bridge. -/
+theorem actual_fine_mixed_budget_of_resonance_row
+    {n : ℕ} (gs : Fin (n + 1) → WeilCompactSmoothGV1)
+    (center : Fin (n + 1) → ℝ)
+    (hm : ∀ i, WeilMomentConditionsV1 (gs i))
+    (hw : ∀ i, AEGIS.RHRationalNinePacketPrimeWindowV1.WidthOneOneTwentyEightAt
+      (gs i) (center i))
+    (residual : Fin (n + 1) → Fin (n + 1) → ℝ)
+    (hsym : ∀ i j, residual i j = residual j i)
+    (hres : ∀ i j, i ≠ j →
+      ¬ FineLogFreeGap |center j - center i| →
+      (B (gs i) (gs j)).re ≤
+        residual i j * (energy (gs i).1 + energy (gs j).1))
+    (hrow : ∀ i, (∑ j ∈
+      (Finset.univ : Finset (Fin (n + 1))).erase i,
+        combinedFineCost center residual i j) ≤
+        (57430 / 65536 : ℝ)) :
+    AEGIS.RHActualMixedDefectV1.actualMixedDefect n gs ≤
+      (5671 / 3200 : ℝ) * (∑ i, energy (gs i).1) := by
+  classical
+  have hcross : ∀ i j, i ≠ j →
+      (B (gs i) (gs j)).re ≤
+        combinedFineCost center residual i j *
+          (energy (gs i).1 + energy (gs j).1) := by
+    intro i j hij
+    by_cases hf : FineLogFreeGap |center j - center i|
+    · have hb := actual_fine_pair_q16_of_log_free_gap
+        gs center hm hw i j hf
+      calc
+        (B (gs i) (gs j)).re ≤ ‖B (gs i) (gs j)‖ :=
+          Complex.re_le_norm _
+        _ ≤ (676 / 65536 : ℝ) *
+            (energy (gs i).1 + energy (gs j).1) := hb
+        _ = combinedFineCost center residual i j *
+            (energy (gs i).1 + energy (gs j).1) := by
+              simp only [combinedFineCost, if_pos hf]
+    · simpa only [combinedFineCost, if_neg hf] using hres i j hij hf
+  have hbound := actual_mixed_defect_le_of_signed_symmetric_row
+    gs (combinedFineCost center residual) (57430 / 65536 : ℝ)
+    (combinedFineCost_symm center residual hsym) hcross hrow
+  have henergy : 0 ≤ (∑ i, energy (gs i).1) :=
+    Finset.sum_nonneg (fun i _ => energy_nonnegative (gs i).1)
+  have hcoeff : (2 * (57430 / 65536 : ℝ)) ≤ 5671 / 3200 := by
+    norm_num
+  exact hbound.trans (mul_le_mul_of_nonneg_right hcoeff henergy)
+
 /-- Exact rational obstruction to a per-link Q16.16 row charge
 for unboundedly refined packet partitions: just 85 log-free links
 already exceed the formerly proposed universal row limit. This is

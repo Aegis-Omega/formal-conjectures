@@ -59,6 +59,9 @@ elab "#export_rh_proof_graph" : command => do
     "AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal",
     "AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget",
     "AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget",
+    "AEGIS.RHAssemblyV1.selected_actual_fine_mixed_budget_of_resonance_rows",
+    "AEGIS.RHAssemblyV1.riemannHypothesis_of_resonance_rows_via_signed_budget",
+    "AEGIS.RHPrimeFreeRecompositionJoinV1.actual_fine_mixed_budget_of_resonance_row",
     "AEGIS.RHGlobalPrimeArchFineGramControlV1.global_arch_prime_lower_bound_of_actual_fine_gram",
     "AEGIS.RHGlobalPrimeArchFineGramControlV1.global_prime_arch_with_signed_error",
     "AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_implies_signed_budget",
@@ -275,6 +278,9 @@ elab "#export_rh_proof_graph" : command => do
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_iff_universal
 #print axioms AEGIS.RHAssemblyV1.actual_global_signed_weil_of_selected_actual_fine_mixed_budget
 #print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_selected_actual_fine_mixed_budget
+#print axioms AEGIS.RHAssemblyV1.selected_actual_fine_mixed_budget_of_resonance_rows
+#print axioms AEGIS.RHAssemblyV1.riemannHypothesis_of_resonance_rows_via_signed_budget
+#print axioms AEGIS.RHPrimeFreeRecompositionJoinV1.actual_fine_mixed_budget_of_resonance_row
 #print axioms AEGIS.RHGlobalPrimeArchFineGramControlV1.global_arch_prime_lower_bound_of_actual_fine_gram
 #print axioms AEGIS.RHGlobalPrimeArchFineGramControlV1.global_prime_arch_with_signed_error
 #print axioms AEGIS.RHOptimizedSchurGlobalJoinV1.mixed_defect_bound_implies_signed_budget
