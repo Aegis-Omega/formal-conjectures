@@ -73,11 +73,17 @@ conditions:
 ## What this does not do
 
 * **`WeilNondegenerate` and `MellinZeroNonvanishing` are not proved.**
-* **Expected argument, not formalized.**
-  * The Mellin transform of a compactly supported packet is entire of exponential type, so it has `O(T)`
-    zeros up to height `T`.
-  * The nontrivial zeros of `ζ` number `N(T) ~ (T/2π) log T`.
-  * This needs zero counting for `ζ` and Jensen-type bounds, which are not in this chain.
+* **What a proof would need (correction, 2026-11-23).** An earlier version of this README claimed that
+  `N(T) ~ (T/2π) log T` against the `O(T)` zeros of the Mellin transform settles this. That is not enough:
+  * the strict sign only sees the zero **set**, since the summands are `m(ρ) |M g(ρ)|²`;
+  * on the critical strip the Mellin transform of a packet of log-width `L` behaves like a Fourier transform of
+    width `L`, so it can have about `L·T/π` zeros up to height `T`, linear with an arbitrary constant;
+  * so one needs the number of **distinct** zeros up to height `T` to grow faster than linearly;
+  * `N(T)` together with the multiplicity bound `O(log T)` gives only a linear lower bound;
+  * superlinear distinct-zero counts are known only through deeper results: Selberg's `≫ T log T` sign changes
+    on the critical line, or, under RH, Littlewood's multiplicity bound `O(log T / log log T)`.
+
+  None of this is formalized in this chain or in Mathlib.
 * Not RH.
 
 ## Build
