@@ -7,7 +7,7 @@ This directory is a single Lake package for the AEGIS Weil chain. One command bu
 It copies no Lean source. `lakefile.toml` points at files that are already on this branch, and `build.sh`
 checks each file's SHA-256 before it builds.
 
-## What it builds: 199 modules in 10 libraries
+## What it builds: 200 modules in 11 libraries
 
 | library | modules | source |
 |---|---|---|
@@ -20,6 +20,7 @@ checks each file's SHA-256 before it builds.
 | `WeilFineChain43` | `WeilFineChain43V1` | `../checkpoints/20261123_fine_chain_43_v1/` |
 | `WeilFineBudgetEquiv` | `WeilFineBudgetEquivV1` | `../checkpoints/20261123_fine_budget_equiv_v1/` |
 | `WeilStrictSign` | `WeilStrictSignNondegV1`, `WeilStrictSignMellinV1` | `../checkpoints/20261123_strict_sign_nondeg_v1/` |
+| `WeilMellinZeroDensity` | `WeilMellinZeroDensityV1` | `../checkpoints/20261123_mellin_zero_density_v1/` |
 | `AegisRHWeilCheck` | `AegisAlpogeBridgeCheckV1` | this directory |
 
 `AegisAlpogeBridgeCheckV1` is new. It imports the chain and restates its Weil-side consequences as `example`s,
@@ -33,6 +34,9 @@ Main theorems:
 * `AEGIS.WeilFineBudgetEquivV1.riemannHypothesis_of_strictWeilSign`.
 * `AEGIS.WeilStrictSignNondegV1.strictWeilSign_iff_rh_and_nondeg`: `StrictWeilSign ↔ RH ∧ WeilNondegenerate`.
 * `AEGIS.WeilStrictSignMellinV1.strictWeilSign_iff_rh_and_mellin`: `StrictWeilSign ↔ RH ∧ MellinZeroNonvanishing`.
+* `AEGIS.WeilMellinZeroDensityV1.mellinZeroNonvanishing_of_distinctZeroSuperlinear`:
+  `DistinctZeroSuperlinear → MellinZeroNonvanishing`, where `DistinctZeroSuperlinear` says that the number of
+  distinct nontrivial zeros of `ζ` of modulus `≤ R` is not `O(R)`.
 
 ## Requirements
 
@@ -55,12 +59,18 @@ Main theorems:
   * `lake build --no-build` with the oleans of that compile ends with `All targets up-to-date (8914 jobs)`,
     exit 0. So Lake resolves every module through this `lakefile.toml`, and the module traces match the compiled
     build.
+* **`WeilMellinZeroDensityV1`** (added later the same day).
+  * It was compiled with `lean` against the oleans of the other 199 modules: exit 0, no errors, no warnings, at
+    default trust and with `--trust=0`.
+  * In this layout `lake build --no-build` reports it as the only out-of-date target (exit 3). So Lake resolves
+    it, but it has not been compiled through Lake.
 * **Not run in this layout:** a fresh `lake exe cache get` and a fresh compile.
 * **Trust level.** The Lake build uses default trust. The `--trust=0` builds are separate:
   * the PR92 packet: 186 of 186 modules;
-  * the twelve checkpoint modules: recorded in each checkpoint's README.
+  * the thirteen checkpoint modules: recorded in each checkpoint's README.
 
 ## What this does not do
 
-* It does not prove RH. `StrictWeilSign`, `WeilNondegenerate` and `MellinZeroNonvanishing` are not proved.
+* It does not prove RH. `StrictWeilSign`, `WeilNondegenerate`, `MellinZeroNonvanishing` and
+  `DistinctZeroSuperlinear` are not proved.
 * It does not import Levent Alpöge's Lean library. The `AegisRHWeilCheck` examples keep RH as a hypothesis.

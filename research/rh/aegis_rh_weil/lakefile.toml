@@ -1,5 +1,5 @@
 name = "aegis_rh_weil"
-defaultTargets = ["PR92Closure", "WeilArchL1", "WeilDiagonalLogGain", "WeilSevenBlock", "WeilEightBlock", "WeilFineDiagonal", "WeilFineChain43", "WeilFineBudgetEquiv", "WeilStrictSign", "AegisRHWeilCheck"]
+defaultTargets = ["PR92Closure", "WeilArchL1", "WeilDiagonalLogGain", "WeilSevenBlock", "WeilEightBlock", "WeilFineDiagonal", "WeilFineChain43", "WeilFineBudgetEquiv", "WeilStrictSign", "WeilMellinZeroDensity", "AegisRHWeilCheck"]
 
 [[require]]
 name = "mathlib"
@@ -239,6 +239,11 @@ roots = ["WeilFineBudgetEquivV1"]
 name = "WeilStrictSign"
 srcDir = "../checkpoints/20261123_strict_sign_nondeg_v1"
 roots = ["WeilStrictSignNondegV1", "WeilStrictSignMellinV1"]
+
+[[lean_lib]]
+name = "WeilMellinZeroDensity"
+srcDir = "../checkpoints/20261123_mellin_zero_density_v1"
+roots = ["WeilMellinZeroDensityV1"]
 
 [[lean_lib]]
 name = "AegisRHWeilCheck"
