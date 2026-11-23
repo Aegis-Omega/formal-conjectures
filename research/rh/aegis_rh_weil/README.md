@@ -2,7 +2,7 @@
 
 This directory is a single Lake package for the AEGIS Weil chain. One command builds it:
 
-    cd research/rh/aegis_rh_weil && ./build.sh
+    cd research/rh/aegis_rh_weil && bash build.sh
 
 It copies no Lean source. `lakefile.toml` points at files that are already on this branch, and `build.sh`
 checks each file's SHA-256 before it builds.
@@ -40,7 +40,7 @@ Main theorems:
 * Mathlib `0df444a360eaa60ab8c11dca51a86af692955474`. `lake-manifest.json` has the same package pins as the
   repository's root `lake-manifest.json`; only the package name differs.
 * `unzip` and `sha256sum`.
-* `build.sh` runs `lake exe cache get` to download the Mathlib build. `./build.sh --no-cache` skips that step.
+* `build.sh` runs `lake exe cache get` to download the Mathlib build. `bash build.sh --no-cache` skips that step.
 
 ## Verification (2026-11-23)
 
