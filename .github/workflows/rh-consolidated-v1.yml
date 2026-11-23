@@ -133,6 +133,12 @@ on:
       - 'research/rh/krein_reflective_v1/RHKreinTaylorModelV1.lean'
       - 'research/rh/krein_reflective_v1/RHKreinTrigTMV1.lean'
   workflow_dispatch:
+    inputs:
+      final_only:
+        description: 'Replay only three final .oleans using pinned 314 archived objects'
+        required: true
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -149,6 +155,7 @@ jobs:
   # their .olean files on as artifacts: base, then the batches one at a time on each of
   # 12 runners, then the modules that import them and the headline audit.
   base:
+    if: ${{ github.event_name != 'workflow_dispatch' || !inputs.final_only }}
     runs-on: ubuntu-24.04
     timeout-minutes: 120
     steps:
@@ -295,6 +302,13 @@ jobs:
           path: |
             ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean
             ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean
+            ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean.source.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean.source.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch0*.olean.context.sha256
+            ${{ runner.temp }}/rhc/RHKreinL105Batch1*.olean.context.sha256
+            ${{ runner.temp }}/rhc/rhc-checkpoint-shard-${{ matrix.shard }}-12.json
           if-no-files-found: error
           retention-days: 3
 
@@ -377,9 +391,26 @@ jobs:
           set -euo pipefail
           lake env python3 research/rh/consolidated_v1/build.py "$RUNNER_TEMP/rhc" consolidated-final.log 3 final
 
+      - name: Upload final .olean files and complete source-bound checkpoint
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: rhc-final
+          path: ${{ runner.temp }}/rhc/rhc-final/
+          if-no-files-found: error
+          retention-days: 3
+
       - name: Upload log
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: rh-consolidated-final-log
           path: consolidated-final.log
+
+  final_only_recovery:
+    # This caller is registered on main. The local reusable workflow resolves
+    # from the exact commit selected for workflow_dispatch, not protected main.
+    if: ${{ github.event_name == 'workflow_dispatch' && inputs.final_only }}
+    permissions:
+      contents: read
+      actions: read
+    uses: ./.github/workflows/rh-recover-final-oleans-v1.yml

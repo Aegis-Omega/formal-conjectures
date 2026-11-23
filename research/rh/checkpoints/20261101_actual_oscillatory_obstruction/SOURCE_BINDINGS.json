@@ -1,0 +1,27 @@
+[
+  {
+    "path": "/workspace/formal-conjectures/research/rh/krein_ring_v1/RHKreinZetaBridgeV3.lean",
+    "sha256": "8330f26fec67c4e9ba4129de0bae5184288aa39e2ec5e8fa438b3f31b24303f7",
+    "git_blob": "e0475674abcd522c31dde707ad8463edd3d7c976"
+  },
+  {
+    "path": "/workspace/aegis-rh-results/consolidated_expanded/research/rh/consolidated_v1/src/RHKreinZetaBridgeV1.lean",
+    "sha256": "90f3b33d1802d670826ecb285c523c549e8ab78ce6165eff1e2b6eb67f507366",
+    "git_blob": "9cf84394385bc7b56d43d9daea24e91fa51d4116"
+  },
+  {
+    "path": "/workspace/aegis-rh-import-repair-20261023/moment_trace_original_sources/research/rh/feshbach_lean_v1/CvSMomentV1.lean",
+    "sha256": "8c28a74883f713fea62a8018b0760f9c9c6c5c27be27d2585e13150c3458f767",
+    "git_blob": "2b133abe97ed0808f6f6f4c2f54d37c60256497f"
+  },
+  {
+    "path": "/workspace/aegis-rh-next-local-20261028/obstruction_transport_20261101/KreinLogScaleTransportV1.lean",
+    "sha256": "b9cfeda9495f248dc18bc152ddd2bb77154177992f08aa16485efc4bf2522b77",
+    "git_blob": "c76ea8abdb68947df69feb97b9b2c44227b69f85"
+  },
+  {
+    "path": "/workspace/aegis-rh-next-local-20261028/defect_tail_20261101/DEFECT_TAIL.md",
+    "sha256": "4179fac74038eb90dbb585edc7a65a8d72bb51ec6b322e2d90d4572c5eee0ab6",
+    "git_blob": "599568de396f3ab7af74f587c145305db7cc24be"
+  }
+]

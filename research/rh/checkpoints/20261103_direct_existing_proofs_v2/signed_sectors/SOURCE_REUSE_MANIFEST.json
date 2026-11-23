@@ -1,0 +1,105 @@
+{
+  "schema": "AEGIS_ACTUAL_SIGNED_SECTOR_COMPOSITION_V1",
+  "source_commit": "1f70364296eee931d0cae5ecc16a0c9810c0c4cc",
+  "proof_status": "ORDINARY_MATHEMATICAL_SOURCE_COMPOSITION_NOT_NEW_LEAN_REPLAY",
+  "sources": [
+    {
+      "path": "AEGISOverlay/RHBaguaActualWeilV1.lean",
+      "git_blob": "4b030efaa21cb5ed825c42d1e263886b6ad356c5",
+      "sha256": "f75367884d2ccf0c5c1ca78da50f99050cf6c1706e7ac34a5bceca594afbe4a9"
+    },
+    {
+      "path": "AEGISOverlay/RHTimeSliceWeilV1.lean",
+      "git_blob": "0281d47ab0e0a790ac5dda4819ee312ed7dec6aa",
+      "sha256": "93df87f1c58f0553f9e2b635538b86e6504aaef2e09e5dce3b4317ca7cd70546"
+    },
+    {
+      "path": "AEGISOverlay/RHLogThreeSignedPrimeProducerV1.lean",
+      "git_blob": "c4f11498abc94fd7e5b9ada587140a1bc862c822",
+      "sha256": "cce91eba3bbdb9c7762f2daea7283eac1f3afda1654adcec0ecf47dc27ece989"
+    },
+    {
+      "path": "AEGISOverlay/RHPrimeThreeWindowV1.lean",
+      "git_blob": "92ae90acc47ea4a8c2b8d0f62642cb8742aaeced",
+      "sha256": "47809981563dbfc8e93985837257664d9b5ad9fd1c1efb7270cd3ab70a4823bb"
+    },
+    {
+      "path": "AEGISOverlay/RHActualMixedDefectV1.lean",
+      "git_blob": "f3d1ccf81ba8c9fbefc41886ddf163db10656148",
+      "sha256": "34557b25d8580c9c47691af90eec3b265084cb03e33155ac5d959b7107476fd9"
+    },
+    {
+      "path": "AEGISOverlay/RHActualUniversalFineGramV1.lean",
+      "git_blob": "a09243144d5116b75f3274dcf990697f261f51fd",
+      "sha256": "1db180efd9073288fb0ffb71193a1f29a30c04bc9b8340b9245b65d826175d34"
+    },
+    {
+      "path": "AEGISOverlay/RHMixedBudgetRefinementV1.lean",
+      "git_blob": "205d3953c4a360e1c8f65779a0b179d102b85d4f",
+      "sha256": "869005fa2c1f9ca288c705924cf55323163710dc74554b03f1e3db05919a4e5a"
+    },
+    {
+      "path": "AEGISOverlay/RHActualNarrowGramSignV1.lean",
+      "git_blob": "4f8c4aa1cd2ef277f9c5e144d2e5473515d165b0",
+      "sha256": "f8a9fde268815798cf6364a6fcec6201341b145dd2dd9bca4ab9d959da2f41e9"
+    },
+    {
+      "path": "AEGISOverlay/RHBaguaRotatingTwoPairMellinV1.lean",
+      "git_blob": "13e92f439c4bdf0676fcf0c9ac74108bb31748bc",
+      "sha256": "6dfdc99153289bd8cba23a298b871ded1bb854f7848e062b8bb7dc097978ec58"
+    },
+    {
+      "path": "AEGISOverlay/RHFourLogThreeActualPrimeV1.lean",
+      "git_blob": "e70d69d731cc745c56e28c035e61f73929d16ced",
+      "sha256": "e84e2e812fa5ca608c8d4817f2eaa132b710e696350b1c40f6b94ac120890122"
+    },
+    {
+      "path": "AEGISOverlay/RHScaleRowCompositionV1.lean",
+      "git_blob": "4ae7d70c5a9c9601063d7d444b9c4e11ca263f1b",
+      "sha256": "5e8d97b5c01bc3f5eaec62a5b4355733b19d671fed013310856fae56c2124d28"
+    }
+  ],
+  "notes": [
+    {
+      "path": "SIGNED_SECTOR_COMPOSITION.md",
+      "bytes": 10672,
+      "sha256": "256eddb8791729e008af001d5fdd844717e6cdcc433a2d9fed9b2714302703ec"
+    },
+    {
+      "path": "ACTUAL_LOG3_INDEPENDENT_SHAPES.md",
+      "bytes": 12830,
+      "sha256": "9511779bad0812e381e9f9e08605241bc9a5f07ae48bd175d7a95db8134eb133"
+    }
+  ],
+  "prior_result_reused": "/workspace/aegis-nov3-weighted-shapes/WEIGHTED_SHAPE_COMPOSITION.md",
+  "results": [
+    {
+      "name": "Bagua full signed phase coupling",
+      "domain": "Prior eleven-window independent-shape linear space; arbitrary within-window combinations",
+      "hypotheses": "Each translated source component remains moment-zero in its fine mother window",
+      "new_weight_or_polarization_proof": false
+    },
+    {
+      "name": "Independent-shape two-log-three signed budget",
+      "domain": "Two arbitrary legal fine packets centered a and a+2log3",
+      "actual_prime_identity": "Prime=(log3/3) aligned complex L2 inner product",
+      "coercive_margin": "10517/9600 times energy sum",
+      "consumer": "actual_sign_of_one_fine_mixed_budget with literal two-atom witness"
+    },
+    {
+      "name": "Actual Bagua orthogonal cross-sign counterexample",
+      "domain": "Two disjoint legal fine packets embedded at original indices0,1",
+      "statement": "Physical L2 orthogonality with prime9 exactly zero and strictly positive Arch/full B cross term"
+    }
+  ],
+  "unresolved": "Signed inter-cluster or complementary-sector budget for the unrestricted centers/cardinality/shapes of the existing universal fine reconstruction.",
+  "actual_delegated_agent_ids": [
+    "/root/analytic_audit/bagua_source_scope",
+    "/root/analytic_audit/log3_actual_sector",
+    "/root/analytic_audit/log3_actual_sector/prime_independent"
+  ],
+  "delegation_scope": "Separate completed model-agent mathematical reviews, not human review or independent kernel foundations.",
+  "archived_program_execution": false,
+  "analytic_lean_replay": "NOT_RUN",
+  "rh_proven": false
+}

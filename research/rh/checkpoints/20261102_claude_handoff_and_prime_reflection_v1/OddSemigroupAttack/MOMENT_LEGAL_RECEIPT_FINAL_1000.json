@@ -1,0 +1,53 @@
+{
+  "schema": "AEGIS_MOMENT_LEGAL_REFLECTION_REPLAY_V1",
+  "checker_sha256": "2869611253c0a49ed54310892d56286e328c13123eca571768b68e7bb4fe7925",
+  "shared_helper_sha256": "35c18b6ef38f0a9ec03a55f8320844ed007b94490d619abf1606502e2c14806b",
+  "python_flint": "0.9.0",
+  "arb_precision": 800,
+  "delta": [
+    "1",
+    "1000"
+  ],
+  "potential": "(1-u^2)^4 on [-1,1], zero outside",
+  "operator": "1/4-d2/dx2",
+  "clamped_conditions_exact": true,
+  "moments_zero_by_exact_integration_by_parts": true,
+  "full_polar_term": "exactly zero",
+  "prime_power_indices": [
+    2
+  ],
+  "exact_prime_mixed_over_local_norm": "sqrt(2)*log(2)",
+  "local_norm_squared": [
+    "5425870330828288",
+    "138125"
+  ],
+  "normalized_arch_mixed": "[-6.090480860955005408068565499917491145027501228909117432648882335040281e-13 +/- 2.93e-83]",
+  "normalized_full_mixed": "[0.9802581434679381436278062230944265247414689499845519709193553353220262 +/- 1.03e-71]",
+  "leading_order_five_coefficient": "[609.016840110940683664323204341003731877746490481276447877708 +/- 1.70e-58]",
+  "explicit_order_seven_constant": "[3780570.31035915178898819585809105759970100031870923982683794 +/- 1.46e-54]",
+  "order_seven_error_bound_verified": true,
+  "exact_potential_mass": [
+    "256",
+    "315"
+  ],
+  "exact_potential_second_derivative_norm": [
+    "196608",
+    "5005"
+  ],
+  "exact_dyadic_lower": [
+    "6536375448592222388225346657856609433942001661327042854550331676989139137186492314473730099904175672029620256480963544906437177342388989679051084169241195821510147597107668963184000701057551650719672035899657523784771839255333924962067526611",
+    "6668014432879854274079851790721257797144758322315908160396257811764037237817632071521432200871554290742929910593433240445888801654119365080363356052330830046095157579514014558463078285911814024728965016135886601981690748037476461291163877376"
+  ],
+  "strict_lower": [
+    "9",
+    "10"
+  ],
+  "smooth_domain_bridge": "ordinary clamped-potential approximation proof",
+  "not_claimed": [
+    "negative diagonal",
+    "failure of PSD",
+    "RH counterexample",
+    "Lean theorem"
+  ],
+  "rh_proven": false
+}

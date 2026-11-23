@@ -1,0 +1,10 @@
+LT = 4/3: max |tau_k| for 70 < k <= NP: 11.869
+rows: 660 outside, built B_rows
+Gram tail built: |G|_1 = 7.1392e-01, tau box radius rho <= 1.000e-25
+all 139 LDL pivots > 0; min pivot 4.03074, max pivot 9.35265e+11
+RESULT: PASS  NP = 400  eps = 1/2  kappa* = 44  robust |dG| <= 3e-07  ->  needs Schur gap >= 0.8359
+LT = 13/10: max |tau_k| for 70 < k <= NP: 11.967
+rows: 660 outside, built B_rows
+Gram tail built: |G|_1 = 7.1392e-01, tau box radius rho <= 1.000e-25
+all 139 LDL pivots > 0; min pivot 18.2582, max pivot 1.03053e+12
+RESULT: PASS  NP = 400  eps = 1/2  kappa* = 44  robust |dG| <= 3e-07  ->  needs Schur gap >= 0.857333

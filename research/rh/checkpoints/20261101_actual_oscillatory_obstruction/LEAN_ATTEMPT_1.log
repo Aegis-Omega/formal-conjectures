@@ -1,0 +1,25 @@
+/workspace/aegis-rh-next-local-20261028/actual_oscillatory_obstruction_20261101/OscillatoryKreinPacketsV1.lean:37:19: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x => ↑(Real.cos (T * x))`
+
+Issues:
+  No theorems found for `Complex.ofReal` in order to prove `ContDiff ℝ ∞ fun x0 => ↑x0`
+  No theorems found for `Complex.ofReal` in order to prove `ContDiff ℝ ∞ fun x => ↑(Real.cos (T * x))`
+/workspace/aegis-rh-next-local-20261028/actual_oscillatory_obstruction_20261101/OscillatoryKreinPacketsV1.lean:41:2: error: Type mismatch: After simplification, term
+  HasCompactSupport.mul_right hc
+ has type
+  @HasCompactSupport ℝ ℂ PseudoMetricSpace.toUniformSpace.toTopologicalSpace instMulZeroClassOfSemiring.toZero
+    (φ * fun x => ↑(Real.cos (T * x)))
+but is expected to have type
+  @HasCompactSupport ℝ ℂ PseudoMetricSpace.toUniformSpace.toTopologicalSpace Complex.instZero (oscillatoryFactor φ T)
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_smooth' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_compact' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_and_scaled_moments' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_support' depends on axioms: [propext, Classical.choice, Quot.sound]

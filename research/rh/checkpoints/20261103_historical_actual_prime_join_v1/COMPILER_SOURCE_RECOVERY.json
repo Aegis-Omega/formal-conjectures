@@ -1,0 +1,58 @@
+{
+  "schema": "AEGIS_TARGETED_COMPILER_SOURCE_RECOVERY_V1",
+  "date_utc": "2026-11-03",
+  "compiler": {
+    "path": "/workspace/aegis-nov2-runtime/toolchain/lean-4.33.1-linux/bin/lean",
+    "version_exit_code": 0,
+    "version_stdout": "Lean (version 4.33.1, x86_64-unknown-linux-gnu, commit 819816b2e0a3bf405af45ae5c7af2491d8f5bee6, Release)",
+    "sha256": "e8baaa71855a616dc351028f3ad2200051b0671f423a1696a100e809302d5550"
+  },
+  "requested_modules": [
+    {
+      "name": "AEGISActualElevenWeightedJoinV1.lean",
+      "local_file": "NOT_LOCATED_IN_SEARCHED_SCOPE",
+      "frozen_tip_index_matches": 0,
+      "historical_git_object_path_matches": 0,
+      "local_zip_member_matches": 0,
+      "drive_exact_search_matches": 0,
+      "compilation_status": "NOT_RUN_SOURCE_UNAVAILABLE",
+      "compiler_error": null
+    },
+    {
+      "name": "GlobalizationReadyRealV1.lean",
+      "local_file": "NOT_LOCATED_IN_SEARCHED_SCOPE",
+      "frozen_tip_index_matches": 0,
+      "historical_git_object_path_matches": 0,
+      "local_zip_member_matches": 0,
+      "drive_exact_search_matches": 0,
+      "compilation_status": "NOT_RUN_SOURCE_UNAVAILABLE",
+      "compiler_error": null
+    }
+  ],
+  "searched_scope": [
+    "local workspace file names and source-body references",
+    "941 frozen tip snapshots in CORPUS_INDEX.sqlite",
+    "all currently fetched objects in formal-conjectures.git and AEGIS-OMEGA.git",
+    "all local ZIP member names",
+    "targeted exact and broadened Drive searches; no matching source"
+  ],
+  "mathlib": {
+    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+    "source_present": true,
+    "full_analytic_olean_closure_available": false,
+    "prior_cache_access_receipt": "/workspace/aegis-nov2-runtime/CACHE_ACCESS_STOP.json",
+    "same_denied_download_retried": false
+  },
+  "reported_elsewhere": {
+    "module_exit_codes": [
+      127,
+      127
+    ],
+    "olean_checkpoints": 429,
+    "rational_certificate_checks": "8/8",
+    "status": "USER_REPORTED_NOT_REPLAYED_OR_ALTERED_HERE"
+  },
+  "rh_proven": false,
+  "hosted_ci_triggered": false,
+  "new_final_theorem": null
+}

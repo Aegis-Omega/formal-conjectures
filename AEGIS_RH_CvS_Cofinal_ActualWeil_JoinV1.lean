@@ -23,6 +23,7 @@ by the finite CvS certificate. No sorry/admit/axioms or RH assumption.
 -/
 import CvSProjectedEntryReplayL12V1
 import CvSProjectedSchurBridgeL12V1
+import CvSProjectedTransportL12V1
 import CvSActualWeilInteropV1
 import RHMomentDecayCofinalJoinV1
 
@@ -68,6 +69,65 @@ theorem certified_source_projectedQ_nonneg
   have hcontra : (2 : ℝ) ^ certQ * projectedQ M v < 0 :=
     mul_neg_of_pos_of_neg hscale hnegative
   exact (not_lt_of_ge hbound) hcontra
+
+/-- Unconditional source-exact positivity of the genuine CvS low-block
+quadratic on the explicitly generated 139-dimensional source basis. The
+identity is the separately kernel-proved finite congruence, not a
+substitution of an arbitrary PSD matrix for the Weil operator. -/
+theorem certified_actual_cvs_lowblock_nonneg
+    (M : ℕ) (hM : 3 ≤ M) (v : Fin 139 → ℂ) :
+    0 ≤ AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS M (6 / 5)
+      AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
+      (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis v) := by
+  rw [← AEGIS.CvSProjectedTransportL12V1.hTransport M v]
+  exact certified_source_projectedQ_nonneg M hM v
+
+/-- Actual CvS low-block approximation for every admissible Weil packet.
+This is a mathematically substantive *unsolved* same-packet convergence
+obligation: finite congruence alone does not produce these coefficients. -/
+def UniversalActualCvSLowBlockApproximation : Prop :=
+  ∀ (g : WeilCompactSmoothGV1), WeilMomentConditionsV1 g →
+    ∃ (M : ℕ → ℕ) (v : ℕ → Fin 139 → ℂ),
+      (∀ j, 3 ≤ M j) ∧
+      Tendsto M atTop atTop ∧
+      Tendsto
+        (fun j =>
+          AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS (M j) (6 / 5)
+            AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
+            (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis (v j)))
+        atTop
+        (𝓝 ((∑' rho : RiemannNontrivialZeroIndexV2,
+          WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re))
+
+/-- Source-certified actual CvS low-block positivity transfers to the exact
+universal zero quadratic *if* the missing same-packet approximation is proved.
+The unconditional finite bound and the finite source congruence are now
+composed with the existing cofinal zero-side limit theorem. -/
+theorem universal_zero_of_actual_cvs_lowblock_approximation
+    (happrox : UniversalActualCvSLowBlockApproximation) :
+    AEGIS.RHMillenniumGateV10.UniversalZeroQuadraticNonnegativeV10 := by
+  intro g hm
+  obtain ⟨M, v, hM, hcofinal, hreproduce⟩ := happrox g hm
+  exact
+    AEGIS.RHMomentDecayCofinalJoinV1.actual_zero_quadratic_nonnegative_of_cofinal_lower_bound
+      g (N := M)
+      (q := fun j =>
+        AEGIS.CvSSchurClosureFromBoundsV1.Q_CvS (M j) (6 / 5)
+          AEGIS.CvSProjectedPackedCertificateL12V1.atomCenter
+          (AEGIS.CvSProjectedSchurBridgeL12V1.R_basis (v j)))
+      (normSq := fun _ => (0 : ℝ)) (normSqLimit := 0)
+      hcofinal hreproduce tendsto_const_nhds
+      (by
+        intro j
+        simpa using certified_actual_cvs_lowblock_nonneg (M j) (hM j) (v j))
+
+/-- Exact canonical V13 terminal. No theorem assumption is hidden:
+universal approximation of the actual Weil zero quadratic remains OPEN. -/
+theorem riemannHypothesis_of_actual_cvs_lowblock_approximation
+    (happrox : UniversalActualCvSLowBlockApproximation) :
+    RiemannHypothesis :=
+  AEGIS.RHRestrictedWeilBridgeV13.restricted_weil_criterion_kernel_bridge_v13
+    (universal_zero_of_actual_cvs_lowblock_approximation happrox)
 
 /-- If the true zero quadratic of this ONE packet is the certified source
     quadratic, the already-proved actual signed-Weil finite reconstruction
@@ -186,6 +246,9 @@ theorem actual_quantitative_signed_budget_of_trigram_margin
 end AEGIS.RHCvSCofinalActualWeilJoinV1
 
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.certified_source_projectedQ_nonneg
+#print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.certified_actual_cvs_lowblock_nonneg
+#print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.universal_zero_of_actual_cvs_lowblock_approximation
+#print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_actual_cvs_lowblock_approximation
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.actual_signed_budget_of_exact_projectedQ
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.zero_quadratic_nonneg_of_projected_cofinal
 #print axioms AEGIS.RHCvSCofinalActualWeilJoinV1.riemannHypothesis_of_universal_actual_cvs_cofinal

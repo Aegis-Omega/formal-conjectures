@@ -1,0 +1,9 @@
+{
+  "file": "AEGIS_EXISTING_PROOFS_DIRECT_COMPOSITION_V2.zip",
+  "bytes": 29335,
+  "sha256": "2686c48dd71e5d9445626581d188390bd6913db724401a9900b52d9cfafb9954",
+  "members": 10,
+  "inner_payload_hashes": "PASS",
+  "zip_crc": "PASS",
+  "rh_proven": false
+}

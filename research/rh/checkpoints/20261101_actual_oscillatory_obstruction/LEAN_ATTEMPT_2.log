@@ -1,0 +1,19 @@
+/workspace/aegis-rh-next-local-20261028/actual_oscillatory_obstruction_20261101/OscillatoryKreinPacketsV1.lean:37:52: error: `fun_prop` was unable to prove `ContDiff ℝ ∞ fun x =>
+  Sub.sub ((Complex.exp (↑(T * x) * Complex.I) + Complex.exp (-↑(T * x) * Complex.I)).re • 2⁻¹.re)
+    ((Complex.exp (↑(T * x) * Complex.I) + Complex.exp (-↑(T * x) * Complex.I)).im * 2⁻¹.im)`
+
+Issues:
+  No theorems found for `Sub.sub` in order to prove `ContDiff ℝ ∞ fun x2x3 => Sub.sub x2x3.1 x2x3.2`
+  No theorems found for `Sub.sub` in order to prove `ContDiff ℝ ∞ fun x =>
+  Sub.sub ((Complex.exp (↑(T * x) * Complex.I) + Complex.exp (-↑(T * x) * Complex.I)).re • 2⁻¹.re)
+    ((Complex.exp (↑(T * x) * Complex.I) + Complex.exp (-↑(T * x) * Complex.I)).im * 2⁻¹.im)`
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_smooth' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatoryFactor_compact' depends on axioms: [propext, Classical.choice, Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_and_scaled_moments' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+'AEGIS.OscillatoryKreinPacketsV1.oscillatory_source_support' depends on axioms: [propext, Classical.choice, Quot.sound]

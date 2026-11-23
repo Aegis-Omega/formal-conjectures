@@ -1,0 +1,24 @@
+{
+  "schema": "AEGIS_ODD_FOURIER_DIAGNOSTIC_V1",
+  "checker_sha256": "0869a092b038310d3012e43e9a77fe5aaa4f997efd40f5c99dde8170dbd44f7d",
+  "results": [
+    {
+      "denominator": 1000,
+      "fourier_arch": -0.00488261360166773,
+      "arb_arch_midpoint": -0.004882613601557377,
+      "difference": -1.1035269920078861e-13,
+      "scipy_reported_error": 6.697831078900953e-12,
+      "diagnostic_only": true
+    },
+    {
+      "denominator": 2000,
+      "fourier_arch": -0.002441287286274856,
+      "arb_arch_midpoint": -0.0024412872862670247,
+      "difference": -7.831409132297296e-15,
+      "scipy_reported_error": 4.9980973103117005e-12,
+      "diagnostic_only": true
+    }
+  ],
+  "rigorous_numerical_certificate": false,
+  "rh_proven": false
+}

@@ -17,7 +17,8 @@ import subprocess
 
 
 def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    with path.open("rb") as stream:
+        return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
 def source_blob(path: Path) -> str:
@@ -63,6 +64,11 @@ def verified_cache(cache: Path) -> dict[str, str]:
     }
     if not blobs or not expected or actual != expected:
         raise RuntimeError("KREIN_CHECKPOINT_FILE_SET_MISMATCH")
+    # The source and binary manifests must describe exactly the SAME modules.
+    # Byte-perfect .oleans for different sources are not reusable evidence.
+    claimed = {"oleans/" + module + ".olean" for module in blobs}
+    if claimed != expected:
+        raise RuntimeError("KREIN_CHECKPOINT_SOURCE_OLEAN_SET_MISMATCH")
     return blobs
 
 

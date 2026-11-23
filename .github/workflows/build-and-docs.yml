@@ -43,7 +43,7 @@ jobs:
   # The category check is a policy gate, so it has tests of its own. They need
   # no Lean build, so they run alongside it rather than after it.
   scripts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Test scripts
     steps:
       - name: Checkout project
@@ -83,7 +83,7 @@ jobs:
             lakefile.extract.toml
 
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     name: Build project
     steps:
 
@@ -181,8 +181,28 @@ jobs:
       - name: Generate All.lean
         if: steps.mode.outputs.website_only != 'true'
         run: |
-          rm -f FormalConjectures/All.lean
-          lake exe mk_all --lib FormalConjectures || true
+          set -euo pipefail
+          rm -f FormalConjectures/All.lean FormalConjectures.lean
+          # The pinned mk_all emits a freshly generated file but returns 1 on
+          # the successful "Creating" path. Historic || true masked ALL failures.
+          # Accept that one documented observed path only, then verify content.
+          status=0
+          lake exe mk_all --lib FormalConjectures > "$RUNNER_TEMP/mk-all-formalconjectures.log" 2>&1 || status=$?
+          cat "$RUNNER_TEMP/mk-all-formalconjectures.log"
+          if [[ "$status" != "0" ]]; then
+            test "$status" -eq 1
+            grep -Fxq "Creating 'FormalConjectures.lean'" "$RUNNER_TEMP/mk-all-formalconjectures.log"
+          fi
+          test -s FormalConjectures.lean
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("FormalConjectures.lean")
+          imports = {line.strip() for line in p.read_text().splitlines() if line.startswith("import ")}
+          required = "import FormalConjectures.Millennium.RiemannHypothesis"
+          if required not in imports or len(imports) < 100:
+              raise SystemExit(f"INCOMPLETE_MK_ALL_OUTPUT imports={len(imports)} rh={required in imports}")
+          print("MK_ALL_OUTPUT_VERIFIED", len(imports), "imports")
+          PY
           mv FormalConjectures.lean FormalConjectures/All.lean
           echo "set_option linter.style.moduleDocstring false" >> FormalConjectures/All.lean
 

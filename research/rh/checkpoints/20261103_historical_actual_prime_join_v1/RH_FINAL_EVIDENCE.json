@@ -1,0 +1,28 @@
+{
+  "schema": "AEGIS_HISTORICAL_PROOF_COMPOSITION_EVIDENCE_V1",
+  "rh_proven": false,
+  "final_theorem": null,
+  "lean_version": "4.33.1",
+  "lean_compiler_commit": "819816b2e0a3bf405af45ae5c7af2491d8f5bee6",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "final_axiom_audit": "NOT_RUN_NO_FINAL_TERM",
+  "closed_ordinary_argument": "Actual canonical finite prime source equals physical overlap quadratic with complex coefficient split, physical cutoff, and width factor",
+  "diagnostics": "14 high-precision overlap-integral comparisons; not rigorous intervals or sign proof",
+  "reused_producers": [
+    "canonical Coq von Mangoldt/log/sqrt source",
+    "CoRN/O0 finite ring/order transport",
+    "PR523 finite source calculus",
+    "existing compact Krein moment constructor",
+    "existing positive complement and function approximation"
+  ],
+  "new_unconditional_global_sign_producer": null,
+  "open_obligations": [
+    {
+      "id": "ALL_RADIUS_ACTUAL_SIGNED_SCHUR_BUDGET",
+      "statement_file": "COMPOSITION_CHECKPOINT.md",
+      "scope": "Current CvS decomposition route; not a universal uniqueness claim"
+    }
+  ],
+  "independent_kernel_replays": [],
+  "hosted_workflow_dispatches": 0
+}

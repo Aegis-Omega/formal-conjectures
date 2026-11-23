@@ -59,7 +59,33 @@ theorem riemannHypothesis_of_cofinal_lower_certificates
   AEGIS.RHRestrictedWeilBridgeV13.restricted_weil_criterion_kernel_bridge_v13
     (universal_of_cofinal_lower_certificates h)
 
+/-- The existing cofinal-certificate proposition is exactly RH-equivalent.
+The reverse implication chooses the constant true zero-quadratic and zero
+"norm" sequence. The present certificate definition does NOT bind that
+sequence to the norm of any actual approximant. This theorem is a diagnostic
+of the current proposition, not an unconditional proof of RH. -/
+theorem cofinal_lower_certificates_iff_riemannHypothesis :
+    EveryPacketCofinalLowerCertificate ↔ RiemannHypothesis := by
+  constructor
+  · exact riemannHypothesis_of_cofinal_lower_certificates
+  · intro hRH g hm
+    have hzero :
+        0 ≤ (∑' rho : RiemannNontrivialZeroIndexV2,
+          WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re :=
+      (AEGIS.WeilRHImpliesFinalSignV13.rh_implies_universal_v13 hRH) g hm
+    refine ⟨(fun j : ℕ => j),
+      (fun _ => (∑' rho : RiemannNontrivialZeroIndexV2,
+        WeilZeroIndexSummandV1 (WeilAutocorrelationV1 g) rho).re),
+      (fun _ => (0 : ℝ)), 0,
+      ?_, ?_, ?_, ?_⟩
+    · exact tendsto_id
+    · exact tendsto_const_nhds
+    · exact tendsto_const_nhds
+    · intro j
+      simpa using hzero
+
 end AEGIS.RHCofinalActualTerminalV1
 
 #print axioms AEGIS.RHCofinalActualTerminalV1.universal_of_cofinal_lower_certificates
 #print axioms AEGIS.RHCofinalActualTerminalV1.riemannHypothesis_of_cofinal_lower_certificates
+#print axioms AEGIS.RHCofinalActualTerminalV1.cofinal_lower_certificates_iff_riemannHypothesis

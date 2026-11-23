@@ -1,0 +1,7 @@
+'AEGIS.WeightedIndependentShapeArithmetic.exact_row_ledger' depends on axioms: [propext]
+'AEGIS.WeightedIndependentShapeArithmetic.positive_weights' depends on axioms: [propext]
+'AEGIS.WeightedIndependentShapeArithmetic.all_eleven_weighted_rows' depends on axioms: [propext]
+'AEGIS.WeightedIndependentShapeArithmetic.maximum_attained' depends on axioms: [propext]
+'AEGIS.WeightedIndependentShapeArithmetic.exact_margin' does not depend on any axioms
+'AEGIS.WeightedIndependentShapeArithmetic.positive_margin' does not depend on any axioms
+'AEGIS.WeightedIndependentShapeArithmetic.improves_previous_weights' does not depend on any axioms

@@ -1,0 +1,19 @@
+LT=11/8 K=70 atoms=139 primes<=3 W=2.2488  max|tau|>K: 11.90  Q(unit atoms) eig min 3.263e-07 max 1.376e+01
+rows: NP=250 rows-only kappa 32.48  best kappa 54.14 (eps=0.7) -> gap needed 0.9975
+trace: m=1.50 t*=267 T=1.155 gap=1.3162 | m=1.65 t*=310 T=1.439 gap=1.4209 | m=1.80 t*=360 T=7.567 gap=0.5957
+
+LT=3/2 K=150 atoms=299 primes<=4 W=2.9420  max|tau|>K: 13.35  Q(unit atoms) eig min 1.779e-09 max 1.798e+01
+rows: NP=500 rows-only kappa 31.11  best kappa 52.53 (eps=0.5) -> gap needed 0.8870
+trace: m=1.50 t*=534 T=1.195 gap=1.3097 | m=1.65 t*=620 T=1.505 gap=1.4105
+
+LT=3/2 K=175 atoms=349 primes<=4 W=2.9420  max|tau|>K: 13.35  Q(unit atoms) eig min 1.774e-09 max 1.863e+01
+rows: NP=600 rows-only kappa 29.60  best kappa 48.52 (eps=0.5) -> gap needed 0.8193
+trace: m=1.65 t*=620 T=1.190 gap=1.4605 | m=1.80 t*=720 T=1.495 gap=1.5621
+
+LT=3/2 K=200 atoms=399 primes<=4 W=2.9420  max|tau|>K: 13.43  Q(unit atoms) eig min 1.771e-09 max 1.920e+01
+rows: NP=700 rows-only kappa 28.12  best kappa 45.13 (eps=0.5) -> gap needed 0.7622
+trace: m=1.80 t*=720 T=1.218 gap=1.6061 | m=1.95 t*=837 T=1.551 gap=1.7031
+
+LT=8/5 K=165 atoms=329 primes<=4 W=2.9420  max|tau|>K: 13.45  Q(unit atoms) eig min 1.449e-11 max 1.934e+01
+rows: NP=560 rows-only kappa 39.31  best kappa 66.38 (eps=0.5) -> gap needed 1.0509
+trace: m=1.50 t*=534 T=1.149 gap=1.3171 | m=1.65 t*=620 T=1.424 gap=1.4233

@@ -1,0 +1,89 @@
+{
+  "schema": "AEGIS_CLAUDE_AND_REFLECTION_FINAL_EVIDENCE_V1",
+  "recorded_at": "2026-11-02T19:54:54.572550+00:00",
+  "rh_proven": false,
+  "final_theorem": null,
+  "exact_head": "8686704f8d90853d5e0934d28db7964420ba847b",
+  "head_meaning": "read-only source parent; publication commit recorded by external receipt",
+  "lean_version": "4.33.1",
+  "mathlib_commit": "0df444a360eaa60ab8c11dca51a86af692955474",
+  "axioms": [],
+  "axiom_audit_executed": false,
+  "axioms_meaning": "No final RH proof term was available to audit; empty is not an axiom-free proof claim",
+  "open_obligations": [
+    {
+      "id": "all_radius_actual_schur_sign",
+      "statement": "For every integer radius R>=1 and every actual balanced low vector v, Q(v) >= sup_{0 != V in V_R} |B_Q(v,V)|^2 / Q(V), with V_R the already constructed positive high-moment complement and the complete actual Weil form.",
+      "status": "OPEN"
+    }
+  ],
+  "verified_new_results": [
+    "four exact two-moment trial upper bounds, two formula implementations",
+    "fourteen malformed-input rejections, ordinary and optimized Python",
+    "ordinary all-radius reflected-prime obstruction to positivity preservation of the odd half-line semigroup, including compact perturbations"
+  ],
+  "independent_replays": [
+    {
+      "kind": "direct-correlation implementation versus original Legendre-matrix implementation",
+      "library": "shared Arb",
+      "formal_kernel": false
+    },
+    {
+      "kind": "separate Fourier-coordinate quadrature for reflected-prime counterexample",
+      "rigorous_certificate": false
+    }
+  ],
+  "certificate_hashes": [
+    {
+      "file": "ClaudeHandoffReview/adversarial_input_checks/NEGATIVE_REPLAY_RECEIPT.json",
+      "sha256": "65e6ff15acdf0a313b452e9355d54c47786a47af69c28960ab0464239fb73c73"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a1_1_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "sha256": "150ebba82d4ef8434112dae99ab9c3ba4a3ece10d634d2228222d056c894c61d"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a1_1_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "sha256": "6305ba3f29c95a7d065791928c24aa0f395b41d294a715aeb3b07dfc586d0225"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a3_2_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "sha256": "5b99c1c05329219fe10b3255133113950329d9926f3bd1f8812bb6343834a7b3"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a3_2_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "sha256": "0b13e62a4b07b01ebbd05cfcc2157905c49f11d0c66c019e0759057993ea140e"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a3_4_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "sha256": "3cb2f3390d297696ca05d13c4a3a3e5862cdbee2a6b98944030ccc7d59373fdd"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a3_4_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "sha256": "688fd598cb667f751477414dd99fbde7e90a5cb13de363f97916f3cb3f3bcb8c"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a5_4_K40/DIRECT_WITNESS_RECEIPT_FINAL.json",
+      "sha256": "a334e46c0f8fcdb3531d30167e7f6de290a8d1a63673a471c0eefd6abd3165c5"
+    },
+    {
+      "file": "ClaudeHandoffReview/replay_a5_4_K40/ORIGINAL_REPLAY_RECEIPT.json",
+      "sha256": "9226072ba80212b6a6a5927b91ce20128aeeea770a73b5326b6f70e0b60b0d5b"
+    },
+    {
+      "file": "OddSemigroupAttack/REFLECTION_RECEIPT_1000.json",
+      "sha256": "34445a320f0749664073e7f130becec0b21285b1823bbfbb0f43da9ebd1dbd30"
+    },
+    {
+      "file": "OddSemigroupAttack/REFLECTION_RECEIPT_2000.json",
+      "sha256": "213799e1277cb69e552faf651cee86d5326f93d5963d740aaa81faf520ae55d3"
+    }
+  ],
+  "mathematical_limits": [
+    "upper bound is not positivity of an infimum",
+    "counterexample is to a semigroup mechanism, not to RH",
+    "existing conditional Lean theorems are retained under their stated hypotheses"
+  ],
+  "formal_RH_replay": "NOT_RUN_NO_COMPLETE_TERM",
+  "private_archive": "verified locally; private manifest and binary not republished"
+}

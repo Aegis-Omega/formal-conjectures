@@ -1,0 +1,251 @@
+name = "aegis_rh_weil"
+defaultTargets = ["PR92Closure", "WeilArchL1", "WeilDiagonalLogGain", "WeilSevenBlock", "WeilEightBlock", "WeilFineDiagonal", "WeilFineChain43", "WeilFineBudgetEquiv", "WeilStrictSign", "WeilMellinZeroDensity", "AegisRHWeilCheck"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.1"
+
+# The 186 modules of the PR92 eleven-kernel packet, extracted by build.sh from the zip in
+# ../checkpoints/20261110_independent_eleven_analytic_closure_v1/.
+[[lean_lib]]
+name = "PR92Closure"
+srcDir = ".pr92/AEGIS_PR92_Independent_Eleven_Kernel_20261110/closure"
+roots = [
+  "AEGISOverlay.RHActualElevenLatticeV1",
+  "AEGISOverlay.RHActualLocalGramCoercivityV1",
+  "AEGISOverlay.RHActualMixedDefectV1",
+  "AEGISOverlay.RHActualUniversalFineGramV1",
+  "AEGISOverlay.RHArchGeometric145V1",
+  "AEGISOverlay.RHFiniteActualGramJoinV1",
+  "AEGISOverlay.RHFiniteFinePartitionV1",
+  "AEGISOverlay.RHKreinMultiplicativeTransportV1",
+  "AEGISOverlay.RHMixedBudgetRefinementV1",
+  "AEGISOverlay.RHWeightedSchurV1",
+  "FormalConjecturesUtil.FixedWindowLimitBridge",
+  "FunctionsOfOneComplexVariable.BorelCaratheodory",
+  "FunctionsOfOneComplexVariable.EntireLog",
+  "Hadamard.Basic",
+  "Hadamard.General",
+  "Hadamard.General.Factorization",
+  "Hadamard.OrderOne.CofiniteControl",
+  "Hadamard.OrderOne.LocallyUniformProduct",
+  "Hadamard.OrderOne.LogDeriv",
+  "Hadamard.OrderOne.LogDerivMultiplicity",
+  "Hadamard.OrderOne.MultipliableFactors",
+  "Hadamard.OrderOne.OrderFromMaxModulus",
+  "Hadamard.OrderOne.QuotientCancellation",
+  "Hadamard.OrderOne.SummabilityMultiplicity",
+  "Hadamard.OrderOne.TailEstimates",
+  "Hadamard.OrderOne.ZeroCountingBounds",
+  "Hadamard.Theorem",
+  "Hadamard.ZeroCounting",
+  "Hadamard.ZeroSet",
+  "Hadamard.ZeroSetMultiplicity",
+  "Lc.LiCriterion.Basic",
+  "Lc.LiCriterion.GenusOne",
+  "Lc.LiCriterion.HadamardBridge",
+  "Lc.LiCriterion.HadamardSummabilityBridge",
+  "Lc.LiCriterion.MobiusMap",
+  "Lc.LiCriterion.Pringsheim",
+  "Lc.LiCriterion.XiGrowth",
+  "Lc.XiZeros",
+  "MellinDecayEstimateV1",
+  "RHBonusGainV13",
+  "RHCell4CapV13",
+  "RHCell5CapV13",
+  "RHCell6CapV13",
+  "RHCell7CapV13",
+  "RHCellCapsV13",
+  "RHCofinalActualTerminalV1",
+  "RHCofinalSchurAdapterV1",
+  "RHDyadicDiagonalV13",
+  "RHDyadicWindowV13",
+  "RHFeshbachCoreV1",
+  "RHFeshbachWeilClosureV2",
+  "RHFinalClosureSpineV1",
+  "RHFineDiagonalUpgradeV3",
+  "RHFineMomentPacketV3",
+  "RHFourBlockPrimeEightV3",
+  "RHGramExpansionV13",
+  "RHHalfCapGainV13",
+  "RHHalfCapV13",
+  "RHHatBudgetV13",
+  "RHHatCellsV13",
+  "RHHatCellsWideV13",
+  "RHHatCoxBudgetV13",
+  "RHHatCoxClass693V13",
+  "RHHatKernelV13",
+  "RHHatPosDefV13",
+  "RHIndependentElevenCompositionV1",
+  "RHIndependentElevenTypeAuditV1",
+  "RHIndependentFineGapNineTenV1",
+  "RHIndependentFinePrimeNormV1",
+  "RHIndependentFinePrimeSupportV1",
+  "RHIndependentFinePrimeWindowV1",
+  "RHKreinFactorV13",
+  "RHLocalKreinPartitionV1",
+  "RHMillenniumGateV10",
+  "RHMomentDecayCofinalJoinV1",
+  "RHMomentGainV13",
+  "RHMomentIdentityV13",
+  "RHMomentNumericsV13",
+  "RHMomentNumericsV14",
+  "RHMomentPiecesV13",
+  "RHNarrowDiagonalUpgradeV2",
+  "RHNarrowSupportPositivityV13",
+  "RHRationalGapNinePrimeBoundV1",
+  "RHRationalGapTenPrimeBoundV1",
+  "RHRationalNinePacketPrimeWindowV1",
+  "RHRestrictedWeilBridgeV13",
+  "RHThreeCellGainV13",
+  "RHThreeCellV13",
+  "RHThresholdClassV13",
+  "RHThresholdGainV13",
+  "RHTranslatedKernelDominanceV1",
+  "RHWindow693Over2000V1",
+  "RHWindowNineOver64GlobalizationV14",
+  "RHZeroKernelBoundV11",
+  "RHZeroKernelLaplaceAnalyticV12",
+  "RHZeroKernelLaplaceV12",
+  "RestrictedWeilCriterionFinalV13",
+  "RestrictedWeilCriterionKernelBridgeV10",
+  "RestrictedWeilCriterionLaplaceV10",
+  "RestrictedWeilCriterionResidueCoefficientV11",
+  "RestrictedWeilCriterionResidueWitnessV11",
+  "RestrictedWeilCriterionTargetWitnessV11",
+  "RestrictedWeilCriterionZeroKernelV10",
+  "WeilAbjadFourPhaseBridgeV1",
+  "WeilArchimedeanConvergenceV1",
+  "WeilArchimedeanCorrectionV10",
+  "WeilArchimedeanCothTailV1",
+  "WeilAutocorrelationClosureV1",
+  "WeilAutocorrelationExplicitFormulaV10",
+  "WeilAutocorrelationMellinV11",
+  "WeilAutocorrelationPoleAggregationV1",
+  "WeilAutocorrelationRealityV1",
+  "WeilCriterionCompactSmoothV1",
+  "WeilDiagonalKernelReductionV21",
+  "WeilDigammaIntegralReductionV1",
+  "WeilDigammaSeriesHalfPlaneV1",
+  "WeilDigammaSeriesRealV1",
+  "WeilDisjointEnergyV2",
+  "WeilExplicitFormulaV10",
+  "WeilFinalSignTranslationBoundV10",
+  "WeilFiniteDilationFilterV10",
+  "WeilFixedLineArithmeticV10",
+  "WeilFixedLineCompletedGammaV10",
+  "WeilFixedLineExplicitFormulaContractV2",
+  "WeilFixedLineFubiniCoreV3",
+  "WeilFixedLineFubiniSwapV4",
+  "WeilFixedLineGammaAssemblyV10",
+  "WeilFixedLineGammaCoreV10",
+  "WeilFixedLineGammaFubiniV10",
+  "WeilFixedLineGammaXSpaceV10",
+  "WeilFixedLineKernelIntegralV6",
+  "WeilFixedLineXSpaceTailV7",
+  "WeilFixedLineZeroSideV10",
+  "WeilLogCoordinateIsometryV21",
+  "WeilLogTransportCanonicalV1",
+  "WeilMellinInversionV1",
+  "WeilMellinWeightedFixedLineV2",
+  "WeilMixedAlgebraV2",
+  "WeilMixedClosureV2",
+  "WeilMomentAnnihilatorV1",
+  "WeilMomentKillerConstructionV1",
+  "WeilOffLineSeedV10",
+  "WeilPairedHadamardFixedLineV1",
+  "WeilPairedHadamardKernelTsumV2",
+  "WeilPairedHadamardTsumFusionV1",
+  "WeilPairedMellinProfileV5",
+  "WeilPairedZeroEvaluationV9",
+  "WeilPoleTermV1",
+  "WeilPrimeLineIdentityV1",
+  "WeilPrimeSummabilityV1",
+  "WeilRHImpliesFinalSignV13",
+  "WeilReciprocalPairedTestV8",
+  "WeilSeparatedArchBridgeV31",
+  "WeilThreeBlockAnalyticConstantsV21",
+  "WeilThreeBlockComplexV2",
+  "WeilThreeBlockCrossAssemblyV30",
+  "WeilThreeBlockCrossPrimeV28",
+  "WeilThreeBlockCrossPrimeWindowV29",
+  "WeilThreeBlockNormBridgeV21",
+  "WeilThreeBlockPrimeEvaluationV30",
+  "WeilThreeBlockRationalV1",
+  "WeilThreeBlockTranslatedPacketsV22",
+  "WeilTranslationGapInvariantV10",
+  "WeilTwoPointPositivityV1",
+  "WeilWidthArchBudgetV26",
+  "WeilWidthArchCorrelationV25",
+  "WeilWidthArchIntegralV27",
+  "WeilWidthDiagonalArchFrontierV24",
+  "WeilWidthPrimeVanishingV23",
+  "WeilWindowExhaustionV1",
+  "WeilXiLogDerivDecompositionV10",
+  "WeilZeroCarrierBridgeV10",
+  "WeilZeroKernelHermitianV11",
+  "WeilZeroSideIdentificationV1",
+  "WeilZeroTranslationV11",
+  "WeilZeroTwoPointV11",
+  "ZeroCountingBoundV1",
+  "ZeroCountingMellinSummabilityV1",
+  "ZeroCriticalStripV1",
+  "ZeroHeightFiniteSumV1",
+  "ZeroHeightLimitContractV1",
+  "ZeroHeightShellMassV1",
+  "ZeroHeightSummabilityBridgeV1",
+  "ZeroMajorantSummabilityV1",
+  "ZeroShellAnalyticSynthesisV1",
+  "ZeroShellQuadraticBoundV1",
+]
+
+[[lean_lib]]
+name = "WeilArchL1"
+srcDir = "../checkpoints/20261121_arch_l1_v32"
+roots = ["WeilLogCorrelationL1V1"]
+
+[[lean_lib]]
+name = "WeilDiagonalLogGain"
+srcDir = "../checkpoints/20261122_diagonal_log_gain_v1"
+roots = ["WeilDiagonalLogGainS1V1", "WeilDiagonalLogGainV1"]
+
+[[lean_lib]]
+name = "WeilSevenBlock"
+srcDir = "../checkpoints/20261122_seven_block_comb_v1"
+roots = ["WeilDiagonalMeanGainV1", "WeilDiagonalMomentGainV1"]
+
+[[lean_lib]]
+name = "WeilEightBlock"
+srcDir = "../checkpoints/20261122_eight_block_comb_v1"
+roots = ["WeilDiagonalQuadGainV1", "WeilDiagonalQuadMomentV1"]
+
+[[lean_lib]]
+name = "WeilFineDiagonal"
+srcDir = "../checkpoints/20261122_fine_diagonal_quad_v1"
+roots = ["WeilFineDiagonalQuadV1"]
+
+[[lean_lib]]
+name = "WeilFineChain43"
+srcDir = "../checkpoints/20261123_fine_chain_43_v1"
+roots = ["WeilFineChain43V1"]
+
+[[lean_lib]]
+name = "WeilFineBudgetEquiv"
+srcDir = "../checkpoints/20261123_fine_budget_equiv_v1"
+roots = ["WeilFineBudgetEquivV1"]
+
+[[lean_lib]]
+name = "WeilStrictSign"
+srcDir = "../checkpoints/20261123_strict_sign_nondeg_v1"
+roots = ["WeilStrictSignNondegV1", "WeilStrictSignMellinV1"]
+
+[[lean_lib]]
+name = "WeilMellinZeroDensity"
+srcDir = "../checkpoints/20261123_mellin_zero_density_v1"
+roots = ["WeilMellinZeroDensityV1"]
+
+[[lean_lib]]
+name = "AegisRHWeilCheck"
+srcDir = "."
+roots = ["AegisAlpogeBridgeCheckV1"]

@@ -1,0 +1,70 @@
+{
+  "schema": "AEGIS_WEIGHTED_SHAPE_PACKAGE_MANIFEST_V1",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1883,
+      "sha256": "467adf0660671ab8859b7bc5931c145c1dcc13639d334aa0b061b0af7595eed3"
+    },
+    {
+      "path": "WEIGHTED_SHAPE_COMPOSITION.md",
+      "bytes": 8611,
+      "sha256": "3771315736d57df2c7806465199386a30aa03c6124ab92c52d5d4754e1e13665"
+    },
+    {
+      "path": "WeightedIndependentShapeArithmetic.lean",
+      "bytes": 2130,
+      "sha256": "00f07f360a4317a1fac4e7be5e850984d88d780b6534e7d438add4e917791268"
+    },
+    {
+      "path": "verify_source_and_emit_arithmetic.py",
+      "bytes": 6387,
+      "sha256": "48d98b63c3046f37689f8e1e9e15a9f85efb0c7356a617f841a4386c304c64df"
+    },
+    {
+      "path": "SOURCE_MANIFEST.json",
+      "bytes": 1643,
+      "sha256": "afea72e2bfcf02caeab63f32485a53974fd2401aa5b8b65192584884e8dc22af"
+    },
+    {
+      "path": "EXACT_SOURCE_REUSE_RECEIPT.json",
+      "bytes": 1075,
+      "sha256": "25efc6682c89980739331232289f0d081d9a1b5d758119e3b31837c686ad4aa8"
+    },
+    {
+      "path": "ARITHMETIC_KERNEL_RECEIPT.json",
+      "bytes": 4400,
+      "sha256": "1d30aa4baf19767112dc34db1b7e562af1efd0892cb5621cac54ea1a81a77358"
+    },
+    {
+      "path": "INDEPENDENT_ANALYTIC_AUDIT.md",
+      "bytes": 5572,
+      "sha256": "6b2e979038fac9d6bf65d69a42e8c30c6246a3c70104e5a65629ce2a35a6e26d"
+    },
+    {
+      "path": "EVIDENCE.json",
+      "bytes": 2061,
+      "sha256": "1073fd97489abc3951842a5cdd0a2a709acf6ddcbd6a271e9206dce718dcbe2c"
+    },
+    {
+      "path": "fresh_a/LEAN_TRUST0.log",
+      "bytes": 638,
+      "sha256": "0d930446abae79e47be0216c027d1055c303ddc25e991426011e77097e06e431"
+    },
+    {
+      "path": "fresh_a/LEANCHECKER_FRESH.log",
+      "bytes": 58,
+      "sha256": "8717f590ea82cd1838b5020def722d846b721ef70e4ba490752e5e3fb3cc4212"
+    },
+    {
+      "path": "fresh_b/LEAN_TRUST0.log",
+      "bytes": 638,
+      "sha256": "0d930446abae79e47be0216c027d1055c303ddc25e991426011e77097e06e431"
+    },
+    {
+      "path": "fresh_b/LEANCHECKER_FRESH.log",
+      "bytes": 58,
+      "sha256": "8717f590ea82cd1838b5020def722d846b721ef70e4ba490752e5e3fb3cc4212"
+    }
+  ]
+}

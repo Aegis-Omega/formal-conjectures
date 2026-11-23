@@ -1,0 +1,3 @@
+'AEGIS.NormalizationConflictV1.incompatible_low_and_high_frequency_bounds' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

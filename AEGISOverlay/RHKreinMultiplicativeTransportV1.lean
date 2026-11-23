@@ -350,6 +350,61 @@ theorem every_moment_zero_packet_finite_actual_weil_partition
         unlift_finset_sum s (fun i => kreinAtom (ψ i))
       _ = (fun x => ∑ i ∈ s, (gs i).1 x) := rfl
 
+/-! ## Selected genuine Krein-Feshbach gate on the kernel-replayed transport lane -/
+
+open AEGIS.RHMillenniumGateV10
+
+
+/-- A source-bound SELECTED two-block certificate for each actual packet.
+Unlike `UniversalKreinFeshbachProducerV1`, this asks for one chosen
+moment-zero decomposition of each input, not every possible decomposition.
+The genuine mixed Weil term is retained. No existence proof is asserted. -/
+def SelectedKreinFeshbachProducerV2 : Prop :=
+  ∀ g : WeilCompactSmoothGV1, WeilMomentConditionsV1 g →
+    ∃ u v : WeilCompactSmoothGV1,
+      WeilMomentConditionsV1 u ∧
+      WeilMomentConditionsV1 v ∧
+      g = AEGIS.WeilMixedAlgebraV2.addPacket u v ∧
+      ∃ nv nw β c μ : ℝ,
+        0 ≤ nw ∧
+        c * nw ^ 2 ≤ -(AEGIS.WeilMixedAlgebraV2.B v v).re ∧
+        (-(AEGIS.WeilMixedAlgebraV2.B u v).re) ^ 2 ≤ β * nw ^ 2 ∧
+        0 ≤ β ∧
+        μ < c ∧
+        0 ≤ μ ∧
+        0 ≤ -(AEGIS.WeilMixedAlgebraV2.B u u).re -
+          μ * nv ^ 2 - β / (c - μ)
+
+/-- The exact, selected genuine mixed Schur block gives the canonical
+universal zero-side sign. This is a CONDITIONAL theorem: the selected
+producer is an explicit premise, not an assumed or proven RH theorem. -/
+theorem universal_of_selected_krein_feshbach_producer_v2
+    (hselect : SelectedKreinFeshbachProducerV2) :
+    UniversalZeroQuadraticNonnegativeV10 := by
+  intro g hm
+  obtain ⟨u, v, hu, hv, hsum, nv, nw, β, c, μ,
+    hnw, htail, hcross, hβ, hgap, hμ, hschur⟩ := hselect g hm
+  have hmuv : WeilMomentConditionsV1
+      (AEGIS.WeilMixedAlgebraV2.addPacket u v) := by
+    simpa only [hsum] using hm
+  have hschur0 :
+      -(0 : ℝ) * 0 ≤
+        -(AEGIS.WeilMixedAlgebraV2.B u u).re -
+          μ * nv ^ 2 - β / (c - μ) := by
+    simpa only [neg_zero, zero_mul] using hschur
+  have hz := AEGIS.RHCofinalSchurAdapterV1.actual_two_block_zero_quadratic_schur_bound
+    u v hmuv nv nw β c μ 0 0 hnw htail hcross hβ hgap hμ hschur0
+  rw [hsum]
+  simpa only [neg_zero, zero_mul] using hz
+
+/-- Selected-decomposition RH consumer with the actual mixed B.
+Unconditional RH additionally requires a proof constructing `hselect`. -/
+theorem riemannHypothesis_of_selected_krein_feshbach_producer_v2
+    (hselect : SelectedKreinFeshbachProducerV2) : RiemannHypothesis :=
+  AEGIS.RHRestrictedWeilBridgeV13.restricted_weil_criterion_kernel_bridge_v13
+    (universal_of_selected_krein_feshbach_producer_v2 hselect)
+
+
 end AEGIS.RHKreinMultiplicativeTransportV1
 
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.lift_unlift
@@ -362,3 +417,6 @@ end AEGIS.RHKreinMultiplicativeTransportV1
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_multiplicative_two_atom
 
 #print axioms AEGIS.RHKreinMultiplicativeTransportV1.every_moment_zero_packet_finite_actual_weil_partition
+
+#print axioms AEGIS.RHKreinMultiplicativeTransportV1.universal_of_selected_krein_feshbach_producer_v2
+#print axioms AEGIS.RHKreinMultiplicativeTransportV1.riemannHypothesis_of_selected_krein_feshbach_producer_v2

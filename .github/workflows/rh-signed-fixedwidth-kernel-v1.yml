@@ -1,0 +1,78 @@
+name: RH source-bound signed Weil rational margin kernel
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/rh-signed-fixedwidth-kernel-v1.yml'
+      - 'research/rh/checkpoints/20261117_signed_fixedwidth_v1/RHSignedWeilMarginsV1.lean'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rh-signed-fixedwidth-kernel-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+env:
+  LEAN_TOOLCHAIN: leanprover/lean4:v4.33.1
+  MATHLIB_SHA: 0df444a360eaa60ab8c11dca51a86af692955474
+
+jobs:
+  kernel:
+    if: github.event.pull_request.number == 92
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - name: Checkout exact source head
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Bind exact head and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "${{ github.event.pull_request.head.sha }}"
+          test "$(cat lean-toolchain)" = "$LEAN_TOOLCHAIN"
+          grep -F "$MATHLIB_SHA" lake-manifest.json
+      - name: Install pinned Lean and restore Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSfL https://github.com/leanprover/elan/releases/download/v1.4.2/elan-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          ./elan-init -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+          test "$(git -C .lake/packages/mathlib rev-parse HEAD)" = "$MATHLIB_SHA"
+          lean --version
+      - name: Compile with trust zero and audit every theorem's axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          M=research/rh/checkpoints/20261117_signed_fixedwidth_v1/RHSignedWeilMarginsV1.lean
+          if grep -nE '(^|[^[:alnum:]_])(sorry|admit)([^[:alnum:]_]|$)|^axiom ' "$M"; then exit 1; fi
+          export LEAN_PATH="$(lake env printenv LEAN_PATH)"
+          lean --trust=0 -DwarningAsError=true -o "$RUNNER_TEMP/RHSignedWeilMarginsV1.olean" "$M" > "$RUNNER_TEMP/rh-signed-margins.log" 2>&1 || { cat "$RUNNER_TEMP/rh-signed-margins.log"; exit 1; }
+          cat "$RUNNER_TEMP/rh-signed-margins.log"
+          python3 - <<'PY'
+          import os,re
+          log=open(os.environ['RUNNER_TEMP']+'/rh-signed-margins.log').read()
+          allow={'propext','Classical.choice','Quot.sound'}
+          names=['signed_real_of_prime_arch_bound','k7_margin_exact','k7_margin_gt_tenth','k10_margin_exact','k10_margin_gt_fifth','k11_margin_exact','k11_margin_gt_twentieth']
+          for name in names:
+              full='AEGIS.RHSignedWeilMarginsV1.'+name
+              match=re.search("'"+re.escape(full)+"' depends on axioms: \\[([^\\]]*)\\]",log)
+              noaxioms=("'"+full+"' does not depend on any axioms" in log)
+              if match:
+                  found={a.strip() for a in match.group(1).split(',') if a.strip()}
+              elif noaxioms:
+                  found=set()
+              else:
+                  raise SystemExit('MISSING_AXIOM_AUDIT '+name)
+              if not found.issubset(allow):
+                  raise SystemExit('UNEXPECTED_AXIOM '+name+' '+str(found))
+          print('RH_SIGNED_FIXEDWIDTH_RATIONAL_KERNEL_T0_PASS',len(names))
+          PY

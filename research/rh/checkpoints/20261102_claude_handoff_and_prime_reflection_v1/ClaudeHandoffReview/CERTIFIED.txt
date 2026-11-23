@@ -1,0 +1,17 @@
+# python3 certify.py a_num a_den 40   (arb, 800 bits)
+a=3/4 K=40 primes=[2, 3, 4]
+moments of v (must contain 0): [+/- 1.60e-232] [+/- 1.60e-232]
+CERTIFIED QW(v)/||v||^2 = [7.67846075110e-10 +/- 2.63e-22]
+CERTIFIED_UPPER_BOUND lambda0_a <= 7.67846e-10
+a=1/1 K=40 primes=[2, 3, 4, 5, 7]
+moments of v (must contain 0): [+/- 5.28e-234] [+/- 5.28e-234]
+CERTIFIED QW(v)/||v||^2 = [1.93608583536e-18 +/- 9.68e-31]
+CERTIFIED_UPPER_BOUND lambda0_a <= 1.93609e-18
+a=5/4 K=40 primes=[2, 3, 4, 5, 7, 8, 9, 11]
+moments of v (must contain 0): [+/- 2.91e-234] [+/- 2.91e-234]
+CERTIFIED QW(v)/||v||^2 = [4.98548768515e-23 +/- 3.20e-35]
+CERTIFIED_UPPER_BOUND lambda0_a <= 4.98549e-23
+a=3/2 K=40 primes=[2, 3, 4, 5, 7, 8, 9, 11, 13, 16, 17, 19]
+moments of v (must contain 0): [+/- 2.50e-233] [+/- 2.50e-233]
+CERTIFIED QW(v)/||v||^2 = [4.22158275532e-26 +/- 2.40e-38]
+CERTIFIED_UPPER_BOUND lambda0_a <= 4.22158e-26

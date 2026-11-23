@@ -1,0 +1,52 @@
+# Row mirror: gen_rr_k.py of ../20261112_window_beyond_l32_feasibility_v1/, arguments
+#   LT NP eps kappa rho_low rho_high rho_diag KK T_tau slack   (rho = box radii; slack 10^-13)
+# 2026-11-13. Grid with ideal boxes 5e-13 / 5e-12 / 3e-13 (scan): 8/5 NP 1000 -9.63e-9, 2000 -5.66e-10, 3000 -7.82e-11, 4000 +4.12e-11;
+# 79/50 NP 3000 +1.05e-10, 4000 +1.74e-10.
+8/5 4000 7/5 66 5e-13 5e-10 3e-13 156 15 13   LT 8/5 NP 4000 eps 7/5 kappa 66: scaled lambda_min 4.07255e-11  lambda_max 6.86529
+8/5 4000 7/5 66 5e-13 5e-10 3e-12 156 15 13   LT 8/5 NP 4000 eps 7/5 kappa 66: scaled lambda_min -1.44638e-11  lambda_max 6.86529
+8/5 5000 7/5 66 5e-13 5e-10 3e-13 156 15 13   LT 8/5 NP 5000 eps 7/5 kappa 66: scaled lambda_min 8.35213e-11  lambda_max 6.86684
+# LDL on the 8/5 / NP 4000 / 5e-13 / 5e-10 / 3e-13 pickle (rescale_pkl.py: exponents -10 8, shift 8; cert43.py q):
+-- q 80  eps 24617048708158  eta 113368564856021  ok False
+-- q 84  eps 393872779330528  eta 459423537945352  ok False
+-- q 88  eps 6301964469288449  eta 1933642587600192  ok True
+-- q 92  eps 100831431508615198  eta 7232347819295734  ok True
+# NP 5000 (shift 8):
+-- q 80  eps 50485548267759  eta 114146155427138  ok False
+-- q 84  eps 807768772284157  eta 443386505834365  ok True
+-- q 88  eps 12924300356546526  eta 1857629172628628  ok True
+
+# Trace mirror: trace_cells_k.py of ../20261110_window_l32_feasibility_v1/, arguments 8/5 156 m 0 150,30,6,3 (2026-11-13)
+m=1.65:
+AssertionError: slack passes the atom range: t*=620.1, hK=612.6
+m=1.64:
+AssertionError: slack passes the atom range: t*=613.9, hK=612.6
+m=1.62:
+m=1.62 t*=601.8 cells=3066  segments 0.5477 0.3064 0.6284 1.4990  T=2.9815  gap=1.1455  kappa_max=72.35
+m=1.6:
+m=1.60 t*=589.8 cells=3030  segments 0.5459 0.3049 0.6232 1.4184  T=2.8925  gap=1.1396  kappa_max=71.99
+# m = 33/20 leaves slack beyond the atom range; m = 8/5 is used (TOP = 600 < hK = 612.6).
+
+# Row certificate from the generated boxes (gen_rr85.py 8/5 4000 7/5 66 0 0 0 156 15 13):
+-- boxes 0.1s
+-- rho 5.06e-13 rhoH 5.00e-10 rhoD 1.95e-13 RE 1.120e-12 epsIn 1.00e-13 epsOut 1.44e-12 epsT 2.60e-23 K' 7.5432e-11  max|tau|>70 13.45
+LT 8/5 NP 4000 eps 7/5 kappa 66: scaled lambda_min 4.46647e-11  lambda_max 6.86529  (91s)
+# rescale_pkl.py: exponents -10 8 shift 8 (Pscale 524 -> 508)
+# cert43.py 88:
+-- q 88  eps 6911523514429976  eta 1846315636526107  ok True  B bits 45  base 2^109
+# check_cert_pkl.py cert43_88.pkl: exit 0
+# Kernel chunk totals of the trace certificate (cert85_totals.json, 71 chunks, 3060 cells): sum 2.89286 <= 3
+
+# Beyond log 5 (M = 5): the first window past the M = 4 family, LT = 13/8 (2026-11-13)
+# Trace mirror (trace_cells_k.py 13/8 K m 0 150,30,6,3): the prime 5 raises W from 2.942 to 4.382, so the slack reaches
+# t* = 2488 / 2037 / 1668 / 1366 at m = 1.6 / 1.4 / 1.2 / 1.0, against 2 pi K / LT = 603 at K = 156:
+K=360: m=1.00 t*=1365.6 cells=5358  segments 0.2710 0.1586 0.3660 1.8693  T=2.6651  gap=0.5758  kappa_max=36.94
+K=450: m=1.20 t*=1668.0 cells=6264  segments 0.2228 0.1318 0.3100 1.8461  T=2.5107  gap=0.8004  kappa_max=51.35
+K=540: m=1.40 t*=2037.3 cells=7374  segments 0.1906 0.1139 0.2729 1.9669  T=2.5443  gap=0.9951  kappa_max=63.84
+K=660: m=1.60 t*=2488.4 cells=8727  segments 0.1601 0.0966 0.2352 2.0123  T=2.5041  gap=1.2015  kappa_max=77.08
+# Row mirror gen_rr_k5.py (gen_rr_k.py of ../20261110_window_l32_feasibility_v1/ with the prime 5 added for log 5 <= LT < log 7),
+# 721 atoms (KK = 360), eps 7/5, kappa 36 (the largest the trace allows at K = 360), boxes 5e-13 / 5e-10 / 3e-13, T_tau 19:
+LT 13/8 NP 4000 eps 7/5 kappa 36: scaled lambda_min -4.97424e-9  lambda_max 5.42054  (1038s)
+LT 13/8 NP 8000 eps 7/5 kappa 36: scaled lambda_min -3.14412e-9  lambda_max 5.43059  (1090s)
+LT 13/8 NP 16000 eps 7/5 kappa 36: scaled lambda_min -2.41076e-9  lambda_max 5.43564  (1180s)
+# The deficit shrinks by a factor of about 0.4 per doubling of NP; extrapolated, about -1.9e-9 as NP -> infinity, so no NP closes 13/8 with
+# 721 atoms and kappa = 36; larger kappa needs K >= 450 (901 atoms) to 660 (1321 atoms), against 311 here.

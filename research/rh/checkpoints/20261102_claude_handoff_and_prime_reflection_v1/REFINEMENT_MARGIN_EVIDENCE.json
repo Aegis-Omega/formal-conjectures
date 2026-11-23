@@ -1,0 +1,11 @@
+{
+  "schema": "AEGIS_REFINEMENT_MARGIN_OBSTRUCTION_V1",
+  "source_parent": "a6c67d84705ee82a40767a72626198cbcdd072f3",
+  "ordinary_proof": "complete argument and independent Poincare derivation in REFINEMENT_MARGIN_OBSTRUCTION.md",
+  "formal_kernel_replay": false,
+  "exact_statement": "For fixed nonzero H=(1/4-D^2)Psi, every finite exact decomposition into local moment-killer images of full length <=2delta and overlap <=m has sum_i E(H_i)>=3||Psi||_2^2/(4m delta^4). Any nonnegative total margin eta satisfies eta<=4m Q(H) delta^4/(3||Psi||_2^2).",
+  "scope": "actual fixed-input bounded-overlap refinement; not a claim about arbitrary overlap or a fixed-scale existential selector",
+  "rh_proven": false,
+  "remaining_mathematical_producer": "all-radius actual low/high Schur sign",
+  "manuscript_sha256": "7cb33b960e8a6db23a848d5fae863e69c0b8da215d283590883ca88ac36c0627"
+}
