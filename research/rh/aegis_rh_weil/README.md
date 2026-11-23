@@ -74,3 +74,4 @@ Main theorems:
 * It does not prove RH. `StrictWeilSign`, `WeilNondegenerate`, `MellinZeroNonvanishing` and
   `DistinctZeroSuperlinear` are not proved.
 * It does not import Levent Alpöge's Lean library. The `AegisRHWeilCheck` examples keep RH as a hypothesis.
+  The bridge that would import it is in `alpoge_bridge/`; it has not been built.
